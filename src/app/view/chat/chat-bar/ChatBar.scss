@@ -1,0 +1,128 @@
+.chat-bar {
+  height: calc(100vh - 130px);
+  background-color: white;
+
+  @media (max-width: 0px) and (max-width: 600px) {
+    .chat-bar {
+      margin-right: 5px !important;
+    }
+  }
+
+  header {
+    padding: 5px;
+    position: relative;
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border-color: gainsboro;
+    }
+
+    h5 {
+      margin: 0 10px;
+      line-height: 40px;
+    }
+  }
+
+  .chat-bar-all-room {
+    transform: 500ms;
+    height: calc(100% - 70px);
+    p {
+      line-height: 25px;
+      margin: 5px;
+    }
+
+    .search-chat-bar {
+      padding: 5px 10px;
+      position: relative;
+    }
+
+    .content-chat-bar {
+      height: calc(100vh - 228px);
+      position: relative;
+      overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        width: 0.5vw;
+        transition: 0.5s;
+      }
+
+      /* Track */
+      &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        position: absolute;
+      }
+
+      /* Handle */
+      &::-webkit-scrollbar-thumb {
+        background: #888;
+      }
+
+      /* Handle on hover */
+      &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+
+      .list-chat-room {
+        .none-data-chat {
+          padding: 10px;
+          line-height: calc(100vh - 250px);
+          text-align: center;
+        }
+
+        ul {
+          li {
+            padding: 0px;
+            &:hover {
+              cursor: pointer;
+            }
+
+            .item-chat-user {
+              display: flex;
+              padding: 5px;
+              margin: 5px;
+              border-radius: 15px;
+              position: relative;
+              //background-color: whitesmoke;
+
+              .img-content {
+                width: auto;
+              }
+
+              .ant-badge-dot{
+                top: 40px;
+                right: 10px;
+                width: 10px;
+                height: 10px;
+              }
+
+              .msg-content {
+                p {
+                  margin: 0px;
+                }
+
+                .check-seen {
+                  border-radius: 50%;
+                  padding: 3px;
+                  position: absolute;
+                  right: 10px;
+                  top: 10px;
+                  width: 10px;
+                  height: 10px;
+                  font-size: 0.5rem;
+                  background-color: rgb(47, 186, 255);
+                  color: white;
+                }
+
+                .msg-name-receiver {
+                  text-transform: capitalize;
+                  font-weight: 500;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

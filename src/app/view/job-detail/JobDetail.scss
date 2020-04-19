@@ -1,0 +1,356 @@
+@import "../sass/variable";
+
+.job-detail-content {
+  position      : relative;
+  animation     : fadeInFromNone 0.75s ease-out;
+  padding-bottom: 10px;
+
+  h6 {
+    font-weight: 600;
+  }
+
+  .body-requirement {
+    .require__p {
+      margin: 10px 0px !important;
+    }
+  }
+
+  .btn-candidate {
+    position : fixed;
+    bottom   : 60px;
+    right    : 20px;
+    z-index  : 5;
+    animation: fadeInFromNone 0.75s ease-out;
+
+    button {
+      border-radius: 50%;
+      padding      : 5px;
+      width        : 50px;
+      height       : 50px;
+      box-shadow   : 0 0 3px rgba(0, 0, 0, 0.4);
+      color        : whitesmoke;
+      background   : $color_base;
+
+      i {
+        width    : 20px;
+        height   : 20px;
+        font-size: 20px;
+      }
+    }
+  }
+
+  p {
+    margin     : 10px 3px;
+    font-family: $font_base;
+    font-size  : 0.9rem;
+  }
+
+  .cover-image-job {
+    margin-top      : 5px;
+    height          : 200px;
+    position        : relative;
+    background-color: #98cdff50;
+    text-align      : center;
+    animation       : fadeInFromNone 0.3s ease-out;
+    transition      : 1s;
+    overflow        : hidden;
+    box-shadow      : 0 0.5px 0 rgba(0, 0, 0, .1);
+
+    img {
+      // margin-top   : -25%;
+      // margin-bottom: -80%;
+      width           : 100%;
+      max-height      : 600%;
+      object-fit      : contain;
+      transition      : 0.7s;
+    }
+
+    .no-company-img {
+      background-color: rgba(88, 208, 255, 0.568);
+      height          : 75px;
+    }
+  }
+
+  .job-header {
+    position        : relative;
+    height          : auto;
+    margin          : 5px 0px;
+    background-color: white;
+    box-shadow      : 0 0.5px 0 rgba(0, 0, 0, .1);
+
+    .company-header {
+      padding: 2vw 10px;
+
+      .btn-s-c {
+        vertical-align: top;
+      }
+
+      .company-logo {
+        display   : relative;
+        height    : 100%;
+        padding   : 0px 10px;
+        z-index   : 0;
+        text-align: center;
+
+        img {
+          animation: fadeInFromNone 0.75s ease-out;
+          border   : solid gray 1px;
+        }
+
+        li {
+          list-style-type: none;
+        }
+      }
+
+      h4 {
+        display    : relative;
+        margin     : 0px;
+        min-height : 70px;
+        font-size  : 1.2rem;
+        padding    : 0px 20px;
+        font-weight: 650;
+      }
+    }
+  }
+
+  .job-business {
+    background-color: white;
+    margin-bottom   : 5px;
+    text-align      : center;
+    padding         : 5px;
+    box-shadow      : 0 0.5px 0 rgba(0, 0, 0, .1);
+
+    .ant-btn-default {
+      color       : white;
+      background  : orange;
+      border-color: orange;
+    }
+
+    .ant-btn {
+      padding: 0px 5px;
+    }
+  }
+
+  .job-content {
+    position  : relative;
+    box-shadow: 0 0.5px 0 rgba(0, 0, 0, .1);
+
+    .ant-tabs {
+      .ant-tabs-nav {
+        width           : 100%;
+        background-color: white;
+      }
+
+      .ant-tabs-bar {
+        margin-bottom: 5px;
+      }
+
+      .des-job {
+        background-color: white;
+        box-shadow      : 0 0.5px 0 rgba(0, 0, 0, .1);
+        margin-bottom   : 5px;
+      }
+
+      .job-detail {
+        min-height: 200px;
+
+        .short-info {
+          padding         : 15px 20px;
+          background-color: white;
+          margin-bottom   : 5px;
+          height          : 100%;
+
+          h6 {
+            margin-bottom: 20px;
+          }
+
+          .d_j_t {
+            margin      : 0px 5px;
+            padding     : 0px 10px;
+            display     : flex;
+            text-align  : justify;
+            text-justify: inter-word;
+
+            i {
+              margin-right: 5px;
+              padding-top : 3px;
+            }
+          }
+        }
+
+        .description-job {
+          padding            : 15px 20px;
+          margin-bottom      : 5px;
+          background-color   : white;
+          height             : 100%;
+          // box-shadow      : 0 0.5px 0 rgba(0, 0, 0, .1);
+
+          p {
+            font-family: $font_base;
+            width      : 100%;
+            border     : none;
+          }
+        }
+
+        .skills-job-detail {
+          padding            : 15px 20px;
+          background-color   : white;
+          // box-shadow      : 0 0.5px 0 rgba(0, 0, 0, .1);
+
+          .skills-detail {
+            color           : white;
+            background-color: #168ECD;
+            padding         : 5px 15px;
+            border-radius   : 3px;
+            margin          : 5px;
+          }
+        }
+
+        .time-job {
+          padding         : 15px 20px;
+          background-color: white;
+          margin-bottom   : 5px;
+          box-shadow      : 0 0.5px 0 rgba(0, 0, 0, .1);
+
+          .time-content {
+            padding: 5px 10px;
+            margin : 4px;
+
+            p {
+              font-weight: 500;
+              margin     : 7px 5px;
+              height     : auto;
+            };
+
+            i {
+              margin-right: 5px;
+            };
+
+            .time-span {
+              background-color: rgb(255, 148, 148);
+              color           : white;
+              padding         : 5px 15px;
+              margin          : 5px;
+              border-radius   : 3px;
+              text-align      : center;
+            };
+
+            .week-day {
+              width  : 100%;
+              height : auto;
+              padding: 5px 0px;
+            };
+          }
+        }
+
+        .all-rating {
+          background-color: white;
+          box-shadow      : 0 0.5px 0 rgba(0, 0, 0, .1);
+          margin-bottom   : 5px;
+          padding         : 15px 20px;
+
+          .rating {
+            margin    : 0px 5px;
+            text-align: center;
+            padding   : 10px 10px;
+          }
+        }
+
+        .company-info {
+          font-weight     : 500;
+          margin-bottom   : 5px;
+          padding         : 15px 20px;
+          background-color: white;
+          box-shadow      : 0 0.5px 0 rgba(0, 0, 0, .1);
+
+          p {
+            padding-left: 15px;
+          }
+
+          i {
+            margin-right: 5px;
+          }
+        }
+
+        .company-description {
+          background-color: white;
+          box-shadow      : 0 0.5px 0 rgba(0, 0, 0, .1);
+          padding         : 15px 20px;
+          margin-bottom   : 5px;
+        }
+
+        .company-more {
+          padding         : 15px 20px;
+          background-color: white;
+          box-shadow      : 0 0.5px 0 rgba(0, 0, 0, .1);
+
+          .company-job-more {
+            background-color: white;
+            width           : 100%;
+            // skeleton
+
+            .ant-skeleton {
+              margin: 5px;
+              height: 190px;
+
+              .ant-skeleton-header .ant-skeleton-avatar-lg {
+                width : 60px;
+                height: 60px;
+              }
+            }
+
+            /* width */
+            .item-job {
+              display         : inline-block;
+              text-align      : center;
+              min-height      : 190px;
+              height          : 92%;
+              width           : 92%;
+              margin          : 5px 5px;
+              border          : solid $color_border 1px;
+              margin          : none;
+              padding         : 10px;
+              border-radius   : 3px;
+              background-color: white;
+
+              &:hover {
+                cursor          : pointer;
+                background-color: azure;
+
+                a {
+                  text-decoration: underline;
+                }
+              }
+
+              p {
+                font-family: $font_base;
+                font-size  : 0.8rem;
+                font-weight: 400;
+              }
+
+              .item-job-logo {
+                width  : 60px;
+                height : 60px;
+                border : solid #1890ff 2px;
+                padding: 2px;
+                margin : 10px;
+              }
+            }
+          }
+
+          .pagination-job {
+            position: relative;
+            padding : 10px 0px;
+
+            // width : 100%;
+            // height: 40px;
+            li {
+              padding: 0px;
+              width  : 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

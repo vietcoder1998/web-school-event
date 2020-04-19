@@ -1,0 +1,66 @@
+@import "./../../../sass/variable";
+
+.option {
+  font-family  : $font_base;
+  border-bottom: solid white 1px;
+  color        : rgb(236, 236, 236) ;
+
+  a {
+    &:hover {
+      text-decoration: underline;
+      color          : rgb(190, 190, 190)
+    }
+  }
+
+  h4 {
+    margin : 10px 0px !important;
+    padding: 20px 0px;
+  }
+
+  h6 {
+    color: rgb(236, 236, 236)!important;
+  }
+
+  .ant-skeleton {
+    padding: 10px 5vw;
+    margin : 2vh 0px;
+
+    .ant-skeleton-header .ant-skeleton-avatar-lg {
+      width        : 70px;
+      height       : 70px;
+      line-height  : 40px;
+      border-radius: 17px !important;
+    }
+
+    &:hover {
+      transition: 0.5s;
+    }
+
+    .img-job {
+      img {
+        height       : 70px;
+        width        : 70px;
+        border-radius: 17px;
+      }
+    }
+
+    .job-content {
+      max-height: 80px;
+      width     : 100% -70px;
+      padding   : 0px 10px;
+
+      a {
+        text-transform: lowercase;
+      }
+
+      a::first-letter {
+        text-transform: uppercase;
+      }
+
+      li {
+        padding  : 5px 2px;
+        font-size: 0.8rem;
+      }
+    }
+  }
+}

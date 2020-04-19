@@ -1,0 +1,14 @@
+.chat-search {
+  li{
+    .invalid-li {
+      padding: 5px 5px;
+      background-color: aliceblue;
+
+
+      .filter-name-label {
+        text-transform: capitalize;
+        font-weight: 500;
+      }
+    }
+  }
+}

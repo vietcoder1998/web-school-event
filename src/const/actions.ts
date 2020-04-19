@@ -1,0 +1,116 @@
+export const REDUX = {
+    AUTHEN: {
+        FAIL_AUTHEN: "FAIL_AUTHEN",
+        EXACT_AUTHEN: "EXACT_AUTHEN",
+    },
+
+    ANNOUNCEMENTS: {
+        GET_ANNOUNCEMENTS: 'GET_ANNOUNCEMENTS',
+        GET_ANNOUNCEMENT_DETAIL: 'GET_ANNOUNCEMENT_DETAIL',
+    },
+
+    EMPLOYER_DETAIL: {
+        GET_EMPLOYER_DETAIL: "GET_EMPLOYER_DETAIL",
+    },
+    EMPLOYER_MORE_JOB: {
+        GET_EMPLOYER_MORE_JOB: "EMPLOYER_MORE_JOB",
+    },
+    HIGH_LIGHT: {
+        GET_HIGH_LIGHT_JOB: 'GET_HIGH_LIGHT_JOB',
+    },
+    IN_DAY: {
+        GET_IN_DAY_JOB: 'GET_IN_DAY_JOB',
+    },
+    HOT_JOB: {
+        GET_HOT_JOB: 'GET_HOT_JOB',
+    },
+    JOB_DETAIL: {
+        GET_JOB_DETAIL: 'GET_JOB_DETAIL',
+    },
+    JOB_RESULT: {
+        GET_JOB_RESULT: "GET_JOB_RESULT",
+        SEARCH_JOB_DTO: "SEARCH_JOB_DTO"
+    },
+    SAVED_JOB: {
+        GET_SAVED_JOB: "GET_SAVED_JOB"
+    },
+    MAP: {
+        SET_MAP_STATE: 'SET_MAP_STATE'
+    },
+    MOBILE_STATE: {
+        SET_MOBILE_STATE: "SET_MOBILE_STATE"
+    },
+    NOTI: {
+        GET_NOTI: 'GET_NOTI'
+    },
+    PERSON_INFO: {
+        GET_PERSON_INFO: 'PERSONAL_INFO'
+    },
+    POPUP: {
+        OPEN_POPUP: 'OPEN_POPUP',
+        CLOSE_POPUP: 'CLOSE_POPUP',
+    },
+    SIDE_BAR: {
+        OPEN_SIDE_BAR: 'OPEN_SIDE_BAR',
+        CLOSE_SIDE_BAR: 'CLOSE_SIDE_BAR',
+    },
+    CHAT_ROOM: {
+        SET_CHAT_ROOM: 'SET_CHAT_ROOM'
+    },
+
+    JOB_NAMES: {
+        GET_JOB_NAMES: 'GET_JOB_NAMES'
+    },
+    JOB_GROUPS: {
+        GET_JOB_GROUPS: 'GET_JOB_GROUPS'
+    },
+    REGIONS: {
+        GET_REGIONS: 'GET_REGIONS'
+    }
+}
+
+export const REDUX_SAGA = {
+    EMPLOYER_DETAIL: {
+        GET_EMPLOYER_DETAIL: 'GET_EMPLOYER_DETAIL_DATA',
+    },
+    EMPLOYER_MORE_JOB: {
+        GET_EMPLOYER_MORE_JOB: 'GET_EMPLOYER_MORE_JOB_DATA',
+    },
+    HIGH_LIGHT: {
+        GET_HIGH_LIGHT_DATA: 'GET_HIGH_LIGHT_DATA',
+    },
+    IN_DAY: {
+        GET_IN_DAY_JOB: 'GET_IN_DAY_JOB_DATA',
+    },
+    HOT_JOB: {
+        GET_HOT_JOB: 'GET_HOT_JOB_DATA',
+    },
+    JOB_DETAIL: {
+        GET_JOB_DETAIL: 'GET_JOB_DETAI_DATA',
+    },
+    JOB_RESULT: {
+        GET_JOB_RESULT: "GET_JOB_RESULT_DATA",
+    },
+    SAVED_JOB: {
+        GET_SAVED_JOB: "GET_SAVED_JOB_DATA"
+    },
+    NOTI: {
+        GET_NOTI: 'GET_NOTI_DATA'
+    },
+    PERSON_INFO: {
+        GET_PERSON_INFO: 'PERSONAL_INFO_DATA'
+    },
+    JOB_NAMES: {
+        GET_JOB_NAMES: 'GET_JOB_NAMES_DATA'
+    },
+    JOB_GROUPS: {
+        GET_JOB_GROUPS: 'GET_JOB_GROUPS_DATA'
+    },
+    REGIONS: {
+        GET_REGIONS: 'GET_REGIONS_DATA'
+    },
+    ANNOUNCEMENTS: {
+        GET_ANNOUNCEMENTS: 'GET_ANNOUNCEMENTS_DATA',
+        GET_ANNOUNCEMENT_DETAIL: 'GET_ANNOUNCEMENT_DETAIL_DATA',
+    },
+}

@@ -1,0 +1,110 @@
+.chat-board {
+  display: block;
+  height: auto;
+  background-color: white;
+
+  header {
+    padding: 5px;
+
+    .header-content {
+      display: flex;
+      margin: 0 10px;
+      line-height: 30px;
+      text-transform: capitalize;
+
+      .label-chat-board {
+        padding: 10px;
+      }
+    }
+  }
+
+  .msg-input {
+    height: calc(100vh - 220px);
+    position: relative;
+
+    .msg-properties {
+      padding: 8px 10px 10px 10px;
+      overflow-y: auto;
+      box-sizing: border-box;
+      height: calc(100vh - 255px);
+      width: 100%;
+      /* width */
+      &::-webkit-scrollbar {
+        width: 0.5vw;
+        transition: 0.5s;
+      }
+
+      /* Track */
+      &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+
+      /* Handle */
+      &::-webkit-scrollbar-thumb {
+        background: #888;
+      }
+
+      /* Handle on hover */
+      &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+
+      .load-history-chat {
+        position: relative;
+        text-align: center;
+        span {
+          float: center;
+          i {
+            font-size: 18px;
+            color: rgb(127, 202, 255);
+          }
+        }
+        padding: 10px 0px;
+      }
+
+      .list-msg {
+        padding: 23px 20px 10px 0px;
+        margin-right: 10px 0px 10px 10px;
+      }
+    }
+
+    .input-msg {
+      box-sizing: border-box;
+      padding: 6px 0px;
+      position: relative;
+      bottom: 0px;
+      right: 0px;
+      left: 0px;
+      display: flex;
+      background-color: white;
+
+      .more-state {
+        width: 60px;
+        text-align: center;
+        line-height: 40px;
+        font-size: 20px;
+      }
+
+      .input-content {
+        padding: 0px 5px;
+        width: calc(100% - 120px);
+        textarea {
+          &::placeholder {
+            top: 10px;
+          }
+        }
+      }
+
+      .send-button {
+        width: 60px;
+        text-align: center;
+        line-height: 40px;
+        font-size: 20px;
+      }
+    }
+  }
+
+  label {
+    margin: 0px !important;
+  }
+}

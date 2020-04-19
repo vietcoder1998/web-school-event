@@ -1,0 +1,44 @@
+.content-msg-inside {
+  min-height: 35px;
+  width: 100%;
+  margin: 3px 0px;
+  position: relative;
+  list-style: none;
+
+  .time-info {
+    height: 20px;
+  }
+
+  .msg-content {
+    height: auto;
+    width: 100%;
+    position: relative;
+  }
+
+  .sender {
+    float: right;
+    text-align: right;
+    width: 100%;
+    span {
+      float: right;
+    }
+
+    label {
+      right: 0px;
+      background-color: whitesmoke;
+      color: rgb(90, 90, 90);
+      border-radius: 15px 5px 5px 15px;
+      padding: 6px 15px;
+      margin: 2px !important;
+    }
+  }
+
+  .receiver {
+    label {
+      background-color: rgb(131, 197, 32);
+      color: white;
+      border-radius: 5px 15px 15px 5px;
+      padding: 6px 15px;
+    }
+  }
+}

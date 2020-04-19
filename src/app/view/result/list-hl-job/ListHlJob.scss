@@ -1,0 +1,23 @@
+.hl-job {
+    .pagination-result {
+        .ant-pagination-item-active {
+            font-weight: 500;
+            width      : 20px;
+            height     : 20px;
+        }
+
+        .ant-pagination-item-link {
+            // display: none;
+            border-radius: 50%;
+        }
+
+        .ant-pagination-item {
+            font-size  : 0;
+            width        : 20px;
+            height       : 20px;
+            min-width    : auto;
+            border-radius: 50%;
+            color        : #ffffff00;
+        }
+    }
+}
