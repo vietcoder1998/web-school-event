@@ -14,8 +14,7 @@ class Block extends Component {
   componentDidMount() {
     setTimeout(() => {
       this.setState({ loading: false, fade: false });
-    }, 1000);
-    // console.log(this.props)
+    }, 2000);
   }
 
   render() {

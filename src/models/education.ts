@@ -1,4 +1,4 @@
-export interface IEducations {
+export interface Ischools {
     items?: Array<IEducation>
     totalItems?: number;
     pageIndex?: number;

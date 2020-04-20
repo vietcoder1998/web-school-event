@@ -48,6 +48,7 @@ class EducationItem extends Component<IProps, IStates> {
         if (item !== null) {
             education = item;
         }
+        console.log(this.props.item)
 
         activeKey = complete;
         this.setState({ education, activeKey });
@@ -134,7 +135,7 @@ class EducationItem extends Component<IProps, IStates> {
                             </Popconfirm>
                         </div>
                         <div>
-                            <p className='header-experience'>{item.label}</p>
+                           
                             <IptLetterP>Nơi học: </IptLetterP>
                             <div style={{ padding: '5px 10px' }}> {item.school}</div>
                             <IptLetterP>Ngành học: </IptLetterP>

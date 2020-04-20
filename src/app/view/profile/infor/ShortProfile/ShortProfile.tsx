@@ -13,8 +13,7 @@ function GetDate(dateRaw) {
 
 function ShortProfile(props?: { personalInfo?: any }) {
   let { personalInfo } = props;
-  console.log("profile");
-  console.log(personalInfo);
+ 
   return (
     <div className="wrapper">
       <div className="avatar">

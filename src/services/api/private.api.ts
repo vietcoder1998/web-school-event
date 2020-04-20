@@ -1,7 +1,7 @@
 export const authUserPassword  = '/api/authentication/username-password';
 export const appliedJobs = '/api/candidates/appliedJobs';
 export const desiredJobs = '/api/candidates/desiredJobs';
-export const education = '/api/candidates/educations';
+export const education = '/api/candidates/schools';
 export const exprience = '/api/candidates/experiences';
 export const jobActive = '';
 export const fullProfile = '/api/candidates/profile';
@@ -9,7 +9,7 @@ export const PERSON_INFO = '/api/candidates/personalInfo';
 export const DESCRIPTION = '/api/candidates/description';
 export const skillsController = '/api/candidates/skills';
 export const LANGUAGE_SKILL = '/api/candidates/languageSkills';
-export const educationController= '/api/candidates/educations'
+export const educationController= '/api/candidates/schools'
 export const experienceController = '/api/candidates/experiences';
 export const isLookingFobJobState = '/api/candidates/isLookingForJob/';
 export const AVATAR = '/api/candidates/avatar';

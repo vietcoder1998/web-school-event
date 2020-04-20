@@ -47,10 +47,17 @@ function* getPersonInfo() {
   personalInfo.firstName = data.firstName;
   personalInfo.lastName = data.lastName;
   personalInfo.gender = data.gender;
-  personalInfo.address = data.address === null ? 'Chưa cập nhật' : data.address;
-  personalInfo.identityCard = data.identityCard === null ? 'Chưa cập nhật' : data.identityCard;
-  personalInfo.identityCardBackImageUrl = data.identityCardBackImageUrl === null ? imageDefault : data.identityCardBackImageUrl;
-  personalInfo.identityCardFrontImageUrl = data.identityCardFrontImageUrl === null ? imageDefault : data.identityCardFrontImageUrl;
+  personalInfo.address = data.address === null ? "Chưa cập nhật" : data.address;
+  personalInfo.identityCard =
+    data.identityCard === null ? "Chưa cập nhật" : data.identityCard;
+  personalInfo.identityCardBackImageUrl =
+    data.identityCardBackImageUrl === null
+      ? imageDefault
+      : data.identityCardBackImageUrl;
+  personalInfo.identityCardFrontImageUrl =
+    data.identityCardFrontImageUrl === null
+      ? imageDefault
+      : data.identityCardFrontImageUrl;
   personalInfo.birthday = data.birthday;
   personalInfo.lat = data.lat;
   personalInfo.lon = data.lon;
@@ -60,7 +67,7 @@ function* getPersonInfo() {
 
   personalInfo.schoolYearStart = data.schoolYearStart;
   personalInfo.schoolYearEnd = data.schoolYearEnd;
-  personalInfo.studentCode = data.studentCode;
+  personalInfo.studentCode = data.studentCode === null ? "Chưa cập nhật" : data.studentCode;
   personalInfo.createdDate = data.createdDate;
   localStorage.setItem("name", data.firstName);
   localStorage.setItem("avatarUrl", personalInfo.avatarUrl);
@@ -69,7 +76,10 @@ function* getPersonInfo() {
   // skills
   let skills = data.skills;
   // education
-  let educations = data.educations;
+
+  let schools = data.school;
+  let major = data.major;
+
   // experiences
   let experiences = data.experiences;
   // languageSkills
@@ -81,7 +91,8 @@ function* getPersonInfo() {
     type: REDUX.PERSON_INFO.GET_PERSON_INFO,
     personalInfo,
     skills,
-    educations,
+    schools,
+    major,
     description,
     experiences,
     languageSkills,

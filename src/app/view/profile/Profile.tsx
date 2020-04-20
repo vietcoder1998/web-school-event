@@ -15,14 +15,13 @@ import Skills from "./infor/Skills/Skills";
 // import Info from '../layout/info/Info';
 import FixExperience from "./fix/FixExperience/FixExperience";
 import Experience from "./infor/Experience/Experience";
-// import Education from "./infor/Education/Education";
-// import FixEducation from "./fix/FixEducation/FixEducation";
+import Education from "./infor/Education/Education";
+import FixEducation from "./fix/FixEducation/FixEducation";
 import LanguageSkills from "./infor/LanguageSkills/LanguageSkills";
 
 // Service
 import FixLanguageSkills from "./fix/FixLanguageSkills/FixLanguageSkills";
 // import moveScrollBar from '../../assets/js/moveScroll';
-import { moveScroll } from "../../../utils/moveScroll";
 import { POST, PUT } from "../../../const/method";
 
 interface IProps {
@@ -70,71 +69,10 @@ class Profile extends Component<IProps, IState> {
   }
 
   _fixData = (id) => {
-    let { personalInfo } = this.props;
     let { profileState } = this.state;
     let param = id;
     profileState[param] = !profileState[param];
     this.setState({ profileState });
-
-    let l_ls = personalInfo.languageSkill
-      ? personalInfo.languageSkill.length
-      : 0;
-    let l_ex = personalInfo.experiences ? personalInfo.experiences.length : 0;
-    let l_ed = personalInfo.educations ? personalInfo.educations.length : 0;
-    let l_sk = personalInfo.skills ? personalInfo.skills.length : 0;
-
-    let h_ls = 0;
-    let h_ex = 0;
-    let h_ed = 0;
-    let h_sk = 0;
-
-    if (l_ls > 0) {
-      h_ls = 400;
-    }
-
-    if (l_ex > 0) {
-      h_ex = 250;
-    }
-
-    if (l_ed > 0) {
-      h_ed = 250;
-    }
-
-    if (l_ed > 0) {
-      h_sk = 50;
-    }
-
-    let p_ls = l_ls * h_ls;
-    let p_ed = l_ed * h_ed;
-    let p_ex = l_ex * h_ex;
-    let p_sk = (l_sk * h_sk) / 3;
-
-    switch (param) {
-      case "person":
-        moveScroll(80, 0, true);
-        break;
-
-      case "description":
-        moveScroll(600, 0, true);
-        break;
-
-      case "skills":
-        moveScroll(880, 0, true);
-        break;
-
-      case "languageSkill":
-        moveScroll(880 + 300 + p_sk + p_ls, 0, true);
-        break;
-
-      case "experience":
-        moveScroll(880 + 260 * 2 + p_sk + p_ls + p_ex, 0);
-        break;
-      case "education":
-        moveScroll(980 + 450 * 3 + p_sk + p_ls * p_ex + p_ed, 0);
-        break;
-      default:
-        break;
-    }
   };
 
   render() {
@@ -153,7 +91,7 @@ class Profile extends Component<IProps, IState> {
               xxl={20}
               className="block-info"
             >
-              <Block describe="Thông tin cá nhân" icon={this.icon_user}> 
+              <Block describe="Thông tin cá nhân" icon={this.icon_user}>
                 <div
                   className="icon-fix"
                   onClick={() => this._fixData("person")}
@@ -250,7 +188,7 @@ class Profile extends Component<IProps, IState> {
               </Block>
 
               {/* Education */}
-              {/* <Block describe="Học vấn và bằng cấp" icon={this.icon_bachelor}>
+              <Block describe="Học vấn và bằng cấp" icon={this.icon_bachelor}>
                 <div
                   className="icon-fix"
                   onClick={() => this._fixData("education")}
@@ -262,11 +200,13 @@ class Profile extends Component<IProps, IState> {
                     className="fa fa-plus"
                   ></span>
                 </div>
-                <Education />
+
                 {profileState["education"] ? (
                   <FixEducation _fixData={this._fixData} method={POST} />
-                ) : null}
-              </Block> */}
+                ) : (
+                  <Education />
+                )}
+              </Block>
               {/* ShortProfileal Info */}
             </Col>
             {/* Comment */}
