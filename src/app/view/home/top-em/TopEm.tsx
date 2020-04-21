@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Col, Row, Skeleton, Avatar } from 'antd';
+import { Col, Row, Skeleton, Avatar, Typography } from 'antd';
 import './TopEm.scss'
 import { connect } from 'react-redux';
 
@@ -10,6 +10,7 @@ import JobChoiceLogo from './../../../../assets/image/job-choice-logo-1.png';
 import EduVietLogo from './../../../../assets/image/eduviet-logo.png';
 //@ts-ignore
 import TTCLogo from './../../../../assets/image/ttc-logo.png';
+import Title from 'antd/lib/skeleton/Title';
 
 interface IProps {
     getHotJob?: Function;
@@ -44,7 +45,8 @@ class TopEm extends PureComponent<IProps, IState> {
 
         return (
             <div className='top-rm'>
-                <h5 style={{ textAlign: 'center' }}>ĐỐI TÁC NỔI BẬT </h5>
+                <Typography level={1}> VIỆC LÀM THEO NGÀNH NGHỀ</Typography>
+
                 <Row>
                     <Col xs={0} sm={0} md={3} lg={6} xl={6} xxl={6} ></Col>
                     <Col xs={12} sm={8} md={6} lg={4} xl={4} xxl={4} >
@@ -88,7 +90,7 @@ class TopEm extends PureComponent<IProps, IState> {
                                 />
                             </div>)}
                         <div className='job-content'>
-                           <p>TTC Solutions</p>
+                            <p>TTC Solutions</p>
                         </div>
                     </Col>
                     <Col xs={0} sm={0} md={3} lg={6} xl={6} xxl={6} ></Col>
