@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './FixDescription.scss';
 
-import { DESCRIPTION } from '../../../../../services/api/private.api';
+import { update_description } from '../../../../../services/api/private/profile'
 import { sendStringHeader } from '../../../../../services/auth';
 import { connect } from 'react-redux';
 import { _requestToServer } from '../../../../../services/exec';
@@ -45,8 +45,8 @@ class FixDescription extends Component<IProps, IState>{
 
     _createRequest = async () => {
         let { description } = this.state;
-        await _requestToServer(this.props.method, description, DESCRIPTION, null, sendStringHeader, null, true);
-        await this.props.reloadData();
+        await _requestToServer(this.props.method, description, update_description, null, sendStringHeader, null, true);
+        window.location.reload();
         await this.props._fixData('description');
     }
 

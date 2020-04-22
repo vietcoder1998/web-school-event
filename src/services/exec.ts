@@ -22,21 +22,26 @@ export const _requestToServer = async (
                 break;
             case POST:
                 res = await _post(data, api, host, headers, params);
-                if (show_alert){ swal({
-                    title: "Workvns thông báo",
-                    text: `${res.msg}`,
-                    icon: TYPE.SUCCESS,
-                    dangerMode: false,}
-                )};
+                if (show_alert) {
+                    swal({
+                        title: "Workvns thông báo",
+                        text: `${res.msg}`,
+                        icon: TYPE.SUCCESS,
+                        dangerMode: false,
+                    }
+                    )
+                };
                 break;
             case PUT:
                 res = await _put(data, api, host, headers, params);
-                if (show_alert){ swal({
-                    title: "Workvns thông báo",
-                    text: `Cập nhập ${res.msg}`,
-                    icon: TYPE.SUCCESS,
-                    dangerMode: false,
-                });}
+                if (show_alert) {
+                    swal({
+                        title: "Workvns thông báo",
+                        text: `Cập nhập ${res.msg}`,
+                        icon: TYPE.SUCCESS,
+                        dangerMode: false,
+                    });
+                }
                 return res;
             case DELETE:
                 res = await _delete(data, api, host, headers);
@@ -46,6 +51,7 @@ export const _requestToServer = async (
         };
 
         if (show_alert && res) {
+            // console.log(res)
             swal({
                 title: "Workvns thông báo",
                 text: res.msg,
@@ -54,7 +60,7 @@ export const _requestToServer = async (
             });
         };
     } catch (err) {
-        exceptionShowNoti(err);
+        // exceptionShowNoti(err);
     }
 
     return res;

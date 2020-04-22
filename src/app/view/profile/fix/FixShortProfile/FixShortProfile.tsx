@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import DatePicker from "react-datepicker";
 import './FixPerson.scss';
-import { AVATAR, PERSON_INFO } from '../../../../../services/api/private.api';
+import { uppdate_avatar, update_profile, update_cover } from '../../../../../services/api/private/profile';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import ButtonToggle from '../../../helper/toggle-button/ToggleButton';
@@ -54,9 +54,10 @@ class FixPerson extends Component<IProps, IState> {
 
             show_popup: false,
 
-            marker: {
-                lat: 21.0223575259305,
-                lng: 105.82227458143632,
+            addressChange: {
+                address: '',
+                lat: 0,
+                lng: 0,
             },
 
             location: '',
@@ -109,12 +110,12 @@ class FixPerson extends Component<IProps, IState> {
     }
 
     _setMap = () => {
-        let { personalInfo, address } = this.state;
-        let { marker } = this.props;
-        personalInfo.lat = marker.lat;
-        personalInfo.lon = marker.lng;
-        address = localStorage.getItem('location')
-        this.setState({ personalInfo, address })
+        let { personalInfo, addressChange } = this.state;
+        personalInfo.lat = addressChange.lat;
+        personalInfo.lon = addressChange.lon;
+        personalInfo.address = addressChange.address;
+        this.setState({ personalInfo })
+        localStorage.setItem('location')
         this._handleClose()
     }
 
@@ -139,28 +140,35 @@ class FixPerson extends Component<IProps, IState> {
 
     _createRequest = async () => {
         let { personalInfo, avatar } = this.state;
-        await _requestToServer(PUT, personalInfo, PERSON_INFO, null, null, null, true)
+        await _requestToServer(PUT, personalInfo, update_profile, null, null, null, true)
         if (avatar !== '') {
             let form = new FormData();
             form.append('avatar', avatar);
-            await _requestToServer(PUT, form, AVATAR + '?avatarContentType=image%2Fpng', null, sendFileHeader)
+            await _requestToServer(PUT, form, uppdate_avatar + '?avatarContentType=image%2Fpng', null, sendFileHeader)
         }
-
         await this.props._fixData('person');
     }
-
+    getLatLngFromMap = (lat, lng, address) => {
+        let { addressChange } = this.state;
+        addressChange.address = address;
+        addressChange.lat = lat;
+        addressChange.lon = lng;
+        this.setState({
+            addressChange,
+        })
+    };
     render() {
         let { personalInfo, show_popup, address, avatarUrl, marker } = this.state;
         let birth_day = timeConverter(personalInfo.birthday, 1000);
         return (
-            <div className='wrapper'>
+            <div className='wraper'>
                 {/* Center */}
                 <Modal
                     visible={show_popup}
                     onCancel={this._handleClose}
                     onOk={this._setMap}
                     title='Định vị trên bản đồ'
-                    style={{ top: '10vh' }}
+                    className='modal-map'
                     footer={[
                         <Button key="back" onClick={this._handleClose}>
                             Trở lại
@@ -169,9 +177,9 @@ class FixPerson extends Component<IProps, IState> {
                             Cập nhật
                     </Button>
                     ]} >
-                    <div >
-                        <MapContainer initialCenter={marker}/>
-                    </div>
+
+                    <MapContainer GetLatLngToParent={this.getLatLngFromMap} />
+
                 </Modal>
 
                 {/* Fix Infomation */}
@@ -192,10 +200,7 @@ class FixPerson extends Component<IProps, IState> {
                             </form>
                             <Input id='avatar' type='file' name='file' alt='ảnh ứng viên' style={{ display: 'none' }} onChange={(e) => { this._upLoadFile(e) }} />
                         </div>
-                        <div className='person-content'>
-                            <p>Email</p>
-                            <Input id='email' type='text' className='input_outside' placeholder='Your Email' value={personalInfo.email} onChange={this._handleData} />
-                        </div>
+
                         <div className='person-content'>
                             <p>Điện thoại</p>
                             <Input id='phone' type='text' className='input_outside' placeholder='Phone' value={personalInfo.phone} onChange={this._handleData} />
@@ -237,7 +242,7 @@ class FixPerson extends Component<IProps, IState> {
                         </div>
                         <div className='person-content'>
                             <p>Địa chỉ</p>
-                            <Input id='address' type='text' className='input_outside' placeholder='Address' value={address} onClick={this._openLocation} />
+                            <Input id='address' type='text' className='input_outside' placeholder='Địa chỉ' value={personalInfo.address} onClick={this._openLocation} />
                         </div>
                         <div className='person-content'>
                             <p>Số CMND</p>

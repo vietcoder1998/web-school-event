@@ -10,7 +10,6 @@ import JobChoiceLogo from './../../../../assets/image/job-choice-logo-1.png';
 import EduVietLogo from './../../../../assets/image/eduviet-logo.png';
 //@ts-ignore
 import TTCLogo from './../../../../assets/image/ttc-logo.png';
-import Title from 'antd/lib/skeleton/Title';
 
 interface IProps {
     getHotJob?: Function;
