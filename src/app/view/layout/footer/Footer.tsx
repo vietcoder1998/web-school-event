@@ -5,7 +5,6 @@ import CHPlay from '../../../../assets/image/CHPlay.png';
 //@ts-ignore
 import AppStore from '../../../../assets/image/app-store.png';
 import { Col, Row } from 'antd';
-import { Icon } from 'antd'
 import Option from './option/Option'
 
 export default function Footer(props) {

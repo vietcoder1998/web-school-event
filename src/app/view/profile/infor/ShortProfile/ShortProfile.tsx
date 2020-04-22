@@ -5,15 +5,16 @@ import { connect } from "react-redux";
 import { Avatar, Progress } from "antd";
 import imageDefault from "../../../../../assets/image/base-image.jpg";
 
-
 function GetDate(dateRaw) {
-    var date = new Date(dateRaw);
-    return (date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear())
+  var date = new Date(dateRaw);
+  return (
+    date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
+  );
 }
 
 function ShortProfile(props?: { personalInfo?: any }) {
   let { personalInfo } = props;
- 
+
   return (
     <div className="wrapper">
       <div className="avatar">
@@ -70,7 +71,7 @@ function ShortProfile(props?: { personalInfo?: any }) {
           </li>
           <li>
             <i className="fa fa-database " />
-           Ngày tạo:{personalInfo && GetDate(personalInfo.createdDate)}
+            Ngày tạo:{personalInfo && GetDate(personalInfo.createdDate)}
           </li>
           <li>
             <i className="fa fa-percent" />
@@ -78,15 +79,14 @@ function ShortProfile(props?: { personalInfo?: any }) {
             <Progress percent={personalInfo.completePercent} />
           </li>
           <li>
-            Ảnh CMND: 
+            Ảnh CMND:
             <img
               src={personalInfo.identityCardFrontImageUrl}
               onError={(e) => {
                 e.target.src = { imageDefault };
               }}
               alt="ảnh CMND"
-             
-              className='identytiImage'
+              className="identytiImage"
             />
             <img
               src={personalInfo.identityCardBackImageUrl}
@@ -94,12 +94,10 @@ function ShortProfile(props?: { personalInfo?: any }) {
               onError={(e) => {
                 e.target.src = { imageDefault };
               }}
-              
-              className='identytiImage'
+              className="identytiImage"
             />
           </li>
         </ul>
-      
       </div>
     </div>
   );

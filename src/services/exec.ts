@@ -60,7 +60,7 @@ export const _requestToServer = async (
             });
         };
     } catch (err) {
-        // exceptionShowNoti(err);
+        // exceptionShowNoti(err); // dont delete
     }
 
     return res;

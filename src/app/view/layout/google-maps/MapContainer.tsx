@@ -23,7 +23,10 @@ function findAddress(lat, lng) {
     })
 }
 
-class GoogleMap extends React.Component {
+interface IProps {
+    location?: any
+}
+class GoogleMap extends React.Component<IProps>{
     constructor(props) {
         super(props);
         this.state = {
@@ -143,6 +146,10 @@ class GoogleMap extends React.Component {
                         lat: this.state.position.lat,
                         lng: this.state.position.lng,
                     }}
+                    initialCenter={{
+                        lat: this.state.position.lat,
+                        lng: this.state.position.lng,
+                      }}
                 >
                     <Marker
                         name={this.state.address}
@@ -156,8 +163,5 @@ class GoogleMap extends React.Component {
     }
 }
 
-GoogleMap.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
 
 export default GoogleMap

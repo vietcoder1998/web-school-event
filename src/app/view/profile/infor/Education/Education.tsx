@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 // import { Tabs, Tab } from 'react-bootstrap';
-import { _requestToServer } from "../../../../../services/exec";
-import { educationController } from "../../../../../services/api/private.api";
 import { connect } from "react-redux";
-import moment from "moment";
-import { PUT, DELETE } from "../../../../../const/method";
 import { REDUX_SAGA } from "../../../../../const/actions";
 import IEducation from "../../../../../models/education";
 
