@@ -1,22 +1,22 @@
 import axios from 'axios';
 import { authHeaders } from './auth';
+import { PUBLIC_HOST } from '../environment/development';
 
 // POST
 export const _post = async (data?: any, api?: string, another_host?: string, headers?: any, params?: string) => {
-    let requestURL = (another_host? another_host : process.env.REACT_APP_API_HOST) + api;
+    let requestURL = (another_host ? another_host : process.env.REACT_APP_API_HOST) + api;
     if (headers === null || headers === undefined) {
         headers = authHeaders;
     }
-    console.log(requestURL);
-    console.log(process.env.REACT_APP_API_HOST)
     let response = await axios.post(requestURL, data, { headers, params });
     return response.data
 };
 
 //GET
 export const _get = async (params?: any, api?: string, another_host?: string, headers?: any) => {
-    let requestURL = (another_host? another_host : process.env.REACT_APP_API_HOST) + api;
-    if (headers === null || headers === undefined) {
+    let requestURL = (another_host ? another_host : process.env.REACT_APP_API_HOST) + api;
+    console.log(requestURL)
+    if (another_host !== PUBLIC_HOST && (headers === null || headers === undefined)) {
         headers = authHeaders
     }
     let response = await axios.get(requestURL, { params: params, headers });
@@ -25,18 +25,25 @@ export const _get = async (params?: any, api?: string, another_host?: string, he
 
 // DELETE
 export const _delete = async (data?: any, api?: string, another_host?: string, headers?: any, params?: string) => {
-    let requestURL = (another_host? another_host : process.env.REACT_APP_API_HOST) + api;
+    let requestURL = (another_host ? another_host : process.env.REACT_APP_API_HOST) + api;
     if (headers === null || headers === undefined) {
-        headers = authHeaders
+        headers = authHeaders;
     }
-    let response = await axios.delete(requestURL, { params: JSON.stringify(params), headers });
-    return response.data;
+    console.log(headers)
+    try {
+        let response = await axios.put(requestURL, data, { headers, params });
+        return response.data;
+    }
+    catch (error) {
+        console.log(error.response.data)
+    }
+
 };
 
 
 // PUT
 export const _put = async (data?: any, api?: string, another_host?: string, headers?: any, params?: string) => {
-    let requestURL = (another_host? another_host : process.env.REACT_APP_API_HOST) + api;
+    let requestURL = (another_host ? another_host : process.env.REACT_APP_API_HOST) + api;
     if (headers === null || headers === undefined) {
         headers = authHeaders
     }

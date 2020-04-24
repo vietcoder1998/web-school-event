@@ -10,6 +10,7 @@ import { PUT, DELETE } from '../../../../../../const/method';
 import { _get } from '../../../../../../services/base-api';
 import { LANGUAGES } from '../../../../../../services/api/public.api';
 import ILanguageSkill from '../../../../../../models/language-skill';
+import { sendStringHeader } from '../../../../../../services/auth';
 
 let { Option } = Select;
 
@@ -85,6 +86,8 @@ class LanguageSkillItem extends Component<IProps, IState> {
     }
 
     async requestServer(method) {
+        console.log('delete')
+        console.log(method)
         let res;
         let { id } = this.props;
         let { languageSkill } = this.state;
@@ -96,7 +99,9 @@ class LanguageSkillItem extends Component<IProps, IState> {
                 res = await _requestToServer(PUT, languageSkill, LANGUAGE_SKILL + '/' + id, null, null, null, true);
             }
         } else if (method === DELETE) {
-            res = await _requestToServer(DELETE, null, LANGUAGE_SKILL + '/' + id, null, null, null, true);
+            let data = [this.props.item.language.id];
+            // await _requestToServer(this.props.method, description, update_description, null, sendStringHeader, null, true);
+            res = await _requestToServer(DELETE, data, LANGUAGE_SKILL, null, sendStringHeader, null, true);
             if (res) {
                 await this.props.getData();
             }

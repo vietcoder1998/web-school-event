@@ -34,11 +34,7 @@ class Education extends Component<IProps, IStates> {
   }
 
   componentDidMount = () => {
-    let { schools, personalInfo, major } = this.props;
-    console.log("school");
-    console.log(schools);
-    console.log(personalInfo);
-    console.log(major);
+   
   };
 
   render() {

@@ -9,7 +9,7 @@ import imageDefault from "../../assets/image/base-image.jpg";
 
 function* getPersonInfo() {
   let res = yield call(getData);
-  console.log(res);
+    
   let data = res.data;
   let personalInfo = {
     id: "",
@@ -39,7 +39,7 @@ function* getPersonInfo() {
     identityCardFrontImageUrl: "",
     identityCardBackImageUrl: "",
   };
-
+  console.log(data)
   //personalInfo
   personalInfo.avatarUrl = data.avatarUrl;
   personalInfo.phone = data.phone;

@@ -143,8 +143,6 @@ class FixPerson extends Component<IProps, IState> {
 
   _upLoadFile = (name, url, event?: any) => {
     let picture = this.state[name];
-    console.log(name);
-    console.log(url)
     let files = event.target.files;
     let reader = new FileReader();
     reader.readAsDataURL(files[0]);
