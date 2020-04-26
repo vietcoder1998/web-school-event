@@ -108,10 +108,10 @@ class Header extends PureComponent<IProps, IState> {
               {
                 isAuthen ? <a href='/save-job'><Icon type="book" />Lịch sử </a> : ''
               }
-              <a href='https://play.google.com/store/apps/details?id=com.worksvn.candidate&hl=vi' target='_blank' rel="noopener noreferrer">
+              <a href='https://play.google.com/store/apps/details?id=com.worksvn.student&hl=vi' target='_blank' rel="noopener noreferrer">
                 App Android
                 </a>
-              <a href='https://apps.apple.com/vn/app/works-vn-t%C3%ACm-vi%E1%BB%87c/id1487662808' target='_blank' rel="noopener noreferrer">
+              <a href='https://apps.apple.com/us/app/worksvn-sinh-vi%C3%AAn/id1492437454' target='_blank' rel="noopener noreferrer">
                 App IOS
                 </a>
             </div>

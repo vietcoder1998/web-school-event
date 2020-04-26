@@ -48,7 +48,7 @@ class EducationItem extends Component<IProps, IStates> {
         if (item !== null) {
             education = item;
         }
-        console.log(this.props.item)
+       
 
         activeKey = complete;
         this.setState({ education, activeKey });

@@ -37,13 +37,13 @@ export default function Footer(props) {
           {/* Market */}
           <Col xs={24} sm={24} md={8} lg={6} xl={6} className='rule app'>
             <div>
-              <a href={'https://apps.apple.com/vn/app/works-vn-t%C3%ACm-vi%E1%BB%87c/id1487662808'}>
-                <img src={AppStore} alt='CHPlay tìm việc' height='50px' width='160px' />
+              <a href={'https://apps.apple.com/us/app/worksvn-sinh-vi%C3%AAn/id1492437454'}>
+                <img src={AppStore} alt='AppStore tìm việc sinh viên' height='50px' width='160px' />
               </a>
             </div>
             <div>
-              <a href={'https://play.google.com/store/apps/details?id=com.worksvn.candidate&hl=vi'}>
-                <img src={CHPlay} alt='AppleStore Tìm việc' height='50px' width='160px' />
+              <a href={'https://play.google.com/store/apps/details?id=com.worksvn.student&hl=en_US'}>
+                <img src={CHPlay} alt='CHPLAY tìm việc sinh viên' height='50px' width='160px' />
               </a>
 
             </div>

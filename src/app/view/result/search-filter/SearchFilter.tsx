@@ -24,7 +24,7 @@ export default function SearchFilter(props?: ISearchFilterProps) {
                         size={"large"}
                         showSearch
                         onChange={(event: string) => {
-                            console.log(event);
+                   
                             let newFilter = filter;
                             newFilter.jobType = event;
                             setFilter(newFilter);

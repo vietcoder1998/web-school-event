@@ -53,7 +53,7 @@ function callAnnouncements(action: any) {
             },
             false,
         )
-            console.log(res)
+         
         return res
     } catch (e) {
         throw e

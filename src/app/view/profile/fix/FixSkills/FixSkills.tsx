@@ -48,8 +48,7 @@ class FixSkills extends Component<IProps, IState> {
         let { skills } = this.props;
         let { list_skills } = this.state;
         let res = await _get(null, SKILLS, PUBLIC_HOST);
-        console.log(PUBLIC_HOST)
-        console.log(res)
+     
         list_skills = res.data.items;
         this.setState({ list_skills, skills });
     }

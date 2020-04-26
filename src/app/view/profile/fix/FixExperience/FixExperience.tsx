@@ -33,11 +33,11 @@ class FixExperience extends Component<IState, IState> {
         }
     }
 
-    _handleInput = (event) => {
+    _handleInput = (type) => (event) => {
         let value = event.target.value;
-        let id = event.target.id;
+       
         let { experience } = this.state;
-        experience[id] = value;
+        experience[type] = value;
         this.setState({ experience });
     }
 
@@ -83,13 +83,13 @@ class FixExperience extends Component<IState, IState> {
                     {/* jobName */}
                     <div className='experience-content'>
                         <p><label style={{ color: 'red' }}>*</label>Tên vị trí</p>
-                        <Input className='input_outside' placeholder='Ví dụ: UX-UI Designer' value={experience.jobName} onChange={this._handleInput} />
+                        <Input className='input_outside' placeholder='Ví dụ: UX-UI Designer' value={experience.jobName} onChange={this._handleInput("jobName")} />
                     </div>
 
                     {/* Company */}
                     <div className='experience-content'>
                         <p><label style={{ color: 'red' }}>*</label>Tên Tổ chức</p>
-                        <Input className='input_outside' placeholder='Ví dụ: Công ti cổ phần Works.vn' value={experience.companyName} onChange={this._handleInput} />
+                        <Input className='input_outside' placeholder='Ví dụ: Công ti cổ phần Works.vn' value={experience.companyName} onChange={this._handleInput("companyName")} />
                     </div>
 
                     <div className='experience-content'>
@@ -115,7 +115,7 @@ class FixExperience extends Component<IState, IState> {
                     {/* Description */}
                     <div className='experience-content'>
                         <p> <label style={{ color: 'red' }}>*</label>Mô tả nội dung</p>
-                        <textarea id='description' placeholder='Nhập nội dung và mô tả cụ thể công việc đã làm' value={experience.description} onChange={this._handleInput}></textarea>
+                        <textarea id='description' placeholder='Nhập nội dung và mô tả cụ thể công việc đã làm' value={experience.description} onChange={this._handleInput("description")}></textarea>
                     </div>
                     <p><label style={{ color: 'red' }}>*</label>Thông tin bắt buộc</p>
                 </div>

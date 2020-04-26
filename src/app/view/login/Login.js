@@ -53,7 +53,7 @@ class Login extends Component {
                     setAuthSate(res);
                     this.props.setAuthen();
                     let last_access = localStorage.getItem('last_access');
-                    console.log(localStorage.getItem('last_access'))
+                 
                     setTimeout(() => {
                         if (last_access) {
                             window.location.assign(last_access);
