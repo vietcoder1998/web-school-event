@@ -15,7 +15,6 @@ export const _post = async (data?: any, api?: string, another_host?: string, hea
 //GET
 export const _get = async (params?: any, api?: string, another_host?: string, headers?: any) => {
     let requestURL = (another_host ? another_host : process.env.REACT_APP_API_HOST) + api;
-    console.log(requestURL)
     if (another_host !== PUBLIC_HOST && (headers === null || headers === undefined)) {
         headers = authHeaders
     }
@@ -29,9 +28,10 @@ export const _delete = async (data?: any, api?: string, another_host?: string, h
     if (headers === null || headers === undefined) {
         headers = authHeaders;
     }
-    console.log(headers)
     try {
-        let response = await axios.put(requestURL, data, { headers, params });
+        console.log(params)
+        // let response = await axios.delete(request_url, { data, headers });
+        let response = await axios.delete(requestURL, { params: JSON.stringify(params), headers });
         return response.data;
     }
     catch (error) {
@@ -44,6 +44,7 @@ export const _delete = async (data?: any, api?: string, another_host?: string, h
 // PUT
 export const _put = async (data?: any, api?: string, another_host?: string, headers?: any, params?: string) => {
     let requestURL = (another_host ? another_host : process.env.REACT_APP_API_HOST) + api;
+
     if (headers === null || headers === undefined) {
         headers = authHeaders
     }

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { _requestToServer } from '../../../../../../services/exec';
 import { Tabs, Tab } from 'react-bootstrap';
 import { Row, Col, Input, Radio, Select, Popconfirm } from 'antd';
-import { PUBLIC_HOST } from '../../../../../../environment/development';
+import { PUBLIC_HOST, STUDENTS_HOST } from '../../../../../../environment/development';
 import { LANGUAGE_SKILL } from '../../../../../../services/api/private.api';
 import { REDUX_SAGA } from '../../../../../../const/actions';
 import { PUT, DELETE } from '../../../../../../const/method';
@@ -86,22 +86,18 @@ class LanguageSkillItem extends Component<IProps, IState> {
     }
 
     async requestServer(method) {
-        console.log('delete')
-        console.log(method)
+
         let res;
         let { id } = this.props;
         let { languageSkill } = this.state;
         if (method === PUT) {
-            if (
-                languageSkill.languageID === null ||
-                languageSkill.level === '') {
-            } else {
-                res = await _requestToServer(PUT, languageSkill, LANGUAGE_SKILL + '/' + id, null, null, null, true);
-            }
+            res = await _requestToServer(PUT, languageSkill, LANGUAGE_SKILL + '/' + id, STUDENTS_HOST, null, null, true);
         } else if (method === DELETE) {
-            let data = [this.props.item.language.id];
+            let param = {
+                languageIDs: [id]
+            }
             // await _requestToServer(this.props.method, description, update_description, null, sendStringHeader, null, true);
-            res = await _requestToServer(DELETE, data, LANGUAGE_SKILL, null, sendStringHeader, null, true);
+            res = await _requestToServer(DELETE, null, LANGUAGE_SKILL, STUDENTS_HOST, sendStringHeader, param, true);
             if (res) {
                 await this.props.getData();
             }

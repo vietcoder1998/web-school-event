@@ -44,7 +44,6 @@ export const _requestToServer = async (
                 }
                 return res;
             case DELETE:
-                console.log(data)
                 res = await _delete(data, api, host, headers, params);
                 break;
             default:

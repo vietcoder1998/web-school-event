@@ -39,8 +39,7 @@ function* getPersonInfo() {
     identityCardFrontImageUrl: "",
     identityCardBackImageUrl: "",
   };
-  console.log(data)
-  //personalInfo
+  
   personalInfo.avatarUrl = data.avatarUrl;
   personalInfo.phone = data.phone;
   personalInfo.email = data.email;

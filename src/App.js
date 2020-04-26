@@ -81,7 +81,7 @@ class App extends React.Component {
     this._loadLocal();
     this.setState({ loading: false });
     this._callResize();
-    
+
     $(window).resize(() => {
       this._callResize();
     });

@@ -189,17 +189,7 @@ class Profile extends Component<IProps, IState> {
 
               {/* Education */}
               <Block describe="Học vấn và bằng cấp" icon={this.icon_bachelor}>
-                <div
-                  className="icon-fix"
-                  onClick={() => this._fixData("education")}
-                >
-                  <span
-                    data-tip
-                    data-for="a_ed"
-                    id="education"
-                    className="fa fa-plus"
-                  ></span>
-                </div>
+               
 
                 {profileState["education"] ? (
                   <FixEducation _fixData={this._fixData} method={POST} />
