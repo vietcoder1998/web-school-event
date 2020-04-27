@@ -62,7 +62,7 @@ class TopJob extends PureComponent<IProps, IState> {
         if (indayJob && indayJob.totalItems > 0) {
             return (
                 <Row className='home-job' style={{ display: indayJob.totalItems === 0 ? 'hidden' : '' }}>
-                    <h5 style={{ textAlign: 'center' }}>VIỆC LÀM NỔI BẬT</h5>
+                    <h5 style={{ textAlign: 'center' }}>VIỆC LÀM NỔI BẬT TRONG NGÀY HỘI</h5>
                     {
                         indayJob && indayJob.items ? indayJob.items.map((item, index) => {
                             let logoUrl = item.employerLogoUrl;

@@ -31,10 +31,11 @@ function getInDayData(action) {
         }
     };
     let isAuthen = store.getState().AuthState.isAuthen;
+    
     let res = _requestToServer(
         POST,
         data,
-        (isAuthen ? JOBS + '/active' : FIND_JOB),
+        (isAuthen ? JOBS.NORMAL.ACTIVE : FIND_JOB),
         isAuthen ? STUDENTS_HOST : PUBLIC_HOST, isAuthen ? authHeaders : noInfoHeader,
         {
             pageIndex: action.pageIndex ? action.pageIndex : 0,
