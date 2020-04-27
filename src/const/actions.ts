@@ -21,6 +21,10 @@ export const REDUX = {
     IN_DAY: {
         GET_IN_DAY_JOB: 'GET_IN_DAY_JOB',
     },
+    EVENT_JOB: {
+        TOP_JOB: 'GET_TOP_JOB',
+        SEARCH_JOB: 'SEARCH_JOB',
+    },
     HOT_JOB: {
         GET_HOT_JOB: 'GET_HOT_JOB',
     },

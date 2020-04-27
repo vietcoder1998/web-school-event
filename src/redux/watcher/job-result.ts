@@ -4,7 +4,7 @@ import { FIND_JOB } from '../../services/api/public.api';
 import { PUBLIC_HOST, STUDENTS_HOST } from '../../environment/development';
 import { noInfoHeader, authHeaders } from '../../services/auth';
 import { store } from '../store';
-import { JOBS } from '../../services/api/private.api';
+import { JOB } from '../../services/api/private.api';
 import { REDUX_SAGA, REDUX } from '../../const/actions'
 import { POST } from '../../const/method';
 

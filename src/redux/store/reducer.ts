@@ -19,7 +19,7 @@ import { HotJobResult } from '../reducers/hot-job';
 import { HighLightResult } from '../reducers/highlight-job';
 import { ChatRoom } from '../reducers/chat-room';
 import { MobileState } from './../reducers/change-mobile-state';
-
+import { EventTopJobReducer, EventJobReducer } from './../reducers/eventJob';
 let rootReducer = {
   PersonalInfo,
   PopupState,
@@ -39,7 +39,9 @@ let rootReducer = {
   JobNames,
   Regions,
   InDayResult,
-  Announcements
+  Announcements,
+  EventJobReducer,
+  EventTopJobReducer
 };
 
 const myReducer = combineReducers(rootReducer);

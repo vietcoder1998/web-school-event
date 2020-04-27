@@ -4,7 +4,7 @@ import { _requestToServer } from '../../services/exec';
 import { PUBLIC_HOST, STUDENTS_HOST } from '../../environment/development';
 import { noInfoHeader, authHeaders } from '../../services/auth';
 import { store } from '../store/index';
-import { JOBS } from '../../services/api/private.api';
+import { JOBs, JOBS } from '../../services/api/private.api';
 import { REDUX_SAGA, REDUX } from '../../const/actions'
 import { GET } from '../../const/method';
 
@@ -22,7 +22,7 @@ function getJobDetailtData(action) {
     let res = _requestToServer(
         GET,
         null,
-        (isAuthen ? JOBS : JOB) + `/${action.jobID}` + (isAuthen ? '/active' : ''),
+        isAuthen ? JOBS.NORMAL.DETAIL.replace("{id}", action.jobID) : JOB + `/${action.jobID}`,
         isAuthen ? STUDENTS_HOST : PUBLIC_HOST, isAuthen ? authHeaders : noInfoHeader,
         false
     )

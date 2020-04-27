@@ -16,6 +16,22 @@ export const AVATAR = '/api/students/avatar';
 export const registrasionController = '/api/students/registration/email';
 export const APPLY_JOB ='/api/students/jobs/';
 export const SAVED_JOB = '/api/students/jobs';
-export const JOBS = '/api/students/jobs';
+// export const JOBS = '/api/students/jobs';
 export const notiController = '/api/students/notifications';
 export const RATE_EMPLOYER_CONTROLLER = '/api/students/employers';
+
+
+export const JOBS = {
+    EVENT: {
+        ACTIVE: '/api/students/schools/events/{eid}/jobs/active',
+        HOME: '/api/students/schools/events/{eid}/jobs/active/home',
+        SEARCH: '/api/students/schools/events/{eid}/jobs/active/search',
+        DETAIL: "/api/students/schools/events/{eid}/jobs/{jid}/active",
+    },
+    NORMAL: {
+        ACTIVE: '/api/students/jobs/active',
+        HOME: '/api/students/jobs/active/home',
+        SEARCH: '/api/students/jobs/active/search',
+        DETAIL: "/api/students/jobs/{id}/active",
+    }
+}

@@ -487,17 +487,7 @@ class SearchBox extends Component<IProps, IState>{
                     {/* Search in Computer */}
                     <div className='search-box hidden-only-phone'>
                         {/* Choose Option */}
-                        <div className='location-address'>
-                            <InputGroup>
-                                <Button type='primary' onClick={this._handleShowLocation}>{show_location ? 'Ẩn' : 'Xem chi tiết'}</Button>
-                                <Input
-                                    placeholder='Vị trí của bạn'
-                                    value={choose_location ? location.address : area.name}
-                                    style={{ width: show_location ? '500px' : '150px' }}
-                                    prefix={<Icon type="environment" style={{ color: "green" }} />}
-                                    readOnly />
-                            </InputGroup>
-                        </div>
+
                         <div>
                             <p style={{ fontSize: '1.5rem', color: 'white' }}>Tìm Công Việc Mơ Ước. Nâng Bước Thành Công!</p>
                         </div>
