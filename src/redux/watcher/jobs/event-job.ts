@@ -1,23 +1,23 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
-import { _requestToServer } from '../../services/exec';
-import { FIND_JOB } from '../../services/api/public.api';
-import { PUBLIC_HOST, STUDENTS_HOST } from '../../environment/development';
-import { noInfoHeader, authHeaders } from '../../services/auth';
-import { store } from '../store';
-import {JOBS } from '../../services/api/private.api';
-import { REDUX_SAGA, REDUX } from '../../const/actions'
-import { POST } from '../../const/method';
+import { _requestToServer } from '../../../services/exec';
+import { FIND_JOB } from '../../../services/api/public.api';
+import { PUBLIC_HOST, STUDENTS_HOST } from '../../../environment/development';
+import { noInfoHeader, authHeaders } from '../../../services/auth';
+import { store } from '../../store';
+import { JOBS } from '../../../services/api/private.api';
+import { REDUX_SAGA, REDUX } from '../../../const/actions'
+import { POST } from '../../../const/method';
 
 
 function* getListJobResultData(action) {
-    let res = yield call(getJobResults, action);
+    let res = yield call(getEventJobResults, action);
     if (res) {
         let data = res.data;
         yield put({ type: REDUX.JOB_RESULT.GET_JOB_RESULT, data });
     }
 }
 
-function getJobResults(action) {
+function getEventJobResults(action) {
     let body = {
         employerID: null,
         excludedJobIDs: null,
@@ -61,7 +61,7 @@ function getJobResults(action) {
     let res = _requestToServer(
         POST,
         body,
-        (isAuthen ? JOBS.NORMAL.ACTIVE : FIND_JOB),
+        (isAuthen ? JOBS.EVENT.ACTIVE : FIND_JOB),
         isAuthen ? STUDENTS_HOST : PUBLIC_HOST,
         isAuthen ? authHeaders : noInfoHeader,
         {

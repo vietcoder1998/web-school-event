@@ -7,3 +7,9 @@ export const JOB = "/api/jobs";
 export const EMPLOYER = "/api/employers";
 export const ANNOUNCEMENTS = '/api/announcements'
 export const oauth2 = "/api/users/emailVerification/request";
+
+export const JOB_PUBLIC = {
+    NORMAL: {
+        
+    }
+}

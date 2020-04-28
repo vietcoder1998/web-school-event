@@ -39,7 +39,7 @@ function getHighLightJobData(action) {
     let res = _requestToServer(
         POST,
         action.body ? action.body : body,
-        (isAuthen ? JOBS + '/active' : FIND_JOB),
+        (isAuthen ? JOBS.NORMAL.ACTIVE : FIND_JOB),
         isAuthen ? STUDENTS_HOST : PUBLIC_HOST,
         isAuthen ? authHeaders : noInfoHeader,
         {

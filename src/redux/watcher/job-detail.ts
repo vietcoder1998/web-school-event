@@ -4,7 +4,7 @@ import { _requestToServer } from '../../services/exec';
 import { PUBLIC_HOST, STUDENTS_HOST } from '../../environment/development';
 import { noInfoHeader, authHeaders } from '../../services/auth';
 import { store } from '../store/index';
-import { JOBs, JOBS } from '../../services/api/private.api';
+import { JOBS } from '../../services/api/private.api';
 import { REDUX_SAGA, REDUX } from '../../const/actions'
 import { GET } from '../../const/method';
 
