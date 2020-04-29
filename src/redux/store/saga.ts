@@ -18,6 +18,8 @@ import { RegionWatcher } from '../watcher/regions';
 import { InDayWatcher } from '../watcher/in-day';
 import { AnnouncementsWatcher } from '../watcher/announcements';
 
+import { EventHotJobsWatcher } from '../watcher/event/jobs';
+
 export default function* rootSaga() {
     yield all([
         PersonInfoWatcher(),
@@ -36,5 +38,7 @@ export default function* rootSaga() {
         AnnouncementsWatcher(),
         HistoryApplyWatcher(),
         SimilarJobWatcher(),
+
+        EventHotJobsWatcher(),
     ])
 } 

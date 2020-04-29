@@ -1,3 +1,5 @@
+import { EventInDayJobs, EventHotJobs } from './../reducers/event';
+
 import { Announcements } from './../reducers/announcements';
 import { InDayResult } from './../reducers/in-day';
 import { Regions } from './../reducers/regions';
@@ -46,7 +48,10 @@ let rootReducer = {
   Announcements,
   GetHistoryApply,
   SimilarJob,
-  AllJobResult
+  AllJobResult,
+  /// event
+  EventInDayJobs,
+  EventHotJobs,
 };
 
 const myReducer = combineReducers(rootReducer);

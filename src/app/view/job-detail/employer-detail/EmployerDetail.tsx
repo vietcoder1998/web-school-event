@@ -4,7 +4,7 @@ import { limitString } from '../../../../utils/limitString';
 import { Link } from 'react-router-dom';
 import { _requestToServer } from '../../../../services/exec';
 import { RATE_EMPLOYER_CONTROLLER } from '../../../../services/api/private.api';
-import { CANDIDATE_HOST } from '../../../../environment/development';
+import { STUDENT_HOST } from '../../../../environment/development';
 import { authHeaders } from '../../../../services/auth';
 import { POST } from '../../../../const/method';
 import { Input } from 'antd';
@@ -61,7 +61,7 @@ export default class EmployerDetail extends React.PureComponent<EmployerDetailPr
         let { id } = this.props.employerDetail;
         let data = { workingEnvironmentRating, salaryRating, comment: comment.trim() };
         await this.setState({ confirmLoading: true })
-        await _requestToServer(POST, data, `${RATE_EMPLOYER_CONTROLLER}/${id}/ratings`, CANDIDATE_HOST, authHeaders, null, true);
+        await _requestToServer(POST, data, `${RATE_EMPLOYER_CONTROLLER}/${id}/ratings`, STUDENT_HOST, authHeaders, null, true);
         await this.setState({ confirmLoading: false })
     }
 

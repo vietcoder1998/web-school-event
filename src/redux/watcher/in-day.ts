@@ -2,7 +2,7 @@ import { IJobSearchFilter } from '../../models/job-search';
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { _requestToServer } from '../../services/exec';
 import { FIND_JOB } from '../../services/api/public.api';
-import { PUBLIC_HOST, CANDIDATE_HOST } from '../../environment/development';
+import { PUBLIC_HOST, STUDENT_HOST } from '../../environment/development';
 import { noInfoHeader, authHeaders } from '../../services/auth';
 import { store } from '../store';
 import { JOBS } from '../../services/api/private.api';
@@ -35,7 +35,7 @@ function getInDayData(action) {
         POST,
         data,
         (isAuthen ? JOBS + '/active/home' : FIND_JOB + '/home'),
-        isAuthen ? CANDIDATE_HOST : PUBLIC_HOST, isAuthen ? authHeaders : noInfoHeader,
+        isAuthen ? STUDENT_HOST : PUBLIC_HOST, isAuthen ? authHeaders : noInfoHeader,
         {
             pageIndex: action.pageIndex ? action.pageIndex : 0,
             pageSize: 6,

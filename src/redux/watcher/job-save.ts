@@ -1,6 +1,6 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { _requestToServer } from '../../services/exec';
-import { CANDIDATE_HOST } from '../../environment/development';
+import { STUDENT_HOST } from '../../environment/development';
 import { authHeaders } from '../../services/auth';
 import { SAVED_JOB } from '../../services/api/private.api';
 import { REDUX_SAGA, REDUX } from '../../const/actions'
@@ -24,7 +24,7 @@ function getJobSaveData(action) {
             GET,
             undefined,
             SAVED_JOB + '/saved',
-            CANDIDATE_HOST,
+            STUDENT_HOST,
             authHeaders,
             { 
                 pageIndex: action.pageIndex ? action.pageIndex : 0, 

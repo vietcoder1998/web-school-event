@@ -1,27 +1,36 @@
-export const authUserPassword  = '/api/authentication/username-password';
-export const resetPassword  = '/api/users/password/new';
-export const forgotPassword  = '/api/users/password/reset/request';
+export const authUserPassword = '/api/authentication/username-password';
+export const resetPassword = '/api/users/password/new';
+export const forgotPassword = '/api/users/password/reset/request';
 
 
-export const appliedJobs = '/api/candidates/appliedJobs';
-export const desiredJobs = '/api/candidates/desiredJobs';
-export const education = '/api/candidates/educations';
-export const exprience = '/api/candidates/experiences';
+export const appliedJobs = '/api/students/appliedJobs';
+export const desiredJobs = '/api/students/desiredJobs';
+export const education = '/api/students/educations';
+export const exprience = '/api/students/experiences';
 export const jobActive = '';
-export const fullProfile = '/api/candidates/profile';
-export const PERSON_INFO = '/api/candidates/personalInfo';
-export const DESCRIPTION = '/api/candidates/description';
-export const skillsController = '/api/candidates/skills';
-export const LANGUAGE_SKILL = '/api/candidates/languageSkills';
-export const educationController= '/api/candidates/educations'
-export const experienceController = '/api/candidates/experiences';
-export const isLookingFobJobState = '/api/candidates/lookingForJob/';
-export const AVATAR = '/api/candidates/avatar';
-export const registrasionController = '/api/candidates/registration/email';
-export const APPLY_JOB ='/api/candidates/jobs/';
-export const SAVED_JOB = '/api/candidates/jobs';
-export const JOBS = '/api/candidates/jobs';
-export const notiController = '/api/candidates/notifications';
-export const RATE_EMPLOYER_CONTROLLER = '/api/candidates/employers';
-export const PROFILE_EMPLOYER = '/api/candidates/employers';
+export const fullProfile = '/api/students/profile';
+export const PERSON_INFO = '/api/students/personalInfo';
+export const DESCRIPTION = '/api/students/description';
+export const skillsController = '/api/students/skills';
+export const LANGUAGE_SKILL = '/api/students/languageSkills';
+export const educationController = '/api/students/educations'
+export const experienceController = '/api/students/experiences';
+export const isLookingFobJobState = '/api/students/lookingForJob/';
+export const AVATAR = '/api/students/avatar';
+export const registrasionController = '/api/students/registration/email';
+export const APPLY_JOB = '/api/students/jobs/';
+export const SAVED_JOB = '/api/students/jobs';
+export const JOBS = '/api/students/jobs';
+export const notiController = '/api/students/notifications';
+export const RATE_EMPLOYER_CONTROLLER = '/api/students/employers';
+export const PROFILE_EMPLOYER = '/api/students/employers';
 
+
+export const EVENT_PRIVATE = {
+    JOBS: {
+        HOME: `/api/students/schools/events/${process.env.REACT_APP_EVENT_ID}/jobs/active/home`,
+        ACTIVE: `/api/students/schools/events/${process.env.REACT_APP_EVENT_ID}/jobs/active`,
+        SEARCH: `/api/students/schools/events/${process.env.REACT_APP_EVENT_ID}/jobs/search`,
+        DETAIL: `/api/students/schools/events/${process.env.REACT_APP_EVENT_ID}/jobs/{jid}/active`
+    }
+}

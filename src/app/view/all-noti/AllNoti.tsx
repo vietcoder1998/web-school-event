@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { _requestToServer } from '../../../services/exec';
 import { notiController } from '../../../services/api/private.api';
 import { PUT } from '../../../const/method';
-import { CANDIDATE_HOST } from '../../../environment/development';
+import { STUDENT_HOST } from '../../../environment/development';
 import { authHeaders } from '../../../services/auth';
 import { timeConverter } from '../../../utils/convertTime';
 import Layout from '../layout/Layout';
@@ -37,7 +37,7 @@ class AllNoti extends PureComponent<IAllNotiProps, IAllNotiState> {
     async _createRequest(id: string, state: boolean) {
         let { pageIndex } = this.state;
 
-        await _requestToServer(PUT, null, notiController + `/${id}/seen/${state}`, CANDIDATE_HOST, authHeaders, null, false).then(res => {
+        await _requestToServer(PUT, null, notiController + `/${id}/seen/${state}`, STUDENT_HOST, authHeaders, null, false).then(res => {
             if (res) {
                 this.props.getNotiData(pageIndex - 1)
             }

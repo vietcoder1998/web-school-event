@@ -8,7 +8,7 @@ import moment from 'moment'
 import { SAVED_JOB } from '../../../services/api/private.api';
 import { authHeaders } from '../../../services/auth';
 import { _requestToServer } from '../../../services/exec';
-import { CANDIDATE_HOST } from '../../../environment/development';
+import { STUDENT_HOST } from '../../../environment/development';
 import { moveScroll } from '../../../utils/moveScroll';
 import { limitString } from '../../../utils/limitString';
 import { REDUX_SAGA } from '../../../const/actions';
@@ -60,7 +60,7 @@ class SaveJob extends React.PureComponent<ISaveJobProp, ISaveJobState>{
         let { isAuthen } = this.props;
         if (isAuthen) {
             let params = [id]
-            let res = await _requestToServer(DELETE, null, SAVED_JOB + `/saved`, CANDIDATE_HOST, authHeaders, params, true);
+            let res = await _requestToServer(DELETE, null, SAVED_JOB + `/saved`, STUDENT_HOST, authHeaders, params, true);
             if (res) {
                 // openNotification();
                 this.props.getJobSaveData(0)

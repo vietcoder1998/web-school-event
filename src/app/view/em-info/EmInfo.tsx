@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { limitString } from '../../../utils/limitString';
 import { _requestToServer } from '../../../services/exec';
 import { GET, POST } from '../../../const/method';
-import { CANDIDATE_HOST } from '../../../environment/development';
+import { STUDENT_HOST } from '../../../environment/development';
 import { PROFILE_EMPLOYER } from '../../../services/api/private.api';
 import { authHeaders } from '../../../services/auth';
 import swal from 'sweetalert';
@@ -84,7 +84,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
 
     showModal = () => {
         if (this.props.isAuthen) {
-            _requestToServer(GET, null, PROFILE_EMPLOYER + `/${window.atob(this.props.match.params.id)}/rating`, CANDIDATE_HOST, authHeaders, null, null, false, true)
+            _requestToServer(GET, null, PROFILE_EMPLOYER + `/${window.atob(this.props.match.params.id)}/rating`, STUDENT_HOST, authHeaders, null, null, false, true)
                 .then((res) => {
                     // console.log(res)
                     if(res && res.code === 200) {
@@ -112,7 +112,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
             let data = {
                 workingEnvironmentRating, salaryRating, comment
             }
-            _requestToServer(POST, data, PROFILE_EMPLOYER + `/${window.atob(this.props.match.params.id)}/rating`, CANDIDATE_HOST, authHeaders, null, null)
+            _requestToServer(POST, data, PROFILE_EMPLOYER + `/${window.atob(this.props.match.params.id)}/rating`, STUDENT_HOST, authHeaders, null, null)
                 .then((res) => {
                     // console.log(res)
                     if(res && res.code === 200) {

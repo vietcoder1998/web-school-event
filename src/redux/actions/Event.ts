@@ -1,15 +1,16 @@
 import { REDUX } from "../../const/actions";
 
-export const getTopEventJob = (data) => {
+export const getEventHobJob = (data) => {
     return {
-        type: REDUX.EVENT_JOB.TOP_JOB,
+        type: REDUX.EVENT.JOB.HOT,
         data
     }
 }
 
-export const getEventJob = (data) => {
-    return {
-        type: REDUX.EVENT_JOB.SEARCH_JOB,
+export const getEventInDayJob = (data) => {
+    return{
+        type: REDUX.EVENT.JOB.IN_DAY,
         data
     }
 }
+

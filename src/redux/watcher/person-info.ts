@@ -1,7 +1,7 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { _get } from '../../services/base-api';
 import { fullProfile } from '../../services/api/private.api';
-import { CANDIDATE_HOST } from '../../environment/development';
+import { STUDENT_HOST } from '../../environment/development';
 import { authHeaders } from '../../services/auth';
 import { REDUX_SAGA, REDUX } from '../../const/actions'
 
@@ -71,7 +71,7 @@ function* getPersonInfo() {
 }
 
 function getData() {
-    let data = _get(null, fullProfile, CANDIDATE_HOST, authHeaders);
+    let data = _get(null, fullProfile, STUDENT_HOST, authHeaders);
     return data;
 }
 

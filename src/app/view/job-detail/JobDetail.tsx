@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { _requestToServer } from '../../../services/exec';
 import { POST } from '../../../const/method';
 import { APPLY_JOB, SAVED_JOB } from '../../../services/api/private.api';
-import { CANDIDATE_HOST } from '../../../environment/development';
+import { STUDENT_HOST } from '../../../environment/development';
 import { authHeaders } from '../../../services/auth';
 //@ts-ignore
 import _ from 'lodash';
@@ -192,7 +192,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
     async _saveJob() {
         let { isAuthen, jobDetail } = this.props;
         if (isAuthen) {
-            let res = await _requestToServer(POST, null, SAVED_JOB + `/${jobDetail.id}/saved`, CANDIDATE_HOST, authHeaders);
+            let res = await _requestToServer(POST, null, SAVED_JOB + `/${jobDetail.id}/saved`, STUDENT_HOST, authHeaders);
             if (res && res.data === null) {
                 this.setState({ isSaved: true });
             } else {
@@ -209,7 +209,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
     };
 
     async requestToServer(data, id) {
-        await _requestToServer(POST, data, APPLY_JOB + `/${id}/apply`, CANDIDATE_HOST, authHeaders).then(res => {
+        await _requestToServer(POST, data, APPLY_JOB + `/${id}/apply`, STUDENT_HOST, authHeaders).then(res => {
             if (res) {
                 this.props.getJobDetail(id);
                 this._loadState();

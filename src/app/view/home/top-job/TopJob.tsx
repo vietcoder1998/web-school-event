@@ -39,8 +39,9 @@ class TopJob extends PureComponent<IProps, IState> {
     };
 
     componentDidMount = async () => {
-        // await this.props.getHotJob(0);
-        await this.props.getInDay(0);
+        await this.props.getEventHotJob(0);
+        
+        console.log(this.props)
         // await this.setState({ is_loading: false });
         // setInterval(() => {
         //     let { atk } = this.state;
@@ -120,8 +121,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    getHotJob: (pageIndex?: number, pageSize?: number) => dispatch({ type: REDUX_SAGA.HOT_JOB.GET_HOT_JOB, pageIndex, pageSize }),
-    getInDay: (pageIndex?: number, pageSize?: number) => dispatch({ type: REDUX_SAGA.IN_DAY.GET_IN_DAY_JOB, pageIndex, pageSize }),
+    getEventHotJob: (pageIndex?: number, pageSize?: number) => dispatch({ type: REDUX_SAGA.EVENT.JOB.HOT, pageIndex, pageSize }),
+   
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopJob);

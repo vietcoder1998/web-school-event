@@ -8,7 +8,7 @@ import { _requestToServer } from '../../../../../services/exec';
 import { notiController } from '../../../../../services/api/private.api';
 import { authHeaders } from '../../../../../services/auth';
 import { PUT } from '../../../../../const/method';
-import { CANDIDATE_HOST } from '../../../../../environment/development';
+import { STUDENT_HOST } from '../../../../../environment/development';
 import { IptLetter, Timer } from "../../common/Common";
 import { REDUX_SAGA } from '../../../../../const/actions';
 
@@ -49,7 +49,7 @@ class Notification extends Component {
     async _createRequest(id) {
         let { isAuthen } = this.props
         if (isAuthen) {
-            await _requestToServer(PUT, null, notiController + `/${id}/seen/${true}`, CANDIDATE_HOST, authHeaders).then(res =>
+            await _requestToServer(PUT, null, notiController + `/${id}/seen/${true}`, STUDENT_HOST, authHeaders).then(res =>
                 res && this.props.getNotiData(0));
         }
     };

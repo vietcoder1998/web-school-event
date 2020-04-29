@@ -8,7 +8,7 @@ import moment from 'moment'
 import { SAVED_JOB } from '../../../services/api/private.api';
 import { authHeaders } from '../../../services/auth';
 import { _requestToServer } from '../../../services/exec';
-import { CANDIDATE_HOST } from '../../../environment/development';
+import { STUDENT_HOST } from '../../../environment/development';
 import { moveScroll } from '../../../utils/moveScroll';
 import { limitString } from '../../../utils/limitString';
 import { REDUX_SAGA } from '../../../const/actions';
@@ -59,7 +59,7 @@ class HistoryApply extends React.PureComponent<ISaveJobProp, ISaveJobState>{
     async _removejob(id) {
         let { isAuthen } = this.props;
         if (isAuthen) {
-            let res = await _requestToServer(DELETE, null, SAVED_JOB + `/${id}/saved`, CANDIDATE_HOST, authHeaders, null, null);
+            let res = await _requestToServer(DELETE, null, SAVED_JOB + `/${id}/saved`, STUDENT_HOST, authHeaders, null, null);
             if (res) {
                 openNotification();
                 this.props.getHistoryApplyData(0)

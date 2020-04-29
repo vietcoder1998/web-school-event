@@ -20,6 +20,19 @@ export const REDUX = {
         GET_SIMILAR_JOB: 'GET_SIMILAR_JOB',
         SET_LOADING_SIMILAR_JOB: 'SET_LOADING_SIMILAR_JOB'
     },
+    EVENT: {
+        DATA: 'GET_EVENT_DATA',
+        JOB: {
+            HOT: 'GET_EVENT_HOT_JOBS',
+            HOT_LOADING: 'SET_LOADING_EVENT_HOT_JOB',
+            IN_DAY: 'GET_EVENT_INDAY_JOBS',
+            ALL: 'GET_EVENT_ALL_JOBS',
+            DETAIL: 'GET_EVENT_JOB_DETAIL',
+        },
+        EMPLOYER: {
+            ALL: 'GET_ALL_EMPLOYER',
+        }
+    },
     HIGH_LIGHT: {
         GET_HIGH_LIGHT_JOB: 'GET_HIGH_LIGHT_JOB',
         SET_LOADING_HIGH_LIGHT_JOB: 'SET_LOADING_HIGH_LIGHT_JOB',
@@ -104,6 +117,18 @@ export const REDUX_SAGA = {
     },
     HIGH_LIGHT: {
         GET_HIGH_LIGHT_DATA: 'GET_HIGH_LIGHT_DATA',
+    },
+    EVENT: {
+        DATA: 'GET_EVENT_DATA',
+        JOB: {
+            HOT: 'GET_EVENT_HOT_JOBS',
+            IN_DAY: 'GET_EVENT_INDAY_JOBS',
+            ALL: 'GET_EVENT_ALL_JOBS',
+            DETAIL: 'GET_EVENT_JOB_DETAIL',
+        },
+        EMPLOYER: {
+            ALL: 'GET_ALL_EMPLOYER',
+        }
     },
     IN_DAY: {
         GET_IN_DAY_JOB: 'GET_IN_DAY_JOB_DATA',

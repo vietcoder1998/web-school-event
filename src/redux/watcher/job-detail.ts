@@ -1,7 +1,7 @@
 import { takeEvery, call, put} from 'redux-saga/effects';
 import { JOB } from '../../services/api/public.api';
 import { _requestToServer } from '../../services/exec';
-import { PUBLIC_HOST, CANDIDATE_HOST } from '../../environment/development';
+import { PUBLIC_HOST, STUDENT_HOST } from '../../environment/development';
 import { noInfoHeader, authHeaders } from '../../services/auth';
 import { store } from '../store/index';
 import { JOBS } from '../../services/api/private.api';
@@ -23,7 +23,7 @@ function getJobDetailtData(action) {
         GET,
         null,
         (isAuthen ? JOBS : JOB) + `/${action.jobID}` + (isAuthen ? '/active' : ''),
-        isAuthen ? CANDIDATE_HOST : PUBLIC_HOST, isAuthen ? authHeaders : noInfoHeader,
+        isAuthen ? STUDENT_HOST : PUBLIC_HOST, isAuthen ? authHeaders : noInfoHeader,
         false, false, true
     )
 
