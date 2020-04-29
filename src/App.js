@@ -120,6 +120,7 @@ class App extends React.Component {
 
    _loadLocal =  async () => {
     let token = localStorage.getItem('accessToken');
+    console.log(localStorage.getItem('accessToken'))
     if (token !== null) {
       await this.props.checkAuthen(token);
     }

@@ -1,4 +1,4 @@
-import { EventInDayJobs, EventHotJobs } from './../reducers/event';
+import { EventHotJobResult, EventJobResults } from './../reducers/event';
 
 import { Announcements } from './../reducers/announcements';
 import { InDayResult } from './../reducers/in-day';
@@ -26,6 +26,8 @@ import { HighLightResult } from '../reducers/highlight-job';
 import { ChatRoom } from '../reducers/chat-room';
 import { MobileState } from './../reducers/change-mobile-state';
 
+
+
 let rootReducer = {
   PersonalInfo,
   PopupState,
@@ -50,8 +52,10 @@ let rootReducer = {
   SimilarJob,
   AllJobResult,
   /// event
-  EventInDayJobs,
-  EventHotJobs,
+
+  EventHotJobResult,
+  EventJobResults,
+
 };
 
 const myReducer = combineReducers(rootReducer);

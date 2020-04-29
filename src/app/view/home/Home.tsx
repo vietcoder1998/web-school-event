@@ -19,7 +19,7 @@ function Home(props) {
                 <TopEm />
                 <TopJob />
                 <HomeJob />
-                <AllJob />
+                {/* <AllJob /> */}
                 <Announcements {...props} />
             </div>
         </Layout>
