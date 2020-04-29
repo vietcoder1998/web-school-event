@@ -2,13 +2,13 @@
 
 .option {
   font-family  : $font_base;
-  border-bottom: solid white 1px;
+  border-bottom: dashed white 1px;
   color        : rgb(236, 236, 236) ;
 
   a {
     &:hover {
       text-decoration: underline;
-      color          : rgb(190, 190, 190)
+      // color          : rgb(190, 190, 190)
     }
   }
 
@@ -19,8 +19,12 @@
 
   h6 {
     color: rgb(236, 236, 236)!important;
+    font-weight: 650;
+    font-size: 1.25em;
   }
-
+  ul {
+    margin-bottom: 7px;
+  }
   .ant-skeleton {
     padding: 10px 5vw;
     margin : 2vh 0px;
@@ -28,7 +32,7 @@
     .ant-skeleton-header .ant-skeleton-avatar-lg {
       width        : 70px;
       height       : 70px;
-      line-height  : 40px;
+      // line-height  : 40px;
       border-radius: 17px !important;
     }
 
@@ -58,7 +62,7 @@
       }
 
       li {
-        padding  : 5px 2px;
+        // padding  : 5px 2px;
         font-size: 0.8rem;
       }
     }

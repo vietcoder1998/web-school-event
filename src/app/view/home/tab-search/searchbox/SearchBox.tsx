@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
-import { Input, Select, Button, Icon, Modal, Tabs } from 'antd';
+import { Input, Select, Button, Icon, Modal, Tabs, Col, Row } from 'antd';
 import './SearchBox.scss';
 import MapContainer from '../../../layout/google-maps/MapContainer';
 import { connect } from 'react-redux';
-import { REDUX_SAGA } from '../../../../../const/actions';
+import { REDUX_SAGA, REDUX } from '../../../../../const/actions';
+//@ts-ignore
+import CHPlay from '../../../../../assets/image/CHPlay.png';
+//@ts-ignore
+import AppStore from '../../../../../assets/image/app-store.png';
+//@ts-ignore
+import QRCodeAppStore from '../../../../../assets/image/qr-code-appstore.png';
+//@ts-ignore
+import QRCodeCHPlay from '../../../../../assets/image/qr-code-chplay.png';
+import qs from 'query-string';
+
 
 const InputGroup = Input.Group;
 const { Option } = Select;
@@ -23,7 +33,8 @@ let list_day_times = [
     { name: 'Ca Tối', shortcut: 'EVN' }
 ]
 
-let region = JSON.parse(localStorage.getItem('region'));
+// let region = JSON.parse(localStorage.getItem('region'));
+
 
 interface IProps {
     marker?: any;
@@ -33,6 +44,18 @@ interface IProps {
     getJobNames?: Function;
     jobNames?: Array<any>;
     regions?: Array<any>;
+    setFilterJobType?: any;
+    jobType?: any;
+    setFilterListShift?: any;
+    list_shift?: any;
+    list_day?: any;
+    setFilterArea?: any;
+    area?: any;
+    job_dto?: any;
+    setFilterJobName?: any;
+    setFilterListDay?: any;
+    show_days?: any;
+    setFilter?: any
 };
 
 interface IState {
@@ -73,7 +96,9 @@ interface IState {
     },
 
     show_location?: boolean,
-    choose_location?: boolean
+    choose_location?: boolean,
+    visible?: boolean,
+    showQRImageType?: any
 };
 
 class SearchBox extends Component<IProps, IState>{
@@ -87,16 +112,16 @@ class SearchBox extends Component<IProps, IState>{
                 WED: true,
                 THU: true,
                 FRI: true,
-                SAT: true,
-                SUN: true,
+                SAT: false,
+                SUN: false,
             },
 
             jobType: 'PARTTIME',
 
             list_shift: {
                 MOR: true,
-                AFT: true,
-                EVN: true,
+                AFT: false,
+                EVN: false,
             },
             show_days: true,
             choose_advanced: false,
@@ -119,7 +144,9 @@ class SearchBox extends Component<IProps, IState>{
             },
 
             show_location: false,
-            choose_location: false
+            choose_location: false,
+            visible: false,
+            showQRImageType: 0,
         }
     }
 
@@ -128,11 +155,30 @@ class SearchBox extends Component<IProps, IState>{
     async componentDidMount() {
         this.props.getRegions();
         this.props.getJobNames();
-        if (region) {
-            this.setState({ area: region })
+        if (!this.props.area) {
+            // this.setState({ area: region })
+            this.props.setFilterArea({ id: 24, name: 'Hà Nội' });
         }
+        // console.log('vao componentDidMount search box');
     }
 
+    showModal = () => {
+        this.setState({
+            visible: true,
+        });
+    }
+
+    handleOk = e => {
+        this.setState({
+            visible: false,
+        });
+    };
+
+    handleCancel = e => {
+        this.setState({
+            visible: false,
+        });
+    };
     _handleInput = () => {
         let { job_dto } = this.state;
         this.setState({ job_dto })
@@ -145,17 +191,20 @@ class SearchBox extends Component<IProps, IState>{
     }
 
     _handleShift = (e) => {
-        let { list_shift } = this.state;
+        // let { list_shift } = this.state;
+        let { list_shift } = this.props;
         let shift = e.target.id;
         list_shift[shift] = !list_shift[shift];
         this.setState({ list_shift });
+        this.props.setFilterListShift(list_shift)
     }
 
     _handleTime = (e) => {
-        let { list_day } = this.state;
+        let { list_day } = this.props;
         let day = e.target.id;
         list_day[day] = !list_day[day];
         this.setState({ list_day });
+        this.props.setFilterListDay(list_day)
     }
 
     _handleShowDay = (jobType, show_days) => {
@@ -167,13 +216,15 @@ class SearchBox extends Component<IProps, IState>{
         };
 
         this.setState({ show_days: show_days_, jobType })
+        this.props.setFilterJobType(jobType, show_days_)
     }
 
     _selectJob = (e) => {
-        let { job_dto } = this.state;
+        let { job_dto } = this.props;
         job_dto.name = e.key;
         job_dto.id = e.item.props.id;
-        this.setState({ job_dto });
+        // this.setState({ job_dto });
+        this.props.setFilterJobName(job_dto);
     }
 
     _handleOk = () => {
@@ -212,7 +263,9 @@ class SearchBox extends Component<IProps, IState>{
     }
 
     _setArea = (item) => {
+        console.log(item)
         this.setState({ area: item });
+        this.props.setFilterArea(item);
         localStorage.setItem("region", JSON.stringify(item))
     }
 
@@ -234,34 +287,30 @@ class SearchBox extends Component<IProps, IState>{
     }
 
     listArea() {
-        let { regions } = this.props;
+        let { regions, area } = this.props;
         return (
-            <div className='choose-area'>
-                <Select
-                    showSearch={true}
-                    defaultValue={region ? region.name : 'Chọn tỉnh thành bạn muốn'} style={{ width: '100%' }}
-                >
-                    {regions.map((item, index) => {
-                        return <Select.Option
-                            key={index}
-                            value={item.name}
-                            onClick={() => { this._setArea(item) }} >{item.name}</Select.Option>
-                    })}
-                </Select>
-            </div>)
+            <Select
+                showSearch={true}
+                defaultValue={area ? area.name : 'Chọn tỉnh thành bạn muốn'} style={{ width: '80%' }}
+                size="default"
+            >
+                {regions.map((item, index) => {
+                    return <Select.Option
+                        key={index}
+                        value={item.name}
+                        onClick={() => { this._setArea(item) }} >{item.name}</Select.Option>
+                })}
+            </Select>)
     }
 
     _createRequest = () => {
         let {
-            list_shift,
-            list_day,
+            // list_shift,
+            // list_day,
             location,
             choose_location,
-            show_days,
-            job_dto,
-            jobType,
-            area
         } = this.state;
+        let { jobType, list_shift, list_day, area, job_dto, show_days } = this.props
 
         let employerID = null;
         let excludedJobIDs = null;
@@ -327,10 +376,26 @@ class SearchBox extends Component<IProps, IState>{
     }
 
     requestToServer(data) {
+        let { job_dto, area, list_day, list_shift } = this.props
+        let jobNameID = job_dto.id ? job_dto.id : null;
+        let regionID = area.id ? area.id : null;
+        this.props.setFilter(true);
         localStorage.setItem('paging', JSON.stringify({ pageIndex: 0, pageSize: 10 }));
         localStorage.setItem('searchData', data);
         this.props.getJobResult(data);
-        this.props.history.push('/result');
+
+        let queryParam = {};
+        queryParam.jobType = this.props.jobType;
+        queryParam.jobNameID = jobNameID;
+        queryParam.regionID = regionID;
+        queryParam = Object.assign(queryParam, list_day)
+        queryParam = Object.assign(queryParam, list_shift)
+        queryParam = qs.stringify(queryParam)
+
+        // console.log(queryParam);
+
+        this.props.history.push('/result?' + queryParam);
+
     }
 
     componentWillUnmount() {
@@ -338,23 +403,23 @@ class SearchBox extends Component<IProps, IState>{
     }
 
     render() {
-        let { list_day,
-            show_days,
-            list_shift,
+        let {
+            // list_day,
+            // list_shift,
             show_modal,
             location,
-            area,
             show_location,
             choose_location,
-            choose_advanced
+            choose_advanced,
+            showQRImageType
         } = this.state;
 
-        let { jobNames } = this.props;
+        let { jobNames, regions, list_shift, list_day, area, job_dto, show_days } = this.props;
 
         return (
             <>
                 {/* Choose location modal */}
-                <Modal
+                {/* <Modal
                     visible={show_modal}
                     title={choose_location ? 'Chọn vị trí' : 'Chọn khu vực'}
                     onOk={this._handleOk}
@@ -373,23 +438,32 @@ class SearchBox extends Component<IProps, IState>{
                         {choose_location ?
                             <MapContainer style={{ height: 350 }} /> : this.listArea()}
                     </div>
+                </Modal> */}
+                <Modal
+                    title="Mã QR ứng dụng tìm việc"
+                    visible={this.state.visible}
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+                    footer={[
+                    <Button key="submit" type="primary" onClick={this.handleOk}>
+                    Ok
+                    </Button>]}
+                >
+                    {showQRImageType === 1 ?
+                        <div style={{ textAlign: 'center' }}>
+                            <img src={QRCodeAppStore} alt='AppleStore Tìm việc QRCode' height='250px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px' }} />
+                            <div>Ứng dụng tìm việc Worksvn trên AppleStore</div>
+                        </div>
+                        :
+                        <div style={{ textAlign: 'center' }}>
+                            <img src={QRCodeCHPlay} alt='CHPlay Tìm việc QRCode' height='250px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px' }} />
+                            <div>Ứng dụng tìm việc Worksvn trên CHPlay</div>                        
+                        </div>
+                    }
                 </Modal>
                 <div className='search-area'>
                     {/* Search Box in Phone */}
                     <div className='search-box-phone show-only-phone test'>
-                        {/* Choose location address */}
-                        <div className="location-address">
-                            <Input
-                                placeholder='Vị trí tìm việc của bạn'
-                                prefix={
-                                    <Icon type='environment'
-                                        style={{ color: 'green' }}
-                                        onClick={() => this._openModal()} />}
-                                value={choose_location ? location.address : area.name}
-                                onClick={() => this._openModal()}
-                                readOnly
-                            />
-                        </div>
                         <Select
                             style={{ width: '100%' }}
                             placeholder="Tìm kiếm công việc của bạn"
@@ -397,6 +471,7 @@ class SearchBox extends Component<IProps, IState>{
                             showSearch
                             optionFilterProp="children"
                             onSearch={this._onSearch}
+                            defaultValue={job_dto && job_dto.name ? job_dto.name : undefined}
                         >
                             {jobNames && jobNames.map((item, index) => {
                                 return (
@@ -410,8 +485,21 @@ class SearchBox extends Component<IProps, IState>{
                                     </Option>)
                             })}
                         </Select>
+                        {/* Choose Area */}
+                        <div className='find-area'>
+                            <InputGroup>
+                                <Select defaultValue={area ? area.name : 'Chọn tỉnh thành bạn muốn'} style={{ width: '100%' }} size="default" >
+                                    {regions.map((item, index) => {
+                                        return <Select.Option
+                                            key={index}
+                                            value={item.name}
+                                            onClick={() => { this._setArea(item) }} >{item.name}</Select.Option>
+                                    })}
+                                </Select>
+                            </InputGroup>
+                        </div>
                         {/* Choose Type Job */}
-                        <Tabs defaultActiveKey="1" onChange={this._handleTabs}>
+                        <Tabs defaultActiveKey={this.props.jobType == 'PARTTIME' ? '1' : (this.props.jobType == 'FULLTIME' ? '2' : '3')} onChange={this._handleTabs}>
                             <TabPane tab="Làm thêm" key="1" onClick={() => { this._handleShowDay(true, 'PARTTIME') }}>
                                 <div className='choose-time' style={{ display: show_days === true ? 'block' : 'none' }}>
                                     <div className='choose-shift'>
@@ -453,22 +541,7 @@ class SearchBox extends Component<IProps, IState>{
                             </TabPane>
                         </Tabs>
 
-                        {/* Choose Area */}
-                        <div className='find-area'>
-                            <InputGroup>
-                                <Select defaultValue="Option4" style={{ width: '80%' }} size="default" >
-                                    <Option value="Option4" onClick={() => { this._handleChooseLocation(false) }}>Chọn khu vực</Option>
-                                    <Option value="Option5" onClick={() => { this._handleChooseLocation(true) }}>Chọn vị trí</Option>
-                                </Select>
-                                <Button size='default'
-                                    type='primary'
-                                    style={{ width: '20%' }}
-                                    onClick={this._openModal}
-                                >
-                                    <Icon type="environment" />
-                                </Button>
-                            </InputGroup>
-                        </div>
+
                         <div className='find-now'>
                             <Button
                                 size='large'
@@ -487,13 +560,68 @@ class SearchBox extends Component<IProps, IState>{
                     {/* Search in Computer */}
                     <div className='search-box hidden-only-phone'>
                         {/* Choose Option */}
+                        {/* <div className='location-address'>
+                            <InputGroup>
+                                <Button type='primary' onClick={this._handleShowLocation}>{show_location ? 'Ẩn' : 'Xem chi tiết'}</Button>
+                                <Input
+                                    placeholder='Vị trí của bạn'
+                                    value={choose_location ? location.address : area.name}
+                                    style={{ width: show_location ? '500px' : '150px' }}
+                                    prefix={<Icon type="environment" style={{ color: "green" }} />}
+                                    readOnly />
+                            </InputGroup>
+                        </div> */}
 
                         <div>
-                            <p style={{ fontSize: '1.5rem', color: 'white' }}>Tìm Công Việc Mơ Ước. Nâng Bước Thành Công!</p>
+                            <p style={{ fontSize: '1.5rem', color: 'white', fontWeight: 550, marginBottom: '5px' }}>Tìm Công Việc Mơ Ước. Nâng Bước Thành Công!</p>
                         </div>
-                        <div className='search-type' style={{ margin: choose_advanced ? '0px' : '30px 0px' }}>
+                        {/* Choose Type Job */}
+                        <Tabs defaultActiveKey={this.props.jobType == 'PARTTIME' ? '1' : (this.props.jobType == 'FULLTIME' ? '2' : '3')} onChange={this._handleTabs}>
+                            <TabPane tab="Làm thêm" key="1" onClick={() => { this._handleShowDay(true, 'PARTTIME') }}>
+                                <div className='choose-time' style={{ display: show_days === true ? 'block' : 'none' }}>
+                                    <div className='choose-shift'>
+                                        {list_day_times.map((item, index) => {
+                                            return <Button
+                                                id={item.shortcut}
+                                                key={index}
+                                                onClick={this._handleShift}
+                                                style={{
+                                                    background: list_shift[item.shortcut] ? '#1890ff' : 'white',
+                                                    color: list_shift[item.shortcut] ? 'white' : 'black',
+                                                    border: list_day[item.shortcut] ? 'solid 1px rgb(24, 144, 255)' : 'white'
+                                                }}>
+                                                {item.name}
+
+                                            </Button>
+                                        })}
+                                    </div>
+                                    {/* Choose day in week */}
+                                    <div className='choose-day'>
+                                        {list_week.map((item, index) => {
+                                            return (
+                                                <Button
+                                                    id={item.shortcut}
+                                                    key={index}
+                                                    className='choose_btn'
+                                                    onClick={this._handleTime}
+                                                    style={{
+                                                        background: list_day[item.shortcut] ? '#1890ff  ' : 'white',
+                                                        color: list_day[item.shortcut] ? 'white' : 'black',
+                                                        border: list_day[item.shortcut] ? 'solid 1px rgb(24, 144, 255)' : 'white'
+                                                    }}
+                                                >{item.shortcut === 'SUN' ? 'CN' : 'Thứ ' + (index + 2)}</Button>)
+                                        })}
+                                    </div>
+                                </div>
+                            </TabPane>
+                            <TabPane tab="Chính thức" key="2" onClick={() => { this._handleShowDay(false, "FULLTIME") }}>
+                            </TabPane>
+                            <TabPane tab="Thực tập" key="3">
+                            </TabPane>
+                        </Tabs>
+                        <div className='search-type' style={{ margin: choose_advanced ? '0px' : '20px 0px' }}>
                             <InputGroup size="large" compact>
-                                <Select className='primary' defaultValue="Option2" style={{ width: '20%' }} size="large" >
+                                {/* <Select className='primary' defaultValue="Option2" style={{ width: '20%' }} size="large" >
                                     <Option
                                         value="Option2"
                                         // @ts-ignore
@@ -515,15 +643,25 @@ class SearchBox extends Component<IProps, IState>{
                                     >
                                         Thực tập
                                         </Option>
-                                </Select>
+                                </Select> */}
                                 <Select
-                                    style={{ width: '35%' }}
+                                    style={{ width: '45%' }}
                                     placeholder="Tìm kiếm công việc của bạn"
                                     size="large"
                                     showSearch
                                     optionFilterProp="children"
                                     onSearch={(event) => this._onSearch(event)}
+                                    defaultValue={job_dto && job_dto.name ? job_dto.name : undefined}
                                 >
+                                    <Option
+                                        key={'1'}
+                                        value={null}
+                                        onClick={() => {
+                                            this.props.setFilterJobName({ id: null, name: 'Tất cả các công việc' })
+                                        }}
+                                    >
+                                        Tất cả các công việc
+                                    </Option>
                                     {jobNames && jobNames.map((item, index) => {
                                         return (<Option key={index}
                                             id={item.id}
@@ -534,67 +672,60 @@ class SearchBox extends Component<IProps, IState>{
                                         </Option>)
                                     })}
                                 </Select>
-                                <Select defaultValue="Option4" style={{ width: '22%' }} size="large" >
+                                {/* <Select defaultValue="Option4" style={{ width: '32%' }} size="large" >
                                     <Option value="Option4" onClick={() => { this._handleChooseLocation(false) }}>Chọn khu vực</Option>
                                     <Option value="Option5" onClick={() => { this._handleChooseLocation(true) }}>Chọn vị trí</Option>
-                                </Select>
-                                <Button size="large"
-                                    type='primary'
-                                    style={{ width: '23%' }}
-                                    onClick={this._openModal}
+                                </Select> */}
+                                <Select
+                                    showSearch={true}
+                                    defaultValue={area ? area.name : 'Chọn tỉnh thành bạn muốn'} style={{ width: '32%' }}
+                                    size="large"
                                 >
-                                    <Icon type="environment" color='green' />{choose_location ? 'Định vị bản đồ' : 'Chọn khu vực'}
+                                    <Option
+                                        key={'1'}
+                                        value={null}
+                                        onClick={() => { this._setArea({ id: null, name: 'Tất cả các tỉnh thành' }) }}
+                                    >
+                                        Tất cả các tỉnh thành
+                                    </Option>
+                                    {regions.map((item, index) => {
+                                        return <Select.Option
+                                            key={index}
+                                            value={item.name}
+                                            onClick={() => { this._setArea(item) }} >{item.name}</Select.Option>
+                                    })}
+                                </Select>
+
+                                <Button size="large"
+                                    // type='primary'
+                                    type='danger'
+                                    style={{ width: '23%' }}
+                                    // onClick={this._openModal}
+                                    onClick={() => this._createRequest()}
+                                >
+                                    <Icon type='search' />Tìm việc ngay
                                 </Button>
                             </InputGroup>
                         </div>
-                        {/* Choose Time */}
-                        <div className='advanced'>
-                            <Button
-                                type='danger'
-                                size='large'
-                                onClick={() => this._createRequest()}
-                                style={{ float: 'right' }}
-                            >
-                                <Icon type='search' /> Tìm việc ngay
-                            </Button>
-                            <button className='btn-advanced' onClick={() => this.setState({ choose_advanced: !choose_advanced })} >
-                                Tùy chọn nâng cao
-                                <Icon type="up" style={{ transform: choose_advanced ? 'rotate(0deg)' : 'rotate(180deg)', transition: '0.5s' }} />
-                            </button>
+                        <div style={{ paddingTop: "25px", paddingBottom: "15px" }}>
+                            <p style={{ color: '#fff' }}>Trải nghiệm tìm việc đỉnh cao bằng ứng dụng Worksvn trên điện thoại!</p>
+                            <Row>
+                                <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12} style={{ justifyContent: 'flex-end', display: 'flex', padding: '0 15px', borderRight: '1px solid #fff' }}>
+                                    <a href={'https://apps.apple.com/vn/app/works-vn-t%C3%ACm-vi%E1%BB%87c/id1487662808'}>
+                                        <img src={AppStore} alt='AppleStore Tìm việc' height='50px' width='auto' />
+                                    </a>
 
+                                    <img onClick={() => { this.setState({ visible: true, showQRImageType: 1 }) }} src={QRCodeAppStore} alt='AppleStore Tìm việc QRCode' height='47px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px', cursor: 'pointer' }} />
+                                </Col>
+                                <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12} style={{ justifyContent: 'flex-start', display: 'flex', padding: '0 15px' }}>
+                                    <a href={'https://play.google.com/store/apps/details?id=com.worksvn.candidate&hl=vi'}>
+                                        <img src={CHPlay} alt='CHPlay Tìm việc' height='50px' width='auto' />
+                                    </a>
+                                    <img onClick={() => { this.setState({ visible: true, showQRImageType: 2 }) }} src={QRCodeCHPlay} alt='CHPlay Tìm việc QRCode' height='47px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px', cursor: 'pointer' }} />
+                                </Col>
+                            </Row>
                         </div>
-                        <div className='choose-time' style={{ display: show_days && choose_advanced ? 'block' : 'none' }}>
-                            <div className='choose-shift'>
-                                {list_day_times.map((item, index) => {
-                                    return <Button
-                                        id={item.shortcut}
-                                        key={index}
-                                        onClick={this._handleShift}
-                                        style={{
-                                            background: list_shift[item.shortcut] ? '#1890ff  ' : 'white',
-                                            color: list_shift[item.shortcut] ? 'white' : '#1890ff'
-                                        }}>
-                                        {item.name}
 
-                                    </Button>
-                                })}
-                            </div>
-                            {/* Choose day in week */}
-                            <div className='choose-day'>
-                                {list_week.map((item, index) => {
-                                    return (<Button
-                                        id={item.shortcut}
-                                        key={index}
-                                        className='choose_btn'
-                                        onClick={this._handleTime}
-                                        style={{
-                                            background: list_day[item.shortcut] ? '#1890ff  ' : 'white',
-                                            color: list_day[item.shortcut] ? 'white' : '#1890ff  '
-                                        }}>
-                                        {item.name}</Button>)
-                                })}
-                            </div>
-                        </div>
                     </div>
                 </div>
             </>
@@ -607,12 +738,26 @@ const mapStateToProps = state => ({
     isAuthen: state.AuthState.isAuthen,
     regions: state.Regions.items,
     jobNames: state.JobNames.items,
+    jobType: state.JobResult.filter.jobType,
+    show_days: state.JobResult.filter.show_days,
+    list_shift: state.JobResult.filter.list_shift,
+    list_day: state.JobResult.filter.list_day,
+    area: state.JobResult.filter.area,
+    job_dto: state.JobResult.filter.job_dto,
+
 })
 
 const mapDispatchToProps = (dispatch) => ({
     getJobResult: (body) => dispatch({ type: REDUX_SAGA.JOB_RESULT.GET_JOB_RESULT, body }),
     getJobNames: (name?: string) => dispatch({ type: REDUX_SAGA.JOB_NAMES.GET_JOB_NAMES, name }),
-    getRegions: () => dispatch({ type: REDUX_SAGA.REGIONS.GET_REGIONS })
+    getRegions: () => dispatch({ type: REDUX_SAGA.REGIONS.GET_REGIONS }),
+    setFilterJobType: (jobType, show_days) => dispatch({ type: REDUX.JOB_RESULT.SET_FILTER_JOB_TYPE, jobType, show_days }),
+    setFilterListShift: (list_shift) => dispatch({ type: REDUX.JOB_RESULT.SET_FILTER_LIST_SHIFT, list_shift }),
+    setFilterListDay: (list_day) => dispatch({ type: REDUX.JOB_RESULT.SET_FILTER_LIST_DAY, list_day }),
+    setFilterArea: (area) => dispatch({ type: REDUX.JOB_RESULT.SET_FILTER_AREA, area }),
+    setFilterJobName: (job_dto) => dispatch({ type: REDUX.JOB_RESULT.SET_FILTER_JOBNAME, job_dto }),
+    setFilter: (setFilter) => dispatch({ type: REDUX.JOB_RESULT.SET_FILTER, setFilter }),
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBox);

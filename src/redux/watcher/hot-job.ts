@@ -2,7 +2,7 @@ import { IJobSearchFilter } from './../../models/job-search';
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { _requestToServer } from '../../services/exec';
 import { FIND_JOB } from '../../services/api/public.api';
-import { PUBLIC_HOST, STUDENTS_HOST } from '../../environment/development';
+import { PUBLIC_HOST, CANDIDATE_HOST } from '../../environment/development';
 import { noInfoHeader, authHeaders } from '../../services/auth';
 import { store } from '../store';
 import { JOBS } from '../../services/api/private.api';
@@ -12,11 +12,15 @@ import { POST } from '../../const/method';
 
 
 function* getListHotJobData(action) {
+
+    yield put({ type: REDUX.HOT_JOB.SET_LOADING_HOT_JOB, loading: true });
     let res = yield call(getHotJobData, action);
     if (res) {
         let data = res.data;
         yield put({ type: REDUX.HOT_JOB.GET_HOT_JOB, data });
     }
+    yield put({ type: REDUX.HOT_JOB.SET_LOADING_HOT_JOB, loading: false });
+
 }
 
 function getHotJobData(action) {
@@ -36,15 +40,15 @@ function getHotJobData(action) {
     let res = _requestToServer(
         POST,
         data,
-        (isAuthen ? JOBS.NORMAL.ACTIVE : FIND_JOB),
-        isAuthen ? STUDENTS_HOST : PUBLIC_HOST, isAuthen ? authHeaders : noInfoHeader,
+        (isAuthen ? JOBS + '/active/home' : FIND_JOB + '/home'),
+        isAuthen ? CANDIDATE_HOST : PUBLIC_HOST, isAuthen ? authHeaders : noInfoHeader,
         {
             pageIndex: action.pageIndex ? action.pageIndex : 0,
-            pageSize: 6
+            pageSize: 6,
+            priority: 'TOP'
         },
         false
     );
-
     return res
 }
 

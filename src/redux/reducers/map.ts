@@ -6,9 +6,9 @@ let initMapState = {
 };
 
 export const MapState = (state = initMapState, action) => {
-    switch (action.key) {
+    switch (action.type) {
         case REDUX.MAP.SET_MAP_STATE:
-            return { marker: action.marker, location: action.location }
+            return { ...state, marker: action.marker, location: action.location }
         default:
             return {...state};
     }

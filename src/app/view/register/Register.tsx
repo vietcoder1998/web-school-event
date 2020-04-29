@@ -200,11 +200,14 @@ class Register extends Component<IProps, IState> {
         if (
             is_exactly_firstname === false || is_exactly_lastname === false
             || is_exactly_email === false
-            || is_exactly_rpw === false || is_exactly_pw === false
+            || is_exactly_pw === false
             || is_exactly_phone === false
         ) {
-            swal({ title: "Workvn thông báo", type: "error", text: "Vui lòng nhật đầy đủ các trường thông tin" })
-        } else {
+            swal({ title: "Workvn thông báo", icon: "error", text: "Vui lòng nhật đầy đủ các trường thông tin" })
+        } else if(is_exactly_rpw === false ) {
+            swal({ title: "Workvn thông báo", icon: "error", text: "Nhập lại mật khẩu không chính xác" })
+        }
+        else {
             await _requestToServer(
                 POST,
                 email_register_dto,
@@ -244,23 +247,23 @@ class Register extends Component<IProps, IState> {
                         Cập nhật
                     </Button>
                 ]} destroyOnClose={true} onCancel={this._handleClose}>
-                    <MapContainer />
+                    <MapContainer style={{height: '55vh'}}/>
                 </Modal>
                 <div className='content' >
                     {/* Form Register */}
                     <Row>
-                        <Col xs={0} sm={0} md={6} xl={8} lg={6} ></Col>
-                        <Col xs={24} sm={24} md={12} xl={8} lg={12}>
-                            <form className='register test'>
-                                <div className='title a_c'>ĐĂNG KÍ</div>
+                        <Col xs={0} sm={0} md={6} xl={7} lg={6} ></Col>
+                        <Col xs={24} sm={24} md={12} xl={10} lg={12}>
+                            <form className='register'>
+                                <div className='title a_c'>ĐĂNG KÝ</div>
                                 {/* FirstName And LastName */}
                                 <Row>
                                     <Col sm={12} md={12} lg={12} xl={12}>
-                                        <div className='normal'>
+                                        <div className='normal_2' style={{padding: '0 5px 0 20px'}}>
                                             <Input
                                                 id='firstName'
                                                 placeholder="Họ (đệm)"
-                                                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.4)' }} />}
                                                 suffix={
                                                     <Tooltip title={is_exactly_firstname ? "Họ" : "Điền họ"}>
                                                         <Icon type={is_exactly_firstname ? 'check' : "warning"} style={{ color: is_exactly_firstname ? 'green' : 'red' }} />
@@ -272,11 +275,11 @@ class Register extends Component<IProps, IState> {
                                         </div>
                                     </Col>
                                     <Col sm={12} md={12} xl={12} lg={12} >
-                                        <div className='normal'>
+                                        <div className='normal_2' style={{padding: '0 20px 0 5px'}}>
                                             <Input
                                                 id='lastName'
                                                 placeholder="Tên"
-                                                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                                // prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                                                 suffix={
                                                     <Tooltip title={is_exactly_lastname ? "Tên" : "Điền Tên"}>
                                                         <Icon type={is_exactly_lastname ? 'check' : "warning"} style={{ color: is_exactly_lastname ? 'green' : 'red' }} />
@@ -290,26 +293,30 @@ class Register extends Component<IProps, IState> {
                                     </Col>
                                 </Row>
                                 {/* Gender */}
-                                <div className='normal'>
+                                <div className='normal' style={{margin: '5px 0px', fontWeight: 400}}>
                                     <Row>
-                                        <Col xs={8}>Giới tính</Col>
-                                        <Col xs={8}>
-                                            <input name="gender" type="checkbox" checked={checked} value='MALE' onChange={this._handleGender} />
+                                        <Col xs={24}>
+                                            Giới tính:
+                                            <input name="gender" type="checkbox" checked={checked} value='MALE' onChange={this._handleGender} style={{margin: '0 5px 0 10px'}}/>
                                             <span>Nam</span>
-                                        </Col>
-                                        <Col xs={8}>
-                                            <input name="gender" type="checkbox" checked={!checked} value='FEMALE' onChange={this._handleGender} />
+                                            <input name="gender" type="checkbox" checked={!checked} value='FEMALE' onChange={this._handleGender}  style={{margin: '0 5px 0 15px'}} />
                                             <span>Nữ</span>
                                         </Col>
+                                        {/* <Col xs={8}>
+                                            
+                                        </Col>
+                                        <Col xs={8}>
+                                            
+                                        </Col> */}
                                     </Row>
                                 </div>
                                 {/* Address */}
                                 <div className='normal'>
                                     <Input
                                         placeholder="Địa chỉ"
-                                        prefix={<Icon type="area-chart" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                        prefix={<Icon type="home" style={{ color: 'rgba(0,0,0,.4)' }} />}
                                         suffix={
-                                            <Tooltip title="Your JPS">
+                                            <Tooltip title="Vị trí của bạn">
                                                 <Icon type="info-circle" style={{ color: 'rgba(0,0,0,.45)' }} onClick={this._handleClose} />
                                             </Tooltip>
                                         }
@@ -323,7 +330,7 @@ class Register extends Component<IProps, IState> {
                                     <Input
                                         id='email'
                                         placeholder="Email"
-                                        prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                        prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.4)' }} />}
                                         suffix={
                                             <Tooltip title={is_exactly_email ? "Email chính xác" : "Điền Địa chỉ mail"}>
                                                 <Icon type={is_exactly_email ? 'check' : "warning"} style={{ color: is_exactly_email ? 'green' : 'red' }} />
@@ -339,7 +346,7 @@ class Register extends Component<IProps, IState> {
                                     <Input
                                         id='phone'
                                         placeholder="Số điện thoại"
-                                        prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                        prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.4)' }} />}
                                         suffix={
                                             <Tooltip title={is_exactly_phone ? "Số điện thoại chính xác" : "Điền Sô điện thoại"}>
                                                 <Icon type={is_exactly_phone ? 'check' : "warning"} style={{ color: is_exactly_phone ? 'green' : 'red' }} />
@@ -351,10 +358,10 @@ class Register extends Component<IProps, IState> {
                                 </div>
                                 {/* Password */}
                                 <div className='normal'>
-                                    <Input
+                                    <Input.Password
                                         id='password'
                                         placeholder="Mật khẩu"
-                                        prefix={<Icon type="key" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.4)' }} />}
                                         suffix={
                                             <Tooltip title={is_exactly_pw ? "Mật khẩu hợp lệ" : "Mật khẩu quá ngắn"}>
                                                 <Icon type={is_exactly_pw ? 'check' : "warning"} style={{ color: is_exactly_pw ? 'green' : 'red' }} />
@@ -367,10 +374,10 @@ class Register extends Component<IProps, IState> {
                                 </div>
                                 {/* RePassword */}
                                 <div className='normal'>
-                                    <Input
+                                    <Input.Password
                                         id='repassword'
                                         placeholder="Nhập lại mật khẩu"
-                                        prefix={<Icon type="key" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.4)' }} />}
                                         suffix={
                                             <Tooltip title={is_exactly_rpw ? "Mật khẩu nhập lại hợp lệ" : "Mật khẩu chính xác"}>
                                                 <Icon type={is_exactly_rpw ? 'check' : "warning"} style={{ color: is_exactly_rpw ? 'green' : 'red' }} />
@@ -382,7 +389,7 @@ class Register extends Component<IProps, IState> {
                                     />
                                 </div>
                                 {/* Except */}
-                                <div className='normal'>
+                                <div className='normal' style={{marginTop: 25}}>
                                     <p className='fogot-password'>
                                         <Checkbox onChange={this._handleCheckbox}>
                                             Đồng ý với <a href='/' target='_blank' style={{ color: "#4a9ae1" }}>điều khoản</a> của Worksvn
@@ -392,22 +399,22 @@ class Register extends Component<IProps, IState> {
                                         <Button
                                             type='primary'
                                             onClick={() => this.requestToServer()}
-                                            disabled={!is_except_rule}
+                                            // disabled={!is_except_rule}
                                             block
                                         >
                                             Hoàn tất
                                     </Button>
                                     </p>
-                                    <p className='or'>
+                                    {/* <p className='or'>
                                         hoặc
-                                    </p>
+                                    </p> */}
                                     <p className='a_c'>
                                         Bạn đã có tài khoản ? <a href='/login' style={{ color: 'red' }}>Đăng nhập</a>
                                     </p>
                                 </div>
                             </form>
                         </Col>
-                        <Col xs={0} sm={0} md={6} xl={8} lg={6} ></Col>
+                        <Col xs={0} sm={0} md={6} xl={7} lg={6} ></Col>
                     </Row>
                 </div>
                 {/* Map */}

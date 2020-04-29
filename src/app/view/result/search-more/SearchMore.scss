@@ -2,4 +2,8 @@
     margin: 5px 0px 10px 10px;
     padding: 0px;
     background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
+    .ant-collapse-icon-position-left {
+        border-radius: 2px;
+    }
 }

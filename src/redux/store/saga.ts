@@ -4,9 +4,14 @@ import { JobResultWatcher } from '../watcher/job-result';
 import { JobDetailWatcher } from '../watcher/job-detail';
 import { EmployerWatcher } from '../watcher/employer-detail';
 import { EmployerMoreJobWatcher } from '../watcher/employer-more-job';
+import { SimilarJobWatcher } from '../watcher/job-similar';
 import { JobSaveWatcher } from '../watcher/job-save';
+import { HistoryApplyWatcher } from '../watcher/history-apply';
+
 import { notiInfoWatcher } from '../watcher/noti';
 import { HotJobWatcher } from '../watcher/hot-job';
+import { AllJobWatcher } from '../watcher/all-job';
+
 import { HighLightJobWatcher } from '../watcher/highlight-job';
 import { JobNameWatcher } from '../watcher/job-names';
 import { RegionWatcher } from '../watcher/regions';
@@ -23,10 +28,13 @@ export default function* rootSaga() {
         JobSaveWatcher(),
         notiInfoWatcher(),
         HotJobWatcher(),
+        AllJobWatcher(),
         HighLightJobWatcher(),
         JobNameWatcher(),
         RegionWatcher(),
         InDayWatcher(),
         AnnouncementsWatcher(),
+        HistoryApplyWatcher(),
+        SimilarJobWatcher(),
     ])
 } 

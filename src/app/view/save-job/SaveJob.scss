@@ -13,7 +13,7 @@
   .history-job {
     .job-detail {
       height: auto;
-      min-height: 180px;
+      min-height: 165px;
       margin: 5px;
       display: flex;
       padding: 5px 20px;
@@ -29,13 +29,18 @@
 
       .image-job {
         position: relative;
-
+        flex-direction: column;
+        align-items: center;
+        display: flex;
+        img{
+          object-fit: contain;
+        }
         .logo-company {
           position: relative;
           padding: 2px;
           height: 85px;
           width: 85px;
-          border: solid $color_border 2px;
+          // border: solid $color_border 2px;
         }
 
         .job-state {
@@ -46,9 +51,9 @@
       }
 
       .content-job {
-        padding: 5px;
-        width: calc(100% -115px);
-        min-height: 200px;
+        padding: 5px 5px 5px 10px;
+        // width: calc(100% -115px);
+        // min-height: 200px;
 
         p {
           font-size: 1rem;

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 function Description(props?: {description?: string}) {
     return (
         <div className='wrapper'>
-            <div style={{ minHeight: "150px" }}>{props.description}</div>
+            <div style={{whiteSpace: 'pre-line'}}>{props.description}</div>
         </div>
     );
 }

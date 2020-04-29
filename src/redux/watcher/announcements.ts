@@ -5,7 +5,7 @@ import { POST } from '../../const/method';
 import { takeEvery, put, call, } from 'redux-saga/effects';
 import { _requestToServer } from '../../services/exec';
 import { REDUX_SAGA, REDUX } from '../../const/actions'
-import {  PUBLIC_HOST } from '../../environment/development';
+import { PUBLIC_HOST } from '../../environment/development';
 
 function* getListAnnouncementsData(action: any) {
     let res = yield call(callAnnouncements, action);
@@ -31,7 +31,7 @@ function callAnnouncements(action: any) {
 
     let body = {
         adminID: null,
-        hasComment: null,
+        hidden: null,
         createdDate: null,
         announcementTypeID: null
     }
@@ -53,7 +53,7 @@ function callAnnouncements(action: any) {
             },
             false,
         )
-         
+
         return res
     } catch (e) {
         throw e

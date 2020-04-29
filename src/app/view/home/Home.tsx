@@ -3,6 +3,7 @@ import Layout from '../layout/Layout';
 import { connect } from 'react-redux';
 import TabSearch from './tab-search/TabSearch';
 import HomeJob from './home-job/HomeJob';
+import AllJob from './all-job/AllJob';
 import TopEm from './top-em/TopEm';
 import Announcements from './annoucements/Announcements';
 import TopJob from './top-job/TopJob';
@@ -16,8 +17,9 @@ function Home(props) {
             <TabSearch {...props} />
             <div className='content' style={{ paddingTop: 20, paddingBottom: 20 }}>
                 <TopEm />
-                <HomeJob />
                 <TopJob />
+                <HomeJob />
+                <AllJob />
                 <Announcements {...props} />
             </div>
         </Layout>

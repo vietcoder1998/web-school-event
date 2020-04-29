@@ -11,7 +11,9 @@ export const _requestToServer = async (
     host?: string,
     headers?: any,
     params?: any,
-    show_alert?: boolean
+    show_alert?: boolean,
+    log_query?: boolean,
+    hide_alert_error?: boolean
 ) => {
     let res;
 
@@ -22,26 +24,21 @@ export const _requestToServer = async (
                 break;
             case POST:
                 res = await _post(data, api, host, headers, params);
-                if (show_alert) {
-                    swal({
-                        title: "Workvns thông báo",
-                        text: `${res.msg}`,
-                        icon: TYPE.SUCCESS,
-                        dangerMode: false,
-                    }
-                    )
-                };
+                if (show_alert){ swal({
+                    title: "Worksvn thông báo",
+                    text: `${res.msg}`,
+                    icon: TYPE.SUCCESS,
+                    dangerMode: false,}
+                )};
                 break;
             case PUT:
                 res = await _put(data, api, host, headers, params);
-                if (show_alert) {
-                    swal({
-                        title: "Workvns thông báo",
-                        text: `Cập nhập ${res.msg}`,
-                        icon: TYPE.SUCCESS,
-                        dangerMode: false,
-                    });
-                }
+                if (show_alert){ swal({
+                    title: "Worksvn thông báo",
+                    text: `Cập nhập ${res.msg}`,
+                    icon: TYPE.SUCCESS,
+                    dangerMode: false,
+                });}
                 return res;
             case DELETE:
                 res = await _delete(data, api, host, headers, params);
@@ -51,16 +48,22 @@ export const _requestToServer = async (
         };
 
         if (show_alert && res) {
-            // console.log(res)
             swal({
-                title: "Workvns thông báo",
+                title: "Worksvns thông báo",
                 text: res.msg,
                 icon: TYPE.SUCCESS,
                 dangerMode: false,
             });
         };
+        if(log_query) {
+            console.log(host  + api);
+            console.log(params);
+            console.log(data);
+            console.log(res);
+
+        }
     } catch (err) {
-        // exceptionShowNoti(err); // dont delete
+        exceptionShowNoti(err, hide_alert_error);
     }
 
     return res;

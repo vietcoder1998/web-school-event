@@ -2,9 +2,12 @@
     .pagination-result {
         .ant-pagination-item-active {
             font-weight: 500;
-            width      : 20px;
-            height     : 20px;
+            width      : 15px;
+            height     : 15px;
+            background-color: rgb(0, 132, 255);
+            color           : white !important;
         }
+
 
         .ant-pagination-item-link {
             // display: none;
@@ -13,11 +16,36 @@
 
         .ant-pagination-item {
             font-size  : 0;
-            width        : 20px;
-            height       : 20px;
+            width        : 15px;
+            height       : 15px;
             min-width    : auto;
             border-radius: 50%;
             color        : #ffffff00;
         }
+        .ant-pagination {
+            margin-top: 5;
+        }
     }
+}
+.l_c {
+    overflow: hidden;
+   text-overflow: ellipsis;
+    display: -webkit-box;
+   -webkit-line-clamp: 2; /* number of lines to show */
+   -webkit-box-orient: vertical;
+   text-transform: inherit;
+   color: black;
+   font-weight: 550;
+}
+.item-hl-job {
+    min-height: 101px;
+}
+.ant-skeleton{
+    padding: 10px 15px 5px;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.01), 0 6px 20px 0 rgba(0, 0, 0, 0.02);
+    margin: 5px;
+}
+.ant-skeleton {
+    width: auto;
 }

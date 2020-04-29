@@ -43,15 +43,17 @@ export function Timer(props) {
     )
 }
 
-export function JobType(props: {children?: any}) {
+export function JobType(props: {children?: any, width?: any, fontSize?: any}) {
     let style: CSSProperties = {
         color: 'black',
         backgroundColor: 'white',
-        borderRadius: 3,
+        // borderRadius: 3,
         padding: 3,
         margin: '3px 0',
-        fontSize: '0.8em',
-        textAlign: 'center'
+        fontSize: props.fontSize ? props.fontSize : '0.8em',
+        textAlign: 'center',
+        width: props.width ? props.width : '70px',
+        display: 'inline-block'
     }
     switch (props.children) {
         case 'FULLTIME':
@@ -60,12 +62,12 @@ export function JobType(props: {children?: any}) {
             break;
 
         case 'PARTTIME':
-            style.color = 'black';
-            style.backgroundColor = 'greenyellow';
+            style.color = 'white';
+            style.backgroundColor = '#00b33c';
             break;
         case 'INTERNSHIP':
-            style.color = 'black';
-            style.backgroundColor = '#d400d473';
+            style.color = 'white';
+            style.backgroundColor = '#ff9933';
             break;
 
         default:

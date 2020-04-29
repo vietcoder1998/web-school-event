@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './FixExperience.scss';
-import { Col, Row, DatePicker, Input } from 'antd';
+import { Col, Row, DatePicker, Input, Icon } from 'antd';
 import { connect } from 'react-redux';
 import { experienceController } from '../../../../../services/api/private.api';
 import { _requestToServer } from '../../../../../services/exec';
@@ -13,6 +13,7 @@ interface IState {
     getData?: Function;
     _fixData?: Function;
     method?: string;
+    loading?: boolean
 }
 
 interface IState {
@@ -29,15 +30,16 @@ class FixExperience extends Component<IState, IState> {
                 startedDate: 0,
                 finishedDate: 0,
                 description: ""
-            }
+            },
+            loading: false
         }
     }
 
-    _handleInput = (type) => (event) => {
+    _handleInput = (event) => {
         let value = event.target.value;
-       
+        let id = event.target.id;
         let { experience } = this.state;
-        experience[type] = value;
+        experience[id] = value;
         this.setState({ experience });
     }
 
@@ -67,29 +69,31 @@ class FixExperience extends Component<IState, IState> {
         let { experience } = this.state;
 
         if (method === POST) {
+            this.setState({loading: true})
             let res = await _requestToServer(POST, experience, experienceController, null, null, null, true);
             if (res) {
                 await this.props.getData()
                 await this.props._fixData('experience');
+                await this.setState({loading: false})
             }
         }
     }
 
     render() {
-        let { experience } = this.state;
+        let { experience, loading } = this.state;
         return (
             <div className='wrapper'>
                 <div className='experience'>
                     {/* jobName */}
                     <div className='experience-content'>
                         <p><label style={{ color: 'red' }}>*</label>Tên vị trí</p>
-                        <Input className='input_outside' placeholder='Ví dụ: UX-UI Designer' value={experience.jobName} onChange={this._handleInput("jobName")} />
+                        <Input  id='jobName' className='input_outside' placeholder='Ví dụ: UX-UI Designer' value={experience.jobName} onChange={this._handleInput} />
                     </div>
 
                     {/* Company */}
                     <div className='experience-content'>
                         <p><label style={{ color: 'red' }}>*</label>Tên Tổ chức</p>
-                        <Input className='input_outside' placeholder='Ví dụ: Công ti cổ phần Works.vn' value={experience.companyName} onChange={this._handleInput("companyName")} />
+                        <Input id='companyName' className='input_outside' placeholder='Ví dụ: Công ti cổ phần Works.vn' value={experience.companyName} onChange={this._handleInput} />
                     </div>
 
                     <div className='experience-content'>
@@ -100,6 +104,7 @@ class FixExperience extends Component<IState, IState> {
                                 <DatePicker
                                     onChange={this._handleChangeStartedTime}
                                     placeholder='Ví dụ: 26/6/2018'
+                                    format={'DD/MM/YYYY'}
                                 />
                             </Col>
                             {/* DatePicker Finished Time */}
@@ -108,6 +113,7 @@ class FixExperience extends Component<IState, IState> {
                                 <DatePicker
                                     onChange={this._handleChangeFinishedTime}
                                     placeholder='Ví dụ: 26/6/2018'
+                                    format={'DD/MM/YYYY'}
                                 />
                             </Col>
                         </Row>
@@ -115,19 +121,17 @@ class FixExperience extends Component<IState, IState> {
                     {/* Description */}
                     <div className='experience-content'>
                         <p> <label style={{ color: 'red' }}>*</label>Mô tả nội dung</p>
-                        <textarea id='description' placeholder='Nhập nội dung và mô tả cụ thể công việc đã làm' value={experience.description} onChange={this._handleInput("description")}></textarea>
+                        <textarea id='description' placeholder='Nhập nội dung và mô tả cụ thể công việc đã làm' value={experience.description} onChange={this._handleInput}></textarea>
                     </div>
                     <p><label style={{ color: 'red' }}>*</label>Thông tin bắt buộc</p>
                 </div>
                 {/* submit button */}
-                <Row className='holder-button' >
-                    <Col xs={12}>
+                <Row className='holder-button' style={{justifyContent: 'flex-end', display: 'flex', textAlign: 'right'}}>
+                    <Col xs={24} >
                         <button className='danger' onClick={() => { this.props._fixData('experience') }}> Hủy</button>
+                        {loading ? <button className='request'><Icon type="loading" /></button> :
+                        <button className='request' onClick={() => this._createRequest()}> Lưu</button> }
                     </Col>
-                    <Col xs={12}>
-                        <button className='request' onClick={() => this._createRequest()}> Lưu</button>
-                    </Col>
-
                 </Row>
             </div>
         );

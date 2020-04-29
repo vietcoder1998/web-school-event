@@ -14,21 +14,21 @@ export default function ResultFilter(props?: IResultFilter) {
         <div className='result-filter'>
             <div className='sub-filter'>
                 <p>
-                    <label style={{ padding: '0px 5%' }}>
+                    <label style={{ paddingLeft: 10 }}>
                         <label>Đã tìm thấy</label>
-                        <label style={{ color: 'red', padding: '0px 5px' }}>{numberRs}</label>
-                        <label className='text-icon'>công việc cho bạn</label>
-                        <Icon type={numberRs === 0 ? 'frown' : 'smile'} theme="twoTone" />
+                        <label style={{ color: 'red', padding: '0 3px 0 2px' }}>{numberRs}</label>
+                        <label className='text-icon'>công việc</label>
+                        {/* <Icon type={numberRs === 0 ? 'frown' : 'smile'} theme="twoTone" /> */}
                     </label>
                     <label style={{ padding: ' 0px 5%' }}>
-                        <label >Khu vực</label>
-                        <label className='text-icon'><Icon type="environment" theme="twoTone" /></label>
-                        <label>{regionName}</label>
+                        <label className='text-icon' style={{ padding: '0 4px' }}><Icon type="environment" theme="twoTone" /></label>
+                        <label >Khu vực: </label>
+                        <label style={{ padding: '0 4px' }}> {regionName}</label>
                     </label>
                     <label style={{ padding: '0px 5%' }}>
-                        <label >Công việc</label>
-                        <label className='text-icon'><Icon type="carry-out" theme="twoTone" /></label>
-                        <label >{totalJobs}</label>
+                        <label className='text-icon' style={{ padding: '0 4px' }}><Icon type="carry-out" theme="twoTone" /></label>
+                        <label >Công việc:</label>
+                        <label style={{ padding: '0 4px' }}> {totalJobs}</label>
                     </label>
                 </p>
             </div>

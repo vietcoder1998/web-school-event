@@ -39,20 +39,20 @@ class TopJob extends PureComponent<IProps, IState> {
     };
 
     componentDidMount = async () => {
-        await this.props.getHotJob(0);
+        // await this.props.getHotJob(0);
         await this.props.getInDay(0);
-        await this.setState({ is_loading: false });
-        setInterval(() => {
-            let { atk } = this.state;
+        // await this.setState({ is_loading: false });
+        // setInterval(() => {
+        //     let { atk } = this.state;
 
-            if (atk === 'inday-job') {
-                this.setState({ atk: 'home-job' })
-            }
+        //     if (atk === 'inday-job') {
+        //         this.setState({ atk: 'home-job' })
+        //     }
 
-            if (atk === 'home-job') {
-                this.setState({ atk: 'inday-job' })
-            }
-        }, 60000);
+        //     if (atk === 'home-job') {
+        //         this.setState({ atk: 'inday-job' })
+        //     }
+        // }, 60000);
     }
 
     render() {
@@ -61,8 +61,8 @@ class TopJob extends PureComponent<IProps, IState> {
 
         if (indayJob && indayJob.totalItems > 0) {
             return (
-                <Row className='home-job' style={{ display: indayJob.totalItems === 0 ? 'hidden' : '' }}>
-                    <h5 style={{ textAlign: 'center' }}>VIỆC LÀM NỔI BẬT TRONG NGÀY HỘI</h5>
+                <Row className='home-job' style={{ display: indayJob.totalItems === 0 ? 'none' : '' }}>
+                    <h5 style={{ textAlign: 'center' }}>VIỆC LÀM TRONG NGÀY</h5>
                     {
                         indayJob && indayJob.items ? indayJob.items.map((item, index) => {
                             let logoUrl = item.employerLogoUrl;

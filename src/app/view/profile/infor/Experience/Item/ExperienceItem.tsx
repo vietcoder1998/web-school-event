@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { timeConverter } from '../../../../../../utils/convertTime';
-import { Row, Col, DatePicker, Input, Popconfirm } from 'antd';
+import { Row, Col, DatePicker, Input, Popconfirm, Icon } from 'antd';
 import { experienceController } from '../../../../../../services/api/private.api';
 import { _requestToServer } from '../../../../../../services/exec';
 import { connect } from 'react-redux';
@@ -27,7 +27,9 @@ interface State {
         finishedDate?: number,
         description?: string
     },
-    id?: string
+    id?: string,
+    personalInfo?: any;
+    loading?: any;
 }
 
 class ExperienceItem extends Component<Props, State> {
@@ -42,7 +44,8 @@ class ExperienceItem extends Component<Props, State> {
                 finishedDate: 0,
                 description: ''
             },
-            id: ''
+            id: '',
+            loading: false
         }
     }
 
@@ -54,12 +57,22 @@ class ExperienceItem extends Component<Props, State> {
         this.setState({ experience, activeKey });
     }
 
-    _handleInput = (type) => (event) => {
+    _handleInput = (event) => {
         let value = event.target.value;
+        console.log(event);
+        let id = event.target.id;
         let { experience } = this.state;
-        experience[type] = value;
+        experience[id] = value;
         this.setState({ experience });
     }
+    _handleData = (event) => {
+        // console.log(event)
+        let type = event.target.id;
+        let { personalInfo } = this.state;
+        personalInfo[type] = event.target.value;
+        this.setState({ personalInfo })
+    }
+
 
     _handleSelect = (key) => {
         let { activeKey } = this.state;
@@ -104,7 +117,9 @@ class ExperienceItem extends Component<Props, State> {
             } else
                 if (experience.startedDate > experience.finishedDate) {
                 } else {
+                    this.setState({loading: true})
                     res = await _requestToServer(PUT, experience, experienceController + '/' + id, null, null, null, true);
+                    await this.setState({loading: false})                    
                 }
         }
 
@@ -120,7 +135,7 @@ class ExperienceItem extends Component<Props, State> {
 
     render() {
         let { item, complete, fix } = this.props;
-        let { experience, activeKey } = this.state;
+        let { experience, activeKey, loading } = this.state;
         let startedDate = timeConverter(experience.startedDate, 1000);
         let finishedDate = timeConverter(experience.finishedDate, 1000);
         return (
@@ -129,7 +144,11 @@ class ExperienceItem extends Component<Props, State> {
                 <Tab eventKey={complete} onSelect={this._handleSelect} id={complete}  >
                     <div className='wrapper' id={complete} >
                         <div className="edit-delete">
-                            <i className="fa fa-edit" onClick={() => { this._handleSelect(fix) }} />
+                            <i className="fa fa-edit" onClick={() => { 
+                                this._handleSelect(fix)
+                                let experience = this.props.item
+                                this.setState({experience})
+                                }} />
                             <Popconfirm
                                 title="Bạn muốn xóa mục này ？"
                                 okText="Xóa"
@@ -146,7 +165,7 @@ class ExperienceItem extends Component<Props, State> {
                             <IptLetterP>Nơi làm việc: </IptLetterP>
                             <div style={{ padding: '5px 10px' }}> {item.companyName}</div>
                             <IptLetterP>Thời gian làm việc: </IptLetterP>
-                            <div style={{ padding: '5px 10px' }}>{item.startedDate > 0 ? timeConverter(item.startedDate, 1000) : 'Chưa cập nhật'} đến {item.finishedDate > 0 ? timeConverter(item.finishedDate, 1000) : 'Chưa cập nhật'} </div>
+                            <div style={{ padding: '5px 10px' }}>{item.startedDate > 0 ? timeConverter(item.startedDate, 1000) : 'Chưa cập nhật'} - {item.finishedDate > 0 ? timeConverter(item.finishedDate, 1000) : 'Chưa cập nhật'} </div>
                             <IptLetterP>Mô tả: </IptLetterP>
                             <div style={{ padding: '5px 10px' }}> {item.description}</div>
                         </div>
@@ -159,13 +178,14 @@ class ExperienceItem extends Component<Props, State> {
                             {/* jobName */}
                             <div className='experience-content'>
                                 <p><label style={{ color: 'red' }}>*</label>Tên vị trí</p>
-                                <Input type='text' className='input_outside' placeholder='Ví dụ: UX-UI Designer' value={experience.jobName} onChange={this._handleInput("jobName")} />
+                                <Input id='jobName' type='text' className='input_outside' placeholder='Ví dụ: UX-UI Designer' value={experience.jobName} onChange={this._handleInput} />
+
                             </div>
 
                             {/* Company */}
                             <div className='experience-content'>
                                 <p><label style={{ color: 'red' }}>*</label>Tên Tổ chức</p>
-                                <Input type='text' className='input_outside' placeholder='Ví dụ: Công ti cổ phần Works.vn' value={experience.companyName} onChange={this._handleInput("companyName")} />
+                                <Input id='companyName' type='text' className='input_outside' placeholder='Ví dụ: Công ti cổ phần Works.vn' value={experience.companyName} onChange={this._handleInput} />
                             </div>
 
                             <div className='experience-content'>
@@ -174,18 +194,20 @@ class ExperienceItem extends Component<Props, State> {
                                     <Col xs={24} sm={24} md={12} lg={12} xl={12} className='column' >
                                         <p> <label style={{ color: 'red' }}>*</label>Từ tháng</p>
                                         <DatePicker
-                                            defaultValue={moment(startedDate, 'DD/MM/YY')}
+                                            value={moment(startedDate, 'DD/MM/YY')}
                                             onChange={this._handleChangeStartedTime}
                                             placeholder='Ví dụ: 26/6/2018'
+                                            format={'DD/MM/YYYY'}
                                         />
                                     </Col>
                                     {/* DatePicker Finished Time */}
                                     <Col xs={24} sm={24} md={12} lg={12} xl={12} className='column'>
                                         <p><label style={{ color: 'red' }}>*</label>Từ tháng</p>
                                         <DatePicker
-                                            defaultValue={moment(finishedDate, 'DD/MM/YY')}
+                                            value={moment(finishedDate, 'DD/MM/YY')}
                                             onChange={this._handleChangeFinishedTime}
                                             placeholder='Ví dụ: 26/6/2018'
+                                            format={'DD/MM/YYYY'}
                                         />
                                     </Col>
                                 </Row>
@@ -194,17 +216,16 @@ class ExperienceItem extends Component<Props, State> {
                             {/* Description */}
                             <div className='experience-content'>
                                 <p> <label style={{ color: 'red' }}>*</label>Mô tả nội dung</p>
-                                <textarea id='description' placeholder='Nhập nội dung và mô tả cụ thể công việc đã làm' value={experience.description} onChange={this._handleInput("description")}></textarea>
+                                <textarea id='description' placeholder='Nhập nội dung và mô tả cụ thể công việc đã làm' value={experience.description} onChange={this._handleInput}></textarea>
                             </div>
                             <p><label style={{ color: 'red' }}>*</label>Thông tin bắt buộc</p>
                         </div>
                         {/* submit button */}
-                        <Row className='holder-button' >
-                            <Col xs={12}>
+                        <Row className='holder-button' style={{display: 'flex', justifyContent: 'flex-end', textAlign: 'right'}}>
+                            <Col xs={24}>
                                 <button className='danger' onClick={() => (this._handleSelect(complete))}> Hủy</button>
-                            </Col>
-                            <Col xs={12}>
-                                <button className='request' onClick={() => this._createRequest(PUT)}> Lưu</button>
+                                {loading ? <button className='request'><Icon type="loading" /></button> :
+                                <button className='request' onClick={() => this._createRequest(PUT)}> Lưu</button> }
                             </Col>
                         </Row>
                     </div>

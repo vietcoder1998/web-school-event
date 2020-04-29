@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './FixDescription.scss';
 
-import { update_description } from '../../../../../services/api/private/profile'
+import { DESCRIPTION } from '../../../../../services/api/private.api';
 import { sendStringHeader } from '../../../../../services/auth';
 import { connect } from 'react-redux';
 import { _requestToServer } from '../../../../../services/exec';
 import { Row, Col } from 'react-bootstrap';
 import { REDUX_SAGA } from '../../../../../const/actions';
-
+import {Icon} from 'antd';
 interface IProps {
     description?: string;
     method?: string;
@@ -18,6 +18,7 @@ interface IProps {
 interface IState {
     description?: string;
     method?: string;
+    loading?: boolean;
 }
 
 
@@ -25,7 +26,8 @@ class FixDescription extends Component<IProps, IState>{
     constructor(props) {
         super(props)
         this.state = {
-            description: ''
+            description: '',
+            loading: false,
         }
     }
 
@@ -45,23 +47,24 @@ class FixDescription extends Component<IProps, IState>{
 
     _createRequest = async () => {
         let { description } = this.state;
-        await _requestToServer(this.props.method, description, update_description, null, sendStringHeader, null, true);
-        window.location.reload();
+        this.setState({loading: true})
+        await _requestToServer(this.props.method, description, DESCRIPTION, null, sendStringHeader, null, true);
+        this.setState({loading: false})
+        await this.props.reloadData();
         await this.props._fixData('description');
     }
 
     render() {
 
-        let { description } = this.state;
+        let { description, loading } = this.state;
         return (
             <div className='wrapper'>
                 <textarea placeholder='Giới thiệu tính cách, sở thích, câu nói yêu thích của bản thân' onChange={this._handleDescription} value={description}></textarea>
-                <Row className='holder-button' >
-                    <Col xs={6}>
+                <Row className='holder-button' style={{justifyContent: 'flex-end', display: 'flex'}}>
+                    <Col xs={24} style={{marginRight: '15px'}}>
                         <button className='danger' onClick={() => { this.props._fixData('description') }}> Hủy</button>
-                    </Col>
-                    <Col xs={6}>
-                        <button className='request' onClick={() => this._createRequest()}> Lưu</button>
+                        {loading ? <button className='request'><Icon type="loading" /></button> :
+                        <button className='request' onClick={() => this._createRequest()}> Lưu</button>}
                     </Col>
                 </Row>
             </div>

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 //@ts-ignore
-import logo from '../../../../assets/image/logo-01.png';
+import logo from '../../../../assets/image/logo-02.png';
 import { connect } from 'react-redux';
 import './Header.scss';
 import clearStorage from '../../../../services/clear-storage';
@@ -78,6 +78,7 @@ class Header extends PureComponent<IProps, IState> {
     return (<Menu>
       <Menu.Item><a href='/profile'>Hồ sơ</a></Menu.Item>
       <Menu.Item><a href='/reset-password'>Đổi mật khẩu</a></Menu.Item>
+      <Menu.Item><a href='/save-job'>Công việc đã lưu</a></Menu.Item>
       <Menu.Item onClick={this._clearStorage}>
         <a href='/' style={{
           pointerEvents: "none"
@@ -96,23 +97,25 @@ class Header extends PureComponent<IProps, IState> {
       <>
         <div className="header">
           <div className="logo">
-            <Link to="/"><img width={120} height={40} src={logo} alt="itea-scan" /> </Link>
+            <Link to="/"><img width="auto" height={45} src={logo} alt="itea-scan" /> </Link>
           </div>
           <div className='direct-page'
           >
             <div
               style={{ display: show_bar ? "none" : "block" }}
             >
-              <a href='/result'>Tìm việc</a>
-              <a href='https://employer.works.vn' target='_blank' rel="noopener noreferrer">Nhà tuyển dụng</a>
+              <a href='/result'><Icon type={'search'} />Việc làm</a>
+              <a href='https://employer.works.vn' target='_blank' rel="noopener noreferrer"><Icon type={'bank'} />Nhà tuyển dụng</a>
               {
-                isAuthen ? <a href='/save-job'><Icon type="book" />Lịch sử </a> : ''
+                isAuthen ? <a href='/history-apply'><Icon type="book" />Lịch sử ứng tuyển</a> : ''
               }
-              <a href='https://play.google.com/store/apps/details?id=com.worksvn.student&hl=vi' target='_blank' rel="noopener noreferrer">
-                App Android
+              <a href='https://play.google.com/store/apps/details?id=com.worksvn.candidate&hl=vi' target='_blank' rel="noopener noreferrer">
+                <Icon type="android" theme="filled" style={{ fontSize: '16.3px' }} />
+                Ứng dụng Android
                 </a>
-              <a href='https://apps.apple.com/us/app/worksvn-sinh-vi%C3%AAn/id1492437454' target='_blank' rel="noopener noreferrer">
-                App IOS
+              <a href='https://apps.apple.com/vn/app/works-vn-t%C3%ACm-vi%E1%BB%87c/id1487662808' target='_blank' rel="noopener noreferrer">
+                <Icon type={'apple'} theme="filled" style={{ fontSize: '16.8px' }} />
+                Ứng dụng iOS
                 </a>
             </div>
           </div>
@@ -120,21 +123,26 @@ class Header extends PureComponent<IProps, IState> {
             style={{ display: show_bar ? "none" : "flex" }}
           >
             {/* IconBell */}
-            <span
-              className='label-function'
-              onClick={() => this.setState({ show_noti: !show_noti })}
+
+            <Notification
+              show_noti={show_noti}
+              hover_on={hover_on}
+              _closeNoti={this._closeNoti}
+              _openNoti={this._openNoti}
             >
-              <Notification
-                show_noti={show_noti}
-                hover_on={hover_on}
-                _closeNoti={this._closeNoti}
-                _openNoti={this._openNoti}
+              <span
+                className='label-function'
+                onClick={() => {
+                  // alert('test')
+                  this.setState({ show_noti: !show_noti })
+                }}
               >
                 <Badge count={number_noti}>
-                  <Icon type="bell" />
+                  <Icon type="bell" theme="filled" />
                 </Badge>
-              </Notification>
-            </span>
+              </span>
+            </Notification>
+
 
             {/* Side Bar */}
             <span className='label-function show-mobile' onClick={this._showSideBar}>
@@ -143,18 +151,19 @@ class Header extends PureComponent<IProps, IState> {
             {isAuthen ?
               //@ts-ignore
               <Dropdown style={{ width: "300px" }} overlay={this.menuUser} placement="bottomRight" >
-                <span className='label-function hidden-mobile' >
-                  <Avatar src={localStorage.getItem("avatarUrl")} icon="user" style={{ border: "solid #7ecaff 2px" }} />
+                <span className='label-function hidden-mobile' style={{borderRadius: '5%'}}>
+                  <Avatar src={localStorage.getItem("avatarUrl")} icon="user" style={{ border: "solid #fff 1.5px" }} />
                   {localStorage.getItem("name") ? <label className="label_name">{localStorage.getItem("name")}</label> : null}
                 </span>
               </Dropdown>
               :
               (<span className='label-login hidden-mobile'>
-                <a href='/login'>
+                <a href='/login' >
                   Đăng nhập
                   </a>
+                  <span style={{ borderRight: 'solid #efefef 0.8px', padding: '0px 0px 2.2px' }}></span>
                 <a href='/register'>
-                  Đăng Kí
+                  Đăng ký
                 </a>
               </span>
               )}

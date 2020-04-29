@@ -4,12 +4,12 @@ import { limitString } from '../../../../utils/limitString';
 import { Link } from 'react-router-dom';
 import { _requestToServer } from '../../../../services/exec';
 import { RATE_EMPLOYER_CONTROLLER } from '../../../../services/api/private.api';
-import { STUDENTS_HOST } from '../../../../environment/development';
+import { CANDIDATE_HOST } from '../../../../environment/development';
 import { authHeaders } from '../../../../services/auth';
 import { POST } from '../../../../const/method';
 import { Input } from 'antd';
 import './EmployerDetail.scss';
-import { NotUpdate } from '../../layout/common/Common';
+import { NotUpdate, JobType } from '../../layout/common/Common';
 import { IEmployerDetail } from '../../../../models/employer-detail';
 const { TextArea } = Input;
 const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
@@ -61,12 +61,12 @@ export default class EmployerDetail extends React.PureComponent<EmployerDetailPr
         let { id } = this.props.employerDetail;
         let data = { workingEnvironmentRating, salaryRating, comment: comment.trim() };
         await this.setState({ confirmLoading: true })
-        await _requestToServer(POST, data, `${RATE_EMPLOYER_CONTROLLER}/${id}/ratings`, STUDENTS_HOST, authHeaders, null, true);
+        await _requestToServer(POST, data, `${RATE_EMPLOYER_CONTROLLER}/${id}/ratings`, CANDIDATE_HOST, authHeaders, null, true);
         await this.setState({ confirmLoading: false })
     }
 
     render() {
-        let { employerDetail, employerMoreJob, paging, is_loading_more, } = this.props;
+        let { employerDetail, employerMoreJob, paging, is_loading_more } = this.props;
         let { visible, confirmLoading, workingEnvironmentRating, salaryRating } = this.state;
 
         return (
@@ -124,7 +124,7 @@ export default class EmployerDetail extends React.PureComponent<EmployerDetailPr
                         <Row>
                             <Col xs={12} className='b_r'>
                                 <div className='rating b_b'>
-                                    <p>Môi trường làm việc </p>
+                                    <p style={{ fontSize: '1.05em', color: 'black' }}>Môi trường làm việc </p>
                                     <div className='star-rating'>
                                         <Rate
                                             disabled
@@ -132,12 +132,12 @@ export default class EmployerDetail extends React.PureComponent<EmployerDetailPr
                                             style={{ fontSize: '0.9rem' }}
                                         />
                                     </div>
-                                    <span><label><Icon type='user' /></label>{employerDetail.rating && employerDetail.rating.ratingCount}</span>
+                                    <span><label><Icon type='user' style={{ fontSize: '12px' }} /></label>{employerDetail.rating && employerDetail.rating.ratingCount} lượt đánh giá</span>
                                 </div>
                             </Col>
                             <Col xs={12}>
                                 <div className='rating b_b'>
-                                    <p>Đãi ngộ nhân viên</p>
+                                    <p style={{ fontSize: '1.05em', color: 'black' }}>Đãi ngộ nhân viên</p>
                                     <div className='star-rating'>
                                         <Rate
                                             disabled
@@ -145,7 +145,7 @@ export default class EmployerDetail extends React.PureComponent<EmployerDetailPr
                                             style={{ fontSize: '0.9rem' }}
                                         />
                                     </div>
-                                    <span><label><Icon type='user' /></label>{employerDetail.rating && employerDetail.rating.ratingCount}</span>
+                                    <span><label><Icon type='user' style={{ fontSize: '12px' }} /></label>{employerDetail.rating && employerDetail.rating.ratingCount} lượt đánh giá</span>
                                 </div>
                             </Col>
                         </Row>
@@ -179,12 +179,19 @@ export default class EmployerDetail extends React.PureComponent<EmployerDetailPr
                         <Row>
                             <div className='company-job-more a_c'>
                                 {employerMoreJob.items && employerMoreJob ? employerMoreJob.items.map((item, index) =>
-                                    (<Col key={index} xs={24} sm={12} md={12} lg={12} xl={8}>
-                                        {is_loading_more ? <Skeleton loading={is_loading_more} avatar paragraph={{ rows: 1 }} /> :
-                                            (<div className='item-job ' >
-                                                <Avatar shape={'square'} src={item.employerLogoUrl} size={60} style={{ margin: "10px", border: "solid cornflowerblue 2px" }} />
-                                                <p><Link to={`/job-detail/${window.btoa(item.id)}`} target='_blank'>{limitString(item.jobTitle)}</Link></p>
-                                                <p><span><Icon type='environment' />{limitString(item.address)}</span></p>
+                                    (<Col key={index} xs={24} sm={12} md={12} lg={12} xl={12}>
+                                        {is_loading_more ? <Skeleton loading={true} avatar paragraph={{ rows: 1 }} /> :
+                                            (<div className='item-job' >
+                                                <div style={{ flex: 3 }}>
+                                                    <Avatar shape={'square'} src={item.employerLogoUrl} size={60} style={{ margin: "10px 10px 0 10px"}} />
+                                                    <JobType width='60px' fontSize='0.7em'>
+                                                        {item && item.jobType}
+                                                    </JobType>
+                                                </div>
+                                                <div style={{ flex: 9 }}>
+                                                    <p style={{ textAlign: 'left', fontSize: '1.1em', fontWeight: 500 }} className="info-silimar-job"><Link to={`/job-detail/${window.btoa(item.id)}`} target='_blank'>{item.jobTitle}</Link></p>
+                                                    <p style={{ textAlign: 'left' }} className="info-silimar-job"><span><Icon type='environment' style={{marginRight: 3}} />{item.address}</span></p>
+                                                </div>
                                             </div>)}
                                     </Col>)
                                 ) : <Empty description={"Không tìm thấy công việc nào"} />

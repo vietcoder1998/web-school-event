@@ -19,7 +19,7 @@ class ChooseLanguage extends Component {
 
     async componentDidMount() {
         let { list_language, language } = this.state;
-        let res_language = await _get(null, LANGUAGES, PUBLIC_HOST);
+        let res_language = await _get(null, LANGUAGES, PUBLIC_HOST, {});
         list_language = res_language.data.items;
         this.setState({ list_language, language });
     }

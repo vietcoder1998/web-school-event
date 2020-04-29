@@ -13,13 +13,17 @@ import { JobResult } from '../reducers/job-result';
 import { GetJobDetail } from '../reducers/job-detail';
 import { EmployerDetail } from '../reducers/employer-detail';
 import { EmployerMoreJob } from '../reducers/employer-more-job';
+import { SimilarJob } from '../reducers/job-similar';
 import { GetJobSave } from '../reducers/job-save';
+import { GetHistoryApply } from '../reducers/history-apply';
 import { Noti } from '../reducers/noti';
 import { HotJobResult } from '../reducers/hot-job';
+import { AllJobResult } from '../reducers/all-job';
+
 import { HighLightResult } from '../reducers/highlight-job';
 import { ChatRoom } from '../reducers/chat-room';
 import { MobileState } from './../reducers/change-mobile-state';
-import { EventTopJobReducer, EventJobReducer } from './../reducers/eventJob';
+
 let rootReducer = {
   PersonalInfo,
   PopupState,
@@ -40,8 +44,9 @@ let rootReducer = {
   Regions,
   InDayResult,
   Announcements,
-  EventJobReducer,
-  EventTopJobReducer
+  GetHistoryApply,
+  SimilarJob,
+  AllJobResult
 };
 
 const myReducer = combineReducers(rootReducer);
