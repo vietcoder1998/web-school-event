@@ -1,4 +1,6 @@
-import { EventHotJobResult, EventJobResults } from './../reducers/event';
+import { BannerEmployer, TopEmployer } from './../reducers/event/employer';
+import { EventHotJobResults, EventJobResults } from '../reducers/event/jobs';
+
 
 import { Announcements } from './../reducers/announcements';
 import { InDayResult } from './../reducers/in-day';
@@ -53,8 +55,10 @@ let rootReducer = {
   AllJobResult,
   /// event
 
-  EventHotJobResult,
+  EventHotJobResults,
   EventJobResults,
+  TopEmployer,
+  BannerEmployer,
 
 };
 

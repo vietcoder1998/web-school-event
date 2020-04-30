@@ -17,7 +17,8 @@ import { JobNameWatcher } from '../watcher/job-names';
 import { RegionWatcher } from '../watcher/regions';
 import { InDayWatcher } from '../watcher/in-day';
 import { AnnouncementsWatcher } from '../watcher/announcements';
-import { EventHotJobWatcher } from '../watcher/event/jobs';
+import { EventHotJobWatcher, EventJobWatcher } from '../watcher/event/jobs';
+import { EventTopEmployerWatcher, EventBannerEmployerWatcher } from '../watcher/event/employer';
 
 
 export default function* rootSaga() {
@@ -40,6 +41,9 @@ export default function* rootSaga() {
         SimilarJobWatcher(),
 
         EventHotJobWatcher(),
-       
+        EventJobWatcher(),
+        EventTopEmployerWatcher(),
+        EventBannerEmployerWatcher(),
+
     ])
 } 

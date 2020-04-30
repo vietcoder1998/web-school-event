@@ -1,3 +1,4 @@
+
 export const authUserPassword = '/api/authentication/username-password';
 export const resetPassword = '/api/users/password/new';
 export const forgotPassword = '/api/users/password/reset/request';
@@ -32,5 +33,9 @@ export const EVENT_PRIVATE = {
         ACTIVE: `/api/students/schools/events/${process.env.REACT_APP_EVENT_ID}/jobs/active`,
         SEARCH: `/api/students/schools/events/${process.env.REACT_APP_EVENT_ID}/jobs/search`,
         DETAIL: `/api/students/schools/events/${process.env.REACT_APP_EVENT_ID}/jobs/{jid}/active`
+    },
+    EMPLOYER: {
+        HOME: `/api/students/schools/events/${process.env.REACT_APP_EVENT_ID}/employers/query`,
+        DETAIL: `/api/students/schools/events/${process.env.REACT_APP_EVENT_ID}/employers/{emid}`
     }
 }

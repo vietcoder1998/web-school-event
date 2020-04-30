@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Col, Row, Skeleton, Avatar } from 'antd';
-import './TopEm.scss'
+import {Carousel } from 'antd';
 import { connect } from 'react-redux';
 
 import defaultImage from '../../../../assets/image/base-image.jpg'
@@ -17,7 +16,7 @@ interface IState {
     is_loading: boolean,
 }
 
-class TopEm extends PureComponent<IProps, IState> {
+class Banner extends PureComponent<IProps, IState> {
     constructor(props) {
         super(props);
         this.state = {
@@ -33,38 +32,29 @@ class TopEm extends PureComponent<IProps, IState> {
     componentDidMount = async () => {
         await this.setState({ is_loading: false })
         await this.props.getTopEmpoyer(0);
-       
     }
 
     render() {
-        let { is_loading } = this.state;
         let { listEmployer } = this.props;
         return (
             <div className='top-rm' style={{ display: listEmployer.totalItems === 0 ? 'none' : '' }}>
                 <h5 style={{ textAlign: 'center' }}>DOANH NGHIỆP NỔI BẬT </h5>
-                <Row align='middle' justify='center'>
+                <Carousel autoplay>
                     {listEmployer && listEmployer.items ? listEmployer.items.map((item, index) => (
-                        <Col xs={4} key={index}>
-                            <div className='h-j-item'>
-                                <img src={item.employer.logoUrl === null ? defaultImage : item.employer.logoUrl} alt='logo' className='image-employer' />
-                            </div>
-                            <div className='job-content'>
-                                <p style={{ color: 'black', fontWeight: 'bold' }}>{item.employer.employerName}</p>
-                            </div>
-                        </Col>
+                        <img src={item.bannerUrl} key={index} alt='banner' className='image-banner'/>
                     )) : null}
-                </Row>
+                </Carousel>
             </div>
         );
     }
 }
 
 const mapStateToProps = (state) => ({
-    listEmployer: state.TopEmployer.data
+    listEmployer: state.BannerEmployer.data
 })
 
 const mapDispatchToProps = dispatch => ({
-    getTopEmpoyer: (pageIndex?: number, pageSize?: number) => dispatch({ type: REDUX_SAGA.EVENT.EMPLOYER.TOP, pageIndex, pageSize }),
+    getTopEmpoyer: (pageIndex?: number, pageSize?: number) => dispatch({ type: REDUX_SAGA.EVENT.EMPLOYER.BANNER, pageIndex, pageSize }),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopEm);
+export default connect(mapStateToProps, mapDispatchToProps)(Banner);

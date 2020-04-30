@@ -1,4 +1,4 @@
-import { REDUX } from "../../const/actions";
+import { REDUX } from "../../../const/actions";
 
 let initListEventHotJob = {
   data: {
@@ -25,10 +25,10 @@ export const EventJobResults = (state = initListEventJob, action) => {
     case REDUX.EVENT.JOB.NORMAL:
       return { ...state, data: action.data };
     default:
-      return { ...state, data: action.data };
+      return { ...state};
   }
 };
-export const EventHotJobResult = (state = initListEventHotJob, action) => {
+export const EventHotJobResults = (state = initListEventHotJob, action) => {
   switch (action.type) {
     case REDUX.EVENT.JOB.HOT:
       return { ...state, data: action.data };

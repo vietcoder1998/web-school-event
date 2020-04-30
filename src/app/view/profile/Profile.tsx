@@ -209,7 +209,7 @@ class Profile extends Component<IProps, IState> {
                             </Block >
 
                             {/* Education */}
-                            <Block describe='Học vấn và bằng cấp' icon={this.icon_bachelor}>
+                            {/* <Block describe='Học vấn và bằng cấp' icon={this.icon_bachelor}>
                                 <div className='icon-fix' onClick={() => this._fixData('education')}>
                                     <span
                                         data-tip data-for='a_ed'
@@ -220,7 +220,7 @@ class Profile extends Component<IProps, IState> {
                                 </div>
                                 <Education />
                                 {profileState['education'] ? <FixEducation _fixData={this._fixData} method={POST} /> : null}
-                            </Block >
+                            </Block > */}
                             {/* ShortProfileal Info */}
                         </Col>
                         {/* Comment */}

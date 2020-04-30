@@ -16,19 +16,13 @@
   }
 
   .h-j-item {
-    padding: 10px;
-    margin: 1vw 1.4vw;
-    min-height: 160px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.06);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    &:hover {
-      transition: 0.5s;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.06), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
-    }
+    background-color: #F9FBFF;
 
+    width: 90%;
+    .image-employer {
+      width: 75%;
+      padding: 15px 0;
+    }
     .img-job {
       img {
         height: 70px;
@@ -41,12 +35,12 @@
       max-height: 80px;
       width: 100% -70px;
       padding: 0px 10px;
-      
+
       a {
         text-transform: lowercase;
       }
 
-      a::first-letter{
+      a::first-letter {
         text-transform: uppercase;
       }
 
@@ -54,7 +48,6 @@
         padding: 5px 2px;
         font-size: 0.8rem;
       }
-
     }
   }
 }

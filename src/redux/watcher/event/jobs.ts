@@ -84,7 +84,7 @@ function getJobData(action) {
         {
             pageIndex: action.pageIndex ? action.pageIndex : 0,
             pageSize: 6,
-            priority: 'TOP'
+            priority: ''
         },
         false
     );

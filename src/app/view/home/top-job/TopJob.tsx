@@ -22,7 +22,6 @@ class TopJob extends PureComponent<IProps> {
 
     componentDidMount = async () => {
         await this.props.getEventHotJob(0);
-        console.log(this.props.data)
     }
     
     changePage = (event?: number) => {
@@ -78,9 +77,7 @@ class TopJob extends PureComponent<IProps> {
 }
 
 const mapStateToProps = (state) => ({
-    topJob: state.EventHotJobResult.data,
-    loading_hot_job: state.HotJobResult.loading,
-    
+    topJob: state.EventHotJobResults.data,
 })
 
 const mapDispatchToProps = dispatch => ({
