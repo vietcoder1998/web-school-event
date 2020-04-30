@@ -39,7 +39,7 @@ class Header extends PureComponent<IProps, IState> {
       hover_on: false,
     }
   }
-
+ 
   _handleStateMenu = () => {
     let { show_menu } = this.state;
     this.setState({ show_menu: !show_menu })
@@ -104,7 +104,9 @@ class Header extends PureComponent<IProps, IState> {
             <div
               style={{ display: show_bar ? "none" : "block" }}
             >
+              <a href='/event' style={{display: window.location.pathname === '/event' ? "none" : '' }}><Icon type={'tags'} />Sự kiện</a>
               <a href='/result'><Icon type={'search'} />Việc làm</a>
+              
               <a href='https://employer.works.vn' target='_blank' rel="noopener noreferrer"><Icon type={'bank'} />Nhà tuyển dụng</a>
               {
                 isAuthen ? <a href='/history-apply'><Icon type="book" />Lịch sử ứng tuyển</a> : ''

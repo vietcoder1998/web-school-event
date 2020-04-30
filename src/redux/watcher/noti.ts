@@ -29,7 +29,6 @@ function getNotiData(action) {
         { pageIndex: action.pageIndex, pageSize: 10 },
         false
     );
-    
     return res;
 }
 

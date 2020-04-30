@@ -1,38 +1,37 @@
 import React, { PureComponent } from 'react';
-import { Col, Row, Skeleton, Avatar, Pagination } from 'antd';
-import './HomeJob.scss'
+import { Col, Row, Skeleton, Pagination } from 'antd';
+import './TopJob.scss'
 import { connect } from 'react-redux';
-import { limitString } from '../../../../utils/limitString';
 import { Link } from 'react-router-dom';
 //@ts-ignore
 import DefaultImage from '../../../../assets/image/carouselGroup/carousel2.jpg';
-import { REDUX_SAGA, REDUX } from '../../../../const/actions';
+import { REDUX_SAGA } from '../../../../const/actions';
 import { JobType } from '../../layout/common/Common';
 
 interface IProps {
-    getHotJob?: Function;
+    getEventHotJob?: Function;
     getInDay?: Function;
     topJob?: any;
     indayJob?: any;
-    setLoadingGetHotJob?: Function;
+    setLoadinggetEventHotJob?: Function;
     loading_hot_job?: any
 };
 
 
-class HomeJob extends PureComponent<IProps> {
+class TopJob extends PureComponent<IProps> {
 
     componentDidMount = async () => {
-        await this.props.getHotJob(0);
+        await this.props.getEventHotJob(0);
     }
     
     changePage = (event?: number) => {
-        this.props.getHotJob(event - 1)
+        this.props.getEventHotJob(event - 1)
     }
     render() {
         let { topJob, loading_hot_job } = this.props;
             return (
                 <Row className='home-job' style={{ display: topJob.totalItems === 0? 'none' : '' }}>
-                    <h5 style={{ textAlign: 'center' }}>VIỆC LÀM NỔI BẬT</h5>
+                    <h5 style={{ textAlign: 'center' }}>VIỆC LÀM NỔI BẬT TRONG NGÀY HỘI</h5>
                     {
                         topJob && topJob.items ? topJob.items.map((item, index) => {
                             let logoUrl = item.employerLogoUrl;
@@ -78,13 +77,11 @@ class HomeJob extends PureComponent<IProps> {
 }
 
 const mapStateToProps = (state) => ({
-    topJob: state.HotJobResult.data,
-    loading_hot_job: state.HotJobResult.loading,
-    
+    topJob: state.EventHotJobResults.data,
 })
 
 const mapDispatchToProps = dispatch => ({
-    getHotJob: (pageIndex?: number, pageSize?: number) => dispatch({ type: REDUX_SAGA.HOT_JOB.GET_HOT_JOB, pageIndex, pageSize }),
+    getEventHotJob: (pageIndex?: number, pageSize?: number) => dispatch({ type: REDUX_SAGA.EVENT.JOB.HOT, pageIndex, pageSize }),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeJob);
+export default connect(mapStateToProps, mapDispatchToProps)(TopJob);

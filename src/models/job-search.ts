@@ -2,6 +2,7 @@ export interface IJobSearchFilter {
     employerID?: string | number,
     excludedJobIDs?: Array<string>,
     jobNameIDs?: Array<number | string>,
+    branchIDs?: Array<number>,
     jobType?: 'PARTTIME' | 'FULLTIME' | 'INTERNSHIP',
     shuffle?: boolean,
     jobPriorityFilter?: {

@@ -9,10 +9,12 @@ import { REDUX, REDUX_SAGA } from './const/actions';
 import $ from 'jquery';
 import { Loading } from './app/view/layout/common/Common';
 
+const EventHome = asyncComponent(() =>
+  import('./app/view/eventHome/Home').then(module => module.default)
+)
 const Home = asyncComponent(() =>
   import('./app/view/home/Home').then(module => module.default)
 )
-
 const Profile = asyncComponent(() =>
   import('./app/view/profile/Profile').then(module => module.default)
 )
@@ -81,7 +83,7 @@ class App extends React.Component {
   }
 
   resizeInterface = null;
-  
+
   componentDidMount() {
     this._loadLocal();
     this.setState({ loading: false });
@@ -118,7 +120,7 @@ class App extends React.Component {
     return null
   }
 
-   _loadLocal =  async () => {
+  _loadLocal = async () => {
     let token = localStorage.getItem('accessToken');
     console.log(localStorage.getItem('accessToken'))
     if (token !== null) {
@@ -133,6 +135,7 @@ class App extends React.Component {
           <Suspense fallback={<Loading />}>
             <Switch >
               <Route exact path="/" component={Home} />
+              <Route exact path="/event" component={EventHome} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/reset-password" component={ResetPassword} />
               <Route exact path="/profile" component={this.props.isAuthen === true ? Profile : Home} />

@@ -1,22 +1,20 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
-import { _requestToServer } from '../../services/exec';
-import { FIND_JOB } from '../../services/api/public.api';
-import { PUBLIC_HOST, STUDENT_HOST } from '../../environment/development';
-import { noInfoHeader, authHeaders } from '../../services/auth';
-import { store } from '../store';
-import { JOBS } from '../../services/api/private.api';
-import { REDUX_SAGA, REDUX } from '../../const/actions'
-import { POST } from '../../const/method';
+import { _requestToServer } from '../../../services/exec';
+import { FIND_JOB } from '../../../services/api/public.api';
+import { PUBLIC_HOST, STUDENT_HOST } from '../../../environment/development';
+import { noInfoHeader, authHeaders } from '../../../services/auth';
+import { store } from '../../store';
+import { JOBS } from '../../../services/api/private.api';
+import { REDUX_SAGA, REDUX } from '../../../const/actions'
+import { POST } from '../../../const/method';
 
 
 function* getListJobResultData(action) {
-    yield put({ type: REDUX.JOB_RESULT.SET_LOADING_RESULT, loading: true });
     let res = yield call(getJobResults, action);
     if (res) {
         let data = res.data;
         console.log(data)
-        yield put({ type: REDUX.JOB_RESULT.GET_JOB_RESULT, data });
-        yield put({ type: REDUX.JOB_RESULT.SET_LOADING_RESULT, loading: false });
+        yield put({ type: REDUX.EVENT.JOB.SEARCH, data });
     }
 }
 
@@ -73,10 +71,9 @@ function getJobResults(action) {
         },
         false
     );
-
     return res;
 }
 
 export function* JobResultWatcher() {
-    yield takeEvery(REDUX_SAGA.JOB_RESULT.GET_JOB_RESULT, getListJobResultData)
+    yield takeEvery(REDUX_SAGA.EVENT.JOB.SEARCH, getListJobResultData)
 }

@@ -12,9 +12,13 @@ export const oauth2 = "/api/users/emailVerification/request";
 export const EVENT_PUBLIC = {
     JOBS: {
         HOME: `/api/schools/${process.env.REACT_APP_SCHOOL_ID}/events/${process.env.REACT_APP_EVENT_ID}/jobs/active/home`,
+        ACTIVE: `/api/schools/${process.env.REACT_APP_SCHOOL_ID}/events/${process.env.REACT_APP_EVENT_ID}/jobs/active`,
+        SEARCH: `/api/schools/${process.env.REACT_APP_SCHOOL_ID}/events/${process.env.REACT_APP_EVENT_ID}/jobs/search`,
+        DETAIL: `/api/schools/${process.env.REACT_APP_SCHOOL_ID}/events/${process.env.REACT_APP_EVENT_ID}/jobs/active`,
     },
     EMPLOYER: {
         HOME: `/api/schools/${process.env.REACT_APP_SCHOOL_ID}/events/${process.env.REACT_APP_EVENT_ID}/employers/query`,
         DETAIL: `/api/schools/${process.env.REACT_APP_SCHOOL_ID}/events/${process.env.REACT_APP_EVENT_ID}/employers/{emid}`
-    }
+    },
+    BRANCH: `/api/schools/events/${process.env.REACT_APP_EVENT_ID}/jobs/branches`
 }

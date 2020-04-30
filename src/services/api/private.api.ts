@@ -37,5 +37,6 @@ export const EVENT_PRIVATE = {
     EMPLOYER: {
         HOME: `/api/students/schools/events/${process.env.REACT_APP_EVENT_ID}/employers/query`,
         DETAIL: `/api/students/schools/events/${process.env.REACT_APP_EVENT_ID}/employers/{emid}`
-    }
+    },
+    BRANCH: `/api/students/schools/events/${process.env.REACT_APP_EVENT_ID}/jobs/branches`,
 }

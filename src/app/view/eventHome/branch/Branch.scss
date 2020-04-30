@@ -1,0 +1,15 @@
+.top-branch {
+    background-color: #f7f7f7;
+    scroll-behavior: smooth;
+    .branch-item {
+        background-color: white;
+
+        .image-branch {
+            width: 40%;
+            height: 90%;
+        }
+        .branch {
+            display: inline;
+        }
+    }
+}

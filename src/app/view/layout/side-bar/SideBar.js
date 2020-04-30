@@ -48,6 +48,7 @@ class SideBar extends Component {
                         <div className="content-sidebar">
                             <ul>
                                 <li><a href='/'><Icon type="home" />Trang chủ</a></li>
+                                <li><a href='/event' style={{display: window.location.pathname === '/event' ? "none" : '' }}><Icon type="tags" />Sự kiện</a></li>
                                 <li><a href='/'><i className="fa fa-briefcase"></i>Tìm việc</a></li>
                                 <li style={{ color: 'gray', cursor: 'not-allowed', opacity: 0.5, pointerEvents: 'none' }}><a href='/'><Icon type="user-add" />Tạo CV</a></li>
                                 <li className='b_b'><a href='/'><Icon type="book" />Kĩ năng</a></li>

@@ -71,7 +71,7 @@ class SearchFilter extends React.Component<ISearchFilterProps, IStateSearchFilte
 
     }
     render() {
-        let { regions, jobNames, loading, area, job_dto } = this.props;
+        let { regions, jobNames, loading, } = this.props;
         let { jobType, jobNameID, regionID } = this.state;
         // let [filter, setFilter] = React.useState({ regionID: null, jobNameID: null });
 

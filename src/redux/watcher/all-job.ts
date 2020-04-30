@@ -17,6 +17,8 @@ function* getListAllJobData(action) {
     let res = yield call(getAllJobData, action);
     if (res) {
         let data = res.data;
+        console.log(data)
+        console.log('aahihi')
         yield put({ type: REDUX.ALL_JOB.GET_ALL_JOB, data });
     }
     yield put({ type: REDUX.ALL_JOB.SET_LOADING_ALL_JOB, loading: false });

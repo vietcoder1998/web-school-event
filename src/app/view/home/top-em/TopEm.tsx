@@ -3,12 +3,17 @@ import { Col, Row, Skeleton, Avatar } from 'antd';
 import './TopEm.scss'
 import { connect } from 'react-redux';
 
-import defaultImage from '../../../../assets/image/base-image.jpg'
-import { REDUX_SAGA } from '../../../../const/actions';
+//@ts-ignore
+//@ts-ignore
+import JobChoiceLogo from './../../../../assets/image/job-choice-logo.png';
+//@ts-ignore
+import EduVietLogo from './../../../../assets/image/eduviet-logo.png';
+//@ts-ignore
+import TTCLogo from './../../../../assets/image/ttc-logo.png';
 
 interface IProps {
-    getTopEmpoyer?: Function,
-    listEmployer?: any,
+    getHotJob?: Function;
+    top_job_data?: any;
 }
 interface IState {
     list_job_top: Array<any>,
@@ -32,27 +37,64 @@ class TopEm extends PureComponent<IProps, IState> {
 
     componentDidMount = async () => {
         await this.setState({ is_loading: false })
-        await this.props.getTopEmpoyer(0);
-       
     }
 
     render() {
         let { is_loading } = this.state;
-        let { listEmployer } = this.props;
+
         return (
-            <div className='top-rm' style={{ display: listEmployer.totalItems === 0 ? 'none' : '' }}>
-                <h5 style={{ textAlign: 'center' }}>DOANH NGHIỆP NỔI BẬT </h5>
-                <Row align='middle' justify='center'>
-                    {listEmployer && listEmployer.items ? listEmployer.items.map((item, index) => (
-                        <Col xs={4} key={index}>
-                            <div className='h-j-item'>
-                                <img src={item.employer.logoUrl === null ? defaultImage : item.employer.logoUrl} alt='logo' className='image-employer' />
-                            </div>
-                            <div className='job-content'>
-                                <p style={{ color: 'black', fontWeight: 'bold' }}>{item.employer.employerName}</p>
-                            </div>
-                        </Col>
-                    )) : null}
+            <div className='top-rm'>
+                <h5 style={{ textAlign: 'center' }}>ĐỐI TÁC NỔI BẬT </h5>
+                <Row style={{padding: '0 3vw'}}>
+                    <Col xs={0} sm={0} md={3} lg={6} xl={0} xxl={6} ></Col>
+                    <Col xs={12} sm={8} md={6} lg={4} xl={8} xxl={4} >
+                        {is_loading ?
+                            <Skeleton loading={true} avatar paragraph={{ rows: 1 }} /> :
+                            (<div className='h-j-item'>
+                                {/* <Avatar
+                                    shape={'square'}
+                                    style={{ width: '100%', height: '100%' }}
+                                    src={JobChoiceLogo}
+                                    alt='logo'
+                                /> */}
+                                <img src={JobChoiceLogo} alt='logo' height='90%' width='90%'/>
+                            </div>)}
+                        <div className='job-content'>
+                            <p style={{color: 'black'}}>JobChoice</p>
+                        </div>
+                    </Col>
+                    <Col xs={12} sm={8} md={6} lg={4} xl={8} xxl={4} >
+                        {is_loading ?
+                            <Skeleton loading={true} avatar paragraph={{ rows: 1 }} /> :
+                            (<div className='h-j-item'>
+                                {/* <Avatar
+                                    shape={'square'}
+                                    style={{ width: '100%', height: '100%' }}
+                                    src={TTCLogo}
+                                    alt='TTC ảnh'
+                                /> */}
+                                <img src={TTCLogo} alt='logo' height='90%' width='90%'/>                                
+                            </div>)}
+                        <div className='job-content'>
+                           <p style={{color: 'black'}}>TTC Solutions</p>
+                        </div>
+                    </Col>
+                    <Col xs={12} sm={8} md={6} lg={4} xl={8} xxl={4} >
+                        {is_loading ?
+                            <Skeleton loading={true} avatar paragraph={{ rows: 1 }} /> :
+                            (<div className='h-j-item'>
+                                {/* <Avatar
+                                    shape={'square'}
+                                    style={{ width: '100%', height: 'auto' }}
+                                    src={EduVietLogo}
+                                /> */}
+                                <img src={EduVietLogo} alt='logo' height='75%' width='75%'/>
+                            </div>)}
+                        <div className='job-content'>
+                            <p style={{color: 'black'}}>EDUVIET</p>
+                        </div>
+                    </Col>
+                    <Col xs={0} sm={0} md={3} lg={6} xl={0} xxl={6} ></Col>
                 </Row>
             </div>
         );
@@ -60,11 +102,9 @@ class TopEm extends PureComponent<IProps, IState> {
 }
 
 const mapStateToProps = (state) => ({
-    listEmployer: state.TopEmployer.data
 })
 
 const mapDispatchToProps = dispatch => ({
-    getTopEmpoyer: (pageIndex?: number, pageSize?: number) => dispatch({ type: REDUX_SAGA.EVENT.EMPLOYER.TOP, pageIndex, pageSize }),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopEm);

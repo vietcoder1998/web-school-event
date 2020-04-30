@@ -1,0 +1,26 @@
+  .search-content {
+    text-align: center;
+    padding: 4vw 1vw;
+  }
+
+  .tab-search {
+    position  : relative;
+    text-align: center;
+    min-height: 500px;
+    border-bottom: solid rgb(224, 224, 224) 1px;
+
+    .ant-carousel {
+      position        : absolute;
+      // background-color: rgb(178, 178, 178);
+      color           : black;
+      height          : 100%;
+      width           : 100%;
+      z-index         : -1;
+
+      .slick-dots {
+        li {
+          height: 4px;
+        }
+      }
+    }
+  }

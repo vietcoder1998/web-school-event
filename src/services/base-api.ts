@@ -17,9 +17,16 @@ export const _get = async (params?: any, api?: string, another_host?: string, he
     if (headers === null || headers === undefined) {
         headers = authHeaders
     }
-    let response = await axios.get(requestURL, { params: params, headers });
-    return response.data
-};
+    try{
+        let response = await axios.get(requestURL, { params: params, headers });
+        return response.data
+    }
+    catch(e) {
+        console.log(e.response.data)
+    }
+    }
+
+  
 
 // DELETE
 export const _delete = async (data?: any, api?: string, another_host?: string, headers?: any, params?: string) => {

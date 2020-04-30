@@ -26,7 +26,7 @@ function getTopEmployer(action) {
         bannerPriority: 'NORMAL',
         priority: 'TOP',
         createDate: 0,
-        shuffle: false,
+        shuffle: true
     };
     let isAuthen = store.getState().AuthState.isAuthen;
     let res = _requestToServer(
@@ -53,7 +53,6 @@ function* getListBannerEmployer(action) {
     let res = yield call(getBannerEmployer, action);
     if (res) {
         let data = res.data;
-        console.log(data)
         yield put({ type: REDUX.EVENT.EMPLOYER.BANNER, data });
     }
 }
@@ -63,7 +62,7 @@ function getBannerEmployer(action) {
         bannerPriority: 'TOP',
         priority: 'NORMAL',
         createDate: 0,
-        shuffle: false,
+        shuffle: true
     };
     let isAuthen = store.getState().AuthState.isAuthen;
     let res = _requestToServer(

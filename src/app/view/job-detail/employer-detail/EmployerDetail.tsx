@@ -68,7 +68,6 @@ export default class EmployerDetail extends React.PureComponent<EmployerDetailPr
     render() {
         let { employerDetail, employerMoreJob, paging, is_loading_more } = this.props;
         let { visible, confirmLoading, workingEnvironmentRating, salaryRating } = this.state;
-
         return (
             <>
                 <Modal title="ĐÁNH GIÁ NHÀ TUYỂN DỤNG"

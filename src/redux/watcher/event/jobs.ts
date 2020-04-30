@@ -3,7 +3,6 @@ import { EVENT_PRIVATE } from './../../../services/api/private.api';
 import { IJobSearchFilter } from '../../../models/job-search';
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { _requestToServer } from '../../../services/exec';
-import { FIND_JOB } from '../../../services/api/public.api';
 import { PUBLIC_HOST, STUDENT_HOST } from '../../../environment/development';
 import { noInfoHeader, authHeaders } from '../../../services/auth';
 import { store } from '../../store';
@@ -21,7 +20,14 @@ function* getListHotJobData(action) {
     yield put({ type: REDUX.EVENT.JOB.HOT_LOADING, loading: false });
 
 }
-
+function* getListJobData(action) {
+    let res = yield call(getJobData, action);
+    if (res) {
+        console.log(res)
+        let data = res.data;
+        yield put({ type: REDUX.EVENT.JOB.NORMAL, data });
+    }
+}
 function getHotJobData(action) {
     let data: IJobSearchFilter = {
         employerID: null,
@@ -54,20 +60,13 @@ function getHotJobData(action) {
 
 
 
-function* getListJobData(action) {
-    let res = yield call(getJobData, action);
-    if (res) {
-        let data = res.data;
-        yield put({ type: REDUX.EVENT.JOB.NORMAL, data });
-    }
-}
-
 function getJobData(action) {
     let data: IJobSearchFilter = {
         employerID: null,
         excludedJobIDs: null,
         shuffle: true,
         jobNameIDs: null,
+        branchIDs: [],
         jobType: null,
         jobShiftFilter: null,
         jobLocationFilter: null,
@@ -75,11 +74,15 @@ function getJobData(action) {
             homePriority: null
         }
     };
+
+    if (localStorage.getItem('e_bid')) {
+        data.branchIDs.push(parseInt(localStorage.getItem('e_bid')))
+    }
     let isAuthen = store.getState().AuthState.isAuthen;
     let res = _requestToServer(
         POST,
         data,
-        (isAuthen ? EVENT_PRIVATE.JOBS.HOME : EVENT_PUBLIC.JOBS.HOME),
+        (isAuthen ? EVENT_PRIVATE.JOBS.ACTIVE : EVENT_PUBLIC.JOBS.HOME),
         isAuthen ? STUDENT_HOST : PUBLIC_HOST, isAuthen ? authHeaders : noInfoHeader,
         {
             pageIndex: action.pageIndex ? action.pageIndex : 0,

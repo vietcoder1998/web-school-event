@@ -57,25 +57,6 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
         }
         this.txtErr = null
     }
-    // let { employerDetail, employerMoreJob, loading } = props;
-    // Error loading 
-    // let [onErrLogo, setErrLogo] = React.useState(false);
-    // let [onErrCover, setErrCover] = React.useState(false);
-    // let [visible, setVisible] = React.useState(false);
-    // let [workingEnvironmentRating, setWorkingEnvironmentRating] = React.useState(0);
-    // let [salaryRating, setSalaryRating] = React.useState(0);
-    // let [comment, setComment] = React.useState(null);
-    // let [txtErr, setTxtErr] = React.useState(null);
-
-    // const async getHistoryRating =  () => {
-
-    // }
-    // React.useEffect(() => {
-
-    // console.log('vao day')
-
-
-    // }, [])
     componentDidMount() {
         this.props.getEmployerDetail(window.atob(this.props.match.params.id));
         this.props.getEmployerMoreJob(0, 6, window.atob(this.props.match.params.id));
