@@ -19,6 +19,7 @@ import { InDayWatcher } from '../watcher/in-day';
 import { AnnouncementsWatcher } from '../watcher/announcements';
 import { EventHotJobWatcher, EventJobWatcher } from '../watcher/event/jobs';
 import { EventTopEmployerWatcher, EventBannerEmployerWatcher } from '../watcher/event/employer';
+import { EventDetail } from '../watcher/event/detail';
 
 
 export default function* rootSaga() {
@@ -44,6 +45,7 @@ export default function* rootSaga() {
         EventJobWatcher(),
         EventTopEmployerWatcher(),
         EventBannerEmployerWatcher(),
+        EventDetail(),
 
     ])
 } 

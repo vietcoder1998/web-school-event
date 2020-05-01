@@ -1,130 +1,167 @@
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
-import React, { Component, CSSProperties } from 'react';
-import './MapContainer.scss';
-import { connect } from 'react-redux';
-import GeoCode from 'react-geocode';
-import { REDUX } from '../../../../const/actions';
+import { PropTypes } from 'prop-types';
+import React from 'react';
+import Map, { Marker } from 'google-maps-react';
+import PlacesAutocomplete, {
+    geocodeByAddress,
+    getLatLng,
+} from 'react-places-autocomplete';
+
+import { Input } from 'antd';
+
+function findAddress(lat, lng) {
+    const google = window.google;
+    //const codeApi = 'AIzaSyA55QnSD4Xj6-zTyCbWUs8iKOyYyjmhv08';
+    var geocoder = new google.maps.Geocoder();
+    return new Promise(function (resolve, reject) {
+        geocoder.geocode({ 'latLng': new google.maps.LatLng(lat, lng) }, function (results, status) {
+            if (status === 'OK') {
+                resolve(results);
+            } else {
+                alert('Không có thông tin nơi bạn chọn!')
+            }
+        })
+    })
+}
 
 interface IProps {
-    mapState?: {
-        marker?: {
-            lat?: number;
-            lng?: number;
-        }
-    };
-
-    setMapState?: Function;
-    style?: CSSProperties;
-    disabled?: boolean;
+    location?: any
 }
-
-interface IState {
-    showingInfoWindow?: boolean,
-    activeMarker?: any,
-    selectedPlace?: any,
-    marker?: {
-        lat?: number, lng?: number
-    },
-    location?: string
-}
-
-class MapContainer extends Component<IProps, IState> {
+class GoogleMap extends React.Component<IProps>{
     constructor(props) {
         super(props);
         this.state = {
-            showingInfoWindow: true,
-            activeMarker: {},
-            selectedPlace: {},
-            marker: {
-                lat: 0, lng: 0
+            position: {
+                lat: 21.027763,
+                lng: 105.834160
             },
-            location: ''
-        };
-    }
-
-    componentDidMount() {
-        let { marker } = this.props.mapState;
-        this.setState({ marker, location: localStorage.getItem('location') });
-        GeoCode.setApiKey(process.env.REACT_APP_GOOGLE_API_KEY)
-
-    }
-
-    _onMarkerClick = (props, marker, e) =>
-        this.setState({
-            selectedPlace: props,
-            activeMarker: marker,
-            showingInfoWindow: true
-        });
-
-    _setMapState = (t, map, coord) => {
-        const { latLng } = coord;
-        let { marker } = this.state;
-        let { disabled } = this.props;
-        if (!disabled) {
-            const lat = latLng.lat();
-            const lng = latLng.lng();
-            marker.lat = lat;
-            marker.lng = lng;
-            GeoCode.fromLatLng(marker.lat, marker.lng).then(
-                response => {
-                    let { location } = this.state;
-                    location = response.results[0].formatted_address;
-                    localStorage.setItem('location', location);
-                    this.setState({ location, marker });
-                    this.props.setMapState(marker, location);
-                },
-
-                error => {
-                    console.error(error);
-                }
-            )
+            address: null,
+            showInfo: false,
         }
     }
 
-    render() {
-        let { marker, location, showingInfoWindow, activeMarker } = this.state;
-        let { style } = this.props;
+    componentDidMount() {
 
+    }
+
+    SendData = (lat, lng, address) => {
+        this.props.GetLatLngToParent(lat, lng, address);
+    }
+
+    handleChange = address => {
+        this.setState({ address });
+    };
+
+    handleSelect = address => {
+        geocodeByAddress(address)
+            .then(results => getLatLng(results[0]))
+            .then(latLng => {
+
+                this.SendData(latLng.lat, latLng.lng, address);
+                this.setState({
+                    address
+                })
+                this.setState(prevState => ({
+                    position: {
+                        ...prevState.position,
+                        lat: latLng.lat,
+                        lng: latLng.lng,
+                    }
+                }));
+            })
+            .catch(error => console.error('Error', error));
+    };
+
+    getAddress = (coord) => {
+        let { latLng } = coord;
+        const lat = latLng.lat();
+        const lng = latLng.lng();
+        this.setState(prevState => ({
+            position: {
+                ...prevState.position,
+                lat: lat,
+                lng: lng,
+            }
+        }));
+        let { address } = this.state;
+        findAddress(lat, lng)
+            .then(res => {
+                address = res[0].formatted_address;
+                this.setState({
+                    address
+                });
+                this.SendData(latLng.lat(), latLng.lng(), address);
+            })
+
+
+    };
+
+    render() {
         return (
             <div>
-                <div>{location}</div>
+                <PlacesAutocomplete
+                    value={this.state.address}
+                    onChange={this.handleChange}
+                    onSelect={this.handleSelect}
+                >
+                    {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                        <div>
+                            <Input
+
+                                {...getInputProps({
+                                    placeholder: 'Search Places ...',
+                                    className: 'location-search-input',
+                                })}
+                            />
+                            <div className="autocomplete-dropdown-container">
+                                {loading && <div>Loading...</div>}
+                                {suggestions.map(suggestion => {
+                                    const className = suggestion.active
+                                        ? 'suggestion-item--active'
+                                        : 'suggestion-item';
+                                    // inline style for demonstration purpose
+                                    const style = suggestion.active
+                                        ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                                        : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                    return (
+                                        <div
+                                            {...getSuggestionItemProps(suggestion, {
+                                                className,
+                                                style,
+                                            })}
+                                        >
+                                            <span>{suggestion.description}</span>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    )}
+
+                </PlacesAutocomplete>
                 <Map
-                    className='map-wraper'
-                    //@ts-ignore
+                    style={{ width: 550, height: 450, marginTop: 10 }}
                     google={window.google}
-                    initialCenter={this.props.mapState.marker}
-                    onClick={this._setMapState}
-                    style={style ? style : undefined}
+                    zoom={14}
+                    center={{
+                        lat: this.state.position.lat,
+                        lng: this.state.position.lng,
+                    }}
+                    initialCenter={{
+                        lat: this.state.position.lat,
+                        lng: this.state.position.lng,
+                      }}
                 >
                     <Marker
-                        onClick={this._onMarkerClick}
-                        name={location}
-                        position={{ lat: marker.lat, lng: marker.lng }}
+                        name={this.state.address}
+                        position={this.state.position}
+                        draggable={true}
+                        onDragend={(t, map, coord) => this.getAddress(coord)}
                     />
-
-                    <InfoWindow
-                        marker={activeMarker}
-                        visible={showingInfoWindow}>
-                        <div>
-                            <h5>{this.state.selectedPlace.name}</h5>
-                        </div>
-                    </InfoWindow>
                 </Map>
             </div>
-        );
+        )
     }
 }
 
-const mapStateTopProps = state => ({
-    mapState: state.MapState
-})
 
-const mapDispatchToProps = dispatch => {
-    return {
-        setMapState: (marker, location) => dispatch({ type: REDUX.MAP.SET_MAP_STATE, marker, location })
-    }
-}
-
-export default connect(mapStateTopProps, mapDispatchToProps)(GoogleApiWrapper({
-    apiKey: process.env.REACT_APP_GOOGLE_API_KEY
-})(MapContainer))
+export default GoogleMap

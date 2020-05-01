@@ -1,3 +1,4 @@
+import { DetailEvent } from './../reducers/event/detail';
 import { EventBranch } from './../reducers/event/branch';
 import { BannerEmployer, TopEmployer } from './../reducers/event/employer';
 import { EventHotJobResults, EventJobResults } from '../reducers/event/jobs';
@@ -61,6 +62,7 @@ let rootReducer = {
   TopEmployer,
   BannerEmployer,
   EventBranch,
+  DetailEvent,
 
 };
 

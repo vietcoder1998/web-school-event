@@ -28,6 +28,8 @@ export const PROFILE_EMPLOYER = '/api/students/employers';
 
 
 export const EVENT_PRIVATE = {
+    QUERY: `/api/students/schools/events/$${process.env.REACT_APP_EVENT_ID}/employers/query`,
+    DETAIL: `/api/students/schools/events/${process.env.REACT_APP_EVENT_ID}/employers/{emid}`,
     JOBS: {
         HOME: `/api/students/schools/events/${process.env.REACT_APP_EVENT_ID}/jobs/active/home`,
         ACTIVE: `/api/students/schools/events/${process.env.REACT_APP_EVENT_ID}/jobs/active`,
