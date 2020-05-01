@@ -20,7 +20,6 @@ function* getListAnnouncementsData(action: any) {
     if (res) {
         data = res.data
     };
-
     yield put({
         type: REDUX.ANNOUNCEMENTS.GET_ANNOUNCEMENTS,
         data

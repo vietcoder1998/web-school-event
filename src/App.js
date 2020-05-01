@@ -12,6 +12,9 @@ import { Loading } from './app/view/layout/common/Common';
 const EventHome = asyncComponent(() =>
   import('./app/view/eventHome/Home').then(module => module.default)
 )
+
+const EventCountDown = asyncComponent(() =>
+  import('./app/view/eventHome/CountDown').then(module => module.default))
 const Home = asyncComponent(() =>
   import('./app/view/home/Home').then(module => module.default)
 )
@@ -135,6 +138,7 @@ class App extends React.Component {
           <Suspense fallback={<Loading />}>
             <Switch >
               <Route exact path="/" component={Home} />
+              <Route exact path="/count" component={EventCountDown} />
               <Route exact path="/event" component={EventHome} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/reset-password" component={ResetPassword} />

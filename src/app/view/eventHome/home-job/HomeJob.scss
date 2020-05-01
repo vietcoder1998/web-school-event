@@ -26,6 +26,13 @@
     }
   }
 
+  .ant-pagination-item-active{
+    background-color: #1D85C7;
+    color: white !important;
+    a{
+      color: white;
+    }
+  }
   .h-j-item {
     display      : flex;
     padding      : 1vw ;

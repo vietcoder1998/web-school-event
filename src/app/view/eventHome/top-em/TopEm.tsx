@@ -41,7 +41,7 @@ class TopEm extends PureComponent<IProps, IState> {
         return (
             <div className='top-rm' style={{ display: listEmployer.totalItems === 0 ? 'none' : '' }}>
                 <h5 style={{ textAlign: 'center' }}>DOANH NGHIỆP NỔI BẬT </h5>
-                <Row>
+                <Row align='center' type='flex'>
                     {listEmployer && listEmployer.items ? listEmployer.items.map((item, index) => (
                         <Col xs={12} sm={8} md={6} lg={4} xl={8} xxl={4}key={index}>
                             <div className='h-j-item'>
