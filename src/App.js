@@ -137,9 +137,9 @@ class App extends React.Component {
         <Router>
           <Suspense fallback={<Loading />}>
             <Switch >
-              <Route exact path="/" component={Home} />
+              <Route exact path="/" component={EventHome} />
               <Route exact path="/count" component={EventCountDown} />
-              <Route exact path="/event" component={EventHome} />
+              <Route exact path="/home" component={Home} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/reset-password" component={ResetPassword} />
               <Route exact path="/profile" component={this.props.isAuthen === true ? Profile : Home} />

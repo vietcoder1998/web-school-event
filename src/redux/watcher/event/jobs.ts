@@ -23,7 +23,6 @@ function* getListHotJobData(action) {
 function* getListJobData(action) {
     let res = yield call(getJobData, action);
     if (res) {
-        console.log(res)
         let data = res.data;
         yield put({ type: REDUX.EVENT.JOB.NORMAL, data });
     }
@@ -82,7 +81,7 @@ function getJobData(action) {
     let res = _requestToServer(
         POST,
         data,
-        (isAuthen ? EVENT_PRIVATE.JOBS.ACTIVE : EVENT_PUBLIC.JOBS.HOME),
+        (isAuthen ? EVENT_PRIVATE.JOBS.ACTIVE : EVENT_PUBLIC.JOBS.ACTIVE),
         isAuthen ? STUDENT_HOST : PUBLIC_HOST, isAuthen ? authHeaders : noInfoHeader,
         {
             pageIndex: action.pageIndex ? action.pageIndex : 0,

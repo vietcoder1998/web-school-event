@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
-import { Carousel, Button } from 'antd';
+import { Carousel } from 'antd';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import defaultImage from '../../../../assets/image/base-image.jpg'
 import { REDUX_SAGA } from '../../../../const/actions';
-
+import './Banner.scss';
 interface IProps {
     getTopEmpoyer?: Function,
     listEmployer?: any,
@@ -37,7 +36,7 @@ class Banner extends PureComponent<IProps, IState> {
     render() {
         let { listEmployer } = this.props;
         return (
-            <div className='top-rm' style={{ display: listEmployer.totalItems === 0 ? 'none' : '' }}>
+            <div className='employer-banner' style={{ display: listEmployer.totalItems === 0 ? 'none' : '' }}>
                 <Carousel autoplay>
                     {listEmployer && listEmployer.items ? listEmployer.items.map((item, index) => (
                         <img src={item.bannerUrl === null ? defaultImage : item.bannerUrl} key={index} alt='banner' className='image-banner' />

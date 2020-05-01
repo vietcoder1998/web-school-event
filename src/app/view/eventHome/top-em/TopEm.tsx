@@ -43,13 +43,13 @@ class TopEm extends PureComponent<IProps, IState> {
                 <h5 style={{ textAlign: 'center' }}>DOANH NGHIỆP NỔI BẬT </h5>
                 <Row align='center' type='flex'>
                     {listEmployer && listEmployer.items ? listEmployer.items.map((item, index) => (
-                        <Col xs={12} sm={8} md={6} lg={4} xl={8} xxl={4}key={index}>
+                        <Col xs={12} sm={6} md={6} lg={4} xl={3} xxl={3} key={index}>
                             <div className='h-j-item'>
                                 <img src={item.employer.logoUrl === null ? defaultImage : item.employer.logoUrl} alt='logo' className='image-employer' />
                             </div>
                             <div className='job-content'>
                                 <Link to={`/employer/${window.btoa(item.employer.id)}`} target='_blank' className="name_employer">
-                                    <p style={{ color: 'black', fontWeight: 'bold' }}>{item.employer.employerName}</p>
+                                    <p style={{ color: '#415167', fontWeight: 'bold' }}>{item.employer.employerName}</p>
                                 </Link>
                             </div>
                         </Col>

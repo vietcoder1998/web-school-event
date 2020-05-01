@@ -15,17 +15,16 @@
     padding: 20px 0 10px;
     font-size: 1.5rem;
   }
-  .image-banner {
-    height: 350px;
-    width: 100%;
-}
+  
   .h-j-item {
     background-color: #F9FBFF;
-    margin: 15px;
-    padding: 10px;
+    margin: 0px 10px;
+    padding: 10px 0;
+    border-radius: 5px;
     .image-employer {
-      width: 35%;
-      
+      min-height: 80px;
+      height: 80px;
+      width: 80%;
     }
     .img-job {
       img {

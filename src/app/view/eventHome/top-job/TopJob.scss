@@ -1,48 +1,47 @@
 @import "../../sass/variable";
 
 .home-job {
-  font-family     : $font_base;
+  font-family: $font_base;
   background-color: white;
-  margin          : 30px 0px;
-  padding         : 10px;
+  margin: 30px 0px;
+  padding: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.02), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
-  
 
   h4 {
-    margin    : 10px 0px !important;
+    margin: 10px 0px !important;
     text-align: center;
   }
 
   .ant-skeleton {
     padding: 10px 5vw;
-    margin : 2vh 0px;
+    margin: 2vh 0px;
 
     .ant-skeleton-header .ant-skeleton-avatar-lg {
-      width        : 70px;
-      height       : 70px;
-      line-height  : 40px;
+      width: 70px;
+      height: 70px;
+      line-height: 40px;
       border-radius: 17px !important;
     }
   }
 
   .h-j-item {
-    display      : flex;
+    display: flex;
     // padding      : 1vw 0;
-    margin       : 0.2vw 1vw;
-    height       : auto;
+    margin: 0.2vw 1vw;
+    height: auto;
     border-bottom: dashed $color_border 1px;
 
     a {
-      color:#5d5d5d;
+      color: #5d5d5d;
 
       &:hover {
-        color: #168ECD
+        color: #168ecd;
       }
     }
 
     .time-left {
       text-align: left;
-      font-size : 0.7rem;
+      font-size: 0.7rem;
       font-style: italic;
     }
 
@@ -52,8 +51,8 @@
 
     .job-content {
       max-height: 80px;
-      width     : 100% ;
-      padding   : 0px 10px;
+      width: 100%;
+      padding: 0px 10px;
 
       a {
         text-transform: lowercase;
@@ -67,7 +66,6 @@
         }
       }
 
-
       .j-d {
         &:hover {
           color: rgba(46, 158, 255, 0.85) !important;
@@ -80,8 +78,6 @@
 
       li {
         padding: 5px 2px;
-
-
       }
     }
   }

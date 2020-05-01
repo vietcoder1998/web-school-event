@@ -79,6 +79,7 @@ class Header extends PureComponent<IProps, IState> {
       <Menu.Item><a href='/profile'>Hồ sơ</a></Menu.Item>
       <Menu.Item><a href='/reset-password'>Đổi mật khẩu</a></Menu.Item>
       <Menu.Item><a href='/save-job'>Công việc đã lưu</a></Menu.Item>
+      <Menu.Item><a href='history-apply'>Lịch sử ứng tuyển</a></Menu.Item>
       <Menu.Item onClick={this._clearStorage}>
         <a href='/' style={{
           pointerEvents: "none"
@@ -104,13 +105,10 @@ class Header extends PureComponent<IProps, IState> {
             <div
               style={{ display: show_bar ? "none" : "block" }}
             >
-              <a href='/event' style={{display: window.location.pathname === '/event' ? "none" : '' }}><Icon type={'tags'} />Sự kiện</a>
-              <a href='/result'><Icon type={'search'} />Việc làm</a>
+              <a href='/home' style={{display: window.location.pathname === '/home' ? "none" : '' }}><Icon type={'home'} />Tìm việc</a>
+              <a href='/' style={{display: window.location.pathname === '/' ? "none" : '' }}><Icon type={'tags'} />Ngày hội việc làm</a>
               
-              <a href='https://employer.works.vn' target='_blank' rel="noopener noreferrer"><Icon type={'bank'} />Nhà tuyển dụng</a>
-              {
-                isAuthen ? <a href='/history-apply'><Icon type="book" />Lịch sử ứng tuyển</a> : ''
-              }
+              <a href='/result'><Icon type={'search'} />Việc làm</a>
               <a href='https://play.google.com/store/apps/details?id=com.worksvn.candidate&hl=vi' target='_blank' rel="noopener noreferrer">
                 <Icon type="android" theme="filled" style={{ fontSize: '16.3px' }} />
                 Ứng dụng Android

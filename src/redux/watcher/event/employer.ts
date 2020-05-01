@@ -23,7 +23,7 @@ function* getListTopEmployer(action) {
 
 function getTopEmployer(action) {
     let data: IEmployerSearchFliter = {
-        bannerPriority: 'NORMAL',
+        bannerPriority: null,
         priority: 'TOP',
         createDate: 0,
         shuffle: true
@@ -60,7 +60,7 @@ function* getListBannerEmployer(action) {
 function getBannerEmployer(action) {
     let data: IEmployerSearchFliter = {
         bannerPriority: 'TOP',
-        priority: 'NORMAL',
+        priority: null,
         createDate: 0,
         shuffle: true
     };
