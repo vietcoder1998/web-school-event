@@ -10,7 +10,6 @@ import { PUBLIC_HOST } from '../../../../../environment/development';
 import { Row, Col } from 'react-bootstrap';
 import { PUT } from '../../../../../const/method';
 import { REDUX_SAGA } from '../../../../../const/actions';
-import { Icon } from 'antd';
 
 interface IProps {
     skills?: Array<{ id?: number, name?: string }>;
@@ -27,8 +26,7 @@ interface IState {
         pageIndex: number,
         pageSize: number,
     },
-    list_tag: Array<{ id?: number, name?: string }>,
-    loading?: boolean
+    list_tag: Array<{ id?: number, name?: string }>
 }
 
 class FixSkills extends Component<IProps, IState> {
@@ -42,15 +40,15 @@ class FixSkills extends Component<IProps, IState> {
                 pageIndex: 0,
                 pageSize: 0,
             },
-            list_tag: [],
-            loading: false
+            list_tag: []
         }
     }
 
     async  componentDidMount() {
         let { skills } = this.props;
         let { list_skills } = this.state;
-        let res = await _get({ pageIndex: 0, pageSize: 0 }, SKILLS, PUBLIC_HOST, {});
+        let res = await _get(null, SKILLS, PUBLIC_HOST);
+     
         list_skills = res.data.items;
         this.setState({ list_skills, skills });
     }
@@ -85,15 +83,15 @@ class FixSkills extends Component<IProps, IState> {
         let array_list_skills = skills.map((item) => {
             return item.id;
         })
-        this.setState({ loading: true })
+
         await _requestToServer(PUT, array_list_skills, skillsController, null, null, null, true);
         await this.props.getData();
-        await this.setState({ skills: this.props.skills, loading: false })
+        await this.setState({ skills: this.props.skills })
         await this.props._fixData('skills')
     }
 
     render() {
-        let { list_skills, skills, loading } = this.state;
+        let { list_skills, skills } = this.state;
         return (
             <div className='wrapper'>
                 <div className='ability'>
@@ -112,10 +110,6 @@ class FixSkills extends Component<IProps, IState> {
                     <div className='list-skills'>
                         <ul className='data-api'>
                             {list_skills && list_skills.map((item, index) => {
-                                // console.log(skills.filter(item2 => (item.name == item2.name)).length)
-                                if (skills.filter(item2 => (item.name == item2.name)).length >0) {                                    
-                                    return null
-                                }
                                 return (
                                     <label id={item.id} key={index} onClick={() => this._addLabel(item, index)}>
                                         {item.name}
@@ -124,11 +118,12 @@ class FixSkills extends Component<IProps, IState> {
                             })}
                         </ul>
                     </div>
-                    <Row className='holder-button' style={{ justifyContent: 'flex-end', display: 'flex' }}>
-                        <Col xs={24} style={{ marginRight: '15px' }}>
+                    <Row className='holder-button' >
+                        <Col xs={6}>
                             <button className='danger' onClick={() => { this.props._fixData('skills') }}> Hủy</button>
-                            {loading ? <button className='request'><Icon type="loading" /></button> :
-                                <button className='request' onClick={() => this._createRequest()}> Lưu</button>}
+                        </Col>
+                        <Col xs={6}>
+                            <button className='request' onClick={() => this._createRequest()}> Lưu</button>
                         </Col>
                     </Row>
                 </div>

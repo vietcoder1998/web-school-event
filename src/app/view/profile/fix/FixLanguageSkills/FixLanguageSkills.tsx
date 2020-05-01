@@ -10,7 +10,7 @@ import { _requestToServer } from '../../../../../services/exec';
 import { LANGUAGE_SKILL } from '../../../../../services/api/private.api';
 import { REDUX_SAGA } from '../../../../../const/actions';
 import ILanguageSkill from '../../../../../models/language-skill';
-import {Icon} from 'antd'
+
 let { Option } = Select;
 interface IProps {
     method?: string;
@@ -22,8 +22,7 @@ interface IState {
     is_show?: boolean,
     choose_lg?: any,
     languageName?: string,
-    languageSkill?: ILanguageSkill,
-    loading?: boolean
+    languageSkill?: ILanguageSkill
 }
 
 class FixLanguageSkills extends Component<IProps, IState> {
@@ -40,13 +39,12 @@ class FixLanguageSkills extends Component<IProps, IState> {
                 certificate: "",
                 score: 0
             },
-            loading: false
         }
     }
 
     async componentDidMount() {
         let { list_language } = this.state;
-        let res_language = await _get(null, LANGUAGES, PUBLIC_HOST, {});
+        let res_language = await _get(null, LANGUAGES, PUBLIC_HOST);
         list_language = res_language.data.items;
         this.setState({ list_language });
     }
@@ -72,7 +70,6 @@ class FixLanguageSkills extends Component<IProps, IState> {
 
     async requestServer(method) {
         let { languageSkill } = this.state;
-        this.setState({loading: true})
         if (languageSkill.languageID === null || languageSkill.level === '') {
         } else if (method === POST) {
             let res = await _requestToServer(POST, languageSkill, LANGUAGE_SKILL, null, null, null, true);
@@ -82,15 +79,14 @@ class FixLanguageSkills extends Component<IProps, IState> {
             }
 
         }
-        await this.setState({loading: false})
     }
 
     render() {
-        let { list_language, languageSkill, loading } = this.state;
+        let { list_language, languageSkill } = this.state;
         return (
             <div className='wrapper language-skills-fix'>
                 <Row>
-                    <Col xs={24} sm={24} md={8} lg={8} style={{marginBottom: 10}}>
+                    <Col xs={24} md={12} lg={12} sm={24}>
                         <p className='language-input'>
                             Chọn ngôn ngữ
                         </p>
@@ -110,8 +106,7 @@ class FixLanguageSkills extends Component<IProps, IState> {
                             })}
                         </Select>
                     </Col>
-                    <Col xs={0} sm={0} md={16} lg={16} ></Col>
-                    <Col xs={24} sm={24} md={24} lg={24} style={{marginBottom: 10}}>
+                    <Col xs={12} md={12} lg={12} sm={12}>
                         <p className='language-input'>
                             Trình độ
                         </p>
@@ -124,14 +119,14 @@ class FixLanguageSkills extends Component<IProps, IState> {
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs={24} sm={24} md={16} lg={16} style={{ paddingRight: 10}}>
+                    <Col xs={24} md={12} lg={12} sm={24}>
                         <p className='language-input'>
                             Chứng chỉ
                         </p>
                         <Input placeholder='Certificate' value={languageSkill.certificate} onChange={(event) => this._handleLanguageSkills(event.target.value, "certificate")} />
 
                     </Col>
-                    <Col xs={24} sm={24} md={8} lg={8}>
+                    <Col xs={24} md={12} lg={12} sm={24}>
                         <p>
                             Điểm số
                         </p>
@@ -140,11 +135,12 @@ class FixLanguageSkills extends Component<IProps, IState> {
 
                 </Row>
                 {/* Button holder */}
-                <Row className='holder-button' style={{justifyContent: 'flex-end', display: 'flex', textAlign: 'right'}}>
-                    <Col xs={24}>
+                <Row className='holder-button' >
+                    <Col xs={12}>
                         <button className='danger' onClick={() => { this.props._fixData('languageSkill') }}> Hủy</button>
-                        {loading ? <button className='request'><Icon type="loading" /></button> :
-                        <button className='request' onClick={() => this._createRequest()}> Lưu</button> }                       
+                    </Col>
+                    <Col xs={12}>
+                        <button className='request' onClick={() => this._createRequest()}> Lưu</button>
                     </Col>
                 </Row>
             </div>

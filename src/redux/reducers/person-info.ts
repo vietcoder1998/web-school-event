@@ -7,7 +7,8 @@ let personal_data = {
     description: "",
     languageSkills: [],
     experiences: [],
-    rating: {}
+    rating: {},
+    major: {},
 };
 
 export const PersonalInfo = (state = personal_data, action): any => {
@@ -22,6 +23,7 @@ export const PersonalInfo = (state = personal_data, action): any => {
                 languageSkills: action.languageSkills,
                 experiences: action.experiences,
                 rating: action.rating,
+                major: action.major,
             }
 
         default:

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import { Tabs, Tab } from 'react-bootstrap';
-import { Row, Col, DatePicker, Input, Popconfirm, Icon } from 'antd';
+import { Row, Col, DatePicker, Input, Popconfirm } from 'antd';
 import { _requestToServer } from '../../../../../../services/exec';
 import { timeConverter } from '../../../../../../utils/convertTime';
 import { educationController } from '../../../../../../services/api/private.api';
@@ -25,7 +25,6 @@ interface IStates {
     education?: IEducation;
     activeKey?: string;
     fix?: string;
-    loading?: boolean
 };
 
 class EducationItem extends Component<IProps, IStates> {
@@ -39,8 +38,7 @@ class EducationItem extends Component<IProps, IStates> {
                 finishedDate: 0,
                 description: ''
             },
-            activeKey: '',
-            loading: false
+            activeKey: ''
         }
     }
 
@@ -50,6 +48,7 @@ class EducationItem extends Component<IProps, IStates> {
         if (item !== null) {
             education = item;
         }
+       
 
         activeKey = complete;
         this.setState({ education, activeKey });
@@ -91,7 +90,6 @@ class EducationItem extends Component<IProps, IStates> {
     async requestServer(method, education) {
         let res;
         let { id } = this.props;
-        this.setState({loading: true})
         if (method === PUT) {
             if (
                 education.school === '' ||
@@ -109,15 +107,14 @@ class EducationItem extends Component<IProps, IStates> {
             res = await _requestToServer(DELETE, null, educationController + '/' + id, null, null, null, true);
         }
 
-        if (res) {
+        if (res && res) {
             await this.props.getData();
         }
-        await this.setState({loading: false})
     }
 
     render() {
         let { item, complete, fix } = this.props;
-        let { education, activeKey, loading } = this.state;
+        let { education, activeKey } = this.state;
         let startedDate = timeConverter(education.startedDate, 1000);
         let finishedDate = timeConverter(education.finishedDate, 1000);
         return (
@@ -126,11 +123,7 @@ class EducationItem extends Component<IProps, IStates> {
                 <Tab eventKey={complete} onSelect={this._handleSelect} id={complete}  >
                     <div className='wrapper'>
                         <div className="edit-delete">
-                            <i className="fa fa-edit" onClick={() => { 
-                                this._handleSelect(fix)
-                                let newEducation = this.props.item;
-                                this.setState({education: newEducation})
-                                }} />
+                            <i className="fa fa-edit" onClick={() => { this._handleSelect(fix) }} />
                             <Popconfirm
                                 title="Bạn muốn xóa mục này ？"
                                 okText="Xóa"
@@ -142,7 +135,7 @@ class EducationItem extends Component<IProps, IStates> {
                             </Popconfirm>
                         </div>
                         <div>
-                            <p className='header-experience'>{item.label}</p>
+                           
                             <IptLetterP>Nơi học: </IptLetterP>
                             <div style={{ padding: '5px 10px' }}> {item.school}</div>
                             <IptLetterP>Ngành học: </IptLetterP>
@@ -160,34 +153,32 @@ class EducationItem extends Component<IProps, IStates> {
                             {/* Branch of learning */}
                             <div className='education-content'>
                                 <p><label style={{ color: 'red' }}>*</label>Tên ngành/nghề đào tạo</p>
-                                <Input id='branchOfLearning' className='input_outside' placeholder='Ví dụ: Công nghệ thông tin' value={education.branchOfLearning} onChange={this._handleData} />
+                                <Input className='input_outside' placeholder='Ví dụ: Công nghệ thông tin' value={education.branchOfLearning} onChange={this._handleData} />
                             </div>
 
                             {/* School */}
                             <div className='education-content'>
                                 <p><label style={{ color: 'red' }}>*</label>Tên cơ sở đào tạo</p>
-                                <Input id='school' className='input_outside' placeholder='Ví dụ: Trường Cao đẳng nghề' value={education.school} onChange={this._handleData} />
+                                <Input className='input_outside' placeholder='Ví dụ: Trường Cao đẳng nghề' value={education.school} onChange={this._handleData} />
                             </div>
                             <div className='education-content'>
                                 <Row >
                                     {/* Started Date */}
                                     <Col xs={24} sm={24} md={12} lg={12} xl={12} className='column'>
-                                        <p> <label style={{ color: 'red' }}>*</label>Từ ngày</p>
+                                        <p> <label style={{ color: 'red' }}>*</label>Từ tháng</p>
                                         <DatePicker
-                                            value={moment(startedDate, 'DD/MM/YYYY')}
+                                            defaultValue={moment(startedDate, 'DD/MM/YY')}
                                             onChange={this._handleChangeStartedTime}
                                             placeholder='Ví dụ: 26/6/2018'
-                                            format={'DD/MM/YYYY'}
                                         />
                                     </Col>
                                     {/* DatePicker Finished Time */}
                                     <Col xs={24} sm={24} md={12} lg={12} xl={12} className='column'>
-                                        <p><label style={{ color: 'red' }}>*</label>Đến ngày</p>
+                                        <p><label style={{ color: 'red' }}>*</label>Từ tháng</p>
                                         <DatePicker
-                                            value={moment(finishedDate, 'DD/MM/YYYY')}
+                                            defaultValue={moment(finishedDate, 'DD/MM/YY')}
                                             onChange={this._handleChangeFinishedTime}
                                             placeholder='Ví dụ: 26/6/2018'
-                                            format={'DD/MM/YYYY'}
                                         />
                                     </Col>
                                 </Row>
@@ -208,11 +199,12 @@ class EducationItem extends Component<IProps, IStates> {
                         </div>
 
                         {/* submit button */}
-                        <Row className='holder-button' style={{justifyContent: 'flex-end', display: 'flex', textAlign: 'right'}}>
-                            <Col xs={24}>
+                        <Row className='holder-button' >
+                            <Col xs={12}>
                                 <button className='danger' onClick={() => this._handleSelect(complete)}> Hủy</button>
-                                {loading ? <button className='request'><Icon type="loading" /></button> :
-                                <button className='request' onClick={() => this._createRequest(PUT)}> Lưu</button> }
+                            </Col>
+                            <Col xs={12}>
+                                <button className='request' onClick={() => this._createRequest(PUT)}> Lưu</button>
                             </Col>
                         </Row>
                     </div>

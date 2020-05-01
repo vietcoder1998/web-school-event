@@ -29,6 +29,7 @@ function* getPersonInfo() {
     const d = new Date();
     const n = d.getTime();
     let param = n;
+    console.log(data)
     // description
     let description = data.description;
     //personalInfo
@@ -50,7 +51,8 @@ function* getPersonInfo() {
     // skills
     let skills = data.skills;
     // education
-    let educations = data.educations;
+    let educations = data.school;
+    let major = data.major;
     // experiences
     let experiences = data.experiences;
     // languageSkills
@@ -66,7 +68,8 @@ function* getPersonInfo() {
         description,
         experiences,
         languageSkills,
-        rating
+        rating,
+        major,
     });
 }
 
