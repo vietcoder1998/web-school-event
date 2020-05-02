@@ -2,10 +2,10 @@ import React, { PureComponent } from "react";
 import { Col, Row, Button } from "antd";
 import { connect } from "react-redux";
 import "./Branch.scss";
-import { PUBLIC_HOST } from "../../../../environment/development";
-import { EVENT_PUBLIC } from "../../../../services/api/public.api";
-import { _get } from "../../../../services/base-api";
-import { REDUX_SAGA } from "../../../../const/actions";
+import { PUBLIC_HOST } from "../../../../../environment/development";
+import { EVENT_PUBLIC } from "../../../../../services/api/public.api";
+import { _get } from "../../../../../services/base-api";
+import { REDUX_SAGA } from "../../../../../const/actions";
 
 interface IProps {
   getEvenJob?: Function;

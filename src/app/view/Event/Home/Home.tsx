@@ -1,5 +1,5 @@
 import React from 'react';
-import Layout from '../layout/Layout';
+import Layout from '../../layout/Layout';
 import { connect } from 'react-redux';
 import HomeJob from './home-job/HomeJob';
 import TopEm from './top-em/TopEm';

@@ -3,8 +3,8 @@ import { Col, Row } from 'antd';
 import './TopEm.scss'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import defaultImage from '../../../../assets/image/base-image.jpg'
-import { REDUX_SAGA } from '../../../../const/actions';
+import defaultImage from '../../../../../assets/image/base-image.jpg'
+import { REDUX_SAGA } from '../../../../../const/actions';
 
 interface IProps {
     getTopEmpoyer?: Function,

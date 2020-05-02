@@ -3,14 +3,12 @@ import { call, takeEvery, put } from 'redux-saga/effects';
 import { PUBLIC_HOST } from '../../environment/development';
 import { noInfoHeader } from '../../services/auth';
 import { FIND_JOB } from '../../services/api/public.api';
-import { store } from '../store/index';
 import { REDUX, REDUX_SAGA } from './../../const/actions';
 import { _requestToServer } from '../../services/exec';
 
 function* getSimilarJobData(action) {
     yield put({ type: REDUX.SIMILAR_JOB.SET_LOADING_SIMILAR_JOB, loading: true });
     let res = yield call(getSimilarJob, action);
-    console.log('vao day')
     if (res) {
         let data = res.data;
         yield put({ type: REDUX.SIMILAR_JOB.GET_SIMILAR_JOB, data, totalItems: data.totalItems });
@@ -21,14 +19,6 @@ function* getSimilarJobData(action) {
 
 // get EmployerData
 function getSimilarJob(action) {
-    // let 
-    // let employerID;
-    // if(action.id){
-    //     employerID = action.id;
-    // } else {
-    //     employerID = store.getState().GetJobDetail.employerID;
-    // }
-
 
     let body = {
         employerID: null,

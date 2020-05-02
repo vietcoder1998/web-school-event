@@ -1,23 +1,23 @@
 import React, { PureComponent } from "react";
 import { Col, Row, Skeleton, Pagination } from "antd";
-import "./TopJob.scss";
+import "./HomeJob.scss";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 //@ts-ignore
-import DefaultImage from "../../../../assets/image/carouselGroup/carousel2.jpg";
-import { REDUX_SAGA } from "../../../../const/actions";
-import { JobType } from "../../layout/common/Common";
+import DefaultImage from "../../../../../assets/image/carouselGroup/carousel2.jpg";
+import { REDUX_SAGA } from "../.././../../../const/actions";
+import { JobType } from "../../../layout/common/Common";
 
 interface IProps {
-  getEventHotJob?: Function;
+  getEvenJob?: Function;
   getInDay?: Function;
-  topJob?: any;
+  normalJob?: any;
   indayJob?: any;
-  setLoadinggetEventHotJob?: Function;
+  setLoadinggetEvenJob?: Function;
   loading_hot_job?: any;
 }
 
-class TopJob extends PureComponent<IProps> {
+class HomeJob extends PureComponent<IProps> {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,25 +25,26 @@ class TopJob extends PureComponent<IProps> {
     };
   }
   componentDidMount = async () => {
-    await this.props.getEventHotJob(0);
+    await this.props.getEvenJob(0);
+    console.log(this.props.normalJob)
   };
 
   changePage = (event?: number) => {
-    this.props.getEventHotJob(event - 1);
+    this.props.getEvenJob(event - 1);
     this.setState({
       current: event,
     });
   };
   render() {
-    let { topJob, loading_hot_job } = this.props;
+    let { normalJob, loading_hot_job } = this.props;
     return (
       <Row
         className="home-job"
-        style={{ display: topJob.totalItems === 0 ? "none" : "" }}
+        style={{ display: normalJob.totalItems === 0 ? "none" : "" }}
       >
-        <h5 style={{ textAlign: "center" }}>VIỆC LÀM NỔI BẬT TRONG NGÀY HỘI</h5>
-        {topJob && topJob.items
-          ? topJob.items.map((item, index) => {
+        <h5 style={{ textAlign: "center" }}>VIỆC LÀM TRONG NGÀY HỘI</h5>
+        {normalJob && normalJob.items
+          ? normalJob.items.map((item, index) => {
               let logoUrl = item.employerLogoUrl;
 
               if (!logoUrl) {
@@ -83,10 +84,10 @@ class TopJob extends PureComponent<IProps> {
                         <ul>
                           <li className="j-d">
                             <Link
-                              to={`/job-detail/${window.btoa(item.id)}`}
+                              to={`/event-job-detail/${window.btoa(item.id)}`}
                               target="_blank"
                             >
-                            <h6 className="l_c" style={{ color: item.titleHighlight ?  "red" : "black"}}>
+                              <h6 className="l_c" style={{ color: item.titleHighlight ?  "red" : "black"}}>
                                 {item.jobTitle}
                               </h6>
                             </Link>
@@ -106,7 +107,7 @@ class TopJob extends PureComponent<IProps> {
                           >
                             {item.region && item.region.name
                               ? item.region.name
-                              : null}{" "}
+                              : null}
                           </li>
                           <li>
                             <JobType>{item.jobType}</JobType>
@@ -122,8 +123,8 @@ class TopJob extends PureComponent<IProps> {
         <Col span={24} style={{ textAlign: "center" }}>
           <Pagination
             current={this.state.current}
-            pageSize={topJob.pageSize}
-            total={topJob.totalItems}
+            pageSize={normalJob.pageSize}
+            total={normalJob.totalItems}
             style={{ margin: "25px 0px 10px" }}
             onChange={this.changePage}
           />
@@ -134,12 +135,12 @@ class TopJob extends PureComponent<IProps> {
 }
 
 const mapStateToProps = (state) => ({
-  topJob: state.EventHotJobResults.data,
+  normalJob: state.EventJobResults.data,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getEventHotJob: (pageIndex?: number, pageSize?: number) =>
-    dispatch({ type: REDUX_SAGA.EVENT.JOB.HOT, pageIndex, pageSize }),
+  getEvenJob: (pageIndex?: number, pageSize?: number) =>
+    dispatch({ type: REDUX_SAGA.EVENT.JOB.NORMAL, pageIndex, pageSize }),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopJob);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeJob);

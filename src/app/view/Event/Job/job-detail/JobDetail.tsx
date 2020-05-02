@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import './JobDetail.scss';
 import { Tabs, Row, Col, Icon, Button, Modal, Checkbox, Avatar } from 'antd';
 import { connect } from 'react-redux';
-import { _requestToServer } from '../../../services/exec';
-import { POST } from '../../../const/method';
-import { APPLY_JOB, SAVED_JOB } from '../../../services/api/private.api';
-import { STUDENT_HOST } from '../../../environment/development';
-import { authHeaders } from '../../../services/auth';
+import { _requestToServer } from '../../../../../services/exec';
+import { POST } from '../../../../../const/method';
+import { APPLY_JOB, SAVED_JOB } from '../../../../../services/api/private.api';
+import { STUDENT_HOST } from '../../../../../environment/development';
+import { authHeaders } from '../../../../../services/auth';
 //@ts-ignore
 import _ from 'lodash';
-import { moveScroll } from '../../../utils/moveScroll';
-import { testImage } from '../../../utils/CheckImage';
+import { moveScroll } from '../../../../../utils/moveScroll';
+import { testImage } from '../../../../../utils/CheckImage';
 import { Input } from 'antd';
-import Layout from './../layout/Layout';
-import { NotUpdate, JobType } from './../layout/common/Common';
-import { REDUX_SAGA } from '../../../const/actions';
+import Layout from '../.././../layout/Layout';
+import { NotUpdate, JobType, IptLetter } from '../.././../layout/common/Common';
+import { REDUX_SAGA } from '../../../../../const/actions';
 import JobProperties from './job-properties/JobProperties';
 import EmployerDetail from './employer-detail/EmployerDetail';
 import { Link } from 'react-router-dom';
@@ -84,7 +84,7 @@ export const _checkGender = (data) => {
     }
 }
 
-class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
+class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
     constructor(props) {
         super(props);
         this.state = {
@@ -108,25 +108,26 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
     show_btn = false;
     l_e = [];
     l_s = [];
-    componentDidMount() {
+    async componentDidMount() {
         this.setState({ is_loading: false });
-        this._loadData();
+        await this._loadData();
         this._loadState();
         moveScroll(0, 0);
-        this.props.getSimilarJob(0,6);        
+        // this.props.getSimilarJob(0,6);        
     };
 
-    static getDerivedStateFromProps(nextProps?: IJobDetailProps, prevState?: IJobDetailState) {
-        if (nextProps.jobDetail.employerID && nextProps.jobDetail.employerID !== prevState.employerID) {
-            nextProps.getEmployerDetail(nextProps.jobDetail.employerID);
-            nextProps.getEmployerMoreJob(0, 6, nextProps.jobDetail.employerID);
-            return {
-                employerID: nextProps.jobDetail.employerID
-            }
-        }
+    // static getDerivedStateFromProps(nextProps?: IJobDetailProps, prevState?: IJobDetailState) {
+    //     console.log(nextProps)
+    //     if (nextProps.jobDetail.employerID && nextProps.jobDetail.employerID !== prevState.employerID) {
+    //         nextProps.getEmployerDetail(nextProps.jobDetail.employerID);
+    //         // nextProps.getEmployerMoreJob(0, 6, nextProps.jobDetail.employerID);
+    //         return {
+    //             employerID: nextProps.jobDetail.employerID
+    //         }
+    //     }
 
-        return null;
-    };
+    //     return null;
+    // };
 
     _loadData = () => {
         let { jobDetail } = this.props;
@@ -134,18 +135,18 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
         this.setState({ isSaved: jobDetail.isSaved })
     };
 
-    _getMoreJob = (pageIndex?: number) => {
-        this.setState({ is_loading_more: true }, () => {
-            this.props.getEmployerMoreJob(pageIndex - 1)
-        });
+    // _getMoreJob = (pageIndex?: number) => {
+    //     this.setState({ is_loading_more: true }, () => {
+    //         this.props.getEmployerMoreJob(pageIndex - 1)
+    //     });
 
-        setTimeout(() => {
-            this.setState({ is_loading_more: false })
-        }, 500);
-    };
-    _getSimilarJob = (pageIndex?: number) => {
-        this.props.getSimilarJob(pageIndex - 1)
-    };
+    //     setTimeout(() => {
+    //         this.setState({ is_loading_more: false })
+    //     }, 500);
+    // };
+    // _getSimilarJob = (pageIndex?: number) => {
+    //     this.props.getSimilarJob(pageIndex - 1)
+    // };
 
     async _loadState() {
         let { isAuthen, jobDetail } = this.props;
@@ -219,7 +220,8 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
     }
 
     render() {
-        let { jobDetail, employerDetail, employerMoreJob, isAuthen, totalMoreJob, is_loading_more, similarJob, totalSimilarJob, is_loading_similar } = this.props;
+        console.log(this.props.jobDetail)
+        let { jobDetail, employerDetail, isAuthen} = this.props;
         let { is_loading, visible, confirmLoading, jobState } = this.state;
         let isSaved = jobDetail.saved;
 
@@ -396,13 +398,10 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                                             <TabPane tab="Chi tiết công việc" key="1">
                                                 <JobProperties
                                                     jobDetail={jobDetail}
-                                                    similarJob={similarJob}
-                                                    _getSimilarJob={this._getSimilarJob}
-                                                    paging={totalSimilarJob}
-                                                    is_loading_similar={is_loading_similar}
+                                                   
                                                 />
                                             </TabPane>
-                                            <TabPane tab="Thông tin Công ty" key="2">
+                                            {/* <TabPane tab="Thông tin Công ty" key="2">
                                                 <EmployerDetail
                                                     employerDetail={employerDetail}
                                                     employerMoreJob={employerMoreJob}
@@ -410,7 +409,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                                                     paging={totalMoreJob}
                                                     is_loading_more={is_loading_more}
                                                 />
-                                            </TabPane>
+                                            </TabPane> */}
                                         </Tabs>
                                     </div>
                                 </div>
@@ -425,24 +424,24 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
 }
 
 const mapStateToProps = (state) => ({
-    jobDetail: state.GetJobDetail,
+    jobDetail: state.GetEventJobDetail,
     employerDetail: state.EmployerDetail,
-    employerMoreJob: state.EmployerMoreJob.data,
-    similarJob: state.SimilarJob.data,
-    is_loading_more: state.EmployerMoreJob.loading,
-    is_loading_similar: state.SimilarJob.loading,
-    totalMoreJob: state.EmployerMoreJob.data.totalItems,
-    totalSimilarJob: state.SimilarJob.totalItems,
+    // employerMoreJob: state.EmployerMoreJob.data,
+    // similarJob: state.SimilarJob.data,
+    // is_loading_more: state.EmployerMoreJob.loading,
+    // is_loading_similar: state.SimilarJob.loading,
+    // totalMoreJob: state.EmployerMoreJob.data.totalItems,
+    // totalSimilarJob: state.SimilarJob.totalItems,
     isAuthen: state.AuthState.isAuthen
 })
 
 const mapDispatchToprops = (dispatch) => ({
     getJobDetail: (jobID?: string) =>
-        dispatch({ type: REDUX_SAGA.JOB_DETAIL.GET_JOB_DETAIL, jobID }),
-    getEmployerMoreJob: (pageIndex?: number, pageSize?: number, employerID?: string) =>
-        dispatch({ type: REDUX_SAGA.EMPLOYER_MORE_JOB.GET_EMPLOYER_MORE_JOB, pageIndex, pageSize, employerID }),
-    getSimilarJob: (pageIndex?: number, pageSize?: number) =>
-        dispatch({ type: REDUX_SAGA.SIMILAR_JOB.GET_SIMILAR_JOB, pageIndex, pageSize }),
+        dispatch({ type: REDUX_SAGA.EVENT.JOB.DETAIL, jobID }),
+    // getEmployerMoreJob: (pageIndex?: number, pageSize?: number, employerID?: string) =>
+    //     dispatch({ type: REDUX_SAGA.EMPLOYER_MORE_JOB.GET_EMPLOYER_MORE_JOB, pageIndex, pageSize, employerID }),
+    // getSimilarJob: (pageIndex?: number, pageSize?: number) =>
+    //     dispatch({ type: REDUX_SAGA.SIMILAR_JOB.GET_SIMILAR_JOB, pageIndex, pageSize }),
     getEmployerDetail: (id?: string) =>
         dispatch({ type: REDUX_SAGA.EMPLOYER_DETAIL.GET_EMPLOYER_DETAIL, id }),
 })
@@ -450,4 +449,4 @@ const mapDispatchToprops = (dispatch) => ({
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ReturnType<typeof mapDispatchToprops>;
 
-export default connect(mapStateToProps, mapDispatchToprops)(JobDetail);
+export default connect(mapStateToProps, mapDispatchToprops)(EventJobDetail);
