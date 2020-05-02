@@ -83,7 +83,7 @@ class TopJob extends PureComponent<IProps> {
                         <ul>
                           <li className="j-d">
                             <Link
-                              to={`/job-detail/${window.btoa(item.id)}`}
+                              to={`/event-job-detail/${window.btoa(item.id)}`}
                               target="_blank"
                             >
                             <h6 className="l_c" style={{ color: item.titleHighlight ?  "red" : "black"}}>

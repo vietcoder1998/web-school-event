@@ -13,13 +13,13 @@ import { moveScroll } from '../../../utils/moveScroll';
 import { limitString } from '../../../utils/limitString';
 import { REDUX_SAGA } from '../../../const/actions';
 import { DELETE } from '../../../const/method';
-import {JobType} from '../layout/common/Common'
+import { JobType } from '../layout/common/Common'
 const openNotification = () => {
     const key = `open${Date.now()}`;
     const btn = (
         <Button type="primary" size="small" onClick={() => notification.close(key)}>
             Confirm
-      </Button>
+        </Button>
     );
 
     const description = () => (<div >Bạn đã xóa một công việc</div>)
@@ -72,7 +72,6 @@ class SaveJob extends React.PureComponent<ISaveJobProp, ISaveJobState>{
         let { listSavedJobs } = this.props;
         let totalItems = listSavedJobs && listSavedJobs.totalItems;
         let totalPagination = totalItems
-
         return (
             <>
 
@@ -82,52 +81,62 @@ class SaveJob extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                             <Col></Col>
                             <Col>
                                 <div className='history-content ' >
-                                    <h5>Lịch sử ứng tuyển</h5>
+                                    <h5>Công việc đã lưu</h5>
                                     <div className='history-job'>
-                                        {this.props.loading ? <div className='loading'><Spin /></div> : 
-                                        <Row>
-                                            {listSavedJobs.items && listSavedJobs.items.length > 0 ? listSavedJobs.items.map((item, index) => {
-                                                
-                                                return (<Col key={index} xs={24} sm={24} md={12} lg={12} xl={12} xxl={8}>
-                                                    <div className='job-detail test'>
-                                                        <div className='image-job'>
-                                                            <Avatar
-                                                                className='logo-company'
-                                                                shape='square'
-                                                                size={70}
-                                                                src={item.job && item.job.employerLogoUrl ? item.job.employerLogoUrl : ''}
-                                                                style={{ margin: '10px 0' }}
-                                                                icon="shop"
-                                                                alt='history job'
-                                                            />
-                                                            <JobType>
-                                                                {item.job && item.job.jobType}
-                                                            </JobType>
-                                                            <Tooltip title='Bạn có muốn xóa công việc' placement="bottom" >
-                                                                <li onClick={() => { this._removejob(item.job.id) }}>
-                                                                    <Button type='danger' size='small'> <Icon type="delete" />Xóa</Button>
-                                                                </li>
-                                                            </Tooltip>
+                                        {this.props.loading ? <div className='loading'><Spin /></div> :
+                                            <Row>
+                                                {listSavedJobs.items && listSavedJobs.items.length > 0 ? listSavedJobs.items.map((item, index) => {
 
-                                                        </div>
-                                                        <div className='content-job'>
-                                                            <p><Link target='_blank' to={`/job-detail/${window.btoa(item.job && item.job.id)}`}>{item.job && item.job.jobTitle}</Link></p>
-                                                            <div className='info-company'>
-                                                                <li>
-                                                                    <Link to={`/employer/${window.btoa(item.job && item.job.employerID)}`}><Icon type="home" style={{ marginRight: 3 }} />{item.job && item.job.employerName}</Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Icon type='environment' style={{ marginRight: 3 }} />{item.job && item.job.address}
+                                                    return (<Col key={index} xs={24} sm={24} md={12} lg={12} xl={12} xxl={8}>
+                                                        <div className='job-detail test'>
+                                                            <div className='image-job'>
+                                                                <Avatar
+                                                                    className='logo-company'
+                                                                    shape='square'
+                                                                    size={70}
+                                                                    src={item.job && item.job.employerLogoUrl ? item.job.employerLogoUrl : ''}
+                                                                    style={{ margin: '10px 0' }}
+                                                                    icon="shop"
+                                                                    alt='history job'
+                                                                />
+                                                                <JobType>
+                                                                    {item.job && item.job.jobType}
+                                                                </JobType>
+                                                                <Tooltip title='Bạn có muốn xóa công việc' placement="bottom" >
+                                                                    <li onClick={() => { this._removejob(item.job.id) }}>
+                                                                        <Button type='danger' size='small'> <Icon type="delete" />Xóa</Button>
+                                                                    </li>
+                                                                </Tooltip>
+
+                                                            </div>
+                                                            <div className='content-job'>
+                                                                <p><Link target='_blank' 
+                                                                to={ item.job.schoolEventID === null ? `/job-detail/${window.btoa(item.job && item.job.id)}` 
+                                                                : `/event-job-detail/${window.btoa(item.job && item.job.id)}`}>
+                                                                    {item.job && item.job.jobTitle}</Link></p>
+                                                                <div className='info-company'>
+
+                                                                    <li>
+                                                                        <Link to={`/employer/${window.btoa(item.job && item.job.employerID)}`}><Icon type="home" style={{ marginRight: 3 }} />{item.job && item.job.employerName}</Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Icon type='environment' style={{ marginRight: 3 }} />{item.job && item.job.address}
+                                                                    </li>
+                                                                </div>
+                                                                <li style={{ fontSize: '0.7rem' }}>
+                                                                    {moment(item.saveTime).format('DD/MM/YY')}
                                                                 </li>
                                                             </div>
-                                                            <li style={{ fontSize: '0.7rem'}}>
-                                                                {moment(item.saveTime).format('DD/MM/YY')}
-                                                            </li>
+                                                            <div className='content-job' style={{display: item.job.schoolEventID === null ? 'none' : ''}}>
+                                                                <Tooltip placement="bottom" title={"Việc làm sự kiện"}>
+                                                                    <Icon type='tag' style={{color: 'red'}} />
+                                                                </Tooltip>
+                                                                
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </Col>)
-                                            }) : <Empty style={{ padding: '15vh' }} description='Bạn chưa lưu công việc nào' />}
-                                        </Row>
+                                                    </Col>)
+                                                }) : <Empty style={{ padding: '15vh' }} description='Bạn chưa lưu công việc nào' />}
+                                            </Row>
                                         }
                                         <div className='pagination-result'>
                                             <Pagination defaultCurrent={1} pageSize={10} total={totalPagination} onChange={this._getJobSave} />

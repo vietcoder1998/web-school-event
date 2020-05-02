@@ -36,7 +36,7 @@ class TopEm extends PureComponent<IProps, IState> {
   handleClick = (id) => {
     localStorage.setItem("e_bid", id);
     this.props.getEvenJob(0);
-    window.scrollTo(0, 1500);
+    window.scrollTo(0, 1800);
   };
 
   render() {
