@@ -58,8 +58,10 @@
 
 // desktop
 @media only screen and (min-width: 1061px) {
-  .content:not(.top-rm) {
+  .content {
+
     padding: 0px 10%;
+    
   }
 
   .content-footer {
@@ -108,8 +110,12 @@
   .detail-job {
     border-bottom: solid $color_border 1px  ;
   }
-}
 
+  
+}
+h5{
+    font-size: 1.7rem !important;
+  }
 // for phone
 @media (min-width: 0px) and (max-width: 560px) {
   .show-only-phone {

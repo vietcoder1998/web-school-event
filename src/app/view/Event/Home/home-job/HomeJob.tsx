@@ -44,7 +44,7 @@ class HomeJob extends PureComponent<IProps> {
         style={{ display: normalJob.totalItems === 0 ? "none" : "" }}
         id="normal_job"
       >
-        <h5 style={{ textAlign: "center", textTransform: "uppercase" }}>
+        <h5 style={{ textAlign: "center", textTransform: "uppercase", fontSize: '1.75rem' }}>
           {title}
         </h5>
         {normalJob && normalJob.items

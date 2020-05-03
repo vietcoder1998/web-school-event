@@ -40,11 +40,15 @@ class TopEm extends PureComponent<IProps, IState> {
         className="top-rm"
         style={{ display: listEmployer.totalItems === 0 ? "none" : "" }}
       >
-        <h5 style={{ textAlign: "center" }}>DOANH NGHIỆP NỔI BẬT </h5>
+        <h5 style={{ textAlign: "center", fontSize: '1.75rem' }}>DOANH NGHIỆP NỔI BẬT </h5>
         <Row align="center" type="flex">
           {listEmployer && listEmployer.items
             ? listEmployer.items.map((item, index) => (
-                <Col xs={12} sm={6} md={3} lg={4} xl={4} xxl={3} key={index}>
+              <Col xs={12} sm={6} md={3} lg={4} xl={4} xxl={3} key={index}>
+                <Link to={`/employer/${window.btoa(item.employer.id)}`}
+                  target="_blank"
+                  className="name_employer"
+                >
                   <div className="h-j-item">
                     <img
                       src={
@@ -55,23 +59,77 @@ class TopEm extends PureComponent<IProps, IState> {
                       alt="logo"
                       className="image-employer"
                     />
+
                   </div>
                   <div className="job-content">
-                    <Link
-                      to={`/employer/${window.btoa(item.employer.id)}`}
-                      target="_blank"
-                      className="name_employer"
-                    >
-                      <p style={{ color: "#415167", fontWeight: "bold" }}>
-                        {item.employer.employerName}
-                      </p>
-                    </Link>
+
+                    <p style={{ color: "#415167", fontWeight: "bold" }}>
+                      {item.employer.employerName}
+                    </p>
+
                   </div>
-                </Col>
-              ))
+                </Link>
+              </Col>
+            ))
+            : null}
+          {listEmployer && listEmployer.items
+            ? listEmployer.items.map((item, index) => (
+              <Col xs={12} sm={6} md={3} lg={4} xl={4} xxl={3} key={index}>
+                <div className="h-j-item">
+                  <img
+                    src={
+                      item.employer.logoUrl === null
+                        ? defaultImage
+                        : item.employer.logoUrl
+                    }
+                    alt="logo"
+                    className="image-employer"
+                  />
+                </div>
+                <div className="job-content">
+                  <Link
+                    to={`/employer/${window.btoa(item.employer.id)}`}
+                    target="_blank"
+                    className="name_employer"
+                  >
+                    <p style={{ color: "#415167", fontWeight: "bold" }}>
+                      {item.employer.employerName}
+                    </p>
+                  </Link>
+                </div>
+              </Col>
+            ))
+            : null}
+          {listEmployer && listEmployer.items
+            ? listEmployer.items.map((item, index) => (
+              <Col xs={12} sm={6} md={3} lg={4} xl={4} xxl={3} key={index}>
+                <div className="h-j-item">
+                  <img
+                    src={
+                      item.employer.logoUrl === null
+                        ? defaultImage
+                        : item.employer.logoUrl
+                    }
+                    alt="logo"
+                    className="image-employer"
+                  />
+                </div>
+                <div className="job-content">
+                  <Link
+                    to={`/employer/${window.btoa(item.employer.id)}`}
+                    target="_blank"
+                    className="name_employer"
+                  >
+                    <p style={{ color: "#415167", fontWeight: "bold" }}>
+                      {item.employer.employerName}
+                    </p>
+                  </Link>
+                </div>
+              </Col>
+            ))
             : null}
         </Row>
-      </div>
+      </div >
     );
   }
 }

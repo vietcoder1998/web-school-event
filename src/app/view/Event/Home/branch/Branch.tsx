@@ -47,11 +47,80 @@ class Branch extends PureComponent<IProps, IState> {
     return (
       <div
         className="top-branch"
-        style={{ backgroundColor: "#F9FBFF !important" }}
+        style={{ backgroundColor: "#F9FBFF !important", padding: "3% 5%" }}
       >
-        <h5 style={{ textAlign: "center" }}>LÀM VIỆC THEO NGÀNH NGHỀ </h5>
-        <Row align='center' type='flex'>
+        <h5 style={{ textAlign: "center", }}>LÀM VIỆC THEO NGÀNH NGHỀ </h5>
+        <Row align='center' type='flex' gutter={[16, 32]}>
           {listBranch && listBranch.items
+            ? listBranch.items.map((item, index) => (
+                <Col xs={12} sm={6} md={6} lg={6} xl={4} xxl={4} key={index}>
+                  <div className="branch-item" style={{ textAlign: "center" }}>
+                    <a
+                      href="#normal_job"
+                      onClick={() => {
+                        this.handleClick(item.id, item.name);
+                      }}
+                    >
+                      <img
+                        src={item.imageUrl}
+                        alt="branch"
+                        className="image-branch"
+                      />
+                      <div style={{ fontWeight: "bold", fontSize: '16px',  marginTop: 15 }}>
+                        {item.name}{" "}
+                      </div>
+                    </a>
+                  </div>
+                </Col>
+              ))
+            : null}
+            {listBranch && listBranch.items
+            ? listBranch.items.map((item, index) => (
+                <Col xs={12} sm={6} md={6} lg={6} xl={4} xxl={4} key={index}>
+                  <div className="branch-item" style={{ textAlign: "center" }}>
+                    <a
+                      href="#normal_job"
+                      onClick={() => {
+                        this.handleClick(item.id, item.name);
+                      }}
+                    >
+                      <img
+                        src={item.imageUrl}
+                        alt="branch"
+                        className="image-branch"
+                      />
+                      <div style={{ fontWeight: "bold", fontSize: '16px',  marginTop: 15 }}>
+                        {item.name}{" "}
+                      </div>
+                    </a>
+                  </div>
+                </Col>
+              ))
+            : null}
+            {listBranch && listBranch.items
+            ? listBranch.items.map((item, index) => (
+                <Col xs={12} sm={6} md={6} lg={6} xl={4} xxl={4} key={index}>
+                  <div className="branch-item" style={{ textAlign: "center" }}>
+                    <a
+                      href="#normal_job"
+                      onClick={() => {
+                        this.handleClick(item.id, item.name);
+                      }}
+                    >
+                      <img
+                        src={item.imageUrl}
+                        alt="branch"
+                        className="image-branch"
+                      />
+                      <div style={{ fontWeight: "bold", fontSize: '16px',  marginTop: 15 }}>
+                        {item.name}{" "}
+                      </div>
+                    </a>
+                  </div>
+                </Col>
+              ))
+            : null}
+            {listBranch && listBranch.items
             ? listBranch.items.map((item, index) => (
                 <Col xs={12} sm={6} md={6} lg={6} xl={4} xxl={4} key={index}>
                   <div className="branch-item" style={{ textAlign: "center" }}>
