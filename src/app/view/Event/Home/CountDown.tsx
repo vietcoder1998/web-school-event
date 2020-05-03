@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import "./Home.scss"
 
 interface IProps {
     date?: string,

@@ -1,3 +1,4 @@
+
 import { PersonInfoWatcher } from '../watcher/person-info';
 import { all } from 'redux-saga/effects';
 import { JobResultWatcher } from '../watcher/job-result';
@@ -21,6 +22,7 @@ import { EventHotJobWatcher, EventJobWatcher } from '../watcher/event/jobs';
 import { EventTopEmployerWatcher, EventBannerEmployerWatcher } from '../watcher/event/employer';
 import { EventDetail } from '../watcher/event/detail';
 import { EventJobDetailWatcher } from '../watcher/event/jobs/job-detail';
+import { EventEmployerMoreJobWatcher } from '../watcher/event/employer/em-more-jobs';
 
 
 export default function* rootSaga() {
@@ -48,6 +50,7 @@ export default function* rootSaga() {
         EventBannerEmployerWatcher(),
         EventDetail(),
         EventJobDetailWatcher(),
+        EventEmployerMoreJobWatcher(),
 
     ])
 } 

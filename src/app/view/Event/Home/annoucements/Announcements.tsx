@@ -2,11 +2,11 @@ import React from 'react';
 import { Row, Col, Carousel, Card, Icon } from 'antd';
 import './Announcements.scss'
 import { connect } from 'react-redux';
-import { REDUX_SAGA } from '../../../../const/actions';
-import { IAppState } from '../../../../redux/store/reducer';
-import { IAnnouncement } from '../../../../models/announcements';
+import { REDUX_SAGA } from '../../../../../const/actions';
+import { IAppState } from '../../../../../redux/store/reducer';
+import { IAnnouncement } from '../../../../../models/announcements';
 import Meta from 'antd/lib/card/Meta';
-import { limitString } from '../../../../utils/limitString';
+import { limitString } from '../../../../../utils/limitString';
 
 interface IProps {
     getAnnouncements?: Function;

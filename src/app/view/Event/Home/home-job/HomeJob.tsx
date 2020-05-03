@@ -22,11 +22,11 @@ class HomeJob extends PureComponent<IProps> {
     super(props);
     this.state = {
       current: 1,
+      title: "VIỆC LÀM NHÓM NGÀNH",
     };
   }
   componentDidMount = async () => {
     await this.props.getEvenJob(0);
-    console.log(this.props.normalJob)
   };
 
   changePage = (event?: number) => {
@@ -37,12 +37,16 @@ class HomeJob extends PureComponent<IProps> {
   };
   render() {
     let { normalJob, loading_hot_job } = this.props;
+    let title = localStorage.getItem("branch_name");
     return (
       <Row
         className="home-job"
         style={{ display: normalJob.totalItems === 0 ? "none" : "" }}
+        id="normal_job"
       >
-        <h5 style={{ textAlign: "center" }}>VIỆC LÀM TRONG NGÀY HỘI</h5>
+        <h5 style={{ textAlign: "center", textTransform: "uppercase" }}>
+          {title}
+        </h5>
         {normalJob && normalJob.items
           ? normalJob.items.map((item, index) => {
               let logoUrl = item.employerLogoUrl;
@@ -52,15 +56,7 @@ class HomeJob extends PureComponent<IProps> {
               }
 
               return (
-                <Col
-                  xs={24}
-                  sm={24}
-                  md={12}
-                  lg={12}
-                  xl={12}
-                  xxl={12}
-                  key={index}
-                >
+                <Col xs={24} sm={24} md={8} lg={8} xl={8} xxl={6} key={index}>
                   {loading_hot_job ? (
                     <Skeleton
                       key={index}
@@ -75,9 +71,9 @@ class HomeJob extends PureComponent<IProps> {
                         <img
                           src={logoUrl}
                           alt="ảnh công ty"
-                          height="110px"
-                          width="70px"
-                          style={{ objectFit: "contain" }}
+                          height="130px"
+                          width="100px"
+                          style={{ borderRadius: 7 }}
                         />
                       </div>
                       <div className="job-content">
@@ -87,7 +83,12 @@ class HomeJob extends PureComponent<IProps> {
                               to={`/event-job-detail/${window.btoa(item.id)}`}
                               target="_blank"
                             >
-                              <h6 className="l_c" style={{ color: item.titleHighlight ?  "red" : "black"}}>
+                              <h6
+                                className="l_c"
+                                style={{
+                                  color: item.titleHighlight ? "red" : "black",
+                                }}
+                              >
                                 {item.jobTitle}
                               </h6>
                             </Link>

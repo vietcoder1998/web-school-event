@@ -51,15 +51,7 @@ class TopJob extends PureComponent<IProps> {
               }
 
               return (
-                <Col
-                  xs={24}
-                  sm={24}
-                  md={12}
-                  lg={12}
-                  xl={12}
-                  xxl={12}
-                  key={index}
-                >
+                <Col xs={24} sm={24} md={8} lg={8} xl={8} xxl={6} key={index}>
                   {loading_hot_job ? (
                     <Skeleton
                       key={index}
@@ -74,9 +66,9 @@ class TopJob extends PureComponent<IProps> {
                         <img
                           src={logoUrl}
                           alt="ảnh công ty"
-                          height="110px"
-                          width="70px"
-                          style={{ objectFit: "contain" }}
+                          height="130px"
+                          width="100px"
+                          style={{  borderRadius: 7 }}
                         />
                       </div>
                       <div className="job-content">
@@ -86,7 +78,12 @@ class TopJob extends PureComponent<IProps> {
                               to={`/event-job-detail/${window.btoa(item.id)}`}
                               target="_blank"
                             >
-                            <h6 className="l_c" style={{ color: item.titleHighlight ?  "red" : "black"}}>
+                              <h6
+                                className="l_c"
+                                style={{
+                                  color: item.titleHighlight ? "red" : "black",
+                                }}
+                              >
                                 {item.jobTitle}
                               </h6>
                             </Link>

@@ -4,7 +4,9 @@
 .top-rm {
   font-family: $font_base;
   background-color: white;
-  margin: 15px 0 0 0;
+  margin: 15px 15px 0 15px;
+  
+  
   // box-shadow: 0 0.5px 0 rgba(0, 0, 0, 0.1);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.02), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
   text-align: center;
@@ -19,12 +21,13 @@
   .h-j-item {
     background-color: #F9FBFF;
     margin: 0px 10px;
-    padding: 10px 0;
+    padding: 10px 10px;
     border-radius: 5px;
     .image-employer {
       min-height: 80px;
       height: 80px;
-      width: 80%;
+      width: 100%;
+      border-radius: 7px;
     }
     .img-job {
       img {

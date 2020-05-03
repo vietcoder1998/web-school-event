@@ -26,8 +26,10 @@ const { Meta } = Card;
 interface IEmployerInfoProps {
     employerDetail?: IEmControllerDetail,
     employerMoreJob?: any,
+    eventEmployerMoreJob?: any,
     getEmployerDetail?: Function,
     getEmployerMoreJob?: Function,
+    getEventEmployerMoreJob?: Function,
     match?: any,
     loading?: boolean,
     isAuthen?: any
@@ -60,6 +62,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
     componentDidMount() {
         this.props.getEmployerDetail(window.atob(this.props.match.params.id));
         this.props.getEmployerMoreJob(0, 6, window.atob(this.props.match.params.id));
+        this.props.getEventEmployerMoreJob(0, 6, window.atob(this.props.match.params.id))
     }
 
 
@@ -131,7 +134,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
         return true
     }
     render() {
-        let { employerDetail, employerMoreJob, loading } = this.props
+        let { employerDetail, employerMoreJob, loading, eventEmployerMoreJob } = this.props
         let { onErrCover, visible, salaryRating, workingEnvironmentRating, comment, onErrLogo, loadingSubmitRate } = this.state
         return (
             <Layout>
@@ -392,6 +395,44 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                     />
                                 </div>
                             </TabPane>
+                            <TabPane tab="Các công việc trong sự kiện" key="4">
+                                <Row>
+                                    <div className='company-job-more a_c'>
+                                        {eventEmployerMoreJob && eventEmployerMoreJob.items ? eventEmployerMoreJob.items.map((item, index) =>
+                                            (<Col key={index} xs={24} sm={12} md={12} lg={12} xl={8}>
+                                                {loading ? <Skeleton loading={true} avatar paragraph={{ rows: 1 }} /> :
+                                                    <div className='item-job ' >
+                                                        <div style={{ flex: 3 }}>
+                                                            <Avatar shape={'square'} src={item.employerLogoUrl} size={60} style={{ margin: "10px 10px 0 10px" }} />
+                                                            {/* <JobType width='60px' fontSize='0.7em'>
+                                                                {item && item.jobType}
+                                                            </JobType> */}
+                                                        </div>
+                                                        <div style={{ flex: 9 }}>
+                                                            <p style={{ textAlign: 'left', fontSize: '1.1em', fontWeight: 500 }} className="info-silimar-job"><Link to={`/job-detail/${window.btoa(item.id)}`} target='_blank'>{item.jobTitle}</Link></p>
+                                                            <p style={{ textAlign: 'left' }} className="info-silimar-job"><span><Icon type='environment' style={{ marginRight: 3 }} />{item.address}</span></p>
+                                                        </div>
+
+                                                        {/* <Avatar src={item.employerLogoUrl} style={{ width: "60px", height: "60px", margin: "10px", borderRadius: 0 }} /> */}
+                                                        {/* <p><Link to={`/job-detail/${window.btoa(item.id)}`} target='_blank'>{limitString(item.jobTitle)}</Link></p>
+                                                        <p><span><Icon type='environment' />{limitString(item.address)}</span></p> */}
+                                                    </div>}
+                                                {/* </Skeleton> */}
+                                            </Col>)
+                                        ) : <Empty description={"Không tìm thấy công việc nào"} />
+                                        }
+                                    </div>
+                                </Row>
+                                <div className='pagination-job a_c'>
+                                    <Pagination
+                                        defaultCurrent={1}
+                                        total={eventEmployerMoreJob && eventEmployerMoreJob.totalItems}
+                                        onChange={
+                                            (event) => this.props.getEventEmployerMoreJob(event - 1, 6, window.atob(this.props.match.params.id))
+                                        }
+                                    />
+                                </div>
+                            </TabPane>
                         </Tabs>
                     </div>
                 </div >
@@ -406,6 +447,7 @@ const mapStateToProps = state => ({
     employerMoreJob: state.EmployerMoreJob.data,
     loading: state.EmployerMoreJob.loading,
     isAuthen: state.AuthState.isAuthen,
+    eventEmployerMoreJob: state.EventEmployerMoreJob.data
 
 });
 
@@ -413,6 +455,8 @@ const mapDispatchToProps = (dispatch) => ({
     getEmployerDetail: (id) => dispatch({ type: REDUX_SAGA.EMPLOYER_DETAIL.GET_EMPLOYER_DETAIL, id }),
     getEmployerMoreJob: (pageIndex?: number, pageSize?: number, id?: string) =>
         dispatch({ type: REDUX_SAGA.EMPLOYER_MORE_JOB.GET_EMPLOYER_MORE_JOB, pageIndex, pageSize, id }),
+    getEventEmployerMoreJob: (pageIndex?: number, pageSize?: number, id?: string) =>
+        dispatch({ type: REDUX_SAGA.EVENT.EMPLOYER.MORE_JOB, pageIndex, pageSize, id }),
 })
 
 type StateProps = ReturnType<typeof mapStateToProps>;

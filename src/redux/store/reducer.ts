@@ -1,3 +1,4 @@
+import { EventEmployerMoreJob } from './../reducers/event/employer/more-jobs';
 import { GetEventJobSave } from './../reducers/event/job/save-job';
 import { GetEventJobDetail } from './../reducers/event/job/job-detail';
 import { DetailEvent } from './../reducers/event/detail';
@@ -67,6 +68,7 @@ let rootReducer = {
   DetailEvent,
   GetEventJobDetail,
   GetEventJobSave,
+  EventEmployerMoreJob,
 
 };
 

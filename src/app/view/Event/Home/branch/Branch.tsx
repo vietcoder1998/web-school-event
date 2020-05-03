@@ -16,7 +16,7 @@ interface IState {
   is_loading: boolean;
 }
 
-class TopEm extends PureComponent<IProps, IState> {
+class Branch extends PureComponent<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,11 +32,14 @@ class TopEm extends PureComponent<IProps, IState> {
       listBranch: listBranch.data,
     });
     localStorage.removeItem("e_bid");
+    localStorage.setItem('branch_name', "VIỆC LÀM TRONG NGÀY HỘI");
+    // console.log(localStorage.getItem('branch_name'))
   };
-  handleClick = (id) => {
+  handleClick = (id, name) => {
     localStorage.setItem("e_bid", id);
+    localStorage.setItem('branch_name', "VIỆC LÀM NHÓM NGÀNH " + name);
     this.props.getEvenJob(0);
-    window.scrollTo(0, 1800);
+   
   };
 
   render() {
@@ -50,11 +53,12 @@ class TopEm extends PureComponent<IProps, IState> {
         <Row align='center' type='flex'>
           {listBranch && listBranch.items
             ? listBranch.items.map((item, index) => (
-                <Col xs={12} sm={6} md={6} lg={6} xl={6} xxl={6} key={index}>
+                <Col xs={12} sm={6} md={6} lg={6} xl={4} xxl={4} key={index}>
                   <div className="branch-item" style={{ textAlign: "center" }}>
                     <a
+                      href="#normal_job"
                       onClick={() => {
-                        this.handleClick(item.id);
+                        this.handleClick(item.id, item.name);
                       }}
                     >
                       <img
@@ -83,4 +87,4 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch({ type: REDUX_SAGA.EVENT.JOB.NORMAL, pageIndex, pageSize }),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopEm);
+export default connect(mapStateToProps, mapDispatchToProps)(Branch);

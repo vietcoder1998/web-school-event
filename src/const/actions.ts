@@ -37,6 +37,7 @@ export const REDUX = {
       ALL: "GET_ALL_EMPLOYER",
       TOP: "GET_TOP_EMPLOYER",
       BANNER: 'GET_BANNER_EMPLOYER',
+      MORE_JOB: 'GET_EMPLOYER_MORE_JOB',
     },
   },
   HIGH_LIGHT: {
@@ -140,6 +141,7 @@ export const REDUX_SAGA = {
       ALL: "GET_ALL_EMPLOYER_DATA",
       TOP: "GET_TOP_EMPLOYER_DATA",
       BANNER: 'GET_BANNER_EMPLOYER_DATA',
+      MORE_JOB: 'GET_EMPLOYER_MORE_JOB_DATA'
     },
   },
   IN_DAY: {

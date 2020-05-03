@@ -131,7 +131,8 @@ class HistoryApply extends React.PureComponent<ISaveJobProp, ISaveJobState>{
 
                                                         </div>
                                                         <div className='content-job'>
-                                                            <p><Link to={`/job-detail/${window.btoa(item.job && item.job.id)}`}>{item.job && item.job.jobTitle}</Link></p>
+                                                            <p><Link to={ item.job.schoolEventID === null ? `/job-detail/${window.btoa(item.job && item.job.id)}` 
+                                                                : `/event-job-detail/${window.btoa(item.job && item.job.id)}`}>{item.job && item.job.jobTitle}</Link></p>
                                                             <div className='info-company'>
                                                                 <li>
                                                                     <Link to={`/employer/${window.btoa(item.job && item.job.employerID)}`}><Icon type="home" style={{ marginRight: 3 }} />{item.job && item.job.employerName}</Link>
@@ -152,9 +153,14 @@ class HistoryApply extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                                                     Ngày phản hồi: {moment(item.repliedDate).format('DD/MM/YYYY')}
                                                                 </li> : null }
                                                             </span>
-
-
+                                                          
                                                         </div>
+                                                        <div className='content-job' style={{display: item.job.schoolEventID === null ? 'none' : ''}}>
+                                                                <Tooltip placement="bottom" title={"Việc làm sự kiện"}>
+                                                                    <Icon type='tag' style={{color: 'red'}} />
+                                                                </Tooltip>
+                                                                
+                                                            </div>
                                                     </div>
                                                 </Col>)
                                             }) : <Empty style={{ padding: '15vh' }} description='Bạn chưa lưu công việc nào' />}
