@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { LANGUAGES } from '../../../../services/api/public.api';
 import { PUBLIC_HOST } from '../../../../environment/development';
 import { _get } from '../../../../services/base-api';
+import { noInfoHeader } from '../../../../services/auth';
 
 class ChooseLanguage extends Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class ChooseLanguage extends Component {
 
     async componentDidMount() {
         let { list_language, language } = this.state;
-        let res_language = await _get(null, LANGUAGES, PUBLIC_HOST, {});
+        let res_language = await _get(null, LANGUAGES, PUBLIC_HOST, noInfoHeader);
         list_language = res_language.data.items;
         this.setState({ list_language, language });
     }

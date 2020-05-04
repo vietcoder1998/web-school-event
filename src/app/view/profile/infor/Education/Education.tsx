@@ -33,8 +33,8 @@ class Education extends Component<IProps, IStates> {
     };
   }
 
-  async componentDidMount() {
-    await (this.props.getData())
+  componentDidMount() {
+   
   };
 
   render() {

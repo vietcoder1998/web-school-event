@@ -16,6 +16,7 @@ interface IProps {
   openSideBar?: Function,
   noti?: any,
   show_bar?: boolean,
+  eventStart?: boolean
 }
 
 interface IState {
@@ -39,7 +40,7 @@ class Header extends PureComponent<IProps, IState> {
       hover_on: false,
     }
   }
- 
+
   _handleStateMenu = () => {
     let { show_menu } = this.state;
     this.setState({ show_menu: !show_menu })
@@ -90,7 +91,7 @@ class Header extends PureComponent<IProps, IState> {
 
   render() {
     let { isAuthen, show_noti, hover_on } = this.state;
-    let { noti, show_bar } = this.props;
+    let { noti, show_bar, eventStart } = this.props;
     let number_noti = 0;
     noti.items && noti.items.forEach(item => { !item.seen ? number_noti += 1 : number_noti += 0 });
 
@@ -98,16 +99,17 @@ class Header extends PureComponent<IProps, IState> {
       <>
         <div className="header">
           <div className="logo">
-            <Link to="/"><img width="auto" height={45} src={logo} alt="itea-scan" /> </Link>
+            <Link to={eventStart ? "/" : "/home"}><img width="auto" height={45} src={logo} alt="itea-scan" /> </Link>
           </div>
           <div className='direct-page'
           >
             <div
               style={{ display: show_bar ? "none" : "block" }}
             >
-              <a href='/home' style={{display: window.location.pathname === '/home' ? "none" : '' }}><Icon type={'home'} />Tìm việc</a>
-              <a href='/' style={{display: window.location.pathname === '/' ? "none" : '', backgroundColor: '#0081e3' }}><Icon type={'tags'} />Ngày hội việc làm</a>
-              
+              <a href='/' style={{ display: eventStart === false ? 'none' : window.location.pathname === '/' ? "none" : '' , backgroundColor: '#0081e3' }}><Icon type={'tags'} />Ngày hội việc làm</a>
+              <a href='/home' style={{ display: window.location.pathname === '/home' ? "none" : '' }}><Icon type={'home'} />Tìm việc</a>
+
+
               <a href='/result'><Icon type={'search'} />Việc làm</a>
               <a href='https://play.google.com/store/apps/details?id=com.worksvn.candidate&hl=vi' target='_blank' rel="noopener noreferrer">
                 <Icon type="android" theme="filled" style={{ fontSize: '16.3px' }} />
@@ -151,7 +153,7 @@ class Header extends PureComponent<IProps, IState> {
             {isAuthen ?
               //@ts-ignore
               <Dropdown style={{ width: "300px" }} overlay={this.menuUser} placement="bottomRight" >
-                <span className='label-function hidden-mobile' style={{borderRadius: '5%'}}>
+                <span className='label-function hidden-mobile' style={{ borderRadius: '5%' }}>
                   <Avatar src={localStorage.getItem("avatarUrl")} icon="user" style={{ border: "solid #fff 1.5px" }} />
                   {localStorage.getItem("name") ? <label className="label_name">{localStorage.getItem("name")}</label> : null}
                 </span>
@@ -161,7 +163,7 @@ class Header extends PureComponent<IProps, IState> {
                 <a href='/login' >
                   Đăng nhập
                   </a>
-                  <span style={{ borderRight: 'solid #efefef 0.8px', padding: '0px 0px 2.2px' }}></span>
+                <span style={{ borderRight: 'solid #efefef 0.8px', padding: '0px 0px 2.2px' }}></span>
                 <a href='/register'>
                   Đăng ký
                 </a>
@@ -177,7 +179,8 @@ class Header extends PureComponent<IProps, IState> {
 
 const mapStateToProps = (state) => ({
   isAuthen: state.AuthState.isAuthen,
-  noti: state.Noti
+  noti: state.Noti,
+  eventStart: state.EventStatusReducer.status
 })
 
 const mapDispatchToProps = (dispatch) => {

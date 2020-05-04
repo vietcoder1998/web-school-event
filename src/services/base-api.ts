@@ -49,6 +49,12 @@ export const _put = async (data?: any, api?: string, another_host?: string, head
     if (headers === null || headers === undefined) {
         headers = authHeaders
     }
-    let response = await axios.put(requestURL, data, { headers, params });
+    try{
+        let response = await axios.put(requestURL, data, { headers, params });
     return response.data;
+    }
+    catch(e) {
+        console.log(e.response.data)
+    }
+    
 };

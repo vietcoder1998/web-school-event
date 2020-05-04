@@ -56,10 +56,10 @@ export const _requestToServer = async (
             });
         };
         if(log_query) {
-            // console.log(host  + api);
-            // console.log(params);
-            // console.log(data);
-            // console.log(res);
+            console.log(host  + api);
+            console.log(params);
+            console.log(data);
+            console.log(res);
 
         }
     } catch (err) {

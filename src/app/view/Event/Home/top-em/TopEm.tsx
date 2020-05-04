@@ -72,62 +72,7 @@ class TopEm extends PureComponent<IProps, IState> {
               </Col>
             ))
             : null}
-          {listEmployer && listEmployer.items
-            ? listEmployer.items.map((item, index) => (
-              <Col xs={12} sm={6} md={3} lg={4} xl={4} xxl={3} key={index}>
-                <div className="h-j-item">
-                  <img
-                    src={
-                      item.employer.logoUrl === null
-                        ? defaultImage
-                        : item.employer.logoUrl
-                    }
-                    alt="logo"
-                    className="image-employer"
-                  />
-                </div>
-                <div className="job-content">
-                  <Link
-                    to={`/employer/${window.btoa(item.employer.id)}`}
-                    target="_blank"
-                    className="name_employer"
-                  >
-                    <p style={{ color: "#415167", fontWeight: "bold" }}>
-                      {item.employer.employerName}
-                    </p>
-                  </Link>
-                </div>
-              </Col>
-            ))
-            : null}
-          {listEmployer && listEmployer.items
-            ? listEmployer.items.map((item, index) => (
-              <Col xs={12} sm={6} md={3} lg={4} xl={4} xxl={3} key={index}>
-                <div className="h-j-item">
-                  <img
-                    src={
-                      item.employer.logoUrl === null
-                        ? defaultImage
-                        : item.employer.logoUrl
-                    }
-                    alt="logo"
-                    className="image-employer"
-                  />
-                </div>
-                <div className="job-content">
-                  <Link
-                    to={`/employer/${window.btoa(item.employer.id)}`}
-                    target="_blank"
-                    className="name_employer"
-                  >
-                    <p style={{ color: "#415167", fontWeight: "bold" }}>
-                      {item.employer.employerName}
-                    </p>
-                  </Link>
-                </div>
-              </Col>
-            ))
-            : null}
+
         </Row>
       </div >
     );

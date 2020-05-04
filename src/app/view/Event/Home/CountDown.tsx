@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import "./Home.scss"
+import countdownImage from '../../../../assets/image/crs3.jpg'
+import { Button } from 'antd';
+
 
 interface IProps {
     date?: string,
@@ -28,7 +31,8 @@ class Countdown extends Component<IProps, IState> {
             const date = this.calculateCountdown(dateX);
             date ? this.setState(date) : this.stop();
         }, 1000);
-        console.log(new Date(dateX))
+        console.log(window.location.hostname)
+
     }
 
     componentWillUnmount() {
@@ -89,34 +93,50 @@ class Countdown extends Component<IProps, IState> {
 
         return (
             <div className="Countdown">
-                <span className="Countdown-col">
-                    <span className="Countdown-col-element">
-                        <strong>{this.addLeadingZeros(countDown.days)}</strong>
-                        <span>{countDown.days === 1 ? 'Day' : 'Days'}</span>
-                    </span>
-                </span>
 
-                <span className="Countdown-col">
-                    <span className="Countdown-col-element">
-                        <strong>{this.addLeadingZeros(countDown.hours)}</strong>
-                        <span>Hours</span>
+                <div className='center'>
+                    <span className="Countdown-col">
+                        <span className="Countdown-col-element">
+                            <h2>NGÀY HỘI VIỆC LÀM</h2>
+                        </span>
                     </span>
-                </span>
+                    <div className="time">
+                        <span className="Countdown-col">
+                            <span className="Countdown-col-element">
+                                <strong>{this.addLeadingZeros(countDown.days)}</strong>
+                                <span>Ngày</span>
+                            </span>
+                        </span>
+                        <span className="Countdown-col">
+                            <span className="Countdown-col-element">
+                                <strong>{this.addLeadingZeros(countDown.hours)}</strong>
+                                <span>Giờ</span>
+                            </span>
+                        </span>
+
+                        <span className="Countdown-col">
+                            <span className="Countdown-col-element">
+                                <strong>{this.addLeadingZeros(countDown.min)}</strong>
+                                <span>Phút</span>
+                            </span>
+                        </span>
 
 
-                <span className="Countdown-col">
-                    <span className="Countdown-col-element">
-                        <strong>{this.addLeadingZeros(countDown.min)}</strong>
-                        <span>Min</span>
-                    </span>
-                </span>
+                        <span className="Countdown-col">
+                            <span className="Countdown-col-element">
+                                <strong>{this.addLeadingZeros(countDown.sec)}</strong>
+                                <span>Giây</span>
+                            </span>
+                        </span>
+                    </div>
+                    <a href="/home">
+                        <Button type="primary" shape="round" className='btn'>
+                            Về trang chủ
+                    </Button>
+                    </a>
 
-                <span className="Countdown-col">
-                    <span className="Countdown-col-element">
-                        <strong>{this.addLeadingZeros(countDown.sec)}</strong>
-                        <span>Sec</span>
-                    </span>
-                </span>
+                </div>
+
             </div>
         );
     }

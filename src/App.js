@@ -8,6 +8,10 @@ import asyncComponent from "./routes/AppRoutes";
 import { REDUX, REDUX_SAGA } from "./const/actions";
 import $ from "jquery";
 import { Loading } from "./app/view/layout/common/Common";
+import { _get } from "./services/base-api";
+import { EVENT_PUBLIC } from "./services/api/public.api";
+import { PUBLIC_HOST } from "./environment/development";
+import { noInfoHeader } from "./services/auth";
 
 const EventHome = asyncComponent(() =>
   import("./app/view/Event/Home/Home").then((module) => module.default)
@@ -136,21 +140,33 @@ class App extends React.Component {
     return null;
   }
 
+  checkEvent() {
+    let res = _get(null, `/api/schools/${process.env.REACT_APP_SCHOOL_ID}/events/${process.env.REACT_APP_EVENT_ID}?activeCheck=true`, PUBLIC_HOST, noInfoHeader)
+    return res
+  }
   _loadLocal = async () => {
     let token = localStorage.getItem("accessToken");
     console.log(localStorage.getItem("accessToken"));
+    this.checkEvent()
+      .then(res => {
+        this.props.checkEvent(true)
+      })
+      .catch(e => {
+        this.props.checkEvent(false)
+      })
     if (token !== null) {
       await this.props.checkAuthen(token);
     }
   };
 
   render() {
+    let {eventStart} = this.props
     return (
       <Fragment>
         <Router>
           <Suspense fallback={<Loading />}>
             <Switch>
-              <Route exact path="/" component={EventHome} />
+              <Route exact path="/" component={eventStart ? EventHome : EventCountDown} />
               <Route exact path="/event-job-detail/:id" component={EventJobDetail} />
               <Route exact path="/count" component={EventCountDown} />
               <Route exact path="/home" component={Home} />
@@ -186,6 +202,7 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => ({
   isAuthen: state.AuthState.isAuthen,
+  eventStart: state.EventStatusReducer.status
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -205,6 +222,12 @@ const mapDispatchToProps = (dispatch) => ({
       type: REDUX.MOBILE_STATE.SET_MOBILE_STATE,
       state,
     }),
+  checkEvent: (status) => {
+    dispatch({
+      type: REDUX.EVENT.START,
+      status
+    })
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

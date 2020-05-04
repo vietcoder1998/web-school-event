@@ -1,45 +1,59 @@
 @import url("https://fonts.googleapis.com/css?family=Lato");
 
-.count-down {
-    * {
-        box-sizing: border-box;
+.Countdown {
+    text-align: center;
+    background-image: url(../../../../assets/image/countdown.jpg);
+    height: 100%;
+    /* Center and scale the image nicely */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+    @media only screen and (min-width: 1px) and (max-width: 600px) {
+        background: none;
+        background-color: rgb(179, 230, 245);
     }
-    body {
-        font-family: "Lato", sans-serif;
+    h2 {
+        color: white;
+        font-weight: bold;
+    }
+    span {
+        font-weight: bold;
+    }
+    .center {
+        position: fixed !important;
+        padding-bottom: 10px;
+        
+        top: 75%;
+        left: 50%;
+        /* bring your own prefixes */
+        transform: translate(-50%, -50%);
+        @media only screen and (min-width: 1px) and (max-width: 600px) {
+           top: 65%;
+           width: 60%;
+        }
+    }
+    .btn {
+        margin-top: 20px;
+    }
+    .time {
+        border: solid 3px white;
+    }
+    .Countdown-col {
+        display: inline-block;
+        color: white;
     }
 
-    h1 {
-        letter-spacing: 2px;
-        text-align: center;
-        text-transform: uppercase;
-    }
-
-    .countdown-wrapper {
+    .Countdown-col-element {
+        display: inline-block;
+        margin: 0 20px;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .countdown-item {
-        color: #111;
-        font-size: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         flex-direction: column;
-        line-height: 30px;
-        margin: 10px;
-        padding-top: 10px;
-        position: relative;
-        width: 100px;
-        height: 100px;
+        color: white;
     }
 
-    .countdown-item span {
-        color: #333;
-        font-size: 12px;
-        font-weight: 600;
-        text-transform: uppercase;
+    .Countdown-col-element strong {
+        font-size: 50px;
+        color: white;
     }
 }

@@ -10,6 +10,7 @@ import { PUBLIC_HOST } from '../../../../../environment/development';
 import { Row, Col } from 'react-bootstrap';
 import { PUT } from '../../../../../const/method';
 import { REDUX_SAGA } from '../../../../../const/actions';
+import { noInfoHeader } from '../../../../../services/auth';
 
 interface IProps {
     skills?: Array<{ id?: number, name?: string }>;
@@ -47,7 +48,7 @@ class FixSkills extends Component<IProps, IState> {
     async  componentDidMount() {
         let { skills } = this.props;
         let { list_skills } = this.state;
-        let res = await _get(null, SKILLS, PUBLIC_HOST);
+        let res = await _get(null, SKILLS, PUBLIC_HOST, noInfoHeader);
      
         list_skills = res.data.items;
         this.setState({ list_skills, skills });

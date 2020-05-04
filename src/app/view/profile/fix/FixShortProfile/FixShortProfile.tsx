@@ -43,7 +43,7 @@ interface IState {
   identityCardFront?: any;
   identityCardBackUrl?: any;
   identityCardBack?: any;
- 
+
 }
 
 class FixPerson extends Component<IProps, IState> {
@@ -152,9 +152,9 @@ class FixPerson extends Component<IProps, IState> {
     };
 
     picture = files[0];
-    this.setState({ [name]: picture});
+    this.setState({ [name]: picture });
   };
-  
+
 
   _openLocation = () => {
     this.setState({ show_popup: true });
@@ -194,23 +194,25 @@ class FixPerson extends Component<IProps, IState> {
         sendFileHeader
       );
     }
-    if(identityCardBack !== "" && identityCardFront !== ""){
-        let form = new FormData();
-        form.append("front", identityCardFront);
-        form.append('back', identityCardBack);
-        await _requestToServer(
-          PUT,
-          form,
-          update_card_image,
-          null,
-          sendFileHeader
-        );
+    if (identityCardBack !== "" || identityCardFront !== "") {
+      let form = new FormData();
+      
+      form.append("front", identityCardFront);
+      form.append('back', identityCardBack);
+      await _requestToServer(
+        PUT,
+        form,
+        update_card_image,
+        null,
+        sendFileHeader
+      );
     }
     // if(identityCard !== ""){
     //     let form = new FormData();
     //     form.append('')
     // }
     await this.props._fixData("person");
+   
     window.location.reload();
   };
   getLatLngFromMap = (lat, lng, address) => {
@@ -415,7 +417,7 @@ class FixPerson extends Component<IProps, IState> {
             </div>
           </Col>
           <Col xs={12}>
-          <div
+            <div
               className="person-content"
               style={{ textAlign: "center", marginTop: "10px" }}
             >
@@ -437,8 +439,8 @@ class FixPerson extends Component<IProps, IState> {
                 alt="ảnh CMND"
                 style={{ display: "none" }}
                 onChange={(e) => {
-                    this._upLoadFile("identityCardBack", "identityCardBackUrl", e);
-                  }}
+                  this._upLoadFile("identityCardBack", "identityCardBackUrl", e);
+                }}
               />
             </div>
           </Col>
