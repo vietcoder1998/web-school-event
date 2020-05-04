@@ -23,6 +23,9 @@
   }
 
   .h-j-item {
+    &:hover {
+      background-color: #E1ECF4;
+    }
     display      : flex;
     margin       : 0.2vw 1vw;
     height       : 130px !important;
@@ -30,6 +33,7 @@
     border-radius: 7px;
     background-color: white;
     margin-top: 10px;
+    
     a {
       color: #5d5d5d;
 

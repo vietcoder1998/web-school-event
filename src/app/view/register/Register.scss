@@ -48,3 +48,11 @@
     text-align: center;
   }
 }
+
+.ant-modal-content{
+  width: 600px;
+  height: 640px;
+  .ant-modal-body{
+    height: 530px;
+  }
+}

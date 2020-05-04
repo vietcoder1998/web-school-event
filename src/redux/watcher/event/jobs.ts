@@ -24,6 +24,7 @@ function* getListJobData(action) {
     let res = yield call(getJobData, action);
     if (res) {
         let data = res.data;
+        console.log(data)
         yield put({ type: REDUX.EVENT.JOB.NORMAL, data });
     }
 }
@@ -41,6 +42,7 @@ function getHotJobData(action) {
         }
     };
     let isAuthen = store.getState().AuthState.isAuthen;
+
     let res = _requestToServer(
         POST,
         data,

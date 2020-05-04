@@ -15,12 +15,15 @@ interface IProps {
     jobNames: Array<any>,
     history?: any,
     getJobResult: Function,
+    getJobNames: Function,
 }
 interface IState {
     body?: any;
 }
 
 function Option(props?: IProps) {
+    React.useEffect(() => { props.getJobNames() }, []);
+
     let [body, setBody] =
         React.useState({
             employerID: null,
@@ -34,17 +37,14 @@ function Option(props?: IProps) {
             jobLocationFilter: {
                 regionID: null
             }
-        });
+        })
 
-    React.useEffect(() => { }, [])
 
     function searchJob() {
         props.getJobResult(body);
         window.scrollTo({ top: 0 });
     }
-
-    let { jobNames } = props;
-
+    let {jobNames} = props
     return (
         <div className='option content-footer'>
             <Row >
@@ -133,6 +133,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+    getJobNames: (pageIndex?: number, pageSize?: number) => dispatch({ type: REDUX_SAGA.JOB_NAMES.GET_JOB_NAMES, pageIndex, pageSize }),
     getJobResult: (body?: IJobSearchFilter) => dispatch({ type: REDUX_SAGA.JOB_RESULT.GET_JOB_RESULT, body })
 })
 

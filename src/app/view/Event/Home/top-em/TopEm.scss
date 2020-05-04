@@ -23,9 +23,12 @@
     margin: 0px 10px;
     padding: 10px 10px;
     border-radius: 5px;
+    &:hover {
+      background-color: #E1ECF4;
+    }
     .image-employer {
     
-      height: 105px;
+      height: 115px;
       width: 100%;
       border-radius: 7px;
     }

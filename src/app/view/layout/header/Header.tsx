@@ -107,10 +107,10 @@ class Header extends PureComponent<IProps, IState> {
               style={{ display: show_bar ? "none" : "block" }}
             >
               <a href='/' style={{ display: eventStart === false ? 'none' : window.location.pathname === '/' ? "none" : '' , backgroundColor: '#0081e3' }}><Icon type={'tags'} />Ngày hội việc làm</a>
-              <a href='/home' style={{ display: window.location.pathname === '/home' ? "none" : '' }}><Icon type={'home'} />Tìm việc</a>
+              <a href='/home' style={{ display: window.location.pathname === '/home' ? "none" : '' }}><Icon type={'home'} />Việc làm</a>
 
 
-              <a href='/result'><Icon type={'search'} />Việc làm</a>
+       
               <a href='https://play.google.com/store/apps/details?id=com.worksvn.candidate&hl=vi' target='_blank' rel="noopener noreferrer">
                 <Icon type="android" theme="filled" style={{ fontSize: '16.3px' }} />
                 Ứng dụng Android

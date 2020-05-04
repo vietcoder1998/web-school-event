@@ -63,6 +63,7 @@ export const _requestToServer = async (
 
         }
     } catch (err) {
+        console.log(err)
         exceptionShowNoti(err, hide_alert_error);
     }
 

@@ -3,6 +3,9 @@
     scroll-behavior: smooth;
     .branch-item {
         background-color: white;
+        &:hover {
+            background-color: #E1ECF4;
+          }
         margin: 10px;
         box-shadow: 0px 2px 18px rgba(205, 205, 205, 0.5);
         border-radius: 10.4528px;

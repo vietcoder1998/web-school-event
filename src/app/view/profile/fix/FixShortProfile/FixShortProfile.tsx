@@ -301,14 +301,17 @@ class FixPerson extends Component<IProps, IState> {
             <div className="person-content">
               <p>Ngày sinh</p>
               <DatePicker
-                defaultValue={
-                  moment(birth_day, "DD/MM/YY")
-                    ? moment(birth_day, "DD/MM/YY")
-                    : null
-                }
                 onChange={this._handleTime}
                 style={{ width: "100%" }}
-                placeholder="Birth day"
+                placeholder="Năm học bắt đầu"
+              />
+            </div>
+            <div className="person-content">
+              <p>Ngày sinh</p>
+              <DatePicker
+                onChange={this._handleTime}
+                style={{ width: "100%" }}
+                placeholder="Năm học kết thúc"
               />
             </div>
           </Col>

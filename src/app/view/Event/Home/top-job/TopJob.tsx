@@ -35,7 +35,7 @@ class TopJob extends PureComponent<IProps> {
     });
   };
   render() {
-    let { topJob, loading_hot_job } = this.props;
+    let { topJob } = this.props;
     return (
       <Row
         className="home-job"
@@ -52,15 +52,7 @@ class TopJob extends PureComponent<IProps> {
 
               return (
                 <Col xs={24} sm={24} md={8} lg={8} xl={8} xxl={6} key={index}>
-                  {loading_hot_job ? (
-                    <Skeleton
-                      key={index}
-                      loading={true}
-                      avatar
-                      paragraph={{ rows: 1 }}
-                      active={true}
-                    />
-                  ) : (
+                 
                     <div key={index} className="h-j-item">
                       <div className="img-job">
                         <img
@@ -111,7 +103,7 @@ class TopJob extends PureComponent<IProps> {
                         </ul>
                       </div>
                     </div>
-                  )}{" "}
+                  {" "}
                 </Col>
               );
             })
