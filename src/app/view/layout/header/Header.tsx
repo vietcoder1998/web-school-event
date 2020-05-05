@@ -152,7 +152,7 @@ class Header extends PureComponent<IProps, IState> {
             </span>
             {isAuthen ?
               //@ts-ignore
-              <Dropdown style={{ width: "300px" }} overlay={this.menuUser} placement="bottomRight" >
+              <Dropdown overlay={this.menuUser} placement="bottomRight" >
                 <span className='label-function hidden-mobile' style={{ borderRadius: '5%' }}>
                   <Avatar src={localStorage.getItem("avatarUrl")} icon="user" style={{ border: "solid #fff 1.5px" }} />
                   {localStorage.getItem("name") ? <label className="label_name">{localStorage.getItem("name")}</label> : null}

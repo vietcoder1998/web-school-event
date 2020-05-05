@@ -50,8 +50,8 @@ class AllNoti extends PureComponent<IAllNotiProps, IAllNotiState> {
             <Layout disableFooterData={false} >
                 <div className='content'>
                     <Row>
-                        <Col></Col>
-                        <Col>
+                        <Col xs={2}></Col>
+                        <Col xs={20}>
                             <div className='all-noti-content '>
                                 <div className='noti-header '>
                                     <h5 >Thông báo của bạn</h5>
@@ -119,7 +119,7 @@ class AllNoti extends PureComponent<IAllNotiProps, IAllNotiState> {
                                     }} />
                             </div>
                         </Col>
-                        <Col></Col>
+                        <Col xs={2}></Col>
                     </Row>
                 </div>
 

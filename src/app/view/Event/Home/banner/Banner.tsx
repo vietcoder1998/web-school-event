@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
-import { Carousel } from 'antd';
+import { Carousel, Icon } from 'antd';
 import { connect } from 'react-redux';
 import defaultImage from '../../../../../assets/image/base-image.jpg'
 import { REDUX_SAGA } from '../../../../../const/actions';
+import { Link } from "react-router-dom";
 import './Banner.scss';
 interface IProps {
     getTopEmpoyer?: Function,
@@ -26,20 +27,42 @@ class Banner extends PureComponent<IProps, IState> {
             pageSize: 9,
             is_loading: true
         };
-    }
+        this.carousel = React.createRef();
+        this.next = this.next.bind(this);
+        this.previous = this.previous.bind(this);
 
+    }
+    next() {
+        this.carousel.next();
+    }
+    previous() {
+        this.carousel.prev();
+    }
     componentDidMount = async () => {
         await this.setState({ is_loading: false })
         await this.props.getTopEmpoyer(0);
     }
 
     render() {
+        const props = {
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1
+        };
+
         let { listEmployer } = this.props;
         return (
             <div className='employer-banner' style={{ display: listEmployer.totalItems === 0 ? 'none' : '' }}>
-                <Carousel autoplay>
+                <Carousel dots={true} ref={node => (this.carousel = node)}  {...props}>
                     {listEmployer && listEmployer.items ? listEmployer.items.map((item, index) => (
-                        <img src={item.bannerUrl === null ? defaultImage : item.bannerUrl} key={index} alt='banner' className='image-banner' />
+                        <Link to={`/employer/${window.btoa(item.employer.id)}`}
+                            target="_blank"
+                            className="name_employer"
+                        >
+                            <img src={item.bannerUrl === null ? defaultImage : item.bannerUrl} key={index} alt='banner' className='image-banner' />
+                        </Link>
                     )) : null}
                 </Carousel>
             </div>
