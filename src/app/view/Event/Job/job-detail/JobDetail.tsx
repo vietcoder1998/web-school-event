@@ -345,7 +345,7 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
                                                     <div className='d_j_t'>
                                                         <Icon type="home" style={{ color: '#168ECD' }} />
                                                         <label>
-                                                            <Link to={`/employer/${window.btoa(employerDetail.id)}`} target='_blank' style={{ fontSize: '1.05em', fontWeight: 450 }}>{employerDetail && employerDetail.employerName}</Link>
+                                                            <Link to={`/employer/${window.btoa(jobDetail.employerID)}`} target='_blank' style={{ fontSize: '1.05em', fontWeight: 450 }}>{jobDetail && jobDetail.employerName}</Link>
                                                         </label>
                                                     </div>
                                                     <div className='d_j_t'>

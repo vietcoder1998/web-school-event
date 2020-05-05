@@ -66,7 +66,7 @@ class Header extends PureComponent<IProps, IState> {
   _showSideBar = () => {
     this.props.openSideBar();
   }
-
+    
   _closeNoti = () => {
     this.setState({ show_noti: false })
   };
@@ -135,7 +135,6 @@ class Header extends PureComponent<IProps, IState> {
               <span
                 className='label-function'
                 onClick={() => {
-                  // alert('test')
                   this.setState({ show_noti: !show_noti })
                 }}
               >

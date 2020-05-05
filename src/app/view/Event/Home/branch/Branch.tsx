@@ -28,6 +28,7 @@ class Branch extends PureComponent<IProps, IState> {
   componentDidMount = async () => {
     await this.setState({ is_loading: false });
     let listBranch = await _get(null, EVENT_PUBLIC.BRANCH, PUBLIC_HOST, {});
+    
     this.setState({
       listBranch: listBranch.data,
     });

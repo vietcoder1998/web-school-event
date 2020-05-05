@@ -82,25 +82,6 @@ function ShortProfile(props?: { personalInfo?: any }) {
             Hoàn thiện hồ sơ:{" "}
             <Progress percent={personalInfo.completePercent} />
           </li>
-          <li>
-            Ảnh CMND:
-            <img
-              src={personalInfo.identityCardFrontImageUrl}
-              onError={(e) => {
-                e.target.src = { imageDefault };
-              }}
-              alt="ảnh CMND"
-              className="identytiImage"
-            />
-            <img
-              src={personalInfo.identityCardBackImageUrl}
-              alt="ảnh CMND"
-              onError={(e) => {
-                e.target.src = { imageDefault };
-              }}
-              className="identytiImage"
-            />
-          </li>
         </ul>
       </div>
     </div>

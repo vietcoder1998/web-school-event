@@ -14,9 +14,9 @@ export const _post = async (
   if (headers === null || headers === undefined) {
     headers = authHeaders;
   }
-  console.log(requestURL)
+
   let response = await axios.post(requestURL, data, { headers, params });
- 
+
   return response.data;
 };
 

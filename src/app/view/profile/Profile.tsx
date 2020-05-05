@@ -12,12 +12,15 @@ import FixDescription from "./fix/FixDescription/FixDescription";
 import Description from "./infor/Description/Description";
 import FixSkills from "./fix/FixSkills/FixSkills";
 import Skills from "./infor/Skills/Skills";
+
 // import Info from '../layout/info/Info';
 import FixExperience from "./fix/FixExperience/FixExperience";
 import Experience from "./infor/Experience/Experience";
 import Education from "./infor/Education/Education";
 import FixEducation from "./fix/FixEducation/FixEducation";
 import LanguageSkills from "./infor/LanguageSkills/LanguageSkills";
+import FixPicture from "./fix/FixPicture/FixPicture";
+import Picture from "./infor/Picture/Picture";
 
 // Service
 import FixLanguageSkills from "./fix/FixLanguageSkills/FixLanguageSkills";
@@ -36,6 +39,7 @@ interface IState {
     langugeSkills?: boolean;
     experiences?: boolean;
     education?: boolean;
+    picture?: boolean;
   };
   loading?: boolean;
 }
@@ -51,6 +55,7 @@ class Profile extends Component<IProps, IState> {
         langugeSkills: false,
         experiences: false,
         education: false,
+        picture: false,
       },
       loading: false,
     };
@@ -108,6 +113,26 @@ class Profile extends Component<IProps, IState> {
                   <ShortProfile />
                 )}
               </Block>
+               {/* picture */}
+               <Block describe="Ảnh CMND/CCCD" icon={this.icon_list}>
+                <div
+                  className="icon-fix"
+                  onClick={() => this._fixData("picture")}
+                >
+                  <span
+                    data-tip
+                    data-for="f_d_i"
+                    id="picture"
+                    className="fa fa-pencil"
+                  ></span>
+                </div>
+                {profileState["picture"] ? (
+                  <FixPicture _fixData={this._fixData} method={PUT} />
+                ) : (
+                  <Picture />
+                )}
+              </Block>
+
               {/* Description */}
               <Block describe="Mô tả bản thân" icon={this.icon_list}>
                 <div
@@ -127,7 +152,7 @@ class Profile extends Component<IProps, IState> {
                   <Description />
                 )}
               </Block>
-
+             
               {/* Skill */}
               <Block describe="Kỹ năng chuyên nghành" icon={this.icon_star}>
                 <div
@@ -189,8 +214,6 @@ class Profile extends Component<IProps, IState> {
 
               {/* Education */}
               <Block describe="Học vấn và bằng cấp" icon={this.icon_bachelor}>
-               
-
                 {profileState["education"] ? (
                   <FixEducation _fixData={this._fixData} method={POST} />
                 ) : (
