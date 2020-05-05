@@ -60,7 +60,7 @@ class FixExperience extends Component<IState, IState> {
     }
 
     _createRequest = () => {
-        this.requestServer();
+        this.requestServer(); 
     }
 
     async requestServer() {

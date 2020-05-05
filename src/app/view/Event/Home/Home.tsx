@@ -31,6 +31,7 @@ const mapStateToProps = (state) => ({
   isAuthen: state.AuthState.isAuthen,
 });
 
+///comment
 const mapDispatchToprops = (dispatch) => ({});
 
 export default connect(mapStateToProps, mapDispatchToprops)(Home);
