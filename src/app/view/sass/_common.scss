@@ -42,8 +42,9 @@ code {
 
 //
 .content {
-  background-color: #ececec;
+  background-color: #f2f2f2;
   min-height      : calc(100vh - 334px);
+  
 }
 
 .none-footer {
@@ -91,7 +92,8 @@ ul {
   }
 
   &:hover {
-    box-shadow: rgba(71, 71, 71, 0.2) 0px 0px 5px 0px;
+    // box-shadow: rgba(71, 71, 71, 0.2) 0px 0px 5px 0px;
+    // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
   }
 
   .header-experience {
@@ -121,8 +123,10 @@ ul {
 
 // div to fix icon in complete
 .edit-delete {
-  display: block;
-  width  : 100%;
+  display: flex;
+  justify-content: flex-end;
+  // display: block;
+  // width  : 100%;
 
   span {
     &:hover {
@@ -139,7 +143,7 @@ ul {
 // Button
 .holder-button {
   height    : 60px;
-  margin-top: 10px;
+  margin-top: 20px;
   text-align: center;
 
   button {
@@ -153,26 +157,29 @@ ul {
   }
 
   .request {
-    border          : solid #29b5e3 2px;
-    color           : #29b5e3;
-    background-color: #fff;
+    border          : solid #31a3f9 2px;
+    color           : #fff;
+    background-color: #31a3f9;
     font            : small;
 
 
     &:hover {
       color           : #fff;
-      background-color: #29b5e3;
+      background-color: #53aff5;
+      border          : solid #53aff5 2px;
+
     }
   }
 
   .danger {
-    border          : solid #e32929 2px;
-    color           : #e32929;
-    background-color: #fff;
+    border          : solid #ff4d4d 2px;
+    color           : #fff;
+    background-color: #ff4d4d;
 
     &:hover {
       color           : #fff;
-      background-color: #e32929;
+      background-color: #ff8080;
+      border          : solid #ff8080 2px;
     }
   }
 }
@@ -192,7 +199,8 @@ ul {
 }
 
 .fa-trash {
-  color: rgb(255, 38, 0);
+  // color: rgb(255, 38, 0);
+  font-size: 1.1em;
 }
 
 .rowling {
@@ -202,7 +210,7 @@ ul {
 
 #facebook_square {
   margin-right: 10px;
-  color       : blue;
+  color       : #225bff;
 }
 
 .first-letter {
@@ -245,7 +253,8 @@ ul {
 .loading {
   width           : 100%;
   height          : 100%;
-  padding         : calc((100% - 20px) / 2) calc((100% - 20px) / 2);
+  // padding         : calc((100% - 20px) / 2) calc((100% - 20px) / 2);
+  padding         : 40px calc((100% - 20px) / 2) 40%;
   color           : #29b5e3;
   background-color: white;
 }
@@ -269,6 +278,7 @@ i {
 
 .tab-content {
   border-top: none;
+  border-bottom: 1px solid #e8e8e8;
 }
 
 .column {
@@ -287,7 +297,7 @@ i {
 
 // For Border
 .b_b {
-  border-bottom: solid $color_border 1px;
+  // border-bottom: solid $color_border 1px;
 }
 
 .b_r {

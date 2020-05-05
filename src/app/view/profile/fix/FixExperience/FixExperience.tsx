@@ -8,7 +8,8 @@ import moment from 'moment';
 import { REDUX_SAGA } from '../../../../../const/actions';
 import { POST } from '../../../../../const/method';
 import IExperience from '../../../../../models/experience';
-
+import swal from 'sweetalert';
+import { TYPE } from '../../../../../const/type';
 interface IState {
     getData?: Function;
     _fixData?: Function;
@@ -66,6 +67,15 @@ class FixExperience extends Component<IState, IState> {
         let { method } = this.props;
         let { experience } = this.state;
 
+        if(experience.finishedDate < experience.startedDate) {
+            swal({
+                title: "Worksvns thông báo",
+                text: "Ngày bắt đầu không thể sau ngày kết thúc",
+                icon: TYPE.ERROR,
+                dangerMode: false,
+            });
+        }
+        
         if (method === POST) {
             let res = await _requestToServer(POST, experience, experienceController, null, null, null, true);
             if (res) {

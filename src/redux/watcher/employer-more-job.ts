@@ -8,18 +8,27 @@ import { REDUX, REDUX_SAGA } from './../../const/actions';
 import { _requestToServer } from '../../services/exec';
 
 function* getEmployerMoreJob(action) {
-
+    yield put({ type: REDUX.EMPLOYER_MORE_JOB.SET_LOADING_MORE_JOB, loading: true });
     let res = yield call(getEmployerMoreJobData, action);
 
     if (res) {
         let data = res.data;
         yield put({ type: REDUX.EMPLOYER_MORE_JOB.GET_EMPLOYER_MORE_JOB, data });
     }
+    yield put({ type: REDUX.EMPLOYER_MORE_JOB.SET_LOADING_MORE_JOB, loading: false });
+
 }
 
 // get EmployerData
 function getEmployerMoreJobData(action) {
-    let employerID = store.getState().GetJobDetail.employerID;
+    // let 
+    let employerID;
+    if(action.id){
+        employerID = action.id;
+    } else {
+        employerID = store.getState().GetJobDetail.employerID;
+    }
+
 
     let body = {
         employerID,

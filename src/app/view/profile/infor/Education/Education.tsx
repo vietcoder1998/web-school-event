@@ -33,13 +33,14 @@ class Education extends Component<IProps, IStates> {
     };
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
    
   };
 
   render() {
     let { schools, personalInfo, major } = this.props;
     return (
+
       <div className="education">
         <div className="wrapper">
           <div className="content-school">
@@ -54,10 +55,12 @@ class Education extends Component<IProps, IStates> {
           </div>
           <div className="content-school">
             Chuyên ngành học / Ngành học: {major.name} /{" "}
-            {major.branch && major.branch.name }
+            {major.branch && major.branch.name}
           </div>
         </div>
       </div>
+
+
     );
   }
 }
@@ -67,7 +70,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  schools: state.PersonalInfo.schools,
+  schools: state.PersonalInfo.educations,
   personalInfo: state.PersonalInfo.personalInfo,
   major: state.PersonalInfo.major,
   redux: state.PersonalInfo,

@@ -3,7 +3,8 @@
 .box-block {
   background: #fff;
   margin-bottom: 15px;
-  border: solid $color_border 1px;
+  // border: solid $color_border 1px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
   width: 100%;
   min-width: 300px;
   margin-bottom: 30px;
@@ -16,7 +17,7 @@
   }
 
   .block-header {
-    border-bottom: solid #e1e1e1 1px;
+    border-bottom: dashed #b3b3b3 1px;
     font-weight: 600;
     font-size: 1.1rem;
     font-family: IBMPlexSanLights;

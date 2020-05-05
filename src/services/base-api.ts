@@ -1,6 +1,5 @@
 import axios from "axios";
 import { authHeaders } from "./auth";
-import { PUBLIC_HOST } from "../environment/development";
 
 // POST
 export const _post = async (
@@ -15,7 +14,9 @@ export const _post = async (
   if (headers === null || headers === undefined) {
     headers = authHeaders;
   }
+  console.log(requestURL)
   let response = await axios.post(requestURL, data, { headers, params });
+ 
   return response.data;
 };
 
@@ -28,12 +29,10 @@ export const _get = async (
 ) => {
   let requestURL =
     (another_host ? another_host : process.env.REACT_APP_API_HOST) + api;
-  if (
-    another_host !== PUBLIC_HOST &&
-    (headers === null || headers === undefined)
-  ) {
+  if (headers === null || headers === undefined) {
     headers = authHeaders;
   }
+
   let response = await axios.get(requestURL, { params: params, headers });
   return response.data;
 };
@@ -51,7 +50,6 @@ export const _delete = async (
   if (headers === null || headers === undefined) {
     headers = authHeaders;
   }
-
   let response = await axios.delete(requestURL, { data: params, headers });
   return response.data;
 };
@@ -66,11 +64,9 @@ export const _put = async (
 ) => {
   let requestURL =
     (another_host ? another_host : process.env.REACT_APP_API_HOST) + api;
-
   if (headers === null || headers === undefined) {
     headers = authHeaders;
   }
-
   let response = await axios.put(requestURL, data, { headers, params });
   return response.data;
 };

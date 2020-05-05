@@ -1,19 +1,22 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { _requestToServer } from '../../services/exec';
 import { FIND_JOB } from '../../services/api/public.api';
-import { PUBLIC_HOST, STUDENTS_HOST } from '../../environment/development';
+import { PUBLIC_HOST, STUDENT_HOST } from '../../environment/development';
 import { noInfoHeader, authHeaders } from '../../services/auth';
 import { store } from '../store';
-import { JOB } from '../../services/api/private.api';
+import { JOBS } from '../../services/api/private.api';
 import { REDUX_SAGA, REDUX } from '../../const/actions'
 import { POST } from '../../const/method';
 
 
 function* getListJobResultData(action) {
+    yield put({ type: REDUX.JOB_RESULT.SET_LOADING_RESULT, loading: true });
     let res = yield call(getJobResults, action);
     if (res) {
         let data = res.data;
+        console.log(data)
         yield put({ type: REDUX.JOB_RESULT.GET_JOB_RESULT, data });
+        yield put({ type: REDUX.JOB_RESULT.SET_LOADING_RESULT, loading: false });
     }
 }
 
@@ -61,8 +64,8 @@ function getJobResults(action) {
     let res = _requestToServer(
         POST,
         body,
-        (isAuthen ? (JOBS + '/active') : FIND_JOB),
-        isAuthen ? STUDENTS_HOST : PUBLIC_HOST,
+        (isAuthen ? (JOBS + '/active') : FIND_JOB + '/search'),
+        isAuthen ? STUDENT_HOST : PUBLIC_HOST,
         isAuthen ? authHeaders : noInfoHeader,
         {
             pageIndex: action.pageIndex ? action.pageIndex : 0,

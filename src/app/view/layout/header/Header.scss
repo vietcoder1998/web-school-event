@@ -4,8 +4,8 @@
   position           : relative;
   z-index            : 1;
   width              : 100%;
-  // background-color: $color_base;
-  background         : white;
+  background-color   : #32A3F9;
+  // background         : linear-gradient(to right, $color_base, rgb(216, 216, 216));
   height             : 60px;
   padding            : 0 20px;
   display            : flex;
@@ -53,12 +53,15 @@
     position   : absolute;
     left       : 15%;
     font-weight: 550;
+    font-size          : 0.93rem;
 
     a {
-      color              : #3D5BAF ;
+      color              : rgb(255, 255, 255);
       height             : 100%;
       padding            : 20px;
       font-size          : 0.93rem;
+      font-weight        : 400;
+      font-family: $font_base;
       // background-color: rgb(214, 214, 214);
 
       &:hover {
@@ -67,6 +70,15 @@
 
         // color        : rgba(255, 255, 255, 0.639);
       }
+    }
+    i {
+      margin-right: 5px;
+    }
+    svg[data-icon="bank"]{
+      margin-bottom: 0.5px;
+    }
+    svg[data-icon="apple"]{
+      margin-bottom: 0.65px;
     }
   }
 
@@ -79,27 +91,36 @@
 
     // MenuProfile
     .label-function {
-      padding    : 15px 10px;
+      padding    : 5px 12px;
       font-size  : 20px;
       position   : relative;
       width      : auto;
-      color      : gray;
-      font-family: IBMPlexSanLights;
+      color      : white;
+      margin: 10px 0;
+      border-radius: 50%;
+      cursor: pointer;
 
+      &:hover {
+        // background-color: #00000014;
+        background-color: rgba(184, 216, 255, 0.367);
+      }
       a {
-        color: #3D5BAF;
+        color: white;
+        
       }
 
       i {
-        font-size: 20px;
-
-        :hover {
-          color: bisque;
-        }
+        font-size: 16.5px;
+        
+        // :hover {
+        //   color: #f2f2f2;
+        // }
       }
-
+      svg[data-icon="bell"]{
+        margin-bottom: 0.65px;
+      }
       .label_name {
-        color      : gray;
+        color      : white;
         height     : 100%;
         font-size  : 0.93rem;
         font-weight: 450;
@@ -109,6 +130,11 @@
           text-decoration: underline;
         }
       }
+    }
+
+    //choosed noti
+    .ant-popover-open{
+      background-color: rgba(184, 216, 255, 0.367);
     }
 
     #borderLeft {
@@ -122,18 +148,22 @@
     // Login Logout Register
     .label-login {
       font-size: 15px;
-      padding  : 0px 10px;
+      // padding  : 0px 10px;
 
       a {
-        color: #3D5BAF;
-
+        color: #ffffff;
+        font-weight        : 400;
+        font-family: $font_base;
+        border-radius: 5px;
         &:hover {
-          color          : #ffe818;
-          text-decoration: underline;
+          // color          : #f2f2f2;
+          background-color: rgba(184, 216, 255, 0.367);
+          // text-decoration: underline;
         }
 
         line-height: 60px;
-        padding    : 5px 5px;
+        padding: 8px;
+        margin: 5px 5px 0;
         font-size  : 0.9pc;
       }
     }

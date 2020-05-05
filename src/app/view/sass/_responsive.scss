@@ -59,7 +59,9 @@
 // desktop
 @media only screen and (min-width: 1061px) {
   .content {
-    padding: 10px 10%;
+
+    padding: 0px 10%;
+    
   }
 
   .content-footer {
@@ -83,7 +85,7 @@
   }
 
   .wrapper {
-    padding: 20px 50px;
+    padding: 15px 40px 10px;
   }
 
   .block-header {
@@ -108,8 +110,12 @@
   .detail-job {
     border-bottom: solid $color_border 1px  ;
   }
-}
 
+  
+}
+h5{
+    font-size: 1.7rem !important;
+  }
 // for phone
 @media (min-width: 0px) and (max-width: 560px) {
   .show-only-phone {

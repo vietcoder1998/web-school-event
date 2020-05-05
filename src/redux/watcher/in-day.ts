@@ -2,7 +2,7 @@ import { IJobSearchFilter } from '../../models/job-search';
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { _requestToServer } from '../../services/exec';
 import { FIND_JOB } from '../../services/api/public.api';
-import { PUBLIC_HOST, STUDENTS_HOST } from '../../environment/development';
+import { PUBLIC_HOST, STUDENT_HOST } from '../../environment/development';
 import { noInfoHeader, authHeaders } from '../../services/auth';
 import { store } from '../store';
 import { JOBS } from '../../services/api/private.api';
@@ -13,6 +13,7 @@ function* getListInDayData(action) {
     let res = yield call(getInDayData, action);
     if (res) {
         let data = res.data;
+        console.log(data)
         yield put({ type: REDUX.IN_DAY.GET_IN_DAY_JOB, data });
     }
 };
@@ -31,15 +32,15 @@ function getInDayData(action) {
         }
     };
     let isAuthen = store.getState().AuthState.isAuthen;
-    
     let res = _requestToServer(
         POST,
         data,
-        (isAuthen ? JOBS.NORMAL.ACTIVE : FIND_JOB),
-        isAuthen ? STUDENTS_HOST : PUBLIC_HOST, isAuthen ? authHeaders : noInfoHeader,
+        (isAuthen ? JOBS + '/active/home' : FIND_JOB + '/home'),
+        isAuthen ? STUDENT_HOST : PUBLIC_HOST, isAuthen ? authHeaders : noInfoHeader,
         {
             pageIndex: action.pageIndex ? action.pageIndex : 0,
-            pageSize: 6
+            pageSize: 6,
+            priority: 'IN_DAY'
         },
         false
     );

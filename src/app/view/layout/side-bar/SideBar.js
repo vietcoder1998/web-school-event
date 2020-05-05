@@ -32,7 +32,7 @@ class SideBar extends Component {
     }
 
     render() {
-        let { show, isAuthen } = this.props;
+        let { show, isAuthen, eventStart } = this.props;
         return (
             <div className="sidebar">
                 <div className="background-sidebar" style={{ display: show ? 'block' : 'none' }} onClick={this._closeSideBar}></div>
@@ -47,7 +47,8 @@ class SideBar extends Component {
 
                         <div className="content-sidebar">
                             <ul>
-                                <li><a href='/'><Icon type="home" />Trang chủ</a></li>
+                                <li><a href={eventStart ? '/' : '/home'}><Icon type="home" />Trang chủ</a></li>
+                                <li><a href='/event' style={{ display: eventStart === false ? 'none' : window.location.pathname === '/' ? "none" : '' }}><Icon type="tags" />Sự kiện</a></li>
                                 <li><a href='/'><i className="fa fa-briefcase"></i>Tìm việc</a></li>
                                 <li style={{ color: 'gray', cursor: 'not-allowed', opacity: 0.5, pointerEvents: 'none' }}><a href='/'><Icon type="user-add" />Tạo CV</a></li>
                                 <li className='b_b'><a href='/'><Icon type="book" />Kĩ năng</a></li>
@@ -71,7 +72,8 @@ const mapStateToProps = (state) => ({
     isAuthen: state.AuthState.isAuthen,
     show_popup: state.PopupState,
     show: state.SideBarState.show,
-    personalInfo: state.PersonalInfo.personalInfo
+    personalInfo: state.PersonalInfo.personalInfo,
+    eventStart: state.EventStatusReducer.status
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

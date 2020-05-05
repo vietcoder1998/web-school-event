@@ -27,7 +27,7 @@ class ButtonToggle extends Component {
     }
 
     async requestToSever(state) {
-        await _requestToServer(PUT, null, isLookingFobJobState + '/' + state, null, null, true);
+        await _requestToServer(PUT, null, isLookingFobJobState + state, null, null);
         await this.props.getData();
     }
 
@@ -62,7 +62,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => {
     return {
-        state: state.PersonalInfo.personalInfo.isLookingForJob
+        state: state.PersonalInfo.personalInfo.lookingForJob
     }
 }
 

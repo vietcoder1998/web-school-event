@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css?family=Lato");
+
+.Countdown {
+    text-align: center;
+    background-image: url(../../../../assets/image/countdown.jpg);
+    height: 100%;
+    /* Center and scale the image nicely */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+    @media only screen and (min-width: 1px) and (max-width: 600px) {
+        background: none;
+        background-color: rgb(179, 230, 245);
+    }
+    h2 {
+        color: white;
+        font-weight: bold;
+    }
+    span {
+        font-weight: bold;
+    }
+    .center {
+        position: fixed !important;
+        padding-bottom: 10px;
+        
+        top: 75%;
+        left: 50%;
+        /* bring your own prefixes */
+        transform: translate(-50%, -50%);
+        @media only screen and (min-width: 1px) and (max-width: 600px) {
+           top: 65%;
+           width: 60%;
+        }
+    }
+    .btn {
+        margin-top: 20px;
+    }
+    .time {
+        border: solid 3px white;
+    }
+    .Countdown-col {
+        display: inline-block;
+        color: white;
+    }
+
+    .Countdown-col-element {
+        display: inline-block;
+        margin: 0 20px;
+        display: flex;
+        flex-direction: column;
+        color: white;
+    }
+
+    .Countdown-col-element strong {
+        font-size: 50px;
+        color: white;
+    }
+}

@@ -3,12 +3,12 @@ import { REDUX } from "../../const/actions";
 let personal_data = {
     personalInfo: {},
     skills: [],
-    schools: [],
-    major: [],
+    educations: [],
     description: "",
     languageSkills: [],
     experiences: [],
-    rating: {}
+    rating: {},
+    major: {},
 };
 
 export const PersonalInfo = (state = personal_data, action): any => {
@@ -18,12 +18,12 @@ export const PersonalInfo = (state = personal_data, action): any => {
                 ...state,
                 personalInfo: action.personalInfo,
                 skills: action.skills,
-                schools: action.schools,
-                major: action.major,
+                educations: action.educations,
                 description: action.description,
                 languageSkills: action.languageSkills,
                 experiences: action.experiences,
                 rating: action.rating,
+                major: action.major,
             }
 
         default:

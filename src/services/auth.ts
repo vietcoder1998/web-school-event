@@ -15,8 +15,8 @@ export const authHeaders = {
 
 // Check Login User
 export const loginHeaders = {
-    'client_id': 'worksvn-student-web',
-    'secret': 'worksvn-student-web@works.vn',
+    'client_id': process.env.REACT_APP_CLIENT_ID,
+    'secret':   process.env.REACT_APP_CLIENT_SECRET,
     'Access-Control-Allow-Headers': '*',
     "Content-Type": "application/json",
 }

@@ -1,5 +1,5 @@
 .search-area {
-  font-weight: 700;
+  font-weight: 500;
   .search-box-phone {
     z-index: 1;
     padding: 20px 10px;
@@ -34,6 +34,7 @@
           margin: 0px 5px;
           text-align: center;
           font-weight: 400;
+          
         }
       }
     }
@@ -53,11 +54,21 @@
   .search-box {
     transition: 0.5s;
     background-color: rgba(32, 32, 32, 0.637);
-    padding: 30px 8vw;
+    padding: 20px 8vw;
     height: auto;
     text-align: center;
     font-family: IBMPlexSanLights;
 
+    .ant-tabs-ink-bar-animated {
+      height: 2.8px;
+      background-color: white;
+    }
+    .ant-tabs-bar {
+      // margin: 0 0 1px 0;
+      // border-bottom: 10;
+      border-width: 1;
+      
+    }
     //Location-address
     .location-address {
       position: relative;
@@ -108,24 +119,61 @@
       padding: 10px;
 
       .choose-shift {
-        margin: 10px 0px;
+        margin: 5px 0px;
 
         button {
-          width: 65px;
-          height: 65px;
+          width: 85px;
+          height: 45px;
           padding: 0px;
           margin: 10px 20px;
           text-align: center;
-          border-radius: 50%;
+          // border-radius: 50%;
           font-weight: 400;
+          // border: solid 1px rgb(24, 144, 255);
+          &:hover {
+            box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+          } 
         }
       }
 
       .choose-day {
         button {
-          margin: 2px 5px;
+          margin: 2px 8px;
+          border-radius: 50%;
+          width: 52px;
+          height: 52px;
+          padding: 0;
+          // border: solid 1px rgb(24, 144, 255);  
+          &:hover {
+            box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+          }        
         }
       }
+    }
+
+    .ant-tabs-nav {
+      color: #fff;
+      font-weight: 400;
+      // font-size: 1.1em;
+      &:hover {
+       
+        // color: #fff !important;
+      }
+      .ant-tabs-tab[aria-selected="true"]:hover {
+        font-weight: 650;
+      }
+      .ant-tabs-tab[aria-selected="false"]:hover {
+        color: #fff;
+        // font-weight: 600;
+        font-size: 1.07em;
+        // text-shadow: 0px 0px 10px #000;
+      }
+      
+    }
+    .ant-tabs-tab-active {
+      color: #fff;
+      font-weight: 650;
+      font-size: 1.07em;
     }
   }
 
@@ -141,5 +189,17 @@
 
   .ant-modal-body {
     height: auto;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .ant-tabs-bar {
+    margin: 0 0 1px 0;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .ant-tabs-bar {
+    margin: 0 200px 1px 200px;
   }
 }

@@ -15,12 +15,15 @@ interface IProps {
     jobNames: Array<any>,
     history?: any,
     getJobResult: Function,
+    getJobNames: Function,
 }
 interface IState {
     body?: any;
 }
 
 function Option(props?: IProps) {
+    React.useEffect(() => { props.getJobNames() }, []);
+
     let [body, setBody] =
         React.useState({
             employerID: null,
@@ -34,17 +37,14 @@ function Option(props?: IProps) {
             jobLocationFilter: {
                 regionID: null
             }
-        });
+        })
 
-    React.useEffect(() => { }, [])
 
     function searchJob() {
         props.getJobResult(body);
         window.scrollTo({ top: 0 });
     }
-
-    let { jobNames } = props;
-
+    let {jobNames} = props
     return (
         <div className='option content-footer'>
             <Row >
@@ -73,7 +73,7 @@ function Option(props?: IProps) {
                         </li>
                     </ul>
                     <p>
-                        <Link to='/tat-ca-cac-tinh'>Xem tất cả >></Link>
+                        <Link to='/tat-ca-cac-tinh' style={{textDecoration: 'underline', fontSize: '0.93em'}}>Xem tất cả >></Link>
                     </p>
                 </Col>
                 <Col xs={24} sm={24} md={8} lg={8} className='rule' >
@@ -93,7 +93,7 @@ function Option(props?: IProps) {
                         }
                     </ul>
                     <p>
-                        <Link to='/tat-ca-cac-cong-viec'>Xem tất cả >></Link>
+                        <Link to='/tat-ca-cac-cong-viec' style={{textDecoration: 'underline', fontSize: '0.93em'}}>Xem tất cả >></Link>
                     </p>
                 </Col>
                 <Col xs={24} sm={24} md={8} lg={8} className='rule' >
@@ -119,7 +119,7 @@ function Option(props?: IProps) {
                         </li>
                     </ul>
                     <p>
-                        <Link to='/result'>Xem tất cả >></Link>
+                        <Link to='/result' style={{textDecoration: 'underline', fontSize: '0.93em'}}>Xem tất cả >></Link>
                     </p>
                 </Col>
             </Row>
@@ -133,6 +133,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+    getJobNames: (pageIndex?: number, pageSize?: number) => dispatch({ type: REDUX_SAGA.JOB_NAMES.GET_JOB_NAMES, pageIndex, pageSize }),
     getJobResult: (body?: IJobSearchFilter) => dispatch({ type: REDUX_SAGA.JOB_RESULT.GET_JOB_RESULT, body })
 })
 

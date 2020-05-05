@@ -6,6 +6,7 @@ import { REDUX_SAGA } from '../../../../const/actions';
 import { IAppState } from '../../../../redux/store/reducer';
 import { IAnnouncement } from '../../../../models/announcements';
 import Meta from 'antd/lib/card/Meta';
+import { limitString } from '../../../../utils/limitString';
 
 interface IProps {
     getAnnouncements?: Function;
@@ -34,7 +35,7 @@ function Announcements(props?: IProps) {
                                             hoverable
                                             cover={
                                                 <div style={{ height: 400, overflow: "hidden" }}>
-                                                    <img width={'100%'} style={{ minHeight: '100%' }} alt="example" src={item.imageUrl} />
+                                                    <img width={'100%'} style={{ minHeight: '100%', backgroundSize: 'cover' }} alt="example" src={item.imageUrl} />
                                                 </div>
                                             }
                                             actions={
@@ -99,10 +100,11 @@ function Announcements(props?: IProps) {
                                                     ]
                                                 }
                                             >
-                                                <Meta title={item.title} description={
+                                                <Meta description={
                                                     <>
-                                                        {/* <div>{item.previewContent}</div> */}
-                                                        <div>Xem thêm >></div>
+                                                        <div  className="title_card" style={{fontWeight: 600,color:"black",fontSize:"1.1em",marginBottom:"5px", textTransform: 'uppercase'}}>{limitString(item.title, 55)}</div>
+                                                        <div className="data_card" style={{color: '#3a3a3a'}}>{item.previewContent} ...</div>
+                                                        <div style={{fontStyle: 'italic', fontSize: '0.9em', marginTop: 5, textDecoration: 'underline', color: 'rgb(99, 99, 99)'}}>Xem thêm >></div>
                                                     </>
                                                 } />
                                             </Card>

@@ -5,7 +5,7 @@ import { Tabs, Tab } from "react-bootstrap";
 import { Row, Col, Input, Radio, Select, Popconfirm } from "antd";
 import {
   PUBLIC_HOST,
-  STUDENTS_HOST,
+  STUDENT_HOST,
 } from "../../../../../../environment/development";
 import { LANGUAGE_SKILL } from "../../../../../../services/api/private.api";
 import { REDUX_SAGA } from "../../../../../../const/actions";
@@ -13,7 +13,7 @@ import { PUT, DELETE } from "../../../../../../const/method";
 import { _get } from "../../../../../../services/base-api";
 import { LANGUAGES } from "../../../../../../services/api/public.api";
 import ILanguageSkill from "../../../../../../models/language-skill";
-import { sendStringHeader } from "../../../../../../services/auth";
+import { sendStringHeader, noInfoHeader } from "../../../../../../services/auth";
 
 let { Option } = Select;
 
@@ -52,7 +52,7 @@ class LanguageSkillItem extends Component<IProps, IState> {
 
   async componentDidMount() {
     let { languageSkill, activeKey, list_language } = this.state;
-    let res_language = await _get(null, LANGUAGES, PUBLIC_HOST);
+    let res_language = await _get(null, LANGUAGES, PUBLIC_HOST, noInfoHeader);
     list_language = res_language.data.items;
     this.setState({ languageSkill, activeKey, list_language });
   }
@@ -96,7 +96,7 @@ class LanguageSkillItem extends Component<IProps, IState> {
         PUT,
         languageSkill,
         LANGUAGE_SKILL + "/" + id,
-        STUDENTS_HOST,
+        STUDENT_HOST, 
         null,
         null,
         true
@@ -107,7 +107,7 @@ class LanguageSkillItem extends Component<IProps, IState> {
         DELETE,
         null,
         LANGUAGE_SKILL,
-        STUDENTS_HOST,
+        STUDENT_HOST,
         null,
         params,
         true

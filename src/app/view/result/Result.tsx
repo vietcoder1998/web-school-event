@@ -6,13 +6,14 @@ import { connect } from 'react-redux';
 import { moveScroll } from '../../../utils/moveScroll';
 // @ts-ignore
 import Cookie from 'universal-cookie';
-import { REDUX_SAGA } from '../../../const/actions';
+import { REDUX_SAGA, REDUX } from '../../../const/actions';
 import ListResult from './list-result/ListResult';
 import SearchMore from './search-more/SearchMore';
 import ListHlJob from './list-hl-job/ListHlJob';
 import { IJobSearchFilter } from '../../../models/job-search';
 import SearchFilter from './search-filter/SearchFilter';
 import ResultFilter from './result-filter/ResultFilter';
+import qs from 'query-string';
 
 const cookie = new Cookie();
 
@@ -22,6 +23,14 @@ interface IPropsResult extends StateProps, DispatchProps {
     match?: any;
     getListJobNames: (name?: string) => any;
     getListRegions: (name?: string) => any;
+    loading_high_light_data?: any;
+    loading?: any;
+    jobType?: any;
+    area?: any;
+    location?: any;
+    setFilterJobType?: any;
+    history?: any;
+
 }
 
 interface IStateResult {
@@ -40,6 +49,7 @@ interface IStateResult {
     list_last_word: any;
     body?: IJobSearchFilter;
     job?: any;
+    pageIndexHighLight?: any;
 };
 
 class Result extends React.Component<IPropsResult, IStateResult> {
@@ -52,6 +62,7 @@ class Result extends React.Component<IPropsResult, IStateResult> {
             jobNameID: null,
             dataSource: [],
             pageIndex: 0,
+            pageIndexHighLight: -1,
             pageSize: 0,
             show_job: false,
             region: JSON.parse(localStorage.getItem('region')),
@@ -73,7 +84,7 @@ class Result extends React.Component<IPropsResult, IStateResult> {
                     regionID: null,
                     lat: null,
                     lon: null,
-                    distance: null
+                    distance: 20000
                 },
                 schoolConnected: null
             }
@@ -92,14 +103,94 @@ class Result extends React.Component<IPropsResult, IStateResult> {
         }
 
         this.props.getHighLightData(0);
-        this._callLoading();
+        // this._callLoading();
         this._callLastWord();
 
-        if (window.performance) {
-            if (performance.navigation.type === 1) {
-                this.props.getJobResults(pageIndex, pageSize, body);
+        let queryParam = qs.parse(this.props.location.search, { ignoreQueryPrefix: true })
+        let jobType, jobNameID, regionID;
+        let newWeekDays = [];
+        let newDayTimes= [];
+        if (this.props.setFilter) {
+            // console.log(this.props.jobType)
+            if (this.props.jobType) {
+                jobType = this.props.jobType
             }
+            if (this.props.job_dto && this.props.job_dto.name) {
+                jobNameID = this.props.job_dto.id
+            }
+            if (this.props.area && this.props.area.id) {
+                regionID = this.props.area.id
+            }
+            Object.keys(this.props.list_day).map((key) => {
+                if (this.props.list_day[key] === true) {
+                    newWeekDays.push(key)
+                }
+            });
+            Object.keys(this.props.list_shift).map((key) => {
+                if (this.props.list_shift[key] === true) {
+                    newDayTimes.push(key)
+                }
+            });
+        } else {
+            // console.log(queryParam.jobNameID)
+            if (queryParam.jobNameID) {
+                jobNameID = Number(queryParam.jobNameID)
+            } else {
+                jobNameID = this.props.job_dto.id
+            }
+            if (queryParam.regionID) {
+                regionID = Number(queryParam.regionID)
+            } else {
+                if (this.props.area && this.props.area.id) {
+                    regionID = this.props.area.id
+                } else {
+                    regionID = null
+                }
+            }
+            if (queryParam.jobType) {
+                jobType = queryParam.jobType
+            } else {
+                jobType = this.props.jobType
+            }
+            Object.keys(this.props.list_day).map((key) => {
+                if(queryParam[key] == 'true') {
+                    newWeekDays.push(key)
+                }
+            })
+            Object.keys(this.props.list_shift).map((key) => {
+                if (queryParam[key] == 'true') {
+                    newDayTimes.push(key)
+                }
+            });
         }
+        this.setState({
+            body: {
+                ...body,
+                jobType: jobType,
+                jobNameIDs: jobNameID ? [jobNameID] : null,
+                jobLocationFilter: {
+                    ...body.jobLocationFilter,
+                    regionID: regionID ? regionID : null
+                },
+                jobShiftFilter: {
+                    ...body.jobShiftFilter,
+                    weekDays: newWeekDays.length > 0 ? newWeekDays : null,
+                    dayTimes: newDayTimes.length > 0 ? newDayTimes: null
+                }
+            },
+            region: this.props.area
+        }, () => {
+            // console.log(this.state.body);
+            if (!this.props.setFilter) {
+                this.props.getJobResults(pageIndex, pageSize, this.state.body);
+            }
+        })
+        // await console.log(this.state.body);
+        // if (window.performance) {
+        //     if (performance.navigation.type === 1) {
+        //         this.props.getJobResults(pageIndex, pageSize, body);
+        //     }
+        // }
     }
 
     static getDerivedStateFromProps(nextProps?: IPropsResult, prevState?: IStateResult) {
@@ -112,9 +203,10 @@ class Result extends React.Component<IPropsResult, IStateResult> {
     }
 
     _handleIndex = (pageIndex?: number, pageSize?: number) => {
+        let { body } = this.state;
         moveScroll(0, 0);
         localStorage.setItem('paging', JSON.stringify({ pageIndex: pageIndex - 1, pageSize }));
-        this.props.getJobResults(pageIndex - 1, pageSize);
+        this.props.getJobResults(pageIndex - 1, pageSize, body);
         this.setState({ pageIndex: pageIndex - 1, pageSize })
         this._callLoading()
     }
@@ -142,33 +234,67 @@ class Result extends React.Component<IPropsResult, IStateResult> {
 
     onChangeJobFilter = async (event?: any) => {
         // console.log(event);
-        let { body } = this.state;
+        let queryParam = qs.parse(this.props.location.search, { ignoreQueryPrefix: true })
 
+        let { body } = this.state;
+        if (event.jobType !== 'PARTTIME') {
+            body.jobShiftFilter = {
+                gender: null,
+                weekDays: null,
+                dayTimes: null,
+            }
+        }
         if (event.jobType) {
             body.jobType = event.jobType;
+            queryParam.jobType = event.jobType
+        } else {
+            body.jobType = null;
         }
-
-        if (event.jobNameID !== null) {
+        // console.log(event.jobNameID)
+        queryParam.jobNameID = event.jobNameID;
+        if (event.jobNameID !== null && event.jobNameID !== undefined && event.jobNameID !== 0) {
             body.jobNameIDs = [event.jobNameID];
+        } else {
+            body.jobNameIDs = []
         }
-
+        // console.log(event.regionID)
+        queryParam.regionID = event.regionID
         body.jobLocationFilter.regionID = event.regionID;
 
-        await this.setState({ body });
+        this.props.history.replace('?' + qs.stringify(queryParam))
+        await this.setState({ body, pageIndex: 0 });
+        // await console.log(this.state.pageIndex)
         await this._callJob();
+
     }
 
     onChangeShiftsFilter = async (event?: any) => {
         let { body } = this.state;
+        let queryParam = qs.parse(this.props.location.search, { ignoreQueryPrefix: true })
         body.jobShiftFilter.weekDays = event.weekDays;
         body.jobShiftFilter.dayTimes = event.dayTimes;
+        Object.keys(this.props.list_day).map((key) => {
+            if (event.weekDays.includes(key)) {
+                queryParam[key] = true
+            } else {
+                queryParam[key] = false
+            }
+        })
+        Object.keys(this.props.list_shift).map((key) => {
+            if (event.dayTimes.includes(key)) {
+                queryParam[key] = true
+            } else {
+                queryParam[key] = false
+            }
+        })
+        this.props.history.replace('?' + qs.stringify(queryParam))
         await this.setState({ body });
         await this._callJob();
     }
 
     render() {
-        const { loading, region, body } = this.state;
-        const { results, highlightData, jobNames, regions } = this.props;
+        const { region, body } = this.state;
+        const { results, highlightData, jobNames, regions, loading_high_light_data, loading } = this.props;
         const list_result = results.items;
 
         return (
@@ -178,20 +304,24 @@ class Result extends React.Component<IPropsResult, IStateResult> {
                         <Col xs={0} sm={0} md={0} lg={0} xl={0} xxl={2}></Col>
                         <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={20}>
                             <div className='search-result'>
+                                {/* Search Result */}
+                                <Row>
+                                    <ListHlJob loading_high_light_data={loading_high_light_data} highlightData={highlightData} getHighLightJobs={(pageIndex) => {
+                                        this.props.getHighLightData(pageIndex, 6)
+                                    }} />
+                                </Row>
                                 {/* SearChTab */}
                                 <div className='search-tab'>
                                     <SearchFilter
                                         loading={loading}
                                         jobNames={jobNames}
-                                        jobType={body.jobType}
+                                        // jobType={body.jobType}
                                         regions={regions}
                                         onChangeJobFilter={this.onChangeJobFilter}
+                                        location={this.props.location}
                                     />
                                 </div>
-                                {/* Search Result */}
-                                <Row>
-                                    <ListHlJob highlightData={highlightData} getHighLightJobs={(pageIndex) => { this.props.getHighLightData(pageIndex, 6) }} />
-                                </Row>
+
                                 <ResultFilter numberRs={results.totalItems} regionName={region && region.name} totalJobs={region && region.totalJobs} />
                                 <Row>
                                     <Col xs={24} sm={24} md={16} lg={16} xl={17} xxl={20} >
@@ -204,6 +334,9 @@ class Result extends React.Component<IPropsResult, IStateResult> {
                                         <SearchMore
                                             loading={loading}
                                             onChangeShiftsFilter={this.onChangeShiftsFilter}
+                                            jobType={body.jobType}
+                                            location={this.props.location}
+
                                         />
                                     </Col>
                                 </Row>
@@ -214,6 +347,7 @@ class Result extends React.Component<IPropsResult, IStateResult> {
                                         defaultCurrent={1}
                                         total={results.totalItems}
                                         onChange={this._handleIndex}
+                                        current={this.state.pageIndex + 1}
                                         onShowSizeChange={(current?: number, size?: number) => this._handleIndex(current, size)}
                                     />
                                 </div>
@@ -232,11 +366,19 @@ class Result extends React.Component<IPropsResult, IStateResult> {
 
 const mapStateToProps = (state) => ({
     results: state.JobResult.result,
-    highlightData: state.HighLightResult,
+    loading: state.JobResult.loading,
+    highlightData: state.HighLightResult.data,
+    loading_high_light_data: state.HighLightResult.loading_high_light_data,
     isAuthen: state.isAuthen,
     jobNames: state.JobNames.items,
     regions: state.Regions.items,
-    isMobile: state.MobileState.isMobile
+    isMobile: state.MobileState.isMobile,
+    jobType: state.JobResult.filter.jobType,
+    area: state.JobResult.filter.area,
+    setFilter: state.JobResult.setFilter,
+    job_dto: state.JobResult.filter.job_dto,
+    list_day: state.JobResult.filter.list_day,
+    list_shift: state.JobResult.filter.list_shift,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -252,6 +394,7 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch({
             type: REDUX_SAGA.REGIONS.GET_REGIONS, name
         }),
+    setFilterJobType: (jobType, show_days) => dispatch({ type: REDUX.JOB_RESULT.SET_FILTER_JOB_TYPE, jobType, show_days }),
 })
 
 type StateProps = ReturnType<typeof mapStateToProps>;

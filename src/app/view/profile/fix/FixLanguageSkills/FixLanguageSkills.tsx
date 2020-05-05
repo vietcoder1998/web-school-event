@@ -10,6 +10,7 @@ import { _requestToServer } from '../../../../../services/exec';
 import { LANGUAGE_SKILL } from '../../../../../services/api/private.api';
 import { REDUX_SAGA } from '../../../../../const/actions';
 import ILanguageSkill from '../../../../../models/language-skill';
+import { noInfoHeader } from '../../../../../services/auth';
 
 let { Option } = Select;
 interface IProps {
@@ -44,7 +45,7 @@ class FixLanguageSkills extends Component<IProps, IState> {
 
     async componentDidMount() {
         let { list_language } = this.state;
-        let res_language = await _get(null, LANGUAGES, PUBLIC_HOST);
+        let res_language = await _get(null, LANGUAGES, PUBLIC_HOST, noInfoHeader);
         list_language = res_language.data.items;
         this.setState({ list_language });
     }

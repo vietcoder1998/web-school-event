@@ -70,6 +70,10 @@ function ShortProfile(props?: { personalInfo?: any }) {
             Số CMND:{personalInfo && personalInfo.identityCard}
           </li>
           <li>
+            <i className="fa fa-address-card " />
+            Mã sinh viên :{personalInfo && personalInfo.studentCode}
+          </li>
+          <li>
             <i className="fa fa-database " />
             Ngày tạo:{personalInfo && GetDate(personalInfo.createdDate)}
           </li>

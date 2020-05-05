@@ -6,7 +6,7 @@ import { limitString } from '../../../../utils/limitString';
 import { Link } from 'react-router-dom';
 //@ts-ignore
 import DefaultImage from '../../../../assets/image/carouselGroup/carousel2.jpg';
-import { REDUX_SAGA } from '../../../../const/actions';
+import { REDUX_SAGA, REDUX } from '../../../../const/actions';
 import { JobType } from '../../layout/common/Common';
 
 interface IProps {
@@ -14,40 +14,24 @@ interface IProps {
     getInDay?: Function;
     topJob?: any;
     indayJob?: any;
+    setLoadingGetHotJob?: Function;
+    loading_hot_job?: any
 };
 
-interface IState {
-    list_job_top: Array<any>,
-    pageIndex: number,
-    pageSize: number,
-    is_loading: boolean,
-};
 
-class HomeJob extends PureComponent<IProps, IState> {
-    constructor(props) {
-        super(props);
-        this.state = {
-            list_job_top: [
-
-            ],
-            pageIndex: 0,
-            pageSize: 9,
-            is_loading: true
-        };
-    };
+class HomeJob extends PureComponent<IProps> {
 
     componentDidMount = async () => {
         await this.props.getHotJob(0);
-        await this.setState({ is_loading: false });
     }
-
+    
+    changePage = (event?: number) => {
+        this.props.getHotJob(event - 1)
+    }
     render() {
-        let { topJob, indayJob } = this.props;
-        let { is_loading } = this.state;
-
-        if (topJob && topJob.totalItems > 0) {
+        let { topJob, loading_hot_job } = this.props;
             return (
-                <Row className='home-job' style={{ display: topJob.totalItems === 0 && indayJob.totalItems === 0 ? 'hidden' : '' }}>
+                <Row className='home-job' style={{ display: topJob.totalItems === 0? 'none' : '' }}>
                     <h5 style={{ textAlign: 'center' }}>VIỆC LÀM NỔI BẬT</h5>
                     {
                         topJob && topJob.items ? topJob.items.map((item, index) => {
@@ -58,29 +42,24 @@ class HomeJob extends PureComponent<IProps, IState> {
                             }
 
                             return <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12} key={index}>
-                                {is_loading ?
-                                    <Skeleton key={index} loading={true} avatar paragraph={{ rows: 1 }} /> :
+                                {loading_hot_job ?
+                                    <Skeleton key={index} loading={true} avatar paragraph={{ rows: 1 }} active={true} /> :
                                     (<div key={index} className='h-j-item'>
                                         <div className='img-job'>
-                                            <Avatar
-                                                shape={'square'}
-                                                src={logoUrl}
-                                                alt='ảnh công ti'
-                                                style={{ height: 70, width: 70 }}
-                                            />
+                                            <img src={logoUrl} alt='ảnh công ti' height='70px' width='70px' style={{ objectFit: 'contain' }} />
                                             <JobType>{item.jobType}</JobType>
                                         </div>
                                         <div className='job-content'>
                                             <ul>
                                                 <li className='j-d'>
                                                     <Link to={`/job-detail/${window.btoa(item.id)}`} target='_blank' >
-                                                        <h6 className='l_c'>{limitString(item.jobTitle, 30)}</h6>
+                                                        <h6 className='l_c'>{item.jobTitle}</h6>
                                                     </Link>
                                                 </li>
                                                 <li className='l_c'>
-                                                    <Link to={`/employer/${window.btoa(item.employerID)}`} target='_blank' >{limitString(item.employerName, 30)}</Link>
+                                                    <Link to={`/employer/${window.btoa(item.employerID)}`} target='_blank' className="name_employer">{item.employerName}</Link>
                                                 </li>
-                                                <li className='time-left'>{item.region.name}</li>
+                                                <li className='time-left' style={{ paddingTop: 0, fontWeight: 550 }}>{item.region && item.region.name ? item.region.name : null}</li>
                                             </ul>
                                         </div>
                                     </div>)} </Col>
@@ -89,25 +68,23 @@ class HomeJob extends PureComponent<IProps, IState> {
                         <Pagination
                             pageSize={topJob.pageSize}
                             total={topJob.totalItems}
-                            style={{ margin: '10px 0px' }}
-                            onChange={(event?: number) => this.props.getHotJob(event - 1)}
+                            style={{ margin: '25px 0px 10px' }}
+                            onChange={this.changePage}
                         />
                     </Col>
                 </Row>
             );
-        }
-        return null;
     }
 }
 
 const mapStateToProps = (state) => ({
     topJob: state.HotJobResult.data,
-    indayJob: state.InDayResult.data
+    loading_hot_job: state.HotJobResult.loading,
+    
 })
 
 const mapDispatchToProps = dispatch => ({
     getHotJob: (pageIndex?: number, pageSize?: number) => dispatch({ type: REDUX_SAGA.HOT_JOB.GET_HOT_JOB, pageIndex, pageSize }),
-    getInDay: (pageIndex?: number, pageSize?: number) => dispatch({ type: REDUX_SAGA.IN_DAY.GET_IN_DAY_JOB, pageIndex, pageSize }),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeJob);

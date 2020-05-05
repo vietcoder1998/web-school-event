@@ -1,0 +1,87 @@
+@import "../../../sass/variable";
+
+.home-job {
+  font-family: $font_base;
+  background-color: #f2f2f2;
+  padding: 10px;
+
+  h4 {
+    margin: 10px 0px !important;
+    text-align: center;
+  }
+
+  .ant-skeleton {
+    padding: 10px 5vw;
+    margin: 2vh 0px;
+
+    .ant-skeleton-header .ant-skeleton-avatar-lg {
+      width: 70px;
+      height: 70px;
+      line-height: 40px;
+      border-radius: 17px !important;
+    }
+  }
+
+  .h-j-item {
+    &:hover {
+      background-color: #E1ECF4;
+    }
+    display      : flex;
+    margin       : 0.2vw 1vw;
+    height       : 130px !important;
+    border-bottom: dashed $color_border 1px;
+    border-radius: 7px;
+    background-color: white;
+    margin-top: 10px;
+    
+    a {
+      color: #5d5d5d;
+
+      &:hover {
+        color: #168ecd;
+      }
+    }
+
+    .time-left {
+      text-align: left;
+      font-size: 0.7rem;
+      font-style: italic;
+    }
+
+    &:hover {
+      transition: 0.5s;
+    }
+
+    .job-content {
+      max-height: 80px;
+      width: 100%;
+      padding: 0px 10px;
+
+      a {
+        text-transform: lowercase;
+      }
+
+      h6 {
+        font-size: 1.1em;
+
+        &:hover {
+          color: rgb(0, 84, 136) !important;
+        }
+      }
+
+      .j-d {
+        &:hover {
+          color: rgba(46, 158, 255, 0.85) !important;
+        }
+      }
+
+      a::first-letter {
+        text-transform: uppercase;
+      }
+
+      li {
+        padding: 5px 2px;
+      }
+    }
+  }
+}

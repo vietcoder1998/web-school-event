@@ -8,11 +8,21 @@ import asyncComponent from "./routes/AppRoutes";
 import { REDUX, REDUX_SAGA } from "./const/actions";
 import $ from "jquery";
 import { Loading } from "./app/view/layout/common/Common";
+import { _get } from "./services/base-api";
+import { EVENT_PUBLIC } from "./services/api/public.api";
+import { PUBLIC_HOST } from "./environment/development";
+import { noInfoHeader } from "./services/auth";
 
+const EventHome = asyncComponent(() =>
+  import("./app/view/Event/Home/Home").then((module) => module.default)
+);
+
+const EventCountDown = asyncComponent(() =>
+  import("./app/view/Event/Home/CountDown").then((module) => module.default)
+);
 const Home = asyncComponent(() =>
   import("./app/view/home/Home").then((module) => module.default)
 );
-
 const Profile = asyncComponent(() =>
   import("./app/view/profile/Profile").then((module) => module.default)
 );
@@ -23,6 +33,12 @@ const NotFound = asyncComponent(() =>
 
 const Login = asyncComponent(() =>
   import("./app/view/login/Login").then((module) => module.default)
+);
+
+const ResetPassword = asyncComponent(() =>
+  import("./app/view/reset-password/ResetPassword").then(
+    (module) => module.default
+  )
 );
 
 const Register = asyncComponent(() =>
@@ -48,7 +64,11 @@ const AllNoti = asyncComponent(() =>
 const SaveJob = asyncComponent(() =>
   import("./app/view/save-job/SaveJob").then((module) => module.default)
 );
-
+const HistoryApply = asyncComponent(() =>
+  import("./app/view/history-apply/HistoryApply").then(
+    (module) => module.default
+  )
+);
 const JobDetail = asyncComponent(() =>
   import("./app/view/job-detail/JobDetail").then((module) => module.default)
 );
@@ -66,6 +86,13 @@ const DataJobNames = asyncComponent(() =>
     (module) => module.default
   )
 );
+
+//event
+
+const EventJobDetail = asyncComponent(() =>
+  import("./app/view/Event/Job/job-detail/JobDetail").then((module) => module.default)
+);
+
 
 class App extends React.Component {
   constructor(props) {
@@ -113,22 +140,38 @@ class App extends React.Component {
     return null;
   }
 
+  checkEvent() {
+    let res = _get(null, `/api/schools/${process.env.REACT_APP_SCHOOL_ID}/events/${process.env.REACT_APP_EVENT_ID}?activeCheck=true`, PUBLIC_HOST, noInfoHeader)
+    return res
+  }
   _loadLocal = async () => {
     let token = localStorage.getItem("accessToken");
     console.log(localStorage.getItem("accessToken"));
+    this.checkEvent()
+      .then(res => {
+        this.props.checkEvent(true)
+      })
+      .catch(e => {
+        this.props.checkEvent(false)
+      })
     if (token !== null) {
       await this.props.checkAuthen(token);
     }
   };
 
   render() {
+    let {eventStart} = this.props
     return (
       <Fragment>
         <Router>
           <Suspense fallback={<Loading />}>
             <Switch>
-              <Route exact path="/" component={Home} />
+              <Route exact path="/" component={eventStart ? EventHome : EventCountDown} />
+              <Route exact path="/event-job-detail/:id" component={EventJobDetail} />
+              <Route exact path="/count" component={EventCountDown} />
+              <Route exact path="/home" component={Home} />
               <Route exact path="/login" component={Login} />
+              <Route exact path="/reset-password" component={ResetPassword} />
               <Route
                 exact
                 path="/profile"
@@ -136,8 +179,9 @@ class App extends React.Component {
               />
               <Route exact path="/register" component={Register} />
               <Route exact path="/forgot-password" component={ForgotPassword} />
-              <Route exact path="/result" component={Result} />
+              <Route path="/result" component={Result} />
               <Route exact path="/save-job" component={SaveJob} />
+              <Route exact path="/history-apply" component={HistoryApply} />
               <Route exact path="/job-detail/:id" component={JobDetail} />
               <Route exact path="/notifications" component={AllNoti} />
               <Route exact path="/tat-ca-cac-tinh" component={DataRegions} />
@@ -158,6 +202,7 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => ({
   isAuthen: state.AuthState.isAuthen,
+  eventStart: state.EventStatusReducer.status
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -177,6 +222,12 @@ const mapDispatchToProps = (dispatch) => ({
       type: REDUX.MOBILE_STATE.SET_MOBILE_STATE,
       state,
     }),
+  checkEvent: (status) => {
+    dispatch({
+      type: REDUX.EVENT.START,
+      status
+    })
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

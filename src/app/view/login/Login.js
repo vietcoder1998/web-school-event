@@ -53,7 +53,6 @@ class Login extends Component {
                     setAuthSate(res);
                     this.props.setAuthen();
                     let last_access = localStorage.getItem('last_access');
-                 
                     setTimeout(() => {
                         if (last_access) {
                             window.location.assign(last_access);
@@ -77,7 +76,7 @@ class Login extends Component {
                         <Col xs={0} sm={0} md={6} lg={6} xl={7} xxl={8} ></Col>
                         <Col xs={24} sm={24} md={12} lg={12} xl={10} xxl={8} >
                             <div className="login-form">
-                                <p className='title a_c'>ĐĂNG NHẬP</p>
+                                <p className='title a_c' style={{fontWeight: 600}}>ĐĂNG NHẬP</p>
                                 <form>
                                     <p className='nomal'>
                                         <Input
@@ -93,14 +92,14 @@ class Login extends Component {
                                         />
                                     </p>
                                     <p className='nomal'>
-                                        <Input
+                                        <Input.Password
                                             placeholder="Password"
-                                            prefix={<Icon type="key" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                            suffix={
-                                                <Tooltip title="Điền đúng mật khẩu">
-                                                    <Icon type="info-circle" style={{ color: 'rgba(0,0,0,.45)' }} />
-                                                </Tooltip>
-                                            }
+                                            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                            // suffix={
+                                            //     <Tooltip title="Điền đúng mật khẩu">
+                                            //         <Icon type="info-circle" style={{ color: 'rgba(0,0,0,.45)' }} />
+                                            //     </Tooltip>
+                                            // }
                                             value={password}
                                             onChange={this.handlePassword}
                                             onPressEnter={this._createResponse}
@@ -111,9 +110,9 @@ class Login extends Component {
                                         <a href='/forgot-password' style={{ color: 'gray' }} >Quên mật khẩu ?</a>
                                     </p>
                                     <p>
-                                        <Button type='primary' onClick={this._createResponse} block>Đăng nhập</Button>
+                                        <Button style={{backgroundColor: '#31a3f9', borderColor: '#31a3f9'}} type='primary' onClick={this._createResponse} block>Đăng nhập</Button>
                                     </p>
-                                    <p className='a_c'>
+                                    {/* <p className='a_c'>
                                         hoặc
                                      </p>
                                     <p>
@@ -121,9 +120,9 @@ class Login extends Component {
                                             <i id='facebook_square' className="fa fa-facebook-square"></i>
                                             Đăng nhập với Facebook
                                         </Button>
-                                    </p>
+                                    </p> */}
                                     <p className='a_c'>
-                                        Bạn chưa có tài khoản ? <a href='/register' style={{ color: 'red' }}>Đăng kí</a>
+                                        Bạn chưa có tài khoản ? <a href='/register' style={{ color: '#fb4141' }}>Đăng ký</a>
                                     </p>
                                 </form>
                             </div>

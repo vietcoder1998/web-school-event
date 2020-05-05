@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { _requestToServer } from '../../../services/exec';
 import { POST } from '../../../const/method';
 import { APPLY_JOB, SAVED_JOB } from '../../../services/api/private.api';
-import { STUDENTS_HOST } from '../../../environment/development';
+import { STUDENT_HOST } from '../../../environment/development';
 import { authHeaders } from '../../../services/auth';
 //@ts-ignore
 import _ from 'lodash';
@@ -17,6 +17,7 @@ import { NotUpdate, JobType } from './../layout/common/Common';
 import { REDUX_SAGA } from '../../../const/actions';
 import JobProperties from './job-properties/JobProperties';
 import EmployerDetail from './employer-detail/EmployerDetail';
+import { Link } from 'react-router-dom';
 
 const { TabPane } = Tabs;
 const { TextArea } = Input;
@@ -43,6 +44,7 @@ interface IJobDetailProps extends StateProps, DispatchProps {
     getEmployerMoreJob?: (pageIndex?: number, pageSize?: number, id?: string) => any;
     getJobDetail?: (jobID?: string) => any;
     getEmployerDetail?: (id?: string) => any;
+    getSimilarJob?: (pageIndex?: number, pageSize?: number) => any;
 };
 
 export const _checkGender = (data) => {
@@ -52,27 +54,29 @@ export const _checkGender = (data) => {
                 return (
                     <div>
                         <p>
-                            <label><Icon type='man' /> Nam</label>
-                            <label><Icon type='woman' /> Nữ</label>
+                            <label style={{ marginBottom: 0, marginRight: 3 }}><Icon type='man' style={{ color: 'rgb(21, 148, 255)' }} />Nam & </label>
+                            <label style={{ marginBottom: 0, marginRight: 5 }}><Icon type='woman' style={{ color: '#ff395c' }} />Nữ </label>
                         </p>
-                        <p>Số lượt tự ứng tuyển: {data.applied}</p>
-                        <p>Số lượng nhận: {data.quantity}</p>
+                        <p>Số lượt đã ứng tuyển: {data.applied}/{data.quantity}</p>
+                        {/* <p>Số lượng nhận: {data.quantity}</p> */}
                     </div>);
             case "MALE":
                 return (
                     <div>
                         <p>
-                            <label><Icon type='man' style={{ color: '#168ECD' }} /></label> Nam
+                            <label style={{ marginBottom: 0 }}><Icon type='man' style={{ color: '#168ECD' }} /></label> Nam -
+                            <label style={{ marginLeft: 5, marginBottom: 0 }}>Số lượt đã ứng tuyển: {data.applied}/{data.quantity}</label>
                         </p>
-                        <p>Số lượt tự ứng tuyển: {data.applied}</p>
-                        <p>Số lượng nhận: {data.quantity}</p>
+
+                        {/* <p>Số lượng nhận: {data.quantity}</p> */}
                     </div>);
             case "FEMALE":
                 return (
                     <div>
-                        <p><label><Icon type='woman' style={{ color: '#168ECD' }} /></label> Nữ</p>
-                        <p>Số lượt tự ứng tuyển: {data.applied}</p>
-                        <p>Số lượng nhận: {data.quantity}</p>
+                        <p>
+                            <label style={{ marginBottom: 0 }}><Icon type='woman' style={{ color: '#ff395c' }} /></label> Nữ -
+                            <label style={{ marginLeft: 5, marginBottom: 0 }}>Số lượt đã ứng tuyển: {data.applied}/{data.quantity}</label>
+                        </p>
                     </div>);
             default:
                 return <NotUpdate />;
@@ -104,12 +108,12 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
     show_btn = false;
     l_e = [];
     l_s = [];
-
     componentDidMount() {
         this.setState({ is_loading: false });
         this._loadData();
         this._loadState();
         moveScroll(0, 0);
+        this.props.getSimilarJob(0,6);        
     };
 
     static getDerivedStateFromProps(nextProps?: IJobDetailProps, prevState?: IJobDetailState) {
@@ -138,6 +142,9 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
         setTimeout(() => {
             this.setState({ is_loading_more: false })
         }, 500);
+    };
+    _getSimilarJob = (pageIndex?: number) => {
+        this.props.getSimilarJob(pageIndex - 1)
     };
 
     async _loadState() {
@@ -183,7 +190,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
     async _saveJob() {
         let { isAuthen, jobDetail } = this.props;
         if (isAuthen) {
-            let res = await _requestToServer(POST, null, SAVED_JOB + `/${jobDetail.id}/saved`, STUDENTS_HOST, authHeaders);
+            let res = await _requestToServer(POST, null, SAVED_JOB + `/${jobDetail.id}/saved`, STUDENT_HOST, authHeaders);
             if (res && res.data === null) {
                 this.setState({ isSaved: true });
             } else {
@@ -200,19 +207,19 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
     };
 
     async requestToServer(data, id) {
-        await _requestToServer(POST, data, APPLY_JOB + `/${id}/apply`, STUDENTS_HOST, authHeaders).then(res => {
+        await _requestToServer(POST, data, APPLY_JOB + `/${id}/apply`, STUDENT_HOST, authHeaders).then(res => {
             if (res) {
                 this.props.getJobDetail(id);
                 this._loadState();
             }
-        })
+        }) 
     };
 
     componentWillUnmount() {
     }
 
     render() {
-        let { jobDetail, employerDetail, employerMoreJob, isAuthen, totalMoreJob } = this.props;
+        let { jobDetail, employerDetail, employerMoreJob, isAuthen, totalMoreJob, is_loading_more, similarJob, totalSimilarJob, is_loading_similar } = this.props;
         let { is_loading, visible, confirmLoading, jobState } = this.state;
         let isSaved = jobDetail.saved;
 
@@ -316,12 +323,11 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                                     <div className='cover-image-job '>
                                         <img src={testImage(coverUrl)}
                                             className='company-image'
-                                            alt='ảnh cover nhà ứng tuyển'
                                         />
 
                                     </div>
                                     {/* Header */}
-                                    <div className='job-header' style={{ backgroundColor: color }} >
+                                    <div className='job-header' >
                                         <div className='company-header'>
                                             <Row>
                                                 <Col xs={4} sm={8} md={4} lg={3} xl={4} className='a_c'>
@@ -334,6 +340,19 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                                                     <h4>
                                                         {jobDetail && jobDetail.jobTitle}
                                                     </h4>
+                                                    <div className='d_j_t'>
+                                                        <Icon type="home" style={{ color: '#168ECD' }} />
+                                                        <label>
+                                                            <Link to={`/employer/${window.btoa(employerDetail.id)}`} target='_blank' style={{ fontSize: '1.05em', fontWeight: 450 }}>{employerDetail && employerDetail.employerName}</Link>
+                                                        </label>
+                                                    </div>
+                                                    <div className='d_j_t'>
+                                                        <Icon type="environment-o" style={{ color: '#168ECD' }} />
+                                                        <label>
+                                                            {/* <IptLetter value={"Nơi đăng: "} /> */}
+                                                            <span>{jobDetail && jobDetail.address}</span>
+                                                        </label>
+                                                    </div>
                                                 </Col>
                                                 <Col xs={24} sm={24} md={4} lg={4} xl={4} >
                                                     <Row className='btn-s-c'>
@@ -357,7 +376,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                                                                 size='large'
                                                                 style={{
                                                                     padding: '5px 0px',
-                                                                    backgroundColor: applyState ? "" : "orange",
+                                                                    backgroundColor: applyState ? "" : "#31a3f9",
                                                                     borderColor: applyState ? "" : "white",
                                                                     color: applyState ? "" : "white",
                                                                 }}
@@ -375,14 +394,21 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                                     <div className='job-content '>
                                         <Tabs defaultActiveKey="1" className='' >
                                             <TabPane tab="Chi tiết công việc" key="1">
-                                                <JobProperties jobDetail={jobDetail} />
+                                                <JobProperties
+                                                    jobDetail={jobDetail}
+                                                    similarJob={similarJob}
+                                                    _getSimilarJob={this._getSimilarJob}
+                                                    paging={totalSimilarJob}
+                                                    is_loading_similar={is_loading_similar}
+                                                />
                                             </TabPane>
-                                            <TabPane tab="Công ti tuyển dụng" key="2">
+                                            <TabPane tab="Thông tin Công ty" key="2">
                                                 <EmployerDetail
                                                     employerDetail={employerDetail}
                                                     employerMoreJob={employerMoreJob}
                                                     _getMoreJob={this._getMoreJob}
                                                     paging={totalMoreJob}
+                                                    is_loading_more={is_loading_more}
                                                 />
                                             </TabPane>
                                         </Tabs>
@@ -401,8 +427,12 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
 const mapStateToProps = (state) => ({
     jobDetail: state.GetJobDetail,
     employerDetail: state.EmployerDetail,
-    employerMoreJob: state.EmployerMoreJob,
-    totalMoreJob: state.EmployerMoreJob.totalItems,
+    employerMoreJob: state.EmployerMoreJob.data,
+    similarJob: state.SimilarJob.data,
+    is_loading_more: state.EmployerMoreJob.loading,
+    is_loading_similar: state.SimilarJob.loading,
+    totalMoreJob: state.EmployerMoreJob.data.totalItems,
+    totalSimilarJob: state.SimilarJob.totalItems,
     isAuthen: state.AuthState.isAuthen
 })
 
@@ -411,6 +441,8 @@ const mapDispatchToprops = (dispatch) => ({
         dispatch({ type: REDUX_SAGA.JOB_DETAIL.GET_JOB_DETAIL, jobID }),
     getEmployerMoreJob: (pageIndex?: number, pageSize?: number, employerID?: string) =>
         dispatch({ type: REDUX_SAGA.EMPLOYER_MORE_JOB.GET_EMPLOYER_MORE_JOB, pageIndex, pageSize, employerID }),
+    getSimilarJob: (pageIndex?: number, pageSize?: number) =>
+        dispatch({ type: REDUX_SAGA.SIMILAR_JOB.GET_SIMILAR_JOB, pageIndex, pageSize }),
     getEmployerDetail: (id?: string) =>
         dispatch({ type: REDUX_SAGA.EMPLOYER_DETAIL.GET_EMPLOYER_DETAIL, id }),
 })

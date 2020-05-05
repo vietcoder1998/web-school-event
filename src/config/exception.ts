@@ -1,12 +1,13 @@
 import swal from "sweetalert";
 import { TYPE } from './../const/type';
 
-export const exceptionShowNoti = async (err: any) => {
+export const exceptionShowNoti = async (err: any, hide_alert_error: any) => {
     // console.log(err);
-    if (err && err && err.response && err.response.data) {
+    if (err && err && err.response && err.response.data && !hide_alert_error) {
         let msg = err.response.data.msg;
+        console.log(err)
         swal({
-            title: "Workvns thông báo",
+            title: "Worksvn thông báo",
             text: msg,
             icon: TYPE.ERROR,
             dangerMode: true,
