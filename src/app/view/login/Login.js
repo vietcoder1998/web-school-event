@@ -71,7 +71,10 @@ class Login extends Component {
                                 icon: 'success',
                                 dangerMode: true,
                             });
-                            window.location.assign('/register');
+                            // setTimeout(() => {
+                            //      window.location.assign('/register');
+                            // }, 3000)
+                           
                         }
                         else {
                             setAuthSate(res);

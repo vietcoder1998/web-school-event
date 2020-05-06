@@ -207,15 +207,60 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
         this.setState({ visible: false })
     };
 
+    // async requestToServer(data, id) {
+    //     await _requestToServer(POST, data, APPLY_JOB + `/${id}/apply`, STUDENT_HOST, authHeaders).then(res => {
+    //         if (res) {
+    //             this.props.getJobDetail(id);
+    //             this._loadState();
+    //         }
+    //     }) 
+    // };
     async requestToServer(data, id) {
-        await _requestToServer(POST, data, APPLY_JOB + `/${id}/apply`, STUDENT_HOST, authHeaders).then(res => {
-            if (res) {
-                this.props.getJobDetail(id);
-                this._loadState();
+        console.log(localStorage.getItem("gender"));
+        await _requestToServer(
+          POST,
+          data,
+          APPLY_JOB + `/${id}/apply`,
+          STUDENT_HOST,
+          authHeaders,
+          null,
+          false
+        ).then((res) => {
+          if (res) {
+            console.log(res);
+            let { results } = res;
+            for (let i in results) {
+              // console.log(results[i])
+              if (results[i].full === true) {
+                swal({
+                  title: "Worksvns thông báo",
+                  text: "Số người ứng tuyển đã đầy",
+                  icon: TYPE.ERROR,
+                  dangerMode: true,
+                });
+              } else {
+                if (results[i].genderSuitable === false) {
+                  swal({
+                    title: "Worksvns thông báo",
+                    text: "Khác giới tính yêu cầu",
+                    icon: TYPE.ERROR,
+                    dangerMode: true,
+                  });
+                } else {
+                    swal({
+                        title: "Worksvns thông báo",
+                        text: "Ứng tuyển thành công!",
+                        icon: TYPE.SUCCESS,
+                        dangerMode: false,
+                      });
+                  this.props.getJobDetail(id);
+                  this._loadState();
+                }
+              }
             }
-        }) 
-    };
-
+          }
+        });
+      }
     componentWillUnmount() {
     }
 

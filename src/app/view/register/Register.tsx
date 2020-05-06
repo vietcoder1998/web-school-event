@@ -99,7 +99,7 @@ class Register extends Component<IProps, IState> {
     };
   }
   async componentDidMount() {
-    let { list_major, email_register_dto } = this.state;
+    let { list_major, email_register_dto, repassword } = this.state;
     let res_major = await _get(null, MAJORS, PUBLIC_HOST, noInfoHeader);
     list_major = res_major.data.items;
     this.setState({
@@ -108,11 +108,17 @@ class Register extends Component<IProps, IState> {
 
     if(localStorage.getItem('user_exists') === 'false'){
       email_register_dto.email = localStorage.getItem('user_exists_userName');
-      email_register_dto.email = localStorage.getItem('user_exists_password');
+      email_register_dto.password = localStorage.getItem('user_exists_password');
+      repassword = localStorage.getItem('user_exists_password');
+      console.log(email_register_dto)
    
       this.setState({
         is_exists: true,
         email_register_dto,
+        repassword,
+        is_exactly_email: true,
+        is_exactly_pw: true,
+        is_exactly_rpw: true,
       })
     }
   }

@@ -141,7 +141,7 @@ class App extends React.Component {
   }
 
   checkEvent() {
-    let res = _get(null, `/api/schools/${process.env.REACT_APP_SCHOOL_ID}/events/abc?activeCheck=true`, PUBLIC_HOST, noInfoHeader)
+    let res = _get(null, `/api/schools/${process.env.REACT_APP_SCHOOL_ID}/events/${process.env.REACT_APP_EVENT_ID}?activeCheck=true`, PUBLIC_HOST, noInfoHeader)
     return res
   }
   _loadLocal = async () => {
