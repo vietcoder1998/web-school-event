@@ -1,59 +1,96 @@
 @import url("https://fonts.googleapis.com/css?family=Lato");
 
 .Countdown {
-    text-align: center;
-    background-image: url(../../../../assets/image/countdown.jpg);
-    height: 100%;
-    /* Center and scale the image nicely */
+  text-align: center;
+  background-image: url(../../../../assets/image/countdown.jpg);
+  height: 100%;
+  /* Center and scale the image nicely */
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  // background-size: auto 100%;
+  background-color: #021444;
+  @media only screen and (min-width: 1px) and (max-width: 600px) {
+    background-color: rgb(179, 230, 245);
+    background-image: url(../../../../assets/image/phone.jpg);
+    background-position: center;
     background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+    background-attachment: fixed;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: 100% 100%;
+    height: 100%;
+    width: 100%;
+  }
+
+  h2 {
+    color: white;
+    font-weight: bold;
+  }
+  span {
+    font-weight: bold;
+  }
+  .center {
+    position: fixed !important;
+    padding-bottom: 10px;
+    top: 75%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
 
     @media only screen and (min-width: 1px) and (max-width: 600px) {
-        background: none;
-        background-color: rgb(179, 230, 245);
+      top: 70%;
+      width: 70%;
+      margin-top: 10px;
     }
-    h2 {
-        color: white;
-        font-weight: bold;
+  }
+  .btn {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .time {
+    width: 100%;
+    margin-top: 5%;
+    
+    @media only screen and (min-width: 1500px) {
+      margin-top: 20%;
     }
-    span {
-        font-weight: bold;
+    @media only screen and (min-width: 660px) and (max-width: 1100px) {
+      width: 550px;
+      text-align: center;
+      align-items: center;
     }
-    .center {
-        position: fixed !important;
-        padding-bottom: 10px;
-        
-        top: 75%;
-        left: 50%;
-        /* bring your own prefixes */
-        transform: translate(-50%, -50%);
-        @media only screen and (min-width: 1px) and (max-width: 600px) {
-           top: 65%;
-           width: 60%;
-        }
+  }
+  img {
+    margin: 0px 30px;
+  }
+  .Countdown-col {
+    display: inline-block;
+    color: white;
+    border: 4px solid white;
+    border-radius: 50%;
+    margin: 0px 10px;
+    @media only screen and (min-width: 1px) and (max-width: 600px) {
+      h2 {
+        margin-bottom: 60%;
+      }
     }
-    .btn {
-        margin-top: 20px;
-    }
-    .time {
-        border: solid 3px white;
-    }
-    .Countdown-col {
-        display: inline-block;
-        color: white;
-    }
+  }
 
-    .Countdown-col-element {
-        display: inline-block;
-        margin: 0 20px;
-        display: flex;
-        flex-direction: column;
-        color: white;
-    }
+  .Countdown-col-element {
+    display: inline-block;
+    margin: 0 20px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+  }
 
-    .Countdown-col-element strong {
-        font-size: 50px;
-        color: white;
+  .Countdown-col-element strong {
+    font-size: 50px;
+    color: white;
+
+    @media only screen and (min-width: 1px) and (max-width: 600px) {
+      font-size: 30px;
     }
+  }
 }
