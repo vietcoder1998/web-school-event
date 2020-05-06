@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Login.scss';
-
+import swal from 'sweetalert';
 // import * as auth from '../../service/auth';
 import { connect } from 'react-redux';
 import { authUserPassword } from '../../../services/api/private.api';
@@ -47,19 +47,49 @@ class Login extends Component {
             password: this.state.password
         }
 
-        _requestToServer(POST, data, authUserPassword, AUTH_HOST, loginHeaders, null, true)
+        _requestToServer(POST, data, authUserPassword, AUTH_HOST, loginHeaders, null, false)
             .then(res => {
                 if (res) {
-                    setAuthSate(res);
-                    this.props.setAuthen();
-                    let last_access = localStorage.getItem('last_access');
-                    setTimeout(() => {
-                        if (last_access) {
-                            window.location.assign(last_access);
-                        } else {
-                            window.location.assign('/');
+                    console.log(res.target)
+                    console.log(res)
+                    if (res.data.target !== 'STUDENT') {
+                        swal({
+                            title: "Worksvns thông báo",
+                            text: "Sai tên đăng nhập hoặc mật khẩu!",
+                            icon: 'error',
+                            dangerMode: true,
+                        });
+                    }
+                    else {
+                        if (res.data.userExists === false) {
+                            localStorage.setItem('user_exists', false);
+                            localStorage.setItem('user_exists_userName', data.username);
+                            localStorage.setItem('user_exists_password', data.password);
+                            swal({
+                                title: "Worksvns thông báo",
+                                text: "Xác thực thông tin để đăng nhập",
+                                icon: 'success',
+                                dangerMode: true,
+                            });
+                            window.location.assign('/register');
                         }
-                    }, 1500);
+                        else {
+                            setAuthSate(res);
+                            this.props.setAuthen();
+                            let last_access = localStorage.getItem('last_access');
+                            setTimeout(() => {
+                                if (last_access) {
+                                    window.location.assign(last_access);
+                                } else {
+                                    window.location.assign('/');
+                                }
+                            }, 1500);
+                        }
+                    }
+
+
+
+
                 }
 
             });
@@ -76,7 +106,7 @@ class Login extends Component {
                         <Col xs={0} sm={0} md={6} lg={6} xl={7} xxl={8} ></Col>
                         <Col xs={24} sm={24} md={12} lg={12} xl={10} xxl={8} >
                             <div className="login-form">
-                                <p className='title a_c' style={{fontWeight: 600}}>ĐĂNG NHẬP</p>
+                                <p className='title a_c' style={{ fontWeight: 600 }}>ĐĂNG NHẬP</p>
                                 <form>
                                     <p className='nomal'>
                                         <Input
@@ -110,7 +140,7 @@ class Login extends Component {
                                         <a href='/forgot-password' style={{ color: 'gray' }} >Quên mật khẩu ?</a>
                                     </p>
                                     <p>
-                                        <Button style={{backgroundColor: '#31a3f9', borderColor: '#31a3f9'}} type='primary' onClick={this._createResponse} block>Đăng nhập</Button>
+                                        <Button style={{ backgroundColor: '#31a3f9', borderColor: '#31a3f9' }} type='primary' onClick={this._createResponse} block>Đăng nhập</Button>
                                     </p>
                                     {/* <p className='a_c'>
                                         hoặc

@@ -207,7 +207,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
     };
 
     async requestToServer(data, id) {
-        await _requestToServer(POST, data, APPLY_JOB + `/${id}/apply`, STUDENT_HOST, authHeaders).then(res => {
+        await _requestToServer(POST, data, APPLY_JOB + `/${id}/apply`, STUDENT_HOST, authHeaders, null, true).then(res => {
             if (res) {
                 this.props.getJobDetail(id);
                 this._loadState();
@@ -276,6 +276,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                         <Button key='ok'
                             type='primary'
                             onClick={isAuthen ? this._createRequest : this._toLogin}
+                            
                         >{content}</Button>
                     ]}
                     confirmLoading={confirmLoading}
