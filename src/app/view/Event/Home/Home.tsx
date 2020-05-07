@@ -3,7 +3,6 @@ import Layout from "../../layout/Layout";
 import { connect } from "react-redux";
 import HomeJob from "./home-job/HomeJob";
 import TopEm from "./top-em/TopEm";
-import Announcements from "./annoucements/Announcements";
 import TopJob from "./top-job/TopJob";
 import Banner from "./banner/Banner";
 import Branch from "./branch/Branch";

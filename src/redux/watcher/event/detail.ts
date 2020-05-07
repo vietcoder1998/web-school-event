@@ -10,7 +10,6 @@ import { store } from '../../store';
 
 function* getDetailEvent(action) {
     let res = yield call(getDetailEventData, action);
-    console.log(res)
     if (res) {
         let data = res.data;
         yield put({ type: REDUX.EVENT.DETAIL, data });

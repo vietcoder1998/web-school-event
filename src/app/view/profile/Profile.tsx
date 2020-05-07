@@ -30,6 +30,7 @@ import { REDUX_SAGA } from "../../../const/actions";
 
 interface IProps {
   personalInfo?: any;
+  getData?: Function;
 }
 
 interface IState {
@@ -71,8 +72,10 @@ class Profile extends Component<IProps, IState> {
   icon_regular_star = (<i className="fa fa-star" />);
 
   async componentDidMount() {
+
     await this.props.getData();
-    await this.setState({ loading: false });
+  
+   this.setState({ loading: false });
   }
 
   _fixData = (id) => {
@@ -257,13 +260,14 @@ const mapStateToProps = (state) => {
   return {
     isAuthen: state.AuthState.isAuthen,
     personalInfo: state.FullPersonalInfo,
+    dataRedux: state,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   getData: () =>
     dispatch({
-      type: REDUX_SAGA.PERSON_INFO.FULL_INFO,
+      type: REDUX_SAGA.PERSON_INFO.GET_FULL_PERSON_INFO,
     }),
 });
 

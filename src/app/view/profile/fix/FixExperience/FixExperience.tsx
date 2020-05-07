@@ -145,7 +145,7 @@ class FixExperience extends Component<IState, IState> {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    getData: () => dispatch({ type: REDUX_SAGA.PERSON_INFO.GET_PERSON_INFO })
+    getData: () => dispatch({ type: REDUX_SAGA.PERSON_INFO.GET_FULL_PERSON_INFO })
 })
 
 export default connect(null, mapDispatchToProps)(FixExperience);

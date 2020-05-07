@@ -13,7 +13,7 @@ function* getListJobResultData(action) {
     let res = yield call(getJobResults, action);
     if (res) {
         let data = res.data;
-        console.log(data)
+      
         yield put({ type: REDUX.EVENT.JOB.SEARCH, data });
     }
 }

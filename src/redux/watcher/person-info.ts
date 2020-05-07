@@ -7,7 +7,9 @@ import { authHeaders } from '../../services/auth';
 import { REDUX_SAGA, REDUX } from '../../const/actions'
 import imageDefault from "../../assets/image/base-image.jpg";
 function* getFullPersonInfo() {
+   
     let res = yield call(getData);
+   
     let data = res.data
     let personalInfo = {
         id: "",
@@ -84,7 +86,7 @@ function* getFullPersonInfo() {
 
 
     yield put({
-        type: REDUX.PERSON_INFO.GET_FULL_INFO,
+        type: REDUX.PERSON_INFO.GET_FULL_PERSON_INFO,
         personalInfo,
         skills,
         educations,
@@ -103,7 +105,7 @@ function getData() {
 
 // Watcher
 export function* PersonInfoWatcher() {
-    yield takeEvery(REDUX_SAGA.PERSON_INFO.FULL_INFO, getFullPersonInfo);
+    yield takeEvery(REDUX_SAGA.PERSON_INFO.GET_FULL_PERSON_INFO, getFullPersonInfo);
 }   
 
 

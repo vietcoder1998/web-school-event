@@ -15,7 +15,6 @@ export const _post = async (
     headers = authHeaders;
   }
 
-  console.log(requestURL)
   let response = await axios.post(requestURL, data, { headers, params });
 
   return response.data;
@@ -33,7 +32,7 @@ export const _get = async (
   if (headers === null || headers === undefined) {
     headers = authHeaders;
   }
-  console.log(requestURL)
+
   let response = await axios.get(requestURL, { params: params, headers });
   return response.data;
 };
@@ -51,7 +50,7 @@ export const _delete = async (
   if (headers === null || headers === undefined) {
     headers = authHeaders;
   }
-  console.log(requestURL)
+
   let response = await axios.delete(requestURL, { data: params, headers });
   return response.data;
 };
@@ -69,7 +68,7 @@ export const _put = async (
   if (headers === null || headers === undefined) {
     headers = authHeaders;
   }
-  console.log(requestURL)
+
   let response = await axios.put(requestURL, data, { headers, params });
   return response.data;
 };

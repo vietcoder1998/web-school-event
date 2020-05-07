@@ -20,7 +20,7 @@ let short_personal_data = {
 
 export const ShortPersonalInfo = (state = short_personal_data, action): any => {
     switch (action.type) {
-        case REDUX.PERSON_INFO.GET_PERSON_INFO:
+        case REDUX.PERSON_INFO.GET_SHORT_PERSON_INFO:
             return {
                 ...state,
                 name: action.name,
@@ -33,7 +33,7 @@ export const ShortPersonalInfo = (state = short_personal_data, action): any => {
 }
 export const FullPersonalInfo = (state = personal_data, action): any => {
     switch (action.type) {
-        case REDUX.PERSON_INFO.GET_PERSON_INFO:
+        case REDUX.PERSON_INFO.GET_FULL_PERSON_INFO:
             return {
                 ...state,
                 personalInfo: action.personalInfo,

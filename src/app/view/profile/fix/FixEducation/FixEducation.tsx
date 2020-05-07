@@ -140,7 +140,7 @@ class FixEducation extends Component<IProps, IState>{
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    getData: () => dispatch({ type: REDUX_SAGA.PERSON_INFO.GET_PERSON_INFO }),
+    getData: () => dispatch({ type: REDUX_SAGA.PERSON_INFO.GET_FULL_PERSON_INFO }),
 })
 
 export default connect(null, mapDispatchToProps)(FixEducation);

@@ -12,7 +12,7 @@ function* getEmployerMoreJob(action) {
     let res = yield call(getEmployerMoreJobData, action);
     if (res) {
         let data = res.data;
-        console.log(data)
+      
         yield put({ type: REDUX.EVENT.EMPLOYER.MORE_JOB, data });
     }
 }
