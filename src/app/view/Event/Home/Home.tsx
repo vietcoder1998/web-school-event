@@ -22,7 +22,6 @@ function Home(props) {
         <TopJob />
         <HomeJob />
       </div>
-      <Announcements {...props} />
     </Layout>
   );
 }

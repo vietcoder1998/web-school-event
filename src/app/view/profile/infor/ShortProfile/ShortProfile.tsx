@@ -21,7 +21,7 @@ function ShortProfile(props?: { personalInfo?: any }) {
     <div className="wrapper">
       <div className="avatar">
         <Avatar
-          src={personalInfo.avatarUrl}
+          src={personalInfo.avatarUrl === null ? imageDefault : personalInfo.avatarUrl}
           style={{
             width: "100px",
             height: "100px",

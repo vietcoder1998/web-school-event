@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Input, Select, Button, Icon, Modal, Tabs, Col, Row } from 'antd';
 import './SearchBox.scss';
-import MapContainer from '../../../layout/google-maps/MapContainer';
 import { connect } from 'react-redux';
 import { REDUX_SAGA, REDUX } from '../../../../../const/actions';
 //@ts-ignore
@@ -154,7 +153,7 @@ class SearchBox extends Component<IProps, IState>{
 
     async componentDidMount() {
         this.props.getRegions();
-        this.props.getJobNames();
+        // this.props.getJobNames();
         if (!this.props.area) {
             // this.setState({ area: region })
             this.props.setFilterArea({ id: 24, name: 'Hà Nội' });
@@ -404,12 +403,7 @@ class SearchBox extends Component<IProps, IState>{
 
     render() {
         let {
-            // list_day,
-            // list_shift,
-            show_modal,
-            location,
-            show_location,
-            choose_location,
+
             choose_advanced,
             showQRImageType
         } = this.state;
