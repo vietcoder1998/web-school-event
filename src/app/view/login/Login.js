@@ -71,9 +71,9 @@ class Login extends Component {
                                 icon: 'success',
                                 dangerMode: true,
                             });
-                            // setTimeout(() => {
-                            //      window.location.assign('/register');
-                            // }, 3000)
+                            setTimeout(() => {
+                                 window.location.assign('/register');
+                            }, 3000)
                            
                         }
                         else {
