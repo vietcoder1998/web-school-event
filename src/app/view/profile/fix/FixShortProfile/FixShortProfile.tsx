@@ -367,7 +367,7 @@ class FixPerson extends Component<IProps, IState> {
 
 const mapStateToProps = (state) => {
   return {
-    personalInfo: state.PersonalInfo.personalInfo,
+    personalInfo: state.FullPersonalInfo.personalInfo,
     marker: state.MapState.marker,
   };
 };

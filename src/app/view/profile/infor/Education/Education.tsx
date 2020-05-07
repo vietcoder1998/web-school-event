@@ -70,9 +70,9 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  schools: state.PersonalInfo.educations,
-  personalInfo: state.PersonalInfo.personalInfo,
-  major: state.PersonalInfo.major,
-  redux: state.PersonalInfo,
+  schools: state.FullPersonalInfo.educations,
+  personalInfo: state.FullPersonalInfo.personalInfo,
+  major: state.FullPersonalInfo.major,
+  redux: state.FullPersonalInfo,
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Education);

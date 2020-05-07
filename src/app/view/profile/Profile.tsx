@@ -26,6 +26,7 @@ import Picture from "./infor/Picture/Picture";
 import FixLanguageSkills from "./fix/FixLanguageSkills/FixLanguageSkills";
 // import moveScrollBar from '../../assets/js/moveScroll';
 import { POST, PUT } from "../../../const/method";
+import { REDUX_SAGA } from "../../../const/actions";
 
 interface IProps {
   personalInfo?: any;
@@ -70,6 +71,7 @@ class Profile extends Component<IProps, IState> {
   icon_regular_star = (<i className="fa fa-star" />);
 
   async componentDidMount() {
+    await this.props.getData();
     await this.setState({ loading: false });
   }
 
@@ -110,11 +112,11 @@ class Profile extends Component<IProps, IState> {
                 {profileState["person"] ? (
                   <FixShortProfile _fixData={this._fixData} />
                 ) : (
-                  <ShortProfile />
-                )}
+                    <ShortProfile />
+                  )}
               </Block>
-               {/* picture */}
-               <Block describe="Ảnh CMND/CCCD" icon={this.icon_list}>
+              {/* picture */}
+              <Block describe="Ảnh CMND/CCCD" icon={this.icon_list}>
                 <div
                   className="icon-fix"
                   onClick={() => this._fixData("picture")}
@@ -129,8 +131,8 @@ class Profile extends Component<IProps, IState> {
                 {profileState["picture"] ? (
                   <FixPicture _fixData={this._fixData} method={PUT} />
                 ) : (
-                  <Picture />
-                )}
+                    <Picture />
+                  )}
               </Block>
 
               {/* Description */}
@@ -149,10 +151,10 @@ class Profile extends Component<IProps, IState> {
                 {profileState["description"] ? (
                   <FixDescription _fixData={this._fixData} method={PUT} />
                 ) : (
-                  <Description />
-                )}
+                    <Description />
+                  )}
               </Block>
-             
+
               {/* Skill */}
               <Block describe="Kỹ năng chuyên nghành" icon={this.icon_star}>
                 <div
@@ -169,8 +171,8 @@ class Profile extends Component<IProps, IState> {
                 {profileState["skills"] ? (
                   <FixSkills _fixData={this._fixData} />
                 ) : (
-                  <Skills />
-                )}
+                    <Skills />
+                  )}
               </Block>
 
               {/* Language Skills */}
@@ -217,8 +219,8 @@ class Profile extends Component<IProps, IState> {
                 {profileState["education"] ? (
                   <FixEducation _fixData={this._fixData} method={POST} />
                 ) : (
-                  <Education />
-                )}
+                    <Education />
+                  )}
               </Block>
               {/* ShortProfileal Info */}
             </Col>
@@ -254,10 +256,16 @@ class Profile extends Component<IProps, IState> {
 const mapStateToProps = (state) => {
   return {
     isAuthen: state.AuthState.isAuthen,
-    personalInfo: state.PersonalInfo,
+    personalInfo: state.FullPersonalInfo,
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  getData: () =>
+    dispatch({
+      type: REDUX_SAGA.PERSON_INFO.FULL_INFO,
+    }),
+});
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

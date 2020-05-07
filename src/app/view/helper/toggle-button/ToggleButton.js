@@ -62,7 +62,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => {
     return {
-        state: state.PersonalInfo.personalInfo.lookingForJob
+        state: state.FullPersonalInfo.personalInfo.lookingForJob
     }
 }
 

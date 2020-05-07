@@ -72,7 +72,6 @@ const mapStateToProps = (state) => ({
     isAuthen: state.AuthState.isAuthen,
     show_popup: state.PopupState,
     show: state.SideBarState.show,
-    personalInfo: state.PersonalInfo.personalInfo,
     eventStart: state.EventStatusReducer.status
 })
 

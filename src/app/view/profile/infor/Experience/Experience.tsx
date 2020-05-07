@@ -20,7 +20,7 @@ function Experience(props) {
 }
 
 const mapStateToProps = (state) => ({
-    experiences: state.PersonalInfo.experiences
+    experiences: state.FullPersonalInfo.experiences
 })
 
 export default connect(mapStateToProps, null)(Experience);

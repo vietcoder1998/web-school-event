@@ -11,7 +11,7 @@ function Description(props?: {description?: string}) {
 }
 
 const mapStateToProps = (state) => ({
-    description: state.PersonalInfo.description
+    description: state.FullPersonalInfo.description
 })
 
 export default connect(mapStateToProps, null)(Description);

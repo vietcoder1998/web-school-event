@@ -131,12 +131,10 @@ class App extends React.Component {
       if (nextProps.isAuthen) {
         nextProps.getData();
       }
-
       return {
         isAuthen: nextProps.isAuthen,
       };
     }
-
     return null;
   }
 
@@ -159,7 +157,7 @@ class App extends React.Component {
   };
 
   render() {
-    let {eventStart} = this.props
+    let { eventStart } = this.props
     return (
       <Fragment>
         <Router>

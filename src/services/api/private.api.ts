@@ -10,6 +10,7 @@ export const education = '/api/students/educations';
 export const exprience = '/api/students/experiences';
 export const jobActive = '';
 export const fullProfile = '/api/students/profile';
+export const SHORT_PROFILE = '/api/students/headerProfile';
 export const PERSON_INFO = '/api/students/personalInfo';
 export const DESCRIPTION = '/api/students/description';
 export const skillsController = '/api/students/skills';

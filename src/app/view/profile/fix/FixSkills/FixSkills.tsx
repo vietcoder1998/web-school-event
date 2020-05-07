@@ -138,7 +138,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => {
     return {
-        skills: state.PersonalInfo.skills
+        skills: state.FullPersonalInfo.skills
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(FixSkills);
