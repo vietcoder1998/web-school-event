@@ -68,6 +68,7 @@ function* getPersonInfo() {
     personalInfo.createdDate = data.createdDate;
     localStorage.setItem("name", data.firstName);
     localStorage.setItem("avatarUrl", personalInfo.avatarUrl);
+    localStorage.setItem("gender", data.gender);
     // description
     let description = data.description;
     // skills

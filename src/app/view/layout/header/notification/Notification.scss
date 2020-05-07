@@ -3,12 +3,11 @@
 .popup-noti {
   .noti-image {
     text-align      : center;
-    padding         : 20px 0px;
-    background-color: rgba(86, 221, 255, 0.294);
-
+    
     img {
       height: 100px;
       width : 100px;
+      border-radius: 50%;
     }
   }
 
@@ -72,7 +71,7 @@
       .li-info {
         padding: 5px 5px;
         display: flex;
-
+        margin: 5px 0;
         .img-logo-noti {
           margin : 0px 15px;
           padding: 12px 0px;
@@ -144,19 +143,16 @@
 .notification {
   background: white;
   font-size : 0.8rem;
-  width     : 300px;
+  width     : 400px;
   z-index   : 4;
-
+  padding: 5px;
   .noti-content {
     position        : relative;
     background-color: white;
     z-index         : 999;
-
+    border: none !important;
+    border-radius: 10px;
     .noti-header {
-      padding    : 5px 10px;
-      text-align : center;
-      font-weight: 600;
-
       h6 {
         margin: 10px 0px;
       }
@@ -171,7 +167,7 @@
       &::-webkit-scrollbar {
         width        : 4px;
         transition   : 0.5s;
-        border-radius: 2px;
+        border-radius: 5px;
       }
 
       /* Track */
@@ -192,7 +188,8 @@
       .li-info {
         padding: 5px 0px;
         display: flex;
-
+        margin-bottom: 5px;
+        border-radius: 5px;
         .img-logo-noti {
           margin : 0px 15px;
           padding: 12px 0px;
@@ -230,7 +227,6 @@
 
     .noti-footer {
       height: 25px;
-
       p {
         margin : 8px 10px;
         padding: 0px 5px;

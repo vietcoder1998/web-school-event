@@ -4,6 +4,8 @@ import { timeConverter } from "../../../../../utils/convertTime";
 import { connect } from "react-redux";
 import { Avatar, Progress } from "antd";
 import imageDefault from "../../../../../assets/image/base-image.jpg";
+import CHPlay from "../../../../../assets/image/CHPlay.png";
+import AppStore from "../../../../../assets/image/app-store.png";
 
 function GetDate(dateRaw) {
   var date = new Date(dateRaw);
@@ -27,6 +29,7 @@ function ShortProfile(props?: { personalInfo?: any }) {
             border: "solid #1890ff80 3px",
           }}
         />
+       
       </div>
       <div className="short-profile">
         <ul>
@@ -72,6 +75,7 @@ function ShortProfile(props?: { personalInfo?: any }) {
           <li>
             <i className="fa fa-address-card " />
             Mã sinh viên :{personalInfo && personalInfo.studentCode}
+            
           </li>
           <li>
             <i className="fa fa-database " />
@@ -81,25 +85,6 @@ function ShortProfile(props?: { personalInfo?: any }) {
             <i className="fa fa-percent" />
             Hoàn thiện hồ sơ:{" "}
             <Progress percent={personalInfo.completePercent} />
-          </li>
-          <li>
-            Ảnh CMND:
-            <img
-              src={personalInfo.identityCardFrontImageUrl}
-              onError={(e) => {
-                e.target.src = { imageDefault };
-              }}
-              alt="ảnh CMND"
-              className="identytiImage"
-            />
-            <img
-              src={personalInfo.identityCardBackImageUrl}
-              alt="ảnh CMND"
-              onError={(e) => {
-                e.target.src = { imageDefault };
-              }}
-              className="identytiImage"
-            />
           </li>
         </ul>
       </div>

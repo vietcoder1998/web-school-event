@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import DatePicker from "react-datepicker";
 import "./FixPerson.scss";
 import {
   update_avatar,
@@ -39,11 +38,6 @@ interface IState {
   isLookingForJobs?: boolean;
   personalInfo?: any;
   addressChange?: any;
-  identityCardFrontUrl?: any;
-  identityCardFront?: any;
-  identityCardBackUrl?: any;
-  identityCardBack?: any;
-
 }
 
 class FixPerson extends Component<IProps, IState> {
@@ -73,10 +67,6 @@ class FixPerson extends Component<IProps, IState> {
       address: "",
       avatarUrl: "",
       avatar: "",
-      identityCardFrontUrl: "",
-      identityCardFront: "",
-      identityCardBackUrl: "",
-      identityCardBack: "",
       isLookingForJobs: true,
     };
   }
@@ -86,17 +76,13 @@ class FixPerson extends Component<IProps, IState> {
     address = personalInfo.address;
     location = address;
     let isLookingForJobs = personalInfo.isLookingForJobs;
-    let { avatarUrl, identityCardFrontUrl, identityCardBackUrl } = this.state;
+    let { avatarUrl } = this.state;
     avatarUrl = personalInfo.avatarUrl;
-    identityCardBackUrl = personalInfo.identityCardBackImageUrl;
-    identityCardFrontUrl = personalInfo.identityCardFrontImageUrl;
     this.setState({
       personalInfo,
       location,
       address,
       avatarUrl,
-      identityCardFrontUrl,
-      identityCardBackUrl,
       isLookingForJobs,
     });
   }
@@ -141,27 +127,12 @@ class FixPerson extends Component<IProps, IState> {
     this._handleClose();
   };
 
-  _upLoadFile = (name, url, event?: any) => {
-    let picture = this.state[name];
-    let files = event.target.files;
-    let reader = new FileReader();
-    reader.readAsDataURL(files[0]);
-    reader.onload = (e?: any) => {
-      // @ts-ignore
-      this.setState({ [url]: e.target.result });
-    };
-
-    picture = files[0];
-    this.setState({ [name]: picture });
-  };
-
-
   _openLocation = () => {
     this.setState({ show_popup: true });
   };
 
   _createRequest = async () => {
-    let { personalInfo, avatar, identityCardBack, identityCardFront } = this.state;
+    let { personalInfo, avatar } = this.state;
     let dataRequest = {
       firstName: personalInfo.firstName,
       lastName: personalInfo.lastName,
@@ -194,25 +165,7 @@ class FixPerson extends Component<IProps, IState> {
         sendFileHeader
       );
     }
-    if (identityCardBack !== "" || identityCardFront !== "") {
-      let form = new FormData();
-      
-      form.append("front", identityCardFront);
-      form.append('back', identityCardBack);
-      await _requestToServer(
-        PUT,
-        form,
-        update_card_image,
-        null,
-        sendFileHeader
-      );
-    }
-    // if(identityCard !== ""){
-    //     let form = new FormData();
-    //     form.append('')
-    // }
     await this.props._fixData("person");
-   
     window.location.reload();
   };
   getLatLngFromMap = (lat, lng, address) => {
@@ -225,8 +178,8 @@ class FixPerson extends Component<IProps, IState> {
     });
   };
   render() {
-    let { personalInfo, show_popup, avatarUrl, identityCardFrontUrl, identityCardBackUrl } = this.state;
-    let birth_day = timeConverter(personalInfo.birthday, 1000);
+    let { personalInfo, show_popup, avatarUrl } = this.state;
+    let birth_day = timeConverter(personalInfo.birthday);
     return (
       <div className="wraper">
         {/* Center */}
@@ -298,20 +251,14 @@ class FixPerson extends Component<IProps, IState> {
                 onChange={this._handleData}
               />
             </div>
+           
             <div className="person-content">
               <p>Ngày sinh</p>
               <DatePicker
+                defaultPickerValue={birth_day}
                 onChange={this._handleTime}
                 style={{ width: "100%" }}
-                placeholder="Năm học bắt đầu"
-              />
-            </div>
-            <div className="person-content">
-              <p>Ngày sinh</p>
-              <DatePicker
-                onChange={this._handleTime}
-                style={{ width: "100%" }}
-                placeholder="Năm học kết thúc"
+                placeholder="Ngày sinh"
               />
             </div>
           </Col>
@@ -388,62 +335,6 @@ class FixPerson extends Component<IProps, IState> {
                 placeholder="CMND"
                 value={personalInfo.identityCard}
                 onChange={this._handleData}
-              />
-            </div>
-          </Col>
-          <Col xs={12}>
-            <div
-              className="person-content"
-              style={{ textAlign: "center", marginTop: "10px" }}
-            >
-              <img
-                src={identityCardFrontUrl}
-                alt="ảnh CMND"
-                className="identityImage"
-              />
-              <form>
-                <label htmlFor="FrontImg" style={{ fontSize: 15 }}>
-                  <Icon type="upload" />
-                  Upload ảnh mặt trước CMND
-                </label>
-              </form>
-              <Input
-                id="FrontImg"
-                type="file"
-                name="file"
-                alt="ảnh CMND"
-                style={{ display: "none" }}
-                onChange={(e) => {
-                  this._upLoadFile("identityCardFront", "identityCardFrontUrl", e);
-                }}
-              />
-            </div>
-          </Col>
-          <Col xs={12}>
-            <div
-              className="person-content"
-              style={{ textAlign: "center", marginTop: "10px" }}
-            >
-              <img
-                src={identityCardBackUrl}
-                alt="ảnh CMND"
-                className="identityImage"
-              />
-              <form>
-                <label htmlFor="backImg" style={{ fontSize: 15 }}>
-                  <Icon type="upload" />
-                  Upload ảnh mặt sau CMND
-                </label>
-              </form>
-              <Input
-                id="backImg"
-                type="file"
-                name="file"
-                alt="ảnh CMND"
-                style={{ display: "none" }}
-                onChange={(e) => {
-                  this._upLoadFile("identityCardBack", "identityCardBackUrl", e);
-                }}
               />
             </div>
           </Col>

@@ -64,9 +64,11 @@ class Notification extends Component {
     };
 
     _openPopup = (item, id) => {
+        
         let createdDate = moment(item.createdDate).format('DD/MM/YYYY');
         this.setState({ data: item.data, visible: true, createdDate, id });
         this._createRequest(id)
+       
     };
 
     _handleOk = (id) => {
@@ -122,13 +124,7 @@ class Notification extends Component {
                                 Xem tất cả
                             </label>
                         </Link>
-                        <span className='all-state' style={{ float: 'right' }} onClick={this.props._closeNoti}>
-                            <Icon type="left" />
-                            <label className='text-icon'>
-                                Quay lại
-                                        </label>
-
-                        </span>
+                       
                     </p>
                 </div>
             </div>
@@ -166,12 +162,13 @@ class Notification extends Component {
                         this.setState({ visible: false })
                     }}
                 >
-                    <div className='popup-noti '>
-                        <h5>Đơn ứng tuyển: {data.jobTitle}</h5>
+                    <div className='popup-noti'>
+                        <h5>Đơn ứng tuyển: {data.jobName}</h5>
                         <div className='noti-image'>
                             <img src={data.logoUrl} alt='logo-company' />
                         </div>
-                        <p>Công ti {data.employerName} đã {data.state === 'ACCEPTED' ? ' chấp nhận' : ' từ chối'} lời mời ứng tuyển của bạn </p>
+                        <br/>
+                        <p>Công ty {data.employerName} đã {data.state === 'ACCEPTED' ? ' chấp nhận' : ' từ chối'} lời mời ứng tuyển của bạn </p>
                         <p style={{ textAlign: "right" }}>
                             Thời gian: {createdDate}
                         </p>

@@ -52,6 +52,7 @@ interface IState {
   show_popup?: boolean;
   is_except_rule?: boolean;
   list_major?: Array;
+  is_exists?: boolean;
 }
 
 class Register extends Component<IProps, IState> {
@@ -93,16 +94,33 @@ class Register extends Component<IProps, IState> {
       location: "",
 
       list_major: [],
+
+      is_exists: false,
     };
   }
   async componentDidMount() {
-    let { list_major } = this.state;
-
+    let { list_major, email_register_dto, repassword } = this.state;
     let res_major = await _get(null, MAJORS, PUBLIC_HOST, noInfoHeader);
     list_major = res_major.data.items;
     this.setState({
       list_major,
     });
+
+    if(localStorage.getItem('user_exists') === 'false'){
+      email_register_dto.email = localStorage.getItem('user_exists_userName');
+      email_register_dto.password = localStorage.getItem('user_exists_password');
+      repassword = localStorage.getItem('user_exists_password');
+      console.log(email_register_dto)
+   
+      this.setState({
+        is_exists: true,
+        email_register_dto,
+        repassword,
+        is_exactly_email: true,
+        is_exactly_pw: true,
+        is_exactly_rpw: true,
+      })
+    }
   }
   _handleTime = (name) => (value) => {
     let { email_register_dto } = this.state;
@@ -303,7 +321,6 @@ class Register extends Component<IProps, IState> {
       phone,
     } = this.state.email_register_dto;
     let {
-      location,
       repassword,
       checked,
       is_exactly_firstname,
@@ -312,29 +329,12 @@ class Register extends Component<IProps, IState> {
       is_exactly_phone,
       is_exactly_rpw,
       is_exactly_pw,
-      show_popup,
       list_major,
+      is_exists,
     } = this.state;
 
     return (
       <Layout disableFooterData={false}>
-        {/* <Modal
-          title="Chọn vị trí của bạn"
-          style={{ top: "10vh" }}
-          visible={show_popup}
-          footer={[
-            <Button key="back" onClick={this._handleClose}>
-              Trở lại
-            </Button>,
-            <Button key="submit" type="primary" onClick={this._setMap}>
-              Cập nhật
-            </Button>,
-          ]}
-          destroyOnClose={true}
-          onCancel={this._handleClose}
-        >
-          <MapContainer GetLatLngToParent={this.getLatLngFromMap} />
-        </Modal> */}
         <div className="content">
           {/* Form Register */}
           <Row>
@@ -433,27 +433,7 @@ class Register extends Component<IProps, IState> {
                     </Col>
                   </Row>
                 </div>
-                {/* Address */}
-                {/* <div className="normal">
-                  <Input
-                    placeholder="Địa chỉ"
-                    prefix={
-                      <Icon type="home" style={{ color: "rgba(0,0,0,.4)" }} />
-                    }
-                    suffix={
-                      <Tooltip title="Vị trí của bạn">
-                        <Icon
-                          type="info-circle"
-                          style={{ color: "rgba(0,0,0,.45)" }}
-                          onClick={this._handleClose}
-                        />
-                      </Tooltip>
-                    }
-                    onClick={this._openMap}
-                    value={location}
-                    type="text"
-                  />
-                </div> */}
+              
                 {/* Mail */}
                 <div className="normal">
                   <Input
@@ -477,6 +457,7 @@ class Register extends Component<IProps, IState> {
                       </Tooltip>
                     }
                     value={email}
+                    disabled={is_exists}
                     onChange={this._handleInput}
                     type="text"
                   />
@@ -551,6 +532,7 @@ class Register extends Component<IProps, IState> {
                   <Input.Password
                     id="password"
                     placeholder="Mật khẩu"
+                    disabled={is_exists}
                     prefix={
                       <Icon type="lock" style={{ color: "rgba(0,0,0,.4)" }} />
                     }
@@ -579,6 +561,7 @@ class Register extends Component<IProps, IState> {
                   <Input.Password
                     id="repassword"
                     placeholder="Nhập lại mật khẩu"
+                    disabled={is_exists}
                     prefix={
                       <Icon type="lock" style={{ color: "rgba(0,0,0,.4)" }} />
                     }

@@ -2,10 +2,9 @@
   background-color: white;
   padding: 15px 25px;
   margin: 10px 0px;
-
+  border-radius: 10px;
   .noti-header {
     padding: 0px 10px;
-
     h5 {
       margin: 20px 0px;
       font-weight: 600;
@@ -21,6 +20,8 @@
       display: flex;
       width: 100%;
       background-color: white;
+      border-radius: 10px;
+      margin-bottom: 5px;
       position: relative;
       padding: 10px 5px;
 
@@ -57,14 +58,14 @@
     .seen {
       background-color: azure;
       &:hover {
-        background: rgb(206, 255, 255);
+        background: rgb(218, 245, 245);
       }
     }
 
     .not-seen {
       background-color: rgb(255, 255, 255);
       &:hover {
-        background: rgba(185, 185, 185, 0.143);
+        background: rgb(218, 245, 245);
       }
     }
   }

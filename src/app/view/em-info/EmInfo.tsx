@@ -409,7 +409,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                                             </JobType> */}
                                                         </div>
                                                         <div style={{ flex: 9 }}>
-                                                            <p style={{ textAlign: 'left', fontSize: '1.1em', fontWeight: 500 }} className="info-silimar-job"><Link to={`/job-detail/${window.btoa(item.id)}`} target='_blank'>{item.jobTitle}</Link></p>
+                                                            <p style={{ textAlign: 'left', fontSize: '1.1em', fontWeight: 500 }} className="info-silimar-job"><Link to={`/event-job-detail/${window.btoa(item.id)}`} target='_blank'>{item.jobTitle}</Link></p>
                                                             <p style={{ textAlign: 'left' }} className="info-silimar-job"><span><Icon type='environment' style={{ marginRight: 3 }} />{item.address}</span></p>
                                                         </div>
 

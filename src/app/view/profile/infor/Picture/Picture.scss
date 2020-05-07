@@ -1,0 +1,21 @@
+@import "../../../sass/variable";
+
+.short-profile {
+  ul {
+    width: 100%;
+
+    li {
+      font-family: $font_base;
+      padding: 10px 0px;
+      width: 100%;
+      margin: 0px;
+      font-weight: 500;
+      .identytiImage {
+        margin: 0 10px;
+        height: 200px;
+        width: 40%;
+        border: 2px solid #1C6EA4;
+      }
+    }
+  }
+}

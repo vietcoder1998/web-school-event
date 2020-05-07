@@ -66,7 +66,7 @@ class Header extends PureComponent<IProps, IState> {
   _showSideBar = () => {
     this.props.openSideBar();
   }
-
+    
   _closeNoti = () => {
     this.setState({ show_noti: false })
   };
@@ -135,7 +135,6 @@ class Header extends PureComponent<IProps, IState> {
               <span
                 className='label-function'
                 onClick={() => {
-                  // alert('test')
                   this.setState({ show_noti: !show_noti })
                 }}
               >
@@ -152,7 +151,7 @@ class Header extends PureComponent<IProps, IState> {
             </span>
             {isAuthen ?
               //@ts-ignore
-              <Dropdown style={{ width: "300px" }} overlay={this.menuUser} placement="bottomRight" >
+              <Dropdown overlay={this.menuUser} placement="bottomRight" >
                 <span className='label-function hidden-mobile' style={{ borderRadius: '5%' }}>
                   <Avatar src={localStorage.getItem("avatarUrl")} icon="user" style={{ border: "solid #fff 1.5px" }} />
                   {localStorage.getItem("name") ? <label className="label_name">{localStorage.getItem("name")}</label> : null}
