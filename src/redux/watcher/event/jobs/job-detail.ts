@@ -12,6 +12,7 @@ function* getEventJobDetailData(action) {
     let res = yield call(getJobDetail, action);
     if (res.data) {
         let data = res.data
+        console.log(data)
         yield put({ type: REDUX.EVENT.JOB.DETAIL, data });
     }
 }

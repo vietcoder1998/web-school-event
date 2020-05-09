@@ -10,7 +10,6 @@ import { _requestToServer } from '../../services/exec';
 function* getEmployerMoreJob(action) {
     yield put({ type: REDUX.EMPLOYER_MORE_JOB.SET_LOADING_MORE_JOB, loading: true });
     let res = yield call(getEmployerMoreJobData, action);
-
     if (res) {
         let data = res.data;
         yield put({ type: REDUX.EMPLOYER_MORE_JOB.GET_EMPLOYER_MORE_JOB, data });

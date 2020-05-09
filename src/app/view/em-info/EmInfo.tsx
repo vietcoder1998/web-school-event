@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Icon, Avatar, Row, Col, Tabs, Card, Modal, Skeleton, Rate, Pagination, Empty, Button, Input } from 'antd';
 import './EmInfo.scss';
 // @ts-ignore
-import backGround from './../../../assets/image/base-image.jpg';
+import defaultImage from './../../../assets/image/base-image.jpg';
 // @ts-ignore
 import avatar from './../../../assets/image/test_avatar.jpg';
 import { NotUpdate, IptLetterP } from './../layout/common/Common';
@@ -11,7 +11,6 @@ import { connect } from 'react-redux';
 import { REDUX_SAGA } from '../../../const/actions';
 import Layout from '../layout/Layout';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-import { limitString } from '../../../utils/limitString';
 import { _requestToServer } from '../../../services/exec';
 import { GET, POST } from '../../../const/method';
 import { STUDENT_HOST } from '../../../environment/development';
@@ -61,8 +60,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
     }
     componentDidMount() {
         this.props.getEmployerDetail(window.atob(this.props.match.params.id));
-        this.props.getEmployerMoreJob(0, 6, window.atob(this.props.match.params.id));
-        this.props.getEventEmployerMoreJob(0, 6, window.atob(this.props.match.params.id))
+        this.props.getEventEmployerMoreJob(0, 6, window.atob(this.props.match.params.id));
     }
 
 
@@ -342,7 +340,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                             <div className="ic-ct-img">
                                                 <IptLetterP children={"Mặt trước giấy phép"} />
                                                 <Skeleton avatar loading={employerDetail ? false : true} >
-                                                    <img className='ic' src={employerDetail && employerDetail.identityCardFrontImageUrl} alt='front description' />
+                                                    <img className='ic' src={employerDetail && employerDetail.identityCardFrontImageUrl === null ? defaultImage : employerDetail.identityCardFrontImageUrl} alt='front description' />
                                                 </Skeleton>
                                             </div>
                                         </Col>
@@ -350,7 +348,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                             <div className="ic-ct-img">
                                                 <IptLetterP children={"Ảnh văn phòng sau"} />
                                                 <Skeleton avatar loading={employerDetail ? false : true} >
-                                                    <img className='ic' src={employerDetail && employerDetail.identityCardBackImageUrl} alt='front description' />
+                                                    <img className='ic' src={employerDetail && employerDetail.identityCardBackImageUrl === null ? defaultImage : employerDetail.identityCardBackImageUrl} alt='front description' />
                                                 </Skeleton>
                                             </div>
                                         </Col>

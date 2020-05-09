@@ -6,7 +6,7 @@ import { PUBLIC_HOST } from "../../../../../environment/development";
 import { EVENT_PUBLIC } from "../../../../../services/api/public.api";
 import { _get } from "../../../../../services/base-api";
 import { REDUX_SAGA } from "../../../../../const/actions";
-
+import whileImage from '../../../../../assets/image/while.png'
 interface IProps {
   getEvenJob?: Function;
   listBranch?: any;
@@ -28,7 +28,7 @@ class Branch extends PureComponent<IProps, IState> {
   componentDidMount = async () => {
     await this.setState({ is_loading: false });
     let listBranch = await _get(null, EVENT_PUBLIC.BRANCH, PUBLIC_HOST, {});
-    
+
     this.setState({
       listBranch: listBranch.data,
     });
@@ -40,7 +40,7 @@ class Branch extends PureComponent<IProps, IState> {
     localStorage.setItem("e_bid", id);
     localStorage.setItem('branch_name', "VIỆC LÀM NHÓM NGÀNH " + name);
     this.props.getEvenJob(0);
-   
+
   };
 
   render() {
@@ -51,32 +51,32 @@ class Branch extends PureComponent<IProps, IState> {
         style={{ backgroundColor: "#F9FBFF !important", padding: "3% 5%" }}
       >
         <h5 style={{ textAlign: "center", }}>LÀM VIỆC THEO NGÀNH NGHỀ </h5>
-        <Row align='center' type='flex'>
+        <Row align='center' type='flex' gutter={[16, 32]}>
           {listBranch && listBranch.items
             ? listBranch.items.map((item, index) => (
-                <Col xs={12} sm={6} md={6} lg={6} xl={4} xxl={4} key={index}>
-                  <div className="branch-item" style={{ textAlign: "center" }}>
-                    <a
-                      href="#normal_job"
-                      onClick={() => {
-                        this.handleClick(item.id, item.name);
-                      }}
-                    >
-                      <img
-                        src={item.imageUrl}
-                        alt="branch"
-                        className="image-branch"
-                      />
-                      <div className='name-branch'>
-                        {item.name}{" "}
-                      </div>
-                    </a>
-                  </div>
-                </Col>
-              ))
+              <Col xs={12} sm={6} md={6} lg={6} xl={4} xxl={4} key={index}>
+                <div className="branch-item" style={{ textAlign: "center" }}>
+                  <a
+                    href="#normal_job"
+                    onClick={() => {
+                      this.handleClick(item.id, item.name);
+                    }}
+                  >
+                    <img
+                      src={item.imageUrl === null ? whileImage : item.imageUrl}
+                      alt="branch"
+                      className="image-branch"
+                    />
+                    <div className='name-branch'>
+                      {"marketng - truyền thông - báo chí - marketng - truyền thông - báo chí"}
+                    </div>
+                  </a>
+                </div>
+              </Col>
+            ))
             : null}
-      
-            
+
+
         </Row>
       </div>
     );
