@@ -51,7 +51,7 @@ class Branch extends PureComponent<IProps, IState> {
         style={{ backgroundColor: "#F9FBFF !important", padding: "3% 5%" }}
       >
         <h5 style={{ textAlign: "center", }}>LÀM VIỆC THEO NGÀNH NGHỀ </h5>
-        <Row align='center' type='flex' gutter={[16, 32]}>
+        <Row align='center' type='flex'>
           {listBranch && listBranch.items
             ? listBranch.items.map((item, index) => (
                 <Col xs={12} sm={6} md={6} lg={6} xl={4} xxl={4} key={index}>
@@ -67,7 +67,7 @@ class Branch extends PureComponent<IProps, IState> {
                         alt="branch"
                         className="image-branch"
                       />
-                      <div style={{ fontWeight: "bold", fontSize: '16px',  marginTop: 15 }}>
+                      <div className='name-branch'>
                         {item.name}{" "}
                       </div>
                     </a>
@@ -75,6 +75,7 @@ class Branch extends PureComponent<IProps, IState> {
                 </Col>
               ))
             : null}
+      
             
         </Row>
       </div>

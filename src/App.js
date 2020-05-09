@@ -108,7 +108,8 @@ class App extends React.Component {
   componentDidMount() {
     this._loadLocal();
     this.setState({ loading: false });
-    this._callResize();
+    this._callResize(); 
+    console.log(localStorage.getItem('accessToken'))
 
     $(window).resize(() => {
       this._callResize();
