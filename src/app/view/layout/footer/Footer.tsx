@@ -5,12 +5,13 @@ import CHPlay from '../../../../assets/image/CHPlay.png';
 //@ts-ignore
 import AppStore from '../../../../assets/image/app-store.png';
 import { Col, Row } from 'antd';
+import Option from './option/Option'
 //@ts-ignore
 
 export default function Footer(props) {
   return (
     <div className='footer' >
-      {/* <Option {...props} /> */}
+      <Option {...props} />
       <div style={{ width: 1, backgroundColor: '#fff' }}></div>
       <div className="content-footer" style={{ display: props.disableFooterData ? "none" : "block" }}>
         <Row >

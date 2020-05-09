@@ -103,7 +103,7 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
             isSaved: true,
             jobID: null,
             employerID: null,
-            
+
             can_send: false,
         }
 
@@ -139,19 +139,6 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
         this.setState({ isSaved: jobDetail.isSaved })
     };
 
-    // _getMoreJob = (pageIndex?: number) => {
-    //     this.setState({ is_loading_more: true }, () => {
-    //         this.props.getEmployerMoreJob(pageIndex - 1)
-    //     });
-
-    //     setTimeout(() => {
-    //         this.setState({ is_loading_more: false })
-    //     }, 500);
-    // };
-    // _getSimilarJob = (pageIndex?: number) => {
-    //     this.props.getSimilarJob(pageIndex - 1)
-    // };
-
     async _loadState() {
         let { isAuthen, jobDetail } = this.props;
 
@@ -181,6 +168,9 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
                 return item === id;
             })
         }
+        this.setState({
+            shiftIDs
+        })
     };
 
     _toLogin = () => {
@@ -207,7 +197,9 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
     _createRequest = () => {
         let { message, shiftIDs } = this.state;
         let id = window.atob(this.props.match.params.id)
-        this.requestToServer({ message, shiftIDs }, id);
+        console.log(message)
+        console.log(shiftIDs)
+        // this.requestToServer({ message, shiftIDs }, id);
         this.setState({ visible: false })
     };
 
@@ -223,7 +215,9 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
         ).then((res) => {
             if (res) {
                 let { results } = res.data;
+
                 if (res.data.success === true) {
+
                     swal({
                         title: "Worksvns thông báo",
                         text: "Ứng tuyển thành công!",
@@ -233,9 +227,10 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
                     this.props.getJobDetail(id);
                     this._loadState();
                 }
+
                 else {
                     for (let i in results) {
-                        console.log(results[i])
+                        console.log(res)
                         if (results[i].full === true) {
                             swal({
                                 title: "Worksvns thông báo",
@@ -265,7 +260,8 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
     render() {
 
         let { jobDetail, isAuthen } = this.props;
-        let { is_loading, visible, confirmLoading, jobState } = this.state;
+        let { is_loading, visible, confirmLoading, jobState, shiftIDs } = this.state;
+
         let isSaved = jobDetail.saved;
 
         if (is_loading) {
@@ -318,7 +314,9 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
                             onClick={this._handleCancel}
                             type='danger'
                         >Huỷ</Button>,
+
                         <Button key='ok'
+                            disabled={shiftIDs.length === 0}
                             type='primary'
                             onClick={isAuthen ? this._createRequest : this._toLogin}
                         >{content}</Button>
