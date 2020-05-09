@@ -42,8 +42,11 @@ class Countdown extends Component<IProps, IState> {
     let diff = (Date.parse(new Date(endDate)) - Date.parse(new Date())) / 1000;
 
     // clear countdown when date is reached
-    if (diff <= 0) return false;
+    if (diff <= 0){
+      window.location.reload()
+       return false;
 
+    }
     const timeLeft = {
       years: 0,
       days: 0,
@@ -74,6 +77,8 @@ class Countdown extends Component<IProps, IState> {
       diff -= timeLeft.min * 60;
     }
     timeLeft.sec = diff;
+
+    
 
     return timeLeft;
   }

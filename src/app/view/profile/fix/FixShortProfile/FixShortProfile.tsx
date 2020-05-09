@@ -3,7 +3,6 @@ import "./FixPerson.scss";
 import {
   update_avatar,
   update_profile,
-  update_card_image,
 } from "../../../../../services/api/private/profile";
 import { connect } from "react-redux";
 import moment from "moment";
@@ -15,6 +14,7 @@ import { timeConverter } from "../../../../../utils/convertTime";
 import { REDUX_SAGA } from "../../../../../const/actions";
 import { _requestToServer } from "../../../../../services/exec";
 import { PUT } from "../../../../../const/method";
+import imageDefault from "../../../../../assets/image/base-image.jpg";
 
 interface IProps {
   personalInfo?: any;
@@ -71,14 +71,14 @@ class FixPerson extends Component<IProps, IState> {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     let { personalInfo, address, location } = this.props;
     address = personalInfo.address;
     location = address;
     let isLookingForJobs = personalInfo.isLookingForJobs;
     let { avatarUrl } = this.state;
     avatarUrl = personalInfo.avatarUrl;
-    this.setState({
+    await this.setState({
       personalInfo,
       location,
       address,
@@ -178,28 +178,13 @@ class FixPerson extends Component<IProps, IState> {
     });
   };
   render() {
-    let { personalInfo, show_popup, avatarUrl } = this.state;
-    let birth_day = timeConverter(personalInfo.birthday);
+    let { personalInfo} = this.props;
+    let avatar = this.props.personalInfo && this.props.personalInfo.avatarUrl === null ? imageDefault : this.props.personalInfo.avatarUrl
+    let birth_day = timeConverter(personalInfo.birthday, 1000);
+
     return (
       <div className="wraper">
         {/* Center */}
-        <Modal
-          visible={show_popup}
-          onCancel={this._handleClose}
-          onOk={this._setMap}
-          title="Định vị trên bản đồ"
-          className="modal-map"
-          footer={[
-            <Button key="back" onClick={this._handleClose}>
-              Trở lại
-            </Button>,
-            <Button key="submit" type="primary" onClick={this._setMap}>
-              Cập nhật
-            </Button>,
-          ]}
-        >
-          <MapContainer GetLatLngToParent={this.getLatLngFromMap} />
-        </Modal>
 
         {/* Fix Infomation */}
         <Row className="person-info">
@@ -208,7 +193,7 @@ class FixPerson extends Component<IProps, IState> {
             <div className="person-avatar">
               <h5>Cập nhật ảnh đại diện</h5>
               <Avatar
-                src={avatarUrl}
+                src={avatar}
                 style={{ width: "95px", height: "95px" }}
               />
               <form>
@@ -251,11 +236,12 @@ class FixPerson extends Component<IProps, IState> {
                 onChange={this._handleData}
               />
             </div>
-           
+
             <div className="person-content">
               <p>Ngày sinh</p>
               <DatePicker
-                defaultPickerValue={birth_day}
+                defaultValue={moment(birth_day, 'DD/MM/YYYY') ? moment(birth_day, 'DD/MM/YYYY') : null}
+                format="DD-MM-YYYY"
                 onChange={this._handleTime}
                 style={{ width: "100%" }}
                 placeholder="Ngày sinh"
@@ -368,7 +354,6 @@ class FixPerson extends Component<IProps, IState> {
 const mapStateToProps = (state) => {
   return {
     personalInfo: state.FullPersonalInfo.personalInfo,
-    marker: state.MapState.marker,
   };
 };
 

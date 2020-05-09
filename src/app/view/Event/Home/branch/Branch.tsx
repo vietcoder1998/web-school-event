@@ -6,7 +6,8 @@ import { PUBLIC_HOST } from "../../../../../environment/development";
 import { EVENT_PUBLIC } from "../../../../../services/api/public.api";
 import { _get } from "../../../../../services/base-api";
 import { REDUX_SAGA } from "../../../../../const/actions";
-import whileImage from '../../../../../assets/image/while.png'
+import whileImage from '../../../../../assets/image/while.png';
+
 interface IProps {
   getEvenJob?: Function;
   listBranch?: any;
@@ -62,21 +63,22 @@ class Branch extends PureComponent<IProps, IState> {
                       this.handleClick(item.id, item.name);
                     }}
                   >
-                    <img
-                      src={item.imageUrl === null ? whileImage : item.imageUrl}
-                      alt="branch"
-                      className="image-branch"
-                    />
+                    <div className='border-image-branch'>
+                      <img
+                        src={item.imageUrl === null ? whileImage : item.imageUrl}
+                        alt="branch"
+                        className="image-branch"
+                      />
+                    </div>
+
                     <div className='name-branch'>
-                      {"marketng - truyền thông - báo chí - marketng - truyền thông - báo chí"}
+                      {item.name}{" "}
                     </div>
                   </a>
                 </div>
               </Col>
             ))
             : null}
-
-
         </Row>
       </div>
     );
