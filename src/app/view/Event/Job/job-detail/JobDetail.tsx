@@ -37,6 +37,7 @@ interface IJobDetailState {
     isSaved?: boolean,
     jobID?: string,
     employerID?: string,
+    can_send?: boolean,
 }
 
 // @ts-ignore
@@ -102,6 +103,8 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
             isSaved: true,
             jobID: null,
             employerID: null,
+            
+            can_send: false,
         }
 
     }
@@ -219,8 +222,7 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
             false
         ).then((res) => {
             if (res) {
-
-                let { results } = res;
+                let { results } = res.data;
                 if (res.data.success === true) {
                     swal({
                         title: "Worksvns thông báo",
@@ -233,6 +235,7 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
                 }
                 else {
                     for (let i in results) {
+                        console.log(results[i])
                         if (results[i].full === true) {
                             swal({
                                 title: "Worksvns thông báo",
