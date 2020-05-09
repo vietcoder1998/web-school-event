@@ -221,7 +221,6 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
             if (res) {
 
                 let { results } = res;
-                console.log(res)
                 if (res.data.success === true) {
                     swal({
                         title: "Worksvns thông báo",
