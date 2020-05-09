@@ -13,6 +13,7 @@
         height: 80;
         text-overflow: ellipsis;
 
+
         .image-branch {
             width: 40%;
             height: 90%;
@@ -26,10 +27,11 @@
             font-weight: bold;
             font-size: 16px;
             margin-top: 15px;
-            max-lines: 2 !important;
+        
             overflow: hidden;
             text-overflow: ellipsis;
             
         }
+
     }
 }

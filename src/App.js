@@ -105,11 +105,10 @@ class App extends React.Component {
 
   resizeInterface = null;
 
-  componentDidMount() {
-    this._loadLocal();
+  async componentDidMount() {
+    await this._loadLocal();
     this.setState({ loading: false });
-    this._callResize(); 
-    console.log(localStorage.getItem('accessToken'))
+    this._callResize();
 
     $(window).resize(() => {
       this._callResize();
@@ -151,7 +150,7 @@ class App extends React.Component {
   }
   _loadLocal = async () => {
     let token = localStorage.getItem("accessToken");
-    await this.checkEvent()
+    this.checkEvent()
       .then((res) => {
         this.props.checkEvent(true);
       })
@@ -159,7 +158,7 @@ class App extends React.Component {
         this.props.checkEvent(false);
       });
     if (token !== null) {
-      await this.props.checkAuthen(token);
+      this.props.checkAuthen(token);
     }
   };
 

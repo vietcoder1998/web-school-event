@@ -2,7 +2,7 @@ import { REDUX } from "../../../const/actions"
 
 
 let initEventStatus = {
-    status: false
+    status: true
 }
 
 export const EventStatusReducer = (state = initEventStatus, action) => {
