@@ -48,7 +48,7 @@ export const _requestToServer = async (
         };
 
         if (show_alert && res) {
-            console.log(res)
+           
             swal({
                 title: "Worksvns thông báo",
                 text: res.msg,

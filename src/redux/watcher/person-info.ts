@@ -6,8 +6,10 @@ import { STUDENT_HOST } from '../../environment/development';
 import { authHeaders } from '../../services/auth';
 import { REDUX_SAGA, REDUX } from '../../const/actions'
 import imageDefault from "../../assets/image/base-image.jpg";
-function* getPersonInfo() {
+function* getFullPersonInfo() {
+   
     let res = yield call(getData);
+   
     let data = res.data
     let personalInfo = {
         id: "",
@@ -66,9 +68,6 @@ function* getPersonInfo() {
     personalInfo.schoolYearEnd = data.schoolYearEnd;
     personalInfo.studentCode = data.studentCode === null ? "Chưa cập nhật" : data.studentCode;
     personalInfo.createdDate = data.createdDate;
-    localStorage.setItem("name", data.firstName);
-    localStorage.setItem("avatarUrl", personalInfo.avatarUrl);
-    localStorage.setItem("gender", data.gender);
     // description
     let description = data.description;
     // skills
@@ -87,7 +86,7 @@ function* getPersonInfo() {
 
 
     yield put({
-        type: REDUX.PERSON_INFO.GET_PERSON_INFO,
+        type: REDUX.PERSON_INFO.GET_FULL_PERSON_INFO,
         personalInfo,
         skills,
         educations,
@@ -106,5 +105,7 @@ function getData() {
 
 // Watcher
 export function* PersonInfoWatcher() {
-    yield takeEvery(REDUX_SAGA.PERSON_INFO.GET_PERSON_INFO, getPersonInfo);
+    yield takeEvery(REDUX_SAGA.PERSON_INFO.GET_FULL_PERSON_INFO, getFullPersonInfo);
 }   
+
+

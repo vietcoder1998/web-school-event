@@ -245,7 +245,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
   };
 
   async requestToServer(data, id) {
-    console.log(localStorage.getItem("gender"));
+   
     await _requestToServer(
       POST,
       data,
@@ -256,7 +256,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
       false
     ).then((res) => {
       if (res) {
-        console.log(res);
+     
         let { results } = res;
         for (let i in results) {
           // console.log(results[i])

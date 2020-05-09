@@ -76,7 +76,7 @@ class LanguageSkills extends Component<IProps, IState> {
 
 const mapStateToProps = (state) => {
     return {
-        languageSkills: state.PersonalInfo.languageSkills,
+        languageSkills: state.FullPersonalInfo.languageSkills,
     }
 }
 

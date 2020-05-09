@@ -47,7 +47,7 @@ class ForgotPassword extends Component {
             }
             _requestToServer(POST, data, forgotPassword, AUTH_HOST, noInfoHeader, null, false)
             .then(res => {
-                console.log(res)
+           
                 if ( res && res.code == 200) {
                     swal({ title: "Email đổi mật khẩu đã gửi thành công", icon: "success", text: 'Vui lòng kiểm tra email!'}).then(() => {
                             window.location.assign('/login');

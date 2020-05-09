@@ -11,9 +11,29 @@ let personal_data = {
     major: {},
 };
 
-export const PersonalInfo = (state = personal_data, action): any => {
+
+let short_personal_data = {
+    name: "",
+    id: "",
+    avatar: "",
+}
+
+export const ShortPersonalInfo = (state = short_personal_data, action): any => {
     switch (action.type) {
-        case REDUX.PERSON_INFO.GET_PERSON_INFO:
+        case REDUX.PERSON_INFO.GET_SHORT_PERSON_INFO:
+            return {
+                ...state,
+                name: action.name,
+                id: action.id,
+                avatar: action.avatar,
+            }
+        default:
+            return state;
+    }
+}
+export const FullPersonalInfo = (state = personal_data, action): any => {
+    switch (action.type) {
+        case REDUX.PERSON_INFO.GET_FULL_PERSON_INFO:
             return {
                 ...state,
                 personalInfo: action.personalInfo,
@@ -25,7 +45,6 @@ export const PersonalInfo = (state = personal_data, action): any => {
                 rating: action.rating,
                 major: action.major,
             }
-
         default:
             return state;
     }

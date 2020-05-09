@@ -9,7 +9,6 @@ import { REDUX, REDUX_SAGA } from "./const/actions";
 import $ from "jquery";
 import { Loading } from "./app/view/layout/common/Common";
 import { _get } from "./services/base-api";
-import { EVENT_PUBLIC } from "./services/api/public.api";
 import { PUBLIC_HOST } from "./environment/development";
 import { noInfoHeader } from "./services/auth";
 
@@ -90,15 +89,17 @@ const DataJobNames = asyncComponent(() =>
 //event
 
 const EventJobDetail = asyncComponent(() =>
-  import("./app/view/Event/Job/job-detail/JobDetail").then((module) => module.default)
+  import("./app/view/Event/Job/job-detail/JobDetail").then(
+    (module) => module.default
+  )
 );
-
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isAuthen: true,
+
     };
   }
 
@@ -131,42 +132,53 @@ class App extends React.Component {
       if (nextProps.isAuthen) {
         nextProps.getData();
       }
-
       return {
         isAuthen: nextProps.isAuthen,
       };
     }
-
     return null;
   }
 
   checkEvent() {
-    let res = _get(null, `/api/schools/${process.env.REACT_APP_SCHOOL_ID}/events/${process.env.REACT_APP_EVENT_ID}?activeCheck=true`, PUBLIC_HOST, noInfoHeader)
-    return res
+    let res = _get(
+      null,
+      `/api/schools/${process.env.REACT_APP_SCHOOL_ID}/events/${process.env.REACT_APP_EVENT_ID}?activeCheck=true`,
+      PUBLIC_HOST,
+      noInfoHeader
+    );
+    return res;
   }
   _loadLocal = async () => {
     let token = localStorage.getItem("accessToken");
-    this.checkEvent()
-      .then(res => {
-        this.props.checkEvent(true)
+    await this.checkEvent()
+      .then((res) => {
+        this.props.checkEvent(true);
       })
-      .catch(e => {
-        this.props.checkEvent(false)
-      })
+      .catch((e) => {
+        this.props.checkEvent(false);
+      });
     if (token !== null) {
       await this.props.checkAuthen(token);
     }
   };
 
   render() {
-    let {eventStart} = this.props
+    let { eventStart } = this.props;
     return (
       <Fragment>
         <Router>
           <Suspense fallback={<Loading />}>
             <Switch>
-              <Route exact path="/" component={eventStart ? EventHome : EventCountDown} />
-              <Route exact path="/event-job-detail/:id" component={EventJobDetail} />
+              <Route
+                exact
+                path="/"
+                component={eventStart ? EventHome : EventCountDown}
+              />
+              <Route
+                exact
+                path="/event-job-detail/:id"
+                component={EventJobDetail}
+              />
               <Route exact path="/count" component={EventCountDown} />
               <Route exact path="/home" component={Home} />
               <Route exact path="/login" component={Login} />
@@ -201,7 +213,7 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => ({
   isAuthen: state.AuthState.isAuthen,
-  eventStart: state.EventStatusReducer.status
+  eventStart: state.EventStatusReducer.status,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -213,7 +225,7 @@ const mapDispatchToProps = (dispatch) => ({
 
   getData: () =>
     dispatch({
-      type: REDUX_SAGA.PERSON_INFO.GET_PERSON_INFO,
+      type: REDUX_SAGA.PERSON_INFO.GET_SHORT_PERSON_INFO,
     }),
 
   setMobileState: (state) =>
@@ -224,9 +236,9 @@ const mapDispatchToProps = (dispatch) => ({
   checkEvent: (status) => {
     dispatch({
       type: REDUX.EVENT.START,
-      status
-    })
-  }
+      status,
+    });
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

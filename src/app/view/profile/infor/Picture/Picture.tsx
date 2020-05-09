@@ -44,7 +44,7 @@ function ShortProfile(props?: { personalInfo?: any }) {
 }
 
 const mapStateToProps = (state) => ({
-  personalInfo: state.PersonalInfo.personalInfo,
+  personalInfo: state.FullPersonalInfo.personalInfo,
 });
 
 export default connect(mapStateToProps, null)(ShortProfile);

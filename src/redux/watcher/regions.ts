@@ -11,7 +11,7 @@ function* getListRegionData(action) {
 
     if (res) {
         let data = res.data;
-        console.log(data)
+       
         yield put({ type: REDUX.REGIONS.GET_REGIONS, data });
     }
 }

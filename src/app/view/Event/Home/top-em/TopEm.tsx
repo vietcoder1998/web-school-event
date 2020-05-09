@@ -43,8 +43,8 @@ class TopEm extends PureComponent<IProps, IState> {
         <h5 style={{ textAlign: "center", fontSize: '1.75rem' }}>DOANH NGHIỆP NỔI BẬT </h5>
         <Row align="center" type="flex">
           {listEmployer && listEmployer.items
-            ? listEmployer.items.map((item, index) => (
-              <Col xs={12} sm={6} md={3} lg={4} xl={4} xxl={3} key={index}>
+            ? listEmployer.items.map((item: { employer: { id: string; logoUrl: string; employerName: React.ReactNode; }; }, index: React.ReactText) => (
+              <Col xs={12} sm={6} md={3} lg={4} xl={3} xxl={3} key={index}>
                 <Link to={`/employer/${window.btoa(item.employer.id)}`}
                   target="_blank"
                   className="name_employer"
@@ -58,6 +58,7 @@ class TopEm extends PureComponent<IProps, IState> {
                       }
                       alt="logo"
                       className="image-employer"
+                      
                     />
 
                   </div>

@@ -110,7 +110,7 @@ class Register extends Component<IProps, IState> {
       email_register_dto.email = localStorage.getItem('user_exists_userName');
       email_register_dto.password = localStorage.getItem('user_exists_password');
       repassword = localStorage.getItem('user_exists_password');
-      console.log(email_register_dto)
+ 
    
       this.setState({
         is_exists: true,
@@ -137,7 +137,7 @@ class Register extends Component<IProps, IState> {
 
   _choseMajor = (value) => {
     let { email_register_dto } = this.state;
-    console.log(value);
+  
     email_register_dto.majorID = value;
     this.setState({ email_register_dto });
   };

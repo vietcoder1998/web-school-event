@@ -70,11 +70,11 @@ class FixDescription extends Component<IProps, IState>{
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    reloadData: () => { dispatch({ type: REDUX_SAGA.PERSON_INFO.GET_PERSON_INFO }) }
+    reloadData: () => { dispatch({ type: REDUX_SAGA.PERSON_INFO.GET_FULL_PERSON_INFO }) }
 });
 
 const mapStateToProps = state => ({
-    description: state.PersonalInfo.description
+    description: state.FullPersonalInfo.description
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(FixDescription);

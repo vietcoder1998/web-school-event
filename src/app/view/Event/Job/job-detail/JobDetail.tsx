@@ -207,16 +207,7 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
         this.setState({ visible: false })
     };
 
-    // async requestToServer(data, id) {
-    //     await _requestToServer(POST, data, APPLY_JOB + `/${id}/apply`, STUDENT_HOST, authHeaders).then(res => {
-    //         if (res) {
-    //             this.props.getJobDetail(id);
-    //             this._loadState();
-    //         }
-    //     }) 
-    // };
     async requestToServer(data, id) {
-        console.log(localStorage.getItem("gender"));
         await _requestToServer(
           POST,
           data,
@@ -227,7 +218,7 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
           false
         ).then((res) => {
           if (res) {
-            console.log(res);
+        
             let { results } = res;
             for (let i in results) {
               // console.log(results[i])
@@ -265,7 +256,7 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
     }
 
     render() {
-        console.log(this.props.jobDetail)
+      
         let { jobDetail, employerDetail, isAuthen} = this.props;
         let { is_loading, visible, confirmLoading, jobState } = this.state;
         let isSaved = jobDetail.saved;

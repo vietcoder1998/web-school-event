@@ -16,7 +16,7 @@ function* getListAnnouncementsData(action: any) {
         pageSize: 10,
         totalItems: 0,
     };
-    console.log(data)
+   
     if (res) {
         data = res.data
     };

@@ -66,13 +66,13 @@ class Education extends Component<IProps, IStates> {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  getData: () => dispatch({ type: REDUX_SAGA.PERSON_INFO.GET_PERSON_INFO }),
+  getData: () => dispatch({ type: REDUX_SAGA.PERSON_INFO.GET_FULL_PERSON_INFO }),
 });
 
 const mapStateToProps = (state) => ({
-  schools: state.PersonalInfo.educations,
-  personalInfo: state.PersonalInfo.personalInfo,
-  major: state.PersonalInfo.major,
-  redux: state.PersonalInfo,
+  schools: state.FullPersonalInfo.educations,
+  personalInfo: state.FullPersonalInfo.personalInfo,
+  major: state.FullPersonalInfo.major,
+  redux: state.FullPersonalInfo,
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Education);

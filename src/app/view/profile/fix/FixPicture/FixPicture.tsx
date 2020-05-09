@@ -2,17 +2,12 @@ import React, { Component } from "react";
 // import DatePicker from "react-datepicker";
 import "./FixPicture.scss";
 import {
-  update_avatar,
-  update_profile,
   update_card_image,
 } from "../../../../../services/api/private/profile";
 import { connect } from "react-redux";
 import moment from "moment";
-import ButtonToggle from "../../../helper/toggle-button/ToggleButton";
 import { sendFileHeader } from "../../../../../services/auth";
-import { Icon, Row, Col, Modal, Input, Button, DatePicker, Avatar } from "antd";
-import MapContainer from "../../../layout/google-maps/MapContainer";
-import { timeConverter } from "../../../../../utils/convertTime";
+import { Icon, Row, Col, Input,  } from "antd";
 import { REDUX_SAGA } from "../../../../../const/actions";
 import { _requestToServer } from "../../../../../services/exec";
 import { PUT } from "../../../../../const/method";
@@ -230,14 +225,14 @@ class FixPerson extends Component<IProps, IState> {
 
 const mapStateToProps = (state) => {
   return {
-    personalInfo: state.PersonalInfo.personalInfo,
+    personalInfo: state.FullPersonalInfo.personalInfo,
     marker: state.MapState.marker,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getData: () => dispatch({ type: REDUX_SAGA.PERSON_INFO.GET_PERSON_INFO }),
+    getData: () => dispatch({ type: REDUX_SAGA.PERSON_INFO.GET_FULL_PERSON_INFO }),
   };
 };
 

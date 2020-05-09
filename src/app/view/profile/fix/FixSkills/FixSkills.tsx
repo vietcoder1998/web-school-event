@@ -133,12 +133,12 @@ class FixSkills extends Component<IProps, IState> {
     }
 }
 const mapDispatchToProps = (dispatch) => ({
-    getData: () => dispatch({ type: REDUX_SAGA.PERSON_INFO.GET_PERSON_INFO }),
+    getData: () => dispatch({ type: REDUX_SAGA.PERSON_INFO.GET_FULL_PERSON_INFO }),
 })
 
 const mapStateToProps = (state) => {
     return {
-        skills: state.PersonalInfo.skills
+        skills: state.FullPersonalInfo.skills
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(FixSkills);

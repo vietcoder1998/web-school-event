@@ -23,7 +23,7 @@ function Skills(props?: IProps) {
 }
 
 const mapStateToProps = (state) => ({
-    skills: state.PersonalInfo.skills
+    skills: state.FullPersonalInfo.skills
 })
 
 export default connect(mapStateToProps, null)(Skills);

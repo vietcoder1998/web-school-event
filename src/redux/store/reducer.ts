@@ -1,3 +1,4 @@
+import { ShortPersonalInfo, FullPersonalInfo } from './../reducers/person-info';
 import { EventStatusReducer } from './../reducers/event/status';
 import { EventEmployerMoreJob } from './../reducers/event/employer/more-jobs';
 import { GetEventJobSave } from './../reducers/event/job/save-job';
@@ -14,7 +15,7 @@ import { Regions } from './../reducers/regions';
 import { JobNames } from './../reducers/job-names';
 import { combineReducers } from 'redux';
 // import Todo from '../reducers/todo';
-import { PersonalInfo } from '../reducers/person-info';
+
 import { PopupState } from '../reducers/popup';
 import { AuthState } from '../reducers/auth';
 import { MapState } from '../reducers/map';
@@ -37,7 +38,8 @@ import { MobileState } from './../reducers/change-mobile-state';
 
 
 let rootReducer = {
-  PersonalInfo,
+  ShortPersonalInfo,
+  FullPersonalInfo,
   PopupState,
   AuthState,
   MapState,

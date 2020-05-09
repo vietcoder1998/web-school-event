@@ -21,22 +21,23 @@
   .h-j-item {
     background-color: #F9FBFF;
     margin: 0px 10px;
-    padding: 10px 10px;
+    padding: 10px;
     border-radius: 5px;
     &:hover {
       background-color: #E1ECF4;
     }
     .image-employer {
-    
-      height: 115px;
+      height: 110px;
       width: 100%;
       border-radius: 7px;
+      
     }
     .img-job {
       img {
         height: 70px;
         width: 70px;
         border-radius: 17px;
+        
       }
     }
     .job-content {

@@ -32,7 +32,6 @@ class Countdown extends Component<IProps, IState> {
       const date = this.calculateCountdown(dateX);
       date ? this.setState(date) : this.stop();
     }, 1000);
-    console.log(window.location.hostname);
   }
 
   componentWillUnmount() {

@@ -13,7 +13,7 @@ function* getListInDayData(action) {
     let res = yield call(getInDayData, action);
     if (res) {
         let data = res.data;
-        console.log(data)
+      
         yield put({ type: REDUX.IN_DAY.GET_IN_DAY_JOB, data });
     }
 };

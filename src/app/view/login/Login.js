@@ -50,8 +50,7 @@ class Login extends Component {
         _requestToServer(POST, data, authUserPassword, AUTH_HOST, loginHeaders, null, false)
             .then(res => {
                 if (res) {
-                    console.log(res.target)
-                    console.log(res)
+           
                     if (res.data.target !== 'STUDENT') {
                         swal({
                             title: "Worksvns thông báo",

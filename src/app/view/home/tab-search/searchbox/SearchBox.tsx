@@ -262,7 +262,7 @@ class SearchBox extends Component<IProps, IState>{
     }
 
     _setArea = (item) => {
-        console.log(item)
+      
         this.setState({ area: item });
         this.props.setFilterArea(item);
         localStorage.setItem("region", JSON.stringify(item))

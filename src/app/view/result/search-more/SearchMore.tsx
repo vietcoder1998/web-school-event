@@ -91,7 +91,7 @@ class SearchMore extends React.Component<ISearchMore, IStateSearchMore> {
                             value={weekDays}
                             onChange={(event: any) => {
                                 this.setState({weekDays: event})
-                                // console.log(event)
+                         
                             }}
                             options={optionDays}
                             defaultValue={null}

@@ -60,7 +60,7 @@ class TopJob extends PureComponent<IProps> {
                           alt="ảnh công ty"
                           height="130px"
                           width="100px"
-                          style={{  borderRadius: 7 }}
+                          style={{  borderRadius: 7, objectFit: 'cover', objectPosition:' center' }}
                         />
                       </div>
                       <div className="job-content">
