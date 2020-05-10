@@ -11,6 +11,7 @@ import { Loading } from "./app/view/layout/common/Common";
 import { _get } from "./services/base-api";
 import { PUBLIC_HOST } from "./environment/development";
 import { noInfoHeader } from "./services/auth";
+import HashLoader from "react-spinners/HashLoader";
 
 const EventHome = asyncComponent(() =>
   import("./app/view/Event/Home/Home").then((module) => module.default)
@@ -99,7 +100,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       isAuthen: true,
-
+      loading: true,
     };
   }
 
@@ -107,8 +108,13 @@ class App extends React.Component {
 
   async componentDidMount() {
     await this._loadLocal();
-    this.setState({ loading: false });
+
     this._callResize();
+    setTimeout(() => {
+      this.setState({
+        loading: false
+      })
+    }, 2000)
 
     $(window).resize(() => {
       this._callResize();
@@ -159,55 +165,71 @@ class App extends React.Component {
       });
     if (token !== null) {
       this.props.checkAuthen(token);
+
+
     }
   };
 
   render() {
     let { eventStart } = this.props;
-    return (
-      <Fragment>
-        <Router>
-          <Suspense fallback={<Loading />}>
-            <Switch>
-              <Route
-                exact
-                path="/"
-                component={eventStart ? EventHome : EventCountDown}
-              />
-              <Route
-                exact
-                path="/event-job-detail/:id"
-                component={EventJobDetail}
-              />
-              <Route exact path="/count" component={EventCountDown} />
-              <Route exact path="/home" component={Home} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/reset-password" component={ResetPassword} />
-              <Route
-                exact
-                path="/profile"
-                component={this.props.isAuthen === true ? Profile : Home}
-              />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/forgot-password" component={ForgotPassword} />
-              <Route path="/result" component={Result} />
-              <Route exact path="/save-job" component={SaveJob} />
-              <Route exact path="/history-apply" component={HistoryApply} />
-              <Route exact path="/job-detail/:id" component={JobDetail} />
-              <Route exact path="/notifications" component={AllNoti} />
-              <Route exact path="/tat-ca-cac-tinh" component={DataRegions} />
-              <Route
-                exact
-                path="/tat-ca-cac-cong-viec"
-                component={DataJobNames}
-              />
-              <Route exact path="/employer/:id" component={EmInfo} />
-              <Route component={NotFound} />
-            </Switch>
-          </Suspense>
-        </Router>
-      </Fragment>
-    );
+
+    if (this.state.loading) return (
+      <div className='loading-page'>
+        <HashLoader
+          sizeUnit={"px"}
+          size={150}
+          color={'#32A3F9'}
+          loading={this.state.loading}
+        />
+      </div>
+    )
+    else {
+      return (
+        <Fragment>
+          <Router>
+            <Suspense fallback={<Loading />}>
+              <Switch>
+                <Route
+                  exact
+                  path="/"
+                  component={eventStart ? EventHome : EventCountDown}
+                />
+                <Route
+                  exact
+                  path="/event-job-detail/:id"
+                  component={EventJobDetail}
+                />
+                <Route exact path="/count" component={EventCountDown} />
+                <Route exact path="/home" component={Home} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/reset-password" component={ResetPassword} />
+                <Route
+                  exact
+                  path="/profile"
+                  component={this.props.isAuthen === true ? Profile : Home}
+                />
+                <Route exact path="/register" component={Register} />
+                <Route exact path="/forgot-password" component={ForgotPassword} />
+                <Route path="/result" component={Result} />
+                <Route exact path="/save-job" component={SaveJob} />
+                <Route exact path="/history-apply" component={HistoryApply} />
+                <Route exact path="/job-detail/:id" component={JobDetail} />
+                <Route exact path="/notifications" component={AllNoti} />
+                <Route exact path="/tat-ca-cac-tinh" component={DataRegions} />
+                <Route
+                  exact
+                  path="/tat-ca-cac-cong-viec"
+                  component={DataJobNames}
+                />
+                <Route exact path="/employer/:id" component={EmInfo} />
+                <Route component={NotFound} />
+              </Switch>
+            </Suspense>
+          </Router>
+        </Fragment>
+      );
+    }
+
   }
 }
 

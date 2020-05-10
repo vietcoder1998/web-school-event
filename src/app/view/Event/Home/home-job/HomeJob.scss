@@ -40,8 +40,14 @@
     border-radius: 7px;
     background-color: white;
     margin-top: 10px;
-    .job-image {
-      border-radius: 10px;
+    .img-job {
+   
+      img {
+        margin-top: 30px;
+        margin-left: 5px;
+        width: 70px;
+        height: 70px;
+      }
     }
     a {
       color: #5d5d5d;

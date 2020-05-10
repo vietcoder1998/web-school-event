@@ -24,16 +24,36 @@
 
   .h-j-item {
     &:hover {
-      background-color: #E1ECF4;
+      background-color: #e1ecf4;
     }
-    display      : flex;
-    margin       : 0.2vw 1vw;
-    height       : 130px !important;
+    display: flex;
+    margin: 0.2vw 1vw;
+    height: 130px !important;
     border-bottom: dashed $color_border 1px;
     border-radius: 7px;
     background-color: white;
     margin-top: 10px;
-    
+    .tag-hot-job {
+      position: absolute;
+      right: 14px;
+      top:63px;
+      left: initial;
+      text-align: center;
+      font-weight: bold;
+      margin-top: 30px;
+     
+      width: 95px;
+      height: 23px;
+      -webkit-transform: rotate(330deg);
+      font-size: 12px;
+      color: white;
+      background-color: red;
+      line-height: 20px;
+
+      @media (min-width: 0px) and (max-width: 500px){
+        margin-top: 30px;
+      }
+    }
     a {
       color: #5d5d5d;
 

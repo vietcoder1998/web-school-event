@@ -15,6 +15,9 @@
     width: 25%;
     background-color: rgba(0, 0, 0, 0.2);
     display: flex;
+    @media (min-width: 0px) and (max-width: 500px){
+      top: 50%
+    }
     a {
       .banner-logo {
         background-color: white;
@@ -34,7 +37,9 @@
         font-size: 1rem;
         font-weight: bold;
         text-transform: uppercase;
-       
+        @media (min-width: 0px) and (max-width: 500px){
+          display: none
+        }
       }
     }
   }

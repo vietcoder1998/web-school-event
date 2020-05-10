@@ -131,6 +131,23 @@ class FixPerson extends Component<IProps, IState> {
     this.setState({ show_popup: true });
   };
 
+  _upLoadFile = (name, url, event?: any) => {
+    let picture = this.state[name];
+    let files = event.target.files;
+    let reader = new FileReader();
+    reader.readAsDataURL(files[0]);
+    reader.onload = (e?: any) => {
+      // @ts-ignore
+      this.setState({ [url]: e.target.result });
+    };
+    console.log(picture)
+    picture = files[0];
+    this.setState({ [name]: picture });
+  };
+
+
+
+
   _createRequest = async () => {
     let { personalInfo, avatar } = this.state;
     let dataRequest = {
@@ -178,8 +195,8 @@ class FixPerson extends Component<IProps, IState> {
     });
   };
   render() {
-    let { personalInfo} = this.props;
-    let avatar = this.props.personalInfo && this.props.personalInfo.avatarUrl === null ? imageDefault : this.props.personalInfo.avatarUrl
+    let { personalInfo } = this.props;
+    let { avatarUrl } = this.state;
     let birth_day = timeConverter(personalInfo.birthday, 1000);
 
     return (
@@ -193,7 +210,7 @@ class FixPerson extends Component<IProps, IState> {
             <div className="person-avatar">
               <h5>Cập nhật ảnh đại diện</h5>
               <Avatar
-                src={avatar}
+                src={avatarUrl}
                 style={{ width: "95px", height: "95px" }}
               />
               <form>
