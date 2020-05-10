@@ -33,26 +33,47 @@
     border-radius: 7px;
     background-color: white;
     margin-top: 10px;
-    .tag-hot-job {
-      position: absolute;
-      right: 14px;
-      top:63px;
-      left: initial;
-      text-align: center;
-      font-weight: bold;
-      margin-top: 30px;
-     
-      width: 95px;
-      height: 23px;
-      -webkit-transform: rotate(330deg);
-      font-size: 12px;
-      color: white;
-      background-color: red;
-      line-height: 20px;
 
-      @media (min-width: 0px) and (max-width: 500px){
-        margin-top: 30px;
+    //tag
+    @function sqrt($r) {
+      $x0: 1;
+      $x1: $x0;
+      @for $i from 1 through 10 {
+        $x1: $x0 - ($x0 * $x0 - abs($r)) / (2 * $x0);
+        $x0: $x1;
       }
+      @return $x1;
+    }
+
+    $cornerwidth: 60px;
+
+    .c-corner-label {
+      position: absolute;
+      top: 11px;
+      right: 15px;
+      border-style: solid;
+      border-color: transparent #ee1c25 transparent transparent;
+      border-color: rgba(255, 255, 255, 0) #e43636 rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
+      height: 0;
+      width: 0;
+      border-width: 0 $cornerwidth $cornerwidth 0;
+      @media (min-width: 0px) and (max-width: 500px) {
+        top: 11px;
+        right: 5px;
+      }
+    }
+    .c-corner-label__text {
+      color: #eee;
+      font-size: $cornerwidth/5;
+      font-weight: bold;
+      position: relative;
+      left: -$cornerwidth * 0.06;
+      top: $cornerwidth * 0.1;
+      white-space: nowrap;
+      transform: rotate(45deg);
+      width: $cornerwidth * sqrt(2);
+      text-align: center;
+      line-height: 2em;
     }
     a {
       color: #5d5d5d;

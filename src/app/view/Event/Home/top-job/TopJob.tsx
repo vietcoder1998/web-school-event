@@ -102,9 +102,9 @@ class TopJob extends PureComponent<IProps> {
                       </li>
                     </ul>
                   </div>
-                  <span className='tag-hot-job'>
-                    HOT
-                      </span>
+                  <div className="c-corner-label">
+                    <div className="c-corner-label__text">HOT</div>
+                  </div>
                 </div>
                 {" "}
               </Col>

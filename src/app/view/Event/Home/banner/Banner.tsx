@@ -15,6 +15,7 @@ interface IState {
   pageIndex: number;
   pageSize: number;
   is_loading: boolean;
+  activeInfo: boolean;
 }
 
 class Banner extends PureComponent<IProps, IState> {
@@ -25,6 +26,7 @@ class Banner extends PureComponent<IProps, IState> {
       pageIndex: 0,
       pageSize: 9,
       is_loading: true,
+      activeInfo: false,
     };
     this.carousel = React.createRef();
     this.next = this.next.bind(this);
@@ -55,43 +57,68 @@ class Banner extends PureComponent<IProps, IState> {
       <div
         className="employer-banner"
         style={{ display: listEmployer.totalItems === 0 ? "none" : "" }}
+        onMouseOver={() => {
+          this.setState({
+            activeInfo: true
+          });
+        }}
+          onMouseOut={() => {
+            this.setState({
+              activeInfo: true
+            });
+          }} 
       >
         <Carousel dots={true} ref={(node) => (this.carousel = node)} {...props}>
           {listEmployer && listEmployer.items
             ? listEmployer.items.map((item, index) => (
-                <div className="banner">
-                  <div className="info-in-banner">
-                    <Link
-                      to={`/employer/${window.btoa(item.employer.id)}`}
-                      target="_blank"
-                      style={{ width: "100px" }}
-                    >
-                      <img
-                        className="banner-logo"
-                        src={
-                          item.employer.logoUrl === null
-                            ? defaultImage
-                            : item.employer.logoUrl
-                        }
-                        alt="logo"
-                      />
-                    </Link>
-                    <a href={`/employer/${window.btoa(item.employer.id)}`}>
-                      <div className="text-banner">
-                        {item.employer.employerName}{" "}
+              <div className="banner">
+                <div className="info-in-banner"
+                  style={{ display: this.state.activeInfo ? 'flex' : 'none', transform: this.state.activeInfo ? 'scale(1.2,1.2)' : 'scale(1,1)', 
+                  transition: this.state.activeInfo ? '0.5s' :  '0.5s'
+                  }}>
+                  <Link
+                    to={`/employer/${window.btoa(item.employer.id)}`}
+                    target="_blank"
+                    style={{ width: "100px" }}
+                  >
+                    <img
+                      className="banner-logo"
+                      src={
+                        item.employer.logoUrl === null
+                          ? defaultImage
+                          : item.employer.logoUrl
+                      }
+                      alt="logo"
+                    />
+                  </Link>
+                  <a href={`/employer/${window.btoa(item.employer.id)}`}>
+                    <div className="text-banner">
+                      {item.employer.employerName}{" "}
+                    </div>
+                    <div className="info">
+                      <div>
+                         <Icon type='environment' /> {item.employer.address}
                       </div>
-                    </a>
-                  </div>
-                  <img
-                    src={
-                      item.bannerUrl === null ? defaultImage : item.bannerUrl
-                    }
-                    key={index}
-                    alt="banner"
-                    className="image-banner"
-                  />
+                      <div>
+                         <Icon type='phone' />  {item.employer.phone}
+                      </div>
+                      <div>
+                         <Icon type='mail' /> {item.employer.email}
+                      </div>
+                     
+                    </div>
+                  </a>
                 </div>
-              ))
+                <img
+                  src={
+                    item.bannerUrl === null ? defaultImage : item.bannerUrl
+                  }
+                  key={index}
+                  alt="banner"
+                  className="image-banner"
+                />
+              </div>
+            ))
             : null}
         </Carousel>
       </div>

@@ -8,15 +8,19 @@
   }
 
   .info-in-banner {
-    position: absolute;
-    top: 75%;
-    left: 70%;
-    height: 100px;
-    width: 25%;
-    background-color: rgba(0, 0, 0, 0.2);
     display: flex;
+    transition: width 2s;
+    position: absolute;
+    top: 70%;
+    left: 65%;
+    height: 110px;
+    width: 30%;
+    background-color: rgba(0, 0, 0, 0.2);
+    
     @media (min-width: 0px) and (max-width: 500px){
-      top: 50%
+      top: 40%;
+      width: 25%;
+      height: 105px;
     }
     a {
       .banner-logo {
@@ -25,7 +29,7 @@
         width: 80px;
         height: 80px;
         padding: 10px;
-        margin: 10px 0px 0 10px;
+        margin: 15px 0px 0 10px;
         vertical-align: middle;
         object-fit: cover;
         object-position: center;
@@ -34,9 +38,21 @@
         margin-top: 10px;
         margin-left: 15px;
         color: white;
-        font-size: 1rem;
+        font-size: 0.8rem;
         font-weight: bold;
         text-transform: uppercase;
+        max-lines: 2;
+        @media (min-width: 0px) and (max-width: 500px){
+          display: none
+        }
+      }
+      .info {
+        color: white;
+        margin-left: 15px;
+        font-size: 0.55rem;
+        text-transform: uppercase;
+        text-overflow: ellipsis;
+        overflow: hidden;
         @media (min-width: 0px) and (max-width: 500px){
           display: none
         }
