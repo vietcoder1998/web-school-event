@@ -165,8 +165,6 @@ class App extends React.Component {
       });
     if (token !== null) {
       this.props.checkAuthen(token);
-
-
     }
   };
 

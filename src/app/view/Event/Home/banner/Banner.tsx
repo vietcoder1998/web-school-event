@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Carousel, Icon, Row, Col, Avatar, Typography } from "antd";
+import { Carousel, Icon, Typography } from "antd";
 import { connect } from "react-redux";
 import defaultImage from "../../../../../assets/image/base-image.jpg";
 import { REDUX_SAGA } from "../../../../../const/actions";
@@ -64,7 +64,7 @@ class Banner extends PureComponent<IProps, IState> {
         }}
           onMouseOut={() => {
             this.setState({
-              activeInfo: true
+              activeInfo: false
             });
           }} 
       >

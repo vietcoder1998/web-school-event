@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Col, Row, Button } from "antd";
+import { Col, Row } from "antd";
 import { connect } from "react-redux";
 import "./Branch.scss";
 import { PUBLIC_HOST } from "../../../../../environment/development";

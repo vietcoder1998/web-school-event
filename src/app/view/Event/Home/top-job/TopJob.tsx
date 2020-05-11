@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Col, Row, Skeleton, Pagination } from "antd";
+import { Col, Row, Pagination } from "antd";
 import "./TopJob.scss";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";

@@ -1,8 +1,6 @@
 import React from 'react';
-import { Row, Col, Icon, Tooltip, Avatar, Pagination, Skeleton } from 'antd';
+import { Row, Col, Icon, Pagination, Skeleton } from 'antd';
 import { Link } from 'react-router-dom';
-import { limitString } from '../../../../utils/limitString';
-
 import './ListHlJob.scss';
 //@ts-ignore
 

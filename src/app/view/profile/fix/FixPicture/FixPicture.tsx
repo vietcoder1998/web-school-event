@@ -82,14 +82,6 @@ class FixPerson extends Component<IProps, IState> {
     this.setState({ show_popup: false });
   };
 
-  _setMap = () => {
-    let { personalInfo, addressChange } = this.state;
-    personalInfo.lat = addressChange.lat;
-    personalInfo.lon = addressChange.lon;
-    personalInfo.address = addressChange.address;
-    this.setState({ personalInfo });
-    this._handleClose();
-  };
 
   _upLoadFile = (name, url, event?: any) => {
     let picture = this.state[name];
@@ -105,9 +97,6 @@ class FixPerson extends Component<IProps, IState> {
     this.setState({ [name]: picture });
   };
 
-  _openLocation = () => {
-    this.setState({ show_popup: true });
-  };
 
   _createRequest = async () => {
     let { identityCardBack, identityCardFront } = this.state;

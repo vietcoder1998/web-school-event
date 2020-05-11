@@ -1,12 +1,11 @@
 import React, { PureComponent } from 'react';
-import { Col, Row, Skeleton, Avatar, Pagination } from 'antd';
+import { Col, Row, Skeleton,  Pagination } from 'antd';
 import './AllJob.scss'
 import { connect } from 'react-redux';
-import { limitString } from '../../../../utils/limitString';
 import { Link } from 'react-router-dom';
 //@ts-ignore
 import DefaultImage from '../../../../assets/image/carouselGroup/carousel2.jpg';
-import { REDUX_SAGA, REDUX } from '../../../../const/actions';
+import { REDUX_SAGA} from '../../../../const/actions';
 import { JobType } from '../../layout/common/Common';
 
 interface IProps {

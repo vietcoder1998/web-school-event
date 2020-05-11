@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import moment from "moment";
 import ButtonToggle from "../../../helper/toggle-button/ToggleButton";
 import { sendFileHeader } from "../../../../../services/auth";
-import { Icon, Row, Col, Modal, Input, Button, DatePicker, Avatar } from "antd";
+import { Icon, Row, Col, Modal, Input, DatePicker, Avatar, Button } from "antd";
 import MapContainer from "../../../layout/google-maps/MapContainer";
 import { timeConverter } from "../../../../../utils/convertTime";
 import { REDUX_SAGA } from "../../../../../const/actions";
@@ -196,12 +196,29 @@ class FixPerson extends Component<IProps, IState> {
   };
   render() {
     let { personalInfo } = this.props;
-    let { avatarUrl } = this.state;
+    let { avatarUrl, show_popup } = this.state;
     let birth_day = timeConverter(personalInfo.birthday, 1000);
 
     return (
       <div className="wraper">
         {/* Center */}
+        <Modal
+          visible={show_popup}
+          onCancel={this._handleClose}
+          onOk={this._setMap}
+          title="Định vị trên bản đồ"
+          className="modal-map"
+          footer={[
+            <Button key="back" onClick={this._handleClose}>
+              Trở lại
+            </Button>,
+            <Button key="submit" type="primary" onClick={this._setMap}>
+              Cập nhật
+            </Button>,
+          ]}
+        >
+          <MapContainer GetLatLngToParent={this.getLatLngFromMap} />
+        </Modal>
 
         {/* Fix Infomation */}
         <Row className="person-info">

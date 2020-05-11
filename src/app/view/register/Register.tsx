@@ -19,7 +19,6 @@ import {
   MAJORS,
 } from "../../../services/api/private.api";
 import { noInfoHeader } from "../../../services/auth";
-import MapContainer from "../layout/google-maps/MapContainer";
 import { _requestToServer } from "../../../services/exec";
 import swal from "sweetalert";
 import { POST } from "../../../const/method";

@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
-import { Affix, Card, Collapse, Checkbox, Icon, Button, Row, Col } from 'antd';
+import React from 'react';
+import {  Card, Collapse, Checkbox, Icon, Button, Row, Col } from 'antd';
 import './SearchMore.scss';
 import { connect } from 'react-redux';
 import { TYPE } from '../../../../const/type';
-import { render } from 'react-dom';
 import qs from 'query-string';
 
 // import MapContainer from '../../layout/google-maps/MapContainer';

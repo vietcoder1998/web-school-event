@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
-import { Row, Col, Icon, Skeleton, Avatar, Empty, Pagination } from 'antd';
-import { IptLetter, NotUpdate, JobType } from '../../../../layout/common/Common';
+import { Row, Col, Icon } from 'antd';
+import { IptLetter, NotUpdate,  } from '../../../../layout/common/Common';
 import moment from 'moment';
 import { weekDays } from '../.././../../../../utils/day';
 import { _checkGender } from './../JobDetail';
@@ -8,7 +8,6 @@ import './JobProperties.scss'
 import { IShift } from '../../../../../../models/announcements';
 // import { convertStringToArray } from '../../../../utils/convertStringToArray';
 import { convertSalary } from '../../../../../../utils/convertNumber'
-import { Link } from 'react-router-dom';
 
 interface JobPropertiesProps {
     jobDetail?: any;

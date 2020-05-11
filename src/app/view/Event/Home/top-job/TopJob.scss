@@ -48,18 +48,21 @@
     $cornerwidth: 60px;
 
     .c-corner-label {
-      position: absolute;
-      top: 11px;
-      right: 15px;
+      margin-top: 70px;
       border-style: solid;
       border-color: transparent #ee1c25 transparent transparent;
       border-color: rgba(255, 255, 255, 0) #e43636 rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
       height: 0;
       width: 0;
       border-width: 0 $cornerwidth $cornerwidth 0;
+      -webkit-transform: rotate(90deg);
       @media (min-width: 0px) and (max-width: 500px) {
         top: 11px;
         right: 5px;
+      }
+      @media (min-width: 600px) and (max-width: 800px) {
+        height: 0;
+        width: 0;
       }
     }
     .c-corner-label__text {
@@ -74,6 +77,7 @@
       width: $cornerwidth * sqrt(2);
       text-align: center;
       line-height: 2em;
+      -webkit-transform: rotate(225deg);
     }
     a {
       color: #5d5d5d;

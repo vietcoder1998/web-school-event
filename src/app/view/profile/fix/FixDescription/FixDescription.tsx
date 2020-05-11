@@ -46,7 +46,6 @@ class FixDescription extends Component<IProps, IState>{
     _createRequest = async () => {
         let { description } = this.state;
         await _requestToServer(this.props.method, description, update_description, null, sendStringHeader, null, true);
-        window.location.reload();
         await this.props._fixData('description');
     }
 

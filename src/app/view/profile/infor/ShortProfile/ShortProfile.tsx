@@ -4,8 +4,7 @@ import { timeConverter } from "../../../../../utils/convertTime";
 import { connect } from "react-redux";
 import { Avatar, Progress } from "antd";
 import imageDefault from "../../../../../assets/image/base-image.jpg";
-import CHPlay from "../../../../../assets/image/CHPlay.png";
-import AppStore from "../../../../../assets/image/app-store.png";
+
 
 function GetDate(dateRaw) {
   var date = new Date(dateRaw);
