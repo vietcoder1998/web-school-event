@@ -119,8 +119,8 @@ class Header extends PureComponent<IProps, IState> {
                 <Icon type={'apple'} theme="filled" style={{ fontSize: '16.8px' }} />
                 Ứng dụng iOS
                 </a>
-              <a href='employer.works.vn' target='_blank' rel="noopener noreferrer">
-                <Icon type='search' theme="filled" style={{ fontSize: '16.8px' }} />
+              <a href='https://employer.works.vn' target='_blank' rel="noopener noreferrer">
+                <Icon type='zoom' theme="filled" style={{ fontSize: '16.8px' }} />
                 Nhà tuyển dụng
                 </a>
             </div>
