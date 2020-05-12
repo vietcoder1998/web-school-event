@@ -66,7 +66,7 @@ class Header extends PureComponent<IProps, IState> {
   _showSideBar = () => {
     this.props.openSideBar();
   }
-    
+
   _closeNoti = () => {
     this.setState({ show_noti: false })
   };
@@ -106,12 +106,12 @@ class Header extends PureComponent<IProps, IState> {
             <div
               style={{ display: show_bar ? "none" : "block" }}
             >
-              <a href='/' style={{ display: eventStart === false ? 'none' : window.location.pathname === '/' ? "none" : '' , backgroundColor: '#0081e3' }}><Icon type={'tags'} />Ngày hội việc làm</a>
+              <a href='/' style={{ display: eventStart === false ? 'none' : window.location.pathname === '/' ? "none" : '', backgroundColor: '#0081e3' }}><Icon type={'tags'} />Ngày hội việc làm</a>
               <a href='/home' style={{ display: window.location.pathname === '/home' ? "none" : '' }}><Icon type={'home'} />Việc làm</a>
 
 
-       
-              <a href='https://play.google.com/store/apps/details?id=com.worksvn.candidate&hl=vi' target='_blank' rel="noopener noreferrer">
+
+              <a href='https://play.google.com/store/apps/details?id=com.worksvn.student&hl=en_US' target='_blank' rel="noopener noreferrer">
                 <Icon type="android" theme="filled" style={{ fontSize: '16.3px' }} />
                 Ứng dụng Android
                 </a>
@@ -119,7 +119,12 @@ class Header extends PureComponent<IProps, IState> {
                 <Icon type={'apple'} theme="filled" style={{ fontSize: '16.8px' }} />
                 Ứng dụng iOS
                 </a>
+              <a href='employer.works.vn' target='_blank' rel="noopener noreferrer">
+                <Icon type='search' theme="filled" style={{ fontSize: '16.8px' }} />
+                Nhà tuyển dụng
+                </a>
             </div>
+
           </div>
           <div className='function'
             style={{ display: show_bar ? "none" : "flex" }}
