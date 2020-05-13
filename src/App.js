@@ -148,20 +148,22 @@ class App extends React.Component {
   checkEvent() {
     let res = _get(
       null,
-      `/api/schools/${process.env.REACT_APP_SCHOOL_ID}/events/${process.env.REACT_APP_EVENT_ID}?activeCheck=true`,
+      `/api/schools/${process.env.REACT_APP_SCHOOL_ID}/events/abc?activeCheck=true`,
       PUBLIC_HOST,
       noInfoHeader
     );
+
     return res;
   }
   _loadLocal = async () => {
     let token = localStorage.getItem("accessToken");
     this.checkEvent()
       .then((res) => {
-        this.props.checkEvent(true);
+        this.props.checkEvent(true, new Date(res.data.startedDate));
       })
       .catch((e) => {
-        this.props.checkEvent(false);
+        console.log(e.response.data)
+        // this.props.checkEvent(false);
       });
     if (token !== null) {
       this.props.checkAuthen(token);
@@ -253,9 +255,10 @@ const mapDispatchToProps = (dispatch) => ({
       type: REDUX.MOBILE_STATE.SET_MOBILE_STATE,
       state,
     }),
-  checkEvent: (status) => {
+  checkEvent: (status, time) => {
     dispatch({
       type: REDUX.EVENT.START,
+      time: time,
       status,
     });
   },

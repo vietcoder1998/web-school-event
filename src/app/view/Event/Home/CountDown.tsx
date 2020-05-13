@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import "./Home.scss";
 import countdownImage from "../../../../assets/image/crs3.jpg";
 import { Button } from "antd";
-import CHPlay from "../../../../assets/image/CHPlay.png";
-import AppStore from "../../../../assets/image/app-store.png";
+import { connect } from "react-redux";
+import { REDUX } from "../../../../const/actions";
 
 interface IProps {
   date?: string;
@@ -42,9 +42,9 @@ class Countdown extends Component<IProps, IState> {
     let diff = (Date.parse(new Date(endDate)) - Date.parse(new Date())) / 1000;
 
     // clear countdown when date is reached
-    if (diff <= 0){
-      window.location.reload()
-       return false;
+    if (diff <= 0) {
+
+      return false;
 
     }
     const timeLeft = {
@@ -78,7 +78,7 @@ class Countdown extends Component<IProps, IState> {
     }
     timeLeft.sec = diff;
 
-    
+
 
     return timeLeft;
   }
@@ -134,7 +134,7 @@ class Countdown extends Component<IProps, IState> {
               </span>
             </span>
           </div>
-          
+
           <a href="/home">
             <Button type="primary" shape="round" className="btn">
               Về trang chủ
@@ -175,5 +175,18 @@ class Countdown extends Component<IProps, IState> {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  isAuthen: state.AuthState.isAuthen,
+  eventStart: state.EventStatusReducer,
+});
 
-export default Countdown;
+const mapDispatchToProps = (dispatch) => ({
+  checkEvent: (status, time) => {
+    dispatch({
+      type: REDUX.EVENT.START,
+      time: time,
+      status,
+    });
+  },
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Countdown);
