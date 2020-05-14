@@ -1,16 +1,29 @@
-import { REDUX } from "../../../const/actions"
-
+import { REDUX } from "../../../const/actions";
 
 let initEventStatus = {
-    status: true,
-    time: 0,
-}
+  haveEvent: true,
+  status: true,
+  time: 0,
+  msgError: "",
+};
 
 export const EventStatusReducer = (state = initEventStatus, action) => {
-    switch (action.type) {
-        case REDUX.EVENT.START:
-            return { ...state, time: action.time, status: action.status };
-        default:
-            return { ...state };
-    }
-}
+  switch (action.type) {
+    case REDUX.EVENT.START:
+      return {
+        ...state,
+        haveEvent: true,
+        time: action.time,
+        status: action.status,
+      };
+    case REDUX.EVENT.NOT_AVAILABLE:
+      return {
+        ...state,
+        status: false,
+        haveEvent: false,
+        msgError: action.msgError,
+      };
+    default:
+      return { ...state };
+  }
+};

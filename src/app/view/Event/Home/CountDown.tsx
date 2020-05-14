@@ -1,12 +1,15 @@
 import React, { Component } from "react";
+import  { Redirect } from 'react-router-dom'
+
 import "./Home.scss";
 import countdownImage from "../../../../assets/image/crs3.jpg";
 import { Button } from "antd";
 import { connect } from "react-redux";
 import { REDUX } from "../../../../const/actions";
 
+
 interface IProps {
-  date?: string;
+  time?: string;
 }
 interface IState {
   days: number;
@@ -27,7 +30,7 @@ class Countdown extends Component<IProps, IState> {
   }
 
   componentDidMount() {
-    const dateX = "2020-5-10";
+    const dateX = this.props.time;
     this.interval = setInterval(() => {
       const date = this.calculateCountdown(dateX);
       date ? this.setState(date) : this.stop();
@@ -43,9 +46,7 @@ class Countdown extends Component<IProps, IState> {
 
     // clear countdown when date is reached
     if (diff <= 0) {
-
       return false;
-
     }
     const timeLeft = {
       years: 0,
@@ -78,8 +79,6 @@ class Countdown extends Component<IProps, IState> {
     }
     timeLeft.sec = diff;
 
-
-
     return timeLeft;
   }
 
@@ -97,87 +96,66 @@ class Countdown extends Component<IProps, IState> {
 
   render() {
     const countDown = this.state;
-
-    return (
-      <div className="Countdown">
-        <div className="center">
-          {/* <span className="Countdown-col">
+    let { msgError, haveEvent } = this.props;
+    if (haveEvent) {
+      return (
+        <div className="Countdown">
+          <div className="center">
+            {/* <span className="Countdown-col">
                         <span className="Countdown-col-element">
                             <h2>NGÀY HỘI VIỆC LÀM</h2>
                         </span>
                     </span> */}
-          <div className="time">
-            <span className="Countdown-col">
-              <span className="Countdown-col-element">
-                <strong>{this.addLeadingZeros(countDown.days)}</strong>
-                <span>Ngày</span>
+            <div className="time">
+              <span className="Countdown-col">
+                <span className="Countdown-col-element">
+                  <strong>{this.addLeadingZeros(countDown.days)}</strong>
+                  <span>Ngày</span>
+                </span>
               </span>
-            </span>
-            <span className="Countdown-col">
-              <span className="Countdown-col-element">
-                <strong>{this.addLeadingZeros(countDown.hours)}</strong>
-                <span>Giờ</span>
+              <span className="Countdown-col">
+                <span className="Countdown-col-element">
+                  <strong>{this.addLeadingZeros(countDown.hours)}</strong>
+                  <span>Giờ</span>
+                </span>
               </span>
-            </span>
 
-            <span className="Countdown-col">
-              <span className="Countdown-col-element">
-                <strong>{this.addLeadingZeros(countDown.min)}</strong>
-                <span>Phút</span>
+              <span className="Countdown-col">
+                <span className="Countdown-col-element">
+                  <strong>{this.addLeadingZeros(countDown.min)}</strong>
+                  <span>Phút</span>
+                </span>
               </span>
-            </span>
 
-            <span className="Countdown-col">
-              <span className="Countdown-col-element">
-                <strong>{this.addLeadingZeros(countDown.sec)}</strong>
-                <span>Giây</span>
+              <span className="Countdown-col">
+                <span className="Countdown-col-element">
+                  <strong>{this.addLeadingZeros(countDown.sec)}</strong>
+                  <span>Giây</span>
+                </span>
               </span>
-            </span>
+            </div>
+
+            <a href="/home">
+              <Button type="primary" shape="round" className="btn">
+                Về trang chủ
+              </Button>
+            </a>
           </div>
-
-          <a href="/home">
-            <Button type="primary" shape="round" className="btn">
-              Về trang chủ
-            </Button>
-          </a>
-          {/* <div>
-            <a
-              href={
-                "https://apps.apple.com/vn/app/worksvn-sinh-vi%C3%AAn/id1492437454"
-              }
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src={AppStore}
-                alt="CHPlay tìm việc"
-                height="50px"
-                width="auto"
-              />
-            </a>
-            <a
-              href={
-                "https://play.google.com/store/apps/details?id=com.worksvn.student&hl=vi"
-              }
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src={CHPlay}
-                alt="AppleStore Tìm việc"
-                height="50px"
-                width="auto"
-              />
-            </a>
-          </div> */}
         </div>
-      </div>
-    );
+      );
+    } else {
+     return (
+       <Redirect to='/home'/>
+     )
+    }
   }
 }
 const mapStateToProps = (state) => ({
   isAuthen: state.AuthState.isAuthen,
   eventStart: state.EventStatusReducer,
+  time: state.EventStatusReducer.time,
+  haveEvent: state.EventStatusReducer.haveEvent,
+  msgError: state.EventStatusReducer.msgError,
 });
 
 const mapDispatchToProps = (dispatch) => ({

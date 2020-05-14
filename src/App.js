@@ -112,9 +112,9 @@ class App extends React.Component {
     this._callResize();
     setTimeout(() => {
       this.setState({
-        loading: false
-      })
-    }, 2000)
+        loading: false,
+      });
+    }, 2000);
 
     $(window).resize(() => {
       this._callResize();
@@ -148,7 +148,7 @@ class App extends React.Component {
   checkEvent() {
     let res = _get(
       null,
-      `/api/schools/${process.env.REACT_APP_SCHOOL_ID}/events/abc?activeCheck=true`,
+      `/api/schools/${process.env.REACT_APP_SCHOOL_ID}/events/no_id/simple?activeCheck=false`,
       PUBLIC_HOST,
       noInfoHeader
     );
@@ -159,11 +159,18 @@ class App extends React.Component {
     let token = localStorage.getItem("accessToken");
     this.checkEvent()
       .then((res) => {
-        this.props.checkEvent(true, new Date(res.data.startedDate));
+        if (res.data.started === true) {
+          this.props.checkEvent(true, new Date(res.data.startedDate));
+        } else {
+          this.props.checkEvent(false, new Date(res.data.startedDate));
+        }
       })
       .catch((e) => {
-        console.log(e.response.data)
-        // this.props.checkEvent(false);
+        try {
+          this.props.noEvent(false, e.response.msg);
+        } catch (e) {
+          this.props.noEvent(false, null);
+        }
       });
     if (token !== null) {
       this.props.checkAuthen(token);
@@ -173,16 +180,17 @@ class App extends React.Component {
   render() {
     let { eventStart } = this.props;
 
-    if (this.state.loading) return (
-      <div className='loading-page'>
-        <HashLoader
-          sizeUnit={"px"}
-          size={150}
-          color={'#32A3F9'}
-          loading={this.state.loading}
-        />
-      </div>
-    )
+    if (this.state.loading)
+      return (
+        <div className="loading-page">
+          <HashLoader
+            sizeUnit={"px"}
+            size={150}
+            color={"#32A3F9"}
+            loading={this.state.loading}
+          />
+        </div>
+      );
     else {
       return (
         <Fragment>
@@ -209,7 +217,11 @@ class App extends React.Component {
                   component={this.props.isAuthen === true ? Profile : Home}
                 />
                 <Route exact path="/register" component={Register} />
-                <Route exact path="/forgot-password" component={ForgotPassword} />
+                <Route
+                  exact
+                  path="/forgot-password"
+                  component={ForgotPassword}
+                />
                 <Route path="/result" component={Result} />
                 <Route exact path="/save-job" component={SaveJob} />
                 <Route exact path="/history-apply" component={HistoryApply} />
@@ -229,7 +241,6 @@ class App extends React.Component {
         </Fragment>
       );
     }
-
   }
 }
 
@@ -260,6 +271,12 @@ const mapDispatchToProps = (dispatch) => ({
       type: REDUX.EVENT.START,
       time: time,
       status,
+    });
+  },
+  noEvent: (msg) => {
+    dispatch({
+      type: REDUX.EVENT.NOT_AVAILABLE,
+      msgError: msg,
     });
   },
 });
