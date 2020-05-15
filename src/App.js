@@ -148,7 +148,7 @@ class App extends React.Component {
   checkEvent() {
     let res = _get(
       null,
-      `/api/schools/${process.env.REACT_APP_SCHOOL_ID}/events/no_id/simple?activeCheck=false`,
+      `/api/schools/${process.env.REACT_APP_SCHOOL_ID}/events/${process.env.REACT_APP_EVENT_ID}/simple?activeCheck=false`,
       PUBLIC_HOST,
       noInfoHeader
     );
