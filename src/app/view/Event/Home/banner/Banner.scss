@@ -1,5 +1,14 @@
 .banner {
   position: relative;
+
+  .search-body {
+    position: absolute;
+    top: 70%;
+    left: 65%;
+    text-align: center;
+    min-height: 500px;
+    border-bottom: solid rgb(224, 224, 224) 1px;
+  }
   .image-banner {
     width: 100%;
     height: auto;
@@ -16,8 +25,8 @@
     height: 110px;
     width: 30%;
     background-color: rgba(0, 0, 0, 0.2);
-    
-    @media (min-width: 0px) and (max-width: 500px){
+
+    @media (min-width: 0px) and (max-width: 500px) {
       top: 40%;
       width: 25%;
       height: 105px;
@@ -42,8 +51,8 @@
         font-weight: bold;
         text-transform: uppercase;
         max-lines: 2;
-        @media (min-width: 0px) and (max-width: 500px){
-          display: none
+        @media (min-width: 0px) and (max-width: 500px) {
+          display: none;
         }
       }
       .info {
@@ -53,8 +62,8 @@
         text-transform: uppercase;
         text-overflow: ellipsis;
         overflow: hidden;
-        @media (min-width: 0px) and (max-width: 500px){
-          display: none
+        @media (min-width: 0px) and (max-width: 500px) {
+          display: none;
         }
       }
     }

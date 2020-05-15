@@ -6,12 +6,13 @@ import TopEm from "./top-em/TopEm";
 import TopJob from "./top-job/TopJob";
 import Banner from "./banner/Banner";
 import Branch from "./branch/Branch";
+import TabSearch from './tab-search/TabSearch'
 // import { REDUX_SAGA } from '../../../const/actions';
 
 function Home(props) {
   return (
     <Layout disableFooterData={false}>
-      <Banner />
+      <Banner {...props} />
       <Branch />
       <TopEm />
       <div

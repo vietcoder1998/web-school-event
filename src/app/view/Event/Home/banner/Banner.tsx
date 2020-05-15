@@ -5,7 +5,7 @@ import defaultImage from "../../../../../assets/image/base-image.jpg";
 import { REDUX_SAGA } from "../../../../../const/actions";
 import { Link } from "react-router-dom";
 import "./Banner.scss";
-
+import SearchBox from './searchbox/SearchBox'
 interface IProps {
   getTopEmpoyer?: Function;
   listEmployer?: any;
@@ -62,19 +62,20 @@ class Banner extends PureComponent<IProps, IState> {
             activeInfo: true
           });
         }}
-          onMouseOut={() => {
-            this.setState({
-              activeInfo: false
-            });
-          }} 
+        onMouseOut={() => {
+          this.setState({
+            activeInfo: false
+          });
+        }}
       >
         <Carousel dots={true} ref={(node) => (this.carousel = node)} {...props}>
           {listEmployer && listEmployer.items
             ? listEmployer.items.map((item, index) => (
               <div className="banner">
                 <div className="info-in-banner"
-                  style={{ display: this.state.activeInfo ? 'flex' : 'none', transform: this.state.activeInfo ? 'scale(1.2,1.2)' : 'scale(1,1)', 
-                  transition: this.state.activeInfo ? '0.5s' :  '0.5s'
+                  style={{
+                    display: this.state.activeInfo ? 'flex' : 'none', transform: this.state.activeInfo ? 'scale(1.2,1.2)' : 'scale(1,1)',
+                    transition: this.state.activeInfo ? '0.5s' : '0.5s'
                   }}>
                   <Link
                     to={`/employer/${window.btoa(item.employer.id)}`}
@@ -97,15 +98,15 @@ class Banner extends PureComponent<IProps, IState> {
                     </div>
                     <div className="info">
                       <div>
-                         <Icon type='environment' /> {item.employer.address}
+                        <Icon type='environment' /> {item.employer.address}
                       </div>
                       <div>
-                         <Icon type='phone' />  {item.employer.phone}
+                        <Icon type='phone' />  {item.employer.phone}
                       </div>
                       <div>
-                         <Icon type='mail' /> {item.employer.email}
+                        <Icon type='mail' /> {item.employer.email}
                       </div>
-                     
+
                     </div>
                   </a>
                 </div>
@@ -121,6 +122,10 @@ class Banner extends PureComponent<IProps, IState> {
             ))
             : null}
         </Carousel>
+
+        {/* <div className='search-body'>
+          <SearchBox {...props} />
+        </div> */}
       </div>
     );
   }
