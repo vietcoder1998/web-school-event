@@ -1,11 +1,10 @@
 import React, { PureComponent } from "react";
-import { Carousel, Icon, Typography } from "antd";
+import { Carousel, Icon, Typography, Skeleton } from "antd";
 import { connect } from "react-redux";
 import defaultImage from "../../../../../assets/image/base-image.jpg";
 import { REDUX_SAGA } from "../../../../../const/actions";
 import { Link } from "react-router-dom";
 import "./Banner.scss";
-import SearchBox from './searchbox/SearchBox'
 interface IProps {
   getTopEmpoyer?: Function;
   listEmployer?: any;
@@ -17,6 +16,8 @@ interface IState {
   is_loading: boolean;
   activeInfo: boolean;
 }
+
+
 
 class Banner extends PureComponent<IProps, IState> {
   constructor(props) {
@@ -39,21 +40,25 @@ class Banner extends PureComponent<IProps, IState> {
     this.carousel.prev();
   }
   componentDidMount = async () => {
-    await this.setState({ is_loading: false });
     await this.props.getTopEmpoyer(0);
+    setTimeout(() => {
+      this.setState({
+        is_loading: false
+      })
+    }, 1000);
   };
 
   render() {
     const props = {
       dots: true,
       infinite: true,
-      speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
     };
-    const { Title } = Typography;
+
     let { listEmployer } = this.props;
     return (
+
       <div
         className="employer-banner"
         style={{ display: listEmployer.totalItems === 0 ? "none" : "" }}
@@ -68,64 +73,62 @@ class Banner extends PureComponent<IProps, IState> {
           });
         }}
       >
-        <Carousel dots={true} ref={(node) => (this.carousel = node)} {...props}>
-          {listEmployer && listEmployer.items
-            ? listEmployer.items.map((item, index) => (
-              <div className="banner">
-                <div className="info-in-banner"
-                  style={{
-                    display: this.state.activeInfo ? 'flex' : 'none', transform: this.state.activeInfo ? 'scale(1.2,1.2)' : 'scale(1,1)',
-                    transition: this.state.activeInfo ? '0.5s' : '0.5s'
-                  }}>
-                  <Link
-                    to={`/employer/${window.btoa(item.employer.id)}`}
-                    target="_blank"
-                    style={{ width: "100px" }}
-                  >
-                    <img
-                      className="banner-logo"
-                      src={
-                        item.employer.logoUrl === null
-                          ? defaultImage
-                          : item.employer.logoUrl
-                      }
-                      alt="logo"
-                    />
-                  </Link>
-                  <a href={`/employer/${window.btoa(item.employer.id)}`}>
-                    <div className="text-banner">
-                      {item.employer.employerName}{" "}
-                    </div>
-                    <div className="info">
-                      <div>
-                        <Icon type='environment' /> {item.employer.address}
+        {this.state.is_loading ? <Skeleton loading={true} paragraph={{ rows: 20 }}  active={true} /> :
+          <Carousel dots={true} ref={(node) => (this.carousel = node)} {...props}>
+            {listEmployer && listEmployer.items
+              ? listEmployer.items.map((item, index) => (
+                <div className="banner">
+                  <div className="info-in-banner"
+                    style={{
+                      display: this.state.activeInfo ? 'flex' : 'none', transform: this.state.activeInfo ? 'scale(1.2,1.2)' : 'scale(1,1)',
+                      transition: this.state.activeInfo ? '0.5s' : '0.5s'
+                    }}>
+                    <Link
+                      to={`/employer/${window.btoa(item.employer.id)}`}
+                      target="_blank"
+                      style={{ width: "100px" }}
+                    >
+                      <img
+                        className="banner-logo"
+                        src={
+                          item.employer.logoUrl === null
+                            ? defaultImage
+                            : item.employer.logoUrl
+                        }
+                        alt="logo"
+                      />
+                    </Link>
+                    <a href={`/employer/${window.btoa(item.employer.id)}`}>
+                      <div className="text-banner">
+                        {item.employer.employerName}{" "}
                       </div>
-                      <div>
-                        <Icon type='phone' />  {item.employer.phone}
-                      </div>
-                      <div>
-                        <Icon type='mail' /> {item.employer.email}
-                      </div>
+                      <div className="info">
+                        <div>
+                          <Icon type='environment' /> {item.employer.address}
+                        </div>
+                        <div>
+                          <Icon type='phone' />  {item.employer.phone}
+                        </div>
+                        <div>
+                          <Icon type='mail' /> {item.employer.email}
+                        </div>
 
-                    </div>
-                  </a>
+                      </div>
+                    </a>
+                  </div>
+                  <img
+                    src={
+                      item.bannerUrl === null ? defaultImage : item.bannerUrl
+                    }
+                    key={index}
+                    alt="banner"
+                    className="image-banner"
+                  />
                 </div>
-                <img
-                  src={
-                    item.bannerUrl === null ? defaultImage : item.bannerUrl
-                  }
-                  key={index}
-                  alt="banner"
-                  className="image-banner"
-                />
-              </div>
-            ))
-            : null}
-        </Carousel>
-
-        {/* <div className='search-body'>
-          <SearchBox {...props} />
-        </div> */}
+              ))
+              : null}
+          </Carousel>
+        }
       </div>
     );
   }

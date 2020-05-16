@@ -1,17 +1,10 @@
 .banner {
   position: relative;
-
-  .search-body {
-    position: absolute;
-    top: 70%;
-    left: 65%;
-    text-align: center;
-    min-height: 500px;
-    border-bottom: solid rgb(224, 224, 224) 1px;
-  }
+  min-height: 700px;
   .image-banner {
     width: 100%;
     height: auto;
+    min-height: 700px;
     object-fit: cover;
     object-position: center;
   }
@@ -69,7 +62,17 @@
     }
   }
 }
+.search-body-event {
+  position: absolute;
+  top: 10%;
+  left: 10%;
 
+}
+
+.ant-skeleton {
+  width: 80%;
+  margin: 0 auto;
+}
 .ant-carousel {
   .slick-dots {
     display: block;

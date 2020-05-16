@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Lato");
 
+
+html {
+  scroll-behavior: smooth;
+}
 .Countdown {
   text-align: center;
   background-image: url(../../../../assets/image/countdown.jpg);

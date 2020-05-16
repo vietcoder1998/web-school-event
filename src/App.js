@@ -12,6 +12,7 @@ import { _get } from "./services/base-api";
 import { PUBLIC_HOST } from "./environment/development";
 import { noInfoHeader } from "./services/auth";
 import HashLoader from "react-spinners/HashLoader";
+import { BackTop } from "antd";
 
 const EventHome = asyncComponent(() =>
   import("./app/view/Event/Home/Home").then((module) => module.default)
@@ -238,6 +239,7 @@ class App extends React.Component {
               </Switch>
             </Suspense>
           </Router>
+          <BackTop></BackTop>
         </Fragment>
       );
     }
