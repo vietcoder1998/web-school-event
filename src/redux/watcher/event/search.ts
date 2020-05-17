@@ -13,6 +13,7 @@ import { POST } from '../../../const/method';
 function* getListJobResultData(action) {
     yield put({ type: REDUX.JOB_RESULT.SET_LOADING_RESULT, loading: true });
     let res = yield call(getJobResults, action);
+    console.log(action.body)
     if (res) {
         console.log(res)
         let data = res.data;
@@ -59,15 +60,13 @@ function getJobResults(action) {
     if (jt) {
         body.jobType = jt;
     }
-
-
-    let isAuthen = store.getState().AuthState.isAuthen;
+    
     let res = _requestToServer(
         POST,
         body,
-        (isAuthen ? EVENT_PRIVATE.JOBS.SEARCH : EVENT_PUBLIC.JOBS.SEARCH),
-        isAuthen ? STUDENT_HOST : PUBLIC_HOST,
-        isAuthen ? authHeaders : noInfoHeader,
+        EVENT_PRIVATE.JOBS.SEARCH,
+        STUDENT_HOST,
+        authHeaders,
         {
             pageIndex: action.pageIndex ? action.pageIndex : 0,
             pageSize: action.pageSize ? action.pageSize : 10,
@@ -77,6 +76,6 @@ function getJobResults(action) {
     return res;
 }
 
-export function* JobResultWatcher() {
+export function* EventJobResultWatcher() {
     yield takeEvery(REDUX_SAGA.EVENT.JOB.SEARCH, getListJobResultData)
 }

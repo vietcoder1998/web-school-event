@@ -1,5 +1,5 @@
 import React from 'react';
-import {  Card, Collapse, Checkbox, Icon, Button, Row, Col } from 'antd';
+import { Card, Collapse, Checkbox, Icon, Button, Row, Col, Tooltip } from 'antd';
 import './SearchMore.scss';
 import { connect } from 'react-redux';
 import { TYPE } from '../../../../const/type';
@@ -40,7 +40,7 @@ interface IStateSearchMore {
 class SearchMore extends React.Component<ISearchMore, IStateSearchMore> {
     // const [weekDays, setWeekDays] = React.useState(null);
     // const [dayTimes, setDayTimes] = React.useState(null);
-    
+
     constructor(props) {
         super(props);
         this.state = {
@@ -50,8 +50,8 @@ class SearchMore extends React.Component<ISearchMore, IStateSearchMore> {
     }
     componentDidMount() {
         let newWeekDays = [];
-        let newDayTimes= [];
-        if (this.props.setFilter) { 
+        let newDayTimes = [];
+        if (this.props.setFilter) {
             Object.keys(this.props.list_day).map((key) => {
                 if (this.props.list_day[key] === true) {
                     newWeekDays.push(key)
@@ -65,7 +65,7 @@ class SearchMore extends React.Component<ISearchMore, IStateSearchMore> {
         } else {
             let queryParam = qs.parse(this.props.location.search, { ignoreQueryPrefix: true })
             Object.keys(this.props.list_day).map((key) => {
-                if(queryParam[key] == 'true') {
+                if (queryParam[key] == 'true') {
                     newWeekDays.push(key)
                 }
             })
@@ -75,12 +75,12 @@ class SearchMore extends React.Component<ISearchMore, IStateSearchMore> {
                 }
             });
         }
-        
-        this.setState({weekDays: newWeekDays, dayTimes: newDayTimes})
+
+        this.setState({ weekDays: newWeekDays, dayTimes: newDayTimes })
 
     }
-    render(){
-        let {weekDays, dayTimes} = this.state;
+    render() {
+        let { weekDays, dayTimes } = this.state;
         let { loading } = this.props;
         return (
             <Card className='search-more' title={'Lọc theo thời gian'} size="small">
@@ -89,8 +89,8 @@ class SearchMore extends React.Component<ISearchMore, IStateSearchMore> {
                         <Checkbox.Group
                             value={weekDays}
                             onChange={(event: any) => {
-                                this.setState({weekDays: event})
-                         
+                                this.setState({ weekDays: event })
+
                             }}
                             options={optionDays}
                             defaultValue={null}
@@ -99,7 +99,7 @@ class SearchMore extends React.Component<ISearchMore, IStateSearchMore> {
                     <Panel header="Chọn ca" key="2">
                         <Checkbox.Group
                             value={dayTimes}
-                            onChange={(event: any) => this.setState({dayTimes: event})}
+                            onChange={(event: any) => this.setState({ dayTimes: event })}
                             options={optionShifts}
                             defaultValue={null}
                         />
@@ -120,7 +120,7 @@ class SearchMore extends React.Component<ISearchMore, IStateSearchMore> {
                             onClick={() => {
                                 // setDayTimes(null);
                                 // setWeekDays(null);
-                                this.setState({weekDays: null, dayTimes: null})
+                                this.setState({ weekDays: null, dayTimes: null })
 
                             }}
                             disabled={this.props.jobType !== 'PARTTIME'}
@@ -130,22 +130,25 @@ class SearchMore extends React.Component<ISearchMore, IStateSearchMore> {
                         </Button>
                     </Col>
                     <Col md={12} lg={12} xl={12} xxl={12}>
-                        <Button
-                            size={'large'}
-                            icon='filter'
-                            type={'primary'}
-                            style={{
-                                // backgroundColor: 'orange',
-                                width: '100%',
-                                color: 'white',
-                                margin: '10px 0px 0px',
-                                border: 'solid white 1px'
-                            }}
-                            onClick={() => this.props.onChangeShiftsFilter({ weekDays, dayTimes })}
-                            disabled={this.props.jobType !== 'PARTTIME'}
-                        >
-                            {loading ? <Icon type={'loading'} /> : 'Lọc'}
-                        </Button>
+                        <Tooltip placement='bottom' title={'Áp dụng với PARTTIME'}>
+                            <Button
+                                size={'large'}
+                                icon='filter'
+                                type={'primary'}
+                                style={{
+                                    width: '100%',
+                                    color: 'white',
+                                    margin: '10px 0px 0px',
+                                    border: 'solid white 1px'
+                                }}
+                                onClick={() => this.props.onChangeShiftsFilter({ weekDays, dayTimes })}
+                                disabled={this.props.jobType !== 'PARTTIME'}
+                            >
+                                {loading ? <Icon type={'loading'} /> : 'Lọc'}
+                            </Button>
+
+                        </Tooltip>
+
                     </Col>
                 </Row>
             </Card>

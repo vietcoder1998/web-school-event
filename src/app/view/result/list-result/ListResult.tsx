@@ -10,10 +10,11 @@ import TextImage from './../../../../assets/image/carouselGroup/carousel1.jpg';
 interface IListResultProps {
     list_result?: Array<any>;
     loading?: boolean;
+    isSearchEvent?: boolean; // phân biệt job-event và job-normal ở 2 trang khác nhau 
 }
 
 export default function ListResult(props?: IListResultProps) {
-    let { loading, list_result } = props;
+    let { loading, list_result, isSearchEvent } = props;
 
     return (
         <div className='result' >
@@ -53,7 +54,7 @@ export default function ListResult(props?: IListResultProps) {
                             <h4 >
                                 <Link
                                     style={{ color: item.priority === 'TOP' ? 'red' : 'black' }}
-                                    to={`/job-detail/${window.btoa(item.id)}`}
+                                    to={isSearchEvent ? `event-job-detail/${window.btoa(item.id)}` : `/job-detail/${window.btoa(item.id)}`}
                                     target='_blank'
                                 > {limitString(item.jobTitle, 80)}</Link>
                                 {item.priority === 'TOP' ? <Tooltip title='Công việc hot'>

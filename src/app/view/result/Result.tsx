@@ -90,22 +90,21 @@ class Result extends React.Component<IPropsResult, IStateResult> {
         schoolConnected: null,
       },
 
-      isSearchEvent: true,
-    };
+      isSearchEvent: true,// phân biệt job-event và job-normal ở 2 trang khác nhau. Đưa vào cả list job, chỗ nào cần search normal thì thêm cả cái này
+    }
   }
 
   componentDidMount() {
     let { search_word, body, pageIndex, pageSize } = this.state;
     let { regions, jobNames } = this.props;
     if (regions.length === 0) {
-      this.props.getListRegions();
+      this.props.getListRegions(); // lấy list vùng
     }
-
     if (jobNames.length === 0) {
-      this.props.getListJobNames(search_word);
+      this.props.getListJobNames(search_word); // lấy list jobs name
     }
 
-    this.props.getHighLightData(0);
+    this.props.getHighLightData(0); // job ở bên trên 
     // this._callLoading();
     this._callLastWord();
 
@@ -231,7 +230,6 @@ class Result extends React.Component<IPropsResult, IStateResult> {
     } else {
       this.props.getJobResults(pageIndex - 1, pageSize, body);
     }
-    // this.props.getJobResults(pageIndex - 1, pageSize, body);
     this.setState({ pageIndex: pageIndex - 1, pageSize });
     this._callLoading();
   };
@@ -255,6 +253,8 @@ class Result extends React.Component<IPropsResult, IStateResult> {
   _callJob = async () => {
     let { body, list_last_word, pageIndex, pageSize } = this.state;
     cookie.set("list_last_word", list_last_word, { path: "/result" });
+
+    
     if (this.state.isSearchEvent) {
       this.props.getEventJobResults(pageIndex, pageSize, body);
     } else {
@@ -284,7 +284,6 @@ class Result extends React.Component<IPropsResult, IStateResult> {
     } else {
       body.jobType = null;
     }
-    // console.log(event.jobNameID)
     queryParam.jobNameID = event.jobNameID;
     if (
       event.jobNameID !== null &&
@@ -300,7 +299,6 @@ class Result extends React.Component<IPropsResult, IStateResult> {
 
     this.props.history.replace("?" + qs.stringify(queryParam));
     await this.setState({ body, pageIndex: 0, isSearchEvent });
-    // await console.log(this.state.pageIndex)
     await this._callJob();
   };
 
@@ -331,7 +329,7 @@ class Result extends React.Component<IPropsResult, IStateResult> {
   };
 
   render() {
-    const { region, body } = this.state;
+    const { region, body, isSearchEvent } = this.state;
     const {
       results,
       highlightData,
@@ -341,7 +339,6 @@ class Result extends React.Component<IPropsResult, IStateResult> {
       loading,
     } = this.props;
     const list_result = results.items;
-
     return (
       <Layout>
         <div className="content">
@@ -354,6 +351,7 @@ class Result extends React.Component<IPropsResult, IStateResult> {
                   <ListHlJob
                     loading_high_light_data={loading_high_light_data}
                     highlightData={highlightData}
+                    isSearchEvent={isSearchEvent}
                     getHighLightJobs={(pageIndex) => {
                       this.props.getHighLightData(pageIndex, 6);
                     }}
@@ -364,7 +362,6 @@ class Result extends React.Component<IPropsResult, IStateResult> {
                   <SearchFilter
                     loading={loading}
                     jobNames={jobNames}
-                    // jobType={body.jobType}
                     regions={regions}
                     onChangeJobFilter={this.onChangeJobFilter}
                     location={this.props.location}
@@ -375,10 +372,11 @@ class Result extends React.Component<IPropsResult, IStateResult> {
                   numberRs={results.totalItems}
                   regionName={region && region.name}
                   totalJobs={region && region.totalJobs}
+                  
                 />
                 <Row>
                   <Col xs={24} sm={24} md={16} lg={16} xl={17} xxl={20}>
-                    <ListResult loading={loading} list_result={list_result} />
+                    <ListResult loading={loading} list_result={list_result} isSearchEvent={isSearchEvent}/>
                   </Col>
                   <Col xs={0} sm={0} md={8} lg={8} xl={7} xxl={4}>
                     <SearchMore
