@@ -20,4 +20,7 @@ export const TYPE = {
     
     TOP: 'TOP',
     HIGHLIGHT: 'HIGHLIGHT',
+
+    EVENT: 'EVENT',
+    NORMAL: 'NORMAL'
 }

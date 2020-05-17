@@ -161,7 +161,11 @@ class App extends React.Component {
     this.checkEvent()
       .then((res) => {
         if (res.data.started === true) {
-          this.props.checkEvent(true, new Date(res.data.startedDate));
+          this.props.checkEvent(
+            true,
+            new Date(res.data.startedDate),
+            res.data.name
+          );
         } else {
           this.props.checkEvent(false, new Date(res.data.startedDate));
         }
@@ -268,11 +272,12 @@ const mapDispatchToProps = (dispatch) => ({
       type: REDUX.MOBILE_STATE.SET_MOBILE_STATE,
       state,
     }),
-  checkEvent: (status, time) => {
+  checkEvent: (status, time, name) => {
     dispatch({
       type: REDUX.EVENT.START,
       time: time,
       status,
+      name: name,
     });
   },
   noEvent: (msg) => {

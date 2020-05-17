@@ -5,6 +5,9 @@ let initEventStatus = {
   status: true,
   time: 0,
   msgError: "",
+  name: "",
+  schoolID: "",
+  schoolName: "",
 };
 
 export const EventStatusReducer = (state = initEventStatus, action) => {
@@ -15,6 +18,7 @@ export const EventStatusReducer = (state = initEventStatus, action) => {
         haveEvent: true,
         time: action.time,
         status: action.status,
+        name: action.name,
       };
     case REDUX.EVENT.NOT_AVAILABLE:
       return {
