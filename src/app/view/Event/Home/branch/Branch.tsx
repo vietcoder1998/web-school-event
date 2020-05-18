@@ -18,63 +18,6 @@ interface IState {
 }
 
 
-var smoothScroll = {
-  timer: null,
-
-  stop: function () {
-    clearTimeout(this.timer);
-  },
-
-  scrollTo: function (id, callback) {
-    var settings = {
-      duration: 1000,
-      easing: {
-        outQuint: function (x, t, b, c, d) {
-          return c * ((t = t / d - 1) * t * t * t * t + 1) + b;
-        }
-      }
-    };
-    var percentage;
-    var startTime;
-    var node = document.getElementById(id);
-    var nodeTop = node.offsetTop;
-    var nodeHeight = node.offsetHeight;
-    var body = document.body;
-    var html = document.documentElement;
-
-
-    if (this.timer) {
-      clearInterval(this.timer);
-    }
-
-    function step() {
-      var yScroll;
-      var elapsed = Date.now() - startTime;
-
-      if (elapsed > settings.duration) {
-        clearTimeout(this.timer);
-      }
-
-      percentage = elapsed / settings.duration;
-
-      if (percentage > 1) {
-        clearTimeout(this.timer);
-
-        if (callback) {
-          callback();
-        }
-      } else {
-        yScroll = settings.easing.outQuint(0, elapsed, offset, targetY, settings.duration);
-        window.scrollTo(0, yScroll);
-        this.timer = setTimeout(step, 10);
-      }
-    }
-
-    this.timer = setTimeout(step, 10);
-  }
-};
-
-
 class Branch extends PureComponent<IProps, IState> {
   constructor(props) {
     super(props);
@@ -94,6 +37,7 @@ class Branch extends PureComponent<IProps, IState> {
     });
     localStorage.removeItem("e_bid");
     localStorage.setItem('branch_name', "VIỆC LÀM TRONG NGÀY HỘI");
+
     // console.log(localStorage.getItem('branch_name'))
   };
 
@@ -101,8 +45,21 @@ class Branch extends PureComponent<IProps, IState> {
   handleClick = (id, name) => {
     localStorage.setItem("e_bid", id);
     localStorage.setItem('branch_name', "VIỆC LÀM NHÓM NGÀNH " + name);
+    let pageHeight = 0;
+    (function () {
+      function findHighestNode(nodesList) {
+        for (let i = nodesList.length - 1; i >= 0; i--) {
+          if (nodesList[i].scrollHeight && nodesList[i].clientHeight) {
+            var elHeight = Math.max(nodesList[i].scrollHeight, nodesList[i].clientHeight);
+            pageHeight = Math.max(elHeight, pageHeight);
+          }
+          if (nodesList[i].childNodes.length) findHighestNode(nodesList[i].childNodes);
+        }
+      }
+      findHighestNode(document.documentElement.childNodes);
+    })();
     window.scrollTo({
-      top: 2200,
+      top: pageHeight - pageHeight/2,
       behavior: 'smooth'
     });
     this.props.getEvenJob(0);
@@ -112,7 +69,7 @@ class Branch extends PureComponent<IProps, IState> {
   render() {
     let { listBranch } = this.state;
     console.log(listBranch)
-   
+
     return (
       <div
         className="top-branch"
@@ -151,7 +108,7 @@ class Branch extends PureComponent<IProps, IState> {
       </div>
     );
 
-    
+
   }
 }
 

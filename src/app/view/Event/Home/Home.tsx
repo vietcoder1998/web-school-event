@@ -12,7 +12,7 @@ import Branch from "./branch/Branch";
 function Home(props) {
   return (
     <Layout disableFooterData={false}>
-      <div style={{ minHeight: 700 }}>
+      <div>
 
         <Banner {...props} />
       </div>

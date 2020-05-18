@@ -120,10 +120,16 @@ class App extends React.Component {
     $(window).resize(() => {
       this._callResize();
     });
+
+
+   
   }
 
   componentWillUnmount() {
-    this.resizeInterface = null;
+    this.resizeInterface = null; var height = window.innerHeight;
+    console.log(height)
+    localStorage.setItem('page-height', height)
+
   }
 
   _callResize = () => {
