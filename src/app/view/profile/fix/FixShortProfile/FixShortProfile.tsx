@@ -140,7 +140,7 @@ class FixPerson extends Component<IProps, IState> {
       // @ts-ignore
       this.setState({ [url]: e.target.result });
     };
-    console.log(picture)
+    
     picture = files[0];
     this.setState({ [name]: picture });
   };

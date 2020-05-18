@@ -65,8 +65,6 @@ class SearchFilter extends React.Component<
         if (this.props.area && this.props.area.id) {
           this.setState({ regionID: this.props.area.id });
         }
-
-        // this.setState({ regionID: this.props.area.id })
       }
       if (queryParam.jobType) {
         this.setState({ jobType: queryParam.jobType });
@@ -175,7 +173,7 @@ class SearchFilter extends React.Component<
               showSearch
               onChange={(event: string) => {
                 let newFilter = {
-                  jobType: null,
+                  jobType: this.state.jobType,
                   regionID: this.state.regionID,
                   jobNameID: this.state.jobNameID,
                   isEvent: this.state.isEvent,
@@ -217,7 +215,7 @@ class SearchFilter extends React.Component<
               showSearch
               onChange={(event: string) => {
                 let newFilter = {
-                  jobType: null,
+                  jobType: this.state.jobType,
                   regionID: this.state.regionID,
                   jobNameID: this.state.jobNameID,
                   isEvent: this.state.isEvent,

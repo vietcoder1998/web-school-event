@@ -197,8 +197,7 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
     _createRequest = () => {
         let { message, shiftIDs } = this.state;
         let id = window.atob(this.props.match.params.id)
-        console.log(message)
-        console.log(shiftIDs)
+      
         // this.requestToServer({ message, shiftIDs }, id);
         this.setState({ visible: false })
     };
@@ -230,7 +229,7 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
 
                 else {
                     for (let i in results) {
-                        console.log(res)
+                    
                         if (results[i].full === true) {
                             swal({
                                 title: "Worksvns thông báo",

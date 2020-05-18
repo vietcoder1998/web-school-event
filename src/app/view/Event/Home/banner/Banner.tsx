@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import { Carousel, Icon, Typography, Skeleton } from "antd";
 import { connect } from "react-redux";
 import defaultImage from "../../../../../assets/image/base-image.jpg";
+import defaultBanner from "../../../../../assets/image/default-banner.jpg";
 import { REDUX_SAGA } from "../../../../../const/actions";
 import { Link } from "react-router-dom";
 import "./Banner.scss";
@@ -73,7 +74,7 @@ class Banner extends PureComponent<IProps, IState> {
           });
         }}
       >
-        {this.state.is_loading ? <Skeleton loading={true} paragraph={{ rows: 20 }}  active={true} /> :
+        {this.state.is_loading ? <img src={defaultBanner} width='100%' height='550px' alt='banner' /> :
           <Carousel dots={true} ref={(node) => (this.carousel = node)} {...props}>
             {listEmployer && listEmployer.items
               ? listEmployer.items.map((item, index) => (

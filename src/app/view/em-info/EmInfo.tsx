@@ -4,7 +4,6 @@ import './EmInfo.scss';
 // @ts-ignore
 import defaultImage from './../../../assets/image/base-image.jpg';
 // @ts-ignore
-import avatar from './../../../assets/image/test_avatar.jpg';
 import { NotUpdate, IptLetterP } from './../layout/common/Common';
 import { IEmControllerDetail } from './../../../models/em-controller-detail';
 import { connect } from 'react-redux';
@@ -157,7 +156,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                 {employerDetail && employerDetail.logoUrl ?
                                     <Avatar
                                         // @ts-ignore
-                                        src={!onErrLogo && employerDetail && employerDetail.logoUrl ? employerDetail.logoUrl : avatar}
+                                        src={!onErrLogo && employerDetail && employerDetail.logoUrl ? employerDetail.logoUrl : defaultImage}
                                         style={{
                                             height: "8vw",
                                             width: "8vw",

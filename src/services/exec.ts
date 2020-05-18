@@ -16,7 +16,6 @@ export const _requestToServer = async (
   hide_alert_error?: boolean
 ) => {
   let res;
-
   try {
     switch (method) {
       case GET:
@@ -60,14 +59,13 @@ export const _requestToServer = async (
       });
     }
     if (log_query) {
-      console.log(host + api);
-      console.log(params);
-      console.log(data);
-      console.log(res);
+      // console.log(host + api);
+      // console.log(params);
+      // console.log(data);
+      // console.log(res);
     }
   } catch (err) {
-    console.log(host + api);
-    console.log(err.response.data);
+    
     exceptionShowNoti(err, hide_alert_error);
   }
 

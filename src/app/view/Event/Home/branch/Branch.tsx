@@ -68,8 +68,6 @@ class Branch extends PureComponent<IProps, IState> {
 
   render() {
     let { listBranch } = this.state;
-    console.log(listBranch)
-
     return (
       <div
         className="top-branch"
