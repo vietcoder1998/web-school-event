@@ -46,7 +46,7 @@ class Banner extends PureComponent<IProps, IState> {
       this.setState({
         is_loading: false
       })
-    }, 1000);
+    }, 2000);
   };
 
   render() {
