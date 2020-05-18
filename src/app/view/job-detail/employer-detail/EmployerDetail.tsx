@@ -1,6 +1,5 @@
 import React from 'react';
 import { Row, Col, Rate, Icon, Avatar, Button, Pagination, Skeleton, Modal, Empty } from 'antd';
-import { limitString } from '../../../../utils/limitString';
 import { Link } from 'react-router-dom';
 import { _requestToServer } from '../../../../services/exec';
 import { RATE_EMPLOYER_CONTROLLER } from '../../../../services/api/private.api';

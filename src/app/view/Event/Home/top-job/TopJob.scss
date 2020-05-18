@@ -24,16 +24,61 @@
 
   .h-j-item {
     &:hover {
-      background-color: #E1ECF4;
+      background-color: #e1ecf4;
     }
-    display      : flex;
-    margin       : 0.2vw 1vw;
-    height       : 130px !important;
+    display: flex;
+    margin: 0.2vw 1vw;
+    height: 130px !important;
     border-bottom: dashed $color_border 1px;
     border-radius: 7px;
     background-color: white;
     margin-top: 10px;
-    
+
+    //tag
+    @function sqrt($r) {
+      $x0: 1;
+      $x1: $x0;
+      @for $i from 1 through 10 {
+        $x1: $x0 - ($x0 * $x0 - abs($r)) / (2 * $x0);
+        $x0: $x1;
+      }
+      @return $x1;
+    }
+
+    $cornerwidth: 60px;
+
+    .c-corner-label {
+      margin-top: 70px;
+      border-style: solid;
+      border-color: transparent #ee1c25 transparent transparent;
+      border-color: rgba(255, 255, 255, 0) #e43636 rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
+      height: 0;
+      width: 0;
+      border-width: 0 $cornerwidth $cornerwidth 0;
+      -webkit-transform: rotate(90deg);
+      @media (min-width: 0px) and (max-width: 500px) {
+        top: 11px;
+        right: 5px;
+      }
+      @media (min-width: 600px) and (max-width: 800px) {
+        height: 0;
+        width: 0;
+      }
+    }
+    .c-corner-label__text {
+      color: #eee;
+      font-size: $cornerwidth/5;
+      font-weight: bold;
+      position: relative;
+      left: -$cornerwidth * 0.06;
+      top: $cornerwidth * 0.1;
+      white-space: nowrap;
+      transform: rotate(45deg);
+      width: $cornerwidth * sqrt(2);
+      text-align: center;
+      line-height: 2em;
+      -webkit-transform: rotate(225deg);
+    }
     a {
       color: #5d5d5d;
 

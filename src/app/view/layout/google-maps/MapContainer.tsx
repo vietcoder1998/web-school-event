@@ -8,6 +8,21 @@ import PlacesAutocomplete, {
 
 import { Input } from 'antd';
 
+interface IProps {
+    personalInfo?: any;
+    address?: any;
+    location?: any;
+    marker?: any;
+    _fixData?: (params?: string) => any;
+}
+
+interface IState {
+    position?: object,
+    address?: string,
+    showInfo?: boolean
+}
+
+
 function findAddress(lat, lng) {
     const google = window.google;
     //const codeApi = 'AIzaSyA55QnSD4Xj6-zTyCbWUs8iKOyYyjmhv08';
@@ -26,7 +41,7 @@ function findAddress(lat, lng) {
 interface IProps {
     location?: any
 }
-class GoogleMap extends React.Component<IProps>{
+class GoogleMap extends React.Component<IProps, IState>{
     constructor(props) {
         super(props);
         this.state = {
@@ -139,7 +154,7 @@ class GoogleMap extends React.Component<IProps>{
 
                 </PlacesAutocomplete>
                 <Map
-                    style={{ width: 550, height: 450, marginTop: 10 }}
+                    style={{ width: 570, height: 450, marginTop: 10 }}
                     google={window.google}
                     zoom={14}
                     center={{
@@ -149,7 +164,7 @@ class GoogleMap extends React.Component<IProps>{
                     initialCenter={{
                         lat: this.state.position.lat,
                         lng: this.state.position.lng,
-                      }}
+                    }}
                 >
                     <Marker
                         name={this.state.address}

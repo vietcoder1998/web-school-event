@@ -20,7 +20,7 @@
 
 @font-face {
   font-family: IBMPlexSanLights;
-  src        : url("../../../assets//font/IBMPlexSans-Light.otf");
+  src: url("../../../assets//font/IBMPlexSans-Light.otf");
 }
 
 @import "./variable";
@@ -28,44 +28,41 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing : antialiased;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 //
 .content {
   background-color: #f2f2f2;
-  min-height      : calc(100vh - 334px);
-  
+  min-height: calc(100vh - 334px);
 }
 
 .none-footer {
-  height          : calc(100vh - 120px);
+  height: calc(100vh - 120px);
   background-color: whitesmoke;
 }
 
 * {
-  font-family: $font_base
+  font-family: $font_base;
 }
 
 .important-letter {
-  padding    : 0px;
-  margin     : 0px;
+  padding: 0px;
+  margin: 0px;
   font-weight: 500;
-  color      : black;
+  color: black;
 }
 
 ul {
   list-style: none;
-  padding   : 0px;
+  padding: 0px;
 }
 
 .text-icon {
@@ -73,7 +70,7 @@ ul {
 }
 
 .title-label {
-  font-weight  : 350;
+  font-weight: 350;
   margin-bottom: 5px;
 }
 
@@ -87,7 +84,7 @@ ul {
       color: rgb(190, 188, 188);
     }
 
-    width : 20px;
+    width: 20px;
     height: 20px;
   }
 
@@ -97,25 +94,25 @@ ul {
   }
 
   .header-experience {
-    font-size  : 20px;
+    font-size: 20px;
     font-weight: 500;
   }
 
   height: auto;
 
   .fa-pen {
-    float   : right;
-    width   : 20px;
-    height  : 20px;
+    float: right;
+    width: 20px;
+    height: 20px;
     position: absolute;
-    top     : -60px;
-    right   : 40px;
-    cursor  : pointer;
+    top: -60px;
+    right: 40px;
+    cursor: pointer;
   }
 
   p {
     font-family: $font_base;
-    font-size  : 0.9rem;
+    font-size: 0.9rem;
   }
 
   border-bottom: solid $color_border 1px;
@@ -135,57 +132,54 @@ ul {
   }
 
   i {
-    margin   : 5px;
+    margin: 5px;
     font-size: 15px;
   }
 }
 
 // Button
 .holder-button {
-  height    : 60px;
+  height: 60px;
   margin-top: 20px;
   text-align: center;
 
   button {
-    margin-left  : 50%;
-    margin-right : 50%;
-    height       : 40px;
-    margin       : 10px 5px;
-    width        : 120px;
+    margin-left: 50%;
+    margin-right: 50%;
+    height: 40px;
+    margin: 10px 5px;
+    width: 120px;
     border-radius: 3px;
-
   }
 
   .request {
-    border          : solid #31a3f9 2px;
-    color           : #fff;
+    border: solid #31a3f9 2px;
+    color: #fff;
     background-color: #31a3f9;
-    font            : small;
-
+    font: small;
 
     &:hover {
-      color           : #fff;
+      color: #fff;
       background-color: #53aff5;
-      border          : solid #53aff5 2px;
-
+      border: solid #53aff5 2px;
     }
   }
 
   .danger {
-    border          : solid #ff4d4d 2px;
-    color           : #fff;
+    border: solid #ff4d4d 2px;
+    color: #fff;
     background-color: #ff4d4d;
 
     &:hover {
-      color           : #fff;
+      color: #fff;
       background-color: #ff8080;
-      border          : solid #ff8080 2px;
+      border: solid #ff8080 2px;
     }
   }
 }
 
 .data {
-  padding         : '10px 20px';
+  padding: "10px 20px";
   background-image: white;
 
   a {
@@ -193,7 +187,7 @@ ul {
 
     &:hover {
       text-decoration: underline;
-      color          : #168ECD
+      color: #168ecd;
     }
   }
 }
@@ -204,13 +198,13 @@ ul {
 }
 
 .rowling {
-  width  : 100%;
+  width: 100%;
   display: flex;
 }
 
 #facebook_square {
   margin-right: 10px;
-  color       : #225bff;
+  color: #225bff;
 }
 
 .first-letter {
@@ -221,13 +215,13 @@ ul {
 
 // Tiltle
 .title {
-  margin   : 10px 0px;
-  padding  : 20px 0px;
+  margin: 10px 0px;
+  padding: 20px 0px;
   font-size: 20px;
 }
 
 .icon_label {
-  font-size         : 20px;
+  font-size: 20px;
   grid-template-rows: auto auto;
 }
 
@@ -246,27 +240,27 @@ ul {
 
 // loading page
 #root {
-  width : 100%;
+  width: 100%;
   height: 100%;
 }
 
 .loading {
-  width           : 100%;
-  height          : 100%;
+  width: 100%;
+  height: 100%;
   // padding         : calc((100% - 20px) / 2) calc((100% - 20px) / 2);
-  padding         : 40px calc((100% - 20px) / 2) 40%;
-  color           : #29b5e3;
+  padding: 40px calc((100% - 20px) / 2) 40%;
+  color: #29b5e3;
   background-color: white;
 }
 
 .loading-app {
-  width  : 100vw;
-  height : 100vh;
+  width: 100vw;
+  height: 100vh;
   padding: calc(50vh - 20px) calc(50vw - 20px);
 
   i {
     font-size: 40px;
-    color    : #29b5e3;
+    color: #29b5e3;
   }
 }
 
@@ -287,11 +281,11 @@ i {
 
 .ant-row {
   position: relative;
-  width   : auto;
+  width: auto;
 }
 
 .test {
-  border       : solid $color_border 1px;
+  border: solid $color_border 1px;
   border-radius: 3px;
 }
 
@@ -314,9 +308,9 @@ i {
 
 .timer {
   font-size: 0.7rem;
-  padding  : 0px;
-  margin   : 0px 5px;
-  width    : auto;
+  padding: 0px;
+  margin: 0px 5px;
+  width: auto;
 }
 
 // Panigition
@@ -325,7 +319,7 @@ i {
 
   li {
     padding: 0px;
-    width  : 5px;
+    width: 5px;
   }
 
   .ant-pagination {
@@ -334,7 +328,7 @@ i {
 
   .ant-pagination-item-active {
     background-color: rgb(0, 132, 255);
-    color           : white !important;
+    color: white !important;
   }
 
   .ant-select-dropdown-menu-item {
@@ -345,10 +339,10 @@ i {
 // text-tranform
 
 .l_c {
-  text-transform : lowercase;
+  text-transform: lowercase;
   list-style-type: none;
-  margin         : 0px !important;
-  font-weight    : 650;
+  margin: 0px !important;
+  font-weight: 650;
 
   &::first-letter {
     text-transform: uppercase;
@@ -356,9 +350,9 @@ i {
 }
 
 .l_ca {
-  text-transform : capitalize;
+  text-transform: capitalize;
   list-style-type: none;
-  margin         : 0px !important;
+  margin: 0px !important;
 }
 
 // h1,
@@ -371,7 +365,7 @@ i {
 // Grid
 
 .ant-modal-body {
-  padding: 15px !important
+  padding: 15px !important;
 }
 
 .wt-container {
@@ -380,7 +374,7 @@ i {
   }
 
   .row::after {
-    clear  : both;
+    clear: both;
     display: table;
   }
 
@@ -388,10 +382,16 @@ i {
   // [class*="col-"] {
   //   width: 100%;
   // }
-
 }
+.loading-page {
+  position: fixed;
+  top: 50%;
+  left: 50%;
 
-.loading-react {
+  margin-top: -6em; /*set to a negative number 1/2 of your height*/
+  margin-left: -6em;
+  width: 100%;
+  height: 100%;
   text-align: center;
-  height: 0;
+  align-items: center;
 }

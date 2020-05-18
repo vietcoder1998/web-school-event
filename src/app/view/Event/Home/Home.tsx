@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../../layout/Layout";
 import { connect } from "react-redux";
 import HomeJob from "./home-job/HomeJob";
@@ -6,12 +6,16 @@ import TopEm from "./top-em/TopEm";
 import TopJob from "./top-job/TopJob";
 import Banner from "./banner/Banner";
 import Branch from "./branch/Branch";
+
 // import { REDUX_SAGA } from '../../../const/actions';
 
 function Home(props) {
   return (
     <Layout disableFooterData={false}>
-      <Banner />
+      <div style={{ minHeight: 700 }}>
+
+        <Banner {...props} />
+      </div>
       <Branch />
       <TopEm />
       <div
@@ -20,7 +24,9 @@ function Home(props) {
       >
         <TopJob />
         <HomeJob />
+
       </div>
+
     </Layout>
   );
 }

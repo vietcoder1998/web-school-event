@@ -1,16 +1,7 @@
 import React from "react";
 import "./Picture.scss";
-import { timeConverter } from "../../../../../utils/convertTime";
 import { connect } from "react-redux";
-import { Avatar, Progress } from "antd";
 import imageDefault from "../../../../../assets/image/base-image.jpg";
-
-function GetDate(dateRaw) {
-  var date = new Date(dateRaw);
-  return (
-    date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
-  );
-}
 
 function ShortProfile(props?: { personalInfo?: any }) {
   let { personalInfo } = props;

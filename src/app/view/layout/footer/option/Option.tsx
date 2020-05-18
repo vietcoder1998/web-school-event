@@ -42,6 +42,7 @@ function Option(props?: IProps) {
 
     function searchJob() {
         props.getJobResult(body);
+        props.getJobNames(body)
         window.scrollTo({ top: 0 });
     }
     let {jobNames} = props

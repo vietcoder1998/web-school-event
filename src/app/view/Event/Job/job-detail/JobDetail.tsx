@@ -18,6 +18,7 @@ import { REDUX_SAGA } from '../../../../../const/actions';
 import JobProperties from './job-properties/JobProperties';
 import EmployerDetail from './employer-detail/EmployerDetail';
 import { Link } from 'react-router-dom';
+import { TYPE } from '../../../../../const/type';
 
 const { TabPane } = Tabs;
 const { TextArea } = Input;
@@ -36,6 +37,7 @@ interface IJobDetailState {
     isSaved?: boolean,
     jobID?: string,
     employerID?: string,
+    can_send?: boolean,
 }
 
 // @ts-ignore
@@ -101,6 +103,8 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
             isSaved: true,
             jobID: null,
             employerID: null,
+
+            can_send: false,
         }
 
     }
@@ -135,19 +139,6 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
         this.setState({ isSaved: jobDetail.isSaved })
     };
 
-    // _getMoreJob = (pageIndex?: number) => {
-    //     this.setState({ is_loading_more: true }, () => {
-    //         this.props.getEmployerMoreJob(pageIndex - 1)
-    //     });
-
-    //     setTimeout(() => {
-    //         this.setState({ is_loading_more: false })
-    //     }, 500);
-    // };
-    // _getSimilarJob = (pageIndex?: number) => {
-    //     this.props.getSimilarJob(pageIndex - 1)
-    // };
-
     async _loadState() {
         let { isAuthen, jobDetail } = this.props;
 
@@ -177,6 +168,9 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
                 return item === id;
             })
         }
+        this.setState({
+            shiftIDs
+        })
     };
 
     _toLogin = () => {
@@ -203,62 +197,71 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
     _createRequest = () => {
         let { message, shiftIDs } = this.state;
         let id = window.atob(this.props.match.params.id)
-        this.requestToServer({ message, shiftIDs }, id);
+        console.log(message)
+        console.log(shiftIDs)
+        // this.requestToServer({ message, shiftIDs }, id);
         this.setState({ visible: false })
     };
 
     async requestToServer(data, id) {
         await _requestToServer(
-          POST,
-          data,
-          APPLY_JOB + `/${id}/apply`,
-          STUDENT_HOST,
-          authHeaders,
-          null,
-          false
+            POST,
+            data,
+            APPLY_JOB + `/${id}/apply`,
+            STUDENT_HOST,
+            authHeaders,
+            null,
+            false
         ).then((res) => {
-          if (res) {
-        
-            let { results } = res;
-            for (let i in results) {
-              // console.log(results[i])
-              if (results[i].full === true) {
-                swal({
-                  title: "Worksvns thông báo",
-                  text: "Số người ứng tuyển đã đầy",
-                  icon: TYPE.ERROR,
-                  dangerMode: true,
-                });
-              } else {
-                if (results[i].genderSuitable === false) {
-                  swal({
-                    title: "Worksvns thông báo",
-                    text: "Khác giới tính yêu cầu",
-                    icon: TYPE.ERROR,
-                    dangerMode: true,
-                  });
-                } else {
+            if (res) {
+                let { results } = res.data;
+
+                if (res.data.success === true) {
+
                     swal({
                         title: "Worksvns thông báo",
                         text: "Ứng tuyển thành công!",
                         icon: TYPE.SUCCESS,
                         dangerMode: false,
-                      });
-                  this.props.getJobDetail(id);
-                  this._loadState();
+                    });
+                    this.props.getJobDetail(id);
+                    this._loadState();
                 }
-              }
+
+                else {
+                    for (let i in results) {
+                        console.log(res)
+                        if (results[i].full === true) {
+                            swal({
+                                title: "Worksvns thông báo",
+                                text: "Số người ứng tuyển đã đầy",
+                                icon: TYPE.ERROR,
+                                dangerMode: true,
+                            });
+                        } else {
+                            if (results[i].genderSuitable === false) {
+                                swal({
+                                    title: "Worksvns thông báo",
+                                    text: "Khác giới tính yêu cầu",
+                                    icon: TYPE.ERROR,
+                                    dangerMode: true,
+                                });
+                            }
+                        }
+                    }
+
+                }
             }
-          }
         });
-      }
+    }
     componentWillUnmount() {
     }
 
     render() {
-      
-        let { jobDetail, employerDetail, isAuthen} = this.props;
-        let { is_loading, visible, confirmLoading, jobState } = this.state;
+
+        let { jobDetail, isAuthen } = this.props;
+        let { is_loading, visible, confirmLoading, jobState, shiftIDs } = this.state;
+
         let isSaved = jobDetail.saved;
 
         if (is_loading) {
@@ -311,7 +314,9 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
                             onClick={this._handleCancel}
                             type='danger'
                         >Huỷ</Button>,
+
                         <Button key='ok'
+                            disabled={shiftIDs.length === 0}
                             type='primary'
                             onClick={isAuthen ? this._createRequest : this._toLogin}
                         >{content}</Button>
@@ -434,7 +439,7 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
                                             <TabPane tab="Chi tiết công việc" key="1">
                                                 <JobProperties
                                                     jobDetail={jobDetail}
-                                                   
+
                                                 />
                                             </TabPane>
                                             {/* <TabPane tab="Thông tin Công ty" key="2">

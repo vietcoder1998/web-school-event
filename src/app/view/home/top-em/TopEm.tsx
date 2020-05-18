@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Col, Row, Skeleton, Avatar } from 'antd';
+import { Col, Row, Skeleton} from 'antd';
 import './TopEm.scss'
 import { connect } from 'react-redux';
 

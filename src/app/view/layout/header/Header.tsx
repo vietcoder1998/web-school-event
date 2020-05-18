@@ -66,7 +66,7 @@ class Header extends PureComponent<IProps, IState> {
   _showSideBar = () => {
     this.props.openSideBar();
   }
-    
+
   _closeNoti = () => {
     this.setState({ show_noti: false })
   };
@@ -101,25 +101,25 @@ class Header extends PureComponent<IProps, IState> {
           <div className="logo">
             <Link to={eventStart ? "/" : "/home"}><img width="auto" height={45} src={logo} alt="itea-scan" /> </Link>
           </div>
-          <div className='direct-page'
-          >
-            <div
-              style={{ display: show_bar ? "none" : "block" }}
-            >
-              <a href='/' style={{ display: eventStart === false ? 'none' : window.location.pathname === '/' ? "none" : '' , backgroundColor: '#0081e3' }}><Icon type={'tags'} />Ngày hội việc làm</a>
+          <div className='direct-page'>
+            <div style={{ display: show_bar ? "none" : "block" }}>
+              <a href='/' style={{ display: eventStart === false ? 'none' : window.location.pathname === '/' ? "none" : '', backgroundColor: '#0081e3' }}><Icon type={'tags'} />Ngày hội việc làm</a>
               <a href='/home' style={{ display: window.location.pathname === '/home' ? "none" : '' }}><Icon type={'home'} />Việc làm</a>
-
-
-       
-              <a href='https://play.google.com/store/apps/details?id=com.worksvn.candidate&hl=vi' target='_blank' rel="noopener noreferrer">
+              <a href='/result' style={{ display: window.location.pathname === '/result' ? "none" : '' }}><Icon type={'search'} />Tìm kiếm</a>
+              <a href='https://play.google.com/store/apps/details?id=com.worksvn.student&hl=en_US' target='_blank' rel="noopener noreferrer">
                 <Icon type="android" theme="filled" style={{ fontSize: '16.3px' }} />
                 Ứng dụng Android
                 </a>
-              <a href='https://apps.apple.com/vn/app/works-vn-t%C3%ACm-vi%E1%BB%87c/id1487662808' target='_blank' rel="noopener noreferrer">
+              <a href='https://apps.apple.com/vn/app/worksvn-sinh-vi%C3%AAn/id1492437454' target='_blank' rel="noopener noreferrer">
                 <Icon type={'apple'} theme="filled" style={{ fontSize: '16.8px' }} />
                 Ứng dụng iOS
                 </a>
+              <a href='https://employer.works.vn' target='_blank' rel="noopener noreferrer">
+                <Icon type='zoom' theme="filled" style={{ fontSize: '16.8px' }} />
+                Nhà tuyển dụng
+                </a>
             </div>
+
           </div>
           <div className='function'
             style={{ display: show_bar ? "none" : "flex" }}

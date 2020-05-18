@@ -245,7 +245,6 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
   };
 
   async requestToServer(data, id) {
-   
     await _requestToServer(
       POST,
       data,
@@ -256,42 +255,44 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
       false
     ).then((res) => {
       if (res) {
-     
-        let { results } = res;
-        for (let i in results) {
-          // console.log(results[i])
-          if (results[i].full === true) {
-            swal({
-              title: "Worksvns thông báo",
-              text: "Số người ứng tuyển đã đầy",
-              icon: TYPE.ERROR,
-              dangerMode: true,
-            });
-          } else {
-            if (results[i].genderSuitable === false) {
+        let { results } = res.data;
+        if (res.data.success === true) {
+          swal({
+            title: "Worksvns thông báo",
+            text: "Ứng tuyển thành công!",
+            icon: TYPE.SUCCESS,
+            dangerMode: false,
+          });
+          this.props.getJobDetail(id);
+          this._loadState();
+        }
+        else {
+          for (let i in results) {
+            console.log(results[i])
+            if (results[i].full === true) {
               swal({
                 title: "Worksvns thông báo",
-                text: "Khác giới tính yêu cầu",
+                text: "Số người ứng tuyển đã đầy",
                 icon: TYPE.ERROR,
                 dangerMode: true,
               });
             } else {
+              if (results[i].genderSuitable === false) {
                 swal({
-                    title: "Worksvns thông báo",
-                    text: "Ứng tuyển thành công!",
-                    icon: TYPE.SUCCESS,
-                    dangerMode: false,
-                  });
-              this.props.getJobDetail(id);
-              this._loadState();
+                  title: "Worksvns thông báo",
+                  text: "Khác giới tính yêu cầu",
+                  icon: TYPE.ERROR,
+                  dangerMode: true,
+                });
+              }
             }
           }
+
         }
       }
     });
   }
-
-  componentWillUnmount() {}
+  componentWillUnmount() { }
 
   render() {
     let {
@@ -404,10 +405,10 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                 </div>
               </div>
             ) : (
-              <div>
-                <p>Bạn cần đăng nhập trước khi đăng tuyển</p>
-              </div>
-            )}
+                <div>
+                  <p>Bạn cần đăng nhập trước khi đăng tuyển</p>
+                </div>
+              )}
           </div>
         </Modal>
         <Layout>

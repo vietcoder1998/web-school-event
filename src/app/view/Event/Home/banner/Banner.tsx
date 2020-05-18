@@ -1,11 +1,10 @@
 import React, { PureComponent } from "react";
-import { Carousel, Icon, Row, Col, Avatar, Typography } from "antd";
+import { Carousel, Icon, Typography, Skeleton } from "antd";
 import { connect } from "react-redux";
 import defaultImage from "../../../../../assets/image/base-image.jpg";
 import { REDUX_SAGA } from "../../../../../const/actions";
 import { Link } from "react-router-dom";
 import "./Banner.scss";
-
 interface IProps {
   getTopEmpoyer?: Function;
   listEmployer?: any;
@@ -15,7 +14,10 @@ interface IState {
   pageIndex: number;
   pageSize: number;
   is_loading: boolean;
+  activeInfo: boolean;
 }
+
+
 
 class Banner extends PureComponent<IProps, IState> {
   constructor(props) {
@@ -25,6 +27,7 @@ class Banner extends PureComponent<IProps, IState> {
       pageIndex: 0,
       pageSize: 9,
       is_loading: true,
+      activeInfo: false,
     };
     this.carousel = React.createRef();
     this.next = this.next.bind(this);
@@ -37,30 +40,49 @@ class Banner extends PureComponent<IProps, IState> {
     this.carousel.prev();
   }
   componentDidMount = async () => {
-    await this.setState({ is_loading: false });
     await this.props.getTopEmpoyer(0);
+    setTimeout(() => {
+      this.setState({
+        is_loading: false
+      })
+    }, 1000);
   };
 
   render() {
     const props = {
       dots: true,
       infinite: true,
-      speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
     };
-    const { Title } = Typography;
+
     let { listEmployer } = this.props;
     return (
+
       <div
         className="employer-banner"
         style={{ display: listEmployer.totalItems === 0 ? "none" : "" }}
+        onMouseOver={() => {
+          this.setState({
+            activeInfo: true
+          });
+        }}
+        onMouseOut={() => {
+          this.setState({
+            activeInfo: false
+          });
+        }}
       >
-        <Carousel dots={true} ref={(node) => (this.carousel = node)} {...props}>
-          {listEmployer && listEmployer.items
-            ? listEmployer.items.map((item, index) => (
+        {this.state.is_loading ? <Skeleton loading={true} paragraph={{ rows: 20 }}  active={true} /> :
+          <Carousel dots={true} ref={(node) => (this.carousel = node)} {...props}>
+            {listEmployer && listEmployer.items
+              ? listEmployer.items.map((item, index) => (
                 <div className="banner">
-                  <div className="info-in-banner">
+                  <div className="info-in-banner"
+                    style={{
+                      display: this.state.activeInfo ? 'flex' : 'none', transform: this.state.activeInfo ? 'scale(1.2,1.2)' : 'scale(1,1)',
+                      transition: this.state.activeInfo ? '0.5s' : '0.5s'
+                    }}>
                     <Link
                       to={`/employer/${window.btoa(item.employer.id)}`}
                       target="_blank"
@@ -80,6 +102,18 @@ class Banner extends PureComponent<IProps, IState> {
                       <div className="text-banner">
                         {item.employer.employerName}{" "}
                       </div>
+                      <div className="info">
+                        <div>
+                          <Icon type='environment' /> {item.employer.address}
+                        </div>
+                        <div>
+                          <Icon type='phone' />  {item.employer.phone}
+                        </div>
+                        <div>
+                          <Icon type='mail' /> {item.employer.email}
+                        </div>
+
+                      </div>
                     </a>
                   </div>
                   <img
@@ -92,8 +126,9 @@ class Banner extends PureComponent<IProps, IState> {
                   />
                 </div>
               ))
-            : null}
-        </Carousel>
+              : null}
+          </Carousel>
+        }
       </div>
     );
   }

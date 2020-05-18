@@ -1,9 +1,9 @@
-import { EVENT_PUBLIC, EMPLOYER } from './../../../services/api/public.api';
+import { EVENT_PUBLIC } from './../../../services/api/public.api';
 import { EVENT_PRIVATE } from './../../../services/api/private.api';
-import { IJobSearchFilter } from '../../../models/job-search';
+
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { _requestToServer } from '../../../services/exec';
-import { FIND_JOB } from '../../../services/api/public.api';
+
 import { PUBLIC_HOST, STUDENT_HOST } from '../../../environment/development';
 import { noInfoHeader, authHeaders } from '../../../services/auth';
 import { store } from '../../store';

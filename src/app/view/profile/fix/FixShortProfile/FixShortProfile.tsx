@@ -3,18 +3,18 @@ import "./FixPerson.scss";
 import {
   update_avatar,
   update_profile,
-  update_card_image,
 } from "../../../../../services/api/private/profile";
 import { connect } from "react-redux";
 import moment from "moment";
 import ButtonToggle from "../../../helper/toggle-button/ToggleButton";
 import { sendFileHeader } from "../../../../../services/auth";
-import { Icon, Row, Col, Modal, Input, Button, DatePicker, Avatar } from "antd";
+import { Icon, Row, Col, Modal, Input, DatePicker, Avatar, Button } from "antd";
 import MapContainer from "../../../layout/google-maps/MapContainer";
 import { timeConverter } from "../../../../../utils/convertTime";
 import { REDUX_SAGA } from "../../../../../const/actions";
 import { _requestToServer } from "../../../../../services/exec";
 import { PUT } from "../../../../../const/method";
+import imageDefault from "../../../../../assets/image/base-image.jpg";
 
 interface IProps {
   personalInfo?: any;
@@ -71,14 +71,14 @@ class FixPerson extends Component<IProps, IState> {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     let { personalInfo, address, location } = this.props;
     address = personalInfo.address;
     location = address;
     let isLookingForJobs = personalInfo.isLookingForJobs;
     let { avatarUrl } = this.state;
     avatarUrl = personalInfo.avatarUrl;
-    this.setState({
+    await this.setState({
       personalInfo,
       location,
       address,
@@ -131,6 +131,23 @@ class FixPerson extends Component<IProps, IState> {
     this.setState({ show_popup: true });
   };
 
+  _upLoadFile = (name, url, event?: any) => {
+    let picture = this.state[name];
+    let files = event.target.files;
+    let reader = new FileReader();
+    reader.readAsDataURL(files[0]);
+    reader.onload = (e?: any) => {
+      // @ts-ignore
+      this.setState({ [url]: e.target.result });
+    };
+    console.log(picture)
+    picture = files[0];
+    this.setState({ [name]: picture });
+  };
+
+
+
+
   _createRequest = async () => {
     let { personalInfo, avatar } = this.state;
     let dataRequest = {
@@ -178,8 +195,10 @@ class FixPerson extends Component<IProps, IState> {
     });
   };
   render() {
-    let { personalInfo, show_popup, avatarUrl } = this.state;
-    let birth_day = timeConverter(personalInfo.birthday);
+    let { personalInfo } = this.props;
+    let { avatarUrl, show_popup } = this.state;
+    let birth_day = timeConverter(personalInfo.birthday, 1000);
+
     return (
       <div className="wraper">
         {/* Center */}
@@ -251,11 +270,12 @@ class FixPerson extends Component<IProps, IState> {
                 onChange={this._handleData}
               />
             </div>
-           
+
             <div className="person-content">
               <p>Ngày sinh</p>
               <DatePicker
-                defaultPickerValue={birth_day}
+                defaultValue={moment(birth_day, 'DD/MM/YYYY') ? moment(birth_day, 'DD/MM/YYYY') : null}
+                format="DD-MM-YYYY"
                 onChange={this._handleTime}
                 style={{ width: "100%" }}
                 placeholder="Ngày sinh"
@@ -368,7 +388,6 @@ class FixPerson extends Component<IProps, IState> {
 const mapStateToProps = (state) => {
   return {
     personalInfo: state.FullPersonalInfo.personalInfo,
-    marker: state.MapState.marker,
   };
 };
 

@@ -705,7 +705,7 @@ class SearchBox extends Component<IProps, IState>{
                             <p style={{ color: '#fff' }}>Trải nghiệm tìm việc đỉnh cao bằng ứng dụng Worksvn trên điện thoại!</p>
                             <Row>
                                 <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12} style={{ justifyContent: 'flex-end', display: 'flex', padding: '0 15px', borderRight: '1px solid #fff' }}>
-                                    <a href={'https://apps.apple.com/vn/app/works-vn-t%C3%ACm-vi%E1%BB%87c/id1487662808'}>
+                                    <a href={'https://apps.apple.com/vn/app/worksvn-sinh-vi%C3%AAn/id1492437454'}>
                                         <img src={AppStore} alt='AppleStore Tìm việc' height='50px' width='auto' />
                                     </a>
 

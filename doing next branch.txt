@@ -1,0 +1,6 @@
+1. Gộp lại css
+2. Chỉnh lại chỗ để local Storage
+3. Đưa code 1 số chỗ quá nhiều dòng sang file
+4. Sửa lại const Action redux
+5. Gộp nhóm API, nhóm Action
+6. 

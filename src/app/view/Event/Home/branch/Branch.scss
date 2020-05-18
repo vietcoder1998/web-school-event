@@ -4,18 +4,35 @@
     .branch-item {
         background-color: white;
         &:hover {
-            background-color: #E1ECF4;
-          }
+            background-color: #e1ecf4;
+        }
         margin: 10px;
         box-shadow: 0px 2px 18px rgba(205, 205, 205, 0.5);
         border-radius: 10.4528px;
         padding: 30px 0;
+
         .image-branch {
             width: 40%;
-            height: 90%;
+            height: 100%;
         }
+
         .branch {
             display: inline;
+        }
+
+        .name-branch {
+            display: block;
+            display: -webkit-box;
+            max-width: 100%;
+            height: 34px;
+            margin: 10px 10px 0 10px;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 1;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     }
 }
