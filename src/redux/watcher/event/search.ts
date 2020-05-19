@@ -13,9 +13,9 @@ import { POST } from '../../../const/method';
 function* getListJobResultData(action) {
     yield put({ type: REDUX.JOB_RESULT.SET_LOADING_RESULT, loading: true });
     let res = yield call(getJobResults, action);
-    console.log(action.body)
+  
     if (res) {
-        console.log(res)
+       
         let data = res.data;
         yield put({ type: REDUX.JOB_RESULT.GET_JOB_RESULT, data });
         yield put({ type: REDUX.JOB_RESULT.SET_LOADING_RESULT, loading: false });

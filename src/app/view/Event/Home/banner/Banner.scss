@@ -1,11 +1,8 @@
 .banner {
   position: relative;
-  min-height: 700px;
   .image-banner {
     width: 100%;
     height: auto;
-    min-height: 700px;
-   
   }
 
   .info-in-banner {
@@ -65,7 +62,6 @@
   position: absolute;
   top: 10%;
   left: 10%;
-
 }
 
 .ant-skeleton {

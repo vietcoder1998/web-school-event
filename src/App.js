@@ -109,7 +109,9 @@ class App extends React.Component {
 
   async componentDidMount() {
     await this._loadLocal();
-
+    if (this.props.isAuthen) {
+      this.props.getData();
+    }
     this._callResize();
     setTimeout(() => {
       this.setState({
@@ -134,17 +136,17 @@ class App extends React.Component {
     }
   };
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.isAuthen !== prevState.isAuthen) {
-      if (nextProps.isAuthen) {
-        nextProps.getData();
-      }
-      return {
-        isAuthen: nextProps.isAuthen,
-      };
-    }
-    return null;
-  }
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   if (nextProps.isAuthen !== prevState.isAuthen) {
+  //     if (nextProps.isAuthen) {
+  //       nextProps.getData();
+  //     }
+  //     return {
+  //       isAuthen: nextProps.isAuthen,
+  //     };
+  //   }
+  //   return null;
+  // }
 
   checkEvent() {
     let res = _get(

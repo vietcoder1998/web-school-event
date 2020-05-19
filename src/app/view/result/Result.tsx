@@ -90,8 +90,8 @@ class Result extends React.Component<IPropsResult, IStateResult> {
         schoolConnected: null,
       },
 
-      isSearchEvent: true,// phân biệt job-event và job-normal ở 2 trang khác nhau. Đưa vào cả list job, chỗ nào cần search normal thì thêm cả cái này
-    }
+      isSearchEvent: true, // phân biệt job-event và job-normal ở 2 trang khác nhau. Đưa vào cả list job, chỗ nào cần search normal thì thêm cả cái này
+    };
   }
 
   componentDidMount() {
@@ -104,7 +104,7 @@ class Result extends React.Component<IPropsResult, IStateResult> {
       this.props.getListJobNames(search_word); // lấy list jobs name
     }
 
-    this.props.getHighLightData(0); // job ở bên trên 
+    this.props.getHighLightData(0); // job ở bên trên
     // this._callLoading();
     this._callLastWord();
 
@@ -212,7 +212,6 @@ class Result extends React.Component<IPropsResult, IStateResult> {
       } else {
         nextProps.getJobResults(prevState.pageIndex, prevState.pageSize, body);
       }
-      //   nextProps.getJobResults(prevState.pageIndex, prevState.pageSize, body);
     }
 
     return null;
@@ -254,7 +253,6 @@ class Result extends React.Component<IPropsResult, IStateResult> {
     let { body, list_last_word, pageIndex, pageSize } = this.state;
     cookie.set("list_last_word", list_last_word, { path: "/result" });
 
-    
     if (this.state.isSearchEvent) {
       this.props.getEventJobResults(pageIndex, pageSize, body);
     } else {
@@ -268,7 +266,6 @@ class Result extends React.Component<IPropsResult, IStateResult> {
     let queryParam = qs.parse(this.props.location.search, {
       ignoreQueryPrefix: true,
     });
-
     let { body, isSearchEvent } = this.state;
     isSearchEvent = event.isEvent;
     if (event.jobType !== "PARTTIME") {
@@ -372,11 +369,14 @@ class Result extends React.Component<IPropsResult, IStateResult> {
                   numberRs={results.totalItems}
                   regionName={region && region.name}
                   totalJobs={region && region.totalJobs}
-                  
                 />
                 <Row>
                   <Col xs={24} sm={24} md={16} lg={16} xl={17} xxl={20}>
-                    <ListResult loading={loading} list_result={list_result} isSearchEvent={isSearchEvent}/>
+                    <ListResult
+                      loading={loading}
+                      list_result={list_result}
+                      isSearchEvent={isSearchEvent}
+                    />
                   </Col>
                   <Col xs={0} sm={0} md={8} lg={8} xl={7} xxl={4}>
                     <SearchMore

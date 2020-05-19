@@ -11,7 +11,7 @@ function* getListJobSaveData(action) {
     let res = yield call(getJobSaveData, action);
     if (res) {
         let data = res.data;
-        console.log(data)
+      
         yield put({ type: REDUX.SAVED_JOB.GET_SAVED_JOB, data });
     }
     yield put({ type: REDUX.SAVED_JOB.SET_LOADING_SAVE_JOB, loading: false });

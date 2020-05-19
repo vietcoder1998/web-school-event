@@ -268,7 +268,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
         }
         else {
           for (let i in results) {
-            console.log(results[i])
+        
             if (results[i].full === true) {
               swal({
                 title: "Worksvns thông báo",
