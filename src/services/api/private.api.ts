@@ -44,3 +44,12 @@ export const EVENT_PRIVATE = {
     },
     BRANCH: `/api/students/schools/events/${process.env.REACT_APP_EVENT_ID}/jobs/branches`,
 }
+
+export const NORMAL_PRIVATE = {
+    JOBS: {
+        HOME: `/api/students/jobs/active/home`,
+        ACTIVE: `/api/students/jobs/active`,
+        SEARCH: `/api/students/jobs/active/search`,
+        DETAIL: `/api/students/jobs/{id}/active`
+    },
+}
