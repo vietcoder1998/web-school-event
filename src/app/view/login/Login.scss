@@ -2,38 +2,28 @@
   display: flex;
   width: 100%;
   text-align: center;
+  background-color: white;
+  .login-form {
+    padding: 20% 15% 0px;
+    .btn-login {
+      background-color: '#31a3f9';
+      height: 40px;
+    }
+  }
+  .nomal {
+    height: 60px;
+    input {
+      height: 40px;
+    }
 
-  .title{
-    padding: 30px 0 0 !important;
+   
+  }
+
+  .image-login{
+    width: 100%;
+    height: auto;
+    border-radius: -5px;
+    position: relative;
   }
   
-  .login-form {
-    margin: 50px 5px;
-    // height: 450px;
-    background-color: white;
-    // max-width: 400px;
-    padding-bottom: 14px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.01), 0 6px 20px 0 rgba(0, 0, 0, 0.01);
-    .nomal {
-      font-weight: 500;
-      margin: 30px 0px;
-    }
-
-    .forgot-password {
-      a {
-        position: absolute;
-        right: 0px;
-      }
-    }
-
-    p {
-      padding: 0px 20px;
-    }
-
-    a {
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
 }

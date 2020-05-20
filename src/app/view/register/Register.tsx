@@ -24,7 +24,8 @@ import swal from "sweetalert";
 import { POST } from "../../../const/method";
 import { _get } from "../../../services/base-api";
 import { PUBLIC_HOST } from "../../../environment/development";
-
+import imageLogin from '../../../assets/image/image-login.png';
+import logo from '../../../assets/image/logo-01.png';
 const isNumeric = (value) => {
   return /^-{0,1}\d+$/.test(value);
 };
@@ -105,12 +106,12 @@ class Register extends Component<IProps, IState> {
       list_major,
     });
 
-    if(localStorage.getItem('user_exists') === 'false'){
+    if (localStorage.getItem('user_exists') === 'false') {
       email_register_dto.email = localStorage.getItem('user_exists_userName');
       email_register_dto.password = localStorage.getItem('user_exists_password');
       repassword = localStorage.getItem('user_exists_password');
- 
-   
+
+
       this.setState({
         is_exists: true,
         email_register_dto,
@@ -136,7 +137,7 @@ class Register extends Component<IProps, IState> {
 
   _choseMajor = (value) => {
     let { email_register_dto } = this.state;
-  
+
     email_register_dto.majorID = value;
     this.setState({ email_register_dto });
   };
@@ -334,291 +335,294 @@ class Register extends Component<IProps, IState> {
 
     return (
       <Layout disableFooterData={false}>
-        <div className="content">
-          {/* Form Register */}
-          <Row>
-            <Col xs={0} sm={0} md={6} xl={7} lg={6}></Col>
-            <Col xs={24} sm={24} md={12} xl={10} lg={12}>
-              <form className="register">
-                <div className="title a_c">ĐĂNG KÝ</div>
-                {/* FirstName And LastName */}
-                <Row>
-                  <Col sm={12} md={12} lg={12} xl={12}>
-                    <div
-                      className="normal_2"
-                      style={{ padding: "0 5px 0 20px" }}
-                    >
-                      <Input
-                        id="firstName"
-                        placeholder="Họ (đệm)"
-                        prefix={
+
+        {/* Form Register */}
+        <Row justify='center' align='center'>
+          <Col xs={12} sm={12} md={12} lg={10} xl={10} xxl={10} >
+            <form className="register">
+              <div className="title a_c">ĐĂNG KÝ</div>
+              {/* FirstName And LastName */}
+              <Row>
+                <Col sm={12} md={12} lg={12} xl={12}>
+                  <div
+                    className="normal_2"
+                    style={{ padding: "0 5px 0 20px" }}
+                  >
+                    <Input
+                      id="firstName"
+                      placeholder="Họ (đệm)"
+                      prefix={
+                        <Icon
+                          type="user"
+                          style={{ color: "rgba(0,0,0,.4)" }}
+                        />
+                      }
+                      suffix={
+                        <Tooltip
+                          title={is_exactly_firstname ? "Họ" : "Điền họ"}
+                        >
                           <Icon
-                            type="user"
-                            style={{ color: "rgba(0,0,0,.4)" }}
+                            type={is_exactly_firstname ? "check" : "warning"}
+                            style={{
+                              color: is_exactly_firstname ? "green" : "red",
+                            }}
                           />
-                        }
-                        suffix={
-                          <Tooltip
-                            title={is_exactly_firstname ? "Họ" : "Điền họ"}
-                          >
-                            <Icon
-                              type={is_exactly_firstname ? "check" : "warning"}
-                              style={{
-                                color: is_exactly_firstname ? "green" : "red",
-                              }}
-                            />
-                          </Tooltip>
-                        }
-                        value={firstName}
-                        onChange={this._handleInput}
-                        type="text"
-                      />
-                    </div>
-                  </Col>
-                  <Col sm={12} md={12} xl={12} lg={12}>
-                    <div
-                      className="normal_2"
-                      style={{ padding: "0 20px 0 5px" }}
-                    >
-                      <Input
-                        id="lastName"
-                        placeholder="Tên"
-                        // prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                        suffix={
-                          <Tooltip
-                            title={is_exactly_lastname ? "Tên" : "Điền Tên"}
-                          >
-                            <Icon
-                              type={is_exactly_lastname ? "check" : "warning"}
-                              style={{
-                                color: is_exactly_lastname ? "green" : "red",
-                              }}
-                            />
-                          </Tooltip>
-                        }
-                        value={lastName}
-                        onChange={this._handleInput}
-                        type="text"
-                      />
-                    </div>
+                        </Tooltip>
+                      }
+                      value={firstName}
+                      onChange={this._handleInput}
+                      type="text"
+                    />
+                  </div>
+                </Col>
+                <Col sm={12} md={12} xl={12} lg={12}>
+                  <div
+                    className="normal_2"
+                    style={{ padding: "0 20px 0 5px" }}
+                  >
+                    <Input
+                      id="lastName"
+                      placeholder="Tên"
+                      // prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                      suffix={
+                        <Tooltip
+                          title={is_exactly_lastname ? "Tên" : "Điền Tên"}
+                        >
+                          <Icon
+                            type={is_exactly_lastname ? "check" : "warning"}
+                            style={{
+                              color: is_exactly_lastname ? "green" : "red",
+                            }}
+                          />
+                        </Tooltip>
+                      }
+                      value={lastName}
+                      onChange={this._handleInput}
+                      type="text"
+                    />
+                  </div>
+                </Col>
+              </Row>
+              {/* Gender */}
+              <div
+                className="normal"
+                style={{ margin: "5px 0px", fontWeight: 400 }}
+              >
+                <Row>
+                  <Col xs={24}>
+                    Giới tính:
+                      <input
+                      name="gender"
+                      type="checkbox"
+                      checked={checked}
+                      value="MALE"
+                      onChange={this._handleGender}
+                      style={{ margin: "0 5px 0 10px" }}
+                    />
+                    <span>Nam</span>
+                    <input
+                      name="gender"
+                      type="checkbox"
+                      checked={!checked}
+                      value="FEMALE"
+                      onChange={this._handleGender}
+                      style={{ margin: "0 5px 0 15px" }}
+                    />
+                    <span>Nữ</span>
                   </Col>
                 </Row>
-                {/* Gender */}
-                <div
-                  className="normal"
-                  style={{ margin: "5px 0px", fontWeight: 400 }}
+              </div>
+
+              {/* Mail */}
+              <div className="normal">
+                <Input
+                  id="email"
+                  placeholder="Email"
+                  prefix={
+                    <Icon type="mail" style={{ color: "rgba(0,0,0,.4)" }} />
+                  }
+                  suffix={
+                    <Tooltip
+                      title={
+                        is_exactly_email
+                          ? "Email chính xác"
+                          : "Điền Địa chỉ mail"
+                      }
+                    >
+                      <Icon
+                        type={is_exactly_email ? "check" : "warning"}
+                        style={{ color: is_exactly_email ? "green" : "red" }}
+                      />
+                    </Tooltip>
+                  }
+                  value={email}
+                  disabled={is_exists}
+                  onChange={this._handleInput}
+                  type="text"
+                />
+              </div>
+              {/* Phone */}
+              <div className="normal">
+                <Input
+                  id="phone"
+                  placeholder="Số điện thoại"
+                  prefix={
+                    <Icon type="phone" style={{ color: "rgba(0,0,0,.4)" }} />
+                  }
+                  suffix={
+                    <Tooltip
+                      title={
+                        is_exactly_phone
+                          ? "Số điện thoại chính xác"
+                          : "Điền Sô điện thoại"
+                      }
+                    >
+                      <Icon
+                        type={is_exactly_phone ? "check" : "warning"}
+                        style={{ color: is_exactly_phone ? "green" : "red" }}
+                      />
+                    </Tooltip>
+                  }
+                  value={phone}
+                  onChange={this._handleInput}
+                  type="text"
+                />
+              </div>
+              <div className="normal">
+                <DatePicker
+                  style={{ width: "100%" }}
+                  onChange={this._handleTime("schoolYearStart")}
+                  placeholder="Năm học bắt đầu"
+                />
+              </div>
+              <div className="normal">
+                <DatePicker
+                  style={{ width: "100%" }}
+                  onChange={this._handleTime("schoolYearEnd")}
+                  placeholder="Năm học kết thúc"
+                />
+              </div>
+              <div className="normal">
+                <Select
+                  showSearch
+                  placeholder="Chọn ngành học"
+                  style={{ width: "100%" }}
+                  optionFilterProp="children"
+                  onChange={(event) => this._choseMajor(event)}
+                  filterOption={(input, option) =>
+                    // @ts-ignore
+                    option.props.children
+                      .toLowerCase()
+                      .indexOf(input.toLowerCase()) >= 0
+                  }
                 >
-                  <Row>
-                    <Col xs={24}>
-                      Giới tính:
-                      <input
-                        name="gender"
-                        type="checkbox"
-                        checked={checked}
-                        value="MALE"
-                        onChange={this._handleGender}
-                        style={{ margin: "0 5px 0 10px" }}
-                      />
-                      <span>Nam</span>
-                      <input
-                        name="gender"
-                        type="checkbox"
-                        checked={!checked}
-                        value="FEMALE"
-                        onChange={this._handleGender}
-                        style={{ margin: "0 5px 0 15px" }}
-                      />
-                      <span>Nữ</span>
-                    </Col>
-                  </Row>
-                </div>
-              
-                {/* Mail */}
-                <div className="normal">
-                  <Input
-                    id="email"
-                    placeholder="Email"
-                    prefix={
-                      <Icon type="mail" style={{ color: "rgba(0,0,0,.4)" }} />
-                    }
-                    suffix={
-                      <Tooltip
-                        title={
-                          is_exactly_email
-                            ? "Email chính xác"
-                            : "Điền Địa chỉ mail"
-                        }
-                      >
-                        <Icon
-                          type={is_exactly_email ? "check" : "warning"}
-                          style={{ color: is_exactly_email ? "green" : "red" }}
-                        />
-                      </Tooltip>
-                    }
-                    value={email}
-                    disabled={is_exists}
-                    onChange={this._handleInput}
-                    type="text"
-                  />
-                </div>
-                {/* Phone */}
-                <div className="normal">
-                  <Input
-                    id="phone"
-                    placeholder="Số điện thoại"
-                    prefix={
-                      <Icon type="phone" style={{ color: "rgba(0,0,0,.4)" }} />
-                    }
-                    suffix={
-                      <Tooltip
-                        title={
-                          is_exactly_phone
-                            ? "Số điện thoại chính xác"
-                            : "Điền Sô điện thoại"
-                        }
-                      >
-                        <Icon
-                          type={is_exactly_phone ? "check" : "warning"}
-                          style={{ color: is_exactly_phone ? "green" : "red" }}
-                        />
-                      </Tooltip>
-                    }
-                    value={phone}
-                    onChange={this._handleInput}
-                    type="text"
-                  />
-                </div>
-                <div className="normal">
-                  <DatePicker
-                    style={{ width: "100%" }}
-                    onChange={this._handleTime("schoolYearStart")}
-                    placeholder="Năm học bắt đầu"
-                  />
-                </div>
-                <div className="normal">
-                  <DatePicker
-                    style={{ width: "100%" }}
-                    onChange={this._handleTime("schoolYearEnd")}
-                    placeholder="Năm học kết thúc"
-                  />
-                </div>
-                <div className="normal">
-                  <Select
-                    showSearch
-                    placeholder="Chọn ngành học"
-                    style={{ width: "100%" }}
-                    optionFilterProp="children"
-                    onChange={(event) => this._choseMajor(event)}
-                    filterOption={(input, option) =>
-                      // @ts-ignore
-                      option.props.children
-                        .toLowerCase()
-                        .indexOf(input.toLowerCase()) >= 0
-                    }
-                  >
-                    {list_major.map((item, index) => {
-                      return (
-                        <Option value={item.id} key={index}>
-                          {item.name}
-                        </Option>
-                      );
-                    })}
-                  </Select>
-                </div>
+                  {list_major.map((item, index) => {
+                    return (
+                      <Option value={item.id} key={index}>
+                        {item.name}
+                      </Option>
+                    );
+                  })}
+                </Select>
+              </div>
 
-                {/* Password */}
-                <div className="normal">
-                  <Input.Password
-                    id="password"
-                    placeholder="Mật khẩu"
-                    disabled={is_exists}
-                    prefix={
-                      <Icon type="lock" style={{ color: "rgba(0,0,0,.4)" }} />
-                    }
-                    suffix={
-                      <Tooltip
-                        title={
-                          is_exactly_pw
-                            ? "Mật khẩu hợp lệ"
-                            : "Mật khẩu quá ngắn"
-                        }
-                      >
-                        <Icon
-                          type={is_exactly_pw ? "check" : "warning"}
-                          style={{ color: is_exactly_pw ? "green" : "red" }}
-                        />
-                      </Tooltip>
-                    }
-                    value={password}
-                    onChange={this._handleInput}
-                    type="password"
-                  />
-                </div>
+              {/* Password */}
+              <div className="normal">
+                <Input.Password
+                  id="password"
+                  placeholder="Mật khẩu"
+                  disabled={is_exists}
+                  prefix={
+                    <Icon type="lock" style={{ color: "rgba(0,0,0,.4)" }} />
+                  }
+                  suffix={
+                    <Tooltip
+                      title={
+                        is_exactly_pw
+                          ? "Mật khẩu hợp lệ"
+                          : "Mật khẩu quá ngắn"
+                      }
+                    >
+                      <Icon
+                        type={is_exactly_pw ? "check" : "warning"}
+                        style={{ color: is_exactly_pw ? "green" : "red" }}
+                      />
+                    </Tooltip>
+                  }
+                  value={password}
+                  onChange={this._handleInput}
+                  type="password"
+                />
+              </div>
 
-                {/* RePassword */}
-                <div className="normal">
-                  <Input.Password
-                    id="repassword"
-                    placeholder="Nhập lại mật khẩu"
-                    disabled={is_exists}
-                    prefix={
-                      <Icon type="lock" style={{ color: "rgba(0,0,0,.4)" }} />
-                    }
-                    suffix={
-                      <Tooltip
-                        title={
-                          is_exactly_rpw
-                            ? "Mật khẩu nhập lại hợp lệ"
-                            : "Mật khẩu chính xác"
-                        }
-                      >
-                        <Icon
-                          type={is_exactly_rpw ? "check" : "warning"}
-                          style={{ color: is_exactly_rpw ? "green" : "red" }}
-                        />
-                      </Tooltip>
-                    }
-                    value={repassword}
-                    onChange={this._handleInput}
-                    type="password"
-                  />
-                </div>
-                {/* Except */}
-                <div className="normal" style={{ marginTop: 25 }}>
-                  <p className="fogot-password">
-                    <Checkbox onChange={this._handleCheckbox}>
-                      Đồng ý với{" "}
-                      <a href="/" target="_blank" style={{ color: "#4a9ae1" }}>
-                        điều khoản
+              {/* RePassword */}
+              <div className="normal">
+                <Input.Password
+                  id="repassword"
+                  placeholder="Nhập lại mật khẩu"
+                  disabled={is_exists}
+                  prefix={
+                    <Icon type="lock" style={{ color: "rgba(0,0,0,.4)" }} />
+                  }
+                  suffix={
+                    <Tooltip
+                      title={
+                        is_exactly_rpw
+                          ? "Mật khẩu nhập lại hợp lệ"
+                          : "Mật khẩu chính xác"
+                      }
+                    >
+                      <Icon
+                        type={is_exactly_rpw ? "check" : "warning"}
+                        style={{ color: is_exactly_rpw ? "green" : "red" }}
+                      />
+                    </Tooltip>
+                  }
+                  value={repassword}
+                  onChange={this._handleInput}
+                  type="password"
+                />
+              </div>
+              {/* Except */}
+              <div className="normal" style={{ marginTop: 25 }}>
+                <p className="fogot-password">
+                  <Checkbox onChange={this._handleCheckbox}>
+                    Đồng ý với{" "}
+                    <a href="/" target="_blank" style={{ color: "#4a9ae1" }}>
+                      điều khoản
                       </a>{" "}
                       của Worksvn
                     </Checkbox>
-                  </p>
-                  <p>
-                    <Button
-                      type="primary"
-                      onClick={() => this.requestToServer()}
-                      // disabled={!is_except_rule}
-                      block
-                    >
-                      Hoàn tất
+                </p>
+                <p>
+                  <Button
+                    type="primary"
+                    onClick={() => this.requestToServer()}
+                    // disabled={!is_except_rule}
+                    block
+                  >
+                    Hoàn tất
                     </Button>
-                  </p>
-                  {/* <p className='or'>
+                </p>
+                {/* <p className='or'>
                                         hoặc
                                     </p> */}
-                  <p className="a_c">
-                    Bạn đã có tài khoản ?{" "}
-                    <a href="/login" style={{ color: "red" }}>
-                      Đăng nhập
+                <p className="a_c">
+                  Bạn đã có tài khoản ?{" "}
+                  <a href="/login" style={{ color: "red" }}>
+                    Đăng nhập
                     </a>
-                  </p>
-                </div>
-              </form>
-            </Col>
-            <Col xs={0} sm={0} md={6} xl={7} lg={6}></Col>
-          </Row>
-        </div>
+                </p>
+              </div>
+            </form>
+          </Col>
+          <Col xs={12} sm={12} md={12} lg={14} xl={14} xxl={14} >
+            <img src={imageLogin} className='image-login' />
+          </Col>
+
+
+        </Row>
+
         {/* Map */}
       </Layout>
     );

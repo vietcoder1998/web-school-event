@@ -3,11 +3,7 @@ import './TabSearch.scss';
 import SearchBox from './searchbox/SearchBox';
 
 // @ts-ignore
-// import IMG1 from '../../../../assets/image/crs1.jpg';
-// @ts-ignore
 import IMG2 from '../../../../assets/image/crs2.jpg';
-// @ts-ignore
-import IMG3 from '../../../../assets/image/crs3.jpg';
 import { Carousel } from 'antd';
 
 function TabSearch(props) {

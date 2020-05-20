@@ -6,12 +6,15 @@ import { connect } from 'react-redux';
 import { authUserPassword } from '../../../services/api/private.api';
 import { setAuthSate, loginHeaders } from '../../../services/auth';
 import { AUTH_HOST } from '../../../environment/development';
-import { Input, Tooltip, Icon, Button } from 'antd';
+import { Input, Tooltip, Icon, Button, Row } from 'antd';
 import { Col } from 'antd';
 import { _requestToServer } from '../../../services/exec';
 import { POST } from '../../../const/method';
 import Layout from '../layout/Layout';
 import { REDUX } from '../../../const/actions';
+
+import logo from '../../../assets/image/logo-01.png';
+import imageLogin from '../../../assets/image/image-login.png';
 
 class Login extends Component {
     constructor(props) {
@@ -50,7 +53,7 @@ class Login extends Component {
         _requestToServer(POST, data, authUserPassword, AUTH_HOST, loginHeaders, null, false)
             .then(res => {
                 if (res) {
-           
+
                     if (res.data.target !== 'STUDENT') {
                         swal({
                             title: "Worksvns thông báo",
@@ -71,9 +74,9 @@ class Login extends Component {
                                 dangerMode: true,
                             });
                             setTimeout(() => {
-                                 window.location.assign('/register');
+                                window.location.assign('/register');
                             }, 3000)
-                           
+
                         }
                         else {
                             setAuthSate(res);
@@ -103,65 +106,62 @@ class Login extends Component {
         return (
             <Layout disableFooterData={false}>
                 {/* <form> */}
-                <div className='content'>
-                    <div className='login-content'>
-                        <Col xs={0} sm={0} md={6} lg={6} xl={7} xxl={8} ></Col>
-                        <Col xs={24} sm={24} md={12} lg={12} xl={10} xxl={8} >
-                            <div className="login-form">
-                                <p className='title a_c' style={{ fontWeight: 600 }}>ĐĂNG NHẬP</p>
-                                <form>
-                                    <p className='nomal'>
-                                        <Input
-                                            placeholder="Email"
-                                            prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                            suffix={
-                                                <Tooltip title="Email của bạn">
-                                                    <Icon type="info-circle" style={{ color: 'rgba(0,0,0,.45)' }} />
-                                                </Tooltip>
-                                            }
-                                            value={user_name}
-                                            onChange={this.handleUsername} type='text'
-                                        />
-                                    </p>
-                                    <p className='nomal'>
-                                        <Input.Password
-                                            placeholder="Password"
-                                            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                            // suffix={
-                                            //     <Tooltip title="Điền đúng mật khẩu">
-                                            //         <Icon type="info-circle" style={{ color: 'rgba(0,0,0,.45)' }} />
-                                            //     </Tooltip>
-                                            // }
-                                            value={password}
-                                            onChange={this.handlePassword}
-                                            onPressEnter={this._createResponse}
-                                            type='password'
-                                        />
-                                    </p>
-                                    <p className='fogot-password a_r'>
-                                        <a href='/forgot-password' style={{ color: 'gray' }} >Quên mật khẩu ?</a>
-                                    </p>
-                                    <p>
-                                        <Button style={{ backgroundColor: '#31a3f9', borderColor: '#31a3f9' }} type='primary' onClick={this._createResponse} block>Đăng nhập</Button>
-                                    </p>
-                                    {/* <p className='a_c'>
-                                        hoặc
-                                     </p>
-                                    <p>
-                                        <Button type='blue-7' onClick={() => this._createRequest()} block>
-                                            <i id='facebook_square' className="fa fa-facebook-square"></i>
-                                            Đăng nhập với Facebook
-                                        </Button>
-                                    </p> */}
-                                    <p className='a_c'>
-                                        Bạn chưa có tài khoản ? <a href='/register' style={{ color: '#fb4141' }}>Đăng ký</a>
-                                    </p>
-                                </form>
-                            </div>
-                        </Col>
-                        <Col xs={0} sm={0} md={6} lg={6} xl={7} xxl={8} ></Col>
-                    </div>
+
+                <div className='login-content'>
+
+                    <Col xs={12} sm={12} md={12} lg={10} xl={10} xxl={10} >  
+                        <div className="login-form">
+                        <img src={logo} alt='logo' width='240' height='80' />
+                            <p className='title a_c' style={{ fontWeight: 600 }}>ĐĂNG NHẬP</p>
+                            <form>
+                                <p className='nomal'>
+                                    <Input
+                                        placeholder="Email"
+                                        prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                        suffix={
+                                            <Tooltip title="Email của bạn">
+                                                <Icon type="info-circle" style={{ color: 'rgba(0,0,0,.45)' }} />
+                                            </Tooltip>
+                                        }
+                                        value={user_name}
+                                        onChange={this.handleUsername} type='text'
+                                    />
+                                </p>
+                                <p className='nomal'>
+                                    <Input.Password
+                                        placeholder="Password"
+                                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                        // suffix={
+                                        //     <Tooltip title="Điền đúng mật khẩu">
+                                        //         <Icon type="info-circle" style={{ color: 'rgba(0,0,0,.45)' }} />
+                                        //     </Tooltip>
+                                        // }
+                                        value={password}
+                                        onChange={this.handlePassword}
+                                        onPressEnter={this._createResponse}
+                                        type='password'
+                                    />
+                                </p>
+                                <p className='fogot-password a_r'>
+                                    <a href='/forgot-password' style={{ color: 'gray' }} >Quên mật khẩu ?</a>
+                                </p>
+                                <p>
+                                    <Button className='btn-login' type='primary' onClick={this._createResponse} block>Đăng nhập</Button>
+                                </p>
+                                <p className='a_c'>
+                                    Bạn chưa có tài khoản ? <a href='/register' style={{ color: '#fb4141' }}>Đăng ký</a>
+                                </p>
+                            </form>
+                        </div>
+                    </Col>
+                    <Col xs={12} sm={12} md={12} lg={14} xl={14} xxl={14} >
+                        <img src={imageLogin} className='image-login' />
+                    </Col>
+
+
+
                 </div>
+
                 {/* </form> */}
             </Layout>
         );
