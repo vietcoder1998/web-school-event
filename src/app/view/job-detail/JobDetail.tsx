@@ -255,6 +255,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
       false
     ).then((res) => {
       if (res) {
+      
         let { results } = res.data;
         if (res.data.success === true) {
           swal({
@@ -267,6 +268,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
           this._loadState();
         }
         else {
+          
           for (let i in results) {
         
             if (results[i].full === true) {
