@@ -24,8 +24,8 @@ import swal from "sweetalert";
 import { POST } from "../../../const/method";
 import { _get } from "../../../services/base-api";
 import { PUBLIC_HOST } from "../../../environment/development";
-import imageLogin from '../../../assets/image/image-login.png';
-import logo from '../../../assets/image/logo-01.png';
+import imageLogin from "../../../assets/image/image-login.png";
+import logo from "../../../assets/image/logo-01.png";
 const isNumeric = (value) => {
   return /^-{0,1}\d+$/.test(value);
 };
@@ -106,11 +106,12 @@ class Register extends Component<IProps, IState> {
       list_major,
     });
 
-    if (localStorage.getItem('user_exists') === 'false') {
-      email_register_dto.email = localStorage.getItem('user_exists_userName');
-      email_register_dto.password = localStorage.getItem('user_exists_password');
-      repassword = localStorage.getItem('user_exists_password');
-
+    if (localStorage.getItem("user_exists") === "false") {
+      email_register_dto.email = localStorage.getItem("user_exists_userName");
+      email_register_dto.password = localStorage.getItem(
+        "user_exists_password"
+      );
+      repassword = localStorage.getItem("user_exists_password");
 
       this.setState({
         is_exists: true,
@@ -119,7 +120,7 @@ class Register extends Component<IProps, IState> {
         is_exactly_email: true,
         is_exactly_pw: true,
         is_exactly_rpw: true,
-      })
+      });
     }
   }
   _handleTime = (name) => (value) => {
@@ -299,7 +300,6 @@ class Register extends Component<IProps, IState> {
         text: "Nhập lại mật khẩu không chính xác",
       });
     } else {
-
       await _requestToServer(
         POST,
         email_register_dto,
@@ -332,30 +332,31 @@ class Register extends Component<IProps, IState> {
       list_major,
       is_exists,
     } = this.state;
-
+    let { mobile } = this.props;
     return (
       <Layout disableFooterData={false}>
-
         {/* Form Register */}
-        <Row justify='center' align='center'>
-          <Col xs={12} sm={12} md={12} lg={10} xl={10} xxl={10} >
+        <Row justify="center" align="center">
+          <Col
+            xs={mobile ? 24 : 12}
+            sm={mobile ? 24 : 12}
+            md={mobile ? 24 : 12}
+            lg={mobile ? 24 : 10}
+            xl={mobile ? 24 : 10}
+            xxl={mobile ? 24 : 10}
+          >
             <form className="register">
               <div className="title a_c">ĐĂNG KÝ</div>
               {/* FirstName And LastName */}
               <Row>
-                <Col sm={12} md={12} lg={12} xl={12}>
-                  <div
-                    className="normal_2"
-                    style={{ padding: "0 5px 0 20px" }}
-                  >
+                <Col xs={24} >
+                  <div className="normal">
                     <Input
                       id="firstName"
                       placeholder="Họ (đệm)"
+                      style={{ marginBottom: 5 }}
                       prefix={
-                        <Icon
-                          type="user"
-                          style={{ color: "rgba(0,0,0,.4)" }}
-                        />
+                        <Icon type="user" style={{ color: "rgba(0,0,0,.4)" }} />
                       }
                       suffix={
                         <Tooltip
@@ -374,12 +375,7 @@ class Register extends Component<IProps, IState> {
                       type="text"
                     />
                   </div>
-                </Col>
-                <Col sm={12} md={12} xl={12} lg={12}>
-                  <div
-                    className="normal_2"
-                    style={{ padding: "0 20px 0 5px" }}
-                  >
+                  <div className="normal">
                     <Input
                       id="lastName"
                       placeholder="Tên"
@@ -411,7 +407,7 @@ class Register extends Component<IProps, IState> {
                 <Row>
                   <Col xs={24}>
                     Giới tính:
-                      <input
+                    <input
                       name="gender"
                       type="checkbox"
                       checked={checked}
@@ -538,9 +534,7 @@ class Register extends Component<IProps, IState> {
                   suffix={
                     <Tooltip
                       title={
-                        is_exactly_pw
-                          ? "Mật khẩu hợp lệ"
-                          : "Mật khẩu quá ngắn"
+                        is_exactly_pw ? "Mật khẩu hợp lệ" : "Mật khẩu quá ngắn"
                       }
                     >
                       <Icon
@@ -590,9 +584,9 @@ class Register extends Component<IProps, IState> {
                     Đồng ý với{" "}
                     <a href="/" target="_blank" style={{ color: "#4a9ae1" }}>
                       điều khoản
-                      </a>{" "}
-                      của Worksvn
-                    </Checkbox>
+                    </a>{" "}
+                    của Worksvn
+                  </Checkbox>
                 </p>
                 <p>
                   <Button
@@ -602,7 +596,7 @@ class Register extends Component<IProps, IState> {
                     block
                   >
                     Hoàn tất
-                    </Button>
+                  </Button>
                 </p>
                 {/* <p className='or'>
                                         hoặc
@@ -611,16 +605,21 @@ class Register extends Component<IProps, IState> {
                   Bạn đã có tài khoản ?{" "}
                   <a href="/login" style={{ color: "red" }}>
                     Đăng nhập
-                    </a>
+                  </a>
                 </p>
               </div>
             </form>
           </Col>
-          <Col xs={12} sm={12} md={12} lg={14} xl={14} xxl={14} >
-            <img src={imageLogin} className='image-login' />
+          <Col
+            xs={mobile ? 0 : 12}
+            sm={mobile ? 0 : 12}
+            md={mobile ? 0 : 12}
+            lg={mobile ? 0 : 14}
+            xl={mobile ? 0 : 14}
+            xxl={mobile ? 0 : 14}
+          >
+            <img src={imageLogin} className="image-login" />
           </Col>
-
-
         </Row>
 
         {/* Map */}
@@ -631,6 +630,7 @@ class Register extends Component<IProps, IState> {
 
 const mapStateToProps = (state) => ({
   marker: state.MapState.marker,
+  mobile: state.MobileState.isMobile,
 });
 
 export default connect(mapStateToProps, null)(Register);

@@ -11,7 +11,7 @@ class BottomPhone extends PureComponent {
     }
 
     render() {
-        let { show, disableBottomPhone } = this.props;
+        let { show, disableBottomPhone, isAuthen } = this.props;
         return (
             <div className='bottom_phone show-only-phone' style={{ display: disableBottomPhone ? "none" : "visible" }}>
                 <span className='link-to'>
@@ -26,18 +26,13 @@ class BottomPhone extends PureComponent {
                         <li>Lịch sử ứng tuyển</li>
                     </a>
                 </span>
-                <span className='link-to'>
+                <span className='link-to' style={{display: isAuthen ? '' : 'none'}}>
                     <a href='/'>
                         <li><Icon type="search" /></li>
                         <li>Tìm việc</li>
                     </a>
                 </span>
-                <span className='link-to'>
-                    <a href='/'>
-                        <li><Icon type="phone" /></li>
-                        <li>Liên hệ</li>
-                    </a>
-                </span>
+               
                 <span className='link-to' onClick={this._toHead}>
                     <span>
                         <li><Icon type="up" /></li>
@@ -57,6 +52,7 @@ class BottomPhone extends PureComponent {
 
 const mapStateToProps = (state) => ({
     show: state.SideBarState.show,
+    isAuthen: state.AuthState.isAuthen,
 })
 
 const mapDispatchToProps = (dispatch) => ({

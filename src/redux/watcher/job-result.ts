@@ -61,7 +61,6 @@ function getJobResults(action) {
   }
 
   let isAuthen = store.getState().AuthState.isAuthen;
-  console.log(isAuthen);
   let res = _requestToServer(
     POST,
     body,

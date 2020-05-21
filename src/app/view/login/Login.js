@@ -53,7 +53,6 @@ class Login extends Component {
         _requestToServer(POST, data, authUserPassword, AUTH_HOST, loginHeaders, null, false)
             .then(res => {
                 if (res) {
-
                     if (res.data.target !== 'STUDENT') {
                         swal({
                             title: "Worksvns thông báo",
@@ -102,14 +101,13 @@ class Login extends Component {
 
 
     render() {
-        let { user_name, password } = this.state;
+        let { user_name, password} = this.state;
+        let {mobile} = this.props;
         return (
             <Layout disableFooterData={false}>
                 {/* <form> */}
-
                 <div className='login-content'>
-
-                    <Col xs={12} sm={12} md={12} lg={10} xl={10} xxl={10} >  
+                    <Col xs={mobile ? 24 : 12} sm={mobile ? 24 : 12} md={mobile ? 24 : 12} lg={mobile ? 24 : 10} xl={mobile ? 24 : 10} xxl={mobile ? 24 : 10} >  
                         <div className="login-form">
                         <img src={logo} alt='logo' width='240' height='80' />
                             <p className='title a_c' style={{ fontWeight: 600 }}>ĐĂNG NHẬP</p>
@@ -154,7 +152,7 @@ class Login extends Component {
                             </form>
                         </div>
                     </Col>
-                    <Col xs={12} sm={12} md={12} lg={14} xl={14} xxl={14} >
+                    <Col xs={mobile ? 0 : 12} sm={mobile ? 0 : 12} md={mobile ? 0 : 12} lg={mobile ? 0 : 14} xl={mobile ? 0 : 14} xxl={mobile ? 0 : 14} >
                         <img src={imageLogin} className='image-login' />
                     </Col>
 
@@ -170,7 +168,8 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        prop: state.prop
+        prop: state.prop,
+        mobile: state.MobileState.isMobile
     }
 }
 
