@@ -5,3 +5,4 @@
 5. Gộp nhóm API, nhóm Action
 6. lịch sử điện thoại bug
 7. Xem lại side bar
+8. Tính toán lại thanh trượt ở branch

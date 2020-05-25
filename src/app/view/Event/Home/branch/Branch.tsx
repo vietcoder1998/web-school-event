@@ -7,7 +7,6 @@ import { EVENT_PUBLIC } from "../../../../../services/api/public.api";
 import { _get } from "../../../../../services/base-api";
 import { REDUX_SAGA } from "../../../../../const/actions";
 import whileImage from '../../../../../assets/image/while.png';
-import $ from 'jquery'
 interface IProps {
   getEvenJob?: Function;
   listBranch?: any;
@@ -59,7 +58,7 @@ class Branch extends PureComponent<IProps, IState> {
       findHighestNode(document.documentElement.childNodes);
     })();
     window.scrollTo({
-      top: pageHeight - pageHeight/2,
+      top: pageHeight - pageHeight / 2,
       behavior: 'smooth'
     });
     this.props.getEvenJob(0);
@@ -74,7 +73,30 @@ class Branch extends PureComponent<IProps, IState> {
         style={{ backgroundColor: "#F9FBFF !important", padding: "3% 5%" }}
       >
         <h5 style={{ textAlign: "center", }}>LÀM VIỆC THEO NGÀNH NGHỀ </h5>
-        <Row align='center' type='flex' gutter={[16, 32]}>
+        <Row  type='flex'>
+          {listBranch && listBranch.items && (
+            <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={8}>
+              <div className="branch-item" style={{ textAlign: "center" }}>
+                  <a
+                    onClick={() => {
+                      this.handleClick(listBranch.items[0].id, listBranch.items[0].name);
+                    }}
+                  >
+                    <div className='border-image-branch'>
+                      <img
+                        src={listBranch.items[0].imageUrl === null ? whileImage : listBranch.items[0].imageUrl}
+                        alt="branch"
+                        className="image-branch"
+                      />
+                    </div>
+
+                    <div className='name-branch'>
+                      {listBranch.items[0].name}{" "}
+                    </div>
+                  </a>
+                </div>
+            </Col>
+          )}
           {listBranch && listBranch.items
             ? listBranch.items.map((item, index) => (
               <Col xs={12} sm={6} md={6} lg={6} xl={4} xxl={4} key={index}>
@@ -102,6 +124,61 @@ class Branch extends PureComponent<IProps, IState> {
               </Col>
             ))
             : null}
+          {listBranch && listBranch.items
+            ? listBranch.items.map((item, index) => (
+              <Col xs={12} sm={6} md={6} lg={6} xl={4} xxl={4} key={index}>
+                <div className="branch-item" style={{ textAlign: "center" }}>
+                  <a
+                    id={`a-${item.id}`}
+                    onClick={() => {
+
+                      this.handleClick(item.id, item.name);
+                    }}
+                  >
+                    <div className='border-image-branch'>
+                      <img
+                        src={item.imageUrl === null ? whileImage : item.imageUrl}
+                        alt="branch"
+                        className="image-branch"
+                      />
+                    </div>
+
+                    <div className='name-branch'>
+                      {item.name}{" "}
+                    </div>
+                  </a>
+                </div>
+              </Col>
+            ))
+            : null}
+          {listBranch && listBranch.items
+            ? listBranch.items.map((item, index) => (
+              <Col xs={12} sm={6} md={6} lg={6} xl={4} xxl={4} key={index}>
+                <div className="branch-item" style={{ textAlign: "center" }}>
+                  <a
+                    id={`a-${item.id}`}
+                    onClick={() => {
+
+                      this.handleClick(item.id, item.name);
+                    }}
+                  >
+                    <div className='border-image-branch'>
+                      <img
+                        src={item.imageUrl === null ? whileImage : item.imageUrl}
+                        alt="branch"
+                        className="image-branch"
+                      />
+                    </div>
+
+                    <div className='name-branch'>
+                      {item.name}{" "}
+                    </div>
+                  </a>
+                </div>
+              </Col>
+            ))
+            : null}
+        
         </Row>
       </div>
     );
