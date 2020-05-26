@@ -72,8 +72,8 @@ class Branch extends PureComponent<IProps, IState> {
         className="top-branch"
         style={{ backgroundColor: "#F9FBFF !important", padding: "3% 5%" }}
       >
-        <h5 style={{ textAlign: "center", }}>LÀM VIỆC THEO NGÀNH NGHỀ </h5>
-        <Row  type='flex'>
+        <h5 style={{ textAlign: "center", }}>GIAN HÀNG NGÀY HỘI THEO NGÀNH NGHỀ</h5>
+        <Row type='flex'>
           {listBranch && listBranch.items && (
             <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={8}>
               <div className="branch-item" style={{ textAlign: "center" }}>
