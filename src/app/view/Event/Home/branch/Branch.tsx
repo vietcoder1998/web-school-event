@@ -7,6 +7,11 @@ import { EVENT_PUBLIC } from "../../../../../services/api/public.api";
 import { _get } from "../../../../../services/base-api";
 import { REDUX_SAGA } from "../../../../../const/actions";
 import whileImage from '../../../../../assets/image/while.png';
+import img_circuit from '../../../../../assets/image/event/circuit.jpg'
+import img_tech from '../../../../../assets/image/event/tech.jpg'
+import img_business from '../../../../../assets/image/event/business.jpg'
+
+
 interface IProps {
   getEvenJob?: Function;
   listBranch?: any;
@@ -31,6 +36,7 @@ class Branch extends PureComponent<IProps, IState> {
   componentDidMount = async () => {
     await this.setState({ is_loading: false });
     let listBranch = await _get(null, EVENT_PUBLIC.BRANCH, PUBLIC_HOST, {});
+    console.log(listBranch.data);
     this.setState({
       listBranch: listBranch.data,
     });
@@ -76,109 +82,142 @@ class Branch extends PureComponent<IProps, IState> {
         <Row type='flex'>
           {listBranch && listBranch.items && (
             <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={8}>
-              <div className="branch-item" style={{ textAlign: "center" }}>
-                  <a
-                    onClick={() => {
-                      this.handleClick(listBranch.items[0].id, listBranch.items[0].name);
-                    }}
-                  >
-                    <div className='border-image-branch'>
-                      <img
-                        src={listBranch.items[0].imageUrl === null ? whileImage : listBranch.items[0].imageUrl}
-                        alt="branch"
-                        className="image-branch"
-                      />
-                    </div>
+              <div className="branch-item" style={{ textAlign: "center", padding: 0 }}>
+                <a
+                  onClick={() => {
+                    this.handleClick(listBranch.items[0].id, listBranch.items[0].name);
+                  }}
+                >
+                  <div className='border-image-branch'>
+                    {/* <img
+              src={listBranch.items[0].imageUrl === null ? whileImage : listBranch.items[0].imageUrl}
+              alt="branch"
+              
+            /> */}
+                    <img
+                      src={img_circuit}
+                      alt="branch"
+                      width="100%"
+                      height="100%"
+                      style={{ borderTopLeftRadius: '10.4528px', borderTopRightRadius: '10.4528px', padding: '0 0 16px' }}
+                    />
+                  </div>
 
-                    <div className='name-branch'>
-                      {listBranch.items[0].name}{" "}
-                    </div>
-                  </a>
-                </div>
+                  <div style={{ padding: '10px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <img
+                      src={listBranch.items[0].imageUrl === null ? whileImage : listBranch.items[0].imageUrl}
+                      alt="branch"
+                      style={{ width: 30, marginRight: 10 }}
+                    />
+                    <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{listBranch.items[0].name}{" "}</div>
+                  </div>
+                </a>
+              </div>
             </Col>
           )}
+          {listBranch && listBranch.items && (
+            <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={8}>
+              <div className="branch-item" style={{ textAlign: "center", padding: 0 }}>
+                <a
+                  onClick={() => {
+                    this.handleClick(listBranch.items[7].id, listBranch.items[7].name);
+                  }}
+                >
+                  <div className='border-image-branch'>
+                    {/* <img
+              src={listBranch.items[0].imageUrl === null ? whileImage : listBranch.items[0].imageUrl}
+              alt="branch"
+              
+            /> */}
+                    <img
+                      src={img_tech}
+                      alt="branch"
+                      width="100%"
+                      height="100%"
+                      style={{ borderTopLeftRadius: '10.4528px', borderTopRightRadius: '10.4528px' }}
+                    />
+                  </div>
+
+                  <div style={{ padding: '10px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <img
+                      src={listBranch.items[7].imageUrl === null ? whileImage : listBranch.items[7].imageUrl}
+                      alt="branch"
+                      style={{ width: 30, marginRight: 10 }}
+                    />
+                    <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{listBranch.items[7].name}{" "}</div>
+                  </div>
+                </a>
+              </div>
+              <div className="branch-item" style={{ textAlign: "center", padding: 0 }}>
+                <a
+                  onClick={() => {
+                    this.handleClick(listBranch.items[6].id, listBranch.items[6].name);
+                  }}
+                >
+                  <div className='border-image-branch'>
+                    {/* <img
+              src={listBranch.items[0].imageUrl === null ? whileImage : listBranch.items[0].imageUrl}
+              alt="branch"
+              
+            /> */}
+                    <img
+                      src={img_business}
+                      alt="branch"
+                      width="100%"
+                      height="100%"
+                      style={{ borderTopLeftRadius: '10.4528px', borderTopRightRadius: '10.4528px' }}
+                    />
+                  </div>
+
+                  <div style={{ padding: '10px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <img
+                      src={listBranch.items[6].imageUrl === null ? whileImage : listBranch.items[6].imageUrl}
+                      alt="branch"
+                      style={{ width: 25, marginRight: 10 }}
+                    />
+                    <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{listBranch.items[6].name}{" "}</div>
+                  </div>
+                </a>
+              </div>
+            </Col>
+          )}
+        </Row>
+        <Row type='flex'>
+
           {listBranch && listBranch.items
-            ? listBranch.items.map((item, index) => (
-              <Col xs={12} sm={6} md={6} lg={6} xl={4} xxl={4} key={index}>
-                <div className="branch-item" style={{ textAlign: "center" }}>
-                  <a
-                    id={`a-${item.id}`}
-                    onClick={() => {
-
-                      this.handleClick(item.id, item.name);
-                    }}
-                  >
-                    <div className='border-image-branch'>
-                      <img
-                        src={item.imageUrl === null ? whileImage : item.imageUrl}
-                        alt="branch"
-                        className="image-branch"
-                      />
+            ? listBranch.items.map((item, index) => 
+            {
+              if(item.id !== 21 && item.id !== 2 && item.id && 13) {
+                return (
+                  <Col xs={12} sm={6} md={6} lg={6} xl={4} xxl={4} key={index}>
+                    <div className="branch-item" style={{ textAlign: "center" }}>
+                      <a
+                        id={`a-${item.id}`}
+                        onClick={() => {
+    
+                          this.handleClick(item.id, item.name);
+                        }}
+                      >
+                        <div className='border-image-branch'>
+                          <img
+                            src={item.imageUrl === null ? whileImage : item.imageUrl}
+                            alt="branch"
+                            className="image-branch"
+                          />
+                        </div>
+    
+                        <div className='name-branch'>
+                          {item.name}{" "}
+                        </div>
+                      </a>
                     </div>
-
-                    <div className='name-branch'>
-                      {item.name}{" "}
-                    </div>
-                  </a>
-                </div>
-              </Col>
-            ))
+                  </Col>
+                )
+              }
+            }
+            )
             : null}
-          {listBranch && listBranch.items
-            ? listBranch.items.map((item, index) => (
-              <Col xs={12} sm={6} md={6} lg={6} xl={4} xxl={4} key={index}>
-                <div className="branch-item" style={{ textAlign: "center" }}>
-                  <a
-                    id={`a-${item.id}`}
-                    onClick={() => {
 
-                      this.handleClick(item.id, item.name);
-                    }}
-                  >
-                    <div className='border-image-branch'>
-                      <img
-                        src={item.imageUrl === null ? whileImage : item.imageUrl}
-                        alt="branch"
-                        className="image-branch"
-                      />
-                    </div>
-
-                    <div className='name-branch'>
-                      {item.name}{" "}
-                    </div>
-                  </a>
-                </div>
-              </Col>
-            ))
-            : null}
-          {listBranch && listBranch.items
-            ? listBranch.items.map((item, index) => (
-              <Col xs={12} sm={6} md={6} lg={6} xl={4} xxl={4} key={index}>
-                <div className="branch-item" style={{ textAlign: "center" }}>
-                  <a
-                    id={`a-${item.id}`}
-                    onClick={() => {
-
-                      this.handleClick(item.id, item.name);
-                    }}
-                  >
-                    <div className='border-image-branch'>
-                      <img
-                        src={item.imageUrl === null ? whileImage : item.imageUrl}
-                        alt="branch"
-                        className="image-branch"
-                      />
-                    </div>
-
-                    <div className='name-branch'>
-                      {item.name}{" "}
-                    </div>
-                  </a>
-                </div>
-              </Col>
-            ))
-            : null}
-        
         </Row>
       </div>
     );
