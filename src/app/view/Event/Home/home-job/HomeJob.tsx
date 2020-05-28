@@ -78,7 +78,7 @@ class HomeJob extends PureComponent<IProps> {
                         />
                       </div>
                       <div className="job-content">
-                        <ul>
+                        <ul style={{marginTop: 7}}>
                           <li className="j-d">
                             <Link
                               to={`/event-job-detail/${window.btoa(item.id)}`}

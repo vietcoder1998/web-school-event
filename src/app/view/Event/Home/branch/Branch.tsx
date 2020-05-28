@@ -19,32 +19,49 @@ interface IProps {
 interface IState {
   listBranch: any;
   is_loading: boolean;
+  heightTech: number;
+  heightBusiness: number;
+  width: number
 }
 
 
 class Branch extends PureComponent<IProps, IState> {
   constructor(props) {
     super(props);
-
-
     this.state = {
       listBranch: [],
       is_loading: true,
+      heightTech: 0,
+      heightBusiness: 0,
+      width: 0
     };
+    this.divElementTech = null
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+    // this.handleLoad = this.handleLoad.bind(this);
   }
 
   componentDidMount = async () => {
     await this.setState({ is_loading: false });
     let listBranch = await _get(null, EVENT_PUBLIC.BRANCH, PUBLIC_HOST, {});
-    console.log(listBranch.data);
+    // console.log(listBranch.data);
     this.setState({
       listBranch: listBranch.data,
     });
     localStorage.removeItem("e_bid");
     localStorage.setItem('branch_name', "VIỆC LÀM TRONG NGÀY HỘI");
 
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions)
+    // window.addEventListener('load', this.updateWindowDimensions);
     // console.log(localStorage.getItem('branch_name'))
   };
+  updateWindowDimensions() {
+    const width = window.innerWidth
+    // 556 is width image, 451.5 is height image 2, 411 is height image 3
+    const offset = ((width - width * 10 / 100)/2 -20) /556 *(451.5 - 411)
+    // console.log(offset )
+    this.setState({ width: offset });
+  }
 
 
   handleClick = (id, name) => {
@@ -81,7 +98,7 @@ class Branch extends PureComponent<IProps, IState> {
         <h5 style={{ textAlign: "center", }}>GIAN HÀNG NGÀY HỘI THEO NGÀNH NGHỀ</h5>
         <Row type='flex'>
           {listBranch && listBranch.items && (
-            <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={8}>
+            <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={8}>
               <div className="branch-item" style={{ textAlign: "center", padding: 0 }}>
                 <a
                   onClick={() => {
@@ -99,11 +116,11 @@ class Branch extends PureComponent<IProps, IState> {
                       alt="branch"
                       width="100%"
                       height="100%"
-                      style={{ borderTopLeftRadius: '10.4528px', borderTopRightRadius: '10.4528px', padding: '0 0 16px' }}
+                      style={{ borderTopLeftRadius: '10.4528px', borderTopRightRadius: '10.4528px' }}
                     />
                   </div>
 
-                  <div style={{ padding: '10px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  <div style={{ padding: '10px 0', display: 'flex', justifyContent: 'center', alignItems: 'center', height: 106.5 - this.state.width }}>
                     <img
                       src={listBranch.items[0].imageUrl === null ? whileImage : listBranch.items[0].imageUrl}
                       alt="branch"
@@ -116,8 +133,8 @@ class Branch extends PureComponent<IProps, IState> {
             </Col>
           )}
           {listBranch && listBranch.items && (
-            <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={8}>
-              <div className="branch-item" style={{ textAlign: "center", padding: 0 }}>
+            <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={8} >
+              <div className="branch-item" style={{ textAlign: "center", padding: 0 }} ref={ (divElement) => { this.divElementTech = divElement } } >
                 <a
                   onClick={() => {
                     this.handleClick(listBranch.items[7].id, listBranch.items[7].name);
