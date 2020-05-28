@@ -11,9 +11,9 @@ import Option from './option/Option'
 export default function Footer(props) {
   return (
     <div className='footer' >
-      <Option {...props} />
+      {/* <Option {...props} /> */}
       <div style={{ width: 1, backgroundColor: '#fff' }}></div>
-      <div className="content-footer" style={{ display: props.disableFooterData ? "none" : "block" }}>
+      <div className="content-footer" style={{ display: props.disableFooterData ? "none" : "block" , paddingTop: 18}}>
         <Row >
           {/* Rule */}
           <Col xs={24} sm={24} md={8} lg={8} className='rule'>
