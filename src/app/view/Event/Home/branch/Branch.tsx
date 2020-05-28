@@ -43,7 +43,6 @@ class Branch extends PureComponent<IProps, IState> {
   componentDidMount = async () => {
     await this.setState({ is_loading: false });
     let listBranch = await _get(null, EVENT_PUBLIC.BRANCH, PUBLIC_HOST, {});
-    // console.log(listBranch.data);
     this.setState({
       listBranch: listBranch.data,
     });
@@ -58,7 +57,7 @@ class Branch extends PureComponent<IProps, IState> {
   updateWindowDimensions() {
     const width = window.innerWidth
     // 556 is width image, 451.5 is height image 2, 411 is height image 3
-    const offset = ((width - width * 10 / 100)/2 -20) /556 *(451.5 - 411)
+    const offset = ((width - width * 10 / 100) / 2 - 20) / 556 * (451.5 - 411)
     // console.log(offset )
     this.setState({ width: offset });
   }
@@ -81,7 +80,7 @@ class Branch extends PureComponent<IProps, IState> {
       findHighestNode(document.documentElement.childNodes);
     })();
     window.scrollTo({
-      top: pageHeight - pageHeight / 2,
+      top: pageHeight - pageHeight / 2 + 200,
       behavior: 'smooth'
     });
     this.props.getEvenJob(0);
@@ -106,11 +105,6 @@ class Branch extends PureComponent<IProps, IState> {
                   }}
                 >
                   <div className='border-image-branch'>
-                    {/* <img
-              src={listBranch.items[0].imageUrl === null ? whileImage : listBranch.items[0].imageUrl}
-              alt="branch"
-              
-            /> */}
                     <img
                       src={img_circuit}
                       alt="branch"
@@ -134,7 +128,7 @@ class Branch extends PureComponent<IProps, IState> {
           )}
           {listBranch && listBranch.items && (
             <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={8} >
-              <div className="branch-item" style={{ textAlign: "center", padding: 0 }} ref={ (divElement) => { this.divElementTech = divElement } } >
+              <div className="branch-item" style={{ textAlign: "center", padding: 0 }} ref={(divElement) => { this.divElementTech = divElement }} >
                 <a
                   onClick={() => {
                     this.handleClick(listBranch.items[7].id, listBranch.items[7].name);
@@ -202,16 +196,15 @@ class Branch extends PureComponent<IProps, IState> {
         <Row type='flex'>
 
           {listBranch && listBranch.items
-            ? listBranch.items.map((item, index) => 
-            {
-              if(item.id !== 21 && item.id !== 2 && item.id && 13) {
+            ? listBranch.items.map((item, index) => {
+              if (item.id !== 21 && item.id !== 2 && item.id && 13) {
                 return (
                   <Col xs={12} sm={6} md={6} lg={6} xl={4} xxl={4} key={index}>
                     <div className="branch-item" style={{ textAlign: "center" }}>
                       <a
                         id={`a-${item.id}`}
                         onClick={() => {
-    
+
                           this.handleClick(item.id, item.name);
                         }}
                       >
@@ -222,7 +215,7 @@ class Branch extends PureComponent<IProps, IState> {
                             className="image-branch"
                           />
                         </div>
-    
+
                         <div className='name-branch'>
                           {item.name}{" "}
                         </div>

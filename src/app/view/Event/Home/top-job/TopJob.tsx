@@ -25,7 +25,7 @@ class TopJob extends PureComponent<IProps> {
     };
   }
   componentDidMount = async () => {
-    await this.props.getEventHotJob(0);
+  
   };
 
   changePage = (event?: number) => {
@@ -52,7 +52,6 @@ class TopJob extends PureComponent<IProps> {
 
             return (
               <Col xs={24} sm={24} md={8} lg={8} xl={8} xxl={6} key={index}>
-
                 <div key={index} className="h-j-item">
                   <div className="img-job">
                     <img
@@ -64,24 +63,24 @@ class TopJob extends PureComponent<IProps> {
                     />
                   </div>
                   <div>
-                    
+
                     <div className="job-content">
-                      <ul style={{marginTop: 12}}>
-                      <li className="j-d">
-                      <Link
-                        to={`/event-job-detail/${window.btoa(item.id)}`}
-                        target="_blank"
-                      >
-                        <h6
-                          className="l_c"
-                          style={{
-                            color: item.titleHighlight ? "red" : "black",
-                          }}
-                        >
-                          {item.jobTitle}
-                        </h6>
-                      </Link>
-                    </li>
+                      <ul style={{ marginTop: 12 }}>
+                        <li className="j-d">
+                          <Link
+                            to={`/event-job-detail/${window.btoa(item.id)}`}
+                            target="_blank"
+                          >
+                            <h6
+                              className="l_c"
+                              style={{
+                                color: item.titleHighlight ? "red" : "black",
+                              }}
+                            >
+                              {item.jobTitle}
+                            </h6>
+                          </Link>
+                        </li>
                         <li className="l_c">
                           <Link
                             to={`/employer/${window.btoa(item.employerID)}`}
