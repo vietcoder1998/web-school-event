@@ -70,7 +70,7 @@ class HomeJob extends PureComponent<IProps> {
                       <div className="img-job">
                         <img
                           src={logoUrl}
-                          alt="ảnh công ty"
+                          alt="ảnh công ti"
                           height="70px"
                           width="70px"
                           style={{  borderRadius: 7}}

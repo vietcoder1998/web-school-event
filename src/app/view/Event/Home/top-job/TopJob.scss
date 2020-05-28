@@ -22,7 +22,7 @@
     }
   }
 
-  .h-j-item {
+  .h-j-item-top {
     &:hover {
       background-color: #e1ecf4;
     }
@@ -119,6 +119,19 @@
       .j-d {
         &:hover {
           color: rgba(46, 158, 255, 0.85) !important;
+        }
+        .l_c {
+          margin-top: 3px;
+          // height: 39px;
+          line-height: 20px;
+          text-align: left;
+          vertical-align: middle;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          text-transform: initial;
         }
       }
 

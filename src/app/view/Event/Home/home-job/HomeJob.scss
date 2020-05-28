@@ -38,6 +38,9 @@
     border-radius: 7px;
     background-color: white;
     margin-top: 10px;
+    &:hover {
+      background-color: #e1ecf4;
+    }
     .img-job {
       img {
         margin-top: 30px;

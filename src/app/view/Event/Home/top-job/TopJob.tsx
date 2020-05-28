@@ -52,20 +52,19 @@ class TopJob extends PureComponent<IProps> {
 
             return (
               <Col xs={24} sm={24} md={8} lg={8} xl={8} xxl={6} key={index}>
-                <div key={index} className="h-j-item">
+                <div key={index} className="h-j-item-top">
                   <div className="img-job">
                     <img
                       src={logoUrl}
                       alt="ảnh công ty"
                       height="130px"
                       width="100px"
-                      style={{ borderRadius: 7 }}
                     />
                   </div>
                   <div>
 
                     <div className="job-content">
-                      <ul style={{ marginTop: 12 }}>
+                      <ul style={{ marginTop: 8 }}>
                         <li className="j-d">
                           <Link
                             to={`/event-job-detail/${window.btoa(item.id)}`}
