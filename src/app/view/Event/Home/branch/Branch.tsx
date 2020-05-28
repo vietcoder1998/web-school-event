@@ -35,7 +35,6 @@ class Branch extends PureComponent<IProps, IState> {
       heightBusiness: 0,
       width: 0
     };
-    this.divElementTech = null
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     // this.handleLoad = this.handleLoad.bind(this);
   }
@@ -43,7 +42,7 @@ class Branch extends PureComponent<IProps, IState> {
   componentDidMount = async () => {
     await this.setState({ is_loading: false });
     let listBranch = await _get(null, EVENT_PUBLIC.BRANCH, PUBLIC_HOST, {});
-    // console.log(listBranch.data);
+    console.log(listBranch.data);
     this.setState({
       listBranch: listBranch.data,
     });
@@ -90,6 +89,14 @@ class Branch extends PureComponent<IProps, IState> {
 
   render() {
     let { listBranch } = this.state;
+    let electromechanical = { id: null, name: null, imageUrl: null}
+    let technique = { id: null, name: null, imageUrl: null}
+    let business = { id: null, name: null, imageUrl: null}
+    if(listBranch && listBranch.items) {
+      electromechanical = listBranch.items.find(item => item.id === 21)
+      technique = listBranch.items.find(item => item.id === 13)
+      business = listBranch.items.find(item => item.id === 2)
+    }
     return (
       <div
         className="top-branch"
@@ -102,7 +109,7 @@ class Branch extends PureComponent<IProps, IState> {
               <div className="branch-item" style={{ textAlign: "center", padding: 0 }}>
                 <a
                   onClick={() => {
-                    this.handleClick(listBranch.items[0].id, listBranch.items[0].name);
+                    this.handleClick(electromechanical.id, electromechanical.name);
                   }}
                 >
                   <div className='border-image-branch'>
@@ -122,11 +129,11 @@ class Branch extends PureComponent<IProps, IState> {
 
                   <div style={{ padding: '10px 0', display: 'flex', justifyContent: 'center', alignItems: 'center', height: 106.5 - this.state.width }}>
                     <img
-                      src={listBranch.items[0].imageUrl === null ? whileImage : listBranch.items[0].imageUrl}
+                      src={electromechanical.imageUrl === null ? whileImage : electromechanical.imageUrl}
                       alt="branch"
                       style={{ width: 30, marginRight: 10 }}
                     />
-                    <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{listBranch.items[0].name}{" "}</div>
+                    <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{electromechanical.name}{" "}</div>
                   </div>
                 </a>
               </div>
@@ -134,10 +141,10 @@ class Branch extends PureComponent<IProps, IState> {
           )}
           {listBranch && listBranch.items && (
             <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={8} >
-              <div className="branch-item" style={{ textAlign: "center", padding: 0 }} ref={ (divElement) => { this.divElementTech = divElement } } >
+              <div className="branch-item" style={{ textAlign: "center", padding: 0 }} >
                 <a
                   onClick={() => {
-                    this.handleClick(listBranch.items[7].id, listBranch.items[7].name);
+                    this.handleClick(technique.id, technique.name);
                   }}
                 >
                   <div className='border-image-branch'>
@@ -157,18 +164,18 @@ class Branch extends PureComponent<IProps, IState> {
 
                   <div style={{ padding: '10px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <img
-                      src={listBranch.items[7].imageUrl === null ? whileImage : listBranch.items[7].imageUrl}
+                      src={technique.imageUrl === null ? whileImage : technique.imageUrl}
                       alt="branch"
                       style={{ width: 30, marginRight: 10 }}
                     />
-                    <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{listBranch.items[7].name}{" "}</div>
+                    <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{technique.name}{" "}</div>
                   </div>
                 </a>
               </div>
               <div className="branch-item" style={{ textAlign: "center", padding: 0 }}>
                 <a
                   onClick={() => {
-                    this.handleClick(listBranch.items[6].id, listBranch.items[6].name);
+                    this.handleClick(business.id, business.name);
                   }}
                 >
                   <div className='border-image-branch'>
@@ -188,11 +195,11 @@ class Branch extends PureComponent<IProps, IState> {
 
                   <div style={{ padding: '10px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <img
-                      src={listBranch.items[6].imageUrl === null ? whileImage : listBranch.items[6].imageUrl}
+                      src={business.imageUrl === null ? whileImage : business.imageUrl}
                       alt="branch"
                       style={{ width: 25, marginRight: 10 }}
                     />
-                    <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{listBranch.items[6].name}{" "}</div>
+                    <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{business.name}{" "}</div>
                   </div>
                 </a>
               </div>
@@ -204,7 +211,7 @@ class Branch extends PureComponent<IProps, IState> {
           {listBranch && listBranch.items
             ? listBranch.items.map((item, index) => 
             {
-              if(item.id !== 21 && item.id !== 2 && item.id && 13) {
+              if(item.id !== 21 && item.id !== 2 && item.id !== 13) {
                 return (
                   <Col xs={12} sm={6} md={6} lg={6} xl={4} xxl={4} key={index}>
                     <div className="branch-item" style={{ textAlign: "center" }}>
