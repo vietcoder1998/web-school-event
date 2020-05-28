@@ -25,6 +25,6 @@ export const EVENT_PUBLIC = {
 
 export const NORMAL_PUBLIC = {
   JOBS: {
-    SEARCH: `POST /api/schools/${process.env.REACT_APP_SCHOOL_ID}/events/${process.env.REACT_APP_EVENT_ID}/jobs/active/search`,
+    SEARCH: `/api/schools/${process.env.REACT_APP_SCHOOL_ID}/events/${process.env.REACT_APP_EVENT_ID}/jobs/active/search`,
   },
 };

@@ -63,45 +63,47 @@ class TopJob extends PureComponent<IProps> {
                       style={{ borderRadius: 7 }}
                     />
                   </div>
-                  <div className="job-content">
-                    <ul>
+                  <div>
+                    
+                    <div className="job-content">
+                      <ul style={{marginTop: 12}}>
                       <li className="j-d">
-                        <Link
-                          to={`/event-job-detail/${window.btoa(item.id)}`}
-                          target="_blank"
-                        >
-                          <h6
-                            className="l_c"
-                            style={{
-                              color: item.titleHighlight ? "red" : "black",
-                            }}
-                          >
-                            {item.jobTitle}
-                          </h6>
-                        </Link>
-                      </li>
-                      <li className="l_c">
-                        <Link
-                          to={`/employer/${window.btoa(item.employerID)}`}
-                          target="_blank"
-                          className="name_employer"
-                        >
-                          {item.employerName}
-                        </Link>
-                      </li>
-                      <li
-                        className="time-left"
-                        style={{ paddingTop: 0, fontWeight: 550 }}
+                      <Link
+                        to={`/event-job-detail/${window.btoa(item.id)}`}
+                        target="_blank"
                       >
-                        {item.region && item.region.name
-                          ? item.region.name
-                          : null}{" "}
-                      </li>
-                      <li>
+                        <h6
+                          className="l_c"
+                          style={{
+                            color: item.titleHighlight ? "red" : "black",
+                          }}
+                        >
+                          {item.jobTitle}
+                        </h6>
+                      </Link>
+                    </li>
+                        <li className="l_c">
+                          <Link
+                            to={`/employer/${window.btoa(item.employerID)}`}
+                            target="_blank"
+                            className="name_employer"
+                          >
+                            {item.employerName}
+                          </Link>
+                        </li>
+                        <li
+                          className="time-left"
+                          style={{ paddingTop: 0, fontWeight: 550 }}
+                        >
+                          {item.region && item.region.name
+                            ? item.region.name
+                            : null}{" "}
+                        </li>
                         <JobType>{item.jobType}</JobType>
-                      </li>
-                    </ul>
+                      </ul>
+                    </div>
                   </div>
+
                   <div className="c-corner-label">
                     <div className="c-corner-label__text">HOT</div>
                   </div>

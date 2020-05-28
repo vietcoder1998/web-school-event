@@ -27,7 +27,7 @@
       background-color: #e1ecf4;
     }
     display: flex;
-    margin: 0.2vw 1vw;
+    margin: 0.2vw 10px;
     height: 130px !important;
     border-bottom: dashed $color_border 1px;
     border-radius: 7px;
@@ -48,6 +48,8 @@
     $cornerwidth: 60px;
 
     .c-corner-label {
+      position: absolute;
+      right: 10px;
       margin-top: 70px;
       border-style: solid;
       border-color: transparent #ee1c25 transparent transparent;
@@ -125,7 +127,7 @@
       }
 
       li {
-        padding: 5px 2px;
+        padding: 2px 2px;
       }
     }
   }
