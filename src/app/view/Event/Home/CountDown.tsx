@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import  { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 import "./Home.scss";
-import countdownImage from "../../../../assets/image/crs3.jpg";
 import { Button } from "antd";
 import { connect } from "react-redux";
 import { REDUX } from "../../../../const/actions";
@@ -10,6 +9,7 @@ import { REDUX } from "../../../../const/actions";
 
 interface IProps {
   time?: string;
+  haveEvent?: any;
 }
 interface IState {
   days: number;
@@ -96,7 +96,7 @@ class Countdown extends Component<IProps, IState> {
 
   render() {
     const countDown = this.state;
-    let { msgError, haveEvent } = this.props;
+    let { haveEvent } = this.props;
     if (haveEvent) {
       return (
         <div className="Countdown">
@@ -144,9 +144,9 @@ class Countdown extends Component<IProps, IState> {
         </div>
       );
     } else {
-     return (
-       <Redirect to='/home'/>
-     )
+      return (
+        <Redirect to='/home' />
+      )
     }
   }
 }

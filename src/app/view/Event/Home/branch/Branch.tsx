@@ -42,7 +42,6 @@ class Branch extends PureComponent<IProps, IState> {
   componentDidMount = async () => {
     await this.setState({ is_loading: false });
     let listBranch = await _get(null, EVENT_PUBLIC.BRANCH, PUBLIC_HOST, {});
-    console.log(listBranch.data);
     this.setState({
       listBranch: listBranch.data,
     });
@@ -57,7 +56,7 @@ class Branch extends PureComponent<IProps, IState> {
   updateWindowDimensions() {
     const width = window.innerWidth
     // 556 is width image, 451.5 is height image 2, 411 is height image 3
-    const offset = ((width - width * 10 / 100)/2 -20) /556 *(451.5 - 411)
+    const offset = ((width - width * 10 / 100) / 2 - 20) / 556 * (451.5 - 411)
     // console.log(offset )
     this.setState({ width: offset });
   }
@@ -80,7 +79,7 @@ class Branch extends PureComponent<IProps, IState> {
       findHighestNode(document.documentElement.childNodes);
     })();
     window.scrollTo({
-      top: pageHeight - pageHeight / 2,
+      top: pageHeight - pageHeight / 2 + 200,
       behavior: 'smooth'
     });
     this.props.getEvenJob(0);
@@ -113,11 +112,6 @@ class Branch extends PureComponent<IProps, IState> {
                   }}
                 >
                   <div className='border-image-branch'>
-                    {/* <img
-              src={listBranch.items[0].imageUrl === null ? whileImage : listBranch.items[0].imageUrl}
-              alt="branch"
-              
-            /> */}
                     <img
                       src={img_circuit}
                       alt="branch"
@@ -218,7 +212,7 @@ class Branch extends PureComponent<IProps, IState> {
                       <a
                         id={`a-${item.id}`}
                         onClick={() => {
-    
+
                           this.handleClick(item.id, item.name);
                         }}
                       >
@@ -229,7 +223,7 @@ class Branch extends PureComponent<IProps, IState> {
                             className="image-branch"
                           />
                         </div>
-    
+
                         <div className='name-branch'>
                           {item.name}{" "}
                         </div>

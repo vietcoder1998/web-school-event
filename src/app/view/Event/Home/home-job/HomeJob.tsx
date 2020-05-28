@@ -26,7 +26,7 @@ class HomeJob extends PureComponent<IProps> {
     };
   }
   componentDidMount = async () => {
-    await this.props.getEvenJob(0);
+
   };
 
   changePage = (event?: number) => {

@@ -40,13 +40,14 @@ class Banner extends PureComponent<IProps, IState> {
   previous() {
     this.carousel.prev();
   }
-  componentDidMount = async () => {
-    await this.props.getTopEmpoyer(0);
-    setTimeout(() => {
-      this.setState({
-        is_loading: false
-      })
-    }, 2000);
+  componentDidMount = () => {
+    if (this.props.listEmployer) {
+      setTimeout(() => {
+        this.setState({
+          is_loading: false
+        })
+      }, 2000);
+    }
   };
 
   render() {
@@ -74,7 +75,7 @@ class Banner extends PureComponent<IProps, IState> {
           });
         }}
       >
-        {this.state.is_loading ? <img src={defaultBanner} width='100%' height='550px' alt='banner' /> :
+        {this.state.is_loading ? <img src={defaultBanner} width='100%' height='450px' alt='banner' /> :
           <Carousel dots={true} ref={(node) => (this.carousel = node)} {...props}>
             {listEmployer && listEmployer.items
               ? listEmployer.items.map((item, index) => (
