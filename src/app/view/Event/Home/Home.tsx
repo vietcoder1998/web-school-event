@@ -7,7 +7,6 @@ import TopJob from "./top-job/TopJob";
 import Banner from "./banner/Banner";
 import Branch from "./branch/Branch";
 import { REDUX_SAGA } from "../../../../const/actions";
-import { _get } from "../../../../services/base-api";
 
 import HashLoader from "react-spinners/HashLoader";
 // import { REDUX_SAGA } from '../../../const/actions';

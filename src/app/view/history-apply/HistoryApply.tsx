@@ -10,7 +10,7 @@ import { authHeaders } from '../../../services/auth';
 import { _requestToServer } from '../../../services/exec';
 import { STUDENT_HOST } from '../../../environment/development';
 import { moveScroll } from '../../../utils/moveScroll';
-import { limitString } from '../../../utils/limitString';
+// import { limitString } from '../../../utils/limitString';
 import { REDUX_SAGA } from '../../../const/actions';
 import { DELETE } from '../../../const/method';
 import { JobType } from '../layout/common/Common'

@@ -11,7 +11,7 @@ import { Loading } from "./app/view/layout/common/Common";
 import { _get } from "./services/base-api";
 import { PUBLIC_HOST } from "./environment/development";
 import { noInfoHeader } from "./services/auth";
-import HashLoader from "react-spinners/HashLoader";
+// import HashLoader from "react-spinners/HashLoader";
 import { BackTop } from "antd";
 
 const EventHome = asyncComponent(() =>

@@ -457,7 +457,7 @@ class SearchBox extends Component<IProps, IState>{
                 </Modal>
                 <div className='search-area'>
                     {/* Search Box in Phone */}
-                    <div className='search-box-phone show-only-phone test'>
+                    <div className='search-box-phone show-only-phone'>
                         <Select
                             style={{ width: '100%' }}
                             placeholder="Tìm kiếm công việc của bạn"
@@ -540,9 +540,10 @@ class SearchBox extends Component<IProps, IState>{
                             <Button
                                 size='large'
                                 onClick={() => this._createRequest()}
+                                type='danger'
                                 style={{
                                     color: 'white',
-                                    backgroundColor: 'orange',
+                                    // backgroundColor: 'orange',
                                     border: 'solid white 1px',
                                     width: '100%'
                                 }}
