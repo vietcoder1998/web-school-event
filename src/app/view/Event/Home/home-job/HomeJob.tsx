@@ -66,7 +66,7 @@ class HomeJob extends PureComponent<IProps> {
                       active={true}
                     />
                   ) : (
-                    <div key={index} className="h-j-item">
+                    <div key={index} className="h-j-item-home">
                       <div className="img-job">
                         <img
                           src={logoUrl}
