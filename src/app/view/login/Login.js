@@ -12,7 +12,7 @@ import { _requestToServer } from '../../../services/exec';
 import { POST } from '../../../const/method';
 import Layout from '../layout/Layout';
 import { REDUX } from '../../../const/actions';
-
+import queryString from 'query-string';
 import logo from '../../../assets/image/logo-01.png';
 import imageLogin from '../../../assets/image/image-login.png';
 
@@ -82,7 +82,11 @@ class Login extends Component {
                             this.props.setAuthen();
                             let last_access = localStorage.getItem('last_access');
                             setTimeout(() => {
-                                if (last_access) {
+                                const parsed = queryString.parse(this.props.location.search);
+                                // console.log(parsed);
+                                if (parsed.path) {
+                                    window.location.assign(parsed.path);
+                                } else if (last_access) {
                                     window.location.assign(last_access);
                                 } else {
                                     window.location.assign('/');
