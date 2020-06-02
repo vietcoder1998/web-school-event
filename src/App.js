@@ -142,14 +142,14 @@ class App extends React.Component {
     let token = localStorage.getItem("accessToken");
     this.checkEvent()
       .then((res) => {
-        if (res.data.started === true) {
+        if (res.data.started === true && res.data.finished === false) {
           this.props.checkEvent(
             true,
             new Date(res.data.startedDate),
             res.data.name
           );
         } else {
-          this.props.checkEvent(false, new Date(res.data.startedDate));
+          this.props.noEvent(false, null)
         }
       })
       .catch((e) => {

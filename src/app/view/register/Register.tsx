@@ -511,6 +511,7 @@ class Register extends Component<IProps, IState> {
                       .toLowerCase()
                       .indexOf(input.toLowerCase()) >= 0
                   }
+                  suffixIcon={null}
                 >
                   {list_major.map((item, index) => {
                     return (
@@ -551,7 +552,7 @@ class Register extends Component<IProps, IState> {
 
               {/* RePassword */}
               <div className="normal">
-                <Input.Password
+                <Input
                   id="repassword"
                   placeholder="Nhập lại mật khẩu"
                   disabled={is_exists}

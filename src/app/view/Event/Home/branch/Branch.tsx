@@ -120,15 +120,15 @@ class Branch extends PureComponent<IProps, IState> {
                       style={{ borderTopLeftRadius: '10.4528px', borderTopRightRadius: '10.4528px' }}
                     />
                   </div>
-
+                  {electromechanical ? 
                   <div style={{ padding: '10px 0', display: 'flex', justifyContent: 'center', alignItems: 'center', height: 106.5 - this.state.width }}>
                     <img
-                      src={electromechanical.imageUrl === null ? whileImage : electromechanical.imageUrl}
+                      src={ electromechanical.imageUrl === null ? whileImage : electromechanical.imageUrl}
                       alt="branch"
                       style={{ width: 30, marginRight: 10 }}
                     />
                     <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{electromechanical.name}{" "}</div>
-                  </div>
+                  </div> : null }
                 </a>
               </div>
             </Col>
@@ -155,7 +155,7 @@ class Branch extends PureComponent<IProps, IState> {
                       style={{ borderTopLeftRadius: '10.4528px', borderTopRightRadius: '10.4528px' }}
                     />
                   </div>
-
+                {technique ? 
                   <div style={{ padding: '10px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <img
                       src={technique.imageUrl === null ? whileImage : technique.imageUrl}
@@ -163,7 +163,7 @@ class Branch extends PureComponent<IProps, IState> {
                       style={{ width: 30, marginRight: 10 }}
                     />
                     <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{technique.name}{" "}</div>
-                  </div>
+                  </div> : null }
                 </a>
               </div>
               <div className="branch-item" style={{ textAlign: "center", padding: 0 }}>
@@ -186,7 +186,7 @@ class Branch extends PureComponent<IProps, IState> {
                       style={{ borderTopLeftRadius: '10.4528px', borderTopRightRadius: '10.4528px' }}
                     />
                   </div>
-
+                  {business ? 
                   <div style={{ padding: '10px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <img
                       src={business.imageUrl === null ? whileImage : business.imageUrl}
@@ -194,7 +194,7 @@ class Branch extends PureComponent<IProps, IState> {
                       style={{ width: 25, marginRight: 10 }}
                     />
                     <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{business.name}{" "}</div>
-                  </div>
+                  </div> : null }
                 </a>
               </div>
             </Col>
