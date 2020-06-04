@@ -96,6 +96,9 @@ const EventJobDetail = asyncComponent(() =>
   )
 );
 
+const Article = asyncComponent(() =>
+  import('./app/view/Article/Article').then((module) => module.default)
+)
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -213,6 +216,7 @@ class App extends React.Component {
                 component={DataJobNames}
               />
               <Route exact path="/employer/:id" component={EmInfo} />
+              <Route exact path="/article/:type/:id" component={Article} />
               <Route component={NotFound} />
             </Switch>
           </Suspense>
