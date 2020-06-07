@@ -5,7 +5,6 @@ export const LIST_REGIONS = "/api/regions/active";
 export const FIND_JOB = "/api/jobs/active";
 export const JOB = "/api/jobs";
 export const EMPLOYER = "/api/employers";
-export const ANNOUNCEMENTS = "/api/announcements";
 export const oauth2 = "/api/users/emailVerification/request";
 
 export const EVENT_PUBLIC = {
@@ -27,4 +26,11 @@ export const NORMAL_PUBLIC = {
   JOBS: {
     SEARCH: `/api/schools/${process.env.REACT_APP_SCHOOL_ID}/events/${process.env.REACT_APP_EVENT_ID}/jobs/active/search`,
   },
+};
+
+export const ANNOUNCEMENTS = {
+  TYPE: "/api/announcementTypes",
+  LIST: "/api/announcements",
+  DETAIL: "/api/announcements/{id}",
+  COMMENT: "/api/announcements/{id}/comments/query",
 };

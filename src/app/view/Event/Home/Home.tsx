@@ -15,7 +15,6 @@ function Home(props) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log('is loading agin')
     props.getTopEmpoyer(0);
     props.getEvenJob(0);
     props.getEventHotJob(0);

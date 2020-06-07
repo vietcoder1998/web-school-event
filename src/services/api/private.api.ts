@@ -53,3 +53,9 @@ export const NORMAL_PRIVATE = {
         DETAIL: `/api/students/jobs/{id}/active`
     },
 }
+
+export const ANNOUNCEMENTS_PRIVATE = {
+    ADD_COMMENT: `/api/students/announcements/{id}/comments`,
+    DELETE_COMMENT: `/api/students/announcements/{id}/comments`
+  };
+  
