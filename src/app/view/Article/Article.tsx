@@ -6,7 +6,7 @@ import { REDUX_SAGA } from "../../../const/actions";
 
 import HashLoader from "react-spinners/HashLoader";
 import { Tabs } from "antd";
-import HightLight from './HightLight/ListArticle'
+import HightLight from './ListArticle/ListArticle'
 import './Article.scss'
 const { TabPane } = Tabs;
 

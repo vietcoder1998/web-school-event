@@ -4,14 +4,11 @@ import { Avatar, Skeleton, Icon } from "antd";
 import DefaultImage from "../../../../assets/image/base-image.jpg";
 import { Link } from 'react-router-dom';
 import './Card.scss'
-import { Typography } from 'antd';
-
-const { Title } = Typography;
 
 export default function FirstCard(props) {
   
     return (
-        <Link>
+        <Link to={`articleDetail/${props && props.item && props.item.id}`}>
             <div className="first-card">
                 <img
                     className="img-card-background"

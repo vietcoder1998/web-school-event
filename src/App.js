@@ -97,8 +97,14 @@ const EventJobDetail = asyncComponent(() =>
 );
 
 const Article = asyncComponent(() =>
-  import('./app/view/Article/Article').then((module) => module.default)
-)
+  import("./app/view/Article/Article").then((module) => module.default)
+);
+
+const ArticleDetail = asyncComponent(() =>
+  import("./app/view/Article/Detail/ArticleDetail").then(
+    (module) => module.default
+  )
+);
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -152,7 +158,7 @@ class App extends React.Component {
             res.data.name
           );
         } else {
-          this.props.noEvent(false, null)
+          this.props.noEvent(false, null);
         }
       })
       .catch((e) => {
@@ -164,15 +170,14 @@ class App extends React.Component {
       });
     if (token !== null) {
       this.props.checkAuthen(token);
-    };
+    }
     this.setState({
-      loading: false
-    })
+      loading: false,
+    });
   };
 
   render() {
     let { eventStart } = this.props;
-
 
     return (
       <Fragment>
@@ -199,11 +204,7 @@ class App extends React.Component {
                 component={this.props.isAuthen === true ? Profile : Home}
               />
               <Route exact path="/register" component={Register} />
-              <Route
-                exact
-                path="/forgot-password"
-                component={ForgotPassword}
-              />
+              <Route exact path="/forgot-password" component={ForgotPassword} />
               <Route path="/result" component={Result} />
               <Route exact path="/save-job" component={SaveJob} />
               <Route exact path="/history-apply" component={HistoryApply} />
@@ -217,6 +218,7 @@ class App extends React.Component {
               />
               <Route exact path="/employer/:id" component={EmInfo} />
               <Route exact path="/article" component={Article} />
+              <Route exact path="/articleDetail/:id" component={ArticleDetail} />
               <Route component={NotFound} />
             </Switch>
           </Suspense>
@@ -225,7 +227,6 @@ class App extends React.Component {
       </Fragment>
     );
   }
-
 }
 
 const mapStateToProps = (state) => ({

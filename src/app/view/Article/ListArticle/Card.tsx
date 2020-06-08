@@ -5,9 +5,7 @@ import DefaultImage from "../../../../assets/image/base-image.jpg";
 import AvatarDefault from "../../../../assets/image/avatar_default.png"
 import { Link } from 'react-router-dom';
 import './Card.scss'
-import { Typography } from 'antd';
 
-const { Title } = Typography;
 
 export default function Card(props) {
     const [loading, setLoading] = useState(true);
@@ -16,7 +14,7 @@ export default function Card(props) {
         setLoading(false)
     }, 1000);
     return (
-        <Link>
+        <Link to={`articleDetail/${props && props.item && props.item.id}`}>
             <div className="header-card">
                 <Row>
                     <Col sm={10} md={10} lg={10} xl={10} xxl={10}>
@@ -34,7 +32,7 @@ export default function Card(props) {
                         <div className="info-card">
                             <div className='title'>{props && props.item && props.item.title}</div>
                             <div className="info-writor">
-                                <div className="writor">
+                                <div >
                                     <Skeleton
                                         avatar
                                         paragraph={{ rows: 2 }}
@@ -42,7 +40,7 @@ export default function Card(props) {
                                         loading={loading}
                                     >
                                         <div>
-                                            <div className='infor'>
+                                            <div className='infor' style={{marginBottom: 10}}>
                                                 <Avatar
                                                     src={
                                                         props && props.item && props.item.admin
@@ -61,6 +59,7 @@ export default function Card(props) {
                                             </div>
 
                                         </div>
+                                        <br/>
                                         <div>
                                             <div className='infor'>
                                                 <Icon type={"eye"} />
