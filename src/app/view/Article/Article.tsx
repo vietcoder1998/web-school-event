@@ -6,6 +6,8 @@ import { REDUX_SAGA } from "../../../const/actions";
 
 import HashLoader from "react-spinners/HashLoader";
 import { Tabs } from "antd";
+import HightLight from './HightLight/ListArticle'
+import './Article.scss'
 const { TabPane } = Tabs;
 
 class Article extends React.Component {
@@ -13,13 +15,13 @@ class Article extends React.Component {
     super(props);
     this.state = {
       loading: true,
+      idType: null,
     };
   }
-  async componentDidMount() {
-    await this.props.getTypeArticle(0);
+  componentDidMount() {
+    this.props.getTypeArticle(0);
   }
   render() {
-    let { loading } = this.state;
     let { listType } = this.props;
     return (
       <Layout disableFooterData={true}>
@@ -27,19 +29,20 @@ class Article extends React.Component {
           <Tabs
             defaultActiveKey="ALL"
             onChange={(e) => {
-              console.log(e);
+              this.setState({ idType: e })
             }}
           >
-            <TabPane key={"ALL"} tab={`Tất cả`} />
+            <TabPane key={"ALL"} tab={`Tất cả`}>
+
+            </TabPane>
             {listType &&
               listType.map((item, index) => (
                 <TabPane key={item.id} tab={`${item.name}`}>
-                    <div>
-                        
-                    </div>
                 </TabPane>
               ))}
+           
           </Tabs>
+          <HightLight type={this.state.idType} />
         </div>
       </Layout>
     );

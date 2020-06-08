@@ -25,6 +25,7 @@ import { EventEmployerMoreJobWatcher } from '../watcher/event/employer/em-more-j
 import { ShortProfileWatcher } from '../watcher/short-profile';
 import { EventJobResultWatcher } from '../watcher/event/search';
 import { AnnouTypesWatcher } from '../watcher/announcement/types';
+import { AnnouncementsWatcher } from '../watcher/announcement/list';
 
 
 export default function* rootSaga() {
@@ -56,7 +57,8 @@ export default function* rootSaga() {
         EventJobResultWatcher(),
 
         //article
-        AnnouTypesWatcher()
+        AnnouTypesWatcher(),
+        AnnouncementsWatcher(),
 
     ])
 } 

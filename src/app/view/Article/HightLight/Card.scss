@@ -1,0 +1,62 @@
+.header-card {
+    margin: 5px;
+    border: 1px solid #32a3f9;
+    text-align: left;
+    .img-card-background {
+        width: 100%;
+        height: 100px;
+        object-fit: cover;
+        z-index: 0;
+    }
+    .info-card {
+        padding: 0 10px;
+        .title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 0px 5px;
+            margin: 5px;
+            font-size: 1.25rem;
+        }
+        .infor {
+            display: inline;
+            margin: 7px;
+        }
+        .ant-rate {
+            font-size: 14px;
+            svg {
+                margin-bottom: 3px;
+            }
+        }
+    }
+}
+
+.first-card {
+    
+    overflow: hidden;
+    padding: 10px;
+    position: relative;
+    text-align: left;
+    .img-card-background {
+        width: 100%;
+        height: 100%;
+    }
+    .info-card {
+        position: absolute;
+        bottom: 8px;
+        left: 20px;
+        right: 70px;
+        justify-content: space-between;
+        .title {
+            margin: 0px;
+            font-family: Arial, Gadget, sans-serif;
+            padding: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-shadow: 1px 0 0 #32A3F9, -1px 0 0 #32A3F9, 0 1px 0 #32A3F9, 0 -1px 0 #32A3F9, 1px 1px #32A3F9, -1px -1px 0 #32A3F9, 1px -1px 0 #32A3F9, -1px 1px 0 #32A3F9;
+        }
+    }
+}

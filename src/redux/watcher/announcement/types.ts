@@ -17,7 +17,7 @@ function* getListAnnouTypesData(action: any) {
   if (res) {
     data = res.data.items;
   }
-  console.log(data)
+  console.log(res)
   yield put({
     type: REDUX.ANNOUNCEMENTS.GET_TYPES,
     data,
