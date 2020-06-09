@@ -4,10 +4,12 @@ import { connect } from "react-redux";
 
 import { REDUX_SAGA } from "../../../const/actions";
 
-import HashLoader from "react-spinners/HashLoader";
 import { Tabs } from "antd";
-import HightLight from './ListArticle/ListArticle'
-import './Article.scss'
+import Header from "./Head/ListArticle";
+import "./Article.scss";
+
+import Title from "./Component/Title";
+import Middle from "./Middle/Middle";
 const { TabPane } = Tabs;
 
 class Article extends React.Component {
@@ -25,24 +27,13 @@ class Article extends React.Component {
     let { listType } = this.props;
     return (
       <Layout disableFooterData={true}>
-        <div className="tabs">
-          <Tabs
-            defaultActiveKey="ALL"
-            onChange={(e) => {
-              this.setState({ idType: e })
-            }}
-          >
-            <TabPane key={"ALL"} tab={`Tất cả`}>
-
-            </TabPane>
-            {listType &&
-              listType.map((item, index) => (
-                <TabPane key={item.id} tab={`${item.name}`}>
-                </TabPane>
-              ))}
-           
-          </Tabs>
-          <HightLight type={this.state.idType} />
+        <div className="Article">
+          <div className="Header">
+            <Header />
+          </div>
+          <div>
+            <Middle />
+          </div>
         </div>
       </Layout>
     );

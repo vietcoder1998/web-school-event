@@ -149,7 +149,7 @@ class ArticleDetail extends PureComponent<IProps, IState> {
               </Col>
 
               <Col xs={0} sm={23} md={15} lg={17} xl={16} xxl={16}>
-                <div className="header">
+                <div className="article-detail-header">
                   <Avatar
                     src={
                       this.state.author.avatarUrl === null
