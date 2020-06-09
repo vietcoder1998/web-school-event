@@ -7,7 +7,7 @@ import { authHeaders } from "../../services/auth";
 import { REDUX_SAGA } from "../../const/actions";
 import imageDefault from "../../assets/image/base-image.jpg";
 import swal from "sweetalert";
-import clearStorage from "../../services/clear-storage";
+// import clearStorage from "../../services/clear-storage";
 
 function* getShortPersonInfo() {
   try {

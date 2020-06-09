@@ -17,7 +17,6 @@ import { HighLightJobWatcher } from '../watcher/highlight-job';
 import { JobNameWatcher } from '../watcher/job-names';
 import { RegionWatcher } from '../watcher/regions';
 import { InDayWatcher } from '../watcher/in-day';
-import { AnnouncementsWatcher } from '../watcher/announcements';
 import { EventHotJobWatcher, EventJobWatcher } from '../watcher/event/jobs';
 import { EventTopEmployerWatcher, EventBannerEmployerWatcher } from '../watcher/event/employer';
 import { EventDetail } from '../watcher/event/detail';
@@ -25,6 +24,8 @@ import { EventJobDetailWatcher } from '../watcher/event/jobs/job-detail';
 import { EventEmployerMoreJobWatcher } from '../watcher/event/employer/em-more-jobs';
 import { ShortProfileWatcher } from '../watcher/short-profile';
 import { EventJobResultWatcher } from '../watcher/event/search';
+import { AnnouTypesWatcher } from '../watcher/announcement/types';
+import { AnnouncementsWatcher } from '../watcher/announcement/list';
 
 
 export default function* rootSaga() {
@@ -43,7 +44,6 @@ export default function* rootSaga() {
         JobNameWatcher(),
         RegionWatcher(),
         InDayWatcher(),
-        AnnouncementsWatcher(),
         HistoryApplyWatcher(),
         SimilarJobWatcher(),
 
@@ -55,6 +55,10 @@ export default function* rootSaga() {
         EventJobDetailWatcher(),
         EventEmployerMoreJobWatcher(),
         EventJobResultWatcher(),
+
+        //article
+        AnnouTypesWatcher(),
+        AnnouncementsWatcher(),
 
     ])
 } 

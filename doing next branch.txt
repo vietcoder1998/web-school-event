@@ -3,4 +3,20 @@
 3. Đưa code 1 số chỗ quá nhiều dòng sang file
 4. Sửa lại const Action redux
 5. Gộp nhóm API, nhóm Action
-6. 
+6. lịch sử điện thoại bug
+7. Xem lại side bar
+8. Tính toán lại thanh trượt ở branch
+
+PORT=3000
+REACT_APP_API_HOST=http://develop.works.vn:8000
+REACT_APP_CLIENT_ID=worksvn-student-web
+REACT_APP_CLIENT_SECRET=worksvn-student-web@works.vn
+REACT_APP_GOOGLE_API_KEY=AIzaSyAYQTUU1rbxfmp5_ik3euXX9B5-VSnDos4
+
+REACT_APP_ENABLE_LOGGING=false
+SKIP_PREFLIGHT_CHECK=true
+GENERATE_SOURCEMAP=false
+NODE_ENV=production
+REACT_APP_EVENT_ID=da316eca-054d-42e0-8483-6060f2a4427e
+REACT_APP_SCHOOL_ID=aca162fe-01ff-4909-a1f1-740317d1c2e5
+REACT_APP_SCHOOL_NAME = nameSchool

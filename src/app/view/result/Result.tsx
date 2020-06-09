@@ -14,7 +14,7 @@ import { IJobSearchFilter } from "../../../models/job-search";
 import SearchFilter from "./search-filter/SearchFilter";
 import ResultFilter from "./result-filter/ResultFilter";
 import qs from "query-string";
-
+import banner from '../../../assets/image/event/banner-worksvn.jpg'
 const cookie = new Cookie();
 
 interface IPropsResult extends StateProps, DispatchProps {
@@ -167,6 +167,9 @@ class Result extends React.Component<IPropsResult, IStateResult> {
         }
       });
     }
+    if(!this.props.isAuthen) {
+      this.setState({isSearchEvent: false})
+    }
     this.setState(
       {
         body: {
@@ -187,9 +190,11 @@ class Result extends React.Component<IPropsResult, IStateResult> {
       },
       () => {
         if (!this.props.setFilter) {
-          if (this.state.isSearchEvent) {
+          if (this.state.isSearchEvent && this.props.isAuthen) {
+            // console.log('SearchEvent')
             this.props.getEventJobResults(pageIndex, pageSize, this.state.body);
           } else {
+            // console.log('no SearchEvent')
             this.props.getJobResults(pageIndex, pageSize, this.state.body);
           }
         }
@@ -218,7 +223,15 @@ class Result extends React.Component<IPropsResult, IStateResult> {
   }
 
   _handleIndex = (pageIndex?: number, pageSize?: number) => {
-    let { body } = this.state;
+    let body = this.state.body;
+    // console.log(this.props.jobType);
+    if(this.props.jobType === 'FULLTIME' || this.props.jobType === 'INTERSHIP') {
+      body.jobShiftFilter = {
+        weekDays: null,
+        dayTimes: null
+      }
+    }
+
     moveScroll(0, 0);
     localStorage.setItem(
       "paging",
@@ -385,6 +398,8 @@ class Result extends React.Component<IPropsResult, IStateResult> {
                       jobType={body.jobType}
                       location={this.props.location}
                     />
+                    <img style={{boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.03)', marginLeft: 11, width: 'calc(100% - 12px)'}} alt="banner" src={banner} />
+                    
                   </Col>
                 </Row>
                 {/* Paginition */}

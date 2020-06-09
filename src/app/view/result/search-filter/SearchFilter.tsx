@@ -35,7 +35,7 @@ class SearchFilter extends React.Component<
       jobType: null,
       regionID: null,
       jobNameID: null,
-      isEvent: true,
+      isEvent: false,
     };
   }
   componentDidMount() {
@@ -228,11 +228,11 @@ class SearchFilter extends React.Component<
               placeholder={"Chọn nhóm"}
               value={isEvent ? eventName : "Bình thường"}
             >
-              <Option key={"1"} value={true}>
-                {eventName}
-              </Option>
-              <Option key={"2"} value={false}>
+              <Option key={"1"} value={false}>
                 Tuyển dụng thường
+              </Option>
+              <Option key={"2"} value={true}>
+                {eventName}
               </Option>
             </Select>
           </Col>

@@ -1,0 +1,54 @@
+.article-detail {
+  padding: 10px;
+  .header {
+    width: 100%;
+    display: inline-flex;
+    padding: 5vh 0;
+    div {
+      margin: 0 10px;
+    }
+  }
+
+  .content {
+    background-color: white;
+    padding: 0px;
+  }
+
+  .comment {
+    .rating-cmt {
+      display: inline-flex;
+      .ant-rate {
+        margin: 0px 15px;
+      }
+      svg {
+        margin-bottom: 12px;
+      }
+    }
+  }
+  .list-comment {
+    display: inline-flex;
+    position: relative;
+    width: 100%;
+    padding: 20px 10px;
+    margin: 10px 0px;
+    border-left: solid rgb(158, 209, 236) 2px;
+
+    &:hover {
+      border-left: solid #168ecd 2px;
+    }
+    vertical-align: bottom;
+
+    .img-cmt {
+      width: 40px;
+      margin: 0 10px;
+    }
+
+    .comment-msg {
+      margin-top: 5px;
+  
+      font-size: 1rem;
+      border-radius: 10px;
+    
+    }
+  }
+}

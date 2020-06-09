@@ -26,7 +26,7 @@ class HomeJob extends PureComponent<IProps> {
     };
   }
   componentDidMount = async () => {
-    await this.props.getEvenJob(0);
+
   };
 
   changePage = (event?: number) => {
@@ -66,11 +66,11 @@ class HomeJob extends PureComponent<IProps> {
                       active={true}
                     />
                   ) : (
-                    <div key={index} className="h-j-item">
+                    <div key={index} className="h-j-item-home">
                       <div className="img-job">
                         <img
                           src={logoUrl}
-                          alt="ảnh công ty"
+                          alt="ảnh công ti"
                           height="70px"
                           width="70px"
                           style={{  borderRadius: 7}}
@@ -78,7 +78,7 @@ class HomeJob extends PureComponent<IProps> {
                         />
                       </div>
                       <div className="job-content">
-                        <ul>
+                        <ul style={{marginTop: 7}}>
                           <li className="j-d">
                             <Link
                               to={`/event-job-detail/${window.btoa(item.id)}`}

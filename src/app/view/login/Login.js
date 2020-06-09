@@ -12,6 +12,9 @@ import { _requestToServer } from '../../../services/exec';
 import { POST } from '../../../const/method';
 import Layout from '../layout/Layout';
 import { REDUX } from '../../../const/actions';
+import queryString from 'query-string';
+import logo from '../../../assets/image/logo-01.png';
+import imageLogin from '../../../assets/image/image-login.png';
 
 class Login extends Component {
     constructor(props) {
@@ -50,7 +53,6 @@ class Login extends Component {
         _requestToServer(POST, data, authUserPassword, AUTH_HOST, loginHeaders, null, false)
             .then(res => {
                 if (res) {
-           
                     if (res.data.target !== 'STUDENT') {
                         swal({
                             title: "Worksvns thông báo",
@@ -71,16 +73,20 @@ class Login extends Component {
                                 dangerMode: true,
                             });
                             setTimeout(() => {
-                                 window.location.assign('/register');
+                                window.location.assign('/register');
                             }, 3000)
-                           
+
                         }
                         else {
                             setAuthSate(res);
                             this.props.setAuthen();
                             let last_access = localStorage.getItem('last_access');
                             setTimeout(() => {
-                                if (last_access) {
+                                const parsed = queryString.parse(this.props.location.search);
+                                // console.log(parsed);
+                                if (parsed.path) {
+                                    window.location.assign(parsed.path);
+                                } else if (last_access) {
                                     window.location.assign(last_access);
                                 } else {
                                     window.location.assign('/');
@@ -99,69 +105,65 @@ class Login extends Component {
 
 
     render() {
-        let { user_name, password } = this.state;
+        let { user_name, password} = this.state;
+        let {mobile} = this.props;
         return (
             <Layout disableFooterData={false}>
                 {/* <form> */}
-                <div className='content'>
-                    <div className='login-content'>
-                        <Col xs={0} sm={0} md={6} lg={6} xl={7} xxl={8} ></Col>
-                        <Col xs={24} sm={24} md={12} lg={12} xl={10} xxl={8} >
-                            <div className="login-form">
-                                <p className='title a_c' style={{ fontWeight: 600 }}>ĐĂNG NHẬP</p>
-                                <form>
-                                    <p className='nomal'>
-                                        <Input
-                                            placeholder="Email"
-                                            prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                            suffix={
-                                                <Tooltip title="Email của bạn">
-                                                    <Icon type="info-circle" style={{ color: 'rgba(0,0,0,.45)' }} />
-                                                </Tooltip>
-                                            }
-                                            value={user_name}
-                                            onChange={this.handleUsername} type='text'
-                                        />
-                                    </p>
-                                    <p className='nomal'>
-                                        <Input.Password
-                                            placeholder="Password"
-                                            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                            // suffix={
-                                            //     <Tooltip title="Điền đúng mật khẩu">
-                                            //         <Icon type="info-circle" style={{ color: 'rgba(0,0,0,.45)' }} />
-                                            //     </Tooltip>
-                                            // }
-                                            value={password}
-                                            onChange={this.handlePassword}
-                                            onPressEnter={this._createResponse}
-                                            type='password'
-                                        />
-                                    </p>
-                                    <p className='fogot-password a_r'>
-                                        <a href='/forgot-password' style={{ color: 'gray' }} >Quên mật khẩu ?</a>
-                                    </p>
-                                    <p>
-                                        <Button style={{ backgroundColor: '#31a3f9', borderColor: '#31a3f9' }} type='primary' onClick={this._createResponse} block>Đăng nhập</Button>
-                                    </p>
-                                    {/* <p className='a_c'>
-                                        hoặc
-                                     </p>
-                                    <p>
-                                        <Button type='blue-7' onClick={() => this._createRequest()} block>
-                                            <i id='facebook_square' className="fa fa-facebook-square"></i>
-                                            Đăng nhập với Facebook
-                                        </Button>
-                                    </p> */}
-                                    <p className='a_c'>
-                                        Bạn chưa có tài khoản ? <a href='/register' style={{ color: '#fb4141' }}>Đăng ký</a>
-                                    </p>
-                                </form>
-                            </div>
-                        </Col>
-                        <Col xs={0} sm={0} md={6} lg={6} xl={7} xxl={8} ></Col>
-                    </div>
+                <div className='login-content'>
+                    <Col xs={mobile ? 24 : 12} sm={mobile ? 24 : 12} md={mobile ? 24 : 12} lg={mobile ? 24 : 10} xl={mobile ? 24 : 10} xxl={mobile ? 24 : 10} >  
+                        <div className="login-form">
+                        <img src={logo} alt='logo' width='240' height='80' />
+                            <p className='title a_c' style={{ fontWeight: 600 }}>ĐĂNG NHẬP</p>
+                            <form>
+                                <p className='nomal'>
+                                    <Input
+                                        placeholder="Email"
+                                        prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                        suffix={
+                                            <Tooltip title="Email của bạn">
+                                                <Icon type="info-circle" style={{ color: 'rgba(0,0,0,.45)' }} />
+                                            </Tooltip>
+                                        }
+                                        value={user_name}
+                                        onChange={this.handleUsername} type='text'
+                                    />
+                                </p>
+                                <p className='nomal'>
+                                    <Input.Password
+                                        placeholder="Password"
+                                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                        // suffix={
+                                        //     <Tooltip title="Điền đúng mật khẩu">
+                                        //         <Icon type="info-circle" style={{ color: 'rgba(0,0,0,.45)' }} />
+                                        //     </Tooltip>
+                                        // }
+                                        value={password}
+                                        onChange={this.handlePassword}
+                                        onPressEnter={this._createResponse}
+                                        type='password'
+                                    />
+                                </p>
+                                <p className='fogot-password a_r'>
+                                    <a href='/forgot-password' style={{ color: 'gray' }} >Quên mật khẩu ?</a>
+                                </p>
+                                <p>
+                                    <Button className='btn-login' type='primary' onClick={this._createResponse} block>Đăng nhập</Button>
+                                </p>
+                                <p className='a_c'>
+                                    Bạn chưa có tài khoản ? <a href='/register' style={{ color: '#fb4141' }}>Đăng ký</a>
+                                </p>
+                            </form>
+                        </div>
+                    </Col>
+                    <Col xs={mobile ? 0 : 12} sm={mobile ? 0 : 12} md={mobile ? 0 : 12} lg={mobile ? 0 : 14} xl={mobile ? 0 : 14} xxl={mobile ? 0 : 14} >
+                        <img src={imageLogin} className='image-login' />
+                    </Col>
+
+
+
                 </div>
+
                 {/* </form> */}
             </Layout>
         );
@@ -170,7 +172,8 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        prop: state.prop
+        prop: state.prop,
+        mobile: state.MobileState.isMobile
     }
 }
 

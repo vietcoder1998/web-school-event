@@ -47,7 +47,7 @@ class TopEm extends PureComponent<IProps, IState> {
                 <h5 style={{ textAlign: 'center' }}>ĐỐI TÁC NỔI BẬT </h5>
                 <Row style={{padding: '0 3vw'}}>
                     <Col xs={0} sm={0} md={3} lg={6} xl={0} xxl={6} ></Col>
-                    <Col xs={12} sm={8} md={6} lg={4} xl={8} xxl={4} >
+                    <Col xs={24} sm={8} md={6} lg={4} xl={8} xxl={4} >
                         {is_loading ?
                             <Skeleton loading={true} avatar paragraph={{ rows: 1 }} /> :
                             (<div className='h-j-item'>
@@ -63,7 +63,7 @@ class TopEm extends PureComponent<IProps, IState> {
                             <p style={{color: 'black'}}>JobChoice</p>
                         </div>
                     </Col>
-                    <Col xs={12} sm={8} md={6} lg={4} xl={8} xxl={4} >
+                    <Col xs={24} sm={8} md={6} lg={4} xl={8} xxl={4} >
                         {is_loading ?
                             <Skeleton loading={true} avatar paragraph={{ rows: 1 }} /> :
                             (<div className='h-j-item'>
@@ -79,7 +79,7 @@ class TopEm extends PureComponent<IProps, IState> {
                            <p style={{color: 'black'}}>TTC Solutions</p>
                         </div>
                     </Col>
-                    <Col xs={12} sm={8} md={6} lg={4} xl={8} xxl={4} >
+                    <Col xs={24} sm={8} md={6} lg={4} xl={8} xxl={4} >
                         {is_loading ?
                             <Skeleton loading={true} avatar paragraph={{ rows: 1 }} /> :
                             (<div className='h-j-item'>

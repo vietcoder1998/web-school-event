@@ -29,8 +29,7 @@ class TopEm extends PureComponent<IProps, IState> {
   }
 
   componentDidMount = async () => {
-    await this.setState({ is_loading: false });
-    await this.props.getTopEmpoyer(0);
+
   };
 
   render() {

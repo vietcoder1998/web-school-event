@@ -35,11 +35,13 @@ const openNotification = () => {
 //  @ts-ignore
 interface ISaveJobProp extends StateProps, DispatchProps {
     getJobSaveData?: (pageIndex?: number, pageSize?: number) => any;
+    listSavedJobs?: any;
 }
 
 interface ISaveJobState {
 
 }
+
 
 class SaveJob extends React.PureComponent<ISaveJobProp, ISaveJobState>{
     async componentDidMount() {
@@ -85,7 +87,7 @@ class SaveJob extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                     <div className='history-job'>
                                         {this.props.loading ? <div className='loading'><Spin /></div> :
                                             <Row>
-                                                {listSavedJobs.items && listSavedJobs.items.length > 0 ? listSavedJobs.items.map((item, index) => {
+                                                {listSavedJobs && listSavedJobs.items && listSavedJobs.items.length > 0 ? listSavedJobs.items.map((item, index) => {
 
                                                     return (<Col key={index} xs={24} sm={24} md={12} lg={12} xl={12} xxl={8}>
                                                         <div className='job-detail test'>

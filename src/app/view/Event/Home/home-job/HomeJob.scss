@@ -30,7 +30,7 @@
       color: white;
     }
   }
-  .h-j-item {
+  .h-j-item-home {
     display: flex;
     margin: 0.2vw 1vw;
     height: 130px !important;
@@ -38,6 +38,9 @@
     border-radius: 7px;
     background-color: white;
     margin-top: 10px;
+    &:hover {
+      background-color: #e1ecf4;
+    }
     .img-job {
       img {
         margin-top: 30px;
@@ -96,8 +99,8 @@
         }
         .l_c {
           margin-top: 3px;
-          height: 33px;
-          line-height: 16px;
+          // height: 39px;
+          line-height: 20px;
           text-align: left;
           vertical-align: middle;
           overflow: hidden;
@@ -114,8 +117,12 @@
       }
 
       li {
-        padding: 5px 2px;
+        padding: 2px 2px;
       }
     }
   }
+}
+
+.img-job img {
+  object-fit: contain;
 }
