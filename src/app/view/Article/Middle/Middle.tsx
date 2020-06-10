@@ -24,7 +24,7 @@ export default class Middle extends PureComponent<IProps, IState> {
   componentDidMount() {
     console.log(this.props.listType)
     this.setState({
-      isAll: this.props.idType === 'ALL' ? true : false,
+      isAll: this.props.idType === 'all' ? true : false,
       listType: this.props.listType
     })
   }
@@ -43,24 +43,26 @@ export default class Middle extends PureComponent<IProps, IState> {
                 <Title title={item.name} />
                 <ListMiddle idType={item.id} pageIndex={0} />
                 <Button onClick={() => {
-                  window.location.href = `/article/${item.id}`
+                  window.location.href = `/announcement/${item.id}`
                 }} type="primary">
                   Xem thêm
                 </Button>
               </div>
             </Col>
           ))}
-           
+
           {!this.state.isAll && (
             <div>
               <Col sm={24} md={24} lg={8} xl={8} xxl={8}>
                 <div>
-                  <ListMiddle idType={this.props.idType} pageIndex={1} />
+                  <ListMiddle idType={this.props.idType} pageIndex={0} />
+                  <Divider />
                 </div>
               </Col>
               <Col sm={24} md={24} lg={8} xl={8} xxl={8}>
                 <div>
-                  <ListMiddle idType={this.props.idType} pageIndex={0} />
+                  <ListMiddle idType={this.props.idType} pageIndex={1} />
+                  <Divider />
                 </div>
               </Col>
               <Col sm={24} md={24} lg={6} xl={6} xxl={6}>
@@ -70,7 +72,7 @@ export default class Middle extends PureComponent<IProps, IState> {
             </div>
           )}
         </Row>
-       
+
       </div>
     );
   }

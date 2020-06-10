@@ -51,7 +51,7 @@ class HeaderArticle extends PureComponent<IProps, IState> {
       createdDate: null,
       announcementTypeID: null,
     };
-    this.props.idType === 'ALL' ? body.announcementTypeID = null : body.announcementTypeID = this.props.idType;
+    this.props.idType === 'all' ? body.announcementTypeID = null : body.announcementTypeID = this.props.idType;
     let res = await _requestToServer(
       POST,
       body,
@@ -89,7 +89,7 @@ class HeaderArticle extends PureComponent<IProps, IState> {
             <Col sm={0} md={0} lg={1} xl={1} xxl={1}></Col>
             <Col sm={24} md={24} lg={22} xl={22} xxl={22}>
               <div>
-                <div style={{ display: this.props.idType === 'ALL' ? '' : 'none' }} >
+                <div style={{ display: this.props.idType === 'all' ? '' : 'none' }} >
                   <Title title={"Bài viết hay"} />
                 </div>
                 <Row>

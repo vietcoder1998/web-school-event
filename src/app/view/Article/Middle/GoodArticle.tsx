@@ -41,7 +41,7 @@ class GoodArticle extends PureComponent<IProps, IState> {
             createdDate: null,
             announcementTypeID: null,
         };
-        this.props.idType === 'ALL' ? body.announcementTypeID = null : body.announcementTypeID = this.props.idType;
+        this.props.idType === 'all' ? body.announcementTypeID = null : body.announcementTypeID = this.props.idType;
         let res = await _requestToServer(
             POST,
             body,

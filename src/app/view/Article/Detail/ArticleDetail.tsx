@@ -12,6 +12,7 @@ import {
   Skeleton,
   Divider,
 } from "antd";
+import { ClockCircleOutlined } from '@ant-design/icons';
 import AvatarDefault from "../../../../assets/image/avatar_default.png";
 import DefaultImage from "../../../../assets/image/base-image.jpg";
 // import { routeLink, routePath } from '../../../../../const/break-cumb';
@@ -27,9 +28,9 @@ import { store } from "../../../../redux/store/index";
 import { TYPE } from "../../../../const/type";
 // import { NotUpdate } from '../../../layout/common/Common';
 
-interface IProps {}
+interface IProps { }
 
-interface IState {}
+interface IState { }
 
 class ArticleDetail extends PureComponent<IProps, IState> {
   constructor(props: any) {
@@ -67,15 +68,24 @@ class ArticleDetail extends PureComponent<IProps, IState> {
       noInfoHeader
     );
     let data = res.data;
-    this.setState({
-      author: data.admin,
-      rated: data.averageRating,
-      content: data.content,
-      createdDate: timeConverter(data.createdDate),
-      imageUrl: data.imageUrl === null ? DefaultImage : data.imageUrl,
-      title: data.title,
-      views: data.viewNumber,
-    });
+    console.log(data);
+    try {
+      this.setState({
+        author: data.admin,
+        rated: data.averageRating,
+        content: data.content,
+        createdDate: timeConverter(data.createdDate),
+        imageUrl: data.imageUrl === null ? DefaultImage : data.imageUrl,
+        title: data.title,
+        views: data.viewNumber,
+        type: data.announcementType.name,
+        idType: data.announcementType.id
+      });
+    }
+    catch (e) {
+      console.log(e)
+    }
+
   }
 
   async getComment() {
@@ -125,22 +135,10 @@ class ArticleDetail extends PureComponent<IProps, IState> {
                           style={{ fontSize: 22, marginTop: 15 }}
                           onClick={() => {
                             window.scrollTo({
-                                top: document.body.scrollHeight,
-                                behavior: 'smooth'
+                              top: document.body.scrollHeight,
+                              behavior: 'smooth'
                             });
                           }}
-                        />
-                      </div>
-                      <div>
-                        <Icon
-                          type={"facebook"}
-                          style={{ fontSize: 22, marginTop: 15 }}
-                        />
-                      </div>
-                      <div>
-                        <Icon
-                          type={"star"}
-                          style={{ fontSize: 22, marginTop: 15 }}
                         />
                       </div>
                     </div>
@@ -153,35 +151,33 @@ class ArticleDetail extends PureComponent<IProps, IState> {
                   <Avatar
                     src={
                       this.state.author.avatarUrl === null
-                        ? this.state.author.avatarUrl
-                        : AvatarDefault
+                        ? AvatarDefault
+                        : this.state.author.avatarUrl
                     }
                   />
                   <div>
-                    {this.state.author.lastName + this.state.author.firstName}
+                    {this.state.author.lastName + " " + this.state.author.firstName}
                   </div>
                   <div>
                     {" "}
-                    <Icon type={"clockCircle"} />
+                    <Icon type={"clock-circle"} />
                     {this.state.createdDate}
                   </div>
                   <div>
                     <Icon type={"eye"} />
                     {this.state.views}
                   </div>
+                  <div>
+                    <a href={`/announcement/${this.state.idType}`} >{this.state.type}</a>
+                  </div>
                 </div>
                 <Rate
                   value={this.state.rated}
-                  style={{
-                    fontSize: 12,
-                    position: "absolute",
-                    right: 10,
-                    top: "5vh",
-                  }}
                   disabled
                 />
+                <Divider />
                 <div className="content">
-                  <h5>{this.state.title}</h5>
+                  <div className='title'>{this.state.title}</div>
                   <div
                     dangerouslySetInnerHTML={{ __html: this.state.content }}
                   />
@@ -192,25 +188,31 @@ class ArticleDetail extends PureComponent<IProps, IState> {
                       <div>Đánh giá</div>
                       <Rate
                         value={this.state.rating}
-                        onChange={(event: number) => setRating(event)}
+                        onChange={(event: number) => {
+                          this.setState({ rating: event })
+                        }}
                       />
                     </div>
                     <div>
                       <TextArea
                         id="text-msg"
                         className="text-comment"
-                        placeholder={"Hãy viết nhận xét của bạn"}
+                        placeholder={"Viết phản hồi"}
                         value={this.state.comment}
                         onChange={this.setComment}
                         maxLength={1000}
                       />
                     </div>
+                    <div>
+                      <br />
+                      <Button type={'primary'}>Gửi</Button>
+                    </div>
                   </div>
                 ) : (
-                  <div>
-                    <Divider />
+                    <div>
+                      <Divider />
                     Đăng nhập để bình luận</div>
-                )}
+                  )}
                 <Divider />
                 {this.state.listComment &&
                   this.state.listComment.map((item, index) => (

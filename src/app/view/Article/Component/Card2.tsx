@@ -52,7 +52,7 @@ export default class Card2 extends PureComponent<IProps, IState> {
 
   render() {
     return (
-      <Link to={`/articleDetail/${this.state.id}`}>
+      <Link to={`/announcementDetail/${this.state.id}`}>
         <Skeleton
           avatar
           paragraph={{ rows: 2 }}
@@ -61,14 +61,14 @@ export default class Card2 extends PureComponent<IProps, IState> {
         >
           <div className="card2">
             <Row>
-              <Col sm={8} md={8} lg={8} xl={8} xxl={8}>
+              <Col sm={10} md={10} lg={10} xl={10} xxl={10}>
                 <img
                   className="img-card"
                   src={this.state.imageUrl}
                   alt="article"
                 />
               </Col>
-              <Col sm={16} md={16} lg={16} xl={16} xxl={16}>
+              <Col sm={14} md={14} lg={14} xl={14} xxl={14}>
                 <div className='info'>
                   <div className='title-article'>
                     {this.state.title}
