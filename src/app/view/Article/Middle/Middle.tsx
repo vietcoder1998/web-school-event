@@ -1,28 +1,76 @@
-import React, { Component } from "react";
-import { Row, Col } from "antd";
+import React, { Component, PureComponent } from "react";
+import { Row, Col, Button, Divider } from "antd";
 import Title from "../Component/Title";
 import "./Middle.scss";
 import ListMiddle from "./ListMiddle";
-export default class Middle extends Component {
+import { Link } from "react-router-dom";
+import GoodArticle from "./GoodArticle";
+
+interface IProps {
+  listType?: any;
+  idType?: string;
+}
+interface IState {
+
+}
+export default class Middle extends PureComponent<IProps, IState> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      listType: [],
+      isAll: true,
+    }
+  }
+  componentDidMount() {
+    console.log(this.props.listType)
+    this.setState({
+      isAll: this.props.idType === 'ALL' ? true : false,
+      listType: this.props.listType
+    })
+  }
+
+  getTypeArticle() {
+
+  }
   render() {
     return (
       <div className="article-middle">
-        <Row>
+        <Row gutter={12}>
           <Col sm={0} md={0} lg={2} xl={2} xxl={2}></Col>
-          <Col sm={24} md={24} lg={6} xl={6} xxl={6}>
-            <Title title={"Kỹ năng mềm"} />
-            <ListMiddle idType={23} />
-          </Col>
-          <Col sm={24} md={22} lg={6} xl={6} xxl={6}>
-            <Title title={"Hướng nghiệp"} />
-            <ListMiddle idType={17} />
-          </Col>
-          <Col sm={24} md={22} lg={6} xl={6} xxl={6}>
-            <Title title={"Khởi nghiệp"} />
-            <ListMiddle idType={18} />
-          </Col>
-         
+          {this.state.isAll && this.props.listType.map((item, index) => (
+            <Col sm={24} md={24} lg={6} xl={6} xxl={6}>
+              <div key={index}>
+                <Title title={item.name} />
+                <ListMiddle idType={item.id} pageIndex={0} />
+                <Button onClick={() => {
+                  window.location.href = `/article/${item.id}`
+                }} type="primary">
+                  Xem thêm
+                </Button>
+              </div>
+            </Col>
+          ))}
+           
+          {!this.state.isAll && (
+            <div>
+              <Col sm={24} md={24} lg={8} xl={8} xxl={8}>
+                <div>
+                  <ListMiddle idType={this.props.idType} pageIndex={1} />
+                </div>
+              </Col>
+              <Col sm={24} md={24} lg={8} xl={8} xxl={8}>
+                <div>
+                  <ListMiddle idType={this.props.idType} pageIndex={0} />
+                </div>
+              </Col>
+              <Col sm={24} md={24} lg={6} xl={6} xxl={6}>
+                <GoodArticle />
+              </Col>
+              <Col sm={24} md={24} lg={1} xl={1} xxl={1}></Col>
+            </div>
+          )}
         </Row>
+       
       </div>
     );
   }

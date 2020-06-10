@@ -41,7 +41,7 @@ export default class Card1 extends PureComponent<IProps, IState> {
 
   render() {
     return (
-      <Link to={`articleDetail/${this.state.id}`}>
+      <Link to={`/articleDetail/${this.state.id}`}>
         <Skeleton
           avatar
           paragraph={{ rows: 2 }}

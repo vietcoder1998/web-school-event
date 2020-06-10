@@ -23,7 +23,7 @@ interface IState {
   rating?: any;
   date?: any;
 }
-export default class Card2 extends PureComponent<IProps, IState> {
+export default class Card3 extends PureComponent<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,39 +52,30 @@ export default class Card2 extends PureComponent<IProps, IState> {
 
   render() {
     return (
-      <Link to={`articleDetail/${this.state.id}`}>
+      <Link to={`/articleDetail/${this.state.id}`}>
         <Skeleton
           avatar
           paragraph={{ rows: 2 }}
           active
           loading={this.state.loading}
         >
-          <div className="card2">
-            <Row>
-              <Col sm={8} md={8} lg={8} xl={8} xxl={8}>
-                <img
-                  className="img-card"
-                  src={this.state.imageUrl}
-                  alt="article"
-                />
-              </Col>
-              <Col sm={16} md={16} lg={16} xl={16} xxl={16}>
-                <div className='info'>
-                  <a href={`articleDetail/${this.state.id}`}>
-                    {this.state.title}
-                  </a>
-                  <div className="summary">{this.state.content}</div>
-                </div>
-                <div className="info">
-                  <div>
-                    <Icon type="calendar" /> {this.state.date}
-                  </div>
-                  <div>
-                    <Rate allowHalf disabled value={this.state.rating} />
-                  </div>
-                </div>
-              </Col>
-            </Row>
+          <div className="card3">
+            <img
+              className="img-card"
+              src={this.state.imageUrl}
+              alt="article"
+            /> 
+            <div className='info'>
+              <div className='title-article'>
+                {this.state.title}
+              </div>
+              <div className="summary">{this.state.content}</div>
+            </div>
+            <div className="info">
+              <div>
+                <Rate allowHalf disabled value={this.state.rating} />
+              </div>
+            </div>
           </div>
         </Skeleton>
       </Link>

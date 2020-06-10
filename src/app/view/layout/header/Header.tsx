@@ -81,6 +81,7 @@ class Header extends PureComponent<IProps, IState> {
       <Menu.Item><a href='/reset-password'>Đổi mật khẩu</a></Menu.Item>
       <Menu.Item><a href='/save-job'>Công việc đã lưu</a></Menu.Item>
       <Menu.Item><a href='/history-apply'>Lịch sử ứng tuyển</a></Menu.Item>
+      
       <Menu.Item onClick={this._clearStorage}>
         <a href='/' style={{
           pointerEvents: "none"
@@ -118,6 +119,7 @@ class Header extends PureComponent<IProps, IState> {
                 <Icon type='zoom' theme="filled" style={{ fontSize: '16.8px' }} />
                 Nhà Tuyển Dụng
                 </a>
+                <a href='/announcement/all' style={{ display: isAuthen ? "" : 'none' }}><Icon type={'fileOut'} />Bài viết</a>
             </div>
 
           </div>

@@ -1,12 +1,16 @@
-import React, { Component } from "react";
+import React, { Component, PureComponent } from "react";
 import { _requestToServer } from "../../../../services/exec";
 import { POST } from "../../../../const/method";
 import { ANNOUNCEMENTS } from "../../../../services/api/public.api";
 import { PUBLIC_HOST } from "../../../../environment/development";
 import { Skeleton } from "antd";
+import Card3 from "../Component/Card3";
 import Card2 from "../Component/Card2";
-
-export default class ListMiddle extends Component {
+interface IProps {
+  idType?: any;
+  pageIndex?: number;
+}
+export default class ListMiddle extends PureComponent<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,9 +22,10 @@ export default class ListMiddle extends Component {
   }
 
   componentDidMount() {
+
     this.getListArticle(
       this.props.idType,
-      this.state.pageIndex,
+      this.props.pageIndex,
       this.state.pageSize
     );
   }
@@ -63,7 +68,7 @@ export default class ListMiddle extends Component {
           {this.state.listArticleRender &&
             this.state.listArticleRender.map((item, index) => (
               <div>
-                <Card2
+                <Card2  
                   id={item.id}
                   title={item.title}
                   imageUrl={item.imageUrl}

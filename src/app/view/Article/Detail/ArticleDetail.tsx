@@ -207,7 +207,9 @@ class ArticleDetail extends PureComponent<IProps, IState> {
                     </div>
                   </div>
                 ) : (
-                  <div>Đăng nhập để bình luận</div>
+                  <div>
+                    <Divider />
+                    Đăng nhập để bình luận</div>
                 )}
                 <Divider />
                 {this.state.listComment &&
