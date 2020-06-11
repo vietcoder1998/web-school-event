@@ -36,10 +36,9 @@ export default class Middle extends PureComponent<IProps, IState> {
     return (
       <div className="article-middle">
         <Row gutter={12}>
-          <Col sm={0} md={0} lg={2} xl={2} xxl={2}></Col>
           {this.state.isAll && this.props.listType.map((item, index) => (
             <Col sm={24} md={24} lg={6} xl={6} xxl={6}>
-              <div key={index}>
+              <div key={index} style={{textAlign: 'left'}}>
                 <Title title={item.name} />
                 <ListMiddle idType={item.id} pageIndex={0} />
                 <Button onClick={() => {
@@ -65,7 +64,7 @@ export default class Middle extends PureComponent<IProps, IState> {
                   <Divider />
                 </div>
               </Col>
-              <Col sm={24} md={24} lg={6} xl={6} xxl={6}>
+              <Col sm={24} md={24} lg={7} xl={7} xxl={7}>
                 <GoodArticle />
               </Col>
               <Col sm={24} md={24} lg={1} xl={1} xxl={1}></Col>

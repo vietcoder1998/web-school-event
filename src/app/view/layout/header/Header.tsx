@@ -119,7 +119,7 @@ class Header extends PureComponent<IProps, IState> {
                 <Icon type='zoom' theme="filled" style={{ fontSize: '16.8px' }} />
                 Nhà Tuyển Dụng
                 </a>
-                <a href='/announcement/all' style={{ display: isAuthen ? "" : 'none' }}><Icon type={'fileOut'} />Bài viết</a>
+                <a href='/announcement/all' ><Icon type={'fileOut'} />Bài viết</a>
             </div>
 
           </div>
