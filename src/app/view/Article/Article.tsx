@@ -1,14 +1,12 @@
-import React, { useState, useEffect, PureComponent } from "react";
+import React from "react";
 import Layout from "../layout/Layout";
-import { connect } from "react-redux";
-
-import { REDUX_SAGA } from "../../../const/actions";
-
-import HashLoader from "react-spinners/HashLoader";
-import { Tabs } from "antd";
-import HightLight from './ListArticle/ListArticle'
-import './Article.scss'
-const { TabPane } = Tabs;
+import Header from "./Head/HeaderArticle";
+import "./Article.scss";
+import Middle from "./Middle/Middle";
+import { _requestToServer } from "../../../services/exec";
+import { GET } from "../../../const/method";
+import { ANNOUNCEMENTS } from "../../../services/api/public.api";
+import { PUBLIC_HOST } from "../../../environment/development";
 
 class Article extends React.Component {
   constructor(props) {
@@ -16,45 +14,45 @@ class Article extends React.Component {
     this.state = {
       loading: true,
       idType: null,
+      listType: [],
     };
   }
   componentDidMount() {
-    this.props.getTypeArticle(0);
+    console.log(this.props.match.params.id);
+    this.getListTypeArticle()
+  }
+  async  getListTypeArticle() {
+    let res = await _requestToServer(GET, null, ANNOUNCEMENTS.TYPE, PUBLIC_HOST, {
+      pageIndex: 0,
+      pageSize: 50,
+      priority: "",
+    },
+      false)
+    try {
+      console.log(res)
+      this.setState({
+        listType: res.data.items
+      })
+    }
+    catch (e) {
+      console.log(e)
+    }
   }
   render() {
-    let { listType } = this.props;
     return (
       <Layout disableFooterData={true}>
-        <div className="tabs">
-          <Tabs
-            defaultActiveKey="ALL"
-            onChange={(e) => {
-              this.setState({ idType: e })
-            }}
-          >
-            <TabPane key={"ALL"} tab={`Tất cả`}>
-
-            </TabPane>
-            {listType &&
-              listType.map((item, index) => (
-                <TabPane key={item.id} tab={`${item.name}`}>
-                </TabPane>
-              ))}
-           
-          </Tabs>
-          <HightLight type={this.state.idType} />
+        <div className="Article">
+          <div className="Header">
+            <Header idType={this.props.match.params.id} />
+          </div>
+          <div>
+            <Middle listType={this.state.listType} idType={this.props.match.params.id}/>
+          </div>
         </div>
       </Layout>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  listType: state.AnnounTypes.listType,
-});
 
-const mapDispatchToProps = (dispatch) => ({
-  getTypeArticle: (pageIndex?: number, pageSize?: number) =>
-    dispatch({ type: REDUX_SAGA.ANNOUNCEMENTS.GET_TYPES, pageIndex, pageSize }),
-});
-export default connect(mapStateToProps, mapDispatchToProps)(Article);
+export default Article;

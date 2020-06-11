@@ -1,17 +1,27 @@
 .article-detail {
-  padding: 10px;
-  .header {
+  padding: 0 4vw 0 0vw;
+  .article-detail-header {
     width: 100%;
     display: inline-flex;
-    padding: 5vh 0;
+    padding: 5vh 0 3vh 0;
     div {
-      margin: 0 10px;
+      margin: auto 20px 0 0;
+      font-weight: bold;
+      font-size: 15px;
+      color: '#5294E2' !important;
+    }
+    svg {
+      margin: 0 5px;
     }
   }
-
   .content {
     background-color: white;
-    padding: 0px;
+    padding: 0;
+    .title {
+      font-weight: bold;
+      font-size: 25px;
+      text-align: justify;
+    }
   }
 
   .comment {
@@ -45,10 +55,17 @@
 
     .comment-msg {
       margin-top: 5px;
-  
+      text-align: justify;
       font-size: 1rem;
       border-radius: 10px;
-    
     }
   }
+}
+
+.article-detail-loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -100px;
 }

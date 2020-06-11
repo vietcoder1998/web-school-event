@@ -81,6 +81,9 @@ class Login extends Component {
                             setAuthSate(res);
                             this.props.setAuthen();
                             let last_access = localStorage.getItem('last_access');
+                            localStorage.removeItem('user_exists');
+                            localStorage.removeItem('user_exists_userName');
+                            localStorage.removeItem('user_exists_password');
                             setTimeout(() => {
                                 const parsed = queryString.parse(this.props.location.search);
                                 // console.log(parsed);

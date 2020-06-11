@@ -217,8 +217,8 @@ class App extends React.Component {
                 component={DataJobNames}
               />
               <Route exact path="/employer/:id" component={EmInfo} />
-              <Route exact path="/article" component={Article} />
-              <Route exact path="/articleDetail/:id" component={ArticleDetail} />
+              <Route exact path="/announcement/:id" component={Article} />
+              <Route exact path="/announcementDetail/:id" component={ArticleDetail} />
               <Route component={NotFound} />
             </Switch>
           </Suspense>
