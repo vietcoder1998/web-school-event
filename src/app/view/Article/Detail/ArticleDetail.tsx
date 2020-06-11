@@ -15,7 +15,6 @@ import {
   Dropdown,
 } from "antd";
 
-import AvatarDefault from "../../../../assets/image/avatar_default.png";
 import DefaultImage from "../../../../assets/image/base-image.jpg";
 // import { routeLink, routePath } from '../../../../../const/break-cumb';
 import "./ArticleDetail.scss";
@@ -32,6 +31,8 @@ import { _requestToServer } from "../../../../services/exec";
 import { POST, DELETE } from "../../../../const/method";
 import { ANNOUNCEMENTS_PRIVATE } from "../../../../services/api/private.api";
 // import { NotUpdate } from '../../../layout/common/Common';
+
+import MoonLoader from 'react-spinners/MoonLoader'
 
 interface IProps {
   match?: any
@@ -54,6 +55,7 @@ interface IState {
   id?: string;
   loadingCommnet?: boolean;
   userID?: string;
+  loading?: boolean;
 }
 
 class ArticleDetail extends PureComponent<IProps, IState> {
@@ -85,7 +87,8 @@ class ArticleDetail extends PureComponent<IProps, IState> {
       rating: 5,
       comment: null,
       userID: null,
-    };
+      loading: true,
+    }
   }
 
   componentDidMount() {
@@ -96,15 +99,24 @@ class ArticleDetail extends PureComponent<IProps, IState> {
     this.DetailArticle();
     this.getComment();
   }
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (this.props.match.params.id !== nextProps.match.params.id) {
+      this.setState({ loading: true });
+      this.props.match.params.id = nextProps.match.params.id
+      this.DetailArticle();
+      this.getComment();
+    
+    }
+    else return 0
+  }
   async DetailArticle() {
     let res = await _get(
       null,
       ANNOUNCEMENTS.DETAIL.replace("{id}", this.props.match.params.id),
       PUBLIC_HOST,
       noInfoHeader
-    );
-    let data = res.data;
-    try {
+    ).then(res => {
+      let data = res.data;
       this.setState({
         author: data.admin,
         rated: data.averageRating,
@@ -116,12 +128,13 @@ class ArticleDetail extends PureComponent<IProps, IState> {
         type: data.announcementType.name,
         idType: data.announcementType.id,
         totalComment: data.totalComment,
-        id: this.props.match.params.id
-      });
-    }
-    catch (e) {
-      console.log(e)
-    }
+        id: this.props.match.params.id,
+        loading: false
+      })
+    })
+      .catch(e => {
+        console.log(e)
+      })
 
   }
 
@@ -194,151 +207,167 @@ class ArticleDetail extends PureComponent<IProps, IState> {
         </Menu.Item>
       </Menu>
     );
-    return (
-      <div className="article-detail">
-        <Row>
-          <Col xs={0} sm={0} md={1} lg={1} xl={1} xxl={1}></Col>
-          <Col xs={24} sm={24} md={16} lg={16} xl={16} xxl={16}>
-            <Row>
-              <Col xs={1} sm={1} md={1} lg={2} xl={3} xxl={4}>
-                <Affix offsetTop={200}>
-                  <div className="affix-annou-card hidden-only-phone">
-                    <div className="affix-annou-card-content">
-                      <div>
-                        <Icon
-                          type={"message"}
-                          style={{ fontSize: 22, marginTop: 15 }}
-                          onClick={() => {
-                            window.scrollTo({
-                              top: document.body.scrollHeight,
-                              behavior: 'smooth'
-                            });
+
+
+    if (this.state.loading) {
+      return (
+        <div className='article-detail-loading'>
+          <MoonLoader
+            size={150}
+            color={"#123abc"}
+            loading={this.state.loading}
+          />
+        </div>
+      )
+    }
+    else {
+      return (
+        <div className="article-detail">
+          <Row>
+            <Col xs={0} sm={0} md={1} lg={1} xl={1} xxl={1}></Col>
+            <Col xs={24} sm={24} md={16} lg={16} xl={16} xxl={16}>
+              <Row>
+                <Col xs={1} sm={1} md={1} lg={2} xl={3} xxl={4}>
+                  <Affix offsetTop={200}>
+                    <div className="affix-annou-card hidden-only-phone">
+                      <div className="affix-annou-card-content">
+                        <div>
+                          <Icon
+                            type={"message"}
+                            style={{ fontSize: 22, marginTop: 15 }}
+                            onClick={() => {
+                              window.scrollTo({
+                                top: document.body.scrollHeight,
+                                behavior: 'smooth'
+                              });
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </Affix>
+                </Col>
+                <Col xs={23} sm={23} md={16} lg={16} xl={18} xxl={18}>
+                  <div className="article-detail-header">
+                    <div>
+                      {this.state.author.lastName + " " + this.state.author.firstName}
+                    </div>
+                    <div>
+                      {" "}
+                      <Icon type={"clock-circle"} />
+                      {this.state.createdDate}
+                    </div>
+                    <div>
+                      <Icon type={"eye"} />
+                      {this.state.views}
+                    </div>
+                    <div>
+                      <Icon type={"message"} />
+                      {this.state.totalComment}
+                    </div>
+                    <div>
+                      <a href={`/announcement/${this.state.idType}`} >{this.state.type}</a>
+                    </div>
+                  </div>
+                  <Rate
+                    value={this.state.rated}
+                    disabled
+                  />
+                  <Divider />
+                  <div className="content">
+                    <div className='title'>{this.state.title}</div>
+                    <div
+                      dangerouslySetInnerHTML={{ __html: this.state.content }}
+                    />
+                  </div>
+                  {isAuthen ? (
+                    <div className="comment">
+                      <div className="rating-cmt">
+                        <div>Đánh giá</div>
+                        <Rate
+                          value={this.state.rating}
+                          onChange={(event: number) => {
+                            this.setState({ rating: event })
                           }}
                         />
                       </div>
+                      <div>
+                        <TextArea
+                          id="text-msg"
+                          className="text-comment"
+                          placeholder={"Viết phản hồi"}
+                          value={this.state.comment}
+                          onChange={this.setComment}
+                          maxLength={1000}
+                        />
+                      </div>
+                      <div>
+                        <br />
+                        <Button type={'primary'} onClick={() => {
+                          this.sendCommnet()
+                        }}>Gửi</Button>
+                      </div>
                     </div>
-                  </div>
-                </Affix>
-              </Col>
-              <Col xs={23} sm={23} md={16} lg={16} xl={18} xxl={18}>
-                <div className="article-detail-header">
-                  <div>
-                    {this.state.author.lastName + " " + this.state.author.firstName}
-                  </div>
-                  <div>
-                    {" "}
-                    <Icon type={"clock-circle"} />
-                    {this.state.createdDate}
-                  </div>
-                  <div>
-                    <Icon type={"eye"} />
-                    {this.state.views}
-                  </div>
-                  <div>
-                    <Icon type={"message"} />
-                    {this.state.totalComment}
-                  </div>
-                  <div>
-                    <a href={`/announcement/${this.state.idType}`} >{this.state.type}</a>
-                  </div>
-                </div>
-                <Rate
-                  value={this.state.rated}
-                  disabled
-                />
-                <Divider />
-                <div className="content">
-                  <div className='title'>{this.state.title}</div>
-                  <div
-                    dangerouslySetInnerHTML={{ __html: this.state.content }}
-                  />
-                </div>
-                {isAuthen ? (
-                  <div className="comment">
-                    <div className="rating-cmt">
-                      <div>Đánh giá</div>
-                      <Rate
-                        value={this.state.rating}
-                        onChange={(event: number) => {
-                          this.setState({ rating: event })
-                        }}
-                      />
-                    </div>
-                    <div>
-                      <TextArea
-                        id="text-msg"
-                        className="text-comment"
-                        placeholder={"Viết phản hồi"}
-                        value={this.state.comment}
-                        onChange={this.setComment}
-                        maxLength={1000}
-                      />
-                    </div>
-                    <div>
-                      <br />
-                      <Button type={'primary'} onClick={() => {
-                        this.sendCommnet()
-                      }}>Gửi</Button>
-                    </div>
-                  </div>
-                ) : (
-                    <div>
-                      <Divider />
-                      <a href="/login">  Đăng nhập để bình luận</a></div>
-                  )}
-                <Divider />
-                {this.state.listComment &&
-                  this.state.listComment.map((item, index) => (
-                    <div className="list-comment" key={index}>
-                      <Skeleton
-                        avatar
-                        paragraph={{ rows: 2 }}
-                        active
-                        loading={this.state.loadingComment}
-                      >
-                        <div className="img-cmt">
-                          <Avatar
-                            src={item ? item.avatarUrl : DefaultImage}
-                            style={{
-                              marginRight: 10,
-                              width: 40,
-                              height: 40,
-                            }}
-                            icon={"user"}
-                          />
-                        </div>
-                        <div>
-                          <div>{item.name}</div>
-                          <div>
-                            <Rate
-                              value={item && item.rating}
-                              disabled
-                              style={{ fontSize: "0.9rem" }}
+                  ) : (
+                      <div>
+                        <Divider />
+                        <a href="/login">  Đăng nhập để bình luận</a></div>
+                    )}
+                  <Divider />
+                  {this.state.listComment &&
+                    this.state.listComment.map((item, index) => (
+                      <div className="list-comment" key={index}>
+                        <Skeleton
+                          avatar
+                          paragraph={{ rows: 2 }}
+                          active
+                          loading={this.state.loadingComment}
+                        >
+                          <div className="img-cmt">
+                            <Avatar
+                              src={item ? item.avatarUrl : DefaultImage}
+                              style={{
+                                marginRight: 10,
+                                width: 40,
+                                height: 40,
+                              }}
+                              icon={"user"}
                             />
                           </div>
-                          <div className="comment-msg">{item.comment}</div>
+                          <div>
+                            <div>{item.name}</div>
+                            <div>
+                              <Rate
+                                value={item && item.rating}
+                                disabled
+                                style={{ fontSize: "0.9rem" }}
+                              />
+                            </div>
+                            <div className="comment-msg">{item.comment}</div>
+                          </div>
+                          <div style={{ display: item.userID === this.state.userID ? '' : 'none', position: 'absolute', right: '0' }}>
+                            <Dropdown overlay={menu(item.id)}>
+                              <Icon type="more" />
+                            </Dropdown>,
                         </div>
-                        <div style={{ display: item.userID === this.state.userID ? '' : 'none', position: 'absolute', right: '0' }}>
-                          <Dropdown overlay={menu(item.id)}>
-                            <Icon type="more" />
-                          </Dropdown>,
-                        </div>
-                      </Skeleton>
-                    </div>
-                  ))}
-              </Col>
-            </Row>
-          </Col>
-          <Col xs={0} sm={0} md={6} lg={6} xl={6} xxl={6}>
-            <div style={{ marginTop: '15vh' }}>
-              <GoodArticle />
-            </div>
+                        </Skeleton>
+                      </div>
+                    ))}
+                </Col>
+              </Row>
+            </Col>
+            <Col xs={0} sm={0} md={6} lg={6} xl={6} xxl={6}>
+              <div style={{ marginTop: '15vh' }}>
+                <GoodArticle />
+              </div>
 
-          </Col>
-        </Row>
-        <BackTop />
-      </div>
-    );
+            </Col>
+          </Row>
+          <BackTop />
+        </div>
+      );
+    }
+
   }
 }
 
