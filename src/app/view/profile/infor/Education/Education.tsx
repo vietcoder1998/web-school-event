@@ -48,7 +48,7 @@ class Education extends Component<IProps, IStates> {
           </div>
           <div className="content-school">
             Thời gian học: {personalInfo.schoolYearStart} -{" "}
-            {personalInfo.schoolYearStart}
+            {personalInfo.schoolYearEnd}
           </div>
           <div className="content-school">
             Mã sinh viên: {personalInfo.studentCode}

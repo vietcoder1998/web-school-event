@@ -8,6 +8,7 @@ import { store } from '../store';
 import { JOBS } from '../../services/api/private.api';
 import { REDUX_SAGA, REDUX } from '../../const/actions'
 import { POST } from '../../const/method';
+import swal from 'sweetalert';
 
 function* getListInDayData(action) {
     let res = yield call(getInDayData, action);
@@ -36,7 +37,8 @@ function getInDayData(action) {
         POST,
         data,
         (isAuthen ? JOBS + '/active/home' : FIND_JOB + '/home'),
-        isAuthen ? STUDENT_HOST : PUBLIC_HOST, isAuthen ? authHeaders : noInfoHeader,
+        isAuthen ? STUDENT_HOST : PUBLIC_HOST, 
+        isAuthen ? authHeaders : noInfoHeader,
         {
             pageIndex: action.pageIndex ? action.pageIndex : 0,
             pageSize: 6,

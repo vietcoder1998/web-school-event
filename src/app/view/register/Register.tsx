@@ -9,29 +9,29 @@ import {
   Row,
   Col,
   DatePicker,
-  Select,
+  Select
 } from "antd";
 import moment from "moment";
 import "./Register.scss";
 import { connect } from "react-redux";
-import {
-  registrasionController,
-  MAJORS,
-} from "../../../services/api/private.api";
+import { SCHOOLS } from "../../../services/api/private.api";
 import { noInfoHeader } from "../../../services/auth";
 import { _requestToServer } from "../../../services/exec";
 import swal from "sweetalert";
 import { POST } from "../../../const/method";
-import { _get } from "../../../services/base-api";
+import { _get, _post } from "../../../services/base-api";
 import { PUBLIC_HOST } from "../../../environment/development";
 import imageLogin from "../../../assets/image/image-login.png";
-import logo from "../../../assets/image/logo-01.png";
+// import logo from "../../../assets/image/logo-01.png";
+import {goBackWhenLogined} from '../../../utils/goBackWhenLogined'
 const isNumeric = (value) => {
   return /^-{0,1}\d+$/.test(value);
 };
-
+const validSchoolYearEnd = ["Chọn năm học kết thúc", "Năm học kết thúc hợp lệ", "Năm học kết thúc phải lớn hơn năm học bắt đầu"]
+const validRePassword = ["Mật khẩu quá ngắn", "Mật khẩu không trùng khớp", "Mật khẩu hợp lệ"]
 interface IProps {
   marker?: any;
+
 }
 let { Option } = Select;
 interface IState {
@@ -39,12 +39,13 @@ interface IState {
   is_exactly_firstname?: boolean;
   is_exactly_lastname?: boolean;
   is_exactly_email?: boolean;
-  is_exactly_rpw?: boolean;
+  is_exactly_rpw?: number;
   is_exactly_pw?: boolean;
   is_exactly_phone?: boolean;
   is_exactly_schoolYearStart?: boolean;
-  is_exactly_schoolYearEnd?: boolean;
+  exactly_schoolYearEnd?: number;
   is_exactly_majorID?: boolean;
+  is_exactly_schoolID?: any;
   marker?: any;
   location?: string;
   repassword?: string;
@@ -53,12 +54,22 @@ interface IState {
   is_except_rule?: boolean;
   list_major?: Array;
   is_exists?: boolean;
+  show_password: boolean;
+  show_re_password: boolean;
+  loading: boolean;
+  list_school?: Array;
+  isOpenStartYear?: boolean;
+  time?: any;
+  listBirthYearMin?: Array;
+  listBirthYearMax?: Array;
+  typeUpdateInfor?: boolean
 }
 
 class Register extends Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
+      loading: false,
       email_register_dto: {
         email: "",
         password: "",
@@ -66,9 +77,12 @@ class Register extends Component<IProps, IState> {
         lastName: "",
         gender: "MALE",
         phone: "",
-        schoolYearStart: "",
-        schoolYearEnd: "",
-        majorID: 0,
+        schoolYearStart: 0,
+        schoolYearEnd: 0,
+        majorID: undefined,
+        show_password: false,
+        show_re_password: false,
+        schoolID: '',
       },
 
       marker: {
@@ -84,27 +98,36 @@ class Register extends Component<IProps, IState> {
       is_exactly_phone: false,
       is_exactly_firstname: false,
       is_exactly_lastname: false,
-      is_exactly_rpw: false,
+      is_exactly_rpw: 0,
       is_except_rule: false,
       is_exactly_schoolYearStart: false,
-      is_exactly_schoolYearEnd: false,
+      exactly_schoolYearEnd: 0,
       is_exactly_majorID: false,
+      is_exactly_schoolID: false,
       show_popup: false,
       repassword: "",
       location: "",
 
       list_major: [],
+      list_school: [],
+
 
       is_exists: false,
+      isOpenStartYear: false,
+      time: null,
+      listBirthYearMin: [],
+      listBirthYearMax: [],
+      typeUpdateInfor: false
     };
   }
   async componentDidMount() {
     let { list_major, email_register_dto, repassword } = this.state;
-    let res_major = await _get(null, MAJORS, PUBLIC_HOST, noInfoHeader);
-    list_major = res_major.data.items;
-    this.setState({
-      list_major,
-    });
+    this.setState({ listBirthYearMin: this.listYear(1970, 2035), listBirthYearMax: this.listYear(1970, 2035) })
+    let res_school = await _post(null, SCHOOLS, PUBLIC_HOST, noInfoHeader);
+    // console.log(res_school);
+    this.setState({ list_school: res_school.data.items })
+
+
 
     if (localStorage.getItem("user_exists") === "false") {
       email_register_dto.email = localStorage.getItem("user_exists_userName");
@@ -112,24 +135,52 @@ class Register extends Component<IProps, IState> {
         "user_exists_password"
       );
       repassword = localStorage.getItem("user_exists_password");
-
+      localStorage.setItem('user_exists', "true");
       this.setState({
         is_exists: true,
         email_register_dto,
         repassword,
         is_exactly_email: true,
         is_exactly_pw: true,
-        is_exactly_rpw: true,
+        is_exactly_rpw: 2,
+        typeUpdateInfor: true
       });
     }
   }
+  
+  listYear(min, max) {
+    let newListBirthYear = [];
+    for (let i = max; i > min; i--) {
+      newListBirthYear.push({ name: i.toString(), id: i.toString() })
+    }
+    return newListBirthYear;
+  }
   _handleTime = (name) => (value) => {
+
     let { email_register_dto } = this.state;
-    let time = moment(value, "YYYY/MM/DD").unix();
+    // let time = moment(value, "YYYY/MM/DD").unix();
+
+    let time = parseInt(value)
+    // console.log(typeof(time))
     if (name === "schoolYearStart") {
       email_register_dto.schoolYearStart = time;
+      if (time && time <= email_register_dto.schoolYearEnd) {
+        this.setState({ is_exactly_schoolYearStart: true, exactly_schoolYearEnd: 1 })
+      } else if (time && time > email_register_dto.schoolYearEnd) {
+        this.setState({ is_exactly_schoolYearStart: true })
+        this.setState({ exactly_schoolYearEnd: 2 })
+      } else {
+        this.setState({ is_exactly_schoolYearStart: false })
+      }
     } else {
       email_register_dto.schoolYearEnd = time;
+      if (time && time >= email_register_dto.schoolYearStart) {
+        this.setState({ exactly_schoolYearEnd: 1 })
+      } else if (time && time < email_register_dto.schoolYearStart) {
+        this.setState({ exactly_schoolYearEnd: 2 })
+      } else {
+        this.setState({ exactly_schoolYearEnd: 0 })
+      }
     }
     this.setState({
       email_register_dto,
@@ -137,10 +188,24 @@ class Register extends Component<IProps, IState> {
   };
 
   _choseMajor = (value) => {
+    console.log("vao day");
     let { email_register_dto } = this.state;
-
+    this.setState({ is_exactly_majorID: true })
     email_register_dto.majorID = value;
     this.setState({ email_register_dto });
+  };
+  _choseSchool = (value) => {
+    let { email_register_dto } = this.state;
+    this.setState({ is_exactly_schoolID: true, is_exactly_majorID: false })
+    email_register_dto.schoolID = value;
+    email_register_dto.majorID = undefined;
+    this.setState({ email_register_dto });
+    _get(null, `/api/schools/${value}/education/majors/query`, PUBLIC_HOST, noInfoHeader)
+      .then((res_major) => {
+        this.setState({
+          list_major: res_major.data.items
+        })
+      })
   };
   _handleInput = (event) => {
     let {
@@ -193,18 +258,25 @@ class Register extends Component<IProps, IState> {
         break;
 
       case "password":
+        console.log('password')
         if (value.length > 5) {
           is_exactly_pw = true;
         } else {
           is_exactly_pw = false;
         }
+        if (value === this.state.repassword) {
+          is_exactly_rpw = 2;
+        } else {
+          is_exactly_rpw = 1;
+        }
         break;
 
       case "repassword":
+        console.log('repassword')
         if (value === email_register_dto.password) {
-          is_exactly_rpw = true;
+          is_exactly_rpw = 2;
         } else {
-          is_exactly_rpw = false;
+          is_exactly_rpw = 1;
         }
         break;
       default:
@@ -271,6 +343,7 @@ class Register extends Component<IProps, IState> {
     });
   };
   requestToServer = async () => {
+    this.setState({ loading: true });
     let {
       email_register_dto,
       is_exactly_firstname,
@@ -279,6 +352,8 @@ class Register extends Component<IProps, IState> {
       is_exactly_rpw,
       is_exactly_pw,
       is_exactly_phone,
+      is_except_rule,
+      is_exactly_schoolID
     } = this.state;
 
     if (
@@ -286,29 +361,41 @@ class Register extends Component<IProps, IState> {
       is_exactly_lastname === false ||
       is_exactly_email === false ||
       is_exactly_pw === false ||
-      is_exactly_phone === false
+      is_exactly_phone === false ||
+      is_exactly_schoolID === false
     ) {
       swal({
         title: "Workvn thông báo",
         icon: "error",
         text: "Vui lòng nhật đầy đủ các trường thông tin",
       });
-    } else if (is_exactly_rpw === false) {
+      this.setState({ loading: false });
+    } else if (is_exactly_rpw === 1) {
       swal({
         title: "Workvn thông báo",
         icon: "error",
         text: "Nhập lại mật khẩu không chính xác",
       });
+      this.setState({ loading: false });
+    } else if (is_except_rule === false) {
+      swal({
+        title: "Workvn thông báo",
+        icon: "error",
+        text: "Bạn chưa đồng ý với điều khoản của Worksvn",
+      });
+      this.setState({ loading: false });
     } else {
       await _requestToServer(
         POST,
         email_register_dto,
-        registrasionController,
+        `/api/students/registration?schoolID=${email_register_dto.schoolID}`,
         null,
         noInfoHeader,
         null,
-        true
+        true, null, null, this.state.typeUpdateInfor ? `Hoàn tất thông tin thành công!` : `Đăng ký thành công,
+        Vui lòng kích hoạt tài khoản trong mail và tiếp tục đăng nhập!`
       );
+      this.setState({ loading: false });
     }
   };
 
@@ -331,6 +418,12 @@ class Register extends Component<IProps, IState> {
       is_exactly_pw,
       list_major,
       is_exists,
+      is_exactly_schoolYearStart,
+      exactly_schoolYearEnd,
+      is_exactly_majorID,
+      is_exactly_schoolID,
+      loading,
+      list_school
     } = this.state;
     let { mobile } = this.props;
     return (
@@ -346,7 +439,7 @@ class Register extends Component<IProps, IState> {
             xxl={mobile ? 24 : 10}
           >
             <form className="register">
-              <div className="title a_c">ĐĂNG KÝ</div>
+              <div className="title_register a_c">ĐĂNG KÝ</div>
               {/* FirstName And LastName */}
               <Row>
                 <Col xs={24} >
@@ -470,7 +563,7 @@ class Register extends Component<IProps, IState> {
                       title={
                         is_exactly_phone
                           ? "Số điện thoại chính xác"
-                          : "Điền Sô điện thoại"
+                          : "Điền Số điện thoại"
                       }
                     >
                       <Icon
@@ -485,18 +578,38 @@ class Register extends Component<IProps, IState> {
                 />
               </div>
               <div className="normal">
-                <DatePicker
+                <Select
+                  showSearch
+                  placeholder="Chọn trường học"
                   style={{ width: "100%" }}
-                  onChange={this._handleTime("schoolYearStart")}
-                  placeholder="Năm học bắt đầu"
-                />
-              </div>
-              <div className="normal">
-                <DatePicker
-                  style={{ width: "100%" }}
-                  onChange={this._handleTime("schoolYearEnd")}
-                  placeholder="Năm học kết thúc"
-                />
+                  optionFilterProp="children"
+                  onChange={(event) => this._choseSchool(event)}
+                  filterOption={(input, option) =>
+                    // @ts-ignore
+                    option.props.children
+                      .toLowerCase()
+                      .indexOf(input.toLowerCase()) >= 0
+                  }
+                  showArrow={false}
+                >
+                  {list_school.map((item, index) => {
+                    return (
+                      <Option value={item.id} key={index}>
+                        {item.name}
+                      </Option>
+                    );
+                  })}
+                </Select>
+                <Tooltip
+                  title={
+                    is_exactly_schoolID ? "Trường học hợp lệ" : "Chọn Trường học"
+                  }
+                >
+                  <Icon
+                    type={is_exactly_schoolID ? "check" : "warning"}
+                    style={{ color: is_exactly_schoolID ? "green" : "red", position: 'absolute', marginLeft: -25, marginTop: 8 }}
+                  />
+                </Tooltip>
               </div>
               <div className="normal">
                 <Select
@@ -505,13 +618,27 @@ class Register extends Component<IProps, IState> {
                   style={{ width: "100%" }}
                   optionFilterProp="children"
                   onChange={(event) => this._choseMajor(event)}
+                  dropdownRender={menu => {
+                    if (is_exactly_schoolID) {
+                      return menu
+                    } else {
+                      return (
+                        <React.Fragment>
+                          <div style={{ color: 'red', padding: 10 }}>
+                            Vui lòng chọn Trường Học trước khi chọn Ngành Nghề
+                          </div>
+                        </React.Fragment>
+                      )
+                    }
+                  }}
                   filterOption={(input, option) =>
                     // @ts-ignore
                     option.props.children
                       .toLowerCase()
                       .indexOf(input.toLowerCase()) >= 0
                   }
-                  suffixIcon={null}
+                  showArrow={false}
+                  value={this.state.email_register_dto.majorID}
                 >
                   {list_major.map((item, index) => {
                     return (
@@ -521,11 +648,140 @@ class Register extends Component<IProps, IState> {
                     );
                   })}
                 </Select>
+                <Tooltip
+                  title={
+                    is_exactly_majorID ? "Ngành học hợp lệ" : "Chọn Ngành học"
+                  }
+                >
+                  <Icon
+                    type={is_exactly_majorID ? "check" : "warning"}
+                    style={{ color: is_exactly_majorID ? "green" : "red", position: 'absolute', marginLeft: -25, marginTop: 8 }}
+                  />
+                </Tooltip>
+              </div>
+
+              <div className="normal" style={{ display: 'flex', flexDirection: 'row' }}>
+                {/* <DatePicker
+                  style={{ width: "100%" }}
+                  // onChange={this._handleTime("schoolYearStart")}
+                  onFocus={() => { this.setState({ isOpenStartYear: true }) }}
+                  // onBlur={() => {this.setState({isOpenStartYear: false})}} 
+                  onPanelChange={(v) => {
+                    this.setState({ isOpenStartYear: false, time: v })
+                  }}
+                  value={this.state.time}
+                  placeholder="Năm học bắt đầu"
+                  mode={'year'}
+                  format="YYYY"
+                  open={this.state.isOpenStartYear}
+                  suffixIcon={
+                    <Tooltip
+                      title={
+                        is_exactly_schoolYearStart ? "Năm học bắt đầu hợp lệ" : "Chọn năm học bắt đầu"
+                      }
+                    >
+                      <Icon
+                        type={is_exactly_schoolYearStart ? "check" : "warning"}
+                        style={{ color: is_exactly_schoolYearStart ? "green" : "red" }}
+                      />
+                    </Tooltip>
+                  }
+                  allowClear={false}
+                /> */}
+                {/* <div> */}
+                  <Select
+                    showSearch
+                    placeholder="Năm học bắt đầu"
+                    style={{ width: "49%", marginRight: 15 }}
+                    optionFilterProp="children"
+                    onChange={this._handleTime("schoolYearStart")}
+                    filterOption={(input, option) =>
+                      // @ts-ignore
+                      option.props.children
+                        .toLowerCase()
+                        .indexOf(input.toLowerCase()) >= 0
+                    }
+                    showArrow={false}
+                  >
+                    {this.state.listBirthYearMin.map((item, index) => {
+                      return (
+                        <Option value={item.id} key={index}>
+                          {item.name}
+                        </Option>
+                      );
+                    })}
+                  </Select>
+                  <Tooltip
+                    title={
+                      is_exactly_schoolYearStart ? "Năm học bắt đầu hợp lệ" : "Chọn năm học bắt đầu"
+                    }
+                  >
+                    <Icon
+                      type={is_exactly_schoolYearStart ? "check" : "warning"}
+                      style={{ color: is_exactly_schoolYearStart ? "green" : "red",  position: 'relative', marginLeft: -35, marginTop: 8}}
+                    />
+                  </Tooltip>
+                {/* </div> */}
+
+
+                <Select
+                  showSearch
+                  placeholder="Năm học kết thúc"
+                  style={{ width: "49%", marginLeft: 15 }}
+                  optionFilterProp="children"
+                  onChange={this._handleTime("schoolYearEnd")}
+                  filterOption={(input, option) =>
+                    // @ts-ignore
+                    option.props.children
+                      .toLowerCase()
+                      .indexOf(input.toLowerCase()) >= 0
+                  }
+                  showArrow={false}
+                >
+                  {this.state.listBirthYearMax.map((item, index) => {
+                    return (
+                      <Option value={item.id} key={index}>
+                        {item.name}
+                      </Option>
+                    );
+                  })}
+                </Select>
+                <Tooltip
+                      title={
+                        validSchoolYearEnd[exactly_schoolYearEnd]
+                      }
+                    >
+                      <Icon
+                        type={exactly_schoolYearEnd === 1 ? "check" : "warning"}
+                        style={{ color: exactly_schoolYearEnd === 1 ? "green" : "red", position: 'relative', marginLeft: -25, marginTop: 8 }}
+                      />
+                    </Tooltip>
+              </div>
+              <div className="normal">
+                {/* <DatePicker
+                  style={{ width: "100%" }}
+                  onChange={this._handleTime("schoolYearEnd")}
+                  placeholder="Năm học kết thúc"
+                  suffixIcon={
+                    <Tooltip
+                      title={
+                        validSchoolYearEnd[exactly_schoolYearEnd]
+                      }
+                    >
+                      <Icon
+                        type={exactly_schoolYearEnd === 1 ? "check" : "warning"}
+                        style={{ color: exactly_schoolYearEnd === 1 ? "green" : "red" }}
+                      />
+                    </Tooltip>
+                  }
+                  allowClear={false}
+                /> */}
+
               </div>
 
               {/* Password */}
               <div className="normal">
-                <Input.Password
+                <Input
                   id="password"
                   placeholder="Mật khẩu"
                   disabled={is_exists}
@@ -533,20 +789,29 @@ class Register extends Component<IProps, IState> {
                     <Icon type="lock" style={{ color: "rgba(0,0,0,.4)" }} />
                   }
                   suffix={
-                    <Tooltip
-                      title={
-                        is_exactly_pw ? "Mật khẩu hợp lệ" : "Mật khẩu quá ngắn"
-                      }
-                    >
+                    <div style={{ flexDirection: 'row' }}>
                       <Icon
-                        type={is_exactly_pw ? "check" : "warning"}
-                        style={{ color: is_exactly_pw ? "green" : "red" }}
+                        type={this.state.show_password ? "eye-invisible" : "eye"}
+                        onClick={() => {
+                          this.setState({ show_password: !this.state.show_password })
+                        }}
+                        style={{ marginRight: 5 }}
                       />
-                    </Tooltip>
+                      <Tooltip
+                        title={
+                          is_exactly_pw ? "Mật khẩu hợp lệ" : "Mật khẩu quá ngắn"
+                        }
+                      >
+                        <Icon
+                          type={is_exactly_pw ? "check" : "warning"}
+                          style={{ color: is_exactly_pw ? "green" : "red" }}
+                        />
+                      </Tooltip>
+                    </div>
                   }
                   value={password}
                   onChange={this._handleInput}
-                  type="password"
+                  type={!this.state.show_password ? "password" : null}
                 />
               </div>
 
@@ -560,22 +825,29 @@ class Register extends Component<IProps, IState> {
                     <Icon type="lock" style={{ color: "rgba(0,0,0,.4)" }} />
                   }
                   suffix={
-                    <Tooltip
-                      title={
-                        is_exactly_rpw
-                          ? "Mật khẩu nhập lại hợp lệ"
-                          : "Mật khẩu chính xác"
-                      }
-                    >
+                    <div style={{ flexDirection: 'row' }}>
                       <Icon
-                        type={is_exactly_rpw ? "check" : "warning"}
-                        style={{ color: is_exactly_rpw ? "green" : "red" }}
+                        type={this.state.show_re_password ? "eye-invisible" : "eye"}
+                        onClick={() => {
+                          this.setState({ show_re_password: !this.state.show_re_password })
+                        }}
+                        style={{ marginRight: 5 }}
                       />
-                    </Tooltip>
+                      <Tooltip
+                        title={
+                          validRePassword[is_exactly_rpw]
+                        }
+                      >
+                        <Icon
+                          type={is_exactly_rpw === 2 ? "check" : "warning"}
+                          style={{ color: is_exactly_rpw === 2 ? "green" : "red" }}
+                        />
+                      </Tooltip>
+                    </div>
                   }
                   value={repassword}
                   onChange={this._handleInput}
-                  type="password"
+                  type={!this.state.show_re_password ? "password" : null}
                 />
               </div>
               {/* Except */}
@@ -596,7 +868,7 @@ class Register extends Component<IProps, IState> {
                     // disabled={!is_except_rule}
                     block
                   >
-                    Hoàn tất
+                    {loading ? <Icon type="loading" /> : 'Hoàn tất'}
                   </Button>
                 </p>
                 {/* <p className='or'>
@@ -604,7 +876,7 @@ class Register extends Component<IProps, IState> {
                                     </p> */}
                 <p className="a_c">
                   Bạn đã có tài khoản ?{" "}
-                  <a href="/login" style={{ color: "red" }}>
+                  <a onClick={() => goBackWhenLogined('login')} style={{ color: "red" }} >
                     Đăng nhập
                   </a>
                 </p>

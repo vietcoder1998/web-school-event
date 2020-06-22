@@ -109,10 +109,11 @@ class ArticleDetail extends PureComponent<IProps, IState> {
     }
     else return 0
   }
-  async DetailArticle() {
-    let res = await _get(
+  DetailArticle() {
+    try{
+      _get(
       null,
-      ANNOUNCEMENTS.DETAIL.replace("{id}", this.props.match.params.id),
+      ANNOUNCEMENTS.DETAIL.replace("{id}",  window.atob(this.props.match.params.id)),
       PUBLIC_HOST,
       noInfoHeader
     ).then(res => {
@@ -136,6 +137,11 @@ class ArticleDetail extends PureComponent<IProps, IState> {
         console.log(e)
       })
 
+    }
+    catch{
+
+    }
+   
   }
 
   async getComment() {
@@ -146,13 +152,14 @@ class ArticleDetail extends PureComponent<IProps, IState> {
       createdDate: null,
       lastModified: null,
     };
-
-    let res = await _post(
+    try{
+       _post(
       dataSend,
-      ANNOUNCEMENTS.COMMENT.replace("{id}", this.props.match.params.id),
+      ANNOUNCEMENTS.COMMENT.replace("{id}", window.atob(this.props.match.params.id)),
       PUBLIC_HOST,
       noInfoHeader
     ).then(res => {
+      
       this.setState({
         listComment: res.data.items,
         loadingCommnet: false,
@@ -162,6 +169,9 @@ class ArticleDetail extends PureComponent<IProps, IState> {
     }).catch((e) => {
       console.log(e)
     })
+    }
+    catch{}
+   
 
   }
   setComment = (e) => {
@@ -240,6 +250,24 @@ class ArticleDetail extends PureComponent<IProps, IState> {
                                 top: document.body.scrollHeight,
                                 behavior: 'smooth'
                               });
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <Icon
+                            type={"facebook"}
+                            style={{ fontSize: 22, marginTop: 15 }}
+                            onClick={() => {
+                             window.open(`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`)
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <Icon
+                            type={"home"}
+                            style={{ fontSize: 22, marginTop: 15 }}
+                            onClick={() => {
+                              window.location.replace("/home");
                             }}
                           />
                         </div>

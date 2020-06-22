@@ -16,13 +16,14 @@ interface JobPropertiesProps {
     _getSimilarJob?: any;
     paging?: any;
     is_loading_similar?: any;
+    param?: string
 }
 
 interface JobPropertiesState { }
 
 export default class JobProperties extends PureComponent<JobPropertiesProps, JobPropertiesState> {
     render() {
-        let { jobDetail, similarJob, is_loading_similar, paging } = this.props;
+        let { jobDetail, similarJob, is_loading_similar, paging, param } = this.props;
         // let add_arr = jobDetail && jobDetail.address && jobDetail.address.split(" ");
         // let list_des = convertStringToArray(jobDetail.description);
 
@@ -146,7 +147,7 @@ export default class JobProperties extends PureComponent<JobPropertiesProps, Job
                                                 </JobType>
                                             </div>
                                             <div style={{ flex: 9 }}>
-                                                <p style={{ textAlign: 'left', fontSize: '1.1em', fontWeight: 500 }} className="info-silimar-job"><Link to={`/job-detail/${window.btoa(item.id)}`} target='_blank'>{item.jobTitle}</Link></p>
+                                                <p style={{ textAlign: 'left', fontSize: '1.1em', fontWeight: 500 }} className="info-silimar-job"><Link to={`/job-detail/${window.btoa(item.id)}${param}`} target='_blank'>{item.jobTitle}</Link></p>
                                                 <p style={{ textAlign: 'left' }} className="info-silimar-job"><span><Icon type='environment' style={{ marginRight: 3 }} />{item.address}</span></p>
                                             </div>
                                         </div>)}
@@ -155,7 +156,7 @@ export default class JobProperties extends PureComponent<JobPropertiesProps, Job
                             }
                         </div>
                     </Row>
-                    <div className='pagination-job a_c'>
+                    <div style={{textAlign: 'center'}}>
                         <Pagination defaultCurrent={1} total={paging} onChange={(event) => this.props._getSimilarJob(event)} />
                     </div>
                 </div>

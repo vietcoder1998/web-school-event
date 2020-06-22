@@ -8,12 +8,12 @@ let data = {
         items: [],
     },
     filter: {
-        jobType: 'PARTTIME',
+        jobType: null,
         show_days: true,
         list_shift: {
             MOR: true,
-            AFT: false,
-            EVN: false,
+            AFT: true,
+            EVN: true,
         },
         list_day: {
             MON: true,
@@ -21,8 +21,8 @@ let data = {
             WED: true,
             THU: true,
             FRI: true,
-            SAT: false,
-            SUN: false,
+            SAT: true,
+            SUN: true,
         },
         area: JSON.parse(localStorage.getItem('region')),
         job_dto: { name: null, id: 0 }

@@ -37,11 +37,12 @@ function getHighLightJobData(action) {
     };
 
     let isAuthen = store.getState().AuthState.isAuthen;
-
+    let eventID = store.getState().DetailEvent.eventID;
+    let schoolID = store.getState().DetailEvent.schoolID
     let res = _requestToServer(
         POST,
         action.body ? action.body : body,
-        (isAuthen ? JOBS + '/active/home' : FIND_JOB + '/home'),
+        (isAuthen ? JOBS + '/active/home' : `/api/schools/${schoolID}/events/${eventID}/jobs/active/home`),
         isAuthen ? STUDENT_HOST : PUBLIC_HOST,
         isAuthen ? authHeaders : noInfoHeader,
         {

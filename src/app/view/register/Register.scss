@@ -4,9 +4,11 @@
   margin: 20px 0 50px;
   background-color: white;
   display: block;
-  padding: 10% 5% 0px;
-  .title{
+  padding: 5% 5% 0px;
+  .title_register{
     font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 10px
   }
   .normal {
     font-weight: 500;
@@ -58,4 +60,13 @@
   .ant-modal-body{
     height: 530px;
   }
+}
+.ant-calendar-year-panel-last-decade-cell {
+  color: #afafaf
+}
+.ant-calendar-year-panel-next-decade-cell {
+  color: #afafaf
+}
+.ant-calendar-year-panel-selected-cell {
+  color: #fff
 }

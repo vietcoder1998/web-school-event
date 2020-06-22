@@ -1,12 +1,10 @@
 import React, { PureComponent } from "react";
-import { connect } from "react-redux";
 import { Row, Col, Divider, Skeleton, Carousel } from "antd";
-import { REDUX_SAGA } from "../../../../const/actions";
 import { _requestToServer } from "../../../../services/exec";
 import { POST } from "../../../../const/method";
 import { ANNOUNCEMENTS } from "../../../../services/api/public.api";
 import { PUBLIC_HOST } from "../../../../environment/development";
-import Card2 from "../Component/Card2";
+
 import Title from "../Component/Title";
 import Card3 from "../Component/Card3";
 interface IProps {
@@ -87,9 +85,7 @@ class GoodArticle extends PureComponent<IProps, IState> {
                                 date={item.createdDate}
                             />
                         </div>
-
                     ))}
-
                 </div>
 
             );
@@ -97,18 +93,6 @@ class GoodArticle extends PureComponent<IProps, IState> {
     }
 }
 
-const mapStateToProps = (state) => ({
-    GoodArticle: state.AnnounList.listAnnoun,
-});
 
-const mapDispatchToProps = (dispatch) => ({
-    getListArticle: (pageIndex?: number, pageSize?: number, body?: any) =>
-        dispatch({
-            type: REDUX_SAGA.ANNOUNCEMENTS.GET_LIST,
-            pageIndex,
-            pageSize,
-            body,
-        }),
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(GoodArticle);
+export default GoodArticle;

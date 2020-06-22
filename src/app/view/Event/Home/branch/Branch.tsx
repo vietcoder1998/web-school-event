@@ -15,6 +15,8 @@ import img_business from '../../../../../assets/image/event/business.jpg'
 interface IProps {
   getEvenJob?: Function;
   listBranch?: any;
+  eventID?: any;
+  schoolID?: any
 }
 interface IState {
   listBranch: any;
@@ -41,7 +43,7 @@ class Branch extends PureComponent<IProps, IState> {
 
   componentDidMount = async () => {
     await this.setState({ is_loading: false });
-    let listBranch = await _get(null, EVENT_PUBLIC.BRANCH, PUBLIC_HOST, {});
+    let listBranch = await _get(null, `/api/schools/events/${this.props.eventID}/jobs/branches`, PUBLIC_HOST, {});
     this.setState({
       listBranch: listBranch.data,
     });
@@ -120,15 +122,15 @@ class Branch extends PureComponent<IProps, IState> {
                       style={{ borderTopLeftRadius: '10.4528px', borderTopRightRadius: '10.4528px' }}
                     />
                   </div>
-                  {electromechanical ?
-                    <div style={{ padding: '10px 0', display: 'flex', justifyContent: 'center', alignItems: 'center', height: 106.5 - this.state.width }}>
-                      <img
-                        src={electromechanical.imageUrl === null ? whileImage : electromechanical.imageUrl}
-                        alt="branch"
-                        style={{ width: 30, marginRight: 10 }}
-                      />
-                      <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{electromechanical.name}{" "}</div>
-                    </div> : null}
+                  {electromechanical ? 
+                  <div style={{ padding: '10px 0', display: 'flex', justifyContent: 'center', alignItems: 'center', height: 106.5 - this.state.width }}>
+                    <img
+                      src={ electromechanical.imageUrl === null ? whileImage : electromechanical.imageUrl}
+                      alt="branch"
+                      style={{ width: 30, marginRight: 10 }}
+                    />
+                    <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{electromechanical.name}{" "}</div>
+                  </div> : null }
                 </a>
               </div>
             </Col>
@@ -155,15 +157,15 @@ class Branch extends PureComponent<IProps, IState> {
                       style={{ borderTopLeftRadius: '10.4528px', borderTopRightRadius: '10.4528px' }}
                     />
                   </div>
-                  {technique ?
-                    <div style={{ padding: '10px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                      <img
-                        src={technique.imageUrl === null ? whileImage : technique.imageUrl}
-                        alt="branch"
-                        style={{ width: 30, marginRight: 10 }}
-                      />
-                      <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{technique.name}{" "}</div>
-                    </div> : null}
+                {technique ? 
+                  <div style={{ padding: '10px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <img
+                      src={technique.imageUrl === null ? whileImage : technique.imageUrl}
+                      alt="branch"
+                      style={{ width: 30, marginRight: 10 }}
+                    />
+                    <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{technique.name}{" "}</div>
+                  </div> : null }
                 </a>
               </div>
               <div className="branch-item" style={{ textAlign: "center", padding: 0 }}>
@@ -186,15 +188,15 @@ class Branch extends PureComponent<IProps, IState> {
                       style={{ borderTopLeftRadius: '10.4528px', borderTopRightRadius: '10.4528px' }}
                     />
                   </div>
-                  {business ?
-                    <div style={{ padding: '10px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                      <img
-                        src={business.imageUrl === null ? whileImage : business.imageUrl}
-                        alt="branch"
-                        style={{ width: 25, marginRight: 10 }}
-                      />
-                      <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{business.name}{" "}</div>
-                    </div> : null}
+                  {business ? 
+                  <div style={{ padding: '10px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <img
+                      src={business.imageUrl === null ? whileImage : business.imageUrl}
+                      alt="branch"
+                      style={{ width: 25, marginRight: 10 }}
+                    />
+                    <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{business.name}{" "}</div>
+                  </div> : null }
                 </a>
               </div>
             </Col>
@@ -243,7 +245,10 @@ class Branch extends PureComponent<IProps, IState> {
   }
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  eventID: state.DetailEvent.eventID,
+  schoolID: state.DetailEvent.schoolID
+});
 
 const mapDispatchToProps = (dispatch) => ({
   getEvenJob: (pageIndex?: number, pageSize?: number) =>

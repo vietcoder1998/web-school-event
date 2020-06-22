@@ -10,11 +10,12 @@ import TextImage from './../../../../assets/image/carouselGroup/carousel1.jpg';
 interface IListResultProps {
     list_result?: Array<any>;
     loading?: boolean;
-    isSearchEvent?: boolean; // phân biệt job-event và job-normal ở 2 trang khác nhau 
+    isSearchEvent?: boolean; // phân biệt job-event và job-normal ở 2 trang khác nhau ,
+    param?: any
 }
 
 export default function ListResult(props?: IListResultProps) {
-    let { loading, list_result, isSearchEvent } = props;
+    let { loading, list_result, isSearchEvent, param } = props;
 
     return (
         <div className='result' >
@@ -54,7 +55,7 @@ export default function ListResult(props?: IListResultProps) {
                             <h4 >
                                 <Link
                                     style={{ color: item.priority === 'TOP' ? 'red' : 'black' }}
-                                    to={isSearchEvent ? `event-job-detail/${window.btoa(item.id)}` : `/job-detail/${window.btoa(item.id)}`}
+                                    to={isSearchEvent ? `event-job-detail/${window.btoa(item.id)}${param}` : `/job-detail/${window.btoa(item.id)}${param}`}
                                     target='_blank'
                                 > {limitString(item.jobTitle, 80)}</Link>
                                 {item.priority === 'TOP' ? <Tooltip title='Công việc hot'>
@@ -67,7 +68,7 @@ export default function ListResult(props?: IListResultProps) {
                         >
                             <div>
                                 {/* <p> */}
-                                <Link to={`/employer/${window.btoa(item.employerID)}`} target='_blank' className="name_employer" style={{ fontWeight: 550}}>{item.employerName ? item.employerName.toUpperCase() : null}</Link>
+                                <Link to={`/employer/${window.btoa(item.employerID)}${param}`} target='_blank' className="name_employer" style={{ fontWeight: 550}}>{item.employerName ? item.employerName.toUpperCase() : null}</Link>
                                 {/* </p> */}
                             </div>
                             <div className='item-detail'

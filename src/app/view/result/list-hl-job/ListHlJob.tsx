@@ -4,19 +4,20 @@ import { Link } from 'react-router-dom';
 import './ListHlJob.scss';
 //@ts-ignore
 
+
 interface IListHlJobProps {
     highlightData?: any;
     is_loading?: boolean;
     getHighLightJobs?: Function;
     loading_high_light_data?: boolean;
-    
+    param?: string
 }
 
 export default class ListHlJob extends React.Component<IListHlJobProps> {
 
 
     render() {
-        let { highlightData, loading_high_light_data, isSearchEvent } = this.props;
+        let { highlightData, loading_high_light_data, param } = this.props;
         // let {loading_high_light_data} = this.state;
         return (
             <div className='hl-job hidden-only-phone'>
@@ -28,7 +29,7 @@ export default class ListHlJob extends React.Component<IListHlJobProps> {
                                 <Col key={index} xs={24} sm={24} md={12} lg={8} xl={8} xxl={8}>
                                     {loading_high_light_data ?
                                         <Skeleton key={index} loading={true} avatar paragraph={{ rows: 1 }} active={true} /> :
-                                        <Link to={`/job-detail/${window.btoa(item.id)}`}
+                                        <Link to={`/job-detail/${window.btoa(item.id)}${param}`}
                                             target='_blank'>
                                             <div key={index} className='item-hl-job'>
                                                 <div style={{ flex: 1 }}>
@@ -43,7 +44,7 @@ export default class ListHlJob extends React.Component<IListHlJobProps> {
 
                                                 <ul style={{ flex: 4, marginLeft: 10, marginBottom: 0 }}>
                                                     <li >
-                                                        <Link to={`/job-detail/${window.btoa(item.id)}`}
+                                                        <Link to={`/job-detail/${window.btoa(item.id)}${param}`}
                                                             target='_blank'
                                                             style={{ color: '#ff6f6f', }}
                                                         >

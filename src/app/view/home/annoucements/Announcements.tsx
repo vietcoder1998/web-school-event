@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Row, Col, Carousel, Card, Icon } from 'antd';
 import './Announcements.scss'
 import { connect } from 'react-redux';
@@ -7,20 +7,51 @@ import { IAppState } from '../../../../redux/store/reducer';
 import { IAnnouncement } from '../../../../models/announcements';
 import Meta from 'antd/lib/card/Meta';
 import { limitString } from '../../../../utils/limitString';
+import { POST } from '../../../../const/method';
+import { _requestToServer } from '../../../../services/exec';
+import { ANNOUNCEMENTS } from '../../../../services/api/public.api';
+import { PUBLIC_HOST } from '../../../../environment/development';
 
 interface IProps {
-    getAnnouncements?: Function;
     inday_data?: any;
     regions: Array<any>,
     jobNames: Array<any>,
     history?: any,
-    announcements?: Array<IAnnouncement>
     isMobile: boolean;
 }
 
 function Announcements(props?: IProps) {
-    React.useEffect(() => { props.getAnnouncements(0, 3) }, []);
-    let { announcements, isMobile } = props;
+
+    React.useEffect(() => { getListArticle(0, 3) }, []);
+    const [announcements, setAnnouncements] = useState([]);
+
+    function getListArticle(pageIndex, pageSize = 5) {
+        let body = {
+            adminID: null,
+            hidden: null,
+            createdDate: null,
+            announcementTypeID: null,
+        };
+
+        _requestToServer(
+            POST,
+            body,
+            ANNOUNCEMENTS.LIST + `?pageIndex=${pageIndex}&pageSize=${pageSize}`,
+            PUBLIC_HOST,
+            {
+                pageIndex: pageIndex,
+                pageSize: pageSize,
+            },
+            false
+        ).then(res => {
+            console.log(res);
+            setAnnouncements(res.data.items)
+        })
+        .catch(e => {
+            console.log(e)
+        })
+    }
+    let { isMobile } = props;
     return (
         <div className='announcements'>
             <h5>BÀI VIẾT CHO BẠN</h5>
@@ -30,7 +61,7 @@ function Announcements(props?: IProps) {
                         {
                             announcements.map((item?: IAnnouncement, i?: number) => (
                                 <div key={i} style={{height: 400}}>
-                                    <a key={i} href={`https://employer.works.vn/announcements/detail/${item.id}`}>
+                                    <a key={i} href={`/announcementDetail/${window.btoa(item.id)}`}>
                                         <Card
                                             hoverable
                                             cover={
@@ -73,7 +104,7 @@ function Announcements(props?: IProps) {
                         <Row>
                             {
                                 announcements.map((item?: IAnnouncement, i?: number) => (
-                                    <a key={i} href={`https://employer.works.vn/announcements/detail/${item.id}`}>
+                                    <a key={i} href={`/announcementDetail/${window.btoa(item.id)}`}>
                                         <Col key={i} span={8} style={{ padding: 10 }} >
                                             <Card
                                                 hoverable

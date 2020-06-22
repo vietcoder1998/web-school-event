@@ -141,7 +141,7 @@ class SaveJob extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                             </Row>
                                         }
                                         <div className='pagination-result'>
-                                            <Pagination defaultCurrent={1} pageSize={10} total={totalPagination} onChange={this._getJobSave} />
+                                            <Pagination defaultCurrent={1} pageSize={10} total={totalPagination} onChange={this._getJobSave} showSizeChanger={false} />
                                         </div>
                                     </div>
                                 </div>

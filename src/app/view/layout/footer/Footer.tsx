@@ -6,9 +6,14 @@ import CHPlay from '../../../../assets/image/CHPlay.png';
 import AppStore from '../../../../assets/image/app-store.png';
 import { Col, Row } from 'antd';
 import Option from './option/Option'
+import { REDUX_SAGA } from './../../../../const/actions';
+
+import { connect } from 'react-redux';
+
 //@ts-ignore
 
-export default function Footer(props) {
+function Footer(props) {
+  React.useEffect(() => { props.getJobNames() }, []);
   return (
     <div className='footer' >
       {/* <Option {...props} /> */}
@@ -71,3 +76,12 @@ export default function Footer(props) {
     </div >
   );
 }
+const mapStateToProps = (state) => ({
+  regions: state.Regions.items,
+  jobNames: state.JobNames.items,
+})
+
+const mapDispatchToProps = dispatch => ({
+  getJobNames: (pageIndex?: number, pageSize?: number) => dispatch({ type: REDUX_SAGA.JOB_NAMES.GET_JOB_NAMES, pageIndex, pageSize }),
+})
+export default connect(mapStateToProps, mapDispatchToProps)(Footer);

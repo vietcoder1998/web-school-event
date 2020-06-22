@@ -4,6 +4,7 @@ import { _requestToServer } from '../../../services/exec';
 import { PUBLIC_HOST } from '../../../environment/development';
 import { REDUX_SAGA, REDUX } from '../../../const/actions'
 import { _get } from '../../../services/base-api';
+import { store } from '../../store';
 
 function* getListEventBranch(action) {
     let res = yield call(getBranchData, action);
@@ -14,7 +15,8 @@ function* getListEventBranch(action) {
 }
 
 function getBranchData(action) {
-    let res = _get(null, EVENT_PUBLIC.BRANCH, PUBLIC_HOST, null)
+    let eventID = store.getState().DetailEvent.eventID;
+    let res = _get(null, `/api/schools/events/${eventID}/jobs/branches`, PUBLIC_HOST, null)
     return res;
 }
 

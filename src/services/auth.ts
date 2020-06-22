@@ -23,6 +23,7 @@ export const loginHeaders = {
 // No info header
 export const noInfoHeader = {
     'Access-Control-Allow-Headers': '*',
+    'Access-Control-Allow-Origin': '*',
     "Content-Type": "application/json",
 }
 

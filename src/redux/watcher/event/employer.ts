@@ -29,15 +29,16 @@ function getTopEmployer(action) {
         shuffle: true
     };
     let isAuthen = store.getState().AuthState.isAuthen;
+    let eventID = store.getState().DetailEvent.eventID;
+    let schoolID = store.getState().DetailEvent.schoolID
     let res = _requestToServer(
         POST,
         data,
-        (isAuthen ? EVENT_PRIVATE.EMPLOYER.HOME : EVENT_PUBLIC.EMPLOYER.HOME),
+        (isAuthen ? `/api/students/schools/events/${eventID}/employers/query` : `/api/schools/${schoolID}/events/${eventID}/employers/query`),
         isAuthen ? STUDENT_HOST : PUBLIC_HOST, isAuthen ? authHeaders : noInfoHeader,
         {
             pageIndex: action.pageIndex ? action.pageIndex : 0,
-            pageSize: 50,
-            priority: 'TOP'
+            pageSize: 50
         },
         false
     );
@@ -65,10 +66,12 @@ function getBannerEmployer(action) {
         shuffle: true
     };
     let isAuthen = store.getState().AuthState.isAuthen;
+    let eventID = store.getState().DetailEvent.eventID;
+    let schoolID = store.getState().DetailEvent.schoolID
     let res = _requestToServer(
         POST,
         data,
-        (isAuthen ? EVENT_PRIVATE.EMPLOYER.HOME : EVENT_PUBLIC.EMPLOYER.HOME),
+        (isAuthen ? `/api/students/schools/events/${eventID}/employers/query` : `/api/schools/${schoolID}/events/${eventID}/employers/query`),
         isAuthen ? STUDENT_HOST : PUBLIC_HOST, isAuthen ? authHeaders : noInfoHeader,
         {
             pageIndex: action.pageIndex ? action.pageIndex : 0,

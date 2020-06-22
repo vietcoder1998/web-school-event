@@ -20,7 +20,8 @@ import EmployerDetail from "./employer-detail/EmployerDetail";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import { TYPE } from "../../../const/type";
-
+import qs from "query-string";
+import {goBackWhenLogined} from '../../../utils/goBackWhenLogined'
 const { TabPane } = Tabs;
 const { TextArea } = Input;
 
@@ -46,7 +47,8 @@ interface IJobDetailProps extends StateProps, DispatchProps {
   getEmployerMoreJob?: (
     pageIndex?: number,
     pageSize?: number,
-    id?: string
+    id?: string,
+    param?: string
   ) => any;
   getJobDetail?: (jobID?: string) => any;
   getEmployerDetail?: (id?: string) => any;
@@ -135,6 +137,18 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
   l_e = [];
   l_s = [];
   componentDidMount() {
+    let queryParam = qs.parse(window.location.search);
+    let { isAuthen } = this.props;
+    if(queryParam.changeHost == '1') {
+      if(isAuthen) {
+        this.setState({visible: true})
+        // console.log(window.location.pathname)
+        // window.location.search = null;
+        this.props.history.replace(`${window.location.pathname}?data=${queryParam.data}`)
+      } else {
+        goBackWhenLogined('login')
+      }
+    } 
     this.setState({ is_loading: false });
     this._loadData();
     this._loadState();
@@ -152,10 +166,13 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
     ) {
       nextProps.getEmployerDetail(nextProps.jobDetail.employerID);
       nextProps.getEmployerMoreJob(0, 6, nextProps.jobDetail.employerID);
+      // console.log(nextProps.jobDetail)
+
       return {
         employerID: nextProps.jobDetail.employerID,
       };
     }
+
 
     return null;
   }
@@ -212,10 +229,10 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
 
   _toLogin = () => {
     let { isAuthen } = this.props;
-    localStorage.setItem("last_access", window.location.href);
-
+    localStorage.setItem("last_access", window.location.pathname);
+    let path = window.location.pathname + window.location.search
     if (isAuthen !== true) {
-      window.location.assign("/login");
+      window.location.assign( `/login?path=${window.btoa(path)}`);
     }
   };
 
@@ -259,11 +276,25 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
         let { results } = res.data;
         if (res.data.success === true) {
           swal({
+            buttons: {
+              cancel: "OK",
+              catch: {
+                text: "Lịch sử ứng tuyển",
+                value: "catch",
+              },
+            },
             title: "Worksvns thông báo",
-            text: "Ứng tuyển thành công!",
+            text: `Ứng tuyển thành công!
+            Hồ sơ của bạn đã được gửi đến nhà tuyển dụng`,
             icon: TYPE.SUCCESS,
-            dangerMode: false,
-          });
+            dangerMode: false
+          }).then((value) => {
+            switch (value) {
+              case "catch":
+                window.open('/history-apply')
+                break;
+            }
+          })
           this.props.getJobDetail(id);
           this._loadState();
         }
@@ -294,7 +325,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
       }
     });
   }
-  componentWillUnmount() { }
+  // componentWillUnmount() { }
 
   render() {
     let {
@@ -307,6 +338,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
       similarJob,
       totalSimilarJob,
       is_loading_similar,
+      param
     } = this.props;
     let { is_loading, visible, confirmLoading, jobState } = this.state;
     let isSaved = jobDetail.saved;
@@ -405,6 +437,8 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                       );
                     })}
                 </div>
+                <div style={{ fontStyle: 'italic'}}><span className="asterisk">*</span> Hồ sơ của bạn sẽ được gửi đến Nhà tuyển dụng! <a href="/profile" target="_blank">Hoàn thiện hồ sơ</a></div>
+                
               </div>
             ) : (
                 <div>
@@ -455,7 +489,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                               <Link
                                 to={`/employer/${window.btoa(
                                   employerDetail.id
-                                )}`}
+                                )}${param}`}
                                 target="_blank"
                                 style={{ fontSize: "1.05em", fontWeight: 450 }}
                               >
@@ -476,7 +510,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                         </Col>
                         <Col xs={24} sm={24} md={4} lg={4} xl={4}>
                           <Row className="btn-s-c">
-                            <Col
+                            {/* <Col
                               xs={8}
                               sm={8}
                               md={24}
@@ -499,7 +533,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                                 }
                                 block
                               />
-                            </Col>
+                            </Col> */}
                             <Col
                               xs={4}
                               sm={4}
@@ -514,7 +548,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                               md={24}
                               lg={24}
                               xl={24}
-                              style={{ marginTop: 10 }}
+                              style={{ marginTop: 30 }}
                             >
                               <Button
                                 type={applyState ? "ghost" : "default"}
@@ -549,6 +583,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                           _getSimilarJob={this._getSimilarJob}
                           paging={totalSimilarJob}
                           is_loading_similar={is_loading_similar}
+                          param={param}
                         />
                       </TabPane>
                       <TabPane tab="Thông tin Công ty" key="2">
@@ -558,6 +593,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                           _getMoreJob={this._getMoreJob}
                           paging={totalMoreJob}
                           is_loading_more={is_loading_more}
+                          param={param}
                         />
                       </TabPane>
                     </Tabs>
@@ -583,6 +619,7 @@ const mapStateToProps = (state) => ({
   totalMoreJob: state.EmployerMoreJob.data.totalItems,
   totalSimilarJob: state.SimilarJob.totalItems,
   isAuthen: state.AuthState.isAuthen,
+  param: state.DetailEvent.param
 });
 
 const mapDispatchToprops = (dispatch) => ({

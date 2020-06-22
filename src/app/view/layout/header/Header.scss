@@ -1,13 +1,13 @@
 @import "../../sass/variable";
 
+
 .header {
   position           : relative;
   z-index            : 1;
   width              : 100%;
-  background-color   : #32A3F9;
   // background         : linear-gradient(to right, $color_base, rgb(216, 216, 216));
   height             : 60px;
-  padding            : 0 15px;
+  padding            : 0 20px;
   display            : flex;
   justify-content    : space-between;
   align-items        : center;
@@ -44,21 +44,21 @@
 
   .logo {
     position: relative;
-    top     : 0px;
+    top     : -2px;
     width   : 40px;
     height  : 40px;
   }
 
   .direct-page {
     position   : absolute;
-    left       : 13%;
+    left       : 15%;
     font-weight: 550;
     font-size          : 0.93rem;
 
     a {
       color              : rgb(255, 255, 255);
       height             : 100%;
-      padding            : 15px;
+      padding            : 20px;
       font-size          : 0.93rem;
       font-weight        : 400;
       font-family: $font_base;

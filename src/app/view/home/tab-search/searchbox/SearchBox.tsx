@@ -13,7 +13,6 @@ import QRCodeAppStore from '../../../../../assets/image/qr-code-appstore.png';
 import QRCodeCHPlay from '../../../../../assets/image/qr-code-chplay.png';
 import qs from 'query-string';
 
-
 const InputGroup = Input.Group;
 const { Option } = Select;
 const { TabPane } = Tabs;
@@ -54,7 +53,9 @@ interface IProps {
     setFilterJobName?: any;
     setFilterListDay?: any;
     show_days?: any;
-    setFilter?: any
+    setFilter?: any;
+    primaryColor?: string;
+    param?: string
 };
 
 interface IState {
@@ -97,7 +98,8 @@ interface IState {
     show_location?: boolean,
     choose_location?: boolean,
     visible?: boolean,
-    showQRImageType?: any
+    showQRImageType?: any,
+
 };
 
 class SearchBox extends Component<IProps, IState>{
@@ -111,16 +113,16 @@ class SearchBox extends Component<IProps, IState>{
                 WED: true,
                 THU: true,
                 FRI: true,
-                SAT: false,
-                SUN: false,
+                SAT: true,
+                SUN: true,
             },
 
             jobType: 'PARTTIME',
 
             list_shift: {
                 MOR: true,
-                AFT: false,
-                EVN: false,
+                AFT: true,
+                EVN: true,
             },
             show_days: true,
             choose_advanced: false,
@@ -145,7 +147,7 @@ class SearchBox extends Component<IProps, IState>{
             show_location: false,
             choose_location: false,
             visible: false,
-            showQRImageType: 0,
+            showQRImageType: 0
         }
     }
 
@@ -213,7 +215,6 @@ class SearchBox extends Component<IProps, IState>{
         } else {
             show_days = false
         };
-
         this.setState({ show_days: show_days_, jobType })
         this.props.setFilterJobType(jobType, show_days_)
     }
@@ -238,6 +239,7 @@ class SearchBox extends Component<IProps, IState>{
     }
 
     _onSearch = (event?: string) => {
+        // console.log(event)
         this.props.getJobNames(event)
     }
 
@@ -262,7 +264,7 @@ class SearchBox extends Component<IProps, IState>{
     }
 
     _setArea = (item) => {
-      
+
         this.setState({ area: item });
         this.props.setFilterArea(item);
         localStorage.setItem("region", JSON.stringify(item))
@@ -270,6 +272,9 @@ class SearchBox extends Component<IProps, IState>{
 
     _handleTabs = (key) => {
         switch (key) {
+            case '0':
+                this._handleShowDay(null, false)
+                break;
             case '1':
                 this._handleShowDay('PARTTIME', true)
                 break;
@@ -284,7 +289,24 @@ class SearchBox extends Component<IProps, IState>{
                 break;
         }
     }
-
+    keyJobType(jobType) {
+        switch (jobType) {
+            case null:
+                return '0'
+                break;
+            case 'PARTTIME':
+                return '1'
+                break;
+            case 'FULLTIME':
+                return '2'
+                break;
+            case 'INTERNSHIP':
+                return '3'
+                break;
+            default:
+                break;
+        }
+    }
     listArea() {
         let { regions, area } = this.props;
         return (
@@ -392,15 +414,19 @@ class SearchBox extends Component<IProps, IState>{
         queryParam = qs.stringify(queryParam)
 
         // console.log(queryParam);
+        if (this.props.param) {
+            // let param = this.props.param.substring(1)
+            let param = qs.parse(this.props.param)
 
-        this.props.history.push('/result?' + queryParam);
-
+            this.props.history.push('/result?' + queryParam + '&eventID=' + param.eventID + '&schoolID=' + param.schoolID)
+        } else {
+            this.props.history.push('/result?' + queryParam);
+        }
     }
 
     componentWillUnmount() {
         this._isMounted = true;
     }
-
     render() {
         let {
 
@@ -408,39 +434,18 @@ class SearchBox extends Component<IProps, IState>{
             showQRImageType
         } = this.state;
 
-        let { jobNames, regions, list_shift, list_day, area, job_dto, show_days } = this.props;
+        let { jobNames, regions, list_shift, list_day, area, job_dto, show_days, primaryColor } = this.props;
 
         return (
             <>
-                {/* Choose location modal */}
-                {/* <Modal
-                    visible={show_modal}
-                    title={choose_location ? 'Chọn vị trí' : 'Chọn khu vực'}
-                    onOk={this._handleOk}
-                    onCancel={this._handleCancel}
-                    style={{ top: '5vh', height: 400 }}
-                    footer={[
-                        <Button key="back" onClick={this._handleCancel}>
-                            Trở lại
-                        </Button>,
-                        <Button key="submit" type="primary" onClick={this._handleOk}>
-                            Cập nhật
-                    </Button>]}
-                >
-
-                    <div style={{ height: 400, width: '100%' }}>
-                        {choose_location ?
-                            <MapContainer style={{ height: 350 }} /> : this.listArea()}
-                    </div>
-                </Modal> */}
                 <Modal
                     title="Mã QR ứng dụng tìm việc"
                     visible={this.state.visible}
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
                     footer={[
-                    <Button key="submit" type="primary" onClick={this.handleOk}>
-                    Ok
+                        <Button key="submit" type="primary" onClick={this.handleOk}>
+                            Ok
                     </Button>]}
                 >
                     {showQRImageType === 1 ?
@@ -451,7 +456,7 @@ class SearchBox extends Component<IProps, IState>{
                         :
                         <div style={{ textAlign: 'center' }}>
                             <img src={QRCodeCHPlay} alt='CHPlay Tìm việc QRCode' height='250px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px' }} />
-                            <div>Ứng dụng tìm việc Worksvn trên CHPlay</div>                        
+                            <div>Ứng dụng tìm việc Worksvn trên CHPlay</div>
                         </div>
                     }
                 </Modal>
@@ -503,8 +508,8 @@ class SearchBox extends Component<IProps, IState>{
                                                 key={index}
                                                 onClick={this._handleShift}
                                                 style={{
-                                                    background: list_shift[item.shortcut] ? '#1890ff' : 'white',
-                                                    color: list_shift[item.shortcut] ? 'white' : '#1890ff'
+                                                    background: list_shift[item.shortcut] ? primaryColor : 'white',
+                                                    color: list_shift[item.shortcut] ? 'white' : primaryColor
                                                 }}>
                                                 {item.name}
 
@@ -521,8 +526,8 @@ class SearchBox extends Component<IProps, IState>{
                                                     className='choose_btn'
                                                     onClick={this._handleTime}
                                                     style={{
-                                                        background: list_day[item.shortcut] ? '#1890ff  ' : 'white',
-                                                        color: list_day[item.shortcut] ? 'white' : '#1890ff  '
+                                                        background: list_day[item.shortcut] ? primaryColor : 'white',
+                                                        color: list_day[item.shortcut] ? 'white' : primaryColor
                                                     }}
                                                 >{item.shortcut === 'SUN' ? 'CN' : 'T' + (index + 2)}</Button>)
                                         })}
@@ -554,24 +559,13 @@ class SearchBox extends Component<IProps, IState>{
                     </div>
                     {/* Search in Computer */}
                     <div className='search-box hidden-only-phone'>
-                        {/* Choose Option */}
-                        {/* <div className='location-address'>
-                            <InputGroup>
-                                <Button type='primary' onClick={this._handleShowLocation}>{show_location ? 'Ẩn' : 'Xem chi tiết'}</Button>
-                                <Input
-                                    placeholder='Vị trí của bạn'
-                                    value={choose_location ? location.address : area.name}
-                                    style={{ width: show_location ? '500px' : '150px' }}
-                                    prefix={<Icon type="environment" style={{ color: "green" }} />}
-                                    readOnly />
-                            </InputGroup>
-                        </div> */}
-
                         <div>
                             <p style={{ fontSize: '1.5rem', color: 'white', fontWeight: 550, marginBottom: '5px' }}>Tìm Công Việc Mơ Ước. Nâng Bước Thành Công!</p>
                         </div>
                         {/* Choose Type Job */}
-                        <Tabs defaultActiveKey={this.props.jobType == 'PARTTIME' ? '1' : (this.props.jobType == 'FULLTIME' ? '2' : '3')} onChange={this._handleTabs}>
+                        <Tabs defaultActiveKey={this.keyJobType(this.props.jobType)} onChange={this._handleTabs}>
+                            <TabPane tab="Tất cả loại công việc" key="0" onClick={() => { this._handleShowDay(null, false) }}>
+                            </TabPane>
                             <TabPane tab="Làm thêm" key="1" onClick={() => { this._handleShowDay(true, 'PARTTIME') }}>
                                 <div className='choose-time' style={{ display: show_days === true ? 'block' : 'none' }}>
                                     <div className='choose-shift'>
@@ -581,9 +575,9 @@ class SearchBox extends Component<IProps, IState>{
                                                 key={index}
                                                 onClick={this._handleShift}
                                                 style={{
-                                                    background: list_shift[item.shortcut] ? '#1890ff' : 'white',
+                                                    background: list_shift[item.shortcut] ? primaryColor : 'white',
                                                     color: list_shift[item.shortcut] ? 'white' : 'black',
-                                                    border: list_day[item.shortcut] ? 'solid 1px rgb(24, 144, 255)' : 'white'
+                                                    border: list_day[item.shortcut] ? `solid 1px ${primaryColor}` : 'white'
                                                 }}>
                                                 {item.name}
 
@@ -600,9 +594,9 @@ class SearchBox extends Component<IProps, IState>{
                                                     className='choose_btn'
                                                     onClick={this._handleTime}
                                                     style={{
-                                                        background: list_day[item.shortcut] ? '#1890ff  ' : 'white',
+                                                        background: list_day[item.shortcut] ? primaryColor : 'white',
                                                         color: list_day[item.shortcut] ? 'white' : 'black',
-                                                        border: list_day[item.shortcut] ? 'solid 1px rgb(24, 144, 255)' : 'white'
+                                                        border: list_day[item.shortcut] ? `solid 1px ${primaryColor}` : 'white'
                                                     }}
                                                 >{item.shortcut === 'SUN' ? 'CN' : 'Thứ ' + (index + 2)}</Button>)
                                         })}
@@ -616,29 +610,25 @@ class SearchBox extends Component<IProps, IState>{
                         </Tabs>
                         <div className='search-type' style={{ margin: choose_advanced ? '0px' : '20px 0px' }}>
                             <InputGroup size="large" compact>
-                                {/* <Select className='primary' defaultValue="Option2" style={{ width: '20%' }} size="large" >
+                                <Select
+                                    showSearch={true}
+                                    defaultValue={area ? area.name : 'Chọn tỉnh thành bạn muốn'} style={{ width: '32%' }}
+                                    size="large"
+                                >
                                     <Option
-                                        value="Option2"
-                                        // @ts-ignore
-                                        onClick={() => { this._handleShowDay('PARTTIME', true) }}
+                                        key={'1'}
+                                        value={null}
+                                        onClick={() => { this._setArea({ id: null, name: 'Tất cả các tỉnh thành' }) }}
                                     >
-                                        Làm thêm (PartTime)
-                                        </Option>
-                                    <Option
-                                        value="Option1"
-                                        // @ts-ignore
-                                        onClick={() => { this._handleShowDay('FULLTIME', false) }}
-                                    >
-                                        Chính thức (FullTime)
-                                        </Option>
-                                    <Option
-                                        value="Option3"
-                                        // @ts-ignore
-                                        onClick={() => { this._handleShowDay('INTERNSHIP', false) }}
-                                    >
-                                        Thực tập
-                                        </Option>
-                                </Select> */}
+                                        Tất cả các tỉnh thành
+                                    </Option>
+                                    {regions.map((item, index) => {
+                                        return <Select.Option
+                                            key={index}
+                                            value={item.name}
+                                            onClick={() => { this._setArea(item) }} >{item.name}</Select.Option>
+                                    })}
+                                </Select>
                                 <Select
                                     style={{ width: '45%' }}
                                     placeholder="Tìm kiếm công việc của bạn"
@@ -667,29 +657,7 @@ class SearchBox extends Component<IProps, IState>{
                                         </Option>)
                                     })}
                                 </Select>
-                                {/* <Select defaultValue="Option4" style={{ width: '32%' }} size="large" >
-                                    <Option value="Option4" onClick={() => { this._handleChooseLocation(false) }}>Chọn khu vực</Option>
-                                    <Option value="Option5" onClick={() => { this._handleChooseLocation(true) }}>Chọn vị trí</Option>
-                                </Select> */}
-                                <Select
-                                    showSearch={true}
-                                    defaultValue={area ? area.name : 'Chọn tỉnh thành bạn muốn'} style={{ width: '32%' }}
-                                    size="large"
-                                >
-                                    <Option
-                                        key={'1'}
-                                        value={null}
-                                        onClick={() => { this._setArea({ id: null, name: 'Tất cả các tỉnh thành' }) }}
-                                    >
-                                        Tất cả các tỉnh thành
-                                    </Option>
-                                    {regions.map((item, index) => {
-                                        return <Select.Option
-                                            key={index}
-                                            value={item.name}
-                                            onClick={() => { this._setArea(item) }} >{item.name}</Select.Option>
-                                    })}
-                                </Select>
+
 
                                 <Button size="large"
                                     // type='primary'
@@ -739,6 +707,8 @@ const mapStateToProps = state => ({
     list_day: state.JobResult.filter.list_day,
     area: state.JobResult.filter.area,
     job_dto: state.JobResult.filter.job_dto,
+    primaryColor: state.DetailEvent.primaryColor,
+    param: state.DetailEvent.param,
 
 })
 

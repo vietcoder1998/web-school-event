@@ -30,7 +30,8 @@ interface IEmployerInfoProps {
     getEventEmployerMoreJob?: Function,
     match?: any,
     loading?: boolean,
-    isAuthen?: any
+    isAuthen?: any,
+    param?: any
 };
 interface IState {
     onErrLogo?: boolean;
@@ -131,7 +132,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
         return true
     }
     render() {
-        let { employerDetail, employerMoreJob, loading, eventEmployerMoreJob } = this.props
+        let { employerDetail, employerMoreJob, loading, eventEmployerMoreJob, param } = this.props
         let { onErrCover, visible, salaryRating, workingEnvironmentRating, comment, onErrLogo, loadingSubmitRate } = this.state
         return (
             <Layout>
@@ -368,7 +369,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                                             </JobType> */}
                                                         </div>
                                                         <div style={{ flex: 9 }}>
-                                                            <p style={{ textAlign: 'left', fontSize: '1.1em', fontWeight: 500 }} className="info-silimar-job"><Link to={`/job-detail/${window.btoa(item.id)}`} target='_blank'>{item.jobTitle}</Link></p>
+                                                            <p style={{ textAlign: 'left', fontSize: '1.1em', fontWeight: 500 }} className="info-silimar-job"><Link to={`/job-detail/${window.btoa(item.id)}${param}`} target='_blank'>{item.jobTitle}</Link></p>
                                                             <p style={{ textAlign: 'left' }} className="info-silimar-job"><span><Icon type='environment' style={{ marginRight: 3 }} />{item.address}</span></p>
                                                         </div>
 
@@ -406,7 +407,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                                             </JobType> */}
                                                         </div>
                                                         <div style={{ flex: 9 }}>
-                                                            <p style={{ textAlign: 'left', fontSize: '1.1em', fontWeight: 500 }} className="info-silimar-job"><Link to={`/event-job-detail/${window.btoa(item.id)}`} target='_blank'>{item.jobTitle}</Link></p>
+                                                            <p style={{ textAlign: 'left', fontSize: '1.1em', fontWeight: 500 }} className="info-silimar-job"><Link to={`/event-job-detail/${window.btoa(item.id)}${param}`} target='_blank'>{item.jobTitle}</Link></p>
                                                             <p style={{ textAlign: 'left' }} className="info-silimar-job"><span><Icon type='environment' style={{ marginRight: 3 }} />{item.address}</span></p>
                                                         </div>
 
@@ -444,7 +445,8 @@ const mapStateToProps = state => ({
     employerMoreJob: state.EmployerMoreJob.data,
     loading: state.EmployerMoreJob.loading,
     isAuthen: state.AuthState.isAuthen,
-    eventEmployerMoreJob: state.EventEmployerMoreJob.data
+    eventEmployerMoreJob: state.EventEmployerMoreJob.data,
+    param: state.DetailEvent.param
 
 });
 
