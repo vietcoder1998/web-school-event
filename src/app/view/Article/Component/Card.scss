@@ -12,14 +12,15 @@
   .img-card {
     width: 100%;
     height: 75vh;
-    border-radius: 3%;
+    border-radius: 2%;
    
   }
   .info-card {
     position: absolute;
-    bottom: 30px;
+    bottom: 50px;
     left: 30px;
     right: 20px;
+    padding: 10px;
     .title {
       font-weight: bold;
     }
@@ -44,31 +45,31 @@
   text-align: left;
   margin: 5px 0;
   transition: transform 0.5s;
-  padding: 5px;
+  margin: 5px 0;
   &:hover {
-    
     transform: scale(1.05);
     -webkit-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
     -moz-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
     box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
+    border-radius: 5px;
+
   }
   .img-card {
     width: 100%;
     height: 20vh;
-    border-radius: 5%;
+    border-radius: 3%;
   }
   .img-card-small {
     width: 100%;
     height: 15vh;
-    border-radius: 10px;
+    border-radius: 5px;
     margin-top: 5px;
   }
   .info {
     margin-left: 10px;
     width: auto;
     .title-article {
-      padding: 0;
+      margin-top: 8px;
       font-family: "Open Sans", Arial, sans-serif !important;
       font-weight: bold;
       color: black;
@@ -110,12 +111,12 @@
   &:hover {
     border: 2px solid #32a3f9;
     transform: scale(1.05);
-    border-radius: 10px;
+    border-radius: 2%;
   }
   .img-card {
     width: 100%;
     height: 30vh;
-    border-radius: 10px;
+    border-radius: 2%;
     
   }
   .info {
@@ -159,30 +160,29 @@
 
 
 .ant-rate {
-  font-size: 15px;
+  font-size: 10px;
 }
 .ant-carousel {
   .slick-dots {
     display: block;
     position: absolute;
-    display: block;
-    width: 100%;
-    height: 3px;
-    margin: 20px 0px;
+    margin: 35px 0px;
     padding: 0;
     text-align: center;
-    list-style: none;
     li {
+      
       button {
-        height: 20px !important;
-        width: 20px;
+        height: 15px !important;
+        width: 15px;
         border-radius: 50%;
         margin: 0 5px;
+        background: unset;
+        border: 2px solid white;
       }
     }
     li.slick-active {
       button {
-        width: 21px;
+        width: 15px;
       }
     }
     // button
