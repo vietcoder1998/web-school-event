@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Avatar, Skeleton, Icon, Row, Col, Rate } from "antd";
+import { Skeleton,} from "antd";
 import DefaultImage from "../../../../assets/image/base-image.jpg";
 import { Link } from "react-router-dom";
 import "./Card.scss";

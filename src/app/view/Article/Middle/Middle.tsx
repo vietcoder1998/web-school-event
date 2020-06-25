@@ -22,7 +22,7 @@ export default class Middle extends PureComponent<IProps, IState> {
     }
   }
   componentDidMount() {
-    console.log(this.props.listType)
+    // console.log(this.props.listType)
     this.setState({
       isAll: this.props.idType === 'all' ? true : false,
       listType: this.props.listType
@@ -37,7 +37,7 @@ export default class Middle extends PureComponent<IProps, IState> {
       <div className="article-middle">
         <Row gutter={12}>
           {this.state.isAll && this.props.listType.map((item, index) => (
-            <Col sm={24} md={24} lg={7} xl={7} xxl={7}>
+            <Col sm={24} md={24} lg={9} xl={9} xxl={9}>
               <div key={index} style={{textAlign: 'left', marginBottom: '20px 0 20px 0'}}>
                 <Title title={item.name} />
                 <ListMiddle idType={item.id} pageIndex={0} />

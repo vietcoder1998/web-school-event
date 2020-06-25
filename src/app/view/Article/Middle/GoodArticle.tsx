@@ -75,7 +75,7 @@ class GoodArticle extends PureComponent<IProps, IState> {
                 <div>
                     <Title title={"Nhiều người đọc"} />
                     {listArticleRender.map((item, index) => (
-                        <div key={index} style={{ display: index === 0 ? "none" : "" }}>
+                        <div key={index} style={{ display: index === 0 ? "none" : "", marginTop: 20 }}>
                             <Card3
                                 id={item.id}
                                 title={item.title}

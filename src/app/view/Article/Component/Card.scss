@@ -15,6 +15,13 @@
     border-radius: 2%;
    
   }
+  @media (min-width: 0px) and (max-width: 1000px) {
+    .img-card {
+      object-fit: cover;
+      border-radius: 3%;
+      height: 50vh;
+    }
+  }
   .info-card {
     position: absolute;
     bottom: 50px;
@@ -28,7 +35,7 @@
       display: block;
       display: -webkit-box;
       max-width: 100%;
-      height: 70px;
+      height: 40px;
       margin: 5 auto;
       font-size: 15px;
       line-height: 1.3;
@@ -47,7 +54,7 @@
   transition: transform 0.5s;
   margin: 5px 0;
   &:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
     -webkit-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
     -moz-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
     box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
@@ -58,12 +65,14 @@
     width: 100%;
     height: 20vh;
     border-radius: 3%;
+   
   }
-  .img-card-small {
-    width: 100%;
-    height: 15vh;
-    border-radius: 5px;
-    margin-top: 5px;
+ 
+  @media (min-width: 0px) and (max-width: 1000px) {
+    .img-card {
+      object-fit: cover;
+      border-radius: 3%;
+    }
   }
   .info {
     margin-left: 10px;
@@ -105,22 +114,21 @@
 .card3 {
   background-color: white;
   text-align: left;
-  margin: 5px 0;
   transition: transform 0.5s;
-  padding: 5px;
+  margin: 10px;
   &:hover {
-    border: 2px solid #32a3f9;
     transform: scale(1.05);
-    border-radius: 2%;
+    -webkit-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+    
   }
   .img-card {
     width: 100%;
-    height: 30vh;
-    border-radius: 2%;
-    
+    height: 30vh;    
   }
   .info {
-    margin-left: 10px;
+    margin-left: 5px;
     margin-top: 5px;
     width: auto;
     .title-article {
