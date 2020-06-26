@@ -170,7 +170,7 @@ class App extends React.Component {
     if (queryParam.data) {
       let data = window.atob(queryParam.data)
       let queryParam2 = qs.parse(data)
-      console.log(queryParam2)
+      
       if (queryParam2.schoolID && queryParam2.eventID) {
         this.getInfoSchool(queryParam2.schoolID).then((res) => {
           if (res && res.data) {
@@ -218,20 +218,7 @@ class App extends React.Component {
   };
 
   render() {
-    let { eventStart } = this.props;
-
-    // if (this.state.loading) {
-    //   return (
-    //     <div className="loading-page">
-    //       <HashLoader
-    //         sizeUnit={"px"}
-    //         size={150}
-    //         color={"#32A3F9"}
-    //         loading={this.state.loading}
-    //       />
-    //     </div>
-    //   )
-    // } else {
+    let { eventStart } = this.props;  
       return (
         <Fragment>
           <Router>

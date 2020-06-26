@@ -14,30 +14,20 @@ class Article extends React.Component {
     this.state = {
       loading: true,
       idType: null,
-      listType: [],
+      listType: [{
+        id: 23,
+        name: 'KỸ NĂNG MỀM'
+      },
+      {
+        id: 17,
+        name: 'HƯỚNG NGHIỆP',
+      }],
     };
   }
   componentDidMount() {
-    console.log(this.props.match.params.id);
-    this.getListTypeArticle()
+
   }
-  async  getListTypeArticle() {
-    let res = await _requestToServer(GET, null, ANNOUNCEMENTS.TYPE, PUBLIC_HOST, {
-      pageIndex: 0,
-      pageSize: 50,
-      priority: "",
-    },
-      false)
-    try {
-      console.log(res)
-      this.setState({
-        listType: res.data.items
-      })
-    }
-    catch (e) {
-      console.log(e)
-    }
-  }
+  
   render() {
     return (
       <Layout disableFooterData={true}>

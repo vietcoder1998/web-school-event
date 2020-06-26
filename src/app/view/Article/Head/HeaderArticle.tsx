@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import { Row, Col, Divider, Skeleton, Carousel } from "antd";
-import { REDUX_SAGA } from "../../../../const/actions";
+import { Row, Col, Carousel, Skeleton } from "antd";
+
 import { _requestToServer } from "../../../../services/exec";
 import { POST } from "../../../../const/method";
 import { ANNOUNCEMENTS } from "../../../../services/api/public.api";
@@ -10,6 +9,8 @@ import { PUBLIC_HOST } from "../../../../environment/development";
 import Card1 from "../Component/Card1";
 import Card2 from "../Component/Card2";
 import Title from "../Component/Title";
+
+import HashLoader from "react-spinners/HashLoader";
 interface IProps {
   idType?: any;
 }
@@ -51,7 +52,9 @@ class HeaderArticle extends PureComponent<IProps, IState> {
       createdDate: null,
       announcementTypeID: null,
     };
-    this.props.idType === 'all' ? body.announcementTypeID = null : body.announcementTypeID = this.props.idType;
+    this.props.idType === "all"
+      ? (body.announcementTypeID = null)
+      : (body.announcementTypeID = this.props.idType);
     let res = await _requestToServer(
       POST,
       body,
@@ -68,9 +71,8 @@ class HeaderArticle extends PureComponent<IProps, IState> {
         listArticleRender: res.data.items,
         loading: false,
       });
-    }
-    catch (e) {
-      console.log(e)
+    } catch (e) {
+      console.log(e);
     }
   }
   render() {
@@ -81,7 +83,14 @@ class HeaderArticle extends PureComponent<IProps, IState> {
       slidesToShow: 1,
       slidesToScroll: 1,
     };
-    if (this.state.loading) return <div>loading .....</div>;
+
+    if (this.state.loading)
+      return (
+        <div>
+           <Title title={"Bài viết hay"} />
+           <Skeleton rows={6}/>
+        </div>
+      );
     else {
       return (
         <div>
@@ -89,12 +98,20 @@ class HeaderArticle extends PureComponent<IProps, IState> {
             <Col sm={0} md={0} lg={1} xl={1} xxl={1}></Col>
             <Col sm={24} md={24} lg={22} xl={22} xxl={22}>
               <div>
-                <div style={{ display: this.props.idType === 'all' ? '' : 'none' }} >
+                <div
+                  style={{ display: this.props.idType === "all" ? "" : "none" }}
+                >
                   <Title title={"Bài viết hay"} />
                 </div>
                 <Row>
                   <Col sm={24} md={24} lg={24} xl={13} xxl={13}>
-                    <Carousel dots={true} autoplay autoplaySpeed={3000} ref={(node) => (this.carousel = node)} {...props}>
+                    <Carousel
+                      dots={true}
+                      autoplay
+                      autoplaySpeed={3000}
+                      ref={(node) => (this.carousel = node)}
+                      {...props}
+                    >
                       {this.state.listArticleRender.map((item, index) => (
                         <div key={index}>
                           <Card1
@@ -106,12 +123,14 @@ class HeaderArticle extends PureComponent<IProps, IState> {
                         </div>
                       ))}
                     </Carousel>
-
                   </Col>
                   <Col sm={24} md={24} lg={24} xl={1} xxl={1}></Col>
                   <Col sm={24} md={24} lg={24} xl={10} xxl={10}>
                     {listArticleRender.map((item, index) => (
-                      <div key={index} style={{ display: index === 0 ? "none" : "" }}>
+                      <div
+                        key={index}
+                        style={{ display: index === 0 ? "none" : "", marginTop: 20 }}
+                      >
                         <Card2
                           id={item.id}
                           title={item.title}
@@ -121,7 +140,6 @@ class HeaderArticle extends PureComponent<IProps, IState> {
                           date={item.createdDate}
                         />
                       </div>
-
                     ))}
                   </Col>
                 </Row>
@@ -129,12 +147,10 @@ class HeaderArticle extends PureComponent<IProps, IState> {
             </Col>
             <Col sm={0} md={0} lg={1} xl={1} xxl={1}></Col>
           </Row>
-         
         </div>
       );
     }
   }
 }
 
-
-export default (HeaderArticle);
+export default HeaderArticle;
