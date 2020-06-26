@@ -9,6 +9,7 @@ import { REDUX_SAGA } from "../../../../../const/actions";
 interface IProps {
   getTopEmpoyer?: Function;
   listEmployer?: any;
+  param?: any;
 }
 interface IState {
   list_job_top: Array<any>;
@@ -29,11 +30,11 @@ class TopEm extends PureComponent<IProps, IState> {
   }
 
   componentDidMount = async () => {
-
+    this.props.getTopEmpoyer();
   };
 
   render() {
-    let { listEmployer } = this.props;
+    let { listEmployer, param } = this.props;
     return (
       <div
         className="top-rm"
@@ -44,7 +45,7 @@ class TopEm extends PureComponent<IProps, IState> {
           {listEmployer && listEmployer.items
             ? listEmployer.items.map((item: { employer: { id: string; logoUrl: string; employerName: React.ReactNode; }; }, index: React.ReactText) => (
               <Col xs={12} sm={6} md={3} lg={4} xl={3} xxl={3} key={index}>
-                <Link to={`/employer/${window.btoa(item.employer.id)}`}
+                <Link to={`/employer/${window.btoa(item.employer.id)}${param}`}
                   target="_blank"
                   className="name_employer"
                 >
@@ -81,6 +82,7 @@ class TopEm extends PureComponent<IProps, IState> {
 
 const mapStateToProps = (state) => ({
   listEmployer: state.TopEmployer.data,
+  param: state.DetailEvent.param
 });
 
 const mapDispatchToProps = (dispatch) => ({

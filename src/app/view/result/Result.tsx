@@ -51,6 +51,7 @@ interface IStateResult {
   job?: any;
   pageIndexHighLight?: any;
   isSearchEvent?: boolean;
+  param?: string
 }
 
 class Result extends React.Component<IPropsResult, IStateResult> {
@@ -167,8 +168,8 @@ class Result extends React.Component<IPropsResult, IStateResult> {
         }
       });
     }
-    if(!this.props.isAuthen) {
-      this.setState({isSearchEvent: false})
+    if (!this.props.isAuthen) {
+      this.setState({ isSearchEvent: false })
     }
     this.setState(
       {
@@ -225,7 +226,7 @@ class Result extends React.Component<IPropsResult, IStateResult> {
   _handleIndex = (pageIndex?: number, pageSize?: number) => {
     let body = this.state.body;
     // console.log(this.props.jobType);
-    if(this.props.jobType === 'FULLTIME' || this.props.jobType === 'INTERSHIP') {
+    if (this.props.jobType === 'FULLTIME' || this.props.jobType === 'INTERSHIP') {
       body.jobShiftFilter = {
         weekDays: null,
         dayTimes: null
@@ -347,6 +348,7 @@ class Result extends React.Component<IPropsResult, IStateResult> {
       regions,
       loading_high_light_data,
       loading,
+      param
     } = this.props;
     const list_result = results.items;
     return (
@@ -365,6 +367,7 @@ class Result extends React.Component<IPropsResult, IStateResult> {
                     getHighLightJobs={(pageIndex) => {
                       this.props.getHighLightData(pageIndex, 6);
                     }}
+                    param={param}
                   />
                 </Row>
                 {/* SearChTab */}
@@ -389,7 +392,21 @@ class Result extends React.Component<IPropsResult, IStateResult> {
                       loading={loading}
                       list_result={list_result}
                       isSearchEvent={isSearchEvent}
+                      param={param}
                     />
+                    {/* Paginition */}
+                    <div style={{paddingTop: 10, textAlign: 'center'}}>
+                      <Pagination
+                        defaultCurrent={1}
+                        pageSize={results.pageSize}
+                        total={results.totalItems}
+                        onChange={this._handleIndex}
+                        current={this.state.pageIndex + 1}
+                        onShowSizeChange={(current?: number, size?: number) =>
+                          this._handleIndex(current, size)
+                        }
+                      />
+                    </div>
                   </Col>
                   <Col xs={0} sm={0} md={8} lg={8} xl={7} xxl={4}>
                     <SearchMore
@@ -398,23 +415,11 @@ class Result extends React.Component<IPropsResult, IStateResult> {
                       jobType={body.jobType}
                       location={this.props.location}
                     />
-                    <img style={{boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.03)', marginLeft: 11, width: 'calc(100% - 12px)'}} alt="banner" src={banner} />
-                    
+                    <img style={{ boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.03)', marginLeft: 11, width: 'calc(100% - 12px)' }} alt="banner" src={banner} />
+
                   </Col>
                 </Row>
-                {/* Paginition */}
-                <div className="pagination-result">
-                  <Pagination
-                    showSizeChanger
-                    defaultCurrent={1}
-                    total={results.totalItems}
-                    onChange={this._handleIndex}
-                    current={this.state.pageIndex + 1}
-                    onShowSizeChange={(current?: number, size?: number) =>
-                      this._handleIndex(current, size)
-                    }
-                  />
-                </div>
+
                 {/* {Job} */}
               </div>
             </Col>
@@ -441,6 +446,7 @@ const mapStateToProps = (state) => ({
   job_dto: state.JobResult.filter.job_dto,
   list_day: state.JobResult.filter.list_day,
   list_shift: state.JobResult.filter.list_shift,
+  param: state.DetailEvent.param
 });
 
 const mapDispatchToProps = (dispatch) => ({

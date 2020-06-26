@@ -15,7 +15,8 @@ interface IProps {
     topJob?: any;
     indayJob?: any;
     setLoadingGetHotJob?: Function;
-    loading_hot_job?: any
+    loading_hot_job?: any;
+    param?: any
 };
 
 
@@ -29,7 +30,7 @@ class HomeJob extends PureComponent<IProps> {
         this.props.getHotJob(event - 1)
     }
     render() {
-        let { topJob, loading_hot_job } = this.props;
+        let { topJob, loading_hot_job, param } = this.props;
             return (
                 <Row className='home-job' style={{ display: topJob.totalItems === 0? 'none' : '' }}>
                     <h5 style={{ textAlign: 'center' }}>VIỆC LÀM NỔI BẬT</h5>
@@ -52,12 +53,12 @@ class HomeJob extends PureComponent<IProps> {
                                         <div className='job-content'>
                                             <ul>
                                                 <li className='j-d'>
-                                                    <Link to={`/job-detail/${window.btoa(item.id)}`} target='_blank' >
+                                                    <Link to={`/job-detail/${window.btoa(item.id)}${param}`} target='_blank' >
                                                         <h6 className='l_c'>{item.jobTitle}</h6>
                                                     </Link>
                                                 </li>
                                                 <li className='l_c'>
-                                                    <Link to={`/employer/${window.btoa(item.employerID)}`} target='_blank' className="name_employer">{item.employerName}</Link>
+                                                    <Link to={`/employer/${window.btoa(item.employerID)}${param}`} target='_blank' className="name_employer">{item.employerName}</Link>
                                                 </li>
                                                 <li className='time-left' style={{ paddingTop: 0, fontWeight: 550 }}>{item.region && item.region.name ? item.region.name : null}</li>
                                             </ul>
@@ -80,7 +81,7 @@ class HomeJob extends PureComponent<IProps> {
 const mapStateToProps = (state) => ({
     topJob: state.HotJobResult.data,
     loading_hot_job: state.HotJobResult.loading,
-    
+    param: state.DetailEvent.param
 })
 
 const mapDispatchToProps = dispatch => ({

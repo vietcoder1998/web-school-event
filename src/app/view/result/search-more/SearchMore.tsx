@@ -31,6 +31,7 @@ interface ISearchMore {
     jobType?: any;
     setFilter?: any;
     location?: any;
+    primaryColor?: any
 }
 interface IStateSearchMore {
     weekDays?: any;
@@ -81,7 +82,7 @@ class SearchMore extends React.Component<ISearchMore, IStateSearchMore> {
     }
     render() {
         let { weekDays, dayTimes } = this.state;
-        let { loading } = this.props;
+        let { loading, primaryColor } = this.props;
         return (
             <Card className='search-more' title={'Lọc theo thời gian'} size="small">
                 <Collapse bordered={true} defaultActiveKey={['1', '2']}>
@@ -105,7 +106,10 @@ class SearchMore extends React.Component<ISearchMore, IStateSearchMore> {
                         />
                     </Panel>
                 </Collapse>
+                <Tooltip placement='bottomRight' title={'Áp dụng với PARTTIME'}>
+                    
                 <Row>
+                   
                     <Col md={12} lg={12} xl={12} xxl={12}>
                         <Button
                             size={'large'}
@@ -130,7 +134,7 @@ class SearchMore extends React.Component<ISearchMore, IStateSearchMore> {
                         </Button>
                     </Col>
                     <Col md={12} lg={12} xl={12} xxl={12}>
-                        <Tooltip placement='bottom' title={'Áp dụng với PARTTIME'}>
+                       
                             <Button
                                 size={'large'}
                                 icon='filter'
@@ -139,7 +143,8 @@ class SearchMore extends React.Component<ISearchMore, IStateSearchMore> {
                                     width: '100%',
                                     color: 'white',
                                     margin: '10px 0px 0px',
-                                    border: 'solid white 1px'
+                                    border: 'solid white 1px',
+                                    // backgroundColor: primaryColor
                                 }}
                                 onClick={() => this.props.onChangeShiftsFilter({ weekDays, dayTimes })}
                                 disabled={this.props.jobType !== 'PARTTIME'}
@@ -147,10 +152,12 @@ class SearchMore extends React.Component<ISearchMore, IStateSearchMore> {
                                 {loading ? <Icon type={'loading'} /> : 'Lọc'}
                             </Button>
 
-                        </Tooltip>
+                        
 
                     </Col>
+                    
                 </Row>
+                </Tooltip>
             </Card>
         )
     }
@@ -159,6 +166,8 @@ const mapStateToProps = (state) => ({
     list_day: state.JobResult.filter.list_day,
     list_shift: state.JobResult.filter.list_shift,
     setFilter: state.JobResult.setFilter,
+    primaryColor: state.DetailEvent.primaryColor,
+
 });
 
 export default connect(

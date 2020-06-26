@@ -42,11 +42,12 @@ function getHotJobData(action) {
         }
     };
     let isAuthen = store.getState().AuthState.isAuthen;
-
+    let eventID = store.getState().DetailEvent.eventID;
+    let schoolID = store.getState().DetailEvent.schoolID
     let res = _requestToServer(
         POST,
         data,
-        (isAuthen ? EVENT_PRIVATE.JOBS.HOME : EVENT_PUBLIC.JOBS.HOME),
+        (isAuthen ?  `/api/students/schools/events/${eventID}/jobs/active/home` : `/api/schools/${schoolID}/events/${eventID}/jobs/active/home`),
         isAuthen ? STUDENT_HOST : PUBLIC_HOST, isAuthen ? authHeaders : noInfoHeader,
         {
             pageIndex: action.pageIndex ? action.pageIndex : 0,
@@ -75,7 +76,8 @@ function getJobData(action) {
             homePriority: null
         }
     };
-
+    let eventID = store.getState().DetailEvent.eventID;
+    let schoolID = store.getState().DetailEvent.schoolID
     if (localStorage.getItem('e_bid')) {
         data.branchIDs.push(parseInt(localStorage.getItem('e_bid')))
     }
@@ -83,7 +85,7 @@ function getJobData(action) {
     let res = _requestToServer(
         POST,
         data,
-        (isAuthen ? EVENT_PRIVATE.JOBS.ACTIVE : EVENT_PUBLIC.JOBS.ACTIVE),
+        (isAuthen ? `/api/students/schools/events/${eventID}/jobs/active` : `/api/schools/${schoolID}/events/${eventID}/jobs/active`),
         isAuthen ? STUDENT_HOST : PUBLIC_HOST, isAuthen ? authHeaders : noInfoHeader,
         {
             pageIndex: action.pageIndex ? action.pageIndex : 0,

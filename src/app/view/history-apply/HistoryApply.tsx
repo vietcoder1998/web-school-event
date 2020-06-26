@@ -11,7 +11,7 @@ import { _requestToServer } from '../../../services/exec';
 import { STUDENT_HOST } from '../../../environment/development';
 import { moveScroll } from '../../../utils/moveScroll';
 // import { limitString } from '../../../utils/limitString';
-import { REDUX_SAGA } from '../../../const/actions';
+import { REDUX_SAGA, REDUX } from '../../../const/actions';
 import { DELETE } from '../../../const/method';
 import { JobType } from '../layout/common/Common'
 const openNotification = () => {
@@ -83,88 +83,96 @@ class HistoryApply extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                 <div className='history-content ' >
                                     <h5>Lịch sử ứng tuyển</h5>
                                     <div className='history-job'>
-                                        {this.props.loading ? <div className='loading'><Spin /></div> : 
-                                        <Row>
-                                            {listHistoryApply && listHistoryApply.items && listHistoryApply.items.length > 0 ? listHistoryApply.items.map((item, index) => {
-                                                let typeSpan = { type: '', color: '', state: '' };
-                                                switch (item.state) {
-                                                    case 'PENDING':
-                                                        typeSpan.type = 'fa fa-pause-circle-o';
-                                                        typeSpan.color = '#ff8d00';
-                                                        typeSpan.state = 'Đang chờ phản hồi';
+                                        {this.props.loading ? <div className='loading'><Spin /></div> :
+                                            <Row>
+                                                {listHistoryApply && listHistoryApply.items && listHistoryApply.items.length > 0 ? listHistoryApply.items.map((item, index) => {
+                                                    let typeSpan = { type: '', color: '', state: '' };
+                                                    switch (item.state) {
+                                                        case 'PENDING':
+                                                            typeSpan.type = 'fa fa-pause-circle-o';
+                                                            typeSpan.color = '#ff8d00';
+                                                            typeSpan.state = 'Đang chờ phản hồi';
 
-                                                        break;
-                                                    case 'REJECTED':
-                                                        typeSpan.type = 'fa fa-times-circle-o';
-                                                        typeSpan.color = '#ff6060';
-                                                        typeSpan.state = 'Đã bị từ chối';
-                                                        break;
-                                                    case 'ACCEPTED':
-                                                        typeSpan.type = 'fa fa-check-circle-o';
-                                                        typeSpan.color = '#00c100';
-                                                        typeSpan.state = 'Đã được chấp nhận';
-                                                        break;
-                                                    default:
-                                                        break;
-                                                }
-                                                return (<Col key={index} xs={24} sm={24} md={12} lg={12} xl={12} xxl={8}>
-                                                    <div className='job-detail test'>
-                                                        <div className='image-job'>
-                                                            <Avatar
-                                                                className='logo-company'
-                                                                shape='square'
-                                                                size={70}
-                                                                src={item.job && item.job.employerLogoUrl ? item.job.employerLogoUrl : ''}
-                                                                style={{ margin: '10px 0' }}
-                                                                icon="shop"
-                                                                alt='history job'
-                                                            />
-                                                            <JobType>
-                                                                {item.job && item.job.jobType}
-                                                            </JobType>
-                                                            {/* <Tooltip title='Bạn có muốn xóa công việc' placement="bottom" >
+                                                            break;
+                                                        case 'REJECTED':
+                                                            typeSpan.type = 'fa fa-times-circle-o';
+                                                            typeSpan.color = '#ff6060';
+                                                            typeSpan.state = 'Đã bị từ chối';
+                                                            break;
+                                                        case 'ACCEPTED':
+                                                            typeSpan.type = 'fa fa-check-circle-o';
+                                                            typeSpan.color = '#00c100';
+                                                            typeSpan.state = 'Đã được chấp nhận';
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                                    return (<Col key={index} xs={24} sm={24} md={12} lg={12} xl={12} xxl={8}>
+                                                        <div className='job-detail test'>
+                                                            <div className='image-job'>
+                                                                <Avatar
+                                                                    className='logo-company'
+                                                                    shape='square'
+                                                                    size={70}
+                                                                    src={item.job && item.job.employerLogoUrl ? item.job.employerLogoUrl : ''}
+                                                                    style={{ margin: '10px 0' }}
+                                                                    icon="shop"
+                                                                    alt='history job'
+                                                                />
+                                                                <JobType>
+                                                                    {item.job && item.job.jobType}
+                                                                </JobType>
+                                                                {/* <Tooltip title='Bạn có muốn xóa công việc' placement="bottom" >
                                                                 <li onClick={() => { this._removejob(item.id) }}>
                                                                     <Button type='danger' size='small'> <Icon type="delete" />Xóa</Button>
                                                                 </li>
                                                             </Tooltip> */}
 
 
-                                                        </div>
-                                                        <div className='content-job'>
-                                                            <p><Link to={ item.job.schoolEventID === null ? `/job-detail/${window.btoa(item.job && item.job.id)}` 
-                                                                : `/event-job-detail/${window.btoa(item.job && item.job.id)}`}>{item.job && item.job.jobTitle}</Link></p>
-                                                            <div className='info-company'>
-                                                                <li>
-                                                                    <Link to={`/employer/${window.btoa(item.job && item.job.employerID)}`}><Icon type="home" style={{ marginRight: 3 }} />{item.job && item.job.employerName}</Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Icon type='environment' style={{ marginRight: 3 }} />{item.job && item.job.address}
-                                                                </li>
                                                             </div>
-                                                            <span style={{ backgroundColor: typeSpan.color, color: '#fff', padding: '3px 5px' }}><i class={typeSpan.type} aria-hidden="true" style={{ fontSize: "1.1em" }}></i> <span style={{ fontWeight: 550, fontSize: '0.9em' }}>{typeSpan.state}</span></span>
-                                                            <span style={{display: 'flex'}}>
-                                                                <li style={{ fontSize: '0.7rem' }}>
-                                                                    <i class="fa fa-paper-plane" aria-hidden="true" style={{ marginRight: 3 }}></i>
-                                                                    Ngày gửi: {moment(item.createdDate).format('DD/MM/YYYY')}
-                                                                </li>
-                                                                {item.repliedDate !== -1 ? 
-                                                                <li style={{ fontSize: '0.7rem', marginLeft: 10}}>
-                                                                    <i class="fa fa-reply" aria-hidden="true" style={{ marginRight: 3 }}></i>
-                                                                    Ngày phản hồi: {moment(item.repliedDate).format('DD/MM/YYYY')}
-                                                                </li> : null }
-                                                            </span>
-                                                          
-                                                        </div>
-                                                        <div className='content-job' style={{display: item.job.schoolEventID === null ? 'none' : ''}}>
+                                                            <div className='content-job'>
+                                                                <p><Link
+                                                                    onClick={() => {
+                                                                        // this.props.setEventID(null)
+                                                                        if (item.job.schoolEventID) {
+                                                                            window.open(`/event-job-detail/${window.btoa(item.job && item.job.id)}?data=${window.btoa('eventID=' + item.job.schoolEventID)}`)
+                                                                        } else {
+                                                                            window.open(`/job-detail/${window.btoa(item.job && item.job.id)}`)
+                                                                        }
+                                                                    }}
+                                                                >{item.job && item.job.jobTitle}</Link></p>
+                                                                <div className='info-company'>
+                                                                    <li>
+                                                                        <Link to={`/employer/${window.btoa(item.job && item.job.employerID)}`}><Icon type="home" style={{ marginRight: 3 }} />{item.job && item.job.employerName}</Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Icon type='environment' style={{ marginRight: 3 }} />{item.job && item.job.address}
+                                                                    </li>
+                                                                </div>
+                                                                <span style={{ backgroundColor: typeSpan.color, color: '#fff', padding: '3px 5px' }}><i class={typeSpan.type} aria-hidden="true" style={{ fontSize: "1.1em" }}></i> <span style={{ fontWeight: 550, fontSize: '0.9em' }}>{typeSpan.state}</span></span>
+                                                                <span style={{ display: 'flex' }}>
+                                                                    <li style={{ fontSize: '0.7rem' }}>
+                                                                        <i class="fa fa-paper-plane" aria-hidden="true" style={{ marginRight: 3 }}></i>
+                                                                        Ngày gửi: {moment(item.createdDate).format('DD/MM/YYYY')}
+                                                                    </li>
+                                                                    {item.repliedDate !== -1 ?
+                                                                        <li style={{ fontSize: '0.7rem', marginLeft: 10 }}>
+                                                                            <i class="fa fa-reply" aria-hidden="true" style={{ marginRight: 3 }}></i>
+                                                                            Ngày phản hồi: {moment(item.repliedDate).format('DD/MM/YYYY')}
+                                                                        </li> : null}
+                                                                </span>
+
+                                                            </div>
+                                                            <div className='content-job' style={{ display: item.job.schoolEventID === null ? 'none' : '' }}>
                                                                 <Tooltip placement="bottom" title={"Việc làm sự kiện"}>
-                                                                    <Icon type='tag' style={{color: 'red'}} />
+                                                                    <Icon type='tag' style={{ color: 'red' }} />
                                                                 </Tooltip>
-                                                                
+
                                                             </div>
-                                                    </div>
-                                                </Col>)
-                                            }) : <Empty style={{ padding: '15vh' }} description='Bạn chưa lưu công việc nào' />}
-                                        </Row>
+                                                        </div>
+                                                    </Col>)
+                                                }) : <Empty style={{ padding: '15vh' }} description='Bạn chưa lưu công việc nào' />}
+                                            </Row>
                                         }
                                         <div className='pagination-result'>
                                             <Pagination showSizeChanger defaultCurrent={1} pageSize={10} total={totalPagination} onChange={this._getJobSave} />
@@ -183,7 +191,8 @@ class HistoryApply extends React.PureComponent<ISaveJobProp, ISaveJobState>{
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    getHistoryApplyData: (pageIndex?: number, pageSize?: number) => dispatch({ type: REDUX_SAGA.HISTORY_APPLY.GET_HISTORY_APPLY, pageIndex, pageSize })
+    getHistoryApplyData: (pageIndex?: number, pageSize?: number) => dispatch({ type: REDUX_SAGA.HISTORY_APPLY.GET_HISTORY_APPLY, pageIndex, pageSize }),
+    setEventID: (eventID?: string) => dispatch({ type: REDUX.EVENT.SET_EVENT_ID, eventID })
 });
 
 const mapStateToProps = (state) => {

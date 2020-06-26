@@ -1,5 +1,4 @@
-import { EVENT_PRIVATE } from './../../../services/api/private.api';
-import { EVENT_PUBLIC } from './../../../services/api/public.api';
+
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { _requestToServer } from '../../../services/exec';
 import { PUBLIC_HOST, STUDENT_HOST } from '../../../environment/development';
@@ -19,9 +18,10 @@ function* getDetailEvent(action) {
 
 function getDetailEventData(action) {
     let isAuthen = store.getState().AuthState.isAuthen;
-
+    let eventID = store.getState().DetailEvent.eventID;
+    let schoolID = store.getState().DetailEvent.schoolID
     let res = _get(null,
-        isAuthen ? EVENT_PRIVATE.DETAIL : EVENT_PUBLIC.DETAIL,
+        isAuthen ? `/api/students/schools/events/${eventID}/employers/{emid}` : `/api/schools/${schoolID}/events/${eventID}`,
         isAuthen ? STUDENT_HOST : PUBLIC_HOST,
         null);
 

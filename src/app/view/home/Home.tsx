@@ -20,7 +20,7 @@ function Home(props) {
         <TopJob />
         <HomeJob />
         <AllJob />
-        {/* <Announcements {...props} /> */}
+        <Announcements {...props} />
       </div>
     </Layout>
   );

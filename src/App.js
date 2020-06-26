@@ -11,8 +11,10 @@ import { Loading } from "./app/view/layout/common/Common";
 import { _get } from "./services/base-api";
 import { PUBLIC_HOST } from "./environment/development";
 import { noInfoHeader } from "./services/auth";
-// import HashLoader from "react-spinners/HashLoader";
+import HashLoader from "react-spinners/HashLoader";
 import { BackTop } from "antd";
+import qs from "query-string";
+
 
 const EventHome = asyncComponent(() =>
   import("./app/view/Event/Home/Home").then((module) => module.default)
@@ -65,6 +67,7 @@ const AllNoti = asyncComponent(() =>
 const SaveJob = asyncComponent(() =>
   import("./app/view/save-job/SaveJob").then((module) => module.default)
 );
+
 const HistoryApply = asyncComponent(() =>
   import("./app/view/history-apply/HistoryApply").then(
     (module) => module.default
@@ -117,6 +120,7 @@ class App extends React.Component {
   resizeInterface = null;
 
   async componentDidMount() {
+
     await this._loadLocal();
     if (this.props.isAuthen) {
       this.props.getData();
@@ -129,6 +133,7 @@ class App extends React.Component {
 
   componentWillUnmount() {
     this.resizeInterface = null;
+
   }
 
   _callResize = () => {
@@ -138,94 +143,160 @@ class App extends React.Component {
       this.props.setMobileState(false);
     }
   };
-  checkEvent() {
+  checkEvent(schoolID, eventID) {
     let res = _get(
       null,
-      `/api/schools/${process.env.REACT_APP_SCHOOL_ID}/events/${process.env.REACT_APP_EVENT_ID}/simple?activeCheck=false`,
+      `/api/schools/${schoolID}/events/${eventID}/simple?activeCheck=false`,
       PUBLIC_HOST,
       noInfoHeader
     );
-    return res;
+    return res
+  }
+  getInfoSchool(schoolID) {
+    let res = _get(
+      null,
+      `/api/schools/${schoolID}/simple`,
+      PUBLIC_HOST,
+      noInfoHeader
+    );
+    return res
   }
   _loadLocal = async () => {
     let token = localStorage.getItem("accessToken");
-    this.checkEvent()
-      .then((res) => {
-        if (res.data.started === true && res.data.finished === false) {
-          this.props.checkEvent(
-            true,
-            new Date(res.data.startedDate),
-            res.data.name
-          );
-        } else {
-          this.props.noEvent(false, null);
-        }
-      })
-      .catch((e) => {
-        try {
-          this.props.noEvent(false, e.response.msg);
-        } catch (e) {
-          this.props.noEvent(false, null);
-        }
-      });
+
+    let queryParam = qs.parse(window.location.search, {
+      ignoreQueryPrefix: true,
+    });
+    if (queryParam.data) {
+      let data = window.atob(queryParam.data)
+      let queryParam2 = qs.parse(data)
+      console.log(queryParam2)
+      if (queryParam2.schoolID && queryParam2.eventID) {
+        this.getInfoSchool(queryParam2.schoolID).then((res) => {
+          if (res && res.data) {
+            console.log('vao day')
+            this.props.setInfoEvent(res.data.logoUrl, res.data.primaryColor, res.data.primaryDarkColor, window.location.search, queryParam2.schoolID, queryParam2.eventID)
+          }
+        }).finally(() => {
+          
+          this.setState({ loading: false })
+        })
+        this.checkEvent(queryParam2.schoolID, queryParam2.eventID)
+          .then((res) => {
+            if (res.data.started === true && res.data.finished === false) {
+              this.props.checkEvent(
+                true,
+                new Date(res.data.startedDate),
+                res.data.name
+              );
+            } else if (res.data.started === false) {
+              this.props.checkEvent(false, new Date(res.data.startedDate));
+            } else {
+              this.props.noEvent(false, null)
+            }
+          })
+          .catch((e) => {
+            try {
+              this.props.noEvent(false, e.response.msg);
+            } catch (e) {
+              this.props.noEvent(false, null);
+            }
+          });
+      } else if(!queryParam2.schoolID && queryParam2.eventID) {
+        this.props.setEventID(queryParam2.eventID)
+      }
+    } else {
+      this.props.noEvent(false, null);
+      this.setState({ loading: false })
+      this.props.setInfoEvent(null, null, null, '', '', '')
+    }
+
     if (token !== null) {
       this.props.checkAuthen(token);
-    }
-    this.setState({
-      loading: false,
-    });
+    };
+
   };
 
   render() {
     let { eventStart } = this.props;
 
-    return (
-      <Fragment>
-        <Router>
-          <Suspense fallback={<Loading />}>
-            <Switch>
-              <Route
-                exact
-                path="/"
-                component={eventStart ? EventHome : EventCountDown}
+    // if (this.state.loading) {
+    //   return (
+    //     <div className="loading-page">
+    //       <HashLoader
+    //         sizeUnit={"px"}
+    //         size={150}
+    //         color={"#32A3F9"}
+    //         loading={this.state.loading}
+    //       />
+    //     </div>
+    //   )
+    // } else {
+      return (
+        <Fragment>
+          <Router>
+            <Suspense fallback={
+              <HashLoader
+                sizeUnit={"px"}
+                size={150}
+                color={"#32A3F9"}
+                loading={true}
               />
-              <Route
-                exact
-                path="/event-job-detail/:id"
-                component={EventJobDetail}
-              />
-              <Route exact path="/count" component={EventCountDown} />
-              <Route exact path="/home" component={Home} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/reset-password" component={ResetPassword} />
-              <Route
-                exact
-                path="/profile"
-                component={this.props.isAuthen === true ? Profile : Home}
-              />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/forgot-password" component={ForgotPassword} />
-              <Route path="/result" component={Result} />
-              <Route exact path="/save-job" component={SaveJob} />
-              <Route exact path="/history-apply" component={HistoryApply} />
-              <Route exact path="/job-detail/:id" component={JobDetail} />
-              <Route exact path="/notifications" component={AllNoti} />
-              <Route exact path="/tat-ca-cac-tinh" component={DataRegions} />
-              <Route
-                exact
-                path="/tat-ca-cac-cong-viec"
-                component={DataJobNames}
-              />
-              <Route exact path="/employer/:id" component={EmInfo} />
-              <Route exact path="/announcement/:id" component={Article} />
+            }>
+              <Switch>
+                <Route
+                  exact
+                  path="/events"
+                  component={EventHome}
+                />
+                <Route
+                  exact
+                  path="/countdown"
+                  component={EventCountDown}
+                />
+                <Route
+                  exact
+                  path="/event-job-detail/:id"
+                  component={EventJobDetail}
+                />
+                <Route exact path="/count" component={EventCountDown} />
+                <Route exact path="/home" component={Home} />
+                <Route exact path="/login" component={this.props.isAuthen ? Home : Login} />
+                <Route exact path="/reset-password" component={ResetPassword} />
+                <Route
+                  exact
+                  path="/profile"
+                  component={this.props.isAuthen === true ? Profile : Home}
+                />
+                <Route exact path="/register" component={this.props.isAuthen ? Home: Register} />
+                <Route
+                  exact
+                  path="/forgot-password"
+                  component={ForgotPassword}
+                />
+                <Route path="/result" component={Result} />
+                <Route exact path="/save-job" component={SaveJob} />
+                {/* <Route exact path="/download-apps-student" component={DownloadApps} /> */}
+                <Route exact path="/history-apply" component={HistoryApply} />
+                <Route exact path="/job-detail/:id" component={JobDetail} />
+                <Route exact path="/notifications" component={AllNoti} />
+                <Route exact path="/tat-ca-cac-tinh" component={DataRegions} />
+                <Route
+                  exact
+                  path="/tat-ca-cac-cong-viec"
+                  component={DataJobNames}
+                />
+                <Route exact path="/employer/:id" component={EmInfo} />
+                <Route exact path="/announcement/:id" component={Article} />
               <Route exact path="/announcementDetail/:id" component={ArticleDetail} />
-              <Route component={NotFound} />
-            </Switch>
-          </Suspense>
-        </Router>
-        <BackTop></BackTop>
-      </Fragment>
-    );
+                <Route component={NotFound} />
+              </Switch>
+            </Suspense>
+          </Router>
+          <BackTop></BackTop>
+        </Fragment>
+      );
+    // }
   }
 }
 
@@ -259,12 +330,24 @@ const mapDispatchToProps = (dispatch) => ({
       name: name,
     });
   },
+  setInfoEvent: (logo, primaryColor, primaryDarkColor, param, schoolID, eventID) => {
+    dispatch({
+      type: REDUX.EVENT.LOGO_SCHOOL,
+      logo,
+      primaryColor,
+      primaryDarkColor,
+      param,
+      schoolID,
+      eventID
+    });
+  },
   noEvent: (msg) => {
     dispatch({
       type: REDUX.EVENT.NOT_AVAILABLE,
       msgError: msg,
     });
   },
+  setEventID: (eventID) => dispatch({ type: REDUX.EVENT.SET_EVENT_ID, eventID })
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

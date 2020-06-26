@@ -15,13 +15,14 @@ import { REDUX } from '../../../const/actions';
 import queryString from 'query-string';
 import logo from '../../../assets/image/logo-01.png';
 import imageLogin from '../../../assets/image/image-login.png';
-
+import {goBackWhenLogined} from '../../../utils/goBackWhenLogined'
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
             user_name: "",
             password: "",
+            loading: false
         }
 
         this.key_icon = <i className="fa fa-key"></i>
@@ -41,6 +42,7 @@ class Login extends Component {
     }
 
     _createResponse = () => {
+        this.setState({loading: true})
         this.getResponse()
     }
 
@@ -67,34 +69,49 @@ class Login extends Component {
                             localStorage.setItem('user_exists_userName', data.username);
                             localStorage.setItem('user_exists_password', data.password);
                             swal({
-                                title: "Worksvns thông báo",
+                                title: "Worksvn thông báo",
                                 text: "Xác thực thông tin để đăng nhập",
                                 icon: 'success',
                                 dangerMode: true,
-                            });
-                            setTimeout(() => {
+                            }).then(() => {
                                 window.location.assign('/register');
-                            }, 3000)
+                            })
+                            
 
                         }
                         else {
                             setAuthSate(res);
-                            this.props.setAuthen();
+                            // console.log('vao day')
+                            // this.props.setAuthen();
                             let last_access = localStorage.getItem('last_access');
-                            localStorage.removeItem('user_exists');
-                            localStorage.removeItem('user_exists_userName');
-                            localStorage.removeItem('user_exists_password');
-                            setTimeout(() => {
-                                const parsed = queryString.parse(this.props.location.search);
-                                // console.log(parsed);
-                                if (parsed.path) {
-                                    window.location.assign(parsed.path);
-                                } else if (last_access) {
-                                    window.location.assign(last_access);
-                                } else {
+                            // const parsed = queryString.parse(this.props.location.search);
+                            // console.log(parsed);
+                            // if (parsed.path) {
+                            //     window.location.assign(parsed.path);
+                            // } else if (last_access) {
+                            //     window.location.assign(last_access);
+                            // } else {
+                            //     window.location.assign('/');
+                            // }
+
+                            // console.log(this.props.location.search);
+                            const parsed = queryString.parse(this.props.location.search);
+                            // console.log(window.atob(parsed.path));
+                            // setTimeout(() => {
+                                var base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+                                if(base64regex.test(parsed.path)) {
+                                    if (window.atob(parsed.path)) {
+                                        window.location.assign(window.atob(parsed.path));
+                                    }  else {
+                                        window.location.assign('/');
+                                    }
+                                }
+                                 else {
                                     window.location.assign('/');
                                 }
-                            }, 1500);
+                            // }, 3000)
+                            
+
                         }
                     }
 
@@ -103,12 +120,17 @@ class Login extends Component {
 
                 }
 
-            });
+            })
+            .finally(() => {
+                setTimeout(() => {
+                    this.setState({loading: false})
+                }, 1000)
+            })
     }
 
 
     render() {
-        let { user_name, password} = this.state;
+        let { user_name, password, loading} = this.state;
         let {mobile} = this.props;
         return (
             <Layout disableFooterData={false}>
@@ -151,10 +173,10 @@ class Login extends Component {
                                     <a href='/forgot-password' style={{ color: 'gray' }} >Quên mật khẩu ?</a>
                                 </p>
                                 <p>
-                                    <Button className='btn-login' type='primary' onClick={this._createResponse} block>Đăng nhập</Button>
+                                    <Button className='btn-login' type='primary' onClick={this._createResponse} block>{loading ? <Icon type="loading" /> : 'Đăng nhập'}</Button>
                                 </p>
                                 <p className='a_c'>
-                                    Bạn chưa có tài khoản ? <a href='/register' style={{ color: '#fb4141' }}>Đăng ký</a>
+                                    Bạn chưa có tài khoản ? <a onClick={() => goBackWhenLogined('register')} style={{ color: '#fb4141' }}>Đăng ký</a>
                                 </p>
                             </form>
                         </div>

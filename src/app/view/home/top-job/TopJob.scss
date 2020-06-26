@@ -72,8 +72,23 @@
         &:hover {
           color: rgba(46, 158, 255, 0.85) !important;
         }
+        .l_c{
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          text-transform: initial;
+        }
       }
-
+      // .l_c{
+      //   overflow: hidden;
+      //   text-overflow: ellipsis;
+      //   display: -webkit-box;
+      //   -webkit-line-clamp: 1;
+      //   -webkit-box-orient: vertical;
+      //   text-transform: initial;
+      // }
       a::first-letter {
         text-transform: uppercase;
       }

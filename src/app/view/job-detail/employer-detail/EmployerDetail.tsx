@@ -19,6 +19,7 @@ interface EmployerDetailProps {
     paging?: number;
     is_loading_more?: boolean;
     _getMoreJob?: Function;
+    param?: string;
 }
 
 interface EmployerDetailState {
@@ -27,6 +28,7 @@ interface EmployerDetailState {
     salaryRating?: number;
     comment?: string;
     confirmLoading?: boolean;
+   
 }
 
 export default class EmployerDetail extends React.PureComponent<EmployerDetailProps, EmployerDetailState> {
@@ -65,7 +67,7 @@ export default class EmployerDetail extends React.PureComponent<EmployerDetailPr
     }
 
     render() {
-        let { employerDetail, employerMoreJob, paging, is_loading_more } = this.props;
+        let { employerDetail, employerMoreJob, paging, is_loading_more, param } = this.props;
         let { visible, confirmLoading, workingEnvironmentRating, salaryRating } = this.state;
         return (
             <>
@@ -187,7 +189,7 @@ export default class EmployerDetail extends React.PureComponent<EmployerDetailPr
                                                     </JobType>
                                                 </div>
                                                 <div style={{ flex: 9 }}>
-                                                    <p style={{ textAlign: 'left', fontSize: '1.1em', fontWeight: 500 }} className="info-silimar-job"><Link to={`/job-detail/${window.btoa(item.id)}`} target='_blank'>{item.jobTitle}</Link></p>
+                                                    <p style={{ textAlign: 'left', fontSize: '1.1em', fontWeight: 500 }} className="info-silimar-job"><Link to={`/job-detail/${window.btoa(item.id)}${param}`} target='_blank'>{item.jobTitle}</Link></p>
                                                     <p style={{ textAlign: 'left' }} className="info-silimar-job"><span><Icon type='environment' style={{marginRight: 3}} />{item.address}</span></p>
                                                 </div>
                                             </div>)}

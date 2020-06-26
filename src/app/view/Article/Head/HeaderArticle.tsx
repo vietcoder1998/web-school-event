@@ -136,18 +136,5 @@ class HeaderArticle extends PureComponent<IProps, IState> {
   }
 }
 
-const mapStateToProps = (state) => ({
-  HeaderArticle: state.AnnounList.listAnnoun,
-});
 
-const mapDispatchToProps = (dispatch) => ({
-  getListArticle: (pageIndex?: number, pageSize?: number, body?: any) =>
-    dispatch({
-      type: REDUX_SAGA.ANNOUNCEMENTS.GET_LIST,
-      pageIndex,
-      pageSize,
-      body,
-    }),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderArticle);
+export default (HeaderArticle);

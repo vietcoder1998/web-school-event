@@ -15,6 +15,7 @@ interface IProps {
   indayJob?: any;
   setLoadinggetEvenJob?: Function;
   loading_hot_job?: any;
+  param?: string
 }
 
 class HomeJob extends PureComponent<IProps> {
@@ -81,7 +82,7 @@ class HomeJob extends PureComponent<IProps> {
                         <ul style={{marginTop: 7}}>
                           <li className="j-d">
                             <Link
-                              to={`/event-job-detail/${window.btoa(item.id)}`}
+                              to={`/event-job-detail/${window.btoa(item.id)}${this.props.param}`}
                               target="_blank"
                             >
                               <h6
@@ -96,7 +97,7 @@ class HomeJob extends PureComponent<IProps> {
                           </li>
                           <li className="l_c">
                             <Link
-                              to={`/employer/${window.btoa(item.employerID)}`}
+                              to={`/employer/${window.btoa(item.employerID)}${this.props.param}`}
                               target="_blank"
                               className="name_employer"
                             >
@@ -138,6 +139,7 @@ class HomeJob extends PureComponent<IProps> {
 
 const mapStateToProps = (state) => ({
   normalJob: state.EventJobResults.data,
+  param: state.DetailEvent.param
 });
 
 const mapDispatchToProps = (dispatch) => ({

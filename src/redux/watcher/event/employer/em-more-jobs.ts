@@ -40,11 +40,12 @@ function getEmployerMoreJobData(action) {
         jobShiftFilter: null,
         jobLocationFilter: null
     };
-
+    let eventID = store.getState().DetailEvent.eventID;
+    let schoolID = store.getState().DetailEvent.schoolID
     let res = _requestToServer(
         POST,
         body,
-        EVENT_PUBLIC.JOBS.ACTIVE,
+        `/api/schools/${schoolID}/events/${eventID}/jobs/active`,
         PUBLIC_HOST,
         noInfoHeader,
         {

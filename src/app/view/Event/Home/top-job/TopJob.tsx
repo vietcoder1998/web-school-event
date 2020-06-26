@@ -15,6 +15,7 @@ interface IProps {
   indayJob?: any;
   setLoadinggetEventHotJob?: Function;
   loading_hot_job?: any;
+  param?: any
 }
 
 class TopJob extends PureComponent<IProps> {
@@ -35,7 +36,7 @@ class TopJob extends PureComponent<IProps> {
     });
   };
   render() {
-    let { topJob } = this.props;
+    let { topJob, param } = this.props;
     return (
       <Row
         className="home-job"
@@ -67,7 +68,7 @@ class TopJob extends PureComponent<IProps> {
                       <ul style={{ marginTop: 8 }}>
                         <li className="j-d">
                           <Link
-                            to={`/event-job-detail/${window.btoa(item.id)}`}
+                            to={`/event-job-detail/${window.btoa(item.id)}${param}`}
                             target="_blank"
                           >
                             <h6
@@ -82,7 +83,7 @@ class TopJob extends PureComponent<IProps> {
                         </li>
                         <li className="l_c">
                           <Link
-                            to={`/employer/${window.btoa(item.employerID)}`}
+                            to={`/employer/${window.btoa(item.employerID)}${param}`}
                             target="_blank"
                             className="name_employer"
                           >
@@ -127,6 +128,7 @@ class TopJob extends PureComponent<IProps> {
 
 const mapStateToProps = (state) => ({
   topJob: state.EventHotJobResults.data,
+  param: state.DetailEvent.param
 });
 
 const mapDispatchToProps = (dispatch) => ({

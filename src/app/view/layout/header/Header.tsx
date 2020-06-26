@@ -8,7 +8,7 @@ import clearStorage from '../../../../services/clear-storage';
 import { Icon, Badge, Menu, Dropdown, Avatar } from 'antd';
 import Notification from './notification/Notification';
 import { REDUX } from '../../../../const/actions';
-
+import {goBackWhenLogined} from '../../../../utils/goBackWhenLogined';
 interface IProps {
   isAuthen?: boolean,
   show_noti?: boolean,
@@ -16,7 +16,11 @@ interface IProps {
   openSideBar?: Function,
   noti?: any,
   show_bar?: boolean,
-  eventStart?: boolean
+  eventStart?: boolean,
+  logo?: string,
+  primaryColor?: string,
+  param?: string,
+  primaryDarkColor?: string
 }
 
 interface IState {
@@ -81,7 +85,6 @@ class Header extends PureComponent<IProps, IState> {
       <Menu.Item><a href='/reset-password'>Đổi mật khẩu</a></Menu.Item>
       <Menu.Item><a href='/save-job'>Công việc đã lưu</a></Menu.Item>
       <Menu.Item><a href='/history-apply'>Lịch sử ứng tuyển</a></Menu.Item>
-      
       <Menu.Item onClick={this._clearStorage}>
         <a href='/' style={{
           pointerEvents: "none"
@@ -92,20 +95,20 @@ class Header extends PureComponent<IProps, IState> {
 
   render() {
     let { isAuthen, show_noti, hover_on } = this.state;
-    let { noti, show_bar, eventStart } = this.props;
+    let { noti, show_bar, eventStart, param } = this.props;
     let number_noti = 0;
     noti.items && noti.items.forEach(item => { !item.seen ? number_noti += 1 : number_noti += 0 });
 
     return (
       <>
-        <div className="header">
+        <div className="header" style={{backgroundColor: '#1890ff'}}>
           <div className="logo">
-            <Link to={eventStart ? "/" : "/home"}><img width="auto" height={45} src={logo} alt="itea-scan" /> </Link>
+            <Link to={eventStart ? `/${param}` : `/home${param}`}><img width="auto" height={45} src={logo} alt="itea-scan" /> </Link>
           </div>
           <div className='direct-page'>
             <div style={{ display: show_bar ? "none" : "block" }}>
-              <a href='/' style={{ display: eventStart === false ? 'none' : window.location.pathname === '/' ? "none" : '', backgroundColor: '#0081e3' }}><Icon type={'tags'} />Ngày hội việc làm</a>
-              <a href='/home' style={{ display: window.location.pathname === '/home' ? "none" : '' }}><Icon type={'home'} />Việc làm</a>
+              <a href={`/${this.props.param}`} style={{ display: eventStart === false ? 'none' : window.location.pathname === '/' ? "none" : '', backgroundColor: this.props.primaryDarkColor }}><Icon type={'tags'} />Ngày hội việc làm</a>
+              <a href={`/home${this.props.param}`} style={{ display: window.location.pathname === '/home' ? "none" : '' }}><Icon type={'home'} />Việc làm</a>
               <a href='/result' style={{ display: isAuthen ? "" : 'none' }}><Icon type={'search'} />Tìm kiếm</a>
               <a href='https://play.google.com/store/apps/details?id=com.worksvn.student&hl=en_US' target='_blank' rel="noopener noreferrer">
                 <Icon type="android" theme="filled" style={{ fontSize: '16.3px' }} />
@@ -155,17 +158,17 @@ class Header extends PureComponent<IProps, IState> {
               //@ts-ignore
               <Dropdown overlay={this.menuUser} placement="bottomRight" >
                 <span className='label-function hidden-mobile' style={{ borderRadius: '5%' }}>
-                  <Avatar src={localStorage.getItem("avatarUrl")} icon="user" style={{ border: "solid #fff 1.5px" }} />
+                  <Avatar src={localStorage.getItem("avatarUrl")} icon="user" style={{ border: "solid #fff 1.5px", objectFit: 'cover' }} />
                   {localStorage.getItem("name") ? <label className="label_name">{localStorage.getItem("name")}</label> : null}
                 </span>
               </Dropdown>
               :
               (<span className='label-login hidden-mobile'>
-                <a href='/login' >
+                <a onClick={() => goBackWhenLogined('login')}>
                   Đăng nhập
                   </a>
                 <span style={{ borderRight: 'solid #efefef 0.8px', padding: '0px 0px 2.2px' }}></span>
-                <a href='/register'>
+                <a onClick={() => goBackWhenLogined('register')}>
                   Đăng ký
                 </a>
               </span>
@@ -181,7 +184,11 @@ class Header extends PureComponent<IProps, IState> {
 const mapStateToProps = (state) => ({
   isAuthen: state.AuthState.isAuthen,
   noti: state.Noti,
-  eventStart: state.EventStatusReducer.status
+  eventStart: state.EventStatusReducer.status,
+  logo: state.DetailEvent.logo,
+  primaryColor: state.DetailEvent.primaryColor,
+  primaryDarkColor: state.DetailEvent.primaryDarkColor,
+  param: state.DetailEvent.param
 })
 
 const mapDispatchToProps = (dispatch) => {

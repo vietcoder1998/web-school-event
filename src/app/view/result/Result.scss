@@ -13,11 +13,10 @@
 
   .pagination-result{
     .ant-pagination-item-active{
-      
         background-color: white;
         color: #41A9FF !important;
-      
     }
+    padding-top: 10px
   }
   .search-tab {
     margin-top: 10px;
@@ -29,7 +28,7 @@
       padding         : 10px;
       text-align      : center;
       transition      : 0.5s;
-      background-color: #32a3f9;
+      // background-color: #32a3f9;
       position        : relative;
       .ant-select-lg {
         font-size: 14.5px;

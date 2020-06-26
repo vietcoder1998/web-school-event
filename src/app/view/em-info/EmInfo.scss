@@ -107,6 +107,9 @@
               padding         : 10px;
               border-radius   : 3px;
               background-color: white;
+              img{
+                object-fit: contain
+              }
     }
     .ant-skeleton{
       display: table;

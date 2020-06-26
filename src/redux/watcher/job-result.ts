@@ -61,10 +61,12 @@ function getJobResults(action) {
   }
 
   let isAuthen = store.getState().AuthState.isAuthen;
+  let eventID = store.getState().DetailEvent.eventID;
+  let schoolID = store.getState().DetailEvent.schoolID
   let res = _requestToServer(
     POST,
     body,
-    isAuthen ? NORMAL_PRIVATE.JOBS.SEARCH : NORMAL_PUBLIC.JOBS.SEARCH,
+    isAuthen ? NORMAL_PRIVATE.JOBS.SEARCH : `/api/schools/${schoolID}/events/${eventID}/jobs/active/search`,
     isAuthen ? STUDENT_HOST : PUBLIC_HOST,
     isAuthen ? authHeaders : noInfoHeader,
     {

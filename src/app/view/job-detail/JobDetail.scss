@@ -47,7 +47,7 @@
 
   .cover-image-job {
     // margin-top      : 5px;
-    height          : 55vh;
+    // height          : 55vh;
     position        : relative;
     background-color: #98cdff50;
     text-align      : center;
@@ -413,4 +413,17 @@
       }
     }
   }
+}
+@media only screen and (min-width: 900px) {
+
+  .cover-image-job {
+    // margin-top      : 5px;
+    height          : 55vh;
+  }
+}
+.asterisk{
+  top: 4px;
+  position: relative;
+  font-size: 1.2em;
+  font-weight: bold;
 }

@@ -14,6 +14,7 @@ interface IProps {
     getInDay?: Function;
     topJob?: any;
     indayJob?: any;
+    param?: any
 };
 
 interface IState {
@@ -56,7 +57,7 @@ class TopJob extends PureComponent<IProps, IState> {
     }
 
     render() {
-        let {  indayJob } = this.props;
+        let {  indayJob, param } = this.props;
         let { is_loading } = this.state;
 
         if (indayJob && indayJob.totalItems > 0) {
@@ -76,23 +77,18 @@ class TopJob extends PureComponent<IProps, IState> {
                                     <Skeleton key={index} loading={true} avatar paragraph={{ rows: 1 }} /> :
                                     (<div key={index} className='h-j-item'>
                                         <div className='img-job'>
-                                            <Avatar
-                                                shape={'square'}
-                                                src={logoUrl}
-                                                alt='ảnh công ti'
-                                                style={{ height: 70, width: 70 }}
-                                            />
+                                            <img src={logoUrl} alt='ảnh công ti' height='70px' width='70px' style={{ objectFit: 'contain' }} />
                                             <JobType>{item.jobType}</JobType>
                                         </div>
                                         <div className='job-content'>
                                             <ul>
                                                 <li className='j-d'>
-                                                    <Link to={`/job-detail/${window.btoa(item.id)}`} target='_blank' >
-                                                        <h6 className='l_c'>{limitString(item.jobTitle, 30)}</h6>
+                                                    <Link to={`/job-detail/${window.btoa(item.id)}${param}`} target='_blank' >
+                                                        <h6 className='l_c'>{item.jobTitle}</h6>
                                                     </Link>
                                                 </li>
                                                 <li className='l_c'>
-                                                    <Link to={`/employer/${window.btoa(item.employerID)}`} target='_blank' >{limitString(item.employerName, 30)}</Link>
+                                                    <Link to={`/employer/${window.btoa(item.employerID)}${param}`} target='_blank' >{limitString(item.employerName, 30)}</Link>
                                                 </li>
                                                 <li className='time-left'>{item.region.name}</li>
                                             </ul>
@@ -104,7 +100,7 @@ class TopJob extends PureComponent<IProps, IState> {
                             pageSize={indayJob.pageSize}
                             total={indayJob.totalItems}
                             style={{ margin: '10px 0px' }}
-                            onChange={(event?: number) => this.props.getHotJob(event - 1)}
+                            onChange={(event?: number) => this.props.getInDay(event - 1)}
                         />
                     </Col>
                 </Row>
@@ -116,7 +112,8 @@ class TopJob extends PureComponent<IProps, IState> {
 
 const mapStateToProps = (state) => ({
     topJob: state.HotJobResult.data,
-    indayJob: state.InDayResult.data
+    indayJob: state.InDayResult.data,
+    param: state.DetailEvent.param,
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -60,11 +60,11 @@ function getJobResults(action) {
     if (jt) {
         body.jobType = jt;
     }
-    
+    let eventID = store.getState().DetailEvent.eventID;
     let res = _requestToServer(
         POST,
         body,
-        EVENT_PRIVATE.JOBS.SEARCH,
+        `/api/students/schools/events/${eventID}/jobs/active/search`,
         STUDENT_HOST,
         authHeaders,
         {
