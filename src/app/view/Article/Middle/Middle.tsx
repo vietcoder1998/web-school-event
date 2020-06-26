@@ -36,7 +36,7 @@ export default class Middle extends PureComponent<IProps, IState> {
     return (
       <div className="article-middle">
         <Row gutter={12}>
-          {this.state.isAll && this.props.listType.map((item, index) => (
+          {this.state.isAll && this.props.listType.slice(0,2).map((item, index) => (
             <Col sm={24} md={24} lg={9} xl={9} xxl={9}>
               <div key={index} style={{textAlign: 'left', marginBottom: '20px 0 20px 0'}}>
                 <Title title={item.name} />
