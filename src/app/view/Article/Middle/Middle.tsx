@@ -4,7 +4,7 @@ import Title from "../Component/Title";
 import "./Middle.scss";
 import ListMiddle from "./ListMiddle";
 import { Link } from "react-router-dom";
-import GoodArticle from "./GoodArticle";
+import GoodArticle from "../Component/GoodArticle";
 
 interface IProps {
   listType?: any;

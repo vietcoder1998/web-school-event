@@ -36,7 +36,7 @@ function Announcements(props?: IProps) {
         _requestToServer(
             POST,
             body,
-            ANNOUNCEMENTS.LIST + `?pageIndex=${pageIndex}&pageSize=${pageSize}`,
+            ANNOUNCEMENTS.LIST + `?sortBy=a.viewNumber&sortType=desc&pageIndex=${pageIndex}&pageSize=${pageSize}`,
             PUBLIC_HOST,
             {
                 pageIndex: pageIndex,

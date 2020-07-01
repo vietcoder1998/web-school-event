@@ -11,6 +11,7 @@ import Card2 from "../Component/Card2";
 import Title from "../Component/Title";
 
 import HashLoader from "react-spinners/HashLoader";
+import GoodArticle from "../Component/GoodArticle";
 interface IProps {
   idType?: any;
 }
@@ -87,8 +88,8 @@ class HeaderArticle extends PureComponent<IProps, IState> {
     if (this.state.loading)
       return (
         <div>
-           <Title title={"Bài viết hay"} />
-           <Skeleton rows={6}/>
+          <Title title={"Bài viết hay"} />
+          <Skeleton rows={6} />
         </div>
       );
     else {
@@ -96,7 +97,7 @@ class HeaderArticle extends PureComponent<IProps, IState> {
         <div>
           <Row>
             <Col sm={0} md={0} lg={1} xl={1} xxl={1}></Col>
-            <Col sm={24} md={24} lg={22} xl={22} xxl={22}>
+            <Col sm={24} md={24} lg={22} xl={23} xxl={23}>
               <div>
                 <div
                   style={{ display: this.props.idType === "all" ? "" : "none" }}
@@ -104,7 +105,7 @@ class HeaderArticle extends PureComponent<IProps, IState> {
                   <Title title={"Bài viết hay"} />
                 </div>
                 <Row>
-                  <Col sm={24} md={24} lg={24} xl={13} xxl={13}>
+                  <Col sm={24} md={24} lg={24} xl={16} xxl={16}>
                     <Carousel
                       dots={true}
                       autoplay
@@ -125,27 +126,12 @@ class HeaderArticle extends PureComponent<IProps, IState> {
                     </Carousel>
                   </Col>
                   <Col sm={24} md={24} lg={24} xl={1} xxl={1}></Col>
-                  <Col sm={24} md={24} lg={24} xl={10} xxl={10}>
-                    {listArticleRender.map((item, index) => (
-                      <div
-                        key={index}
-                        style={{ display: index === 0 ? "none" : "", marginTop: 20 }}
-                      >
-                        <Card2
-                          id={item.id}
-                          title={item.title}
-                          imageUrl={item.imageUrl}
-                          summary={item.previewContent}
-                          rating={item.averageRating}
-                          date={item.createdDate}
-                        />
-                      </div>
-                    ))}
+                  <Col sm={24} md={24} lg={24} xl={7} xxl={7}>
+                    <GoodArticle />
                   </Col>
                 </Row>
               </div>
             </Col>
-            <Col sm={0} md={0} lg={1} xl={1} xxl={1}></Col>
           </Row>
         </div>
       );
