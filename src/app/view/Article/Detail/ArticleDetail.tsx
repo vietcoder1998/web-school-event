@@ -26,7 +26,7 @@ import { timeConverter } from "../../../../utils/convertTime";
 import TextArea from "antd/lib/input/TextArea";
 
 import { store } from "../../../../redux/store/index";
-import GoodArticle from "../Middle/GoodArticle";
+import GoodArticle from "../Component/GoodArticle";
 import { _requestToServer } from "../../../../services/exec";
 import { POST, DELETE } from "../../../../const/method";
 import { ANNOUNCEMENTS_PRIVATE } from "../../../../services/api/private.api";
@@ -412,7 +412,7 @@ class ArticleDetail extends PureComponent<IProps, IState> {
               </Col>
               <Col xs={0} sm={0} md={6} lg={6} xl={6} xxl={6}>
                 <div style={{ marginTop: "15vh" }}>
-                  <GoodArticle />
+                  <GoodArticle cardType={3} />
                 </div>
               </Col>
             </Row>
