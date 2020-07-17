@@ -18,6 +18,38 @@
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <script type="text/javascript">
+    window.twttr = (function(d, s, id) {
+      var js, fjs=d.getElementsByTagName(s)[0], t=window.twttr || {};
+      if (d.getElementById(id)) {return t;}
+      js=d.createElement(s); js.id=id;
+      js.src="https://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
+      t._e=[];
+      t.ready = function(f) {
+        t._e.push(f);
+      };
+      return t;
+    }(document, "script", "twitter-wjs"));
+  </script>
+  <script type="text/javascript">
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId: "2645790149071853",
+        cookie: true,
+        status: true,
+        xfbml: true,
+        version: "v2.5"
+      });
+    };
+    (function(d, s, id) {
+      var js, fjs=d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js=d.createElement(s); js.id=id;
+      js.src="//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, "script", "facebook-jssdk"));
+  </script>
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYQTUU1rbxfmp5_ik3euXX9B5-VSnDos4&libraries=places"></script>
   <!-- <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> -->

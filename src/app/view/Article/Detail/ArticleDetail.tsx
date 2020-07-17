@@ -32,6 +32,7 @@ import { POST, DELETE } from "../../../../const/method";
 import { ANNOUNCEMENTS_PRIVATE } from "../../../../services/api/private.api";
 // import { NotUpdate } from '../../../layout/common/Common';
 import HashLoader from "react-spinners/HashLoader";
+
 interface IProps {
   match?: any;
 }
@@ -185,7 +186,10 @@ class ArticleDetail extends PureComponent<IProps, IState> {
     await _requestToServer(
       POST,
       dataSend,
-      ANNOUNCEMENTS_PRIVATE.ADD_COMMENT.replace("{id}", window.atob(this.state.id)),
+      ANNOUNCEMENTS_PRIVATE.ADD_COMMENT.replace(
+        "{id}",
+        window.atob(this.state.id)
+      ),
       STUDENT_HOST,
       authHeaders,
       null,
@@ -199,7 +203,10 @@ class ArticleDetail extends PureComponent<IProps, IState> {
     let res = _requestToServer(
       DELETE,
       null,
-      ANNOUNCEMENTS_PRIVATE.DELETE_COMMENT.replace("{id}", window.atob(this.state.id)),
+      ANNOUNCEMENTS_PRIVATE.DELETE_COMMENT.replace(
+        "{id}",
+        window.atob(this.state.id)
+      ),
       STUDENT_HOST,
       authHeaders,
       dataSend,
@@ -241,10 +248,10 @@ class ArticleDetail extends PureComponent<IProps, IState> {
         <Layout disableFooterData={true}>
           <div className="article-detail">
             <Row>
-              <Col xs={0} sm={0} md={1} lg={1} xl={1} xxl={1}></Col>
+              <Col xs={0} sm={0} md={0} lg={1} xl={1} xxl={1}></Col>
               <Col xs={24} sm={24} md={16} lg={16} xl={16} xxl={16}>
-                <Row>
-                  <Col xs={1} sm={1} md={1} lg={2} xl={3} xxl={4}>
+                <Row gutter={[16, 16]}>
+                  <Col xs={0} sm={0} md={0} lg={3} xl={3} xxl={4}>
                     <Affix offsetTop={200}>
                       <div className="affix-annou-card hidden-only-phone">
                         <div className="affix-annou-card-content">
@@ -265,8 +272,21 @@ class ArticleDetail extends PureComponent<IProps, IState> {
                               type={"facebook"}
                               style={{ fontSize: 22, marginTop: 15 }}
                               onClick={() => {
-                                window.open(
-                                  `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`
+                                // window.open(
+                                //   `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`,
+                                //   "facebook-share-dialog",
+                                //   "width=626, height=436"
+                                // );
+                                // console.log("1");
+                                FB.ui(
+                                  {
+                                    display: "popup",
+                                    method: "share",
+                                    href:
+                                      "https://developers.facebook.com/docs/",
+                                    picture: this.state.imageUrl,
+                                  },
+                                  function (response) {}
                                 );
                               }}
                             />
@@ -276,7 +296,7 @@ class ArticleDetail extends PureComponent<IProps, IState> {
                               type={"home"}
                               style={{ fontSize: 22, marginTop: 15 }}
                               onClick={() => {
-                                window.location.replace("/home");
+                                window.location.href = "/home";
                               }}
                             />
                           </div>
@@ -284,7 +304,7 @@ class ArticleDetail extends PureComponent<IProps, IState> {
                       </div>
                     </Affix>
                   </Col>
-                  <Col xs={23} sm={23} md={16} lg={16} xl={18} xxl={18}>
+                  <Col xs={23} sm={23} md={23} lg={20} xl={20} xxl={20}>
                     <div className="article-detail-header">
                       <div>
                         {this.state.author.lastName +
@@ -310,18 +330,22 @@ class ArticleDetail extends PureComponent<IProps, IState> {
                         </a>
                       </div>
                     </div>
-                    <Rate value={this.state.rated} disabled />
+                    <div>
+                      <Rate value={this.state.rated} disabled />
+                    </div>
                     <Divider />
                     <div className="content">
                       <div className="title">{this.state.title}</div>
                       <div
                         dangerouslySetInnerHTML={{ __html: this.state.content }}
                       />
+                      <Divider />
                     </div>
+
                     {isAuthen ? (
                       <div className="comment">
                         <div className="rating-cmt">
-                          <div>Đánh giá</div>
+                          <div style={{ fontWeight: "bold" }}>Đánh giá</div>
                           <Rate
                             value={this.state.rating}
                             onChange={(event: number) => {
@@ -354,7 +378,16 @@ class ArticleDetail extends PureComponent<IProps, IState> {
                     ) : (
                       <div>
                         <Divider />
-                        <a href="/login"> Đăng nhập để bình luận</a>
+                        <a
+                          href="/login"
+                          onClick={() => {
+                            let last_access = window.location.href;
+                            localStorage.setItem("last_access", last_access);
+                          }}
+                        >
+                          {" "}
+                          Đăng nhập để bình luận
+                        </a>
                       </div>
                     )}
                     <Divider />
@@ -384,7 +417,7 @@ class ArticleDetail extends PureComponent<IProps, IState> {
                                 <Rate
                                   value={item && item.rating}
                                   disabled
-                                  style={{ fontSize: "0.9rem" }}
+                                  style={{ fontSize: "1rem" }}
                                 />
                               </div>
                               <div className="comment-msg">{item.comment}</div>
@@ -410,7 +443,7 @@ class ArticleDetail extends PureComponent<IProps, IState> {
                   </Col>
                 </Row>
               </Col>
-              <Col xs={0} sm={0} md={6} lg={6} xl={6} xxl={6}>
+              <Col xs={0} sm={0} md={8} lg={7} xl={6} xxl={6}>
                 <div style={{ marginTop: "15vh" }}>
                   <GoodArticle cardType={3} />
                 </div>

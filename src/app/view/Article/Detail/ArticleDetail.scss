@@ -1,22 +1,29 @@
 .article-detail {
-  padding: 0 4vw 0 0vw;
+  padding: 0 3vw 0 3vw;
   .article-detail-header {
     width: 100%;
-    display: inline-flex;
+    display: flex;
+    flex-wrap: wrap;
     padding: 5vh 0 3vh 0;
     div {
-      margin: auto 20px 0 0;
+      margin: 10px 20px 0 0;
       font-weight: bold;
       font-size: 15px;
-      color: '#5294E2' !important;
+      color: "#5294E2" !important;
     }
     svg {
       margin: 0 5px;
     }
   }
+  .anticon {
+    &:hover {
+      color: blue;
+    }
+  }
   .content {
     background-color: white;
     padding: 0;
+
     .title {
       font-weight: bold;
       font-size: 25px;
@@ -28,7 +35,8 @@
     .rating-cmt {
       display: inline-flex;
       .ant-rate {
-        margin: 0px 15px;
+        margin: 3px 15px;
+        font-size: 15px;
       }
       svg {
         margin-bottom: 12px;
