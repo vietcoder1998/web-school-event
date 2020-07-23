@@ -1,4 +1,3 @@
-import { EVENT_PUBLIC } from './../../../../services/api/public.api';
 import { POST } from '../.././../../const/method';
 import { call, takeEvery, put } from 'redux-saga/effects';
 import { PUBLIC_HOST } from '../../../../environment/development';
@@ -45,7 +44,7 @@ function getEmployerMoreJobData(action) {
     let res = _requestToServer(
         POST,
         body,
-        `/api/schools/${schoolID}/events/${eventID}/jobs/active`,
+        FIND_JOB,
         PUBLIC_HOST,
         noInfoHeader,
         {

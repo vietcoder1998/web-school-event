@@ -447,7 +447,6 @@ const mapStateToProps = state => ({
     isAuthen: state.AuthState.isAuthen,
     eventEmployerMoreJob: state.EventEmployerMoreJob.data,
     param: state.DetailEvent.param
-
 });
 
 const mapDispatchToProps = (dispatch) => ({

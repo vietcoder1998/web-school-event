@@ -28,7 +28,6 @@ function getEmployerMoreJobData(action) {
         employerID = store.getState().GetJobDetail.employerID;
     }
 
-
     let body = {
         employerID,
         excludedJobIDs: null,
