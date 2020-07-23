@@ -159,41 +159,16 @@ class Header extends PureComponent<IProps, IState> {
                 Tìm kiếm
               </a>
               <a
-                href="https://play.google.com/store/apps/details?id=com.worksvn.student&hl=en_US"
+                href="http://qrco.de/worksvn-vieclam?fbclid=IwAR2nRSwHv0aFQyVagAIb1EmFBA-0SX4NY3VVDevPwAb5VXQN_qnywhvJfwI"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <Icon
-                  type="android"
+                  type="appstore"
                   theme="filled"
                   style={{ fontSize: "16.3px" }}
                 />
-                Ứng dụng Android
-              </a>
-              <a
-                href="https://apps.apple.com/vn/app/worksvn-sinh-vi%C3%AAn/id1492437454"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Icon
-                  type={"apple"}
-                  theme="filled"
-                  style={{ fontSize: "16.8px" }}
-                />
-                Ứng dụng iOS
-              </a>
-              <a
-                href="https://employer.works.vn"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="employer"
-              >
-                <Icon
-                  type="zoom"
-                  theme="filled"
-                  style={{ fontSize: "16.8px" }}
-                />
-                Nhà Tuyển Dụng
+                Ứng dụng trên điện thoại
               </a>
               <a
                 href="/announcement/all"
@@ -205,6 +180,20 @@ class Header extends PureComponent<IProps, IState> {
                 <Icon type={"fileOut"} />
                 Bài viết
               </a>
+              <a
+                href="https://employer.works.vn"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="employer"
+              >
+                <Icon
+                  type="bank"
+                  theme="filled"
+                  style={{ fontSize: "16.8px"}}
+                />
+                Nhà Tuyển Dụng
+              </a>
+             
             </div>
           </div>
           <div

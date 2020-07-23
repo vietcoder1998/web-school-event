@@ -12,13 +12,13 @@
   .img-card {
     width: 100%;
     height: 75vh;
-    border-radius: 20px;
+    
    
   }
   @media (min-width: 0px) and (max-width: 1000px) {
     .img-card {
       object-fit: cover;
-      border-radius: 3%;
+      
       height: 50vh;
     }
   }
@@ -137,7 +137,7 @@
     margin-left: 5px;
     margin-top: 5px;
     width: auto;
-    padding: 0px 5px;
+    padding: 0px 5px 5px 5px;
     .title-article {
       padding: 0;
       color: black;
@@ -173,7 +173,7 @@
 
 
 .ant-rate {
-  font-size: 10px;
+  font-size: 15px;
 }
 .ant-carousel {
   .slick-dots {
@@ -183,7 +183,6 @@
     padding: 0;
     text-align: center;
     li {
-      
       button {
         height: 15px !important;
         width: 15px;
