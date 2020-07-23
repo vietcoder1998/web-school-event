@@ -19,6 +19,7 @@ class Article extends React.Component {
   }
   componentDidMount() {
     this.getListTypeArticle()
+    // this comment for test ssh remote to gitlab
   }
   async  getListTypeArticle() {
     let res = await _requestToServer(GET, null, ANNOUNCEMENTS.TYPE, PUBLIC_HOST, {

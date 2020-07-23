@@ -4,7 +4,7 @@ import Title from "../Component/Title";
 import "./Middle.scss";
 import ListMiddle from "./ListMiddle";
 import GoodArticle from "../Component/GoodArticle";
-import bannerImage from '../../../../assets/image/Ứng dụng tìm kiếm việc làm hàng đầu.gif'
+import bannerImage from "../../../../assets/image/Ứng dụng tìm kiếm việc làm hàng đầu.gif";
 
 interface IProps {
   listType?: any;
@@ -55,7 +55,13 @@ export default class Middle extends PureComponent<IProps, IState> {
           {this.state.isAll && (
             <div>
               <Col sm={24} md={24} lg={6} xl={6} xxl={6}>
-                <img src={bannerImage} width={"100%"} height="auto" />
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="http://qrco.de/worksvn-vieclam?fbclid=IwAR2nRSwHv0aFQyVagAIb1EmFBA-0SX4NY3VVDevPwAb5VXQN_qnywhvJfwI"
+                >
+                  <img src={bannerImage} width={"100%"} height="auto" />
+                </a>
               </Col>
             </div>
           )}

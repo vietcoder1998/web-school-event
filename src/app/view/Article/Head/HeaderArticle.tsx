@@ -72,9 +72,7 @@ class HeaderArticle extends PureComponent<IProps, IState> {
         listArticleRender: res.data.items,
         loading: false,
       });
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   }
   render() {
     let { listArticleRender } = this.state;
@@ -99,13 +97,15 @@ class HeaderArticle extends PureComponent<IProps, IState> {
             <Col sm={0} md={0} lg={1} xl={1} xxl={1}></Col>
             <Col sm={24} md={24} lg={22} xl={23} xxl={23}>
               <div>
-                <div
-                  style={{ display: this.props.idType === "all" ? "" : "none" }}
-                >
-                  <Title title={"Bài viết hay"} />
-                </div>
                 <Row>
                   <Col sm={24} md={24} lg={24} xl={16} xxl={16}>
+                    <div
+                      style={{
+                        display: this.props.idType === "all" ? "" : "none",
+                      }}
+                    >
+                      <Title title={"Bài viết hay"} />
+                    </div>
                     <Carousel
                       dots={true}
                       autoplay
