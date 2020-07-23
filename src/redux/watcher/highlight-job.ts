@@ -1,15 +1,13 @@
 import { TYPE } from './../../const/type';
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { _requestToServer } from '../../services/exec';
-import { FIND_JOB } from '../../services/api/public.api';
+import {NORMAL_PUBLIC} from '../../services/api/public.api';
 import { PUBLIC_HOST, STUDENT_HOST } from '../../environment/development';
 import { noInfoHeader, authHeaders } from '../../services/auth';
 import { store } from '../store';
-import { JOBS } from '../../services/api/private.api';
+import {NORMAL_PRIVATE} from '../../services/api/private.api';
 import { REDUX_SAGA, REDUX } from '../../const/actions'
 import { POST } from '../../const/method';
-
-
 
 function* getListHighLightJobData(action) {
     yield put({ type: REDUX.HIGH_LIGHT.SET_LOADING_HIGH_LIGHT_JOB, loading_high_light_data: true });
@@ -33,16 +31,14 @@ function getHighLightJobData(action) {
         jobLocationFilter: null,
         jobPriorityFilter: {
             searchPriority: TYPE.HIGHLIGHT
-        }
+        },
+        schoolEventID: store.getState().DetailEvent.eventID
     };
-
     let isAuthen = store.getState().AuthState.isAuthen;
-    let eventID = store.getState().DetailEvent.eventID;
-    let schoolID = store.getState().DetailEvent.schoolID
     let res = _requestToServer(
         POST,
         action.body ? action.body : body,
-        (isAuthen ? JOBS + '/active/home' : `/api/schools/${schoolID}/events/${eventID}/jobs/active/home`),
+        (isAuthen ? NORMAL_PRIVATE.JOBS.HOME : NORMAL_PUBLIC.JOBS.HOME),
         isAuthen ? STUDENT_HOST : PUBLIC_HOST,
         isAuthen ? authHeaders : noInfoHeader,
         {

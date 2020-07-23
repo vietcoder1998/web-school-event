@@ -24,7 +24,8 @@ export let EVENT_PUBLIC = {
 
 export const NORMAL_PUBLIC = {
   JOBS: {
-    SEARCH: `/api/schools/${process.env.REACT_APP_SCHOOL_ID}/events/${process.env.REACT_APP_EVENT_ID}/jobs/active/search`,
+    HOME: `/api/jobs/active/home`,
+    SEARCH: `/api/jobs/active/search`,
   },
 };
 

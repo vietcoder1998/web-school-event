@@ -2,11 +2,10 @@
 import { NORMAL_PRIVATE } from "./../../services/api/private.api";
 import { takeEvery, put, call } from "redux-saga/effects";
 import { _requestToServer } from "../../services/exec";
-import { FIND_JOB, NORMAL_PUBLIC } from "../../services/api/public.api";
+import { NORMAL_PUBLIC } from "../../services/api/public.api";
 import { PUBLIC_HOST, STUDENT_HOST } from "../../environment/development";
 import { noInfoHeader, authHeaders } from "../../services/auth";
 import { store } from "../store";
-import { JOBS } from "../../services/api/private.api";
 import { REDUX_SAGA, REDUX } from "../../const/actions";
 import { POST } from "../../const/method";
 
@@ -36,6 +35,7 @@ function getJobResults(action) {
       lat: null,
       lon: null,
     },
+    schoolEventID: store.getState().DetailEvent.eventID
   };
 
   if (action.body) {
@@ -61,12 +61,10 @@ function getJobResults(action) {
   }
 
   let isAuthen = store.getState().AuthState.isAuthen;
-  let eventID = store.getState().DetailEvent.eventID;
-  let schoolID = store.getState().DetailEvent.schoolID
   let res = _requestToServer(
     POST,
     body,
-    isAuthen ? NORMAL_PRIVATE.JOBS.SEARCH : `/api/schools/${schoolID}/events/${eventID}/jobs/active/search`,
+    isAuthen ? NORMAL_PRIVATE.JOBS.SEARCH : NORMAL_PUBLIC.JOBS.SEARCH,
     isAuthen ? STUDENT_HOST : PUBLIC_HOST,
     isAuthen ? authHeaders : noInfoHeader,
     {
