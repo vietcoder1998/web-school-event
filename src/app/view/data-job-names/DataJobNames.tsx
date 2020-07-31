@@ -22,7 +22,7 @@ function DataJobNames(props: IProps) {
             employerID: null,
             excludedJobIDs: null,
             excludePriority: null,
-            shuffle: true,
+            shuffle: false,
             jobNameIDs: null,
             jobGroupID: null,
             jobType: null,

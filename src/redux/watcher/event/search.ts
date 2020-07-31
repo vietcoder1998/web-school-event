@@ -27,7 +27,7 @@ function getJobResults(action) {
         employerID: null,
         excludedJobIDs: null,
         excludePriority: null,
-        shuffle: true,
+        shuffle: false,
         jobNameIDs: null,
         jobGroupID: null,
         jobType: null,
@@ -69,7 +69,7 @@ function getJobResults(action) {
         authHeaders,
         {
             pageIndex: action.pageIndex ? action.pageIndex : 0,
-            pageSize: action.pageSize ? action.pageSize : 10,
+            pageSize: action.pageSize ? action.pageSize : 20,
         },
         false
     );

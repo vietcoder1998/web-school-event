@@ -51,7 +51,7 @@ function getHotJobData(action) {
         isAuthen ? STUDENT_HOST : PUBLIC_HOST, isAuthen ? authHeaders : noInfoHeader,
         {
             pageIndex: action.pageIndex ? action.pageIndex : 0,
-            pageSize: 12,
+            pageSize: 18,
             priority: 'TOP'
         },
         false
@@ -66,7 +66,7 @@ function getJobData(action) {
     let data: IJobSearchFilter = {
         employerID: null,
         excludedJobIDs: null,
-        shuffle: true,
+        shuffle: false,
         jobNameIDs: null,
         branchIDs: [],
         jobType: null,
@@ -89,7 +89,7 @@ function getJobData(action) {
         isAuthen ? STUDENT_HOST : PUBLIC_HOST, isAuthen ? authHeaders : noInfoHeader,
         {
             pageIndex: action.pageIndex ? action.pageIndex : 0,
-            pageSize: 12,
+            pageSize: 21,
             priority: ''
         },
         false

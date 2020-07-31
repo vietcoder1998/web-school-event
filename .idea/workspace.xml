@@ -3,6 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="49ead047-4242-4270-8520-9803960f3db2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/view/Event/Home/home-job/HomeJob.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/view/Event/Home/home-job/HomeJob.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/view/Event/Home/home-job/HomeJob.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/view/Event/Home/home-job/HomeJob.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/view/Event/Home/top-job/TopJob.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/view/Event/Home/top-job/TopJob.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/view/data-job-names/DataJobNames.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/view/data-job-names/DataJobNames.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/view/data-regions/DataRegions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/view/data-regions/DataRegions.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/view/layout/common/Common.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/view/layout/common/Common.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/view/layout/footer/option/Option.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/view/layout/footer/option/Option.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/watcher/all-job.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/watcher/all-job.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/watcher/event/jobs.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/watcher/event/jobs.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/watcher/event/search.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/watcher/event/search.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/watcher/job-result.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/watcher/job-result.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/convertNumber.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/convertNumber.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -96,19 +108,21 @@
           <entry key="development" value="1" />
           <entry key="env" value="2" />
           <entry key="html" value="1" />
-          <entry key="js" value="1" />
+          <entry key="js" value="2" />
           <entry key="production" value="1" />
-          <entry key="ts" value="13" />
-          <entry key="tsx" value="3" />
+          <entry key="scss" value="2" />
+          <entry key="ts" value="14" />
+          <entry key="tsx" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key=".env file" value="4" />
           <entry key="HTML" value="1" />
-          <entry key="JavaScript" value="1" />
-          <entry key="TypeScript" value="13" />
-          <entry key="TypeScript JSX" value="3" />
+          <entry key="JavaScript" value="2" />
+          <entry key="SCSS" value="2" />
+          <entry key="TypeScript" value="14" />
+          <entry key="TypeScript JSX" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
@@ -120,25 +134,34 @@
         <counts>
           <entry key="development" value="29" />
           <entry key="env" value="21" />
+          <entry key="js" value="1" />
           <entry key="production" value="18" />
-          <entry key="ts" value="76" />
+          <entry key="scss" value="17" />
+          <entry key="ts" value="100" />
+          <entry key="tsx" value="30" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="68" />
-          <entry key="TypeScript" value="76" />
+          <entry key="JavaScript" value="1" />
+          <entry key="SCSS" value="17" />
+          <entry key="TypeScript" value="100" />
+          <entry key="TypeScript JSX" value="30" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/index.html">
+        <entry file="file://$PROJECT_DIR$/src/app/view/Event/Home/top-job/TopJob.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" column="43" lean-forward="true" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
+            <state relative-caret-position="524">
+              <caret line="63" column="24" lean-forward="true" selection-start-line="63" selection-start-column="24" selection-end-line="63" selection-end-column="24" />
+              <folding>
+                <element signature="e#0#45#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -162,6 +185,11 @@
       <find>REDUX_SAGA.EVENT.EMPLOYER.MORE_JOB</find>
       <find>EmployerInfo</find>
       <find>HEAD</find>
+      <find>img</find>
+      <find>sala</find>
+      <find>name_employer</find>
+      <find>shuffle: true</find>
+      <find>img-jo</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -189,6 +217,12 @@
         <option value="$PROJECT_DIR$/.env.production" />
         <option value="$PROJECT_DIR$/.env.development" />
         <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/src/app/view/Event/Home/home-job/HomeJob.scss" />
+        <option value="$PROJECT_DIR$/src/utils/convertNumber.js" />
+        <option value="$PROJECT_DIR$/src/app/view/layout/common/Common.tsx" />
+        <option value="$PROJECT_DIR$/src/app/view/Event/Home/home-job/HomeJob.tsx" />
+        <option value="$PROJECT_DIR$/src/app/view/Event/Home/top-job/TopJob.scss" />
+        <option value="$PROJECT_DIR$/src/redux/watcher/event/jobs.ts" />
       </list>
     </option>
   </component>
@@ -255,11 +289,6 @@
             <path>
               <item name="worksvn-web-student" type="b2602c69:ProjectViewProjectNode" />
               <item name="worksvn-web-student" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="worksvn-web-student" type="b2602c69:ProjectViewProjectNode" />
-              <item name="worksvn-web-student" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -282,6 +311,43 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="view" type="462c0819:PsiDirectoryNode" />
               <item name="em-info" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="worksvn-web-student" type="b2602c69:ProjectViewProjectNode" />
+              <item name="worksvn-web-student" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="Event" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="worksvn-web-student" type="b2602c69:ProjectViewProjectNode" />
+              <item name="worksvn-web-student" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="Event" type="462c0819:PsiDirectoryNode" />
+              <item name="Home" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="worksvn-web-student" type="b2602c69:ProjectViewProjectNode" />
+              <item name="worksvn-web-student" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="Event" type="462c0819:PsiDirectoryNode" />
+              <item name="Home" type="462c0819:PsiDirectoryNode" />
+              <item name="home-job" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="worksvn-web-student" type="b2602c69:ProjectViewProjectNode" />
+              <item name="worksvn-web-student" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="Event" type="462c0819:PsiDirectoryNode" />
+              <item name="Home" type="462c0819:PsiDirectoryNode" />
+              <item name="top-job" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="worksvn-web-student" type="b2602c69:ProjectViewProjectNode" />
@@ -325,7 +391,21 @@
               <item name="worksvn-web-student" type="b2602c69:ProjectViewProjectNode" />
               <item name="worksvn-web-student" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="redux" type="462c0819:PsiDirectoryNode" />
+              <item name="watcher" type="462c0819:PsiDirectoryNode" />
+              <item name="event" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="worksvn-web-student" type="b2602c69:ProjectViewProjectNode" />
+              <item name="worksvn-web-student" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="services" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="worksvn-web-student" type="b2602c69:ProjectViewProjectNode" />
+              <item name="worksvn-web-student" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -401,13 +481,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11236000" />
+    <option name="totallyTimeSpent" value="13120000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22405817" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26107073" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -428,6 +508,28 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.290152" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="npm" order="2" side_tool="true" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32719547" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="RNConsole" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.3937677" />
+      <window_info anchor="bottom" id="TypeScript" order="12" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -591,6 +693,65 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="23" column="43" lean-forward="true" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/convertNumber.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="14" lean-forward="true" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/view/layout/common/Common.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1352">
+          <caret line="81" column="36" selection-start-line="81" selection-start-column="36" selection-end-line="81" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/view/Event/Home/home-job/HomeJob.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="91" column="58" lean-forward="true" selection-start-line="91" selection-start-column="58" selection-end-line="91" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+            <element signature="e#219#302#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/view/Event/Home/home-job/HomeJob.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="526">
+          <caret line="124" column="1" selection-start-line="124" selection-start-column="1" selection-end-line="124" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/redux/watcher/event/jobs.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="38" column="32" lean-forward="true" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#66#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/view/Event/Home/top-job/TopJob.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="747">
+          <caret line="129" lean-forward="true" selection-start-line="129" selection-end-line="129" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/view/Event/Home/top-job/TopJob.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="524">
+          <caret line="63" column="24" lean-forward="true" selection-start-line="63" selection-start-column="24" selection-end-line="63" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -6,13 +6,13 @@
   padding: 10px;
 
   h4 {
-    margin: 10px 0px !important;
+    margin: 10px 0 !important;
     text-align: center;
   }
 
   .ant-skeleton {
     padding: 10px 5vw;
-    margin: 2vh 0px;
+    margin: 2vh 0;
 
     .ant-skeleton-header .ant-skeleton-avatar-lg {
       width: 70px;
@@ -27,60 +27,25 @@
       background-color: #e1ecf4;
     }
     display: flex;
-    margin: 0.2vw 10px;
-    height: 130px !important;
-    border-bottom: dashed $color_border 1px;
-    border-radius: 7px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    height: 110px !important;
+    border-radius: 5px;
     background-color: white;
-    margin-top: 10px;
 
-    //tag
-    @function sqrt($r) {
-      $x0: 1;
-      $x1: $x0;
-      @for $i from 1 through 10 {
-        $x1: $x0 - ($x0 * $x0 - abs($r)) / (2 * $x0);
-        $x0: $x1;
-      }
-      @return $x1;
-    }
-
-    $cornerwidth: 60px;
-
-    .c-corner-label {
-      position: absolute;
-      right: 10px;
-      margin-top: 70px;
-      border-style: solid;
-      border-color: transparent #ee1c25 transparent transparent;
-      border-color: rgba(255, 255, 255, 0) #e43636 rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
-      height: 0;
-      width: 0;
-      border-width: 0 $cornerwidth $cornerwidth 0;
-      -webkit-transform: rotate(90deg);
-      @media (min-width: 0px) and (max-width: 500px) {
-        top: 11px;
-        // right: 5px;
-      }
-      @media (min-width: 600px) and (max-width: 800px) {
-        height: 0;
-        width: 0;
-      }
-    }
-    .c-corner-label__text {
-      color: #eee;
-      font-size: $cornerwidth/5;
-      font-weight: bold;
-      position: relative;
-      left: -$cornerwidth * 0.06;
-      top: $cornerwidth * 0.1;
-      white-space: nowrap;
-      transform: rotate(45deg);
-      width: $cornerwidth * sqrt(2);
+    .img-job {
       text-align: center;
-      line-height: 2em;
-      -webkit-transform: rotate(225deg);
+      width: 88px;
+      padding: 8px;
+
+      img {
+        width: 72px;
+        height: 72px;
+        border-radius: 8px;
+        border: 1px solid $color_border;
+      }
     }
+
     a {
       color: #5d5d5d;
 
@@ -89,31 +54,58 @@
       }
     }
 
-    .time-left {
+    .region {
       text-align: left;
-      font-size: 0.7rem;
-      font-style: italic;
+      font-size: 0.8rem;
     }
+
+    .salary {
+      text-align: left;
+      font-size: 0.8rem;
+    }
+
+    .salary-label {
+      color: red;
+    }
+
+    .top-badge {
+      text-transform: uppercase;
+      color: white;
+      background-color: red;
+      border-radius: 3px;
+      padding-right: 4px;
+      padding-left: 4px
+    }
+
 
     &:hover {
       transition: 0.5s;
     }
 
     .job-content {
-      max-height: 80px;
       width: 100%;
-      padding: 0px 10px;
+      padding-top: 8px;
+      padding-right: 8px;
 
       a {
         text-transform: lowercase;
       }
 
       h6 {
-        font-size: 1.1em;
+        font-size: 0.95em;
 
         &:hover {
           color: rgb(0, 84, 136) !important;
         }
+      }
+
+      .name_employer {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        text-transform: initial;
+        font-size: 0.8em;
       }
 
       .j-d {
@@ -137,10 +129,6 @@
 
       a::first-letter {
         text-transform: uppercase;
-      }
-
-      li {
-        padding: 2px 2px;
       }
     }
   }
