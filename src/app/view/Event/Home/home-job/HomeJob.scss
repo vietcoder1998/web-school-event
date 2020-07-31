@@ -4,6 +4,7 @@
   font-family: $font_base;
   background-color: white;
   padding: 10px;
+
   b h5 {
     margin: 10px 0 !important;
     text-align: center;
@@ -30,6 +31,7 @@
       color: white;
     }
   }
+
   .h-j-item-home {
     display: flex;
     margin-right: 10px;
@@ -85,7 +87,6 @@
 
       a {
         text-transform: lowercase;
-        font-weight: 500;
       }
 
       h6 {

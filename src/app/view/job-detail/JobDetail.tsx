@@ -478,6 +478,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                             shape={"square"}
                             src={testImage(logoUrl, "logo")}
                             alt="logo-company"
+                            style={{marginBottom: 5}}
                           />
                           <JobType>{jobDetail && jobDetail.jobType}</JobType>
                         </Col>

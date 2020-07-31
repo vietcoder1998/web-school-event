@@ -61,66 +61,69 @@ class HomeJob extends PureComponent<IProps> {
 
                         return (
                             <Col xs={24} sm={24} md={8} lg={8} xl={8} xxl={6} key={index}>
-                                {loading_hot_job ? (
-                                    <Skeleton
-                                        key={index}
-                                        loading={true}
-                                        avatar
-                                        paragraph={{rows: 1}}
-                                        active={true}
-                                    />
-                                ) : (
-                                    <div key={index} className="h-j-item-home">
-                                        <div className="img-job">
-                                            <img src={logoUrl} alt="employer logo"/>
-                                            <JobType>{item.jobType}</JobType>
-                                        </div>
-                                        <div className="job-content">
-                                            <ul>
-                                                <li className="j-d">
-                                                    <Link
-                                                        to={`/event-job-detail/${window.btoa(item.id)}${this.props.param}`}
-                                                        target="_blank"
-                                                    >
-                                                        <h6
-                                                            className="l_c"
-                                                            style={{
-                                                                color: item.titleHighlight ? "red" : "black",
-                                                            }}
+                                {loading_hot_job ?
+                                    (
+                                        <Skeleton
+                                            key={index}
+                                            loading={true}
+                                            avatar
+                                            paragraph={{rows: 1}}
+                                            active={true}
+                                        />
+                                    )
+                                    :
+                                    (
+                                        <div key={index} className="h-j-item-home">
+                                            <div className="img-job">
+                                                <img src={logoUrl} alt="employer logo"/>
+                                                <JobType>{item.jobType}</JobType>
+                                            </div>
+                                            <div className="job-content">
+                                                <ul>
+                                                    <li className="j-d">
+                                                        <Link
+                                                            to={`/event-job-detail/${window.btoa(item.id)}${this.props.param}`}
+                                                            target="_blank"
                                                         >
-                                                            {item.jobTitle}
-                                                        </h6>
-                                                    </Link>
-                                                </li>
-                                                <li className="l_c">
-                                                    <Link
-                                                        to={`/employer/${window.btoa(item.employerID)}${this.props.param}`}
-                                                        target="_blank"
-                                                        className="name_employer"
-                                                    >
-                                                        {item.employerName}
-                                                    </Link>
-                                                </li>
-                                                <li className="region">
-                                                    <Icon type="environment" style={{marginRight: 3}}/>
-                                                    {item.region && item.region.name
-                                                        ? item.region.name
-                                                        : null}
-                                                </li>
-                                                <li className="salary">
-                                                    <Icon type="dollar" style={{marginRight: 3}}/>
-                                                    <span className="salary-label">
+                                                            <h6
+                                                                className="l_c"
+                                                                style={{
+                                                                    color: item.titleHighlight ? "red" : "black",
+                                                                }}
+                                                            >
+                                                                {item.jobTitle}
+                                                            </h6>
+                                                        </Link>
+                                                    </li>
+                                                    <li className="l_c">
+                                                        <Link
+                                                            to={`/employer/${window.btoa(item.employerID)}${this.props.param}`}
+                                                            target="_blank"
+                                                            className="name_employer"
+                                                        >
+                                                            {item.employerName}
+                                                        </Link>
+                                                    </li>
+                                                    <li className="region">
+                                                        <Icon type="environment" style={{marginRight: 3}}/>
+                                                        {item.region && item.region.name
+                                                            ? item.region.name
+                                                            : null}
+                                                    </li>
+                                                    <li className="salary">
+                                                        <Icon type="dollar" style={{marginRight: 3}}/>
+                                                        <span className="salary-label">
                                                         <b>
                                                             {convertFullSalary(item.minSalary, item.minSalaryUnit,
                                                                 item.maxSalary, item.maxSalaryUnit)}
                                                         </b>
                                                     </span>
-                                                </li>
-
-                                            </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
-                                )}{" "}
+                                    )
+                                }
                             </Col>
                         );
                     })

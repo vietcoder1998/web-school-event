@@ -41,7 +41,7 @@ function getInDayData(action) {
         isAuthen ? authHeaders : noInfoHeader,
         {
             pageIndex: action.pageIndex ? action.pageIndex : 0,
-            pageSize: 6,
+            pageSize: 18,
             priority: 'IN_DAY'
         },
         false

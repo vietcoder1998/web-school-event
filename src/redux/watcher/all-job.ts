@@ -27,7 +27,7 @@ function getAllJobData(action) {
     let data: IJobSearchFilter = {
         employerID: null,
         excludedJobIDs: null,
-        shuffle: true,
+        shuffle: false,
         jobNameIDs: null,
         jobType: null,
         jobShiftFilter: null,
@@ -42,7 +42,7 @@ function getAllJobData(action) {
         isAuthen ? STUDENT_HOST : PUBLIC_HOST, isAuthen ? authHeaders : noInfoHeader,
         {
             pageIndex: action.pageIndex ? action.pageIndex : 0,
-            pageSize: 6
+            pageSize: 21
         },
         false
     );

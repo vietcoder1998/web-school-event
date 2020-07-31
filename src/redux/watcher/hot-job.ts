@@ -44,7 +44,7 @@ function getHotJobData(action) {
         isAuthen ? STUDENT_HOST : PUBLIC_HOST, isAuthen ? authHeaders : noInfoHeader,
         {
             pageIndex: action.pageIndex ? action.pageIndex : 0,
-            pageSize: 6,
+            pageSize: 18,
             priority: 'TOP'
         },
         false
