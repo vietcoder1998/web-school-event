@@ -85,7 +85,15 @@ class TopJob extends PureComponent<IProps, IState> {
                                                         <li className='j-d'>
                                                             <Link to={`/job-detail/${window.btoa(item.id)}${param}`}
                                                                   target='_blank'>
-                                                                <h6 className='l_c'>{item.jobTitle}</h6>
+                                                                <h6 className='l_c'
+                                                                    style={{
+                                                                        color: item.titleHighlight ? "red" : "black",
+                                                                    }}
+                                                                >
+                                                                    <span className="in-day-badge"
+                                                                          style={{marginRight: 5}}>Gấp</span>
+                                                                    {item.jobTitle}
+                                                                </h6>
                                                             </Link>
                                                         </li>
                                                         <li className='l_c'>

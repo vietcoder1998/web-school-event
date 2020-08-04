@@ -72,6 +72,15 @@
       color: red;
     }
 
+    .in-day-badge {
+      text-transform: uppercase;
+      color: white;
+      background-color: #F3612C;
+      border-radius: 3px;
+      padding-right: 4px;
+      padding-left: 4px
+    }
+
     &:hover {
       transition: 0.5s;
     }
@@ -111,6 +120,7 @@
           overflow: hidden;
           text-overflow: ellipsis;
           text-transform: initial;
+          line-height: 18px;
         }
       }
 

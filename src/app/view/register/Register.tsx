@@ -188,7 +188,6 @@ class Register extends Component<IProps, IState> {
   };
 
   _choseMajor = (value) => {
-    console.log("vao day");
     let { email_register_dto } = this.state;
     this.setState({ is_exactly_majorID: true })
     email_register_dto.majorID = value;

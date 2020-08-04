@@ -174,7 +174,6 @@ class App extends React.Component {
       if (queryParam2.schoolID && queryParam2.eventID) {
         this.getInfoSchool(queryParam2.schoolID).then((res) => {
           if (res && res.data) {
-            console.log('vao day')
             this.props.setInfoEvent(res.data.logoUrl, res.data.primaryColor, res.data.primaryDarkColor, window.location.search, queryParam2.schoolID, queryParam2.eventID)
           }
         }).finally(() => {

@@ -55,7 +55,7 @@ class TopJob extends PureComponent<IProps> {
                         }
 
                         return (
-                            <Col xs={24} sm={24} md={8} lg={8} xl={8} xxl={6} key={index}>
+                            <Col xs={24} sm={12} md={12} lg={8} xl={8} xxl={6} key={index}>
                                 <div key={index} className="h-j-item-top">
                                     <div className="img-job">
                                         <img src={logoUrl} alt="employer logo"/>

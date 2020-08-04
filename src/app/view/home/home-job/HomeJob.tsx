@@ -66,7 +66,15 @@ class HomeJob extends PureComponent<IProps> {
                                                 <li className='j-d'>
                                                     <Link to={`/job-detail/${window.btoa(item.id)}${param}`}
                                                           target='_blank'>
-                                                        <h6 className='l_c'>{item.jobTitle}</h6>
+                                                        <h6 className='l_c'
+                                                            style={{
+                                                                color: item.titleHighlight ? "red" : "black",
+                                                            }}
+                                                        >
+                                                             <span className="top-badge"
+                                                                   style={{marginRight: 5}}>Hot</span>
+                                                            {item.jobTitle}
+                                                        </h6>
                                                     </Link>
                                                 </li>
                                                 <li className='l_c'>

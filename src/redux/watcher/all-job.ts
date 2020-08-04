@@ -9,8 +9,6 @@ import { JOBS } from '../../services/api/private.api';
 import { REDUX_SAGA, REDUX } from '../../const/actions'
 import { POST } from '../../const/method';
 
-
-
 function* getListAllJobData(action) {
 
     yield put({ type: REDUX.ALL_JOB.SET_LOADING_ALL_JOB, loading: true });
@@ -42,7 +40,7 @@ function getAllJobData(action) {
         isAuthen ? STUDENT_HOST : PUBLIC_HOST, isAuthen ? authHeaders : noInfoHeader,
         {
             pageIndex: action.pageIndex ? action.pageIndex : 0,
-            pageSize: 21
+            pageSize: 24
         },
         false
     );

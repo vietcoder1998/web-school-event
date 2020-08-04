@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="49ead047-4242-4270-8520-9803960f3db2" name="Default Changelist" comment="" />
+    <list default="true" id="49ead047-4242-4270-8520-9803960f3db2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/view/Event/Home/home-job/HomeJob.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/view/Event/Home/home-job/HomeJob.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/view/Event/Home/top-job/TopJob.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/view/Event/Home/top-job/TopJob.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/view/Event/Home/top-job/TopJob.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/view/Event/Home/top-job/TopJob.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/view/home/home-job/HomeJob.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/view/home/home-job/HomeJob.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/view/home/home-job/HomeJob.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/view/home/home-job/HomeJob.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/view/home/top-job/TopJob.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/view/home/top-job/TopJob.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/view/home/top-job/TopJob.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/view/home/top-job/TopJob.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/view/login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/view/login/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/view/register/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/view/register/Register.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/background.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image/loading.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/watcher/all-job.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/watcher/all-job.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/watcher/event/branch.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/watcher/event/branch.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/watcher/event/jobs.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/watcher/event/jobs.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/watcher/hot-job.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/watcher/hot-job.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/watcher/in-day.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/watcher/in-day.ts" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -82,42 +101,45 @@
     <session id="162773154">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="8" />
+          <entry key="project.closed" value="9" />
           <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.6" value="4" />
-          <entry key="project.opened" value="8" />
+          <entry key="project.opened" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="development" value="1" />
-          <entry key="env" value="2" />
+          <entry key="development" value="4" />
+          <entry key="env" value="4" />
+          <entry key="gif" value="1" />
           <entry key="html" value="1" />
-          <entry key="jpg" value="1" />
+          <entry key="jpg" value="6" />
           <entry key="js" value="2" />
-          <entry key="production" value="1" />
-          <entry key="scss" value="36" />
-          <entry key="svg" value="1" />
-          <entry key="ts" value="27" />
-          <entry key="tsx" value="23" />
+          <entry key="png" value="5" />
+          <entry key="production" value="3" />
+          <entry key="scss" value="45" />
+          <entry key="svg" value="4" />
+          <entry key="ts" value="36" />
+          <entry key="tsx" value="43" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key=".env file" value="4" />
+          <entry key=".env file" value="11" />
           <entry key="HTML" value="1" />
-          <entry key="Image" value="1" />
+          <entry key="Image" value="12" />
           <entry key="JavaScript" value="2" />
-          <entry key="SCSS" value="36" />
-          <entry key="SVG" value="1" />
-          <entry key="TypeScript" value="27" />
-          <entry key="TypeScript JSX" value="23" />
+          <entry key="SCSS" value="45" />
+          <entry key="SVG" value="4" />
+          <entry key="TypeScript" value="36" />
+          <entry key="TypeScript JSX" value="43" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
         <counts>
-          <entry key="TypeScriptServerServiceImpl" value="3" />
+          <entry key="TypeScriptServerServiceImpl" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -126,29 +148,29 @@
           <entry key="env" value="21" />
           <entry key="js" value="1" />
           <entry key="production" value="18" />
-          <entry key="scss" value="121" />
-          <entry key="ts" value="125" />
-          <entry key="tsx" value="187" />
+          <entry key="scss" value="135" />
+          <entry key="ts" value="149" />
+          <entry key="tsx" value="226" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="68" />
           <entry key="JavaScript" value="1" />
-          <entry key="SCSS" value="121" />
-          <entry key="TypeScript" value="125" />
-          <entry key="TypeScript JSX" value="187" />
+          <entry key="SCSS" value="135" />
+          <entry key="TypeScript" value="149" />
+          <entry key="TypeScript JSX" value="226" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/app/view/home/all-job/AllJob.tsx">
+        <entry file="file://$PROJECT_DIR$/src/app/view/job-detail/JobDetail.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="6" column="70" lean-forward="true" selection-start-line="6" selection-start-column="70" selection-end-line="6" selection-end-column="70" />
+            <state relative-caret-position="91">
+              <caret line="469" column="24" lean-forward="true" selection-start-line="469" selection-start-column="24" selection-end-line="469" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -157,14 +179,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>REDUX_SAGA.EVENT.EMPLOYER.MORE_JOB</find>
-      <find>EmployerInfo</find>
-      <find>HEAD</find>
-      <find>sala</find>
-      <find>name_employer</find>
-      <find>shuffle: true</find>
       <find>img-jo</find>
-      <find>hot</find>
       <find>sear</find>
       <find>img-job</find>
       <find>border</find>
@@ -177,16 +192,23 @@
       <find>col</find>
       <find>h4</find>
       <find>ul</find>
-      <find>h6</find>
       <find>font-weight</find>
       <find>text-transform: uppercase;`</find>
       <find>font-weight: 500</find>
       <find>font-we</find>
-      <find>l_c</find>
       <find>he</find>
       <find>job-content</find>
       <find>img</find>
       <find>jobty</find>
+      <find>background.jpg</find>
+      <find>loading.svg</find>
+      <find>Ứng dụng tìm kiếm việc làm hàng đầu</find>
+      <find>hot</find>
+      <find>l_c</find>
+      <find>h6</find>
+      <find>vao day</find>
+      <find>20px</find>
+      <find>line-height</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -211,27 +233,28 @@
         <option value="$PROJECT_DIR$/src/redux/watcher/highlight-job.ts" />
         <option value="$PROJECT_DIR$/src/services/api/public.api.ts" />
         <option value="$PROJECT_DIR$/.env.production" />
-        <option value="$PROJECT_DIR$/.env.development" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/src/utils/convertNumber.js" />
         <option value="$PROJECT_DIR$/src/app/view/layout/common/Common.tsx" />
-        <option value="$PROJECT_DIR$/src/app/view/Event/Home/top-job/TopJob.tsx" />
-        <option value="$PROJECT_DIR$/src/app/view/Event/Home/top-job/TopJob.scss" />
-        <option value="$PROJECT_DIR$/src/redux/watcher/event/jobs.ts" />
         <option value="$PROJECT_DIR$/src/redux/watcher/event/search.ts" />
         <option value="$PROJECT_DIR$/src/redux/watcher/job-result.ts" />
         <option value="$PROJECT_DIR$/src/app/view/Event/Home/home-job/HomeJob.scss" />
-        <option value="$PROJECT_DIR$/src/app/view/Event/Home/home-job/HomeJob.tsx" />
-        <option value="$PROJECT_DIR$/src/redux/watcher/all-job.ts" />
-        <option value="$PROJECT_DIR$/src/redux/watcher/hot-job.ts" />
-        <option value="$PROJECT_DIR$/src/redux/watcher/in-day.ts" />
-        <option value="$PROJECT_DIR$/src/app/view/home/top-job/TopJob.tsx" />
-        <option value="$PROJECT_DIR$/src/app/view/home/all-job/AllJob.tsx" />
-        <option value="$PROJECT_DIR$/src/app/view/home/home-job/HomeJob.tsx" />
-        <option value="$PROJECT_DIR$/src/app/view/home/home-job/HomeJob.scss" />
-        <option value="$PROJECT_DIR$/src/app/view/home/top-job/TopJob.scss" />
         <option value="$PROJECT_DIR$/src/app/view/home/all-job/AllJob.scss" />
         <option value="$PROJECT_DIR$/src/app/view/job-detail/JobDetail.tsx" />
+        <option value="$PROJECT_DIR$/src/app/view/home/all-job/AllJob.tsx" />
+        <option value="$PROJECT_DIR$/src/redux/watcher/hot-job.ts" />
+        <option value="$PROJECT_DIR$/src/redux/watcher/in-day.ts" />
+        <option value="$PROJECT_DIR$/src/redux/watcher/event/jobs.ts" />
+        <option value="$PROJECT_DIR$/src/redux/watcher/all-job.ts" />
+        <option value="$PROJECT_DIR$/src/app/view/Event/Home/home-job/HomeJob.tsx" />
+        <option value="$PROJECT_DIR$/src/app/view/Event/Home/top-job/TopJob.tsx" />
+        <option value="$PROJECT_DIR$/src/app/view/home/home-job/HomeJob.tsx" />
+        <option value="$PROJECT_DIR$/.env.development" />
+        <option value="$PROJECT_DIR$/src/redux/watcher/event/branch.ts" />
+        <option value="$PROJECT_DIR$/src/app/view/Event/Home/top-job/TopJob.scss" />
+        <option value="$PROJECT_DIR$/src/app/view/home/home-job/HomeJob.scss" />
+        <option value="$PROJECT_DIR$/src/app/view/home/top-job/TopJob.scss" />
+        <option value="$PROJECT_DIR$/src/app/view/home/top-job/TopJob.tsx" />
       </list>
     </option>
   </component>
@@ -258,7 +281,7 @@
       <path value="$PROJECT_DIR$/server/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="950" />
     <option name="width" value="980" />
     <option name="height" value="1040" />
@@ -338,6 +361,16 @@
               <item name="view" type="462c0819:PsiDirectoryNode" />
               <item name="Event" type="462c0819:PsiDirectoryNode" />
               <item name="Home" type="462c0819:PsiDirectoryNode" />
+              <item name="branch" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="worksvn-web-student" type="b2602c69:ProjectViewProjectNode" />
+              <item name="worksvn-web-student" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="Event" type="462c0819:PsiDirectoryNode" />
+              <item name="Home" type="462c0819:PsiDirectoryNode" />
               <item name="home-job" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -349,6 +382,25 @@
               <item name="Event" type="462c0819:PsiDirectoryNode" />
               <item name="Home" type="462c0819:PsiDirectoryNode" />
               <item name="top-job" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="worksvn-web-student" type="b2602c69:ProjectViewProjectNode" />
+              <item name="worksvn-web-student" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="Event" type="462c0819:PsiDirectoryNode" />
+              <item name="Job" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="worksvn-web-student" type="b2602c69:ProjectViewProjectNode" />
+              <item name="worksvn-web-student" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="Event" type="462c0819:PsiDirectoryNode" />
+              <item name="Job" type="462c0819:PsiDirectoryNode" />
+              <item name="job-detail" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="worksvn-web-student" type="b2602c69:ProjectViewProjectNode" />
@@ -406,19 +458,6 @@
               <item name="worksvn-web-student" type="b2602c69:ProjectViewProjectNode" />
               <item name="worksvn-web-student" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="worksvn-web-student" type="b2602c69:ProjectViewProjectNode" />
-              <item name="worksvn-web-student" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="image" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="worksvn-web-student" type="b2602c69:ProjectViewProjectNode" />
-              <item name="worksvn-web-student" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="redux" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -427,6 +466,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="redux" type="462c0819:PsiDirectoryNode" />
               <item name="watcher" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="worksvn-web-student" type="b2602c69:ProjectViewProjectNode" />
+              <item name="worksvn-web-student" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="redux" type="462c0819:PsiDirectoryNode" />
+              <item name="watcher" type="462c0819:PsiDirectoryNode" />
+              <item name="event" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="worksvn-web-student" type="b2602c69:ProjectViewProjectNode" />
@@ -510,22 +557,24 @@
       <workItem from="1595566680260" duration="2000" />
       <workItem from="1595573623793" duration="164000" />
       <workItem from="1595576909116" duration="624000" />
+      <workItem from="1596506839137" duration="4594000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21886000" />
+    <option name="totallyTimeSpent" value="27474000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21414408" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30337077" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.41501418" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.40651557" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -570,69 +619,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/.env" />
-    <entry file="file://$PROJECT_DIR$/src/firebase.json" />
-    <entry file="file://$PROJECT_DIR$/src/index.css" />
-    <entry file="file://$PROJECT_DIR$/src/index.js" />
-    <entry file="file://$PROJECT_DIR$/gridsome.config.js" />
-    <entry file="file://$PROJECT_DIR$/yarn.lock">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1071" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="65" column="3" selection-start-line="65" selection-start-column="3" selection-end-line="65" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/view/login/Login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="37" column="5" lean-forward="true" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/static/js/11.5a016252.chunk.js" />
-    <entry file="file://$PROJECT_DIR$/tsconfig.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/view/layout/google-maps/MapContainer.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="17" lean-forward="true" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/environment/development.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/exec.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="41" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/base-api.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="48" lean-forward="true" selection-start-line="6" selection-start-column="48" selection-end-line="6" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/view/Event/Home/CountDown.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="34" column="46" selection-start-line="34" selection-start-column="46" selection-end-line="34" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/const/actions.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="226">
@@ -682,27 +668,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env.production">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env.development">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="12" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -724,33 +689,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/redux/watcher/event/jobs.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="57" column="6" lean-forward="true" selection-start-line="57" selection-start-column="6" selection-end-line="57" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#66#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/redux/watcher/event/search.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1190">
           <caret line="70" column="63" lean-forward="true" selection-start-line="70" selection-start-column="63" selection-end-line="70" selection-end-column="63" />
-          <folding>
-            <element signature="e#0#66#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/view/Event/Home/top-job/TopJob.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="41" column="41" lean-forward="true" selection-start-line="41" selection-start-column="41" selection-end-line="41" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -758,108 +700,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1241">
           <caret line="73" column="9" lean-forward="true" selection-start-line="73" selection-start-column="9" selection-end-line="73" selection-end-column="9" />
-          <folding>
-            <element signature="e#1#67#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/view/home/Home.scss">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/view/Event/Home/home-job/HomeJob.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="63" column="42" selection-start-line="63" selection-start-column="42" selection-end-line="63" selection-end-column="42" />
-          <folding>
-            <element signature="e#217#300#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/view/home/home-job/HomeJob.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="65" column="68" lean-forward="true" selection-start-line="65" selection-start-column="68" selection-end-line="65" selection-end-column="68" />
-          <folding>
-            <element signature="e#283#363#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/redux/watcher/in-day.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="42" column="38" selection-start-line="42" selection-start-column="38" selection-end-line="42" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#59#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/redux/watcher/all-job.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="42" column="9" lean-forward="true" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#61#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/redux/watcher/hot-job.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="46" column="24" selection-start-line="46" selection-start-column="24" selection-end-line="46" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#61#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/view/Event/Home/top-job/TopJob.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/view/home/top-job/TopJob.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="6" column="10" lean-forward="true" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#45#0" expanded="true" />
-            <element signature="e#282#362#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/view/home/all-job/AllJob.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="20" column="18" lean-forward="true" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/view/home/top-job/TopJob.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="35" column="3" lean-forward="true" selection-start-line="35" selection-start-column="3" selection-end-line="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/view/home/home-job/HomeJob.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="35" column="4" selection-start-line="35" selection-start-column="4" selection-end-line="37" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/view/Event/Home/home-job/HomeJob.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="37" column="24" lean-forward="true" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -870,23 +720,236 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/view/job-detail/JobDetail.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="469" column="24" lean-forward="true" selection-start-line="469" selection-start-column="24" selection-end-line="469" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/assets/image/carouselGroup/carousel2.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/logo.svg">
       <provider selected="true" editor-type-id="images" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/image/Ứng dụng tìm kiếm việc làm hàng đầu.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/image/Abstract-Envelope.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/image/avatar_default.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/image/app-store.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/image/background.jpg" />
+    <entry file="file://$PROJECT_DIR$/src/assets/image/base-image.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/image/countdown.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/image/CHPlay.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/image/job-choice-logo.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/image/job-choice-logo-1.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/image/loading.svg" />
+    <entry file="file://$PROJECT_DIR$/src/assets/image/crs2.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/redux/watcher/in-day.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="39" column="32" lean-forward="true" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/redux/watcher/hot-job.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="366">
+          <caret line="45" column="33" lean-forward="true" selection-start-line="45" selection-start-column="33" selection-end-line="45" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#61#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/redux/watcher/all-job.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" column="32" lean-forward="true" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#61#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/view/Event/Home/Home.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-637">
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/view/Event/Home/branch/Branch.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="89" lean-forward="true" selection-start-line="89" selection-end-line="89" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/redux/watcher/event/jobs.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-379">
+          <caret line="53" column="24" selection-start-line="53" selection-start-column="24" selection-end-line="53" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#66#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env.development">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="30" lean-forward="true" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env.production">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="39" lean-forward="true" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/redux/watcher/event/branch.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="23" column="35" lean-forward="true" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#66#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/redux/watcher/event/employer.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="37" column="47" lean-forward="true" selection-start-line="37" selection-start-column="47" selection-end-line="37" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#66#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/view/Event/Home/home-job/HomeJob.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="35" column="41" lean-forward="true" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="41" />
+          <folding>
+            <element signature="e#217#300#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/view/Event/Home/home-job/HomeJob.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="21" column="17" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/view/Event/Home/top-job/TopJob.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="48" column="7" lean-forward="true" selection-start-line="48" selection-start-column="7" selection-end-line="48" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/view/Event/Home/top-job/TopJob.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="65">
+          <caret line="59" column="50" lean-forward="true" selection-start-line="59" selection-start-column="50" selection-end-line="59" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/view/home/home-job/HomeJob.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="122" column="28" lean-forward="true" selection-start-line="122" selection-start-column="10" selection-end-line="122" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/view/home/home-job/HomeJob.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="422">
+          <caret line="74" column="102" lean-forward="true" selection-start-line="73" selection-start-column="61" selection-end-line="74" selection-end-column="102" />
+          <folding>
+            <element signature="e#283#363#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/view/home/top-job/TopJob.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="82" lean-forward="true" selection-start-line="82" selection-end-line="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/view/home/top-job/TopJob.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="72" column="60" lean-forward="true" selection-start-line="72" selection-start-column="60" selection-end-line="72" selection-end-column="60" />
+          <folding>
+            <element signature="e#282#362#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/view/home/all-job/AllJob.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="6" column="70" lean-forward="true" selection-start-line="6" selection-start-column="70" selection-end-line="6" selection-end-column="70" />
+        <state relative-caret-position="287">
+          <caret line="38" column="50" lean-forward="true" selection-start-line="38" selection-start-column="50" selection-end-line="38" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/view/Event/Job/job-detail/JobDetail.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="30" column="27" lean-forward="true" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/view/job-detail/JobDetail.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="469" column="24" lean-forward="true" selection-start-line="469" selection-start-column="24" selection-end-line="469" selection-end-column="24" />
         </state>
       </provider>
     </entry>

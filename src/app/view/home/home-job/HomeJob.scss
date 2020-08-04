@@ -72,6 +72,15 @@
       color: red;
     }
 
+    .top-badge {
+      text-transform: uppercase;
+      color: white;
+      background-color: red;
+      border-radius: 3px;
+      padding-right: 4px;
+      padding-left: 4px
+    }
+
     &:hover {
       transition: 0.5s;
     }
@@ -111,6 +120,7 @@
           overflow: hidden;
           text-overflow: ellipsis;
           text-transform: initial;
+          line-height: 18px;
         }
       }
 

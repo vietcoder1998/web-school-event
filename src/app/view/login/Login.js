@@ -85,7 +85,6 @@ class Login extends Component {
               });
             } else {
               setAuthSate(res);
-              // console.log('vao day')
               // this.props.setAuthen();
               let last_access = localStorage.getItem("last_access");
 
