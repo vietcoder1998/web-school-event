@@ -69,7 +69,6 @@ export default class JobProperties extends PureComponent<JobPropertiesProps, Job
                         <Row className='time-job '>
                             <h6>Ca làm việc</h6>
                             {jobDetail.shifts && jobDetail.shifts ? jobDetail.shifts.map((item?: IShift, index?: any) => {
-                                let maxSalary = '' + item.maxSalary && item.maxSalary === 0 ? '' : ('-' + item.maxSalary);
                                 return (
                                     <Col key={index} xs={24} sm={24} md={12} lg={12} xl={12} xxl={12}>
                                         <div className='time-content' style={{ border: '1px solid rgb(119, 197, 255)', borderRadius: '3px' }}>

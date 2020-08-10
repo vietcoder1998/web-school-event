@@ -4,7 +4,7 @@ export const convertFullSalary = (min, minUnit, max, maxUnit) => {
     let result = '';
     if (min) {
         result += getNumberWithDot(min);
-        if (minUnit !== maxUnit) {
+        if (minUnit && minUnit !== maxUnit) {
             result += '/' + minUnit;
         }
     }
