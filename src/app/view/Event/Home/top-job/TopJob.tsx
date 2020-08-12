@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {convertFullSalary} from '../../../../../utils/convertNumber'
 //@ts-ignore
-import DefaultImage from "../../../../../assets/image/carouselGroup/carousel2.jpg";
+import DefaultImage from "../../../../../assets/image/base-image.jpg";
 import {REDUX_SAGA} from "../../../../../const/actions";
 import {JobType} from "../../../layout/common/Common";
 
