@@ -3,10 +3,13 @@ import Layout from "../layout/Layout";
 import { connect } from "react-redux";
 import TabSearch from "./tab-search/TabSearch";
 import HomeJob from "./home-job/HomeJob";
-import AllJob from "./all-job/AllJob";
+// import AllJob from "./all-job/AllJob";
 import TopEm from "./top-em/TopEm";
 import Announcements from "./annoucements/Announcements";
 import TopJob from "./top-job/TopJob";
+import JobExpect from "./JobExpect";
+import './Home.scss';
+import VideoAd from "./VideoAd";
 
 // import { REDUX_SAGA } from '../../../const/actions';
 
@@ -16,10 +19,11 @@ function Home(props) {
       {/* <CarouselUX /> */}
       <TabSearch {...props} />
       <div className="content" style={{ paddingTop: 20, paddingBottom: 20 }}>
-        <TopEm />
+        <JobExpect />
         <TopJob />
         <HomeJob />
-        <AllJob />
+        <TopEm />
+        <VideoAd />
         <Announcements {...props} />
       </div>
     </Layout>

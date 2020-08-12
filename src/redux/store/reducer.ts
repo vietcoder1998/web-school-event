@@ -1,3 +1,4 @@
+import { TopEmployer } from './../reducers/employers';
 import { ShortPersonalInfo, FullPersonalInfo } from './../reducers/person-info';
 import { EventStatusReducer } from './../reducers/event/status';
 import { EventEmployerMoreJob } from './../reducers/event/employer/more-jobs';
@@ -5,7 +6,7 @@ import { GetEventJobSave } from './../reducers/event/job/save-job';
 import { GetEventJobDetail } from './../reducers/event/job/job-detail';
 import { DetailEvent } from './../reducers/event/detail';
 import { EventBranch } from './../reducers/event/branch';
-import { BannerEmployer, TopEmployer } from './../reducers/event/employer';
+import { BannerEmployer} from './../reducers/event/employer';
 import { EventHotJobResults, EventJobResults } from '../reducers/event/jobs';
 
 
@@ -73,7 +74,6 @@ let rootReducer = {
   GetEventJobSave,
   EventEmployerMoreJob,
   EventStatusReducer,
-
 };
 
 const myReducer = combineReducers(rootReducer);

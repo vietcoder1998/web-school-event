@@ -13,10 +13,9 @@ import { moveScroll } from "../../../../../utils/moveScroll";
 import { testImage } from "../../../../../utils/CheckImage";
 import { Input } from "antd";
 import Layout from "../.././../layout/Layout";
-import { NotUpdate, JobType, IptLetter } from "../.././../layout/common/Common";
+import { NotUpdate, JobType } from "../.././../layout/common/Common";
 import { REDUX_SAGA } from "../../../../../const/actions";
 import JobProperties from "./job-properties/JobProperties";
-import EmployerDetail from "./employer-detail/EmployerDetail";
 import { Link } from "react-router-dom";
 import { TYPE } from "../../../../../const/type";
 import qs from "query-string";
@@ -65,7 +64,7 @@ export const _checkGender = (data) => {
             <p>
               <label style={{ marginBottom: 0, marginRight: 3 }}>
                 <Icon type="man" style={{ color: "rgb(21, 148, 255)" }} />
-                Nam &{" "}
+                Nam{" "}
               </label>
               <label style={{ marginBottom: 0, marginRight: 5 }}>
                 <Icon type="woman" style={{ color: "#ff395c" }} />
@@ -142,7 +141,7 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
   async componentDidMount() {
     let queryParam = qs.parse(window.location.search);
     let { isAuthen } = this.props;
-    if(queryParam.changeHost == '1') {
+    if(queryParam.changeHost === '1') {
       if(isAuthen) {
         this.setState({visible: true})
         // console.log(window.location.pathname)
@@ -319,7 +318,7 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
       shiftIDs,
     } = this.state;
 
-    let isSaved = jobDetail.saved;
+    // let isSaved = jobDetail.saved;
 
     if (is_loading) {
       return (
@@ -334,18 +333,18 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
     let content = "Ứng tuyển";
     let applyState = jobDetail.applyState;
 
-    let color = "rgba(255, 238, 224, 0.38)";
-    switch (jobDetail.jobType) {
-      case "PARTTIME":
-        color = "rgb(239, 253, 239)";
-        break;
+    // let color = "rgba(255, 238, 224, 0.38)";
+    // switch (jobDetail.jobType) {
+    //   case "PARTTIME":
+    //     color = "rgb(239, 253, 239)";
+    //     break;
 
-      case "FULLTIME":
-        color = "rgb(229, 239, 255)";
-        break;
-      default:
-        break;
-    }
+    //   case "FULLTIME":
+    //     color = "rgb(229, 239, 255)";
+    //     break;
+    //   default:
+    //     break;
+    // }
 
     if (isAuthen === false) {
       content = "Ứng tuyển";
@@ -445,7 +444,7 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
 
                   {/* Cover Image */}
                   <div className="cover-image-job ">
-                    <img src={testImage(coverUrl)} className="company-image" />
+                    <img alt="Ảnh công ty" src={testImage(coverUrl)} className="company-image" />
                   </div>
                   {/* Header */}
                   <div className="job-header">

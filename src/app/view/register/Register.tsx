@@ -8,10 +8,10 @@ import {
   Checkbox,
   Row,
   Col,
-  DatePicker,
+  // DatePicker,
   Select
 } from "antd";
-import moment from "moment";
+// import moment from "moment";
 import "./Register.scss";
 import { connect } from "react-redux";
 import { SCHOOLS } from "../../../services/api/private.api";
@@ -52,16 +52,16 @@ interface IState {
   checked?: boolean;
   show_popup?: boolean;
   is_except_rule?: boolean;
-  list_major?: Array;
+  list_major?: Array<any>;
   is_exists?: boolean;
   show_password: boolean;
   show_re_password: boolean;
   loading: boolean;
-  list_school?: Array;
+  list_school?: Array<any>;
   isOpenStartYear?: boolean;
   time?: any;
-  listBirthYearMin?: Array;
-  listBirthYearMax?: Array;
+  listBirthYearMin?: Array<any>;
+  listBirthYearMax?: Array<any>;
   typeUpdateInfor?: boolean
 }
 
@@ -107,11 +107,8 @@ class Register extends Component<IProps, IState> {
       show_popup: false,
       repassword: "",
       location: "",
-
       list_major: [],
       list_school: [],
-
-
       is_exists: false,
       isOpenStartYear: false,
       time: null,
@@ -121,7 +118,7 @@ class Register extends Component<IProps, IState> {
     };
   }
   async componentDidMount() {
-    let { list_major, email_register_dto, repassword } = this.state;
+    let { email_register_dto, repassword } = this.state;
     this.setState({ listBirthYearMin: this.listYear(1970, 2035), listBirthYearMax: this.listYear(1970, 2035) })
     let res_school = await _post(null, SCHOOLS, PUBLIC_HOST, noInfoHeader);
     // console.log(res_school);

@@ -139,7 +139,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
   componentDidMount() {
     let queryParam = qs.parse(window.location.search);
     let { isAuthen } = this.props;
-    if(queryParam.changeHost == '1') {
+    if(queryParam.changeHost === '1') {
       if(isAuthen) {
         this.setState({visible: true})
         // console.log(window.location.pathname)
@@ -277,7 +277,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
         if (res.data.success === true) {
           swal({
             buttons: {
-              cancel: "OK",
+              // type: "OK",
               catch: {
                 text: "Lịch sử ứng tuyển",
                 value: "catch",
@@ -341,7 +341,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
       param
     } = this.props;
     let { is_loading, visible, confirmLoading, jobState } = this.state;
-    let isSaved = jobDetail.saved;
+    // let isSaved = jobDetail.saved;
 
     if (is_loading) {
       return (
@@ -356,18 +356,18 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
     let content = "Ứng tuyển";
     let applyState = jobDetail.applyState;
 
-    let color = "rgba(255, 238, 224, 0.38)";
-    switch (jobDetail.jobType) {
-      case "PARTTIME":
-        color = "rgb(239, 253, 239)";
-        break;
+    // let color = "rgba(255, 238, 224, 0.38)";
+    // switch (jobDetail.jobType) {
+    //   case "PARTTIME":
+    //     color = "rgb(239, 253, 239)";
+    //     break;
 
-      case "FULLTIME":
-        color = "rgb(229, 239, 255)";
-        break;
-      default:
-        break;
-    }
+    //   case "FULLTIME":
+    //     color = "rgb(229, 239, 255)";
+    //     break;
+    //   default:
+    //     break;
+    // }
 
     if (isAuthen === false) {
       content = "Ứng tuyển";
@@ -466,7 +466,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
 
                   {/* Cover Image */}
                   <div className="cover-image-job ">
-                    <img src={testImage(coverUrl)} className="company-image" />
+                    <img alt="Ảnh công ty" src={testImage(coverUrl)} className="company-image" />
                   </div>
                   {/* Header */}
                   <div className="job-header">

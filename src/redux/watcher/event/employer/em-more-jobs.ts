@@ -26,7 +26,6 @@ function getEmployerMoreJobData(action) {
         employerID = store.getState().GetJobDetail.employerID;
     }
 
-
     let body = {
         employerID,
         excludedJobIDs: null,
@@ -39,8 +38,8 @@ function getEmployerMoreJobData(action) {
         jobShiftFilter: null,
         jobLocationFilter: null
     };
-    let eventID = store.getState().DetailEvent.eventID;
-    let schoolID = store.getState().DetailEvent.schoolID
+    // let eventID = store.getState().DetailEvent.eventID;
+    // let schoolID = store.getState().DetailEvent.schoolID;
     let res = _requestToServer(
         POST,
         body,
@@ -49,7 +48,7 @@ function getEmployerMoreJobData(action) {
         noInfoHeader,
         {
             pageIndex: action.pageIndex ? action.pageIndex : 0,
-            pageSize: 6
+            pageSize: action.pageIndex ? action.pageIndex : 6
         }
     );
 

@@ -25,6 +25,7 @@ import { EventJobDetailWatcher } from '../watcher/event/jobs/job-detail';
 import { EventEmployerMoreJobWatcher } from '../watcher/event/employer/em-more-jobs';
 import { ShortProfileWatcher } from '../watcher/short-profile';
 import { EventJobResultWatcher } from '../watcher/event/search';
+import { TopEmployersWatcher} from'../watcher/top-employer';
 
 
 export default function* rootSaga() {
@@ -46,7 +47,6 @@ export default function* rootSaga() {
         AnnouncementsWatcher(),
         HistoryApplyWatcher(),
         SimilarJobWatcher(),
-
         EventHotJobWatcher(),
         EventJobWatcher(),
         EventTopEmployerWatcher(),
@@ -55,6 +55,6 @@ export default function* rootSaga() {
         EventJobDetailWatcher(),
         EventEmployerMoreJobWatcher(),
         EventJobResultWatcher(),
-
+        TopEmployersWatcher()
     ])
 } 

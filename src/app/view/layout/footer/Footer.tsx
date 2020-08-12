@@ -5,7 +5,7 @@ import CHPlay from '../../../../assets/image/CHPlay.png';
 //@ts-ignore
 import AppStore from '../../../../assets/image/app-store.png';
 import { Col, Row } from 'antd';
-import Option from './option/Option'
+// import Option from './option/Option'
 import { REDUX_SAGA } from './../../../../const/actions';
 
 import { connect } from 'react-redux';

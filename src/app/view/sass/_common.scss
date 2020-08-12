@@ -49,8 +49,68 @@ code {
   background-color: whitesmoke;
 }
 
+.expert-content {
+  margin: 10px;
+  border-radius: 5px;
+  border: solid #fff 1px;
+
+  &:hover {
+    cursor: pointer;
+    border: solid $color_border 1px;
+    color: rgb(0, 84, 136) !important;
+    cursor: pointer;
+    transition: 40ms;
+
+    .job-expert {
+      background-color: azure;
+    }
+  }
+
+  img {
+    border-radius: 5px 5px;
+    margin: 10px 0px;
+  }
+
+  .job-expert {
+    text-align: center;
+    font-size: large;
+    font-weight: 500;
+    line-height: 60px;
+    border-radius: 0px 0px 10px 10px;
+  }
+}
+
 * {
   font-family: $font_base;
+}
+
+.top-em-detail {
+  background-color: white;
+  margin: 20px;
+  height: 15vw;
+  min-height: 120px;
+  border-radius: 10px;
+  box-shadow: 0 4px 5px 2px rgba(0, 0, 0, 0.1);
+  padding-top: 5%;
+  font-size: large;
+  font-weight: 500px;
+
+  image {
+    margin-top: 5px !important;
+    border-radius: 10px;
+  }
+
+  .link {
+    max-width: 25ch;
+    white-space: nowrap;
+    text-emphasis: ellipsis;
+    font-weight: 500;
+    text-transform: uppercase;
+
+    &:hover {
+      color: rgb(0, 84, 136);
+    }
+  }
 }
 
 .important-letter {

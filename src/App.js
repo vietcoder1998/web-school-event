@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import asyncComponent from "./routes/AppRoutes";
 import { REDUX, REDUX_SAGA } from "./const/actions";
 import $ from "jquery";
-import { Loading } from "./app/view/layout/common/Common";
+// import { Loading } from "./app/view/layout/common/Common";
 import { _get } from "./services/base-api";
 import { PUBLIC_HOST } from "./environment/development";
 import { noInfoHeader } from "./services/auth";
@@ -217,7 +217,7 @@ class App extends React.Component {
   };
 
   render() {
-    let { eventStart } = this.props;  
+    // let { eventStart } = this.props;  
       return (
         <Fragment>
           <Router>

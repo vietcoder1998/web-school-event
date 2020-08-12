@@ -1,5 +1,5 @@
-import { EVENT_PUBLIC } from './../../../../services/api/public.api';
-import { EVENT_PRIVATE } from './../../../../services/api/private.api';
+// import { EVENT_PUBLIC } from './../../../../services/api/public.api';
+// import { EVENT_PRIVATE } from './../../../../services/api/private.api';
 import { takeEvery, call, put} from 'redux-saga/effects';
 import { _requestToServer } from '../../../../services/exec';
 import { PUBLIC_HOST, STUDENT_HOST } from '../../../../environment/development';
@@ -21,6 +21,7 @@ function* getEventJobDetailData(action) {
 function getJobDetail(action) {
     let isAuthen = store.getState().AuthState.isAuthen;
     let queryParam = qs.parse(action.eventAndSchoolID);
+    //@ts-ignore
     let data = window.atob(queryParam.data)
     let queryParam2 = qs.parse(data)
     let eventID = queryParam2.eventID;

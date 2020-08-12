@@ -21,18 +21,18 @@ export default function ListResult(props?: IListResultProps) {
         <div className='result' >
             {loading ? <div className='loading'><Spin /></div> : (list_result.length > 0 ? list_result.map((item, index) => {
                 // console.log(item);
-                let color = "#fde8c7";
-                switch (item.jobType) {
-                    case 'PARTTIME':
-                        color = 'rgb(239, 253, 239)';
-                        break;
+                // let color = "#fde8c7";
+                // switch (item.jobType) {
+                //     case 'PARTTIME':
+                //         color = 'rgb(239, 253, 239)';
+                //         break;
 
-                    case 'FULLTIME':
-                        color = 'rgb(229, 239, 255)';
-                        break;
-                    default:
-                        break;
-                }
+                //     case 'FULLTIME':
+                //         color = 'rgb(229, 239, 255)';
+                //         break;
+                //     default:
+                //         break;
+                // }
 
                 return (<Row key={index} className='result-item' >
                     {/* Image */}

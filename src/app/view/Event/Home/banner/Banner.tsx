@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
-import { Carousel, Icon, Typography, Skeleton } from "antd";
+import { Carousel, Icon } from "antd";
 import { connect } from "react-redux";
+//@ts-ignore
 import defaultImage from "../../../../../assets/image/base-image.jpg";
-import defaultBanner from "../../../../../assets/image/default-banner.jpg";
 import { REDUX_SAGA } from "../../../../../const/actions";
 import { Link } from "react-router-dom";
 import "./Banner.scss";

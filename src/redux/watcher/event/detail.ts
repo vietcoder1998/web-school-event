@@ -1,6 +1,6 @@
 
 import { takeEvery, put, call } from 'redux-saga/effects';
-import { _requestToServer } from '../../../services/exec';
+// import { _requestToServer } from '../../../services/exec';
 import { PUBLIC_HOST, STUDENT_HOST } from '../../../environment/development';
 import { REDUX_SAGA, REDUX } from '../../../const/actions'
 import { _get } from '../../../services/base-api';

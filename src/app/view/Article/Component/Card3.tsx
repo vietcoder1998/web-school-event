@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
-import { Skeleton, Icon, Row, Col, Rate } from "antd";
-
+import { Skeleton, Icon, Rate } from "antd";
+//@ts-ignore
 import DefaultImage from "../../../../assets/image/base-image.jpg";
 import { Link } from "react-router-dom";
 import "./Card.scss";

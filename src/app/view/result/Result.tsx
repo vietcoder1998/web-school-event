@@ -1,7 +1,7 @@
 import React from "react";
 import "./Result.scss";
 import Layout from "../layout/Layout";
-import { Row, Col, Pagination, BackTop } from "antd";
+import { Row, Col, Pagination, BackTop, Affix } from "antd";
 import { connect } from "react-redux";
 import { moveScroll } from "../../../utils/moveScroll";
 // @ts-ignore
@@ -109,9 +109,7 @@ class Result extends React.Component<IPropsResult, IStateResult> {
     // this._callLoading();
     this._callLastWord();
 
-    let queryParam = qs.parse(this.props.location.search, {
-      ignoreQueryPrefix: true,
-    });
+    let queryParam = qs.parse(this.props.location.search);
     let jobType, jobNameID, regionID;
     let newWeekDays = [];
     let newDayTimes = [];
@@ -126,12 +124,12 @@ class Result extends React.Component<IPropsResult, IStateResult> {
       if (this.props.area && this.props.area.id) {
         regionID = this.props.area.id;
       }
-      Object.keys(this.props.list_day).map((key) => {
+      Object.keys(this.props.list_day).forEach((key) => {
         if (this.props.list_day[key] === true) {
           newWeekDays.push(key);
         }
       });
-      Object.keys(this.props.list_shift).map((key) => {
+      Object.keys(this.props.list_shift).forEach((key) => {
         if (this.props.list_shift[key] === true) {
           newDayTimes.push(key);
         }
@@ -157,13 +155,13 @@ class Result extends React.Component<IPropsResult, IStateResult> {
       } else {
         jobType = this.props.jobType;
       }
-      Object.keys(this.props.list_day).map((key) => {
-        if (queryParam[key] == "true") {
+      Object.keys(this.props.list_day).forEach((key) => {
+        if (queryParam[key] === "true") {
           newWeekDays.push(key);
         }
       });
-      Object.keys(this.props.list_shift).map((key) => {
-        if (queryParam[key] == "true") {
+      Object.keys(this.props.list_shift).forEach((key) => {
+        if (queryParam[key] === "true") {
           newDayTimes.push(key);
         }
       });
@@ -277,9 +275,7 @@ class Result extends React.Component<IPropsResult, IStateResult> {
   };
 
   onChangeJobFilter = async (event?: any) => {
-    let queryParam = qs.parse(this.props.location.search, {
-      ignoreQueryPrefix: true,
-    });
+    let queryParam = qs.parse(this.props.location.search);
     let { body, isSearchEvent } = this.state;
     isSearchEvent = event.isEvent;
     if (event.jobType !== "PARTTIME") {
@@ -320,14 +316,14 @@ class Result extends React.Component<IPropsResult, IStateResult> {
     });
     body.jobShiftFilter.weekDays = event.weekDays;
     body.jobShiftFilter.dayTimes = event.dayTimes;
-    Object.keys(this.props.list_day).map((key) => {
+    Object.keys(this.props.list_day).forEach((key) => {
       if (event.weekDays.includes(key)) {
         queryParam[key] = true;
       } else {
         queryParam[key] = false;
       }
     });
-    Object.keys(this.props.list_shift).map((key) => {
+    Object.keys(this.props.list_shift).forEach((key) => {
       if (event.dayTimes.includes(key)) {
         queryParam[key] = true;
       } else {
@@ -395,7 +391,7 @@ class Result extends React.Component<IPropsResult, IStateResult> {
                       param={param}
                     />
                     {/* Paginition */}
-                    <div style={{paddingTop: 10, textAlign: 'center'}}>
+                    <div style={{ paddingTop: 10, textAlign: 'center' }}>
                       <Pagination
                         defaultCurrent={1}
                         pageSize={results.pageSize}
@@ -416,7 +412,6 @@ class Result extends React.Component<IPropsResult, IStateResult> {
                       location={this.props.location}
                     />
                     <img style={{ boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.03)', marginLeft: 11, width: 'calc(100% - 12px)' }} alt="banner" src={banner} />
-
                   </Col>
                 </Row>
 

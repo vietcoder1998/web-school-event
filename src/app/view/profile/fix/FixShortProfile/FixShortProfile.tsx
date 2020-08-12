@@ -14,7 +14,7 @@ import { timeConverter } from "../../../../../utils/convertTime";
 import { REDUX_SAGA } from "../../../../../const/actions";
 import { _requestToServer } from "../../../../../services/exec";
 import { PUT } from "../../../../../const/method";
-import imageDefault from "../../../../../assets/image/base-image.jpg";
+// import imageDefault from "../../../../../assets/image/base-image.jpg";
 
 interface IProps {
   personalInfo?: any;

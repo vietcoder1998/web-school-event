@@ -293,16 +293,12 @@ class SearchBox extends Component<IProps, IState>{
         switch (jobType) {
             case null:
                 return '0'
-                break;
             case 'PARTTIME':
                 return '1'
-                break;
             case 'FULLTIME':
                 return '2'
-                break;
             case 'INTERNSHIP':
                 return '3'
-                break;
             default:
                 break;
         }
@@ -405,10 +401,12 @@ class SearchBox extends Component<IProps, IState>{
         localStorage.setItem('searchData', data);
         this.props.getJobResult(data);
 
-        let queryParam = {};
-        queryParam.jobType = this.props.jobType;
-        queryParam.jobNameID = jobNameID;
-        queryParam.regionID = regionID;
+        let queryParam: Object = {
+            jobType: this.props.jobType,
+            jobNameID,
+            regionID
+        };
+
         queryParam = Object.assign(queryParam, list_day)
         queryParam = Object.assign(queryParam, list_shift)
         queryParam = qs.stringify(queryParam)
@@ -498,7 +496,7 @@ class SearchBox extends Component<IProps, IState>{
                             </InputGroup>
                         </div>
                         {/* Choose Type Job */}
-                        <Tabs defaultActiveKey={this.props.jobType == 'PARTTIME' ? '1' : (this.props.jobType == 'FULLTIME' ? '2' : '3')} onChange={this._handleTabs}>
+                        <Tabs defaultActiveKey={this.props.jobType === 'PARTTIME' ? '1' : (this.props.jobType === 'FULLTIME' ? '2' : '3')} onChange={this._handleTabs}>
                             <TabPane tab="Làm thêm" key="1" onClick={() => { this._handleShowDay(true, 'PARTTIME') }}>
                                 <div className='choose-time' style={{ display: show_days === true ? 'block' : 'none' }}>
                                     <div className='choose-shift'>

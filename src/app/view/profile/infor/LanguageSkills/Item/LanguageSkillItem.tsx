@@ -13,7 +13,10 @@ import { PUT, DELETE } from "../../../../../../const/method";
 import { _get } from "../../../../../../services/base-api";
 import { LANGUAGES } from "../../../../../../services/api/public.api";
 import ILanguageSkill from "../../../../../../models/language-skill";
-import { sendStringHeader, noInfoHeader } from "../../../../../../services/auth";
+import {
+  // sendStringHeader,
+  noInfoHeader
+} from "../../../../../../services/auth";
 
 let { Option } = Select;
 
@@ -88,15 +91,15 @@ class LanguageSkillItem extends Component<IProps, IState> {
   };
 
   async requestServer(method) {
-    let res;
+    // let res;
     let { id } = this.props;
     let { languageSkill } = this.state;
     if (method === PUT) {
-      res = await _requestToServer(
+      await _requestToServer(
         PUT,
         languageSkill,
         LANGUAGE_SKILL + "/" + id,
-        STUDENT_HOST, 
+        STUDENT_HOST,
         null,
         null,
         true
@@ -122,7 +125,7 @@ class LanguageSkillItem extends Component<IProps, IState> {
     let { index, item, complete, fix } = this.props;
     let { languageSkill, activeKey, list_language } = this.state;
     return (
-      <Tabs key={index} activeKey={activeKey} onSelect={() => {}}>
+      <Tabs key={index} activeKey={activeKey} onSelect={() => { }}>
         {/* Update of delete */}
         <Tab eventKey={complete} onSelect={this._handleSelect} id={complete}>
           <div className="wrapper">

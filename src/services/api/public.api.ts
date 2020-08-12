@@ -35,3 +35,5 @@ export const ANNOUNCEMENTS = {
   DETAIL: "/api/announcements/{id}",
   COMMENT: "/api/announcements/{id}/comments/query",
 };
+
+export const TOP_EMPLOYER =  '/api/employers/priority/query';

@@ -1,6 +1,6 @@
 import { GET, POST, PUT, DELETE } from "../const/method";
 import { _delete, _get, _post, _put } from "./base-api";
-import { exceptionShowNoti } from "../config/exception";
+// import { exceptionShowNoti } from "../config/exception";
 import swal from "sweetalert";
 import { TYPE } from "../const/type";
 
@@ -63,7 +63,7 @@ export const _requestToServer = async (
         dangerMode: false,
       }).then(() => {
         if ((res.code === 200 || res.code === 40927) && message_success) {
-          if(message_success == `Hoàn tất thông tin thành công!`) {
+          if(message_success === `Hoàn tất thông tin thành công!`) {
             window.location.assign(`/${window.location.search}`);
           } else {
             // window.open('https://mail.google.com/mail/u/0/')

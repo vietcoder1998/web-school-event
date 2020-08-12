@@ -22,7 +22,6 @@ interface IState {
     showInfo?: boolean
 }
 
-
 function findAddress(lat, lng) {
     const google = window.google;
     //const codeApi = 'AIzaSyA55QnSD4Xj6-zTyCbWUs8iKOyYyjmhv08';

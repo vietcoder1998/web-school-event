@@ -7,10 +7,10 @@ import { ANNOUNCEMENTS } from "../../../../services/api/public.api";
 import { PUBLIC_HOST } from "../../../../environment/development";
 
 import Card1 from "../Component/Card1";
-import Card2 from "../Component/Card2";
+// import Card2 from "../Component/Card2";
 import Title from "../Component/Title";
 
-import HashLoader from "react-spinners/HashLoader";
+// import HashLoader from "react-spinners/HashLoader";
 import GoodArticle from "../Component/GoodArticle";
 interface IProps {
   idType?: any;
@@ -75,7 +75,7 @@ class HeaderArticle extends PureComponent<IProps, IState> {
     } catch (e) {}
   }
   render() {
-    let { listArticleRender } = this.state;
+    // let { listArticleRender } = this.state;
     const props = {
       dots: true,
       infinite: true,

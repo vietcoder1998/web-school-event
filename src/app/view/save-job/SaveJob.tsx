@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '../layout/Layout';
-import { Row, Col, Icon, Pagination, Tooltip, notification, Button, Empty, Avatar, Spin } from 'antd';
+import { Row, Col, Icon, Pagination, Tooltip, Button, Empty, Avatar, Spin } from 'antd';
 import './SaveJob.scss'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -10,27 +10,28 @@ import { authHeaders } from '../../../services/auth';
 import { _requestToServer } from '../../../services/exec';
 import { STUDENT_HOST } from '../../../environment/development';
 import { moveScroll } from '../../../utils/moveScroll';
-import { limitString } from '../../../utils/limitString';
+// import { limitString } from '../../../utils/limitString';
 import { REDUX_SAGA } from '../../../const/actions';
 import { DELETE } from '../../../const/method';
-import { JobType } from '../layout/common/Common'
-const openNotification = () => {
-    const key = `open${Date.now()}`;
-    const btn = (
-        <Button type="primary" size="small" onClick={() => notification.close(key)}>
-            Confirm
-        </Button>
-    );
+import { JobType } from '../layout/common/Common';
 
-    const description = () => (<div >Bạn đã xóa một công việc</div>)
+// const openNotification = () => {
+//     const key = `open${Date.now()}`;
+//     const btn = (
+//         <Button type="primary" size="small" onClick={() => notification.close(key)}>
+//             Confirm
+//         </Button>
+//     );
 
-    notification.open({
-        message: 'WorkVn Thông báo',
-        description,
-        btn,
-        key,
-    });
-};
+//     const description = () => (<div >Bạn đã xóa một công việc</div>)
+
+//     notification.open({
+//         message: 'WorkVn Thông báo',
+//         description,
+//         btn,
+//         key,
+//     });
+// };
 
 //  @ts-ignore
 interface ISaveJobProp extends StateProps, DispatchProps {

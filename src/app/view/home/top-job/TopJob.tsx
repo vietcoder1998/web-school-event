@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {Col, Row, Skeleton, Avatar, Pagination, Icon} from 'antd';
+import {Col, Row, Skeleton, Pagination, Icon} from 'antd';
 import './TopJob.scss'
 import {connect} from 'react-redux';
 import {limitString} from '../../../../utils/limitString';

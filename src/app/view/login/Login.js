@@ -12,7 +12,7 @@ import { _requestToServer } from "../../../services/exec";
 import { POST } from "../../../const/method";
 import Layout from "../layout/Layout";
 import { REDUX } from "../../../const/actions";
-import queryString from "query-string";
+// import queryString from "query-string";
 import logo from "../../../assets/image/logo-01.png";
 import imageLogin from "../../../assets/image/image-login.png";
 import { goBackWhenLogined } from "../../../utils/goBackWhenLogined";
@@ -219,7 +219,7 @@ class Login extends Component {
             xl={mobile ? 0 : 14}
             xxl={mobile ? 0 : 14}
           >
-            <img src={imageLogin} className="image-login" />
+            <img alt="Đăng nhập tìm việc" src={imageLogin} className="image-login" />
           </Col>
         </div>
 

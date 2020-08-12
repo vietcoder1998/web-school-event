@@ -24,3 +24,13 @@ export interface IEmployerDetail {
     profileVerified?: boolean,
     createdDate?: number
 }
+
+export interface ITopEmDetail {
+    employerID?: string,
+    employerName?: string,
+    employerLogoUrl?: string,
+    bannerUrl?: string,
+    bannerPriority?: string,
+    logoPriority?: string,
+    createdDate?: number
+}

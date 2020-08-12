@@ -70,12 +70,12 @@ class GoodArticle extends PureComponent<IProps, IState> {
   }
   render() {
     let { listArticleRender } = this.state;
-    const props = {
-      dots: true,
-      infinite: true,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-    };
+    // const props = {
+    //   dots: true,
+    //   infinite: true,
+    //   slidesToShow: 1,
+    //   slidesToScroll: 1,
+    // };
     if (this.state.loading) return <div>loading .....</div>;
     else {
       return (

@@ -1,9 +1,11 @@
-import React, { Component, PureComponent } from "react";
+import React, { PureComponent } from "react";
 import { Row, Col, Button, Divider } from "antd";
 import Title from "../Component/Title";
 import "./Middle.scss";
 import ListMiddle from "./ListMiddle";
 import GoodArticle from "../Component/GoodArticle";
+
+//@ts-ignore
 import bannerImage from "../../../../assets/image/Ứng dụng tìm kiếm việc làm hàng đầu.gif";
 
 interface IProps {
@@ -60,7 +62,7 @@ export default class Middle extends PureComponent<IProps, IState> {
                   rel="noopener noreferrer"
                   href="http://qrco.de/worksvn-vieclam?fbclid=IwAR2nRSwHv0aFQyVagAIb1EmFBA-0SX4NY3VVDevPwAb5VXQN_qnywhvJfwI"
                 >
-                  <img src={bannerImage} width={"100%"} height="auto" />
+                  <img alt="tìm việc" src={bannerImage} width={"100%"} height="auto" />
                 </a>
               </Col>
             </div>

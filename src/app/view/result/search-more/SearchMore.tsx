@@ -66,12 +66,12 @@ class SearchMore extends React.Component<ISearchMore, IStateSearchMore> {
         } else {
             let queryParam = qs.parse(this.props.location.search, { ignoreQueryPrefix: true })
             Object.keys(this.props.list_day).map((key) => {
-                if (queryParam[key] == 'true') {
+                if (queryParam[key] === 'true') {
                     newWeekDays.push(key)
                 }
             })
             Object.keys(this.props.list_shift).map((key) => {
-                if (queryParam[key] == 'true') {
+                if (queryParam[key] === 'true') {
                     newDayTimes.push(key)
                 }
             });
@@ -82,7 +82,7 @@ class SearchMore extends React.Component<ISearchMore, IStateSearchMore> {
     }
     render() {
         let { weekDays, dayTimes } = this.state;
-        let { loading, primaryColor } = this.props;
+        let { loading } = this.props;
         return (
             <Card className='search-more' title={'Lọc theo thời gian'} size="small">
                 <Collapse bordered={true} defaultActiveKey={['1', '2']}>
@@ -109,7 +109,6 @@ class SearchMore extends React.Component<ISearchMore, IStateSearchMore> {
                 <Tooltip placement='bottomRight' title={'Áp dụng với PARTTIME'}>
                     
                 <Row>
-                   
                     <Col md={12} lg={12} xl={12} xxl={12}>
                         <Button
                             size={'large'}
@@ -151,11 +150,7 @@ class SearchMore extends React.Component<ISearchMore, IStateSearchMore> {
                             >
                                 {loading ? <Icon type={'loading'} /> : 'Lọc'}
                             </Button>
-
-                        
-
-                    </Col>
-                    
+                    </Col>  
                 </Row>
                 </Tooltip>
             </Card>

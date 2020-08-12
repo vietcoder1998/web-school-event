@@ -146,15 +146,15 @@ class Header extends PureComponent<IProps, IState> {
                 Ngày hội việc làm
               </a>
               <a
-                href={`/home${this.props.param}`}
+                href={`/${this.props.param}`}
                 style={{
-                  display: window.location.pathname === "/home" ? "none" : "",
+                  display: window.location.pathname === "/" ? "none" : "",
                 }}
               >
                 <Icon type={"home"} />
-                Việc làm
+                Trang chủ
               </a>
-              <a href="/result" style={{ display: isAuthen ? "" : "none" }}>
+              <a href="/result">
                 <Icon type={"search"} />
                 Tìm kiếm
               </a>
@@ -187,7 +187,7 @@ class Header extends PureComponent<IProps, IState> {
                 className="employer"
               >
                 <Icon
-                  type="bank"
+                  type="shop"
                   theme="filled"
                   style={{ fontSize: "16.8px"}}
                 />
@@ -255,7 +255,7 @@ class Header extends PureComponent<IProps, IState> {
                     padding: "0px 0px 2.2px",
                   }}
                 ></span>
-                <a onClick={() => goBackWhenLogined("register")}>Đăng ký</a>
+                <a  onClick={() => goBackWhenLogined("register")}>Đăng ký</a>
               </span>
             )}
           </div>

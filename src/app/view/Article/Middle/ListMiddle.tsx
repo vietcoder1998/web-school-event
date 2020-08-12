@@ -7,7 +7,7 @@ import { Skeleton } from "antd";
 import Card3 from "../Component/Card3";
 import Card2 from "../Component/Card2";
 
-import ImageDeault from "../../../../assets/image/base-image.jpg";
+// import ImageDeault from "../../../../assets/image/base-image.jpg";
 
 interface IProps {
   idType?: any;

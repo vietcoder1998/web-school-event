@@ -18,7 +18,7 @@ import Layout from "../../layout/Layout";
 import DefaultImage from "../../../../assets/image/base-image.jpg";
 // import { routeLink, routePath } from '../../../../../const/break-cumb';
 import "./ArticleDetail.scss";
-import { _get, _post, _delete } from "../../../../services/base-api";
+import { _get, _post } from "../../../../services/base-api";
 import { ANNOUNCEMENTS } from "../../../../services/api/public.api";
 import { PUBLIC_HOST, STUDENT_HOST } from "../../../../environment/development";
 import { noInfoHeader, authHeaders } from "../../../../services/auth";
@@ -200,7 +200,7 @@ class ArticleDetail extends PureComponent<IProps, IState> {
   DeleteComment = (id) => {
     let dataSend = [id];
     console.log(dataSend);
-    let res = _requestToServer(
+    _requestToServer(
       DELETE,
       null,
       ANNOUNCEMENTS_PRIVATE.DELETE_COMMENT.replace(
@@ -211,8 +211,7 @@ class ArticleDetail extends PureComponent<IProps, IState> {
       authHeaders,
       dataSend,
       false
-    )
-      .then((res) => {
+    ).then((res) => {
         console.log(res);
         this.getComment();
       })
