@@ -450,7 +450,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
         <Layout>
           <div className="content">
             <Row>
-              <Col xs={0} sm={0} md={0} lg={1} xl={2} xxl={3}></Col>
+              <Col xs={0} sm={0} md={0} lg={1} xl={2} xxl={3}/>
               <Col xs={24} sm={24} md={24} lg={22} xl={20} xxl={18}>
                 <div id="requirement-job" className="job-detail-content">
                   {/* Button recruitment */}
@@ -542,7 +542,8 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                               lg={0}
                               xl={0}
                               className="a_c"
-                            ></Col>
+                            >
+                            </Col>
                             <Col
                               xs={12}
                               sm={12}
