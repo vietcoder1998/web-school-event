@@ -74,7 +74,7 @@ const HistoryApply = asyncComponent(() =>
   )
 );
 const JobDetail = asyncComponent(() =>
-  import("./app/view/job-detail/JobDetail").then((module) => module.default)
+  import("./app/view/job-detail").then((module) => module.default)
 );
 
 const EmInfo = asyncComponent(() =>

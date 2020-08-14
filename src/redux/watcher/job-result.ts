@@ -75,7 +75,7 @@ function getJobResults(action) {
     isAuthen ? authHeaders : noInfoHeader,
     {
       pageIndex: action.pageIndex ? action.pageIndex : 0,
-      pageSize: action.pageSize ? action.pageSize : 20,
+      pageSize: action.pageSize ? action.pageSize : 10,
     },
     false
   );

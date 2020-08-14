@@ -1,17 +1,17 @@
 import React from "react";
 import Layout from "../layout/Layout";
 import { connect } from "react-redux";
-import TabSearch from "./tab-search/TabSearch";
-import TopJob from "./top-job/TopJob";
+import TabSearch from "./tab-search";
+import TopJob from "./TopJob";
 // import AllJob from "./all-job/AllJob";
-import TopEm from "./top-em/TopEm";
-import Announcements from "./annoucements/Announcements";
+import TopEm from "./TopEm";
+import Announcements from "./Announcements";
 import JobExpect from "./JobExpect";
 import VideoAd from "./VideoAd";
 import { IAppState } from "../../../redux/store/reducer";
 
 // import { REDUX_SAGA } from '../../../const/actions';
-import IndayJob from './inday-job/IndayJob';
+import IndayJob from './IndayJob';
 
 function Home(props) {
   return (

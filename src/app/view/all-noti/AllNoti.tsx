@@ -54,7 +54,7 @@ class AllNoti extends PureComponent<IAllNotiProps, IAllNotiState> {
                         <Col xs={20}>
                             <div className='all-noti-content '>
                                 <div className='noti-header '>
-                                    <h5 >Thông báo của bạn</h5>
+                                    <h5 >Thông báo ({`${noti.totalItems}`})</h5>
                                 </div>
                                 <div className='list-content '>
                                         {noti && noti.items && noti.items.length > 0 ? noti.items.map((item, index) => {

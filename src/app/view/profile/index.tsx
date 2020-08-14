@@ -5,24 +5,24 @@ import Layout from "../layout/Layout";
 
 // Layer
 import Block from "../layout/block/Block";
-import FixShortProfile from "./fix/FixShortProfile/FixShortProfile";
-import ShortProfile from "./infor/ShortProfile/ShortProfile";
-import FixDescription from "./fix/FixDescription/FixDescription";
-import Description from "./infor/Description/Description";
-import FixSkills from "./fix/FixSkills/FixSkills";
-import Skills from "./infor/Skills/Skills";
+import FixShortProfile from "./fix/FixShortProfile";
+import ShortProfile from "./infor/ShortProfile";
+import FixDescription from "./fix/FixDescription";
+import Description from "./infor/Description";
+import FixSkills from "./fix/FixSkills";
+import Skills from "./infor/Skills";
 
 // import Info from '../layout/info/Info';
-import FixExperience from "./fix/FixExperience/FixExperience";
-import Experience from "./infor/Experience/Experience";
-import Education from "./infor/Education/Education";
-import FixEducation from "./fix/FixEducation/FixEducation";
-import LanguageSkills from "./infor/LanguageSkills/LanguageSkills";
-import FixPicture from "./fix/FixPicture/FixPicture";
-import Picture from "./infor/Picture/Picture";
+import FixExperience from "./fix/FixExperience";
+import Experience from "./infor/Experience";
+import Education from "./infor/Education";
+import FixEducation from "./fix/FixEducation";
+import LanguageSkills from "./infor/LanguageSkills";
+import FixPicture from "./fix/FixPicture";
+import Picture from "./infor/Picture";
 
 // Service
-import FixLanguageSkills from "./fix/FixLanguageSkills/FixLanguageSkills";
+import FixLanguageSkills from "./fix/FixLanguageSkills";
 // import moveScrollBar from '../../assets/js/moveScroll';
 import { POST, PUT } from "../../../const/method";
 import { REDUX_SAGA } from "../../../const/actions";
