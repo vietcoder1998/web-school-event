@@ -1,55 +1,55 @@
 import React, { Suspense, Fragment } from "react";
-import "./app/view/sass/_common.scss";
+import "./view/sass/_common.scss";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import Home from './app/view/home/Home';
 import { connect } from "react-redux";
-import asyncComponent from "./routes/AppRoutes";
-import { REDUX, REDUX_SAGA } from "./const/actions";
+import asyncComponent from "../routes/AppRoutes";
+import { REDUX, REDUX_SAGA } from "../const/actions";
 import $ from "jquery";
 // import { Loading } from "./app/view/layout/common/Common";
-import { _get } from "./services/base-api";
-import { PUBLIC_HOST } from "./environment/development";
-import { noInfoHeader } from "./services/auth";
+import { _get } from "../services/base-api";
+import { PUBLIC_HOST } from "../environment/development";
+import { noInfoHeader } from "../services/auth";
 import HashLoader from "react-spinners/HashLoader";
 import { BackTop } from "antd";
 import qs from "query-string";
 
 
 const EventHome = asyncComponent(() =>
-  import("./app/view/Event/Home/Home").then((module) => module.default)
+  import("./view/Event/Home/Home").then((module) => module.default)
 );
 
 const EventCountDown = asyncComponent(() =>
-  import("./app/view/Event/Home/CountDown").then((module) => module.default)
+  import("./view/Event/Home/CountDown").then((module) => module.default)
 );
 const Home = asyncComponent(() =>
-  import("./app/view/home").then((module) => module.default)
+  import("./view/home").then((module) => module.default)
 );
 const Profile = asyncComponent(() =>
-  import("./app/view/profile").then((module) => module.default)
+  import("./view/profile").then((module) => module.default)
 );
 
 const NotFound = asyncComponent(() =>
-  import("./app/view/home").then((module) => module.default)
+  import("./view/home").then((module) => module.default)
 );
 
 const Login = asyncComponent(() =>
-  import("./app/view/login/Login").then((module) => module.default)
+  import("./view/login/Login").then((module) => module.default)
 );
 
 const ResetPassword = asyncComponent(() =>
-  import("./app/view/reset-password/ResetPassword").then(
+  import("./view/reset-password/ResetPassword").then(
     (module) => module.default
   )
 );
 
 const Register = asyncComponent(() =>
-  import("./app/view/register/Register").then((module) => module.default)
+  import("./view/register/Register").then((module) => module.default)
 );
 
 const ForgotPassword = asyncComponent(() =>
-  import("./app/view/forgot/ForgotPassword").then((module) => module.default)
+  import("./view/forgot/ForgotPassword").then((module) => module.default)
 );
 
 // const ChatPage = asyncComponent(() =>
@@ -57,36 +57,36 @@ const ForgotPassword = asyncComponent(() =>
 // )
 
 const Result = asyncComponent(() =>
-  import("./app/view/result/Result").then((module) => module.default)
+  import("./view/result/Result").then((module) => module.default)
 );
 
 const AllNoti = asyncComponent(() =>
-  import("./app/view/all-noti/AllNoti").then((module) => module.default)
+  import("./view/all-noti/AllNoti").then((module) => module.default)
 );
 
 const SaveJob = asyncComponent(() =>
-  import("./app/view/save-job/SaveJob").then((module) => module.default)
+  import("./view/save-job/SaveJob").then((module) => module.default)
 );
 
 const HistoryApply = asyncComponent(() =>
-  import("./app/view/history-apply/HistoryApply").then(
+  import("./view/history-apply/HistoryApply").then(
     (module) => module.default
   )
 );
 const JobDetail = asyncComponent(() =>
-  import("./app/view/job-detail").then((module) => module.default)
+  import("./view/job-detail").then((module) => module.default)
 );
 
 const EmInfo = asyncComponent(() =>
-  import("./app/view/em-info/EmInfo").then((module) => module.default)
+  import("./view/em-info/EmInfo").then((module) => module.default)
 );
 
 const DataRegions = asyncComponent(() =>
-  import("./app/view/data-regions/DataRegions").then((module) => module.default)
+  import("./view/data-regions/DataRegions").then((module) => module.default)
 );
 
 const DataJobNames = asyncComponent(() =>
-  import("./app/view/data-job-names/DataJobNames").then(
+  import("./view/data-job-names/DataJobNames").then(
     (module) => module.default
   )
 );
@@ -94,17 +94,17 @@ const DataJobNames = asyncComponent(() =>
 //event
 
 const EventJobDetail = asyncComponent(() =>
-  import("./app/view/Event/Job/job-detail/JobDetail").then(
+  import("./view/Event/Job/job-detail/JobDetail").then(
     (module) => module.default
   )
 );
 
 const Article = asyncComponent(() =>
-  import("./app/view/Article/Article").then((module) => module.default)
+  import("./view/Article/Article").then((module) => module.default)
 );
 
 const ArticleDetail = asyncComponent(() =>
-  import("./app/view/Article/Detail/ArticleDetail").then(
+  import("./view/Article/Detail/ArticleDetail").then(
     (module) => module.default
   )
 );
@@ -182,9 +182,12 @@ class App extends React.Component<IProps, IState> {
     let token = localStorage.getItem("accessToken");
 
     let queryParam = qs.parse(window.location.search, {
+      //@ts-ignore
+
       ignoreQueryPrefix: true,
     });
     if (queryParam.data) {
+      //@ts-ignore
       let data = window.atob(queryParam.data)
       let queryParam2 = qs.parse(data)
 

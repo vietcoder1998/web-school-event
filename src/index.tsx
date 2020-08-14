@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './app/view/sass/_keyFrame.scss';
-import App from './App';
+import App from './app';
 import ErrorBoundary from './app/view/layout/common/ErrorBoudary';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
