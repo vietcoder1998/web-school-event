@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './app/view/sass/_keyFrame.scss';
-import App from './app';
-import ErrorBoundary from './app/view/layout/common/ErrorBoudary';
+import './view/sass/_keyFrame.scss';
+import App from './view';
+import ErrorBoundary from './view/layout/common/ErrorBoudary';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import { store } from './redux/store/index';
-// import '../font-awesome/css/font-awesome.min.css';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
+import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "antd/dist/antd.css";
 // import 'emoji-mart/css/emoji-mart.css';
