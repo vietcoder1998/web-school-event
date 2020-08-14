@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom'
-
-import "./Home.scss";
 import { Button } from "antd";
 import { connect } from "react-redux";
 import { REDUX } from "../../../../const/actions";

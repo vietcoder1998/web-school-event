@@ -14,7 +14,7 @@ interface IProps {
 export default function Layout(props?: IProps)  {
     let {
         disableFooterData,
-        disableBottomPhone,
+        // disableBottomPhone,
         show_bar
     } = props;
 

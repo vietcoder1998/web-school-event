@@ -7,7 +7,7 @@ import { IShift } from '../../../models/announcements';
 // import { convertStringToArray } from '../../../utils/convertStringToArray';
 import { convertSalary } from '../../../utils/convertNumber'
 import { Link } from 'react-router-dom';
-import { _checkGender } from './../Event/Job/job-detail/JobDetail';
+import { _checkGender } from './../event/job-detail';
 
 interface JobPropertiesProps {
     jobDetail?: any;

@@ -9,6 +9,7 @@ import { Icon, Badge, Menu, Dropdown, Avatar } from "antd";
 import Notification from "./notification/Notification";
 import { REDUX } from "../../../../const/actions";
 import { goBackWhenLogined } from "../../../../utils/goBackWhenLogined";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 interface IProps {
   isAuthen?: boolean;
   show_noti?: boolean;
@@ -125,7 +126,7 @@ class Header extends PureComponent<IProps, IState> {
         <div className="header" style={{ backgroundColor: "#1890ff" }}>
           <div className="logo">
             <Link to={eventStart ? `/${param}` : `/home${param}`}>
-              <img width="auto" height={45} src={logo} alt="itea-scan" />{" "}
+              <LazyLoadImage width="auto" height={45} src={logo} alt="itea-scan" />{" "}
             </Link>
           </div>
           <div className="direct-page">

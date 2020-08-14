@@ -1,7 +1,6 @@
 import React from "react";
-import "./Result.scss";
 import Layout from "../layout/Layout";
-import { Row, Col, Pagination, BackTop, Affix } from "antd";
+import { Row, Col, Pagination, Affix } from "antd";
 import { connect } from "react-redux";
 import { moveScroll } from "../../../utils/moveScroll";
 // @ts-ignore
@@ -16,6 +15,7 @@ import ResultFilter from "./result-filter/ResultFilter";
 import qs from "query-string";
 //@ts-ignore
 import banner from '../../../assets/image/event/banner-worksvn.jpg'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 const cookie = new Cookie();
 
 interface IProps extends StateProps, DispatchProps {
@@ -25,17 +25,17 @@ interface IProps extends StateProps, DispatchProps {
   match?: any;
   getListJobNames: (name?: string) => any;
   getListRegions: (name?: string) => any;
-  loading_high_light_data?: any;
-  loading?: any;
+  loadingHlData?: any;
+  loading?: boolean;
   jobType?: any;
   area?: any;
   location?: any;
   setFilterJobType?: any;
   history?: any;
+  results?: any;
 }
 
 interface IStateResult {
-  is_search: boolean;
   loading: boolean;
   search_word: string;
   jobNameID: string;
@@ -59,7 +59,6 @@ class Result extends React.Component<IProps, IStateResult> {
   constructor(props) {
     super(props);
     this.state = {
-      is_search: false,
       loading: false,
       search_word: "",
       jobNameID: null,
@@ -343,11 +342,11 @@ class Result extends React.Component<IProps, IStateResult> {
       highlightData,
       jobNames,
       regions,
-      loading_high_light_data,
+      loadingHlData,
       loading,
       param
     } = this.props;
-    const list_result = results.items;
+    const listResult = results.items;
     return (
       <Layout>
         <div className="content">
@@ -358,8 +357,9 @@ class Result extends React.Component<IProps, IStateResult> {
                 {/* Search Result */}
                 <Row>
                   <ListHlJob
-                    loading_high_light_data={loading_high_light_data}
+                    loadingHlData={loadingHlData}
                     highlightData={highlightData}
+                    //@ts-ignore
                     isSearchEvent={isSearchEvent}
                     getHighLightJobs={(pageIndex) => {
                       this.props.getHighLightData(pageIndex, 6);
@@ -368,7 +368,7 @@ class Result extends React.Component<IProps, IStateResult> {
                   />
                 </Row>
                 {/* SearChTab */}
-                <Affix offsetTop={-5}>
+                <Affix offsetTop={-65}>
                   <div className="search-tab">
                     <SearchFilter
                       loading={loading}
@@ -388,7 +388,7 @@ class Result extends React.Component<IProps, IStateResult> {
                   <Col xs={24} sm={24} md={16} lg={16} xl={17} xxl={19}>
                     <ListResult
                       loading={loading}
-                      list_result={list_result}
+                      listResult={listResult}
                       isSearchEvent={isSearchEvent}
                       param={param}
                     />
@@ -413,10 +413,9 @@ class Result extends React.Component<IProps, IStateResult> {
                       jobType={body.jobType}
                       location={this.props.location}
                     />
-                    <img style={{ boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.03)', marginLeft: 11, width: 'calc(100% - 12px)' }} alt="banner" src={banner} />
+                    <LazyLoadImage style={{ boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.03)', marginLeft: 11, width: 'calc(100% - 12px)' }} alt="banner" src={banner} />
                   </Col>
                 </Row>
-
                 {/* {Job} */}
               </div>
             </Col>
@@ -432,7 +431,7 @@ const mapStateToProps = (state) => ({
   results: state.JobResult.result,
   loading: state.JobResult.loading,
   highlightData: state.HighLightResult.data,
-  loading_high_light_data: state.HighLightResult.loading_high_light_data,
+  loadingHlData: state.HighLightResult.loadingHlData,
   isAuthen: state.isAuthen,
   jobNames: state.JobNames.items,
   regions: state.Regions.items,

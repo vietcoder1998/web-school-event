@@ -54,7 +54,7 @@ export interface IJobDetail {
         name?: string
     }>,
     timeLeft?: string,
-    priority?: Array<string>,
+    priority?: any,
     jobType?: 'FULLTIME' | 'PARTTIME' | 'INTERNSHIP',
     applyState?: 'PENDING' | 'ACCEPTED' | 'REJECTED',
     offerState?: 'PENDING' | 'ACCEPTED' | 'REJECTED', 

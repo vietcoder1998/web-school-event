@@ -7,7 +7,7 @@ let initListHotJob = {
         totalItems: 0,
         items: [{}, {}, {}, {}, {}, {}],
     },
-    loading_high_light_data: true,
+    loadingHlData: true,
 };
 
 export const HighLightResult = (state = initListHotJob, action) => {
@@ -15,7 +15,7 @@ export const HighLightResult = (state = initListHotJob, action) => {
         case REDUX.HIGH_LIGHT.GET_HIGH_LIGHT_JOB:
             return { ...state, data: action.data };
         case REDUX.HIGH_LIGHT.SET_LOADING_HIGH_LIGHT_JOB:
-            return { ...state, loading_high_light_data: action.loading_high_light_data};
+            return { ...state, loadingHlData: action.loadingHlData};
         default:
             return { ...state };
     }

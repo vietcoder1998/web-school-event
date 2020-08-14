@@ -33,7 +33,6 @@ class ButtonToggle extends Component {
   }
 
   render() {
-    let { state } = this.state;
     return (
       <div className="toggle-button">
         <b style={{ marginLeft: 10 }} >

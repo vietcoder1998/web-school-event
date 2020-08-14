@@ -1,7 +1,6 @@
 import React from 'react';
 import Layout from '../layout/Layout';
 import { Row, Col, Icon, Pagination, Tooltip, Button, Empty, Avatar, Spin } from 'antd';
-import './SaveJob.scss'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import moment from 'moment'

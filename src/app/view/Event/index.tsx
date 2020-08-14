@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Layout from "../../layout/Layout";
+import Layout from "../layout/Layout";
 import { connect } from "react-redux";
-import HomeJob from "./home-job/HomeJob";
-import TopEm from "./top-em/TopEm";
-import TopJob from "./top-job/TopJob";
-import Banner from "./banner/Banner";
-import Branch from "./branch/Branch";
-import { REDUX_SAGA } from "../../../../const/actions";
+import HomeJob from "./home/HomeJob";
+import TopEm from "./home/TopEm";
+import TopJob from "./home/TopJob";
+import Banner from "./home/Banner";
+import Branch from "./home/Branch";
+import { REDUX_SAGA } from "../../../const/actions";
 
 import HashLoader from "react-spinners/HashLoader";
 // import { REDUX_SAGA } from '../../../const/actions';
@@ -14,17 +14,18 @@ import HashLoader from "react-spinners/HashLoader";
 function Home(props) {
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  React.useEffect(() => {
     props.getTopEmpoyer(0);
     props.getEvenJob(0);
     props.getEventHotJob(0);
     setLoading(false)
   })
+
   if (loading) {
     return (
       <div className="loading-page">
         <HashLoader
-          sizeUnit={"px"}
+          sizeUnit={"17px"}
           size={150}
           color={"#32A3F9"}
           loading={true}

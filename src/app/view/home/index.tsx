@@ -12,6 +12,7 @@ import { IAppState } from "../../../redux/store/reducer";
 
 // import { REDUX_SAGA } from '../../../const/actions';
 import IndayJob from './IndayJob';
+import { MobileState } from '../../../redux/reducers/change-mobile-state';
 
 function Home(props) {
   return (
@@ -32,6 +33,7 @@ function Home(props) {
 
 const mapStateToProps = (state: IAppState) => ({
   isAuthen: state.AuthState.isAuthen,
+  mobileState: state.MobileState
 });
 
 const mapDispatchToprops = (dispatch) => ({});

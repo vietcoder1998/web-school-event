@@ -1,6 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import imageDefault from "../../../../assets/image/base-image.jpg";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { Row, Col } from 'antd';
+import { IAppState } from '../../../../redux/store/reducer';
 
 function ShortProfile(props?: { personalInfo?: any }) {
   let { personalInfo } = props;
@@ -8,9 +11,9 @@ function ShortProfile(props?: { personalInfo?: any }) {
   return (
     <div className="wrapper">
       <div className="short-profile">
-        <ul>
-          <li>
-            <img
+        <Row>
+          <Col  xs={24} span={12}>
+            <LazyLoadImage
               src={personalInfo.identityCardFrontImageUrl}
               onError={(e?: React.SyntheticEvent) => {
                 //@ts-ignore
@@ -19,7 +22,9 @@ function ShortProfile(props?: { personalInfo?: any }) {
               alt="ảnh CMND"
               className="identytiImage"
             />
-            <img
+          </Col>
+          <Col xs={24} span={12}>
+            <LazyLoadImage
               src={personalInfo.identityCardBackImageUrl}
               alt="ảnh CMND"
               onError={(e) => {
@@ -28,14 +33,14 @@ function ShortProfile(props?: { personalInfo?: any }) {
               }}
               className="identytiImage"
             />
-          </li>
-        </ul>
+          </Col>
+        </Row>
       </div>
-    </div>
+    </div >
   );
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state?: IAppState) => ({
   personalInfo: state.FullPersonalInfo.personalInfo,
 });
 

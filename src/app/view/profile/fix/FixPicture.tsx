@@ -10,6 +10,7 @@ import { Icon, Row, Col, Input, Button } from 'antd';
 import { REDUX_SAGA } from "../../../../const/actions";
 import { _requestToServer } from "../../../../services/exec";
 import { PUT } from "../../../../const/method";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 interface IProps {
   personalInfo?: any;
@@ -124,8 +125,8 @@ class FixPerson extends Component<IProps, IState> {
     return (
       <div className="wrapper">
         <Row >
-          <Col span={10}>
-            <img
+          <Col xs={24} span={10}>
+            <LazyLoadImage
               src={identityCardFrontUrl}
               alt="ảnh CMND"
               className="identityImage"
@@ -149,8 +150,8 @@ class FixPerson extends Component<IProps, IState> {
               }}
             />
           </Col>
-          <Col span={10}>
-            <img
+          <Col xs={24} span={10}>
+            <LazyLoadImage
               src={identityCardBackUrl}
               alt="ảnh CMND"
               className="identityImage"

@@ -1,25 +1,24 @@
 import React, { Component } from "react";
-import "./JobDetail.scss";
 import { Tabs, Row, Col, Icon, Button, Modal, Checkbox, Avatar, Affix } from "antd";
 import { connect } from "react-redux";
-import { _requestToServer } from "../../../../../services/exec";
-import { POST } from "../../../../../const/method";
-import { APPLY_JOB, SAVED_JOB } from "../../../../../services/api/private.api";
-import { STUDENT_HOST } from "../../../../../environment/development";
-import { authHeaders } from "../../../../../services/auth";
+import { _requestToServer } from "../../../../services/exec";
+import { POST } from "../../../../const/method";
+import { APPLY_JOB, SAVED_JOB } from "../../../../services/api/private.api";
+import { STUDENT_HOST } from "../../../../environment/development";
+import { authHeaders } from "../../../../services/auth";
 //@ts-ignore
 import _ from "lodash";
-import { moveScroll } from "../../../../../utils/moveScroll";
-import { testImage } from "../../../../../utils/CheckImage";
+import { moveScroll } from "../../../../utils/moveScroll";
+import { testImage } from "../../../../utils/CheckImage";
 import { Input } from "antd";
-import Layout from "../.././../layout/Layout";
-import { NotUpdate, JobType } from "../.././../layout/common/Common";
-import { REDUX_SAGA } from "../../../../../const/actions";
+import Layout from "../../layout/Layout";
+import { NotUpdate, JobType } from "../../layout/common/Common";
+import { REDUX_SAGA } from "../../../../const/actions";
 import JobProperties from "./job-properties/JobProperties";
 import { Link } from "react-router-dom";
-import { TYPE } from "../../../../../const/type";
+import { TYPE } from "../../../../const/type";
 import qs from "query-string";
-import { goBackWhenLogined } from '../../../../../utils/goBackWhenLogined'
+import { goBackWhenLogined } from '../../../../utils/goBackWhenLogined'
 import swal from 'sweetalert';
 const { TabPane } = Tabs;
 const { TextArea } = Input;

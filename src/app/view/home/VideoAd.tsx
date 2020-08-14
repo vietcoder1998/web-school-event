@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-//@ts-ignore
-import Banner1 from "./../../../assets/image/banner-1.jpg";
-//@ts-ignore
-import Banner2 from "./../../../assets/image/banner-2.jpg";
-import { Col, Row, Icon, Modal } from 'antd';
+import { Col, Row, Modal } from 'antd';
 
 //@ts-ignore
 import imgvd1 from './../../../assets/image/video/1.png';
@@ -22,6 +18,7 @@ const description = [
 interface IProps {
     match?: any;
     history?: any;
+    mobileState?: any;
 }
 interface IState {
     vm?: boolean;
@@ -60,26 +57,32 @@ class VideoAd extends Component<IProps, IState> {
 
     showVideo = (vm?: boolean, vl?: string, title?: string) => {
         this.props.history.push(`?vm=${vm}&vl=${vl}`)
+        let { isMobile } = this.props.mobileState
         this.setState({ title })
+        if (isMobile) {
+            window.open(`https://www.youtube.com/embed/${vl}?autoplay=1`, "_blank")
+        }
     }
 
     render() {
+        let { mobileState } = this.props;
         return (
             <div className={"home-job"} >
-                <Modal
+                {!mobileState.isMobile ? <Modal
                     visible={this.state.vm}
-                    width="60vw"
+                    width="50vw"
                     destroyOnClose={true}
                     onCancel={() => this.props.history.push('?vm=false')}
                     title={this.state.title}
                 >
                     <iframe
-                        width="100%"
+                        title={this.state.title}
                         height="500"
+                        width="100%"
                         src={`https://www.youtube.com/embed/${this.state.vl}?autoplay=1`}
                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     ></iframe>
-                </Modal>
+                </Modal> : ""}
                 <Row>
                     <h5>CHỦ ĐỀ TIÊU BIỂU</h5>
                     <Col sm={24} md={8} lg={8} xl={8} xxl={8}>

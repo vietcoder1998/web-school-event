@@ -1,5 +1,4 @@
-import React, { CSSProperties } from 'react';
-import $ from 'jquery';
+import React from 'react';
 
 export default function LinkToolTip(props: {
     title?: string, name?: any,
@@ -23,10 +22,11 @@ export default function LinkToolTip(props: {
 
             )
         } else return <>
-            {props.name}
-            <div className="tooltiptext">
+         <div className="tooltiptext">
                 {props.title}
             </div>
+            {props.name}
+           
         </>
     }
 

@@ -21,6 +21,7 @@ import swal from "sweetalert";
 import { TYPE } from "../../../const/type";
 import qs from "query-string";
 import { goBackWhenLogined } from '../../../utils/goBackWhenLogined'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 const { TabPane } = Tabs;
 const { TextArea } = Input;
 
@@ -466,7 +467,11 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
 
                   {/* Cover Image */}
                   <div className="cover-image-job ">
-                    <img alt="Ảnh công ty" src={testImage(coverUrl)} className="company-image" />
+                    <LazyLoadImage
+                      alt={employerDetail && employerDetail.employerName}
+                      src={testImage(coverUrl)}
+                      className="company-image"
+                    />
                   </div>
                   {/* Header */}
                   <div className="job-header">

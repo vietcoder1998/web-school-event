@@ -47,7 +47,7 @@ class SideBar extends Component {
 
                         <div className="content-sidebar">
                             <ul>
-                                <li><a href={eventStart ? '/' : '/home'}><Icon type="home" />Trang chủ</a></li>
+                                <li><a href={'/'}><Icon type="home" />Trang chủ</a></li>
                                 <li><a href='/event' style={{ display: eventStart === false ? 'none' : window.location.pathname === '/' ? "none" : '' }}><Icon type="tags" />Sự kiện</a></li>
             
                                 

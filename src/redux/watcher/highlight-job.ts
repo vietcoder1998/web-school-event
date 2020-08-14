@@ -10,12 +10,12 @@ import { REDUX_SAGA, REDUX } from '../../const/actions'
 import { POST } from '../../const/method';
 
 function* getListHighLightJobData(action) {
-    yield put({ type: REDUX.HIGH_LIGHT.SET_LOADING_HIGH_LIGHT_JOB, loading_high_light_data: true });
+    yield put({ type: REDUX.HIGH_LIGHT.SET_LOADING_HIGH_LIGHT_JOB, loadingHlData: true });
     let res = yield call(getHighLightJobData, action);
     if (res) {
         let data = res.data;
         yield put({ type: REDUX.HIGH_LIGHT.GET_HIGH_LIGHT_JOB, data });
-        yield put({ type: REDUX.HIGH_LIGHT.SET_LOADING_HIGH_LIGHT_JOB, loading_high_light_data: false });
+        yield put({ type: REDUX.HIGH_LIGHT.SET_LOADING_HIGH_LIGHT_JOB, loadingHlData: false });
     }
 }
 

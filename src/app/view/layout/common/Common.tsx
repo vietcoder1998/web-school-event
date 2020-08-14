@@ -1,5 +1,6 @@
 import React, { CSSProperties } from 'react';
 import moment from 'moment';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export const Titlelabel = (props) => {
     return <label className="title-label">{" " + props.value + " "}</label>
@@ -12,7 +13,6 @@ export const IptLetter = (props?: { value?: any }) => {
 export const IptLetterP = (props?: { children?: any }) => {
     return <p className="important-letter">{" " + props.children + " "}</p>
 }
-
 
 export const FirstLetter = (props) => {
     return <span className="first-letter">{" " + props.value + " "}</span>
@@ -49,7 +49,7 @@ export function JobType(props: { children?: any, width?: any, fontSize?: any }) 
         backgroundColor: 'white',
         fontSize: props.fontSize ? props.fontSize : '0.8em',
         textAlign: 'center',
-        width: props.width ? props.width : '90%',
+        width: props.width ? props.width : '100%',
         display: 'inline-block',
         position: 'relative',
         marginTop: '5px',
@@ -102,8 +102,8 @@ export function OnDiv(props?: {
     alt?: string
 } ) {
     return <div className="push-on" onClick={ () => props.onClick ? props.onClick() : undefined }>
-         <img className="on-image" src={require("./../../../../assets/image/video/pngegg.png")} />
-         <img className="base-inside" src={props.src} alt={props.alt} />
+         <LazyLoadImage className="on-image" src={require("./../../../../assets/image/video/pngegg.png")} alt={props.alt} />
+         <LazyLoadImage className="base-inside" src={props.src} alt={props.alt} />
          <div className="on-bound"/>
     </div>
 }

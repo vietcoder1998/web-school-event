@@ -53,24 +53,24 @@ class SearchMore extends React.Component<ISearchMore, IStateSearchMore> {
         let newWeekDays = [];
         let newDayTimes = [];
         if (this.props.setFilter) {
-            Object.keys(this.props.list_day).map((key) => {
+            Object.keys(this.props.list_day).forEach((key) => {
                 if (this.props.list_day[key] === true) {
                     newWeekDays.push(key)
                 }
             });
-            Object.keys(this.props.list_shift).map((key) => {
+            Object.keys(this.props.list_shift).forEach((key) => {
                 if (this.props.list_shift[key] === true) {
                     newDayTimes.push(key)
                 }
             });
         } else {
             let queryParam = qs.parse(this.props.location.search, { ignoreQueryPrefix: true })
-            Object.keys(this.props.list_day).map((key) => {
+            Object.keys(this.props.list_day).forEach((key) => {
                 if (queryParam[key] === 'true') {
                     newWeekDays.push(key)
                 }
             })
-            Object.keys(this.props.list_shift).map((key) => {
+            Object.keys(this.props.list_shift).forEach((key) => {
                 if (queryParam[key] === 'true') {
                     newDayTimes.push(key)
                 }

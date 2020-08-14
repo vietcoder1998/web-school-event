@@ -1,10 +1,10 @@
 import React, { PureComponent } from "react";
 import { Col, Row } from "antd";
-import "./TopEm.scss";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import defaultImage from "../../../../../assets/image/base-image.jpg";
-import { REDUX_SAGA } from "../../../../../const/actions";
+//@ts-ignore
+import defaultImage from "../../../../assets/image/base-image.jpg";
+import { REDUX_SAGA } from "../../../../const/actions";
 
 interface IProps {
   getTopEmpoyer?: Function;
@@ -37,11 +37,11 @@ class TopEm extends PureComponent<IProps, IState> {
     let { listEmployer, param } = this.props;
     return (
       <div
-        className="top-rm"
+        className="top-em"
         style={{ display: listEmployer.totalItems === 0 ? "none" : "" }}
       >
         <h5 style={{ textAlign: "center", fontSize: '1.75rem' }}>DOANH NGHIỆP NỔI BẬT </h5>
-        <Row align="center" type="flex">
+        <Row className="a_c" type="flex">
           {listEmployer && listEmployer.items
             ? listEmployer.items.map((item: { employer: { id: string; logoUrl: string; employerName: React.ReactNode; }; }, index: React.ReactText) => (
               <Col xs={12} sm={6} md={3} lg={4} xl={3} xxl={3} key={index}>

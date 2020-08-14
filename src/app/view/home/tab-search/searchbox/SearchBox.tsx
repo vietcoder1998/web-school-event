@@ -12,6 +12,7 @@ import QRCodeAppStore from '../../../../../assets/image/qr-code-appstore.png';
 //@ts-ignore
 import QRCodeCHPlay from '../../../../../assets/image/qr-code-chplay.png';
 import qs from 'query-string';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const InputGroup = Input.Group;
 const { Option } = Select;
@@ -448,12 +449,12 @@ class SearchBox extends Component<IProps, IState>{
                 >
                     {showQRImageType === 1 ?
                         <div style={{ textAlign: 'center' }}>
-                            <img src={QRCodeAppStore} alt='AppleStore Tìm việc QRCode' height='250px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px' }} />
+                            <LazyLoadImage src={QRCodeAppStore} alt='AppleStore Tìm việc QRCode' height='250px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px' }} />
                             <div>Ứng dụng tìm việc Worksvn trên AppleStore</div>
                         </div>
                         :
                         <div style={{ textAlign: 'center' }}>
-                            <img src={QRCodeCHPlay} alt='CHPlay Tìm việc QRCode' height='250px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px' }} />
+                            <LazyLoadImage src={QRCodeCHPlay} alt='CHPlay Tìm việc QRCode' height='250px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px' }} />
                             <div>Ứng dụng tìm việc Worksvn trên CHPlay</div>
                         </div>
                     }

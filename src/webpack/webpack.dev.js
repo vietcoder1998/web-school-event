@@ -12,7 +12,7 @@ module.export = options => ({
             changeOrigin: options.tls
         }],
         watchOptions: {
-            ignored: /node_modules/
+            ignored: /
         },
         https: options.tls
     },

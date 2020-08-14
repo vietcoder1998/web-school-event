@@ -16,6 +16,7 @@ import { REDUX } from "../../../const/actions";
 import logo from "../../../assets/image/logo-01.png";
 import imageLogin from "../../../assets/image/image-login.png";
 import { goBackWhenLogined } from "../../../utils/goBackWhenLogined";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -143,7 +144,7 @@ class Login extends Component {
             xxl={mobile ? 24 : 10}
           >
             <div className="login-form">
-              <img src={logo} alt="logo" width="240" height="80" />
+              <LazyLoadImage src={logo} alt="logo" width="240" height="80" />
               <p className="title a_c" style={{ fontWeight: 600 }}>
                 ĐĂNG NHẬP
               </p>
@@ -219,7 +220,7 @@ class Login extends Component {
             xl={mobile ? 0 : 14}
             xxl={mobile ? 0 : 14}
           >
-            <img alt="Đăng nhập tìm việc" src={imageLogin} className="image-login" />
+            <LazyLoadImage alt="Đăng nhập tìm việc" src={imageLogin} className="image-login" />
           </Col>
         </div>
 

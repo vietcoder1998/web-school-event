@@ -2,23 +2,25 @@ import React, { PureComponent } from "react";
 import { Carousel, Icon } from "antd";
 import { connect } from "react-redux";
 //@ts-ignore
-import defaultImage from "../../../../../assets/image/base-image.jpg";
-import { REDUX_SAGA } from "../../../../../const/actions";
+import defaultImage from "../../../../assets/image/base-image.jpg";
+import { REDUX_SAGA } from "../../../../const/actions";
 import { Link } from "react-router-dom";
-import "./Banner.scss";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+
 interface IProps {
   getTopEmpoyer?: Function;
   listEmployer?: any;
+
 }
+
 interface IState {
   list_job_top: Array<any>;
   pageIndex: number;
   pageSize: number;
   is_loading: boolean;
   activeInfo: boolean;
+  carousel?: any;
 }
-
-
 
 class Banner extends PureComponent<IProps, IState> {
   constructor(props) {
@@ -118,7 +120,7 @@ class Banner extends PureComponent<IProps, IState> {
                       </div>
                     </a>
                   </div>
-                  <img
+                  <LazyLoadImage
                     src={
                       item.bannerUrl === null ? defaultImage : item.bannerUrl
                     }

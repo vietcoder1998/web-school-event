@@ -8,6 +8,7 @@ import DefaultImage from '../../../../assets/image/base-image.jpg';
 import {REDUX_SAGA} from '../../../const/actions';
 import {JobType} from '../layout/common/Common';
 import {convertFullSalary} from '../../../utils/convertNumber'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 interface IProps {
     getAllJob?: Function;
@@ -52,7 +53,7 @@ class AllJob extends PureComponent<IProps> {
                                 (
                                     <div key={index} className='h-j-item'>
                                         <div className='img-job'>
-                                            <img src={logoUrl} alt="employer logo"/>
+                                            <LazyLoadImage src={logoUrl} alt="employer logo"/>
                                             <JobType>{item.jobType}</JobType>
                                         </div>
                                         <div className='job-content'>

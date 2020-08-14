@@ -11,6 +11,7 @@ import { _requestToServer } from '../../../services/exec';
 import { ANNOUNCEMENTS } from '../../../services/api/public.api';
 import { PUBLIC_HOST } from '../../../environment/development';
 import LinkToolTip from '../layout/common/LinkToolTip';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 interface IProps {
     inday_data?: any;
@@ -21,7 +22,6 @@ interface IProps {
 }
 
 function Announcements(props?: IProps) {
-
     React.useEffect(() => { getListArticle(0, 3) }, []);
     const [announcements, setAnnouncements] = useState([]);
 
@@ -44,11 +44,9 @@ function Announcements(props?: IProps) {
             },
             false
         ).then(res => {
-            console.log(res);
             setAnnouncements(res.data.items)
         })
             .catch(e => {
-                console.log(e)
             })
     }
     let { isMobile } = props;
@@ -57,16 +55,16 @@ function Announcements(props?: IProps) {
             <h5>BÀI VIẾT CHO BẠN</h5>
             {
                 isMobile ?
-                    (announcements.length > 0 ? <Carousel effect="fade" style={{ height: 500 }} autoplay>
+                    (announcements.length > 0 ? <Carousel effect="fade" style={{ height: 400 }} autoplay>
                         {
                             announcements.map((item?: IAnnouncement, i?: number) => (
-                                <div key={i} style={{ height: 400 }}>
+                                <div key={i} style={{ height: 'auto' }}>
                                     <a key={i} href={`/announcementDetail/${window.btoa(item.id)}`}>
                                         <Card
                                             hoverable
                                             cover={
-                                                <div style={{ height: 300, overflow: "hidden" }}>
-                                                    <img
+                                                <div style={{ height: "20vw",minHeight: 200, overflow: "hidden" }}>
+                                                    <LazyLoadImage
                                                         width={'100%'}
                                                         style={{
                                                             minHeight: '100%',

@@ -8,6 +8,7 @@ import { REDUX_SAGA } from '../../../const/actions';
 import { JobType } from '../layout/common/Common';
 import LinkToolTip from '../layout/common/LinkToolTip';
 import { limitString } from '../../../utils/limitString';
+import { convertFullSalary } from '../../../utils/convertNumber';
 
 interface IProps {
     getHotJob?: Function;
@@ -70,11 +71,18 @@ class TopJob extends PureComponent<IProps> {
                                                                 color: item.titleHighlight ? "red" : "black",
                                                             }}
                                                         >
-                                                            <span className="top-badge">Hot</span>
                                                             <LinkToolTip
                                                                 title={item.jobTitle}
-                                                                name={limitString(item.jobTitle, 30)}
-                                                                placement={"top"}
+                                                                name={
+                                                                    <>
+                                                                        <span
+                                                                            className="top-badge"
+                                                                            style={{ marginRight: 5 }}
+                                                                            children={"HOT"}
+                                                                        />
+                                                                        {limitString(item.jobTitle, 30)}
+                                                                    </>
+                                                                }
                                                                 transform={"uppercase"}
                                                             />
                                                         </h6>
@@ -88,7 +96,15 @@ class TopJob extends PureComponent<IProps> {
                                                     >
                                                         <LinkToolTip
                                                             title={item.employerName}
-                                                            name={limitString(item.employerName, 20)}
+                                                            name={
+                                                                <>
+                                                                    <Icon
+                                                                        type="shop"
+                                                                        style={{ marginRight: 5 }}
+
+                                                                    />
+                                                                    {limitString(item.jobTitle, 20)}
+                                                                </>}
                                                             transform={"initial"}
                                                         />
                                                     </Link>
@@ -98,6 +114,10 @@ class TopJob extends PureComponent<IProps> {
                                                     {item.region && item.region.name
                                                         ? item.region.name
                                                         : null}
+                                                </li>
+                                                <li className="region">
+                                                    <Icon type="dollar" style={{ marginRight: 3 }} />
+                                                    {convertFullSalary(item.minSalary, item.minSalaryUnit, item.maxSalary, item.maxSalaryUnit)}
                                                 </li>
                                             </ul>
                                         </div>

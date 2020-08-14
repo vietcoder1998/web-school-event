@@ -9,6 +9,8 @@ import { REDUX_SAGA } from '../../../const/actions';
 import { JobType } from '../layout/common/Common';
 import LinkToolTip from '../layout/common/LinkToolTip';
 import { IAppState } from '../../../redux/store/reducer';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { convertFullSalary } from '../../../utils/convertNumber';
 
 interface IProps {
     getHotJob?: Function;
@@ -52,7 +54,7 @@ class IndayJob extends PureComponent<IProps, IState> {
         let { indayJob, param, loading } = this.props;
         if (indayJob && indayJob.totalItems > 0) {
             return (
-                <Row className='top-job' style={{ display: indayJob.totalItems === 0 ? 'none' : '' }}>
+                <Row className='home-job' style={{ display: indayJob.totalItems === 0 ? 'none' : '' }}>
                     <h5 style={{ textAlign: 'center' }}>VIỆC LÀM TUYỂN GẤP</h5>
                     {
                         indayJob && indayJob.items ? indayJob.items.map((item, index) => {
@@ -75,7 +77,7 @@ class IndayJob extends PureComponent<IProps, IState> {
                                         (
                                             <div key={index} className='h-j-item'>
                                                 <div className='img-job'>
-                                                    <img src={logoUrl} alt="employer logo" />
+                                                    <LazyLoadImage src={logoUrl} alt="employer logo" />
                                                     <JobType>{item.jobType}</JobType>
                                                 </div>
                                                 <div className='job-content'>
@@ -88,12 +90,18 @@ class IndayJob extends PureComponent<IProps, IState> {
                                                                         color: item.titleHighlight ? "red" : "black",
                                                                     }}
                                                                 >
-                                                                    <span className="in-day-badge"
-                                                                        style={{ marginRight: 5 }} children={"GẤP"} />
                                                                     <LinkToolTip
                                                                         title={item.jobTitle}
-                                                                        name={limitString(item.jobTitle, 30)}
-                                                                        placement={"top"}
+                                                                        name={
+                                                                            <>
+                                                                                <span
+                                                                                    className="in-day-badge"
+                                                                                    style={{ marginRight: 5 }}
+                                                                                    children={"GẤP"}
+                                                                                />
+                                                                                {limitString(item.jobTitle, 30)}
+                                                                            </>
+                                                                        }
                                                                         transform={"uppercase"}
                                                                     />
                                                                 </h6>
@@ -106,7 +114,13 @@ class IndayJob extends PureComponent<IProps, IState> {
                                                                 className="name_employer">
                                                                 <LinkToolTip
                                                                     title={item.employerName}
-                                                                    name={item.employerName}
+                                                                    name={<>
+                                                                        <Icon
+                                                                            type="shop"
+                                                                            style={{ marginRight: 5 }}
+                                                                        />
+                                                                        {limitString(item.jobTitle, 20)}
+                                                                    </>}
                                                                     transform={"initial"}
                                                                 />
                                                             </Link>
@@ -116,6 +130,10 @@ class IndayJob extends PureComponent<IProps, IState> {
                                                             {item.region && item.region.name
                                                                 ? item.region.name
                                                                 : null}
+                                                        </li>
+                                                        <li className="region">
+                                                            <Icon type="dollar" style={{ marginRight: 3 }} />
+                                                            {convertFullSalary(item.minSalary, item.minSalaryUnit, item.maxSalary, item.maxSalaryUnit)}
                                                         </li>
                                                     </ul>
                                                 </div>

@@ -1,27 +1,25 @@
 import React, { Suspense, Fragment } from "react";
-import "./view/sass/_common.scss";
-
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import Home from './app/view/home/Home';
 import { connect } from "react-redux";
 import asyncComponent from "../routes/AppRoutes";
 import { REDUX, REDUX_SAGA } from "../const/actions";
+import './view/sass/_common.scss';
 import $ from "jquery";
 // import { Loading } from "./app/view/layout/common/Common";
 import { _get } from "../services/base-api";
 import { PUBLIC_HOST } from "../environment/development";
 import { noInfoHeader } from "../services/auth";
 import HashLoader from "react-spinners/HashLoader";
-import { BackTop } from "antd";
 import qs from "query-string";
 
 
 const EventHome = asyncComponent(() =>
-  import("./view/Event/Home/Home").then((module) => module.default)
+  import("./view/event").then((module) => module.default)
 );
 
 const EventCountDown = asyncComponent(() =>
-  import("./view/Event/Home/CountDown").then((module) => module.default)
+  import("./view/event/home/CountDown").then((module) => module.default)
 );
 const Home = asyncComponent(() =>
   import("./view/home").then((module) => module.default)
@@ -57,7 +55,7 @@ const ForgotPassword = asyncComponent(() =>
 // )
 
 const Result = asyncComponent(() =>
-  import("./view/result/Result").then((module) => module.default)
+  import("./view/result").then((module) => module.default)
 );
 
 const AllNoti = asyncComponent(() =>
@@ -94,7 +92,7 @@ const DataJobNames = asyncComponent(() =>
 //event
 
 const EventJobDetail = asyncComponent(() =>
-  import("./view/Event/Job/job-detail/JobDetail").then(
+  import("./view/event/job-detail").then(
     (module) => module.default
   )
 );
@@ -298,7 +296,6 @@ class App extends React.Component<IProps, IState> {
             </Switch>
           </Suspense>
         </Router>
-        <BackTop></BackTop>
       </Fragment>
     );
     // }

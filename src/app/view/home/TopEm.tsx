@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { IAppState } from '../../../redux/store/reducer';
 import { REDUX_SAGA } from '../../../const/actions';
 import { ITopEmDetail } from '../../../models/employer-detail';
+import LinkToolTip from '../layout/common/LinkToolTip';
+import { limitString } from '../../../utils/limitString';
 
 
 interface IProps {
@@ -27,8 +29,9 @@ class TopEm extends PureComponent<IProps, IState> {
         if (topEm && totalItems > 0) {
             return (
                 <div className='top-job'>
-                    <h5 style={{ textAlign: 'center' }}>DOANH NGHIỆP NỔI BẬT </h5>
+                    <h5 className="a_c">DOANH NGHIỆP NỔI BẬT </h5>
                     <Row style={{ padding: '0 3vw' }}>
+                        <Col xl={0} xxl={2} children={"ok"} style={{color: "rgba(0, 0, 0, 0)"}}/>
                         {
                             topEm.map((item: ITopEmDetail, i: number) => (
                                 <Col
@@ -38,7 +41,7 @@ class TopEm extends PureComponent<IProps, IState> {
                                     md={6}
                                     lg={6}
                                     xl={6}
-                                    xxl={6}
+                                    xxl={5}
                                 >
                                     <a href={`/employer/${btoa(item.employerID)}`}>
                                         {loading ?
@@ -48,16 +51,20 @@ class TopEm extends PureComponent<IProps, IState> {
                                                     <img
                                                         src={item.employerLogoUrl}
                                                         alt={item.employerName}
-                                                        height="100%"
                                                         width="100%"
+                                                        height="100%"
                                                     />
                                                 </div>
                                             )}
                                         <div className='link-em a_c'>
-                                            <p style={{ padding: '0px 20px' }}>{item.employerName}</p>
+                                            <LinkToolTip
+                                                title={
+                                                    item.employerName
+                                                }
+                                                name={limitString(item.employerName, 15)}
+                                            />
                                         </div>
                                     </a>
-
                                 </Col>
                             ))
                         }

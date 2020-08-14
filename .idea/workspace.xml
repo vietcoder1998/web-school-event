@@ -218,18 +218,18 @@
         <option value="$PROJECT_DIR$/src/app/view/layout/common/Common.tsx" />
         <option value="$PROJECT_DIR$/src/redux/watcher/event/search.ts" />
         <option value="$PROJECT_DIR$/src/redux/watcher/job-result.ts" />
-        <option value="$PROJECT_DIR$/src/app/view/Event/Home/home-job/HomeJob.scss" />
+        <option value="$PROJECT_DIR$/src/app/view/event/Home/home-job/HomeJob.scss" />
         <option value="$PROJECT_DIR$/src/app/view/home/all-job/AllJob.scss" />
         <option value="$PROJECT_DIR$/src/app/view/home/all-job/AllJob.tsx" />
         <option value="$PROJECT_DIR$/src/redux/watcher/hot-job.ts" />
         <option value="$PROJECT_DIR$/src/redux/watcher/in-day.ts" />
         <option value="$PROJECT_DIR$/src/redux/watcher/event/jobs.ts" />
         <option value="$PROJECT_DIR$/src/redux/watcher/all-job.ts" />
-        <option value="$PROJECT_DIR$/src/app/view/Event/Home/home-job/HomeJob.tsx" />
-        <option value="$PROJECT_DIR$/src/app/view/Event/Home/top-job/TopJob.tsx" />
+        <option value="$PROJECT_DIR$/src/app/view/event/Home/home-job/HomeJob.tsx" />
+        <option value="$PROJECT_DIR$/src/app/view/event/Home/top-job/TopJob.tsx" />
         <option value="$PROJECT_DIR$/src/app/view/home/home-job/HomeJob.tsx" />
         <option value="$PROJECT_DIR$/src/redux/watcher/event/branch.ts" />
-        <option value="$PROJECT_DIR$/src/app/view/Event/Home/top-job/TopJob.scss" />
+        <option value="$PROJECT_DIR$/src/app/view/event/Home/top-job/TopJob.scss" />
         <option value="$PROJECT_DIR$/src/app/view/home/home-job/HomeJob.scss" />
         <option value="$PROJECT_DIR$/src/app/view/home/top-job/TopJob.scss" />
         <option value="$PROJECT_DIR$/src/app/view/home/top-job/TopJob.tsx" />
@@ -238,7 +238,7 @@
         <option value="$PROJECT_DIR$/.env.production" />
         <option value="$PROJECT_DIR$/src/app/view/job-detail/job-properties/JobProperties.tsx" />
         <option value="$PROJECT_DIR$/src/utils/convertNumber.js" />
-        <option value="$PROJECT_DIR$/src/app/view/Event/Job/job-detail/job-properties/JobProperties.tsx" />
+        <option value="$PROJECT_DIR$/src/app/view/event/Job/job-detail/job-properties/JobProperties.tsx" />
         <option value="$PROJECT_DIR$/.env.development" />
       </list>
     </option>
@@ -699,12 +699,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/view/Event/Home/Home.tsx">
+    <entry file="file://$PROJECT_DIR$/src/app/view/event/Home/Home.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-637" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/view/Event/Home/branch/Branch.tsx">
+    <entry file="file://$PROJECT_DIR$/src/app/view/event/Home/branch/Branch.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="89" lean-forward="true" selection-start-line="89" selection-end-line="89" />
@@ -739,28 +739,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/view/Event/Home/home-job/HomeJob.tsx">
+    <entry file="file://$PROJECT_DIR$/src/app/view/event/Home/home-job/HomeJob.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
           <caret line="35" column="41" lean-forward="true" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="41" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/view/Event/Home/home-job/HomeJob.scss">
+    <entry file="file://$PROJECT_DIR$/src/app/view/event/Home/home-job/HomeJob.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="235">
           <caret line="21" column="17" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/view/Event/Home/top-job/TopJob.scss">
+    <entry file="file://$PROJECT_DIR$/src/app/view/event/Home/top-job/TopJob.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="196">
           <caret line="48" column="7" lean-forward="true" selection-start-line="48" selection-start-column="7" selection-end-line="48" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/view/Event/Home/top-job/TopJob.tsx">
+    <entry file="file://$PROJECT_DIR$/src/app/view/event/Home/top-job/TopJob.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="65">
           <caret line="59" column="50" lean-forward="true" selection-start-line="59" selection-start-column="50" selection-end-line="59" selection-end-column="50" />
@@ -788,7 +788,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/view/Event/Job/job-detail/JobDetail.tsx">
+    <entry file="file://$PROJECT_DIR$/src/app/view/event/Job/job-detail/JobDetail.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="30" column="27" lean-forward="true" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
@@ -845,7 +845,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/view/Event/Job/job-detail/job-properties/JobProperties.tsx">
+    <entry file="file://$PROJECT_DIR$/src/app/view/event/Job/job-detail/job-properties/JobProperties.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="430">
           <caret line="71" column="40" lean-forward="true" selection-start-line="71" selection-start-column="40" selection-end-line="71" selection-end-column="40" />

@@ -16,6 +16,7 @@ import { STUDENT_HOST } from '../../../environment/development';
 import { PROFILE_EMPLOYER } from '../../../services/api/private.api';
 import { authHeaders } from '../../../services/auth';
 import swal from 'sweetalert';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const { TextArea } = Input;
 const { TabPane } = Tabs;
@@ -141,7 +142,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                         {/* LogoUrl */}
                         {/* <div> */}
                         {employerDetail && employerDetail.coverUrl ?
-                            <img
+                            <LazyLoadImage
                                 className="cover-image-profile "
                                 src={!onErrCover && employerDetail && employerDetail.coverUrl ? employerDetail.coverUrl : null}
                                 alt={"base"}

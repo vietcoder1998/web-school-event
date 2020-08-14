@@ -7,42 +7,33 @@ import moment from 'moment';
 import TextImage from './../../../../assets/image/carouselGroup/carousel1.jpg';
 import { convertFullSalary } from '../../../../utils/convertNumber';
 import { IJobDetail } from '../../../../models/job-detail';
-import { IAnnouncement } from '../../../../models/announcements';
+// import { IAnnouncement } from '../../../../models/announcements';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import LinkToolTip from '../../layout/common/LinkToolTip';
 
 
 interface IListResultProps {
-    list_result?: Array<IJobDetail>;
+    listResult?: Array<IJobDetail>;
     loading?: boolean;
     isSearchEvent?: boolean; // phân biệt job-event và job-normal ở 2 trang khác nhau ,
     param?: any
 }
 
 export default function ListResult(props?: IListResultProps) {
-    let { loading, list_result, isSearchEvent, param } = props;
-
+    let { loading, listResult, isSearchEvent, param } = props;
     return (
         <div className='result' >
-            {loading ? <div className='loading'><Spin /></div> : (list_result.length > 0 ? list_result.map((item?: any, index) => {
-                // console.log(item);
-                // let color = "#fde8c7";
-                // switch (item.jobType) {
-                //     case 'PARTTIME':
-                //         color = 'rgb(239, 253, 239)';
-                //         break;
-
-                //     case 'FULLTIME':
-                //         color = 'rgb(229, 239, 255)';
-                //         break;
-                //     default:
-                //         break;
-                // }
-
+            {loading ? <div className='loading'><Spin /></div> : (listResult.length > 0 ? listResult.map((item?: IJobDetail, index?: number) => {
+                let jobTitle=  item.jobTitle;
+                if (jobTitle ) {
+                    jobTitle = jobTitle.toLowerCase();
+                }
                 return (<Row key={index} className='result-item' >
                     {/* Image */}
                     <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4} >
                         <Link to={`/job-detail/${window.btoa(item.id)}`} target='_blank'>
                             <div className='image-content'>
-                                <img src={item.employerLogoUrl ? item.employerLogoUrl : TextImage} alt='logo ct' />
+                                <LazyLoadImage src={item.employerLogoUrl ? item.employerLogoUrl : TextImage} alt={item.employerName} />
                                 <span className={item.jobType}>
                                     {item.jobType === 'FULLTIME' ? 'FullTime' : null}
                                     {item.jobType === 'PARTTIME' ? 'Part-Time' : null}
@@ -61,7 +52,11 @@ export default function ListResult(props?: IListResultProps) {
                                     to={isSearchEvent ? `event-job-detail/${window.btoa(item.id)}${param}` : `/job-detail/${window.btoa(item.id)}${param}`}
                                     target='_blank'
                                 >
-                                    {limitString(item.jobTitle, 80)}
+                                    <LinkToolTip
+                                        title={jobTitle}
+                                        name={limitString(jobTitle, 60)}
+                                        transform={"uppercase"}
+                                    />
                                 </Link>
                                 {item.priority === 'TOP' ? <Tooltip title='Công việc hot'>
                                     <span> <Icon type='fire' twoToneColor="#eb2f96" style={{ color: 'red' }} /></span>
@@ -69,7 +64,8 @@ export default function ListResult(props?: IListResultProps) {
                             </h4>
                         </div>
                         {/* Info */}
-                        <div className='item-info'
+                        <div
+                            className='item-info'
                         >
                             <div>
                                 {/* <p> */}
@@ -78,7 +74,7 @@ export default function ListResult(props?: IListResultProps) {
                                     target='_blank'
                                     className="name_employer" style={{ fontWeight: 550 }}
                                 >
-                                    <Icon type="shop" style={{ color: '#168ECD', margin: 5 }} />
+                                    <Icon type="shop" style={{ color: '#168ECD', marginRight: 5 }} />
                                     {item.employerName ? item.employerName.toUpperCase() : null}
                                 </Link>
                                 {/* </p> */}

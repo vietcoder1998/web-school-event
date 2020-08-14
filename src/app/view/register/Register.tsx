@@ -24,6 +24,8 @@ import { PUBLIC_HOST } from "../../../environment/development";
 import imageLogin from "../../../assets/image/image-login.png";
 // import logo from "../../../assets/image/logo-01.png";
 import {goBackWhenLogined} from '../../../utils/goBackWhenLogined'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { IAppState } from '../../../redux/store/reducer';
 const isNumeric = (value) => {
   return /^-{0,1}\d+$/.test(value);
 };
@@ -63,6 +65,7 @@ interface IState {
   listBirthYearMin?: Array<any>;
   listBirthYearMax?: Array<any>;
   typeUpdateInfor?: boolean
+  mobile?: boolean;
 }
 
 class Register extends Component<IProps, IState> {
@@ -872,7 +875,7 @@ class Register extends Component<IProps, IState> {
                                     </p> */}
                 <p className="a_c">
                   Bạn đã có tài khoản ?{" "}
-                  <a onClick={() => goBackWhenLogined('login')} style={{ color: "red" }} >
+                  <a type="" onClick={() => goBackWhenLogined('login')} style={{ color: "red" }} >
                     Đăng nhập
                   </a>
                 </p>
@@ -887,7 +890,7 @@ class Register extends Component<IProps, IState> {
             xl={mobile ? 0 : 14}
             xxl={mobile ? 0 : 14}
           >
-            <img src={imageLogin} className="image-login" />
+            <LazyLoadImage src={imageLogin} className="image-login" alt={"Sự kiện work"} />
           </Col>
         </Row>
 
@@ -897,7 +900,7 @@ class Register extends Component<IProps, IState> {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: IAppState) => ({
   marker: state.MapState.marker,
   mobile: state.MobileState.isMobile,
 });

@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react';
 import { Row, Col, Icon } from 'antd';
-import { IptLetter, NotUpdate,  } from '../../../../layout/common/Common';
+import { IptLetter, NotUpdate,  } from '../../../layout/common/Common';
 import moment from 'moment';
-import { weekDays } from '../.././../../../../utils/day';
-import { _checkGender } from './../JobDetail';
+import { weekDays } from '../../../../../utils/day';
+import { _checkGender } from '..';
 import './JobProperties.scss'
-import { IShift } from '../../../../../../models/announcements';
+import { IShift } from '../../../../../models/announcements';
 // import { convertStringToArray } from '../../../../utils/convertStringToArray';
-import { convertSalary } from '../../../../../../utils/convertNumber'
+import { convertSalary } from '../../../../../utils/convertNumber'
 
 interface JobPropertiesProps {
     jobDetail?: any;

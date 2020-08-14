@@ -9,6 +9,7 @@ import { Col, Row } from 'antd';
 import { REDUX_SAGA } from './../../../../const/actions';
 
 import { connect } from 'react-redux';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 //@ts-ignore
 
@@ -53,13 +54,13 @@ function Footer(props) {
               <div>
                 <div style={{ display: 'flex' }}>
                   <a href={'https://apps.apple.com/vn/app/worksvn-sinh-vi%C3%AAn/id1492437454'} target="_blank" rel="noopener noreferrer">
-                    <img src={AppStore} alt='CHPlay tìm việc' height='50px' width='auto' />
+                    <LazyLoadImage src={AppStore} alt='CHPlay tìm việc' height='50px' width='auto' />
                   </a>
                   {/* <img src={QRCodeAppStore} alt='AppleStore Tìm việc QRCode' height='47px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px' }} /> */}
                 </div>
                 <div style={{ display: 'flex' }} >
                   <a href={'https://play.google.com/store/apps/details?id=com.worksvn.student&hl=vi'} target="_blank" rel="noopener noreferrer">
-                    <img src={CHPlay} alt='AppleStore Tìm việc' height='50px' width='auto' />
+                    <LazyLoadImage src={CHPlay} alt='AppleStore Tìm việc' height='50px' width='auto' />
                   </a>
                   {/* <img src={QRCodeCHPlay} alt='CHPlay Tìm việc QRCode' height='47px' width='auto' style={{marginTop: '1.2px', marginLeft: '5px'}}/> */}
                 </div>
