@@ -3,45 +3,127 @@ import React, { Component } from 'react';
 import Banner1 from "./../../../assets/image/banner-1.jpg";
 //@ts-ignore
 import Banner2 from "./../../../assets/image/banner-2.jpg";
-import { Col, Row, Icon } from 'antd';
+import { Col, Row, Icon, Modal } from 'antd';
 
+//@ts-ignore
+import imgvd1 from './../../../assets/image/video/1.png';
+//@ts-ignore
+import imgvd2 from './../../../assets/image/video/2.png';
+//@ts-ignore
+import imgvd3 from './../../../assets/image/video/3.png';
+import { OnDiv } from '../layout/common/Common';
 
-class VideoAd extends Component {
+const description = [
+    "1. Giới thiệu về cổng thông tin",
+    "2. Góc nhìn từ Nhà tuyển dụng về Ứng viên chuyên nghiệp",
+    "3. Thế nào là hồ sơ (CV) chất thu hút Nhà tuyển dụng?"
+];
+
+interface IProps {
+    match?: any;
+    history?: any;
+}
+interface IState {
+    vm?: boolean;
+    vl?: string;
+    title?: string;
+}
+
+class VideoAd extends Component<IProps, IState> {
+    constructor(props) {
+        super(props);
+        this.state = {
+            vm: true,
+            vl: null,
+            title: description[0],
+        }
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        if (props) {
+            let url_string = window.location.href;
+            var url = new URL(url_string);
+            var vm = url.searchParams.get("vm");
+            var vl = url.searchParams.get("vl");
+
+            if (vm && vm === "true")
+                return {
+                    vm: true,
+                    vl
+                }
+        }
+
+        return {
+            vm: false
+        };
+    }
+
+    showVideo = (vm?: boolean, vl?: string, title?: string) => {
+        this.props.history.push(`?vm=${vm}&vl=${vl}`)
+        this.setState({ title })
+    }
+
     render() {
         return (
             <div className={"home-job"} >
+                <Modal
+                    visible={this.state.vm}
+                    width="60vw"
+                    destroyOnClose={true}
+                    onCancel={() => this.props.history.push('?vm=false')}
+                    title={this.state.title}
+                >
+                    <iframe
+                        width="100%"
+                        height="500"
+                        src={`https://www.youtube.com/embed/${this.state.vl}?autoplay=1`}
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    ></iframe>
+                </Modal>
                 <Row>
-                    <h5>VIDEO</h5>
+                    <h5>CHỦ ĐỀ TIÊU BIỂU</h5>
                     <Col sm={24} md={8} lg={8} xl={8} xxl={8}>
                         <div className="expert-content">
-                            <iframe
-                                width="100%"
-                                title="Giới thiệu cổng thông tin Works.vn"
-                                height="300"
-                                src="https://www.youtube.com/embed/Zj8t2qyJ2n4"
-                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            <OnDiv
+                                onClick={
+                                    () => this.showVideo(true, "Zj8t2qyJ2n4", description[0])
+                                }
+                                src={imgvd1}
+                                alt={description[1]}
                             />
-                            <div className="job-expert">
-                                <Icon type={"pie-chart"} style={{ marginRight: 5 }} />
-                                Nhóm ngành kinh doanh
+                            <div className="video-ad-on">
+                                {description[0]}
                             </div>
                         </div>
                     </Col >
                     <Col sm={24} md={8} lg={8} xl={8} xxl={8}>
                         <div className="expert-content">
-                            <img style={{ width: '100%' }} src={Banner2} alt={"Công việc liên quan đến kĩ thuật"} />
-                            <div className="job-expert">
-                                <Icon type={"tool"} style={{ marginRight: 5 }} />
-                                Nhóm ngành kĩ thuật
+                            <OnDiv
+                                onClick={
+                                    () => this.showVideo(true, "0c3LgKTNHKU", description[1])
+                                }
+                                src={imgvd2}
+                                alt={description[1]}
+                            />
+                            <div className="video-ad-on">
+                                <p>
+                                    {description[1]}
+                                </p>
                             </div>
                         </div>
                     </Col>
                     <Col sm={24} md={8} lg={8} xl={8} xxl={8}>
                         <div className="expert-content">
-                            <img style={{ width: '100%' }} src={Banner2} alt={"Công việc liên quan đến kĩ thuật"} />
-                            <div className="job-expert">
-                                <Icon type={"tool"} style={{ marginRight: 5 }} />
-                                Nhóm ngành kĩ thuật
+                            <OnDiv
+                                onClick={
+                                    () => this.showVideo(true, "Sxl2g3DCs_s", description[2])}
+                                src={imgvd3}
+                                alt={"Công việc liên quan đến kĩ thuật"}
+                            />
+                            <div className="video-ad-on">
+                                <p>
+                                    {description[2]}
+                                </p>
                             </div>
                         </div>
                     </Col>

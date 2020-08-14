@@ -8,6 +8,7 @@ import { noInfoHeader, authHeaders } from "../../services/auth";
 import { store } from "../store";
 import { REDUX_SAGA, REDUX } from "../../const/actions";
 import { POST } from "../../const/method";
+import { IJobSearchFilter } from '../../models/job-search';
 
 function* getListJobResultData(action) {
   yield put({ type: REDUX.JOB_RESULT.SET_LOADING_RESULT, loading: true });
@@ -21,13 +22,12 @@ function* getListJobResultData(action) {
 }
 
 function getJobResults(action) {
-  let body = {
+  let body: IJobSearchFilter = {
     employerID: null,
     excludedJobIDs: null,
-    excludePriority: null,
     shuffle: false,
     jobNameIDs: null,
-    jobGroupID: null,
+    jobGroupIDs: null,
     jobType: null,
     jobShiftFilter: null,
     jobLocationFilter: {
@@ -35,7 +35,8 @@ function getJobResults(action) {
       lat: null,
       lon: null,
     },
-    schoolEventID: store.getState().DetailEvent.eventID
+    schoolEventID: store.getState().DetailEvent.eventID,
+    branchIDs: null
   };
 
   if (action.body) {
@@ -47,9 +48,10 @@ function getJobResults(action) {
   var jnids = url.searchParams.get("jids");
   var rid = url.searchParams.get("rid");
   var jt = url.searchParams.get("jt");
+  var brids = url.searchParams.get("brids");
 
   if (jnids) {
-    body.jobNameIDs = [jnids];
+    body.jobNameIDs = [parseInt(jnids)];
   }
 
   if (rid) {
@@ -58,6 +60,10 @@ function getJobResults(action) {
 
   if (jt) {
     body.jobType = jt;
+  }
+
+  if (brids) {
+    body.branchIDs = [parseInt(brids)];
   }
 
   let isAuthen = store.getState().AuthState.isAuthen;

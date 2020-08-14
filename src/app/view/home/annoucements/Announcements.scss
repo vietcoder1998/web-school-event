@@ -6,6 +6,7 @@
   border-radius   : 1px;
   padding         : 1vw;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.02), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
+
   .title_card{
     overflow: hidden;
     text-overflow: ellipsis;
@@ -23,7 +24,7 @@
     text-transform: inherit;
   }
   .ant-card-meta-description{
-    min-height: 179px;
+    min-height: 120px;
   }
   a {
     color: gray;
@@ -49,8 +50,8 @@
   h5 {
     margin    : 10px 0px !important;
     text-align: center;
-    font-size: 1.5rem;
-    padding: 15px 0 20px;
+    padding: 15px 0 25px;
+    font-weight: 400;
   }
 
   .ant-skeleton {

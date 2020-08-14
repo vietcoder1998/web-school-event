@@ -83,7 +83,7 @@ class SearchFilter extends React.Component<
     return (
       <div className="filter-name-job" style={{ padding: "10px 2%", backgroundColor: primaryColor}}>
         <Row>
-          <Col xs={24} sm={24} md={12} lg={4} xl={4} xxl={4}>
+          <Col xs={11} sm={12} md={5} lg={4} xl={4} xxl={4}>
             <Select
               size={"large"}
               showSearch
@@ -100,11 +100,11 @@ class SearchFilter extends React.Component<
                 this.props.onChangeJobFilter(newFilter);
               }}
               style={{ width: "100%", margin: "5px 0px" }}
-              placeholder={"Tất cả loại công việc (FullTime, Part-Time"}
+              placeholder={"Chọn loại công việc"}
               value={jobType ? jobType : undefined}
             >
               <Option key={"1"} value={null}>
-                Tất cả loại công việc (FullTime, Part-Time
+                Tất cả 
               </Option>
               <Option key={"2"} value={TYPE.FULLTIME}>
                 Fulltime
@@ -117,16 +117,16 @@ class SearchFilter extends React.Component<
               </Option>
             </Select>
           </Col>
-          <Col xs={24} sm={24} md={12} lg={4} xl={4} xxl={4}>
+          <Col xs={2} sm={0} md={0} lg={0} xl={0} xxl={0} />
+          <Col xs={11} sm={12} md={5} lg={4} xl={4} xxl={4}>
             <Select
-              
               size={"large"}
               showSearch
               style={{ width: "100%", margin: "5px 0px" }}
-              placeholder={"Tất cả các tỉnh thành"}
+              placeholder={"Chọn tỉnh thành"}
               value={regionID && regions.length > 0 ? regions.find(element => element.id === regionID).name  : undefined}
             >
-              <Option key={"1"} value={'Tất cả các tỉnh thành'}
+              <Option key={"1"} value={'Tất cả '}
               onClick={() => {
                 let newFilter = {
                   jobType: null,
@@ -186,8 +186,8 @@ class SearchFilter extends React.Component<
           </Col>
           <Col
             xs={24}
-            sm={24}
-            md={12}
+            sm={12}
+            md={7}
             lg={isAuthen ? 6 : 12}
             xl={isAuthen ? 6 : 12}
             xxl={isAuthen ? 6 : 12}
@@ -197,10 +197,10 @@ class SearchFilter extends React.Component<
               size={"large"}
               showSearch
               style={{ width: "100%", margin: "5px 0px" }}
-              placeholder={"Tất cả các công việc"}
+              placeholder={"Chọn loại công việc"}
               value={jobNameID && jobNames.length > 0 ? jobNames.find(element => element.id === jobNameID).name : undefined}
             >
-              <Option key={"1"} value={"Tất cả các công việc"}
+              <Option key={"1"} value={"Tất cả"}
               onClick={() => {
                 let newFilter = {
                   jobType: this.state.jobType,
@@ -240,8 +240,8 @@ class SearchFilter extends React.Component<
           </Col>
           <Col
             xs={24}
-            sm={24}
-            md={12}
+            sm={12}
+            md={3}
             lg={6}
             xl={6}
             xxl={6}
@@ -274,7 +274,7 @@ class SearchFilter extends React.Component<
               </Option>
             </Select>
           </Col>
-          <Col xs={24} sm={24} md={12} lg={4} xl={4} xxl={4}>
+          <Col xs={24} sm={12} md={4} lg={4} xl={4} xxl={4}>
             <Button
               size="large"
               type="danger"

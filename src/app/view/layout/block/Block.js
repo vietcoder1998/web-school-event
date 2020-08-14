@@ -3,7 +3,6 @@ import './Block.scss';
 import { Icon } from 'antd';
 
 class Block extends Component {
-
     constructor() {
         super();
         this.state = {
@@ -15,7 +14,7 @@ class Block extends Component {
     componentDidMount() {
         setTimeout(() => {
             this.setState({ loading: false, fade: false })
-        }, 2000)
+        })
     }
 
     render() {

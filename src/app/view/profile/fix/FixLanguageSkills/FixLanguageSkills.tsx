@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './FixLanguageSkills.scss';
-import { Row, Col, Input, Select, Radio } from 'antd';
+import { Row, Col, Input, Select, Radio, InputNumber, Button } from 'antd';
 import { _get } from '../../../../../services/base-api';
 import { LANGUAGES } from '../../../../../services/api/public.api';
 import { PUBLIC_HOST } from '../../../../../environment/development';
@@ -88,9 +88,9 @@ class FixLanguageSkills extends Component<IProps, IState> {
             <div className='wrapper language-skills-fix'>
                 <Row>
                     <Col xs={24} md={12} lg={12} sm={24}>
-                        <p className='language-input'>
+                        <b className='language-input'>
                             Chọn ngôn ngữ
-                        </p>
+                        </b>
                         <Select
                             showSearch
                             placeholder="Chose language"
@@ -108,9 +108,9 @@ class FixLanguageSkills extends Component<IProps, IState> {
                         </Select>
                     </Col>
                     <Col xs={12} md={12} lg={12} sm={12}>
-                        <p className='language-input'>
+                        <b className='language-input'>
                             Trình độ
-                        </p>
+                        </b>
                         <Radio.Group onChange={this._choseLevel} value={languageSkill.level}>
                             <Radio value={"Bản địa"}>Bản địa</Radio>
                             <Radio value={"Sơ cấp"}>Sơ cấp</Radio>
@@ -121,27 +121,43 @@ class FixLanguageSkills extends Component<IProps, IState> {
                 </Row>
                 <Row>
                     <Col xs={24} md={12} lg={12} sm={24}>
-                        <p className='language-input'>
+                        <b className='language-input'>
                             Chứng chỉ
-                        </p>
+                        </b>
                         <Input placeholder='Certificate' value={languageSkill.certificate} onChange={(event) => this._handleLanguageSkills(event.target.value, "certificate")} />
 
                     </Col>
                     <Col xs={24} md={12} lg={12} sm={24}>
-                        <p>
+                        <b>
                             Điểm số
-                        </p>
-                        <Input placeholder='Score' value={languageSkill.score} onChange={(event) => this._handleLanguageSkills(event.target.value, "score")} />
+                        </b>
+                        <InputNumber
+                            placeholder='Score'
+                            value={languageSkill.score}
+                            style={{ width: "100%" }}
+                            onChange={(event) => this._handleLanguageSkills(event, "score")
+                            } />
                     </Col>
 
                 </Row>
                 {/* Button holder */}
                 <Row className='holder-button' >
                     <Col xs={12}>
-                        <button className='danger' onClick={() => { this.props._fixData('languageSkill') }}> Hủy</button>
+                        <Button
+                            type='danger'
+                            icon={"close"}
+                            onClick={() => { this.props._fixData('languageSkill') }}
+                        > Hủy
+                        </Button>
                     </Col>
                     <Col xs={12}>
-                        <button className='request' onClick={() => this._createRequest()}> Lưu</button>
+                        <Button
+                            type='primary'
+                            icon={"save"}
+                            onClick={() => this._createRequest()}
+                        >
+                            Lưu
+                         </Button>
                     </Col>
                 </Row>
             </div>

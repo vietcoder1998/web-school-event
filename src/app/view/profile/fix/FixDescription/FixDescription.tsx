@@ -5,8 +5,9 @@ import { update_description } from '../../../../../services/api/private/profile'
 import { sendStringHeader } from '../../../../../services/auth';
 import { connect } from 'react-redux';
 import { _requestToServer } from '../../../../../services/exec';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Input } from 'antd';
 import { REDUX_SAGA } from '../../../../../const/actions';
+import { Button } from 'antd';
 
 interface IProps {
     description?: string;
@@ -54,13 +55,34 @@ class FixDescription extends Component<IProps, IState>{
         let { description } = this.state;
         return (
             <div className='wrapper'>
-                <textarea placeholder='Giới thiệu tính cách, sở thích, câu nói yêu thích của bản thân' onChange={this._handleDescription} value={description}></textarea>
-                <Row className='holder-button' >
-                    <Col xs={6}>
-                        <button className='danger' onClick={() => { this.props._fixData('description') }}> Hủy</button>
+                <Input.TextArea
+                    placeholder='Giới thiệu tính cách, sở thích, câu nói yêu thích của bản thân'
+                    onChange={this._handleDescription}
+                    rows={10}
+                    value={description}
+                />
+                <Row className="holder-button">
+                    <Col span={12}>
+                        <Button
+                            className="danger"
+                            size="large"
+                            icon="close"
+                            onClick={() => {
+                                this.props._fixData("description");
+                            }}
+                        >
+                            Hủy
+                  </Button>
                     </Col>
-                    <Col xs={6}>
-                        <button className='request' onClick={() => this._createRequest()}> Lưu</button>
+                    <Col span={12}>
+                        <Button
+                            type="primary"
+                            size="large"
+                            icon="save"
+                            onClick={() => this._createRequest()}
+                        >
+                            Lưu
+                  </Button>
                     </Col>
                 </Row>
             </div>

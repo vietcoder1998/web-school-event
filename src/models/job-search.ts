@@ -1,26 +1,34 @@
 export interface IJobSearchFilter {
-    employerID?: string | number,
-    excludedJobIDs?: Array<string>,
-    jobNameIDs?: Array<number | string>,
-    branchIDs?: Array<number>,
-    jobType?: 'PARTTIME' | 'FULLTIME' | 'INTERNSHIP',
+    employerID?: string,
+    excludedJobIDs?: Array<number>,
+    jobGroupIDs?: Array<number>,
+    jobNameIDs?:  Array<number>,
+    branchIDs?:  Array<number>,
+    majorIDs?:  Array<number>,
+    jobType?: string,
     shuffle?: boolean,
+    startCreatedDate?: number,
+    endCreatedDate?: number,
     jobPriorityFilter?: {
-        homePriority?: 'IN_DAY' | 'TOP' | 'HIGHLIGHT',
-        excludeHomePriority?: boolean,
-        searchPriority?: 'HIGHLIGHT',
-        excludeSearchPriority?: boolean,
+      homePriority?: string,
+      excludeHomePriority?: boolean,
+      searchPriority?: string,
+      excludeSearchPriority?: boolean,
+      highlight?: string,
+      excludeHighlightPriority?: boolean
     },
     jobShiftFilter?: {
-        gender?: 'MALE' | 'FEMALE' | 'BOTH',
-        weekDays?: Array<string>,
-        dayTimes?: Array<string>,
+      gender?: string ,
+      weekDays?: Array<string>,
+      dayTimes?: Array<string>
     },
     jobLocationFilter?: {
-        regionID?: string | number,
-        lat?: number,
-        lon?: number,
-        distance?: number
+      regionID?: string,
+      lat?: number,
+      lon?: number,
+      distance?: number
     },
-    schoolConnected?: boolean
-}
+    schoolID?: string,
+    schoolIgnored?: boolean,
+    schoolEventID?: string
+  }

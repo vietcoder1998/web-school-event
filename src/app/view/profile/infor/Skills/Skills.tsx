@@ -12,7 +12,11 @@ function Skills(props?: IProps) {
 
     return (
         <div className='wrapper'>
-            <div style={{ marginBottom: 10 }}>Thêm công việc hoặc kĩ năng để nhà tuyển dụng tìm kiếm phù hợp với bạn</div>
+            <div style={{ marginBottom: 20 }}>
+                <b>
+                    Thêm công việc hoặc kĩ năng để nhà tuyển dụng tìm kiếm phù hợp với bạn
+                </b>
+            </div>
             {skills && skills.length > 0 ? skills.map((item, index) => {
                 return (
                     <label key={index}><span className='tag-ability'> {item.name}</span></label>

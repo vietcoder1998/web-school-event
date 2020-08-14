@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './FixExperience.scss';
-import { Col, Row, DatePicker, Input } from 'antd';
+import { Col, Row, DatePicker, Input, Button } from 'antd';
 import { connect } from 'react-redux';
 import { experienceController } from '../../../../../services/api/private.api';
 import { _requestToServer } from '../../../../../services/exec';
@@ -132,12 +132,22 @@ class FixExperience extends Component<IState, IState> {
                 {/* submit button */}
                 <Row className='holder-button' >
                     <Col xs={12}>
-                        <button className='danger' onClick={() => { this.props._fixData('experience') }}> Hủy</button>
+                        <Button
+                            type='danger'
+                            icon={"close"}
+                            onClick={() => { this.props._fixData('experience') }}
+                        > Hủy
+                        </Button>
                     </Col>
                     <Col xs={12}>
-                        <button className='request' onClick={() => this._createRequest()}> Lưu</button>
+                        <Button
+                            type='primary'
+                            icon={"save"}
+                            onClick={() => this._createRequest()}
+                        >
+                            Lưu
+                         </Button>
                     </Col>
-
                 </Row>
             </div>
         );

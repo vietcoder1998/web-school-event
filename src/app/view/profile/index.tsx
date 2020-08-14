@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Col, Row } from "antd";
+import { Col, Row, Icon } from "antd";
 import Layout from "../layout/Layout";
-import "./Profile.scss";
 
 // Layer
 import Block from "../layout/block/Block";
@@ -63,19 +62,19 @@ class Profile extends Component<IProps, IState> {
     };
   }
 
-  icon_user = (<i className="fa fa-user" />);
-  icon_list = (<i className="fa fa-list" aria-hidden="true" />);
-  icon_star = (<i className="fa fa-star" aria-hidden="true" />);
-  icon_tower = (<i className="fa fa-home" aria-hidden="true" />);
-  icon_bachelor = (<i className="fa fa-graduation-cap" aria-hidden="true" />);
-  icon_solid_star = (<i className="fa fa-star" />);
+  icon_user = (<Icon type="profile" />);
+  icon_list = (<Icon type="ordered-list" />);
+  icon_star = (<Icon type="star" />);
+  icon_tower = (<Icon type="folder" />);
+  icon_bachelor = (<Icon type="read" />);
+  icon_solid_star = (<Icon type="star" />);
   icon_regular_star = (<i className="fa fa-star" />);
 
   async componentDidMount() {
 
     await this.props.getData();
-  
-   this.setState({ loading: false });
+
+    this.setState({ loading: false });
   }
 
   _fixData = (id) => {
@@ -98,7 +97,7 @@ class Profile extends Component<IProps, IState> {
               md={18}
               lg={18}
               xl={16}
-              xxl={20}
+              xxl={16}
               className="block-info"
             >
               <Block describe="Thông tin cá nhân" icon={this.icon_user}>
@@ -106,11 +105,7 @@ class Profile extends Component<IProps, IState> {
                   className="icon-fix"
                   onClick={() => this._fixData("person")}
                 >
-                  <span
-                    data-tip
-                    data-for="f_p_i"
-                    className="fa fa-pencil"
-                  ></span>
+                  <Icon type="edit" />
                 </div>
                 {profileState["person"] ? (
                   <FixShortProfile _fixData={this._fixData} />
@@ -124,12 +119,7 @@ class Profile extends Component<IProps, IState> {
                   className="icon-fix"
                   onClick={() => this._fixData("picture")}
                 >
-                  <span
-                    data-tip
-                    data-for="f_d_i"
-                    id="picture"
-                    className="fa fa-pencil"
-                  ></span>
+                  <Icon type="edit" />
                 </div>
                 {profileState["picture"] ? (
                   <FixPicture _fixData={this._fixData} method={PUT} />
@@ -139,17 +129,12 @@ class Profile extends Component<IProps, IState> {
               </Block>
 
               {/* Description */}
-              <Block describe="Mô tả bản thân" icon={this.icon_list}>
+              <Block describe="Mục tiêu nghề nghiệp" icon={this.icon_list}>
                 <div
                   className="icon-fix"
                   onClick={() => this._fixData("description")}
                 >
-                  <span
-                    data-tip
-                    data-for="f_d_i"
-                    id="description"
-                    className="fa fa-pencil"
-                  ></span>
+                  <Icon type="edit" />
                 </div>
                 {profileState["description"] ? (
                   <FixDescription _fixData={this._fixData} method={PUT} />
@@ -164,12 +149,7 @@ class Profile extends Component<IProps, IState> {
                   className="icon-fix"
                   onClick={() => this._fixData("skills")}
                 >
-                  <span
-                    data-tip
-                    data-for="a_s"
-                    id="skills"
-                    className="fa fa-pencil"
-                  ></span>
+                  <Icon type="edit" />
                 </div>
                 {profileState["skills"] ? (
                   <FixSkills _fixData={this._fixData} />
@@ -184,13 +164,7 @@ class Profile extends Component<IProps, IState> {
                   className="icon-fix"
                   onClick={() => this._fixData("languageSkill")}
                 >
-                  <span
-                    data-tip
-                    data-for="a_ls"
-                    id="languageSkill"
-                    className="fa fa-plus"
-                    color="blue"
-                  ></span>
+                  <Icon type={"plus"} twoToneColor={"blue"} />
                 </div>
                 <LanguageSkills />
                 {profileState["languageSkill"] ? (
@@ -204,12 +178,7 @@ class Profile extends Component<IProps, IState> {
                   className="icon-fix"
                   onClick={() => this._fixData("experience")}
                 >
-                  <span
-                    data-tip
-                    data-for="a_ex"
-                    id="experience"
-                    className="fa fa-plus"
-                  ></span>
+                  <Icon type={"plus"} twoToneColor={"blue"} />
                 </div>
                 <Experience />
                 {profileState["experience"] ? (
@@ -219,6 +188,12 @@ class Profile extends Component<IProps, IState> {
 
               {/* Education */}
               <Block describe="Học vấn và bằng cấp" icon={this.icon_bachelor}>
+                <div
+                  className="icon-fix"
+                  onClick={() => this._fixData("education")}
+                >
+                  <Icon type={"plus"} twoToneColor={"blue"} />
+                </div>
                 {profileState["education"] ? (
                   <FixEducation _fixData={this._fixData} method={POST} />
                 ) : (

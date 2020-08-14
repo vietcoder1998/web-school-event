@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { _requestToServer } from "../../../../../../services/exec";
 import { Tabs, Tab } from "react-bootstrap";
-import { Row, Col, Input, Radio, Select, Popconfirm } from "antd";
+import { Row, Col, Input, Radio, Select, Popconfirm, Icon, Button } from "antd";
 import {
   PUBLIC_HOST,
   STUDENT_HOST,
@@ -130,9 +130,7 @@ class LanguageSkillItem extends Component<IProps, IState> {
         <Tab eventKey={complete} onSelect={this._handleSelect} id={complete}>
           <div className="wrapper">
             <div className="edit-delete">
-              <i
-                id={index}
-                className="fa fa-edit"
+              <Icon type="form"
                 onClick={() => {
                   this._handleSelect(fix);
                 }}
@@ -144,29 +142,31 @@ class LanguageSkillItem extends Component<IProps, IState> {
                 onConfirm={() => this._createRequest(DELETE)}
                 okType={"danger"}
               >
-                <i className="fa fa-trash" />
+                <Icon type="delete" />
               </Popconfirm>
             </div>
             <div className="language-skills " id={complete}>
               {/* function for button */}
               <Row>
                 <Col sm={24} md={12} lg={6}>
-                  <label id="language-name">{item.language.name}</label>
+                  <Icon type="message" />
+                  <b>Ngôn ngữ: {item.language.name}</b>
                 </Col>
                 <Col sm={24} md={12} lg={6}>
-                  <label>{item.level}</label>
+                  <Icon type="book" />
+                  <b>Trình độ: {item.level}</b>
                 </Col>
                 <Col sm={24} md={12} lg={6}>
-                  <label>
-                    <i className="fa fa-graduation-cap" />
+                  <b>
+                    <Icon type="star" />
                     Chứng chỉ: {item.certificate ? item.certificate : "Không"}
-                  </label>
+                  </b>
                 </Col>
-                <Col sm={24} md={12} lg={6}>
-                  <label>
-                    <i className="fa fa-certificate" />
+                <Col sm={24} md={12} lg={4}>
+                  <b>
+                    <Icon type="highlight" />
                     Điểm số: {item.score ? item.score : "Không"}
-                  </label>
+                  </b>
                 </Col>
               </Row>
             </div>
@@ -242,22 +242,28 @@ class LanguageSkillItem extends Component<IProps, IState> {
               {/* Button holder */}
               <Row className="holder-button">
                 <Col xs={12}>
-                  <button
+                  <Button
                     className="danger"
-                    onClick={() => this._handleSelect(complete)}
+                    size="large"
+                    icon="close"
+                    onClick={() => {
+                      this._handleSelect(complete);
+                    }}
                   >
                     {" "}
-                    Hủy
-                  </button>
+                  Hủy
+                </Button>
                 </Col>
                 <Col xs={12}>
-                  <button
-                    className="request"
+                  <Button
+                    type="primary"
+                    size="large"
+                    icon="save"
                     onClick={() => this._createRequest(PUT)}
                   >
                     {" "}
-                    Lưu
-                  </button>
+                  Lưu
+                </Button>
                 </Col>
               </Row>
             </div>

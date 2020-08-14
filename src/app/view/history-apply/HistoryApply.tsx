@@ -149,15 +149,17 @@ class HistoryApply extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                                                         <Icon type='environment' style={{ marginRight: 3 }} />{item.job && item.job.address}
                                                                     </li>
                                                                 </div>
-                                                                <span style={{ backgroundColor: typeSpan.color, color: '#fff', padding: '3px 5px' }}><i class={typeSpan.type} aria-hidden="true" style={{ fontSize: "1.1em" }}></i> <span style={{ fontWeight: 550, fontSize: '0.9em' }}>{typeSpan.state}</span></span>
+                                                                <span style={{ backgroundColor: typeSpan.color, color: '#fff', padding: '3px 5px' }}>
+                                                                <i className={typeSpan.type} aria-hidden="true" style={{ fontSize: "1.1em" }}></i>
+                                                                 <span style={{ fontWeight: 550, fontSize: '0.9em' }}>{typeSpan.state}</span></span>
                                                                 <span style={{ display: 'flex' }}>
                                                                     <li style={{ fontSize: '0.7rem' }}>
-                                                                        <i class="fa fa-paper-plane" aria-hidden="true" style={{ marginRight: 3 }}></i>
+                                                                        <i className="fa fa-paper-plane" aria-hidden="true" style={{ marginRight: 3 }}></i>
                                                                         Ngày gửi: {moment(item.createdDate).format('DD/MM/YYYY')}
                                                                     </li>
                                                                     {item.repliedDate !== -1 ?
                                                                         <li style={{ fontSize: '0.7rem', marginLeft: 10 }}>
-                                                                            <i class="fa fa-reply" aria-hidden="true" style={{ marginRight: 3 }}></i>
+                                                                            <i className="fa fa-reply" aria-hidden="true" style={{ marginRight: 3 }}></i>
                                                                             Ngày phản hồi: {moment(item.repliedDate).format('DD/MM/YYYY')}
                                                                         </li> : null}
                                                                 </span>

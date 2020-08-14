@@ -1,20 +1,22 @@
 @import "../../sass/variable";
 
-.home-job {
+.top-job {
   font-family: $font_base;
-  background-color: white;
+  background-color: $color_background;
   padding: 10px;
+  margin-bottom: 1vw;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.02), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
+  position: relative;
 
   h5 {
     margin: 10px 0 !important;
     text-align: center;
-    font-size: 1.5rem;
-    padding: 15px 0 20px;
+    padding: 15px 0 25px;
+    font-weight: 400;
   }
 
   .ant-skeleton {
-    padding: 10px 5vw;
+    padding: 10px 8vw;
     margin: 2vh 0;
 
     .ant-skeleton-header .ant-skeleton-avatar-lg {
@@ -29,18 +31,22 @@
     display: flex;
     margin-right: 10px;
     margin-bottom: 10px;
-    height: 110px !important;
+    height: 116px !important;
     border-radius: 5px;
-    border: $color_border solid 1px;
+    border: rgba(255, 255, 255, 0) solid 1px;
+    background-color: #ffffff;
+    position: relative;
 
     &:hover {
-      background-color: whitesmoke;
+      background-color: rgba(223, 243, 255, 0.691);
+      // border: $color_border solid 1px;\
+      // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.1);
     }
 
     .img-job {
       text-align: center;
-      width: 88px;
-      padding: 8px;
+      width: 90px;
+      padding: 10px;
 
       img {
         width: 72px;
@@ -52,9 +58,10 @@
 
     a {
       color: #5d5d5d;
+      text-transform: capitalize;
 
       &:hover {
-        color: #168ECD
+        color: #168ecd;
       }
     }
 
@@ -72,23 +79,11 @@
       color: red;
     }
 
-    .top-badge {
-      text-transform: uppercase;
-      color: white;
-      background-color: red;
-      border-radius: 3px;
-      padding-right: 4px;
-      padding-left: 4px
-    }
-
-    &:hover {
-      transition: 0.5s;
-    }
 
     .job-content {
       width: 100%;
-      padding-top: 8px;
-      padding-right: 8px;
+      padding-top: 10px;
+      padding-right: 10px;
 
       a {
         text-transform: lowercase;
@@ -103,8 +98,6 @@
       }
 
       .name_employer {
-        overflow: hidden;
-        text-overflow: ellipsis;
         display: -webkit-box;
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
@@ -117,10 +110,11 @@
         }
         .l_c {
           text-align: left;
-          overflow: hidden;
           text-overflow: ellipsis;
           text-transform: initial;
           line-height: 18px;
+          text-transform: capitalize;
+          position: relative;
         }
       }
 

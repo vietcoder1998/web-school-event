@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Row, Col, Carousel, Card, Icon } from 'antd';
 import './Announcements.scss'
 import { connect } from 'react-redux';
@@ -11,6 +11,7 @@ import { POST } from '../../../../const/method';
 import { _requestToServer } from '../../../../services/exec';
 import { ANNOUNCEMENTS } from '../../../../services/api/public.api';
 import { PUBLIC_HOST } from '../../../../environment/development';
+import LinkToolTip from './../../layout/common/LinkToolTip';
 
 interface IProps {
     inday_data?: any;
@@ -47,9 +48,9 @@ function Announcements(props?: IProps) {
             console.log(res);
             setAnnouncements(res.data.items)
         })
-        .catch(e => {
-            console.log(e)
-        })
+            .catch(e => {
+                console.log(e)
+            })
     }
     let { isMobile } = props;
     return (
@@ -60,13 +61,20 @@ function Announcements(props?: IProps) {
                     (announcements.length > 0 ? <Carousel effect="fade" style={{ height: 500 }} autoplay>
                         {
                             announcements.map((item?: IAnnouncement, i?: number) => (
-                                <div key={i} style={{height: 400}}>
+                                <div key={i} style={{ height: 400 }}>
                                     <a key={i} href={`/announcementDetail/${window.btoa(item.id)}`}>
                                         <Card
                                             hoverable
                                             cover={
-                                                <div style={{ height: 400, overflow: "hidden" }}>
-                                                    <img width={'100%'} style={{ minHeight: '100%', backgroundSize: 'cover' }} alt="example" src={item.imageUrl} />
+                                                <div style={{ height: 300, overflow: "hidden" }}>
+                                                    <img
+                                                        width={'100%'}
+                                                        style={{
+                                                            minHeight: '100%',
+                                                            backgroundSize: 'cover'
+                                                        }}
+                                                        alt={item.title}
+                                                        src={item.imageUrl} />
                                                 </div>
                                             }
                                             actions={
@@ -88,11 +96,14 @@ function Announcements(props?: IProps) {
                                                 ]
                                             }
                                         >
-                                            <Meta title={item.title} description={
-                                                <>
-                                                    {item.previewContent}
-                                                    Xem thêm >>
-                                                </>} />
+                                            <Meta
+                                                title={item.title}
+                                                description={
+                                                    <>
+                                                        {limitString(item.previewContent, 30)}
+                                                        Xem thêm &gt; &gt;
+                                                    </>
+                                                } />
                                         </Card>
                                     </a>
                                 </div>
@@ -113,30 +124,40 @@ function Announcements(props?: IProps) {
                                                         <img width={'100%'} style={{ minHeight: '100%' }} alt="example" src={item.imageUrl} />
                                                     </div>
                                                 }
-                                                actions={
-                                                    [
-                                                        <div>
-                                                            <Icon type="star" key="edit" />
-                                                            {item.averageRating}
-                                                        </div>,
-                                                        <div>
-                                                            <Icon type="eye" key="edit" />
-                                                            {item.viewNumber}
-                                                        </div>
-                                                        ,
-                                                        <div>
-                                                            <Icon type="message" key="msg" />
-                                                            {item.totalComments}
-                                                        </div>
-                                                    ]
-                                                }
+                                                // actions={
+                                                //     [
+                                                //         <div>
+                                                //             <Icon type="star" key="edit" />
+                                                //             {item.averageRating}
+                                                //         </div>,
+                                                //         <div>
+                                                //             <Icon type="eye" key="edit" />
+                                                //             {item.viewNumber}
+                                                //         </div>
+                                                //         ,
+                                                //         <div>
+                                                //             <Icon type="message" key="msg" />
+                                                //             {item.totalComments}
+                                                //         </div>
+                                                //     ]
+                                                // }
                                             >
                                                 <Meta description={
-                                                    <>
-                                                        <div  className="title_card" style={{fontWeight: 600,color:"black",fontSize:"1.1em",marginBottom:"5px", textTransform: 'uppercase'}}>{limitString(item.title, 55)}</div>
-                                                        <div className="data_card" style={{color: '#3a3a3a'}}>{item.previewContent} ...</div>
-                                                        <div style={{fontStyle: 'italic', fontSize: '0.9em', marginTop: 5, textDecoration: 'underline', color: 'rgb(99, 99, 99)'}}>Xem thêm >></div>
-                                                    </>
+                                                    <div>
+                                                        <div 
+                                                        className="title_card" 
+                                                             style={{ 
+                                                            fontWeight: 600, 
+                                                            color: "black", 
+                                                            fontSize: "1.1em", 
+                                                            marginBottom: "5px", 
+                                                            textTransform: 'uppercase' 
+                                                        }}> 
+                                                        <LinkToolTip  name={limitString(item.title, 30)} title={item.title}/>
+                                                        </div>
+                                                        <div className="data_card" style={{ color: '#3a3a3a' }}>{limitString(item.previewContent, 50)} </div>
+                                                        <div style={{ fontStyle: 'italic', fontSize: '0.9em', marginTop: 5, textDecoration: 'underline', color: 'rgb(99, 99, 99)' }}>Xem thêm&gt;&gt;</div>
+                                                    </div>
                                                 } />
                                             </Card>
                                         </Col>

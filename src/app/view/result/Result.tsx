@@ -14,10 +14,11 @@ import { IJobSearchFilter } from "../../../models/job-search";
 import SearchFilter from "./search-filter/SearchFilter";
 import ResultFilter from "./result-filter/ResultFilter";
 import qs from "query-string";
+//@ts-ignore
 import banner from '../../../assets/image/event/banner-worksvn.jpg'
 const cookie = new Cookie();
 
-interface IPropsResult extends StateProps, DispatchProps {
+interface IProps extends StateProps, DispatchProps {
   getJobResults: Function;
   getEventJobResults: Function;
   getHighLightData: Function;
@@ -54,7 +55,7 @@ interface IStateResult {
   param?: string
 }
 
-class Result extends React.Component<IPropsResult, IStateResult> {
+class Result extends React.Component<IProps, IStateResult> {
   constructor(props) {
     super(props);
     this.state = {
@@ -88,7 +89,7 @@ class Result extends React.Component<IPropsResult, IStateResult> {
           lon: null,
           distance: 20000,
         },
-        schoolConnected: null,
+        // schoolConnected: null,
       },
 
       isSearchEvent: true, // phân biệt job-event và job-normal ở 2 trang khác nhau. Đưa vào cả list job, chỗ nào cần search normal thì thêm cả cái này
@@ -202,7 +203,7 @@ class Result extends React.Component<IPropsResult, IStateResult> {
   }
 
   static getDerivedStateFromProps(
-    nextProps?: IPropsResult,
+    nextProps?: IProps,
     prevState?: IStateResult
   ) {
     if (nextProps.match.param) {
@@ -312,22 +313,22 @@ class Result extends React.Component<IPropsResult, IStateResult> {
   onChangeShiftsFilter = async (event?: any) => {
     let { body } = this.state;
     let queryParam = qs.parse(this.props.location.search, {
-      ignoreQueryPrefix: true,
+      // ignoreQueryPrefix: true,
     });
     body.jobShiftFilter.weekDays = event.weekDays;
     body.jobShiftFilter.dayTimes = event.dayTimes;
     Object.keys(this.props.list_day).forEach((key) => {
       if (event.weekDays.includes(key)) {
-        queryParam[key] = true;
+        // queryParam[key] = true;
       } else {
-        queryParam[key] = false;
+        // queryParam[key] = false;
       }
     });
     Object.keys(this.props.list_shift).forEach((key) => {
       if (event.dayTimes.includes(key)) {
-        queryParam[key] = true;
+        // queryParam[key] = true;
       } else {
-        queryParam[key] = false;
+        // queryParam[key] = false;
       }
     });
     this.props.history.replace("?" + qs.stringify(queryParam));
@@ -367,23 +368,24 @@ class Result extends React.Component<IPropsResult, IStateResult> {
                   />
                 </Row>
                 {/* SearChTab */}
-                <div className="search-tab">
-                  <SearchFilter
-                    loading={loading}
-                    jobNames={jobNames}
-                    regions={regions}
-                    onChangeJobFilter={this.onChangeJobFilter}
-                    location={this.props.location}
-                  />
-                </div>
-
+                <Affix offsetTop={-5}>
+                  <div className="search-tab">
+                    <SearchFilter
+                      loading={loading}
+                      jobNames={jobNames}
+                      regions={regions}
+                      onChangeJobFilter={this.onChangeJobFilter}
+                      location={this.props.location}
+                    />
+                  </div>
+                </Affix>
                 <ResultFilter
                   numberRs={results.totalItems}
                   regionName={region && region.name}
                   totalJobs={region && region.totalJobs}
                 />
                 <Row>
-                  <Col xs={24} sm={24} md={16} lg={16} xl={17} xxl={20}>
+                  <Col xs={24} sm={24} md={16} lg={16} xl={17} xxl={19}>
                     <ListResult
                       loading={loading}
                       list_result={list_result}
@@ -404,7 +406,7 @@ class Result extends React.Component<IPropsResult, IStateResult> {
                       />
                     </div>
                   </Col>
-                  <Col xs={0} sm={0} md={8} lg={8} xl={7} xxl={4}>
+                  <Col xs={0} sm={0} md={8} lg={8} xl={7} xxl={5}>
                     <SearchMore
                       loading={loading}
                       onChangeShiftsFilter={this.onChangeShiftsFilter}

@@ -5,7 +5,11 @@
   height: auto;
   padding: 15px 25px;
   background-color: white;
-  // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
+  margin-top: 10px;
+  h5 {
+    font-weight: 350;
+  }
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
 
   a {
     text-transform: capitalize;
@@ -17,7 +21,8 @@
       min-height: 210px;
       margin: 5px;
       display: flex;
-      padding: 5px 20px;
+      padding: 5px 10px;
+      min-height: 260px;
       &:hover {
         background-color: azure;
       }

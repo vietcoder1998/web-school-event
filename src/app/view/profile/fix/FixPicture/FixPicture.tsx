@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 // import DatePicker from "react-datepicker";
-import "./FixPicture.scss";
 import {
   update_card_image,
 } from "../../../../../services/api/private/profile";
 import { connect } from "react-redux";
 import moment from "moment";
 import { sendFileHeader } from "../../../../../services/auth";
-import { Icon, Row, Col, Input,  } from "antd";
+import { Icon, Row, Col, Input, Button } from 'antd';
 import { REDUX_SAGA } from "../../../../../const/actions";
 import { _requestToServer } from "../../../../../services/exec";
 import { PUT } from "../../../../../const/method";
@@ -119,92 +118,85 @@ class FixPerson extends Component<IProps, IState> {
     let { identityCardFrontUrl, identityCardBackUrl } = this.state;
 
     return (
-      <div className="wraper">
-        <Row className="person-info">
-          <Col xs={12}>
-            <div
-              className="person-content"
-              style={{ textAlign: "center", marginTop: "10px" }}
-            >
-              <img
-                src={identityCardFrontUrl}
-                alt="ảnh CMND"
-                className="identityImage"
-              />
-              <form>
-                <label htmlFor="FrontImg" style={{ fontSize: 15 }}>
-                  <Icon type="upload" />
+      <div className="wrapper">
+        <Row >
+          <Col span={10}>
+            <img
+              src={identityCardFrontUrl}
+              alt="ảnh CMND"
+              className="identityImage"
+            />
+            <label htmlFor="FrontImg" style={{ fontSize: 15 }}>
+              <Icon type="upload" />
                   Upload ảnh mặt trước CMND
-                </label>
-              </form>
-              <Input
-                id="FrontImg"
-                type="file"
-                name="file"
-                alt="ảnh CMND"
-                style={{ display: "none" }}
-                onChange={(e) => {
-                  this._upLoadFile(
-                    "identityCardFront",
-                    "identityCardFrontUrl",
-                    e
-                  );
-                }}
-              />
-            </div>
+            </label>
+            <Input
+              id="FrontImg"
+              type="file"
+              name="file"
+              alt="ảnh CMND"
+              style={{ display: "none" }}
+              onChange={(e) => {
+                this._upLoadFile(
+                  "identityCardFront",
+                  "identityCardFrontUrl",
+                  e
+                );
+              }}
+            />
           </Col>
-          <Col xs={12}>
-            <div
-              className="person-content"
-              style={{ textAlign: "center", marginTop: "10px" }}
-            >
-              <img
-                src={identityCardBackUrl}
-                alt="ảnh CMND"
-                className="identityImage"
-              />
-              <form>
-                <label htmlFor="backImg" style={{ fontSize: 15 }}>
-                  <Icon type="upload" />
+          <Col span={10}>
+            <img
+              src={identityCardBackUrl}
+              alt="ảnh CMND"
+              className="identityImage"
+            />
+            <form>
+              <label htmlFor="backImg" style={{ fontSize: 15 }}>
+                <Icon type="upload" />
                   Upload ảnh mặt sau CMND
                 </label>
-              </form>
-              <Input
-                id="backImg"
-                type="file"
-                name="file"
-                alt="ảnh CMND"
-                style={{ display: "none" }}
-                onChange={(e) => {
-                  this._upLoadFile(
-                    "identityCardBack",
-                    "identityCardBackUrl",
-                    e
-                  );
-                }}
-              />
-            </div>
+            </form>
+            <Input
+              id="backImg"
+              type="file"
+              name="file"
+              alt="ảnh CMND"
+              style={{ display: "none" }}
+              onChange={(e) => {
+                this._upLoadFile(
+                  "identityCardBack",
+                  "identityCardBackUrl",
+                  e
+                );
+              }}
+            />
           </Col>
         </Row>
 
         {/* submit button */}
         <Row className="holder-button">
           <Col xs={12}>
-            <button
+            <Button
               className="danger"
+              size="large"
+              icon="close"
               onClick={() => {
-                this.props._fixData("person");
+                this.props._fixData("picture");
               }}
             >
-              {" "}
               Hủy
-            </button>
+            </Button>
           </Col>
           <Col xs={12}>
-            <button className="request" onClick={() => this._createRequest()}>
-              {" "}
+            <Button
+              type="primary"
+              size="large"
+              icon="save"
+              onClick={() => this._createRequest()}
+            >
               Lưu
-            </button>
+            </Button>
           </Col>
         </Row>
       </div>

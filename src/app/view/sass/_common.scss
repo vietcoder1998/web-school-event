@@ -28,14 +28,16 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-    "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
 //
@@ -52,32 +54,49 @@ code {
 .expert-content {
   margin: 10px;
   border-radius: 5px;
-  border: solid #fff 1px;
+  position: relative;
 
   &:hover {
+    box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.01), 0 2px 4px rgba(0, 0, 0, 0.02),
+      0 4px 8px rgba(0, 0, 0, 0.04);
+
     cursor: pointer;
-    border: solid $color_border 1px;
-    color: rgb(0, 84, 136) !important;
     cursor: pointer;
-    transition: 40ms;
 
     .job-expert {
-      background-color: azure;
+      background-color: rgb(204, 232, 255);
+      color: rgb(7, 138, 219) !important;
     }
   }
 
   img {
-    border-radius: 5px 5px;
-    margin: 10px 0px;
+    border-radius: 5px 5px 0px 0px;
+    height: 210px;
   }
+}
 
-  .job-expert {
-    text-align: center;
-    font-size: large;
-    font-weight: 500;
-    line-height: 60px;
-    border-radius: 0px 0px 10px 10px;
-  }
+.job-expert {
+  color: rgb(0, 84, 136) !important;
+  background-color: rgb(240, 251, 255);
+  text-align: center;
+  font-size: large;
+  font-weight: 500;
+  line-height: 60px;
+  border-radius: 0px 0px 5px 5px;
+}
+
+.video-ad-on {
+  background-color: rgb(255, 253, 240);
+  position: relative;
+  text-align: center;
+  font-weight: 500;
+  line-height: 30px;
+  padding: 10px;
+  min-height: 8vw;
+  margin-bottom: 10px;
+  border-radius: 0px 0px 5px 5px;
+  border: solid $color_border 1px;
+  border-top: none;
 }
 
 * {
@@ -87,25 +106,31 @@ code {
 .top-em-detail {
   background-color: white;
   margin: 20px;
-  height: 15vw;
+  height: 12vw;
   min-height: 120px;
   border-radius: 10px;
   box-shadow: 0 4px 5px 2px rgba(0, 0, 0, 0.1);
-  padding-top: 5%;
   font-size: large;
   font-weight: 500px;
+  text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.06);
+  overflow: hidden;
 
   image {
-    margin-top: 5px !important;
+    width: 100%;
+    height: 100%;
     border-radius: 10px;
   }
 
-  .link {
+  .link-em {
     max-width: 25ch;
     white-space: nowrap;
     text-emphasis: ellipsis;
-    font-weight: 500;
-    text-transform: uppercase;
+
+    p {
+      font-weight: 600 !important;
+      text-transform: uppercase;
+    }
 
     &:hover {
       color: rgb(0, 84, 136);
@@ -139,6 +164,10 @@ ul {
 }
 
 .wrapper {
+  position: relative;
+  height: auto;
+  border-bottom: solid $color_border 1px;
+
   i {
     &:hover {
       color: rgb(190, 188, 188);
@@ -148,17 +177,10 @@ ul {
     height: 20px;
   }
 
-  &:hover {
-    // box-shadow: rgba(71, 71, 71, 0.2) 0px 0px 5px 0px;
-    // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
-  }
-
   .header-experience {
     font-size: 20px;
     font-weight: 500;
   }
-
-  height: auto;
 
   .fa-pen {
     float: right;
@@ -174,20 +196,26 @@ ul {
     font-family: $font_base;
     font-size: 0.9rem;
   }
-
-  border-bottom: solid $color_border 1px;
 }
 
 // div to fix icon in complete
 .edit-delete {
   display: flex;
   justify-content: flex-end;
-  // display: block;
-  // width  : 100%;
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  z-index: 1;
 
-  span {
-    &:hover {
-      cursor: pointer;
+  &:hover {
+    cursor: pointer;
+
+    i[class~="form"] {
+      color: $color_base
+    }
+
+    i[class~="delete"] {
+      color: red;
     }
   }
 
@@ -201,6 +229,7 @@ ul {
 .holder-button {
   height: 60px;
   margin-top: 20px;
+  margin-bottom: 20px;
   text-align: center;
 
   button {
@@ -402,7 +431,7 @@ i {
   text-transform: lowercase;
   list-style-type: none;
   margin: 0px !important;
-  font-weight: 650;
+  font-weight: 500;
 
   &::first-letter {
     text-transform: uppercase;
@@ -457,4 +486,248 @@ i {
 }
 .swal-modal .swal-text {
   text-align: center;
+}
+
+.config-tooltip {
+  display: block;
+
+  .tooltiptext {
+    visibility: hidden;
+    width: auto;
+    max-width: 120ch;
+    text-align: center;
+    padding: 2px 5px;
+    font-size: 10px;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 10;
+    top: 70%;
+    left: 80%;
+    width: auto;
+    margin-left: -60px;
+    border: solid black 1px;
+    background-color: white;
+    color: black;
+  }
+
+  &:hover .tooltiptext {
+    visibility: visible;
+    transition-delay: 500ms;
+  }
+}
+
+.top {
+  .tooltiptext {
+    top: -10%;
+    right: -30%;
+  }
+}
+
+.bottom {
+  .tooltiptext {
+    top: 55%;
+    left: 30%;
+  }
+}
+
+.home-job {
+  background-color: $color_background;
+  margin-bottom: 1vw;
+}
+
+.conner {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 0px 5px 0px;
+  right: -15px;
+  top: -10px;
+  overflow: hidden;
+
+  .bg-triagle {
+    width: 60px;
+    height: 60px;
+    background-color: red;
+    position: absolute;
+    right: -30px;
+    top: -30px;
+    transform: rotate(45deg);
+  }
+
+  .tt {
+    position: absolute;
+    color: white;
+    background-color: rgba(255, 255, 255, 0);
+    right: 0px;
+    z-index: 1;
+  }
+}
+
+.in-day-badge {
+  text-transform: uppercase;
+  color: white;
+  background-color: #f3612c;
+  border-radius: 5px;
+  padding: 0px 4px;
+}
+
+[class*="badge"] {
+  margin-bottom: 3px;
+}
+
+li.region {
+  font-weight: 500;
+}
+
+.push-on {
+  position: relative;
+  width: 100%;
+  min-height: 16vw;
+  z-index: 1;
+
+  .on-image {
+    position: absolute;
+    top: 0px;
+    z-index: 2;
+    width: 25%;
+    height: 25%;
+    top: 25%;
+    left: 40%;
+    border-radius: 10px;
+  }
+
+  .base-inside {
+    width: 100%;
+    min-height: 16vw;
+    position: relative;
+  }
+
+  .on-bound {
+    position: absolute;
+    top: 0px;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    &:hover {
+      background-color: rgba(128, 128, 128, 0.178);
+    }
+  }
+}
+
+* {
+  font-family: $font_base;
+}
+
+.profile {
+  width: auto;
+  transition: 0.3s;
+  padding: 10px 0px;
+
+  .ant-tabs-nav-wrap {
+    display: none;
+  }
+
+  .ant-tabs-bar {
+    margin: 0;
+  }
+
+  .candicate-info {
+    position: relative;
+    right: 0px;
+    top: 0px;
+  }
+
+  span {
+    cursor: pointer;
+  }
+
+  .profile-info {
+    width: 60%;
+  }
+
+  .icon-fix {
+    position: relative;
+    float: right;
+    top: -60px;
+    right: 20px;
+    padding: 5px 10px;
+    font-size: 25px;
+    border-radius: 50%;
+
+    &:hover {
+      background-color: whitesmoke;
+      cursor: pointer;
+    }
+  }
+}
+
+.person-info {
+  padding: 10px 3vw;
+  .input_outside {
+    width: 100%;
+    height: 30px;
+  }
+  h5 {
+    font-weight: 400;
+  }
+
+  p {
+    font-weight: 600;
+    padding-top: 10px;
+  }
+
+  h6 {
+    font-weight: 600 !important;
+  }
+
+  .person-avatar {
+    padding-bottom: 5px;
+    margin: 2.5vw 1vw;
+  }
+
+  .ant-col {
+    padding: 5px 1vw;
+  }
+}
+
+.location {
+  height: auto;
+  margin-top: 30px;
+  textarea {
+    width: 100%;
+    min-height: 70px !important;
+  }
+}
+
+.location-devide {
+  color: blueviolet;
+  background-color: white;
+  margin: 5px 0px;
+  border: solid blueviolet 1px;
+  border-radius: 3px;
+  font-weight: 500;
+  &:hover {
+    color: white;
+    background-color: blueviolet;
+  }
+}
+.identityImage {
+  margin: 10px 10px;
+  height: 200px;
+  width: 90%;
+  padding: 5px;
+  border: 2px solid #1c6ea4;
+}
+.map-container {
+  width: 50vw;
+  position: relative;
+}
+
+.ant-modal-content {
+  width: 600px;
+  height: 640px;
+  .ant-modal-body {
+    height: 530px;
+  }
 }

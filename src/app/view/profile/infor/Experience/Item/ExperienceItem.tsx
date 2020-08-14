@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { timeConverter } from '../../../../../../utils/convertTime';
-import { Row, Col, DatePicker, Input, Popconfirm } from 'antd';
+import { Row, Col, DatePicker, Input, Popconfirm, Icon, Button } from 'antd';
 import { experienceController } from '../../../../../../services/api/private.api';
 import { _requestToServer } from '../../../../../../services/exec';
 import { connect } from 'react-redux';
@@ -121,34 +121,37 @@ class ExperienceItem extends Component<Props, State> {
     render() {
         let { item, complete, fix } = this.props;
         let { experience, activeKey } = this.state;
-        let startedDate = timeConverter(experience.startedDate, 1000);
-        let finishedDate = timeConverter(experience.finishedDate, 1000);
+        let startedDate = timeConverter(experience.startedDate);
+        let finishedDate = timeConverter(experience.finishedDate);
         return (
             <Tabs activeKey={activeKey} onSelect={() => { }}>
                 {/* Delete */}
                 <Tab eventKey={complete} onSelect={this._handleSelect} id={complete}  >
                     <div className='wrapper' id={complete} >
                         <div className="edit-delete">
-                            <i className="fa fa-edit" onClick={() => { this._handleSelect(fix) }} />
+                            <Icon type="form" onClick={() => { this._handleSelect(fix) }} />
                             <Popconfirm
                                 title="Bạn muốn xóa mục này ？"
                                 okText="Xóa"
                                 cancelText="Hủy"
                                 onConfirm={() => this._createRequest(DELETE)}
                                 okType={'danger'}                            >
-                                <i className="fa fa-trash" />
+                                <Icon type="delete" />
                             </Popconfirm>
                         </div>
                         <div>
                             <p className='header-experience'>{item.label}</p>
-                            <IptLetterP>Công việc: </IptLetterP>
-                            <div style={{ padding: '5px 10px' }}> {item.jobName}</div>
-                            <IptLetterP>Nơi làm việc: </IptLetterP>
-                            <div style={{ padding: '5px 10px' }}> {item.companyName}</div>
-                            <IptLetterP>Thời gian làm việc: </IptLetterP>
-                            <div style={{ padding: '5px 10px' }}>{item.startedDate > 0 ? timeConverter(item.startedDate, 1000) : 'Chưa cập nhật'} đến {item.finishedDate > 0 ? timeConverter(item.finishedDate, 1000) : 'Chưa cập nhật'} </div>
-                            <IptLetterP>Mô tả: </IptLetterP>
-                            <div style={{ padding: '5px 10px' }}> {item.description}</div>
+                            <b>Công việc: </b>
+                            <li> {item.jobName}</li>
+                            <b>Nơi làm việc: </b>
+                            <li> {item.companyName}</li>
+                            <b>Thời gian làm việc: </b>
+                            <li>
+                                {item.startedDate > 0 ?
+                                    timeConverter(item.startedDate) : 'Chưa cập nhật'}
+                                 - {item.finishedDate > 0 ? timeConverter(item.finishedDate) : 'Chưa cập nhật'} </li>
+                            <b>Mô tả: </b>
+                            <li> {item.description}</li>
                         </div>
                     </div>
                 </Tab>
@@ -198,13 +201,28 @@ class ExperienceItem extends Component<Props, State> {
                             </div>
                             <p><label style={{ color: 'red' }}>*</label>Thông tin bắt buộc</p>
                         </div>
-                        {/* submit button */}
-                        <Row className='holder-button' >
-                            <Col xs={12}>
-                                <button className='danger' onClick={() => (this._handleSelect(complete))}> Hủy</button>
+                        <Row className="holder-button">
+                            <Col span={12}>
+                                <Button
+                                    className="danger"
+                                    size="large"
+                                    icon="close"
+                                    onClick={() => {
+                                        this._handleSelect(complete);
+                                    }}
+                                >
+                                    Hủy
+                                </Button>
                             </Col>
-                            <Col xs={12}>
-                                <button className='request' onClick={() => this._createRequest(PUT)}> Lưu</button>
+                            <Col span={12}>
+                                <Button
+                                    type="primary"
+                                    size="large"
+                                    icon="save"
+                                    onClick={() => this._createRequest(PUT)}
+                                >
+                                    Lưu
+                            </Button>
                             </Col>
                         </Row>
                     </div>

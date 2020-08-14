@@ -5,10 +5,13 @@ import { limitString } from '../../../../utils/limitString';
 import moment from 'moment';
 //@ts-ignore
 import TextImage from './../../../../assets/image/carouselGroup/carousel1.jpg';
+import { convertFullSalary } from '../../../../utils/convertNumber';
+import { IJobDetail } from '../../../../models/job-detail';
+import { IAnnouncement } from '../../../../models/announcements';
 
 
 interface IListResultProps {
-    list_result?: Array<any>;
+    list_result?: Array<IJobDetail>;
     loading?: boolean;
     isSearchEvent?: boolean; // phân biệt job-event và job-normal ở 2 trang khác nhau ,
     param?: any
@@ -19,7 +22,7 @@ export default function ListResult(props?: IListResultProps) {
 
     return (
         <div className='result' >
-            {loading ? <div className='loading'><Spin /></div> : (list_result.length > 0 ? list_result.map((item, index) => {
+            {loading ? <div className='loading'><Spin /></div> : (list_result.length > 0 ? list_result.map((item?: any, index) => {
                 // console.log(item);
                 // let color = "#fde8c7";
                 // switch (item.jobType) {
@@ -36,7 +39,7 @@ export default function ListResult(props?: IListResultProps) {
 
                 return (<Row key={index} className='result-item' >
                     {/* Image */}
-                    <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={3} >
+                    <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4} >
                         <Link to={`/job-detail/${window.btoa(item.id)}`} target='_blank'>
                             <div className='image-content'>
                                 <img src={item.employerLogoUrl ? item.employerLogoUrl : TextImage} alt='logo ct' />
@@ -50,14 +53,16 @@ export default function ListResult(props?: IListResultProps) {
 
                     </Col>
                     {/* Content */}
-                    <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={21} className='item-content'>
+                    <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20} className='item-content'>
                         <div className='item-header'>
                             <h4 >
                                 <Link
                                     style={{ color: item.priority === 'TOP' ? 'red' : 'black' }}
                                     to={isSearchEvent ? `event-job-detail/${window.btoa(item.id)}${param}` : `/job-detail/${window.btoa(item.id)}${param}`}
                                     target='_blank'
-                                > {limitString(item.jobTitle, 80)}</Link>
+                                >
+                                    {limitString(item.jobTitle, 80)}
+                                </Link>
                                 {item.priority === 'TOP' ? <Tooltip title='Công việc hot'>
                                     <span> <Icon type='fire' twoToneColor="#eb2f96" style={{ color: 'red' }} /></span>
                                 </Tooltip> : null}
@@ -68,25 +73,33 @@ export default function ListResult(props?: IListResultProps) {
                         >
                             <div>
                                 {/* <p> */}
-                                <Link to={`/employer/${window.btoa(item.employerID)}${param}`} target='_blank' className="name_employer" style={{ fontWeight: 550}}>{item.employerName ? item.employerName.toUpperCase() : null}</Link>
+                                <Link
+                                    to={`/employer/${window.btoa(item.employerID)}${param}`}
+                                    target='_blank'
+                                    className="name_employer" style={{ fontWeight: 550 }}
+                                >
+                                    <Icon type="shop" style={{ color: '#168ECD', margin: 5 }} />
+                                    {item.employerName ? item.employerName.toUpperCase() : null}
+                                </Link>
                                 {/* </p> */}
                             </div>
-                            <div className='item-detail'
+                            <div
+                                className='item-detail'
                             >
-                                <Row style={{ marginBottom: 5 }}>
-                                    <div className='item-time '>
-                                        <Icon type="calendar" style={{ color: '#168ECD' }} /> Ngày đăng: {moment(item.createdDate).format('DD/MM/YY')}
-                                    </div>
-                                </Row>
-                                <Row>
-                                    <Col xs={8} sm={8} md={6} lg={6} xl={6} >
-                                        <Icon type='environment' style={{ color: '#168ECD' }} /><span>{item.region.name}</span>
+                                <Row style={{ margin: "10px 0px" }}>
+                                    <Col xs={24} sm={24} md={10} lg={10} xl={10} >
+                                        <Icon type="calendar" style={{ color: '#168ECD' }} /> <span>Ngày đăng: {moment(item.createdDate).format('DD/MM/YY')}</span>
                                     </Col>
-                                    <Col xs={16} sm={16} md={18} lg={18} xl={18} >
-                                        <Icon type="profile" style={{ color: '#168ECD' }} /><span>{item.jobType === 'PARTTIME' ? 'Không cần kinh nghiệm' : 'Thỏa thuận'}</span>
+                                    <Col xs={24} sm={24} md={12} lg={10} xl={12} >
+                                        <Icon type="calendar" style={{ color: '#168ECD' }} /> <span>Hết hạn: {moment(item.finishedDate).format('DD/MM/YY')}</span>
+                                    </Col>
+                                    <Col xs={24} sm={24} md={10} lg={10} xl={10} >
+                                        <Icon type='environment' style={{ color: '#168ECD' }} /><span>Tỉnh thành: {item.region.name}</span>
+                                    </Col>
+                                    <Col xs={24} sm={24} md={14} lg={14} xl={14} >
+                                        <Icon type="dollar" style={{ color: '#168ECD' }} /> <span>Lương: {convertFullSalary(item.minSalary, item.minSalaryUnit, item.maxSalary, item.maxSalaryUnit)}</span>
                                     </Col>
                                 </Row>
-
                             </div>
                         </div>
                     </Col>
@@ -104,8 +117,8 @@ export default function ListResult(props?: IListResultProps) {
                     {/* </div> */}
                     {/* </Tooltip> */}
                     {/* </Col> */}
-                </Row>)
+                </Row >)
             }) : <Empty style={{ minHeight: '500px', backgroundColor: 'white', padding: '8.5vw 0', margin: '0' }} description={'Không tìm thấy công việc liên quan'} />)}
-        </div>
+        </div >
     )
 }

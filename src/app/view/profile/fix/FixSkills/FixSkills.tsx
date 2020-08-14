@@ -7,7 +7,7 @@ import { skillsController } from '../../../../../services/api/private.api';
 import { _get } from '../../../../../services/base-api';
 import { SKILLS } from '../../../../../services/api/public.api';
 import { PUBLIC_HOST } from '../../../../../environment/development';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Button } from 'antd';
 import { PUT } from '../../../../../const/method';
 import { REDUX_SAGA } from '../../../../../const/actions';
 import { noInfoHeader } from '../../../../../services/auth';
@@ -45,11 +45,11 @@ class FixSkills extends Component<IProps, IState> {
         }
     }
 
-    async  componentDidMount() {
+    async componentDidMount() {
         let { skills } = this.props;
         let { list_skills } = this.state;
         let res = await _get(null, SKILLS, PUBLIC_HOST, noInfoHeader);
-     
+
         list_skills = res.data.items;
         this.setState({ list_skills, skills });
     }
@@ -97,7 +97,7 @@ class FixSkills extends Component<IProps, IState> {
             <div className='wrapper'>
                 <div className='ability'>
                     {/* List Skills */}
-                    <p>Thêm kĩ năng hoặc công việc phù hợp</p>
+                    <p><b>Thêm kĩ năng hoặc công việc phù hợp</b></p>
                     <div className='list-ability'>
                         {skills && skills.map((item, index?: number) => {
                             return (
@@ -119,12 +119,28 @@ class FixSkills extends Component<IProps, IState> {
                             })}
                         </ul>
                     </div>
-                    <Row className='holder-button' >
-                        <Col xs={6}>
-                            <button className='danger' onClick={() => { this.props._fixData('skills') }}> Hủy</button>
+                    <Row className="holder-button">
+                        <Col span={12}>
+                            <Button
+                                type="danger"
+                                size="large"
+                                icon="close"
+                                onClick={() => {
+                                    this.props._fixData("skills");
+                                }}
+                            >
+                                Hủy
+                        </Button>
                         </Col>
-                        <Col xs={6}>
-                            <button className='request' onClick={() => this._createRequest()}> Lưu</button>
+                        <Col span={12}>
+                            <Button
+                                type="primary"
+                                size="large"
+                                icon="save"
+                                onClick={() => this._createRequest()}
+                            >
+                                Lưu
+                            </Button>
                         </Col>
                     </Row>
                 </div>

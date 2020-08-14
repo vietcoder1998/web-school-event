@@ -5,6 +5,7 @@ import { _requestToServer } from "../../../../services/exec";
 import { isLookingFobJobState } from "../../../../services/api/private.api";
 import { PUT } from "../../../../const/method";
 import { REDUX_SAGA } from "../../../../const/actions";
+import { Switch } from "antd";
 
 class ButtonToggle extends Component {
   constructor(props) {
@@ -35,23 +36,12 @@ class ButtonToggle extends Component {
     let { state } = this.state;
     return (
       <div className="toggle-button">
-        <div
-          className="toggle-wrapper"
-          onClick={this._handleStateButton}
-          style={{
-            backgroundColor: state === true ? "rgb(9, 209, 9)" : "gray",
-            borderColor: state === true ? "rgb(9, 209, 9)" : "gray",
-          }}
-        >
-          <div
-            className="toggle-range"
-            style={{
-              width: state === true ? "9px" : "0px",
-            }}
-          ></div>
-          <div className="toggle-state"></div>
-        </div>
-        <div>{this.state.state === true ? "Đang tìm việc" : "Đã có việc"}</div>
+        <b style={{ marginLeft: 10 }} >
+          <Switch id="find-job" onChange={this._handleStateButton} defaultChecked={this.props.state} />
+          <label htmlFor="find-job">
+            {this.state.state === true ? "Đang tìm việc" : "Đã có việc"}
+          </label>
+        </b>
       </div>
     );
   }

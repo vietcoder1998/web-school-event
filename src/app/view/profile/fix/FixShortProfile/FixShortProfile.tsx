@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./FixPerson.scss";
 import {
   update_avatar,
   update_profile,
@@ -140,7 +139,7 @@ class FixPerson extends Component<IProps, IState> {
       // @ts-ignore
       this.setState({ [url]: e.target.result });
     };
-    
+
     picture = files[0];
     this.setState({ [name]: picture });
   };
@@ -200,7 +199,7 @@ class FixPerson extends Component<IProps, IState> {
     let birth_day = timeConverter(personalInfo.birthday, 1000);
 
     return (
-      <div className="wraper">
+      <div className="wrapper">
         {/* Center */}
         <Modal
           visible={show_popup}
@@ -223,161 +222,155 @@ class FixPerson extends Component<IProps, IState> {
         {/* Fix Infomation */}
         <Row className="person-info">
           {/* left div */}
-          <Col xs={24} sm={24} md={12} lg={12}>
-            <div className="person-avatar">
-              <h5>Cập nhật ảnh đại diện</h5>
-              <Avatar
-                src={avatarUrl}
-                style={{ width: "95px", height: "95px" }}
-              />
-              <form>
-                <label htmlFor="avatar" style={{ fontSize: 15 }}>
-                  <Icon type="upload" />
-                  Upload ảnh avatar
-                </label>
-              </form>
-              <Input
-                id="avatar"
-                type="file"
-                name="file"
-                alt="ảnh ứng viên"
-                style={{ display: "none" }}
-                onChange={(e) => {
-                  this._upLoadFile("avatar", "avatarUrl", e);
-                }}
-              />
-            </div>
-
-            <div className="person-content">
-              <p>Điện thoại</p>
-              <Input
-                id="phone"
-                type="text"
-                className="input_outside"
-                placeholder="Phone"
-                value={personalInfo.phone}
-                onChange={this._handleData}
-              />
-            </div>
-            <div className="person-content">
-              <p>Mã sinh viên</p>
-              <Input
-                id="studentCode"
-                type="text"
-                className="input_outside"
-                placeholder="Mã sinh viên"
-                value={personalInfo.studentCode}
-                onChange={this._handleData}
-              />
-            </div>
-
-            <div className="person-content">
-              <p>Ngày sinh</p>
-              <DatePicker
-                defaultValue={moment(birth_day, 'DD/MM/YYYY') ? moment(birth_day, 'DD/MM/YYYY') : null}
-                format="DD-MM-YYYY"
-                onChange={this._handleTime}
-                style={{ width: "100%" }}
-                placeholder="Ngày sinh"
-              />
-            </div>
-          </Col>
-
           {/* right div */}
           <Col xs={24} sm={24} md={12} lg={12}>
-            <div className="person-content">
-              <p>Họ</p>
-              <Input
-                id="lastName"
-                type="text"
-                className="input_outside"
-                placeholder="LastName"
-                value={personalInfo.lastName}
-                onChange={this._handleData}
+            <Avatar
+              src={avatarUrl}
+              style={{ width: "95px", height: "95px" }}
+            />
+            <form>
+              <label htmlFor="avatar" style={{ fontSize: 15 }}>
+                <Icon type="upload" />
+                Upload ảnh avatar
+              </label>
+            </form>
+            <Input
+              id="avatar"
+              type="file"
+              name="file"
+              alt="ảnh ứng viên"
+              style={{ display: "none" }}
+              onChange={(e) => {
+                this._upLoadFile("avatar", "avatarUrl", e);
+              }}
+            />
+          </Col>
+          <Col xs={24} sm={12} span={12}>
+            <p>Họ</p>
+            <Input
+              id="lastName"
+              type="text"
+              className="input_outside"
+              placeholder="LastName"
+              value={personalInfo.lastName}
+              onChange={this._handleData}
+            />
+          </Col>
+          <Col xs={24} sm={12} span={12}>
+            <p>Tên</p>
+            <Input
+              id="firstName"
+              type="text"
+              className="input_outside"
+              placeholder="FirstName"
+              value={personalInfo.firstName}
+              onChange={this._handleData}
+            />
+          </Col>
+          <Col xs={24} sm={12} span={12}>
+            <ButtonToggle />
+          </Col>
+          <Col xs={24} sm={12} span={12}>
+            <p>Giới tính</p>
+            <Icon type="man" />
+            <label>
+              <input
+                type="radio"
+                name="gender"
+                value="MALE"
+                onClick={this._handleGender}
+                defaultChecked={personalInfo.gender === "MALE" ? true : false}
               />
-            </div>
-            <div className="person-content">
-              <p>Tên</p>
-              <Input
-                id="firstName"
-                type="text"
-                className="input_outside"
-                placeholder="FirstName"
-                value={personalInfo.firstName}
-                onChange={this._handleData}
-              />
-            </div>
-            <div className="person-content">
-              <ButtonToggle />
-            </div>
-            <div className="person-content">
-              <p>Giới tính</p>
-              <Icon type="man" />
-              <label>
-                <input
-                  type="radio"
-                  name="gender"
-                  value="MALE"
-                  onClick={this._handleGender}
-                  defaultChecked={personalInfo.gender === "MALE" ? true : false}
-                />
                 Nam
               </label>
-              <Icon type="woman" />
-              <label>
-                <input
-                  type="radio"
-                  name="gender"
-                  value="FEMALE"
-                  onClick={this._handleGender}
-                  defaultChecked={personalInfo.gender === "MALE" ? false : true}
-                />{" "}
+            <Icon type="woman" />
+            <label>
+              <input
+                type="radio"
+                name="gender"
+                value="FEMALE"
+                onClick={this._handleGender}
+                defaultChecked={personalInfo.gender === "MALE" ? false : true}
+              />{" "}
                 Nữ
               </label>
-            </div>
-            <div className="person-content">
-              <p>Địa chỉ</p>
-              <Input
-                id="address"
-                type="text"
-                className="input_outside"
-                placeholder="Địa chỉ"
-                value={personalInfo.address}
-                onClick={this._openLocation}
-              />
-            </div>
-            <div className="person-content">
-              <p>Số CMND</p>
-              <Input
-                id="identityCard"
-                type="text"
-                className="input_outside"
-                placeholder="CMND"
-                value={personalInfo.identityCard}
-                onChange={this._handleData}
-              />
-            </div>
+          </Col>
+          <Col span={24}>
+            <p>Địa chỉ</p>
+            <Input
+              id="address"
+              type="text"
+              className="input_outside"
+              placeholder="Địa chỉ"
+              value={personalInfo.address}
+              onClick={this._openLocation}
+            />
+          </Col>
+          <Col xs={24} sm={12} span={12}>
+            <p>Số CMND</p>
+            <Input
+              id="identityCard"
+              type="text"
+              className="input_outside"
+              placeholder="CMND"
+              value={personalInfo.identityCard}
+              onChange={this._handleData}
+            />
+          </Col>
+          <Col xs={24} sm={12} span={12}>
+            <p>Ngày sinh</p>
+            <DatePicker
+              className="input_outside"
+              defaultValue={moment(birth_day, 'DD/MM/YYYY') ? moment(birth_day, 'DD/MM/YYYY') : null}
+              format="DD-MM-YYYY"
+              onChange={this._handleTime}
+              placeholder="Ngày sinh"
+            />
+          </Col>
+          <Col xs={24} sm={12} span={12}>
+            <p>Điện thoại</p>
+            <Input
+              id="phone"
+              type="text"
+              className="input_outside"
+              placeholder="Phone"
+              value={personalInfo.phone}
+              onChange={this._handleData}
+            />
+          </Col>
+          <Col xs={24} sm={12} span={12}>
+            <p>Mã sinh viên</p>
+            <Input
+              id="studentCode"
+              type="text"
+              className="input_outside"
+              placeholder="Mã sinh viên"
+              value={personalInfo.studentCode}
+              onChange={this._handleData}
+            />
           </Col>
         </Row>
-
         {/* submit button */}
         <Row className="holder-button">
           <Col xs={12}>
-            <button
-              className="danger"
+            <Button
+              type="danger"
+              icon="close"
               onClick={() => {
                 this.props._fixData("person");
               }}
             >
-              {" "}
               Hủy
-            </button>
+            </Button>
           </Col>
           <Col xs={12}>
-            <button className="request" onClick={() => this._createRequest()}>
-              {" "}
+            <Button
+              type="primary"
+              icon="save"
+              onClick={() => this._createRequest()}
+            >
               Lưu
-            </button>
+              </Button>
           </Col>
         </Row>
       </div>

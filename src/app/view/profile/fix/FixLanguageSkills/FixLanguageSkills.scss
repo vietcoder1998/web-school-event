@@ -1,5 +1,10 @@
 .language-skills-fix {
   transition: 0.3s;
+
+  .ant-col {
+    padding: 10px;
+  }
+
   .language-skills-ul {
     border: solid gray 1px;
     li {

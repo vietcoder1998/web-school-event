@@ -16,7 +16,7 @@ export default function ResultFilter(props?: IResultFilter) {
                 <p>
                     <label style={{ paddingLeft: 10 }}>
                         <label>Đã tìm thấy</label>
-                        <label style={{ color: 'red', padding: '0 3px 0 2px' }}>{numberRs}</label>
+                        <label style={{ color: 'red', padding: '0 3px 0 4px' }}>{numberRs}</label>
                         <label className='text-icon'>công việc</label>
                         {/* <Icon type={numberRs === 0 ? 'frown' : 'smile'} theme="twoTone" /> */}
                     </label>

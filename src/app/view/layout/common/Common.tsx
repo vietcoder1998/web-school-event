@@ -43,14 +43,16 @@ export function Timer(props) {
     )
 }
 
-export function JobType(props: {children?: any, width?: any, fontSize?: any}) {
+export function JobType(props: { children?: any, width?: any, fontSize?: any }) {
     let style: CSSProperties = {
         color: 'black',
         backgroundColor: 'white',
         fontSize: props.fontSize ? props.fontSize : '0.8em',
         textAlign: 'center',
-        width: props.width ? props.width : '72px',
-        display: 'inline-block'
+        width: props.width ? props.width : '90%',
+        display: 'inline-block',
+        position: 'relative',
+        marginTop: '5px',
     };
     let label;
     switch (props.children) {
@@ -81,4 +83,27 @@ export function JobType(props: {children?: any, width?: any, fontSize?: any}) {
 
 export function DangerousWord(props?: { size?: number }) {
     return (<label style={{ color: 'red' }}>({props && props.size >= 0 ? props.size : ''})</label>)
+}
+
+export function ConnerDiv(props?: { title?: string }) {
+    return (
+        <div className="conner">
+            <div className="bg-triagle"/>
+            <div className="tt">{props.title}</div>
+        </div>
+
+    )
+}
+
+export function OnDiv(props?: {
+    onClick?: Function,
+    loading?: Function,
+    src?: any;
+    alt?: string
+} ) {
+    return <div className="push-on" onClick={ () => props.onClick ? props.onClick() : undefined }>
+         <img className="on-image" src={require("./../../../../assets/image/video/pngegg.png")} />
+         <img className="base-inside" src={props.src} alt={props.alt} />
+         <div className="on-bound"/>
+    </div>
 }

@@ -11,6 +11,9 @@ interface IProps {
   getData?: Function;
   fix?: string;
   _fixData?: Function;
+  schools?: any;
+  major?: any;
+  personalInfo?: any;
 }
 
 interface IStates {
@@ -33,10 +36,6 @@ class Education extends Component<IProps, IStates> {
     };
   }
 
-  componentDidMount() {
-   
-  };
-
   render() {
     let { schools, personalInfo, major } = this.props;
     return (
@@ -44,18 +43,38 @@ class Education extends Component<IProps, IStates> {
       <div className="education">
         <div className="wrapper">
           <div className="content-school">
-            Tên trường: {schools.name} ({schools.shortName})
+            <p>
+              <b> Nơi học:</b>
+            </p>
+            <li>
+              {schools.name} ({schools.shortName})
+        </li>
           </div>
           <div className="content-school">
-            Thời gian học: {personalInfo.schoolYearStart} -{" "}
-            {personalInfo.schoolYearEnd}
+            <p>
+              <b> Thời gian học:</b>
+            </p>
+            <li>
+              {personalInfo.schoolYearStart} -{" "}
+              {personalInfo.schoolYearEnd}
+            </li>
           </div>
           <div className="content-school">
-            Mã sinh viên: {personalInfo.studentCode}
+            <p>
+              <b> Mã sinh viên:</b>
+            </p>
+            <li>
+              {personalInfo.studentCode}
+            </li>
           </div>
           <div className="content-school">
-            Chuyên ngành học / Ngành học: {major.name} /{" "}
-            {major.branch && major.branch.name}
+            <p>
+              <b>Chuyên ngành học / Ngành học:</b>
+            </p>
+            <li>
+              {major.name} /{" "}
+              {major.branch && major.branch.name}
+            </li>
           </div>
         </div>
       </div>

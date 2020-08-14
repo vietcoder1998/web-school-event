@@ -2,7 +2,6 @@
 
 .home-job {
   font-family: $font_base;
-  background-color: white;
   padding: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.02), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
 
@@ -10,7 +9,7 @@
     margin: 10px 0 !important;
     text-align: center;
     font-size: 1.5rem;
-    padding: 15px 0 20px;
+    padding: 15px 0 25px;
   }
 
   .ant-skeleton {
@@ -31,7 +30,7 @@
     margin-bottom: 10px;
     height: 110px !important;
     border-radius: 5px;
-    border: $color_border solid 1px;
+    // border: $color_border solid 1px;
 
     &:hover {
       background-color: whitesmoke;

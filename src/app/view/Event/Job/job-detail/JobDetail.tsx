@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./JobDetail.scss";
-import { Tabs, Row, Col, Icon, Button, Modal, Checkbox, Avatar } from "antd";
+import { Tabs, Row, Col, Icon, Button, Modal, Checkbox, Avatar, Affix } from "antd";
 import { connect } from "react-redux";
 import { _requestToServer } from "../../../../../services/exec";
 import { POST } from "../../../../../const/method";
@@ -19,7 +19,7 @@ import JobProperties from "./job-properties/JobProperties";
 import { Link } from "react-router-dom";
 import { TYPE } from "../../../../../const/type";
 import qs from "query-string";
-import {goBackWhenLogined} from '../../../../../utils/goBackWhenLogined'
+import { goBackWhenLogined } from '../../../../../utils/goBackWhenLogined'
 import swal from 'sweetalert';
 const { TabPane } = Tabs;
 const { TextArea } = Input;
@@ -49,7 +49,7 @@ interface IJobDetailProps extends StateProps, DispatchProps {
     pageSize?: number,
     id?: string,
   ) => any;
-  getJobDetail?: (jobID?: string,  eventAndSchoolID?: string) => any;
+  getJobDetail?: (jobID?: string, eventAndSchoolID?: string) => any;
   getEmployerDetail?: (id?: string) => any;
   getSimilarJob?: (pageIndex?: number, pageSize?: number) => any;
   param?: any
@@ -141,16 +141,16 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
   async componentDidMount() {
     let queryParam = qs.parse(window.location.search);
     let { isAuthen } = this.props;
-    if(queryParam.changeHost === '1') {
-      if(isAuthen) {
-        this.setState({visible: true})
+    if (queryParam.changeHost === '1') {
+      if (isAuthen) {
+        this.setState({ visible: true })
         // console.log(window.location.pathname)
         // window.location.search = null;
         this.props.history.replace(`${window.location.pathname}?data=${queryParam.data}`)
       } else {
         goBackWhenLogined('login')
       }
-    } 
+    }
     this.setState({ is_loading: false });
     await this._loadData();
     this._loadState();
@@ -216,7 +216,7 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
     localStorage.setItem("last_access", window.location.pathname);
     let path = window.location.pathname + window.location.search
     if (isAuthen !== true) {
-      window.location.assign( `/login?path=${window.btoa(path)}`);
+      window.location.assign(`/login?path=${window.btoa(path)}`);
     }
   };
 
@@ -306,7 +306,7 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
       }
     });
   }
-  componentWillUnmount() {}
+  componentWillUnmount() { }
 
   render() {
     let { jobDetail, isAuthen, param } = this.props;
@@ -416,13 +416,13 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
                       );
                     })}
                 </div>
-                <div style={{ fontStyle: 'italic'}}><span className="asterisk">*</span> Hồ sơ của bạn sẽ được gửi đến Nhà tuyển dụng! <a href="/profile" target="_blank">Hoàn thiện hồ sơ</a></div>                
+                <div style={{ fontStyle: 'italic' }}><span className="asterisk">*</span> Hồ sơ của bạn sẽ được gửi đến Nhà tuyển dụng! <a href="/profile" target="_blank">Hoàn thiện hồ sơ</a></div>
               </div>
             ) : (
-              <div>
-                <p>Bạn cần đăng nhập trước khi đăng tuyển</p>
-              </div>
-            )}
+                <div>
+                  <p>Bạn cần đăng nhập trước khi đăng tuyển</p>
+                </div>
+              )}
           </div>
         </Modal>
         <Layout>
@@ -447,48 +447,49 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
                     <img alt="Ảnh công ty" src={testImage(coverUrl)} className="company-image" />
                   </div>
                   {/* Header */}
-                  <div className="job-header">
-                    <div className="company-header">
-                      <Row>
-                        <Col xs={4} sm={8} md={4} lg={3} xl={4} className="a_c">
-                          <Avatar
-                            size={70}
-                            shape={"square"}
-                            src={testImage(logoUrl, "logo")}
-                            alt="logo-company"
-                          />
-                          <JobType>{jobDetail && jobDetail.jobType}</JobType>
-                        </Col>
-                        <Col xs={20} sm={12} md={16} lg={17} xl={14}>
-                          <h4>{jobDetail && jobDetail.jobTitle}</h4>
-                          <div className="d_j_t">
-                            <Icon type="home" style={{ color: "#168ECD" }} />
-                            <label>
-                              <Link
-                                to={`/employer/${window.btoa(
-                                  jobDetail.employerID
-                                )}${param}`}
-                                target="_blank"
-                                style={{ fontSize: "1.05em", fontWeight: 450 }}
-                              >
-                                {jobDetail && jobDetail.employerName}
-                              </Link>
-                            </label>
-                          </div>
-                          <div className="d_j_t">
-                            <Icon
-                              type="environment-o"
-                              style={{ color: "#168ECD" }}
+                  <Affix offsetTop={0} >
+                    <div className="job-header">
+                      <div className="company-header">
+                        <Row>
+                          <Col xs={4} sm={8} md={4} lg={3} xl={4} className="a_c">
+                            <Avatar
+                              size={70}
+                              shape={"square"}
+                              src={testImage(logoUrl, "logo")}
+                              alt="logo-company"
                             />
-                            <label>
-                              {/* <IptLetter value={"Nơi đăng: "} /> */}
-                              <span>{jobDetail && jobDetail.address}</span>
-                            </label>
-                          </div>
-                        </Col>
-                        <Col xs={24} sm={24} md={4} lg={4} xl={4}>
-                          <Row className="btn-s-c">
-                            {/* <Col
+                            <JobType>{jobDetail && jobDetail.jobType}</JobType>
+                          </Col>
+                          <Col xs={20} sm={12} md={16} lg={17} xl={14}>
+                            <h4>{jobDetail && jobDetail.jobTitle}</h4>
+                            <div className="d_j_t">
+                              <Icon type="home" style={{ color: "#168ECD" }} />
+                              <label>
+                                <Link
+                                  to={`/employer/${window.btoa(
+                                    jobDetail.employerID
+                                  )}${param}`}
+                                  target="_blank"
+                                  style={{ fontSize: "1.05em", fontWeight: 450 }}
+                                >
+                                  {jobDetail && jobDetail.employerName}
+                                </Link>
+                              </label>
+                            </div>
+                            <div className="d_j_t">
+                              <Icon
+                                type="environment-o"
+                                style={{ color: "#168ECD" }}
+                              />
+                              <label>
+                                {/* <IptLetter value={"Nơi đăng: "} /> */}
+                                <span>{jobDetail && jobDetail.address}</span>
+                              </label>
+                            </div>
+                          </Col>
+                          <Col xs={24} sm={24} md={4} lg={4} xl={4}>
+                            <Row className="btn-s-c">
+                              {/* <Col
                               xs={8}
                               sm={8}
                               md={24}
@@ -512,46 +513,48 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
                                 block
                               />
                             </Col> */}
-                            <Col
-                              xs={4}
-                              sm={4}
-                              md={4}
-                              lg={0}
-                              xl={0}
-                              className="a_c"
-                            ></Col>
-                            <Col
-                              xs={12}
-                              sm={12}
-                              md={24}
-                              lg={24}
-                              xl={24}
-                              style={{ marginTop: 30 }}
-                            >
-                              <Button
-                                type={applyState ? "ghost" : "default"}
-                                size="large"
-                                style={{
-                                  padding: "5px 0px",
-                                  backgroundColor: applyState ? "" : "#31a3f9",
-                                  borderColor: applyState ? "" : "white",
-                                  color: applyState ? "" : "white",
-                                }}
-                                onClick={() => {
-                                  isAuthen
-                                    ? this.setState({ visible: true })
-                                    : this._toLogin();
-                                }}
-                                disabled={applyState}
-                                children={content}
-                                block
-                              />
-                            </Col>
-                          </Row>
-                        </Col>
-                      </Row>
+                              <Col
+                                xs={4}
+                                sm={4}
+                                md={4}
+                                lg={0}
+                                xl={0}
+                                className="a_c"
+                              ></Col>
+                              <Col
+                                xs={12}
+                                sm={12}
+                                md={24}
+                                lg={24}
+                                xl={24}
+                                style={{ marginTop: 30 }}
+                              >
+                                <Button
+                                  type={applyState ? "ghost" : "default"}
+                                  size="large"
+                                  style={{
+                                    padding: "5px 0px",
+                                    backgroundColor: applyState ? "" : "#31a3f9",
+                                    borderColor: applyState ? "" : "white",
+                                    color: applyState ? "" : "white",
+                                  }}
+                                  onClick={() => {
+                                    isAuthen
+                                      ? this.setState({ visible: true })
+                                      : this._toLogin();
+                                  }}
+                                  disabled={applyState}
+                                  children={content}
+                                  block
+                                />
+                              </Col>
+                            </Row>
+                          </Col>
+                        </Row>
+                      </div>
                     </div>
-                  </div>
+                  </Affix>
+
                   <div className="job-content ">
                     <Tabs defaultActiveKey="1" className="">
                       <TabPane tab="Chi tiết công việc" key="1">

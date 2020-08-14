@@ -24,14 +24,14 @@ const EventCountDown = asyncComponent(() =>
   import("./app/view/Event/Home/CountDown").then((module) => module.default)
 );
 const Home = asyncComponent(() =>
-  import("./app/view/home/Home").then((module) => module.default)
+  import("./app/view/home").then((module) => module.default)
 );
 const Profile = asyncComponent(() =>
-  import("./app/view/profile/Profile").then((module) => module.default)
+  import("./app/view/profile").then((module) => module.default)
 );
 
 const NotFound = asyncComponent(() =>
-  import("./app/view/home/Home").then((module) => module.default)
+  import("./app/view/home").then((module) => module.default)
 );
 
 const Login = asyncComponent(() =>
@@ -108,7 +108,24 @@ const ArticleDetail = asyncComponent(() =>
     (module) => module.default
   )
 );
-class App extends React.Component {
+
+interface IProps {
+  checkAuthen?: Function;
+  checkEvent?: Function;
+  setInfoEvent?: Function;
+  noEvent?: Function;
+  getData?: Function;
+  isAuthen?: boolean;
+  setMobileState?: Function;
+  setEventID?: Function;
+}
+
+interface IState {
+  isAuthen?: boolean;
+  loading?: boolean;
+}
+
+class App extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -170,14 +187,14 @@ class App extends React.Component {
     if (queryParam.data) {
       let data = window.atob(queryParam.data)
       let queryParam2 = qs.parse(data)
-      
+
       if (queryParam2.schoolID && queryParam2.eventID) {
         this.getInfoSchool(queryParam2.schoolID).then((res) => {
           if (res && res.data) {
             this.props.setInfoEvent(res.data.logoUrl, res.data.primaryColor, res.data.primaryDarkColor, window.location.search, queryParam2.schoolID, queryParam2.eventID)
           }
         }).finally(() => {
-          
+
           this.setState({ loading: false })
         })
         this.checkEvent(queryParam2.schoolID, queryParam2.eventID)
@@ -201,7 +218,7 @@ class App extends React.Component {
               this.props.noEvent(false, null);
             }
           });
-      } else if(!queryParam2.schoolID && queryParam2.eventID) {
+      } else if (!queryParam2.schoolID && queryParam2.eventID) {
         this.props.setEventID(queryParam2.eventID)
       }
     } else {
@@ -218,70 +235,69 @@ class App extends React.Component {
 
   render() {
     // let { eventStart } = this.props;  
-      return (
-        <Fragment>
-          <Router>
-            <Suspense fallback={
-              <HashLoader
-                sizeUnit={"px"}
-                size={150}
-                color={"#32A3F9"}
-                loading={true}
+    return (
+      <Fragment>
+        <Router>
+          <Suspense fallback={
+            <HashLoader
+              size={150}
+              color={"#32A3F9"}
+              loading={true}
+            />
+          }>
+            <Switch>
+              <Route
+                exact
+                path="/events"
+                component={EventHome}
               />
-            }>
-              <Switch>
-                <Route
-                  exact
-                  path="/events"
-                  component={EventHome}
-                />
-                <Route
-                  exact
-                  path="/countdown"
-                  component={EventCountDown}
-                />
-                <Route
-                  exact
-                  path="/event-job-detail/:id"
-                  component={EventJobDetail}
-                />
-                <Route exact path="/count" component={EventCountDown} />
-                <Route exact path="/home" component={Home} />
-                <Route exact path="/login" component={this.props.isAuthen ? Home : Login} />
-                <Route exact path="/reset-password" component={ResetPassword} />
-                <Route
-                  exact
-                  path="/profile"
-                  component={this.props.isAuthen === true ? Profile : Home}
-                />
-                <Route exact path="/register" component={this.props.isAuthen ? Home: Register} />
-                <Route
-                  exact
-                  path="/forgot-password"
-                  component={ForgotPassword}
-                />
-                <Route path="/result" component={Result} />
-                <Route exact path="/save-job" component={SaveJob} />
-                {/* <Route exact path="/download-apps-student" component={DownloadApps} /> */}
-                <Route exact path="/history-apply" component={HistoryApply} />
-                <Route exact path="/job-detail/:id" component={JobDetail} />
-                <Route exact path="/notifications" component={AllNoti} />
-                <Route exact path="/tat-ca-cac-tinh" component={DataRegions} />
-                <Route
-                  exact
-                  path="/tat-ca-cac-cong-viec"
-                  component={DataJobNames}
-                />
-                <Route exact path="/employer/:id" component={EmInfo} />
-                <Route exact path="/announcement/:id" component={Article} />
+              <Route
+                exact
+                path="/countdown"
+                component={EventCountDown}
+              />
+              <Route
+                exact
+                path="/event-job-detail/:id"
+                component={EventJobDetail}
+              />
+              <Route exact path="/count" component={EventCountDown} />
+              <Route exact path="/home" component={Home} />
+              <Route exact path="/login" component={this.props.isAuthen ? Home : Login} />
+              <Route exact path="/reset-password" component={ResetPassword} />
+              <Route
+                exact
+                path="/profile"
+                component={this.props.isAuthen === true ? Profile : Home}
+              />
+              <Route exact path="/register" component={this.props.isAuthen ? Home : Register} />
+              <Route
+                exact
+                path="/forgot-password"
+                component={ForgotPassword}
+              />
+              <Route path="/result" component={Result} />
+              <Route exact path="/save-job" component={SaveJob} />
+              {/* <Route exact path="/download-apps-student" component={DownloadApps} /> */}
+              <Route exact path="/history-apply" component={HistoryApply} />
+              <Route exact path="/job-detail/:id" component={JobDetail} />
+              <Route exact path="/notifications" component={AllNoti} />
+              <Route exact path="/tat-ca-cac-tinh" component={DataRegions} />
+              <Route
+                exact
+                path="/tat-ca-cac-cong-viec"
+                component={DataJobNames}
+              />
+              <Route exact path="/employer/:id" component={EmInfo} />
+              <Route exact path="/announcement/:id" component={Article} />
               <Route exact path="/announcementDetail/:id" component={ArticleDetail} />
-                <Route component={NotFound} />
-              </Switch>
-            </Suspense>
-          </Router>
-          <BackTop></BackTop>
-        </Fragment>
-      );
+              <Route component={NotFound} />
+            </Switch>
+          </Suspense>
+        </Router>
+        <BackTop></BackTop>
+      </Fragment>
+    );
     // }
   }
 }

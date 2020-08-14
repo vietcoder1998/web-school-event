@@ -1,12 +1,11 @@
 import React, { PureComponent } from 'react';
 import { Col, Row, Skeleton, Avatar } from 'antd';
-import './TopEm.scss'
 import { connect } from 'react-redux';
 
-//@ts-ignore
 import { IAppState } from '../../../../redux/store/reducer';
 import { REDUX_SAGA } from '../../../../const/actions';
 import { ITopEmDetail } from '../../../../models/employer-detail';
+
 
 interface IProps {
     getTopEmployer?: Function;
@@ -28,7 +27,7 @@ class TopEm extends PureComponent<IProps, IState> {
         let { topEm, totalItems, loading } = this.props;
         if (topEm && totalItems > 0) {
             return (
-                <div className='top-rm'>
+                <div className='top-job'>
                     <h5 style={{ textAlign: 'center' }}>DOANH NGHIỆP NỔI BẬT </h5>
                     <Row style={{ padding: '0 3vw' }}>
                         {
@@ -40,7 +39,7 @@ class TopEm extends PureComponent<IProps, IState> {
                                     md={6}
                                     lg={6}
                                     xl={6}
-                                    xxl={4}
+                                    xxl={6}
                                 >
                                     <a href={`/employer/${btoa(item.employerID)}`}>
                                         {loading ?
@@ -50,13 +49,13 @@ class TopEm extends PureComponent<IProps, IState> {
                                                     <img
                                                         src={item.employerLogoUrl}
                                                         alt={item.employerName}
-                                                        height="90%"
-                                                        width="90%"
+                                                        height="100%"
+                                                        width="100%"
                                                     />
                                                 </div>
                                             )}
-                                        <div className='link'>
-                                            <p >{item.employerName}</p>
+                                        <div className='link-em a_c'>
+                                            <p style={{ padding: '0px 20px' }}>{item.employerName}</p>
                                         </div>
                                     </a>
 

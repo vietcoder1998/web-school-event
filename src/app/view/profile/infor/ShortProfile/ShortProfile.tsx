@@ -2,7 +2,7 @@ import React from "react";
 import "./ShortProfile.scss";
 import { timeConverter } from "../../../../../utils/convertTime";
 import { connect } from "react-redux";
-import { Avatar, Progress } from "antd";
+import { Avatar, Progress, Icon } from "antd";
 import imageDefault from "../../../../../assets/image/base-image.jpg";
 
 
@@ -28,61 +28,59 @@ function ShortProfile(props?: { personalInfo?: any }) {
             border: "solid #1890ff80 3px",
           }}
         />
-       
+
       </div>
       <div className="short-profile">
         <ul>
           <li className="profile-info">
-            <i className="fa fa-user " />
-            Họ và tên:
+            <Icon type="user" />
+            Họ và tên:{" "}
             {personalInfo &&
               personalInfo.lastName + " " + personalInfo.firstName}
           </li>
           <li className="profile-info">
-            <i className="fa fa-briefcase " />
-            Trạng thái:{" "}
+            <Icon type="share-alt" />
             {personalInfo && personalInfo.isLookingForJob === true
-              ? "Đang tìm việc"
-              : "Đã có công việc"}
+              ? <b>Đang tìm việc</b>
+              : <b>Đã có công việc</b>}
           </li>
           <li className="profile-info">
-            <i className="fa fa-calendar " />
+            <Icon type="reconciliation" />
             Ngày sinh:{" "}
-            {timeConverter(personalInfo && personalInfo.birthday, 1000)}
+            {timeConverter(personalInfo && personalInfo.birthday)}
           </li>
           <li className="profile-info">
-            <i className="fa fa-venus-mars " />
+            <Icon type={personalInfo && personalInfo.gender === "MALE" ? "man" : "woman"} />
             Giới tính:{" "}
             {personalInfo && personalInfo.gender === "MALE" ? "Nam" : "Nữ"}
           </li>
           <li>
-            <i className="fa fa-home " />
-            Địa chỉ: {personalInfo && personalInfo.address}
+            <Icon type="environment" />
+            Địa chỉ:{" "} {personalInfo && personalInfo.address}
           </li>
           <li>
-            <i className="fa fa-envelope " />
-            Email: {personalInfo && personalInfo.email}
+            <Icon type="mail" />
+            Email:{" "}{personalInfo && personalInfo.email}
           </li>
           <li>
-            <i className="fa fa-phone " />
-            Điện thoại liên hệ:{personalInfo && personalInfo.phone}
+            <Icon type="phone" />
+            Điện thoại liên hệ:{" "}{personalInfo && personalInfo.phone}
           </li>
           <li>
-            <i className="fa fa-address-card " />
+            <Icon type="idcard" />
             Số CMND:{personalInfo && personalInfo.identityCard}
           </li>
           <li>
-            <i className="fa fa-address-card " />
-            Mã sinh viên :{personalInfo && personalInfo.studentCode}
-            
+            <Icon type="idcard" />
+            Mã sinh viên :{" "}{personalInfo && personalInfo.studentCode}
           </li>
           <li>
-            <i className="fa fa-database " />
-            Ngày tạo:{personalInfo && GetDate(personalInfo.createdDate)}
+            <Icon type="database" />
+            Ngày tạo:{" "}{personalInfo && GetDate(personalInfo.createdDate)}
           </li>
           <li>
-            <i className="fa fa-percent" />
-            Hoàn thiện hồ sơ:{" "}
+            <Icon type="safety" />
+            Hoàn thiện hồ sơ:{" "}{personalInfo.completePercent} %
             <Progress percent={personalInfo.completePercent} />
           </li>
         </ul>

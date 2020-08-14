@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./JobDetail.scss";
-import { Tabs, Row, Col, Icon, Button, Modal, Checkbox, Avatar } from "antd";
+import { Tabs, Row, Col, Icon, Button, Modal, Checkbox, Avatar, Affix } from "antd";
 import { connect } from "react-redux";
 import { _requestToServer } from "../../../services/exec";
 import { POST } from "../../../const/method";
@@ -21,7 +21,7 @@ import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import { TYPE } from "../../../const/type";
 import qs from "query-string";
-import {goBackWhenLogined} from '../../../utils/goBackWhenLogined'
+import { goBackWhenLogined } from '../../../utils/goBackWhenLogined'
 const { TabPane } = Tabs;
 const { TextArea } = Input;
 
@@ -44,6 +44,7 @@ interface IJobDetailState {
 // @ts-ignore
 interface IJobDetailProps extends StateProps, DispatchProps {
   match?: any;
+  history?: any;
   getEmployerMoreJob?: (
     pageIndex?: number,
     pageSize?: number,
@@ -139,16 +140,16 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
   componentDidMount() {
     let queryParam = qs.parse(window.location.search);
     let { isAuthen } = this.props;
-    if(queryParam.changeHost === '1') {
-      if(isAuthen) {
-        this.setState({visible: true})
+    if (queryParam.changeHost === '1') {
+      if (isAuthen) {
+        this.setState({ visible: true })
         // console.log(window.location.pathname)
         // window.location.search = null;
         this.props.history.replace(`${window.location.pathname}?data=${queryParam.data}`)
       } else {
         goBackWhenLogined('login')
       }
-    } 
+    }
     this.setState({ is_loading: false });
     this._loadData();
     this._loadState();
@@ -232,7 +233,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
     localStorage.setItem("last_access", window.location.pathname);
     let path = window.location.pathname + window.location.search
     if (isAuthen !== true) {
-      window.location.assign( `/login?path=${window.btoa(path)}`);
+      window.location.assign(`/login?path=${window.btoa(path)}`);
     }
   };
 
@@ -272,7 +273,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
       false
     ).then((res) => {
       if (res) {
-      
+
         let { results } = res.data;
         if (res.data.success === true) {
           swal({
@@ -299,9 +300,9 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
           this._loadState();
         }
         else {
-          
+
           for (let i in results) {
-        
+
             if (results[i].full === true) {
               swal({
                 title: "Worksvns thông báo",
@@ -437,8 +438,8 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                       );
                     })}
                 </div>
-                <div style={{ fontStyle: 'italic'}}><span className="asterisk">*</span> Hồ sơ của bạn sẽ được gửi đến Nhà tuyển dụng! <a href="/profile" target="_blank">Hoàn thiện hồ sơ</a></div>
-                
+                <div style={{ fontStyle: 'italic' }}><span className="asterisk">*</span> Hồ sơ của bạn sẽ được gửi đến Nhà tuyển dụng! <a href="/profile" target="_blank">Hoàn thiện hồ sơ</a></div>
+
               </div>
             ) : (
                 <div>
@@ -450,7 +451,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
         <Layout>
           <div className="content">
             <Row>
-              <Col xs={0} sm={0} md={0} lg={1} xl={2} xxl={3}/>
+              <Col xs={0} sm={0} md={0} lg={1} xl={2} xxl={3} />
               <Col xs={24} sm={24} md={24} lg={22} xl={20} xxl={18}>
                 <div id="requirement-job" className="job-detail-content">
                   {/* Button recruitment */}
@@ -472,17 +473,16 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                   <div className="job-header">
                     <div className="company-header">
                       <Row>
-                        <Col xs={4} sm={8} md={4} lg={3} xl={4} className="a_c">
+                        <Col xs={4} sm={8} md={4} lg={3} xl={3} xxl={3} className="a_c">
                           <Avatar
-                            size={70}
                             shape={"square"}
                             src={testImage(logoUrl, "logo")}
-                            alt="logo-company"
-                            style={{marginBottom: 5}}
+                            alt={employerDetail && employerDetail.employerName}
+                            style={{ marginBottom: 5, width: "90%", height: "100%" }}
                           />
                           <JobType>{jobDetail && jobDetail.jobType}</JobType>
                         </Col>
-                        <Col xs={20} sm={12} md={16} lg={17} xl={14}>
+                        <Col xs={20} sm={12} md={16} lg={17} xl={16} xxl={17}>
                           <h4>{jobDetail && jobDetail.jobTitle}</h4>
                           <div className="d_j_t">
                             <Icon type="home" style={{ color: "#168ECD" }} />
@@ -509,32 +509,32 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                             </label>
                           </div>
                         </Col>
-                        <Col xs={24} sm={24} md={4} lg={4} xl={4}>
+                        <Col xs={24} sm={24} md={4} lg={4} xl={4} xxl={4}>
                           <Row className="btn-s-c">
                             {/* <Col
-                              xs={8}
-                              sm={8}
-                              md={24}
-                              lg={24}
-                              xl={24}
-                              style={{ marginTop: 10 }}
-                            >
-                              <Button
-                                size="large"
-                                type={
-                                  isAuthen && !isSaved ? "primary" : "ghost"
-                                }
-                                onClick={() => this._saveJob()}
-                                disabled={isSaved}
-                                style={{
-                                  marginRight: 5,
-                                }}
-                                children={
-                                  isAuthen && !isSaved ? "Lưu" : "Đã lưu"
-                                }
-                                block
-                              />
-                            </Col> */}
+                            xs={8}
+                            sm={8}
+                            md={24}
+                            lg={24}
+                            xl={24}
+                            style={{ marginTop: 10 }}
+                          >
+                            <Button
+                              size="large"
+                              type={
+                                isAuthen && !isSaved ? "primary" : "ghost"
+                              }
+                              onClick={() => this._saveJob()}
+                              disabled={isSaved}
+                              style={{
+                                marginRight: 5,
+                              }}
+                              children={
+                                isAuthen && !isSaved ? "Lưu" : "Đã lưu"
+                              }
+                              block
+                            />
+                          </Col> */}
                             <Col
                               xs={4}
                               sm={4}
@@ -548,28 +548,33 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                               xs={12}
                               sm={12}
                               md={24}
-                              lg={24}
-                              xl={24}
+                              lg={23}
+                              xl={22}
+                              xxl={22}
+
                               style={{ marginTop: 30 }}
                             >
-                              <Button
-                                type={applyState ? "ghost" : "default"}
-                                size="large"
-                                style={{
-                                  padding: "5px 0px",
-                                  backgroundColor: applyState ? "" : "#31a3f9",
-                                  borderColor: applyState ? "" : "white",
-                                  color: applyState ? "" : "white",
-                                }}
-                                onClick={() => {
-                                  isAuthen
-                                    ? this.setState({ visible: true })
-                                    : this._toLogin();
-                                }}
-                                disabled={applyState}
-                                children={content}
-                                block
-                              />
+                              <Affix offsetTop={20}>
+                                <Button
+                                  type={applyState ? "ghost" : "default"}
+                                  size="large"
+                                  style={{
+                                    padding: 5,
+                                    backgroundColor: applyState ? "" : "#31a3f9",
+                                    borderColor: applyState ? "" : "white",
+                                    color: applyState ? "" : "white",
+                                  }}
+                                  icon={"solution"}
+                                  onClick={() => {
+                                    isAuthen
+                                      ? this.setState({ visible: true })
+                                      : this._toLogin();
+                                  }}
+                                  disabled={applyState}
+                                  children={content}
+                                  block
+                                />
+                              </Affix>
                             </Col>
                           </Row>
                         </Col>
@@ -602,7 +607,6 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                   </div>
                 </div>
               </Col>
-              <Col xs={0} sm={0} md={0} lg={1} xl={2} xxl={3}></Col>
             </Row>
           </div>
         </Layout>

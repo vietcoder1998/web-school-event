@@ -21,7 +21,7 @@ export default class ListHlJob extends React.Component<IListHlJobProps> {
         // let {loading_high_light_data} = this.state;
         return (
             <div className='hl-job hidden-only-phone'>
-                <h5>Công việc hàng đầu</h5>
+                <h5>CÔNG VIỆC HÀNG ĐẦU</h5>
                 <div className='all-hl-job'>
                     <Row>
                         {highlightData && highlightData.items && highlightData.items.map((item, index) => {
