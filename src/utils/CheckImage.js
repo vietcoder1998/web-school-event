@@ -1,3 +1,4 @@
+import React from 'react';
 
 export const testImage = (defaultImage, type) => {
     if (defaultImage !== null) {
@@ -8,5 +9,5 @@ export const testImage = (defaultImage, type) => {
         }
     }
 
-    return "";
+    return "./../assets/image/countdown.jpg";
 }

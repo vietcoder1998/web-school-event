@@ -138,8 +138,8 @@ class Header extends PureComponent<IProps, IState> {
                     eventStart === false
                       ? "none"
                       : window.location.pathname === "/"
-                      ? "none"
-                      : "",
+                        ? "none"
+                        : "",
                   backgroundColor: this.props.primaryDarkColor,
                 }}
               >
@@ -157,7 +157,7 @@ class Header extends PureComponent<IProps, IState> {
               </a>
               <a href="/result">
                 <Icon type={"search"} />
-                Tìm kiếm
+                Tìm việc
               </a>
               <a
                 href="http://qrco.de/worksvn-vieclam?fbclid=IwAR2nRSwHv0aFQyVagAIb1EmFBA-0SX4NY3VVDevPwAb5VXQN_qnywhvJfwI"
@@ -173,7 +173,7 @@ class Header extends PureComponent<IProps, IState> {
               </a>
               <a
                 href="/announcement/all"
-                
+
                 style={{
                   display: window.location.pathname.split('/')[1] === "announcement" ? "none" : "",
                 }}
@@ -190,11 +190,11 @@ class Header extends PureComponent<IProps, IState> {
                 <Icon
                   type="shop"
                   theme="filled"
-                  style={{ fontSize: "16.8px"}}
+                  style={{ fontSize: "16.8px" }}
                 />
                 Nhà Tuyển Dụng
               </a>
-             
+
             </div>
           </div>
           <div
@@ -216,7 +216,7 @@ class Header extends PureComponent<IProps, IState> {
                 }}
               >
                 <Badge count={number_noti}>
-                  <Icon type="bell" theme="filled" />
+                  <Icon type="bell" theme="filled" style={{fontSize: 14}} />
                 </Badge>
               </span>
             </Notification>
@@ -238,7 +238,11 @@ class Header extends PureComponent<IProps, IState> {
                   <Avatar
                     src={localStorage.getItem("avatarUrl")}
                     icon="user"
-                    style={{ border: "solid #fff 1.5px", objectFit: "cover" }}
+                    style={{
+                      border: "solid #fff 1.5px",
+                      objectFit: "cover",
+                      marginBottom: 5
+                    }}
                   />
                   {localStorage.getItem("name") ? (
                     <label className="label_name">
@@ -248,17 +252,17 @@ class Header extends PureComponent<IProps, IState> {
                 </span>
               </Dropdown>
             ) : (
-              <span className="label-login hidden-mobile">
-                <a onClick={() => goBackWhenLogined("login")}>Đăng nhập</a>
-                <span
-                  style={{
-                    borderRight: "solid #efefef 0.8px",
-                    padding: "0px 0px 2.2px",
-                  }}
-                ></span>
-                <a  onClick={() => goBackWhenLogined("register")}>Đăng ký</a>
-              </span>
-            )}
+                <span className="label-login hidden-mobile">
+                  <a onClick={() => goBackWhenLogined("login")}>Đăng nhập</a>
+                  <span
+                    style={{
+                      borderRight: "solid #efefef 0.8px",
+                      padding: "0px 0px 2.2px",
+                    }}
+                  ></span>
+                  <a onClick={() => goBackWhenLogined("register")}>Đăng ký</a>
+                </span>
+              )}
           </div>
         </div>
       </>

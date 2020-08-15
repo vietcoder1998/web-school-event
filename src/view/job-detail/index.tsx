@@ -382,7 +382,12 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
       }
     }
 
-    let coverUrl = jobDetail.employerCoverUrl;
+    let coverUrl = require("./../../assets/image/countdown.jpg");
+    
+    if (jobDetail.employerCoverUrl) {
+      coverUrl = jobDetail.employerCoverUrl
+    };
+
     let logoUrl = jobDetail.employerLogoUrl;
 
     return (
@@ -450,7 +455,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
         </Modal>
         <Layout>
           <div className="content">
-            <Row>
+            <Row style={{marginTop: '0.5vw'}}>
               <Col xs={0} sm={0} md={0} lg={1} xl={2} xxl={3} />
               <Col xs={24} sm={24} md={24} lg={22} xl={20} xxl={18}>
                 <div id="requirement-job" className="job-detail-content">
@@ -461,7 +466,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                         this.setState({ visible: true });
                       }}
                     >
-                      <i className="fa fa-paper-plane-o" aria-hidden="true" />
+                      <Icon type="solution" />
                     </Button>
                   </div>
 
@@ -470,6 +475,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                     <LazyLoadImage
                       alt={employerDetail && employerDetail.employerName}
                       src={testImage(coverUrl)}
+                      onError={() => coverUrl=require("./../../assets/image/countdown.jpg")}
                       className="company-image"
                     />
                   </div>

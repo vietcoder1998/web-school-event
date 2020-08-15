@@ -344,9 +344,8 @@ class SearchBox extends Component<IProps, IState>{
 
         let jobLocationFilter = {
             regionID: null,
-            lat: 0,
-            lon: 0,
-            distance: 20000
+            lat: null,
+            lon: null,
         }
 
         if (show_days) {

@@ -20,6 +20,7 @@ import { TYPE } from "../../../const/type";
 import qs from "query-string";
 import { goBackWhenLogined } from '../../../utils/goBackWhenLogined'
 import swal from 'sweetalert';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 const { TabPane } = Tabs;
 const { TextArea } = Input;
 
@@ -443,7 +444,7 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
 
                   {/* Cover Image */}
                   <div className="cover-image-job ">
-                    <img alt="Ảnh công ty" src={testImage(coverUrl)} className="company-image" />
+                    <LazyLoadImage alt={jobDetail.employerName} src={testImage(coverUrl)} className="company-image" />
                   </div>
                   {/* Header */}
                   <Affix offsetTop={0} >
@@ -463,27 +464,23 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
                             <h4>{jobDetail && jobDetail.jobTitle}</h4>
                             <div className="d_j_t">
                               <Icon type="home" style={{ color: "#168ECD" }} />
-                              <label>
-                                <Link
-                                  to={`/employer/${window.btoa(
-                                    jobDetail.employerID
-                                  )}${param}`}
-                                  target="_blank"
-                                  style={{ fontSize: "1.05em", fontWeight: 450 }}
-                                >
-                                  {jobDetail && jobDetail.employerName}
-                                </Link>
-                              </label>
+                              <Link
+                                to={`/employer/${window.btoa(
+                                  jobDetail.employerID
+                                )}${param}`}
+                                target="_blank"
+                                style={{ fontSize: "1.05em", fontWeight: 450 }}
+                              >
+                                {jobDetail && jobDetail.employerName}
+                              </Link>
                             </div>
                             <div className="d_j_t">
                               <Icon
                                 type="environment-o"
                                 style={{ color: "#168ECD" }}
                               />
-                              <label>
-                                {/* <IptLetter value={"Nơi đăng: "} /> */}
-                                <span>{jobDetail && jobDetail.address}</span>
-                              </label>
+                              {/* <IptLetter value={"Nơi đăng: "} /> */}
+                              <span>{jobDetail && jobDetail.address}</span>
                             </div>
                           </Col>
                           <Col xs={24} sm={24} md={4} lg={4} xl={4}>

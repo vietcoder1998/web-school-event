@@ -34,6 +34,7 @@ function getJobResults(action) {
       regionID: null,
       lat: null,
       lon: null,
+      distance: 100,
     },
     schoolEventID: store.getState().DetailEvent.eventID,
     branchIDs: null
@@ -45,8 +46,8 @@ function getJobResults(action) {
 
   let url_string = window.location.href;
   var url = new URL(url_string);
-  var jnids = url.searchParams.get("jids");
-  var rid = url.searchParams.get("rid");
+  var jnids = url.searchParams.get("jobNameID");
+  var rid = url.searchParams.get("regionID");
   var jt = url.searchParams.get("jt");
   var brids = url.searchParams.get("brids");
 
@@ -65,6 +66,11 @@ function getJobResults(action) {
   if (brids) {
     body.branchIDs = [parseInt(brids)];
   }
+
+  body.jobLocationFilter.distance=null;
+  body.jobLocationFilter.lat=null;
+  body.jobLocationFilter.lon=null;
+
 
   let isAuthen = store.getState().AuthState.isAuthen;
   let res = _requestToServer(

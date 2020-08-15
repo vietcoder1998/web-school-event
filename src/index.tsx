@@ -6,7 +6,7 @@ import ErrorBoundary from './view/layout/common/ErrorBoudary';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import { store } from './redux/store/index';
-import 'font-awesome/css/font-awesome.min.css';
+// import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "antd/dist/antd.css";
 // import 'emoji-mart/css/emoji-mart.css';

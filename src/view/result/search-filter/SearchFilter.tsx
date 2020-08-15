@@ -193,7 +193,6 @@ class SearchFilter extends React.Component<
             xxl={isAuthen ? 6 : 12}
           >
             <Select
-              
               size={"large"}
               showSearch
               style={{ width: "100%", margin: "5px 0px" }}

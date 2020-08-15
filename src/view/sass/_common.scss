@@ -1,5 +1,38 @@
-@import "./variable";
 @import "./responsive";
+
+$color_blue: #15b5dd;
+$color_blue_link: #4a90e2;
+$color_blue_lagoon: #04728e;
+$color_white: #ffffff;
+$color_white_rgb: #fdfdfd;
+$color_primary: #212833;
+$color_secondary: #848e9c;
+$color_grey_athens: #ebedef;
+$color_grey_river: #48515d;
+$color_grey_light: #f9f9f9;
+$color_grey_alto: #d8d8d8;
+$color_green: #00c087;
+$color_red: #e03a3e;
+$color_font_header: #4e4e4e;
+$color_font_base: rgba(0, 0, 0, 0.65);
+$color_base: #1890ff;
+$color_background: #fafafa;
+// font-family
+
+$font_root: "Roboto", sans-serif;
+
+// font size
+
+$font_size_base: 14px;
+$font_size_small: 12px;
+$font_size_medium: 16px;
+$font_size_above_medium: 20px;
+$font_size_large: 28px;
+$font_super_small: 8px;
+
+$color_border: rgb(231, 231, 231);
+$font_base: Roboto, Segoe UI, BlinkMacSystemFont, -apple-system, sans-serif;
+
 
 body {
   margin: 0;
@@ -63,7 +96,6 @@ code {
 }
 
 .video-ad-on {
-  background-color: rgb(255, 253, 240);
   position: relative;
   text-align: center;
   font-weight: 500;
@@ -95,7 +127,7 @@ code {
 
   image {
     object-fit: cover;
-    height: 100%;
+    width: 100%;
     border-radius: 10px;
   }
 }
@@ -493,6 +525,15 @@ i {
 .home-job {
   background-color: $color_background;
   margin-bottom: 1vw;
+  .ant-pagination {
+    font-weight: 500;
+  }
+  .ant-pagination-item {
+    border: solid rgba($color: #fff, $alpha: 0.5) 1px;
+  }
+  .ant-pagination-item-link {
+    border: none;
+  }
 }
 
 .conner {
@@ -1776,12 +1817,6 @@ label {
   }
 }
 
-@media only screen and (min-width: 900px) {
-  .cover-image-job {
-    // margin-top      : 5px;
-    height: 55vh;
-  }
-}
 .asterisk {
   top: 4px;
   position: relative;
@@ -2204,7 +2239,7 @@ html {
 
 .Countdown {
   text-align: center;
-  background-image: url(../../assets/image/countdown.jpg);
+  // background-image: url('./../assets/image/countdown.jpg');
   height: 100%;
   width: 100%;
   /* Center and scale the image nicely */
@@ -2216,7 +2251,7 @@ html {
   
   @media only screen and (min-width: 1px) and (max-width: 600px) {
     background-color: rgb(179, 230, 245);
-    background-image: url(../../assets/image/phone.jpg);
+    // background-image: url('./../assets/image/phone.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -2722,7 +2757,7 @@ html {
 @media only screen and (min-width: 900px) {
   .cover-image-job {
     // margin-top      : 5px;
-    height: 55vh;
+    height: 35vh;
   }
 }
 
@@ -3002,3 +3037,290 @@ html {
     height: 530px;
   }
 }
+
+.employer-info {
+  border-radius : 3px;
+  position      : relative;
+  transition    : 0.5s;
+  $color_black  : black;
+  $color_gray   : rgb(17, 13, 13);
+  $padding_base : 60px;
+  $height_head  : 400px;
+  min-height    : 80vh;
+  display       : block;
+  padding-top   : 10px;
+  padding-bottom: 10px;
+  
+  .employer-info-header {
+    top          : 0px;
+    left         : 0px;
+    overflow     : hidden;
+    border-radius: 3px;
+    position     : relative;
+    border       : solid rgb(255, 255, 255) 1px;
+    height       : 70vh;
+    transition   : 0.25s;
+    z-index      : 2;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
+    span {
+      letter-spacing: 0.5px;
+    }
+
+    .cover-image-profile {
+      width     : 100%;
+      height: calc(100% - 109px);
+      opacity   : 1;
+      min-width : 100%;
+      min-height: 100%;
+      z-index   : 0;
+      min-height: auto;
+      object-fit: cover;
+    }
+
+    &:hover {
+      .upload-cover {
+        opacity: 1;
+      }
+    }
+
+    .block-span {
+      width: 100px !important;
+      color: #168ecd;
+    }
+
+    .block-image {
+      border-radius  : 3px;
+      position       : absolute;
+      bottom         : 0;
+      width          : 100%;
+      z-index        : 2;
+      justify-content: center;
+
+      .content-avatar {
+        height         : 8vw;
+        width          : 100%;
+        border-radius  : 50%;
+        position       : relative;
+        text-align     : center;
+        display        : flex;
+        justify-content: center;
+        
+        img{
+          object-fit: contain;
+          background-color: white
+        }
+      }
+
+      .name-employer {
+        background-color: white;
+        text-align      : center;
+        font-size       : 1.2rem;
+        font-weight     : 600;
+        padding         : 10px;
+      }
+    }
+  }
+
+  .employer-info-body {
+    position        : relative;
+    // min-height      : 500px;
+    height          : auto;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
+    margin-bottom: 15px;
+    Button {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+    }
+    .item-job{
+              display         : flex;
+              text-align      : center;
+              min-height      : 140px;
+              height          : 92%;
+              width           : 92%;
+              margin          : 5px 5px;
+              border          : solid $color_border 1px;
+              margin          : none;
+              padding         : 10px;
+              border-radius   : 3px;
+              background-color: white;
+              img{
+                object-fit: contain
+              }
+    }
+    .ant-skeleton{
+      display: table;
+      width: auto;
+      margin: 5px 5px;
+      min-height: 140px;
+      border: solid #e7e7e7 1px;
+      padding: 10px;
+    }
+    .info-silimar-job{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        text-transform: inherit;
+    }
+    .pagination-job {
+      margin-bottom: 20px;
+    }
+    .ant-card-meta-avatar {
+      i {
+        color: #168ECD
+      }
+    }
+
+
+    .verified-profile {
+      padding: 5px;
+
+      .ic-ct-id {
+        padding: 10px 40px;
+      }
+
+      // min-height: 50vh;
+
+      .ic-ct-img {
+        padding: 20px 40px;
+        width  : 100%;
+        height : 100%;
+
+        .ic {
+          border       : solid gray 1px;
+          border-radius: 3px;
+          padding      : 3px;
+          height       : 300px;
+          width        : 100%;
+          object-fit: cover;
+        }
+      }
+    }
+
+    .description-info {
+      width           : 100%;
+      min-height      : 25vh;
+      padding         : 0.5vw 2vw;
+      margin          : 10px 0px;
+      text-align      : center;
+      border-radius   : 3px;
+      position        : relative;
+      background-color: rgba(243, 243, 243, 0.659);
+      border          : solid rgb(255, 255, 255) 1px;
+      transition      : 0.25s;
+
+      &:hover {
+        // background-color: rgba(162, 255, 246, 0.408);
+        border             : solid rgba(178, 178, 178, 0.639) 1px;
+        cursor             : pointer;
+        // margin          : 5px 15px;
+      }
+
+      .image-f-d {
+        height: 20vw;
+        width : 100%;
+      }
+
+      ul {
+        margin: 0px -10px;
+      }
+
+      li {
+        display: inline-flex;
+        width  : 100%;
+        padding: 5px 10px;
+
+        .info {
+          margin-top: -5px;
+          padding   : 5px 10px;
+        }
+      }
+
+      img {
+        max-height: 100%;
+        max-width : 100%;
+        float     : center;
+      }
+
+      .fix {
+        width           : 100%;
+        margin          : 20px 0px 10px;
+        background-color: #168ecd;
+        border          : none;
+        color           : white;
+        border-radius   : 3px;
+        padding         : 5px;
+      }
+
+      .exit {
+        width           : 45%;
+        margin          : 20px 0px 10px;
+        margin-right    : 10%;
+        background-color: #cd6816;
+        border          : none;
+        color           : white;
+        border-radius   : 3px;
+        padding         : 5px;
+      }
+
+      .accepted {
+        width           : 45%;
+        margin          : 20px 0px 10px;
+        background-color: #16cd41;
+        border          : none;
+        color           : white;
+        border-radius   : 3px;
+        padding         : 5px;
+      }
+
+      .image-f-d {
+        position: relative;
+      }
+    }
+  }
+}
+
+.upload-image {
+  position  : absolute;
+  margin    : 0px;
+  bottom    : 0px;
+  left      : 0px;
+  width     : 100%;
+  height    : 50%;
+  transition: 400ms;
+  text-align: center;
+  font-size : 20px;
+  padding   : calc(25% - 15px) 0px;
+  display   : hidden;
+  color     : white;
+  opacity   : 0;
+
+  z-index: 2;
+
+  &:hover {
+    background-color: rgba(26, 26, 26, 0.285);
+    display         : block;
+    opacity         : 1;
+    font-size       : 20px;
+
+    p {
+      font-size: 15;
+    }
+  }
+}
+.fa-star {
+  color: #ffbe00;
+}
+.fa-star-o {
+  color: #ffbe00;
+}
+// textarea {
+//   width: 98%;
+//   border: solid rgba(128, 128, 128, 0.476) 1px;
+//   border-radius: 2px;
+//   min-height: 150px;
+// }

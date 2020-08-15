@@ -1,72 +1,68 @@
-@import "../../sass/variable";
-
-
 .header {
-  position           : relative;
-  z-index            : 1;
-  width              : 100%;
+  position: relative;
+  z-index: 1;
+  width: 100%;
   // background         : linear-gradient(to right, $color_base, rgb(216, 216, 216));
-  height             : 60px;
-  padding            : 0 20px;
-  display            : flex;
-  justify-content    : space-between;
-  align-items        : center;
+  height: 60px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   // border-bottom   : 1px solid $color_border;
   // box-shadow      : 0 0 8px 0 rgba(0,0,0,.3);
 
   .triagle-up {
-    position     : absolute;
-    bottom       : -1px;
-    z-index      : 1;
-    width        : 0;
-    height       : 0;
-    border-left  : 12px solid transparent;
-    border-right : 12px solid transparent;
+    position: absolute;
+    bottom: -1px;
+    z-index: 1;
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
     border-bottom: 12px solid #ffffff;
   }
 
   .triagle-shadow {
-    position     : absolute;
-    bottom       : 0px;
-    bottom       : -1px;
-    z-index      : 0;
-    width        : 0;
-    height       : 0;
-    border-left  : 12px solid transparent;
-    border-right : 12px solid transparent;
+    position: absolute;
+    bottom: 0px;
+    bottom: -1px;
+    z-index: 0;
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
     border-bottom: 12px solid #252525;
   }
 
   .search_box_container {
     position: absolute;
-    left    : 25%;
+    left: 25%;
   }
 
   .logo {
     position: relative;
-    top     : -2px;
-    width   : 40px;
-    height  : 40px;
+    top: -2px;
+    width: 40px;
+    height: 40px;
   }
 
   .direct-page {
-    position   : absolute;
-    left       : 15%;
+    position: absolute;
+    left: 15%;
     font-weight: 550;
-    font-size          : 0.93rem;
+    font-size: 0.93rem;
 
     a {
-      color              : rgb(255, 255, 255);
-      height             : 100%;
-      padding            : 20px;
-      font-size          : 0.93rem;
-      font-weight        : 400;
-      font-family: $font_base;
+      color: rgb(255, 255, 255);
+      height: 100%;
+      padding: 20px;
+      font-size: 0.93rem;
+      font-weight: 400;
       // background-color: rgb(214, 214, 214);
 
       &:hover {
         background-color: rgba(184, 216, 255, 0.367);
-        border-bottom   : solid rgb(226, 226, 226) 1px;
+        border-bottom: solid rgb(226, 226, 226) 1px;
 
         // color        : rgba(255, 255, 255, 0.639);
       }
@@ -74,10 +70,10 @@
     i {
       margin-right: 5px;
     }
-    svg[data-icon="bank"]{
+    svg[data-icon="bank"] {
       margin-bottom: 0.5px;
     }
-    svg[data-icon="apple"]{
+    svg[data-icon="apple"] {
       margin-bottom: 0.65px;
     }
   }
@@ -85,18 +81,18 @@
   // Function Link
   .function {
     display: flex;
-    width  : auto;
-    height : 100%;
-    margin : 0px;
+    width: auto;
+    height: 100%;
+    margin: 0px;
 
     // MenuProfile
     .label-function {
-      padding    : 5px 12px;
-      font-size  : 20px;
-      position   : relative;
-      width      : auto;
-      color      : white;
-      margin: 10px 0;
+      padding: 4px 12px;
+      font-size: 20px;
+      position: relative;
+      width: auto;
+      color: white;
+      margin: 10px 5px;
       border-radius: 50%;
       cursor: pointer;
 
@@ -106,25 +102,17 @@
       }
       a {
         color: white;
-        
       }
 
-      i {
-        font-size: 16.5px;
-        
-        // :hover {
-        //   color: #f2f2f2;
-        // }
-      }
-      svg[data-icon="bell"]{
+      svg[data-icon="bell"] {
         margin-bottom: 0.65px;
       }
+
       .label_name {
-        color      : white;
-        height     : 100%;
-        font-size  : 0.93rem;
-        font-weight: 450;
-        padding    : 0px 10px;
+        color: white;
+        font-size: 0.93rem;
+        font-weight: 600;
+        padding: 0px 10px;
 
         &:hover {
           text-decoration: underline;
@@ -133,16 +121,16 @@
     }
 
     //choosed noti
-    .ant-popover-open{
+    .ant-popover-open {
       background-color: rgba(184, 216, 255, 0.367);
     }
 
     #borderLeft {
       border-left: 2px solid gray;
-      position   : absolute;
-      height     : 30px;
-      top        : 15px;
-      right      : 0px;
+      position: absolute;
+      height: 30px;
+      top: 15px;
+      right: 0px;
     }
 
     // Login Logout Register
@@ -152,8 +140,7 @@
 
       a {
         color: #ffffff;
-        font-weight        : 400;
-        font-family: $font_base;
+        font-weight: 400;
         border-radius: 5px;
         &:hover {
           // color          : #f2f2f2;
@@ -164,7 +151,7 @@
         line-height: 60px;
         padding: 8px;
         margin: 5px 5px 0;
-        font-size  : 0.9pc;
+        font-size: 0.9pc;
       }
     }
   }
@@ -179,12 +166,12 @@
     margin-right: 60px;
   }
 }
-.ant-badge-multiple-words{
-  padding: 0px 2px 0 0px
+.ant-badge-multiple-words {
+  padding: 0px 2px 0 0px;
 }
-.ant-popover-inner{
+.ant-popover-inner {
   margin-right: 20px !important;
 }
 .employer {
-  background-color: #0E7CCD
+  background-color: #0e7ccd;
 }

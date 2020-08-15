@@ -86,7 +86,6 @@ class Result extends React.Component<IProps, IStateResult> {
           regionID: null,
           lat: null,
           lon: null,
-          distance: 20000,
         },
         // schoolConnected: null,
       },

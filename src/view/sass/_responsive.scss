@@ -1,4 +1,23 @@
 // tablet
+$color_font_header: #4e4e4e;
+$color_font_base: rgba(0, 0, 0, 0.65);
+$color_base: #1890ff;
+$color_background: #fafafa;
+// font-family
+
+$font_root: "Roboto", sans-serif;
+
+// font size
+
+$font_size_base: 14px;
+$font_size_small: 12px;
+$font_size_medium: 16px;
+$font_size_above_medium: 20px;
+$font_size_large: 28px;
+$font_super_small: 8px;
+
+$color_border: rgb(231, 231, 231);
+
 @media (min-width: 768px) and (max-width: 1060px) {
   .content {
     padding: 10px 30px;
