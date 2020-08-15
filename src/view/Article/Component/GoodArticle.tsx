@@ -1,18 +1,19 @@
 import React, { PureComponent } from "react";
 import { _requestToServer } from "../../../services/exec";
-import { POST } from "../../../const/method";
+// import { POST } from '../../../const/method';
 import { ANNOUNCEMENTS } from "../../../services/api/public.api";
 import { PUBLIC_HOST } from "../../../environment/development";
 
 import Title from "./Title";
 import Card3 from "./Card3";
 import Card2 from "./Card2";
+import { POST } from './../../../const/method';
 interface IProps {
   idType?: any;
   cardType?: number;
 }
 interface IState {
-  listArticleRender?: any;
+  listArticleData?: any;
   body?: any;
   loading?: boolean;
   pageIndex?: any;
@@ -23,12 +24,13 @@ class GoodArticle extends PureComponent<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      listArticleRender: [],
+      listArticleData: [],
       pageIndex: 0,
       pageSize: 10,
       loading: true,
     };
   }
+
   public static defaultProps = {
     cardType: 2,
   };
@@ -36,7 +38,7 @@ class GoodArticle extends PureComponent<IProps, IState> {
     this.getListArticle(0, 5);
   }
 
-  async getListArticle(pageIndex, pageSize = 5) {
+  async getListArticle(pageIndex = 0, pageSize = 5) {
     let body = {
       adminID: null,
       hidden: null,
@@ -46,30 +48,31 @@ class GoodArticle extends PureComponent<IProps, IState> {
     this.props.idType === "all"
       ? (body.announcementTypeID = null)
       : (body.announcementTypeID = this.props.idType);
-    let res = await _requestToServer(
+
+   await _requestToServer(
       POST,
       body,
       ANNOUNCEMENTS.LIST +
-        `?sortBy=a.viewNumber&sortType=desc&pageIndex=${pageIndex}&pageSize=${pageSize}`,
+      `?sortBy=a.viewNumber&sortType=desc&pageIndex=${0}&pageSize=${pageSize}`,
       PUBLIC_HOST,
       {
         pageIndex: pageIndex,
         pageSize: pageSize,
       },
-      false
-    );
-    console.log(res);
-    try {
-      this.setState({
-        listArticleRender: res.data.items,
-        loading: false,
-      });
-    } catch (e) {
-      console.log(e);
-    }
+      false,
+
+    ).then((res?: any) => {
+      if (res) {
+        this.setState({
+          listArticleData: res.data.items,
+          loading: false,
+        });
+      }
+    });
   }
+
   render() {
-    let { listArticleRender } = this.state;
+    let { listArticleData } = this.state;
     // const props = {
     //   dots: true,
     //   infinite: true,
@@ -81,7 +84,7 @@ class GoodArticle extends PureComponent<IProps, IState> {
       return (
         <div className="good-article">
           <Title title={"Nhiều người đọc"} />
-          {listArticleRender.map((item, index) => (
+          {listArticleData.map((item, index) => (
             <div
               key={index}
               style={{ display: index === 0 ? "none" : "", marginTop: 20 }}

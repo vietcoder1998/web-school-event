@@ -5,7 +5,7 @@ import moment from 'moment';
 import { weekDays } from '../../../../utils/day';
 import { _checkGender } from '..';
 import './JobProperties.scss'
-import { IShift } from '../../../../models/announcements';
+import { IShift } from '../../../../models/announcements.interface';
 // import { convertStringToArray } from '../../../utils/convertStringToArray';
 import { convertSalary } from '../../../../utils/convertNumber'
 

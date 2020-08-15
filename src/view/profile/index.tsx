@@ -11,6 +11,7 @@ import FixDescription from "./fix/FixDescription";
 import Description from "./infor/Description";
 import FixSkills from "./fix/FixSkills";
 import Skills from "./infor/Skills";
+import UploadConfig from './Upload'
 
 // import Info from '../layout/info/Info';
 import FixExperience from "./fix/FixExperience";
@@ -26,10 +27,13 @@ import FixLanguageSkills from "./fix/FixLanguageSkills";
 // import moveScrollBar from '../../assets/js/moveScroll';
 import { POST, PUT } from "../../const/method";
 import { REDUX_SAGA } from "../../const/actions";
+import CVviewer from './CVviewer';
+import { IAppState } from "../../redux/store/reducer";
 
 interface IProps {
   personalInfo?: any;
   getData?: Function;
+  history?: any;
 }
 
 interface IState {
@@ -77,11 +81,12 @@ class Profile extends Component<IProps, IState> {
     this.setState({ loading: false });
   }
 
-  _fixData = (id) => {
+  _fixData = (id?: string) => {
     let { profileState } = this.state;
     let param = id;
     profileState[param] = !profileState[param];
     this.setState({ profileState });
+    window.location.assign(`/profile#${id}`);
   };
 
   render() {
@@ -94,16 +99,22 @@ class Profile extends Component<IProps, IState> {
             <Col
               xs={24}
               sm={24}
-              md={18}
-              lg={18}
+              md={12}
+              lg={15}
               xl={16}
               xxl={16}
               className="block-info"
             >
-              <Block describe="Thông tin cá nhân" icon={this.icon_user}>
+              <Block
+                describe="Thông tin cá nhân"
+                icon={this.icon_user}
+                id={"person"}
+              >
                 <div
                   className="icon-fix"
-                  onClick={() => this._fixData("person")}
+                  onClick={() => {
+                    this._fixData("person");
+                  }}
                 >
                   <Icon type="edit" />
                 </div>
@@ -114,10 +125,14 @@ class Profile extends Component<IProps, IState> {
                   )}
               </Block>
               {/* picture */}
-              <Block describe="Ảnh CMND/CCCD" icon={this.icon_list}>
+              <Block
+                describe="Ảnh CMND/CCCD"
+                icon={this.icon_list}
+                id={"picture"}
+              >
                 <div
                   className="icon-fix"
-                  onClick={() => this._fixData("picture")}
+                  onClick={() => { this._fixData("picture"); window.location.assign("/profile#picture") }}
                 >
                   <Icon type="edit" />
                 </div>
@@ -129,7 +144,11 @@ class Profile extends Component<IProps, IState> {
               </Block>
 
               {/* Description */}
-              <Block describe="Mục tiêu nghề nghiệp" icon={this.icon_list}>
+              <Block
+                describe="Mục tiêu nghề nghiệp"
+                icon={this.icon_list}
+                id={"description"}
+              >
                 <div
                   className="icon-fix"
                   onClick={() => this._fixData("description")}
@@ -144,7 +163,11 @@ class Profile extends Component<IProps, IState> {
               </Block>
 
               {/* Skill */}
-              <Block describe="Kỹ năng chuyên nghành" icon={this.icon_star}>
+              <Block
+                describe="Kỹ năng mềm"
+                icon={this.icon_star}
+                id={"skills"}
+              >
                 <div
                   className="icon-fix"
                   onClick={() => this._fixData("skills")}
@@ -159,7 +182,11 @@ class Profile extends Component<IProps, IState> {
               </Block>
 
               {/* Language Skills */}
-              <Block describe="Ngoại ngữ" icon={this.icon_list}>
+              <Block
+                describe="Ngoại ngữ"
+                icon={this.icon_list}
+                id="languageSkill"
+              >
                 <div
                   className="icon-fix"
                   onClick={() => this._fixData("languageSkill")}
@@ -173,7 +200,11 @@ class Profile extends Component<IProps, IState> {
               </Block>
 
               {/* Experience */}
-              <Block describe="Kinh nghiệm làm việc" icon={this.icon_tower}>
+              <Block
+                describe="Kinh nghiệm làm việc"
+                icon={this.icon_tower}
+                id="experience"
+              >
                 <div
                   className="icon-fix"
                   onClick={() => this._fixData("experience")}
@@ -187,7 +218,11 @@ class Profile extends Component<IProps, IState> {
               </Block>
 
               {/* Education */}
-              <Block describe="Học vấn và bằng cấp" icon={this.icon_bachelor}>
+              <Block
+                describe="Học vấn và bằng cấp"
+                icon={this.icon_bachelor}
+                id="education"
+              >
                 <div
                   className="icon-fix"
                   onClick={() => this._fixData("education")}
@@ -206,24 +241,14 @@ class Profile extends Component<IProps, IState> {
             <Col
               xs={24}
               sm={24}
-              md={6}
-              lg={6}
+              md={12}
+              lg={9}
               xl={8}
-              xxl={4}
+              xxl={8}
               className="candicate-info "
             >
-              {/* <div>
-                                <p>
-                                    <label>THÁI ĐỘ</label>
-                                </p>
-                                <p>
-                                    <label>KĨ NĂNG</label>
-                                </p>
-                                <p>
-                                    <label>HÀI LÒNG</label>
-                                </p>
-
-                            </div> */}
+              <UploadConfig />
+              <CVviewer cvUrl={this.props.personalInfo.personalInfo.cvUrl} />
             </Col>
           </Row>
         </div>
@@ -231,7 +256,7 @@ class Profile extends Component<IProps, IState> {
     );
   }
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = (state?: IAppState) => {
   return {
     isAuthen: state.AuthState.isAuthen,
     personalInfo: state.FullPersonalInfo,

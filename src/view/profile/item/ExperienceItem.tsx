@@ -197,7 +197,12 @@ class ExperienceItem extends Component<Props, State> {
                             {/* Description */}
                             <div className='experience-content'>
                                 <p> <label style={{ color: 'red' }}>*</label>Mô tả nội dung</p>
-                                <textarea id='description' placeholder='Nhập nội dung và mô tả cụ thể công việc đã làm' value={experience.description} onChange={this._handleInput("description")}></textarea>
+                                <Input.TextArea
+                                    id='description'
+                                    placeholder='Nhập nội dung và mô tả cụ thể công việc đã làm'
+                                    value={experience.description}
+                                    onChange={this._handleInput("description")}
+                                />
                             </div>
                             <p><label style={{ color: 'red' }}>*</label>Thông tin bắt buộc</p>
                         </div>

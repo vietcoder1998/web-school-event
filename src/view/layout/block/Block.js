@@ -21,7 +21,7 @@ class Block extends Component {
         let { loading, fade } = this.state;
 
         return (
-            <div className='box-block'>
+            <div className='box-block' id={this.props.id}>
                 <div className="block-header">
                     <p>{this.props.icon} {this.props.describe}</p>
                 </div>

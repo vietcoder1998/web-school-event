@@ -43,6 +43,7 @@ export const sendStringHeader = {
 
 export const sendFileHeader = {
     'Access-Control-Allow-Headers': '*',
+    'Content-Type': 'multipart/form-data',
     'Authorization': `Bearer ${localStorage.getItem("accessToken")}`,
 }
 

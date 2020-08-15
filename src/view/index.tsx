@@ -10,9 +10,8 @@ import $ from "jquery";
 import { _get } from "../services/base-api";
 import { PUBLIC_HOST } from "../environment/development";
 import { noInfoHeader } from "../services/auth";
-import HashLoader from "react-spinners/HashLoader";
+import BarLoader from "react-spinners/BarLoader";
 import qs from "query-string";
-
 
 const EventHome = asyncComponent(() =>
   import("./event").then((module) => module.default)
@@ -98,14 +97,23 @@ const EventJobDetail = asyncComponent(() =>
 );
 
 const Article = asyncComponent(() =>
-  import("./Article/Article").then((module) => module.default)
+  import("./article").then((module) => module.default)
 );
 
 const ArticleDetail = asyncComponent(() =>
-  import("./Article/Detail/ArticleDetail").then(
+  import("./article/detail/ArticleDetail").then(
     (module) => module.default
   )
 );
+
+
+const override = `
+display: block;
+margin: 0 auto;
+border-color: red;
+font-size: 150px;
+`;
+
 
 interface IProps {
   checkAuthen?: Function;
@@ -134,8 +142,11 @@ class App extends React.Component<IProps, IState> {
 
   resizeInterface = null;
 
-  async componentDidMount() {
+  componentWillMount() {
+    return (<BarLoader />)
+  }
 
+  async componentDidMount() {
     await this._loadLocal();
     if (this.props.isAuthen) {
       this.props.getData();
@@ -158,6 +169,7 @@ class App extends React.Component<IProps, IState> {
       this.props.setMobileState(false);
     }
   };
+
   checkEvent(schoolID, eventID) {
     let res = _get(
       null,
@@ -240,7 +252,9 @@ class App extends React.Component<IProps, IState> {
       <Fragment>
         <Router>
           <Suspense fallback={
-            <HashLoader
+            <BarLoader
+              css={override}
+              //@ts-ignore
               size={150}
               color={"#32A3F9"}
               loading={true}

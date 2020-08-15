@@ -115,8 +115,8 @@ class EducationItem extends Component<IProps, IStates> {
     render() {
         let { item, complete, fix } = this.props;
         let { education, activeKey } = this.state;
-        let startedDate = timeConverter(education.startedDate, 1000);
-        let finishedDate = timeConverter(education.finishedDate, 1000);
+        let startedDate = timeConverter(education.startedDate);
+        let finishedDate = timeConverter(education.finishedDate);
         return (
             <Tabs activeKey={activeKey} onSelect={() => { }}>
                 {/* Delete */}
@@ -135,7 +135,6 @@ class EducationItem extends Component<IProps, IStates> {
                             </Popconfirm>
                         </div>
                         <div>
-                           
                             <IptLetterP>Nơi học: </IptLetterP>
                             <div style={{ padding: '5px 10px' }}> {item.school}</div>
                             <IptLetterP>Ngành học: </IptLetterP>

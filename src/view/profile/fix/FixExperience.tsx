@@ -55,9 +55,6 @@ class FixExperience extends Component<IState, IState> {
         this.setState({ experience });
     }
 
-    _closeFixExperience = () => {
-    }
-
     _createRequest = () => {
         this.requestServer(); 
     }
@@ -78,7 +75,7 @@ class FixExperience extends Component<IState, IState> {
         if (method === POST) {
             let res = await _requestToServer(POST, experience, experienceController, null, null, null, true);
             if (res) {
-                await this.props.getData()
+                await this.props.getData();
                 await this.props._fixData('experience');
             }
         }
@@ -124,7 +121,7 @@ class FixExperience extends Component<IState, IState> {
                     {/* Description */}
                     <div className='experience-content'>
                         <p> <label style={{ color: 'red' }}>*</label>Mô tả nội dung</p>
-                        <textarea id='description' placeholder='Nhập nội dung và mô tả cụ thể công việc đã làm' value={experience.description} onChange={this._handleInput("description")}></textarea>
+                        <Input.TextArea id='description' placeholder='Nhập nội dung và mô tả cụ thể công việc đã làm' value={experience.description} onChange={this._handleInput("description")}/>
                     </div>
                     <p><label style={{ color: 'red' }}>*</label>Thông tin bắt buộc</p>
                 </div>

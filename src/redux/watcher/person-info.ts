@@ -38,6 +38,7 @@ function* getFullPersonInfo() {
         identityCard: "",
         identityCardFrontImageUrl: "",
         identityCardBackImageUrl: "",
+        cvUrl: ""
     };
 
     personalInfo.avatarUrl = data.avatarUrl;
@@ -68,6 +69,7 @@ function* getFullPersonInfo() {
     personalInfo.schoolYearEnd = data.schoolYearEnd;
     personalInfo.studentCode = data.studentCode === null ? "Chưa cập nhật" : data.studentCode;
     personalInfo.createdDate = data.createdDate;
+    personalInfo.cvUrl = data.cvUrl;
     // description
     let description = data.description;
     // skills

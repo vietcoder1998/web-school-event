@@ -55,3 +55,5 @@ export const NORMAL_PRIVATE = {
         DETAIL: `/api/students/jobs/{id}/active`
     },
 }
+
+export const UPCVSTUDENT = '/api/students/curriculumVitae'

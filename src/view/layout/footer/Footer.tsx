@@ -19,7 +19,7 @@ function Footer(props) {
     <div className='footer' >
       {/* <Option {...props} /> */}
       <div style={{ width: 1, backgroundColor: '#fff' }}></div>
-      <div className="content-footer" style={{ display: props.disableFooterData ? "none" : "block" , paddingTop: 18}}>
+      <div className="content-footer" style={{ display: props.disableFooterData ? "none" : "block", paddingTop: 18 }}>
         <Row >
           {/* Rule */}
           <Col xs={24} sm={24} md={8} lg={8} className='rule'>
@@ -43,7 +43,7 @@ function Footer(props) {
             </div>
             <div>
               <label style={{ fontSize: '0.95em' }}>
-              Văn phòng: BT08-TT2, KĐT Kim văn kim lũ, Đại kim, Hoàng mai, Hà nội
+                Văn phòng: BT08-TT2, KĐT Kim văn kim lũ, Đại kim, Hoàng mai, Hà nội
                 </label>
             </div>
           </Col>
@@ -59,7 +59,12 @@ function Footer(props) {
                   {/* <img src={QRCodeAppStore} alt='AppleStore Tìm việc QRCode' height='47px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px' }} /> */}
                 </div>
                 <div style={{ display: 'flex' }} >
-                  <a href={'https://play.google.com/store/apps/details?id=com.worksvn.student&hl=vi'} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={'https://play.google.com/store/apps/details?id=com.worksvn.student&hl=vi'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    
+                  >
                     <LazyLoadImage src={CHPlay} alt='AppleStore Tìm việc' height='50px' width='auto' />
                   </a>
                   {/* <img src={QRCodeCHPlay} alt='CHPlay Tìm việc QRCode' height='47px' width='auto' style={{marginTop: '1.2px', marginLeft: '5px'}}/> */}

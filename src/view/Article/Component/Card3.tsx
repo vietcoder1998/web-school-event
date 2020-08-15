@@ -3,8 +3,9 @@ import { Skeleton, Icon, Rate } from "antd";
 //@ts-ignore
 import DefaultImage from "../../../assets/image/base-image.jpg";
 import { Link } from "react-router-dom";
-import "./Card.scss";
+// import "./Card.scss";
 import { timeConverter } from "../../../utils/convertTime";
+// import Title from './Title';
 
 interface IProps {
   id?: string;
@@ -64,7 +65,7 @@ export default class Card3 extends PureComponent<IProps, IState> {
               className="img-card"
               src={this.state.imageUrl}
               alt="article"
-            /> 
+            />
             <div className='info'>
               <div className='title-article'>
                 {this.state.title}
@@ -72,13 +73,12 @@ export default class Card3 extends PureComponent<IProps, IState> {
               <div className="summary">{this.state.content}</div>
             </div>
             <div className="info">
-            <div>
-                    <Icon type="calendar" /> {this.state.date}
-                  </div>
+              <div>
+                <Icon type="calendar" /> {this.state.date}
+              </div>
               <div>
                 <Rate allowHalf disabled value={this.state.rating} />
               </div>
-              
             </div>
           </div>
         </Skeleton>

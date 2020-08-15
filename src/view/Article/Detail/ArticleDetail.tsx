@@ -26,7 +26,7 @@ import { timeConverter } from "../../../utils/convertTime";
 import TextArea from "antd/lib/input/TextArea";
 
 import { store } from "../../../redux/store/index";
-import GoodArticle from "../Component/GoodArticle";
+import GoodArticle from "../component/GoodArticle";
 import { _requestToServer } from "../../../services/exec";
 import { POST, DELETE } from "../../../const/method";
 import { ANNOUNCEMENTS_PRIVATE } from "../../../services/api/private.api";
@@ -40,19 +40,19 @@ interface IProps {
 interface IState {
   author?: any;
   type?: string;
-  rated?: Number;
+  rated?: number;
   content?: string;
   imageUrl?: string;
   createdDate?: string;
   title?: string;
-  views?: Number;
+  views?: number;
   listComment?: any;
-  rating?: Number;
+  rating?: number;
   comment?: string;
   idType?: string;
-  totalComment?: Number;
+  totalComment?: number;
   id?: string;
-  loadingCommnet?: boolean;
+  loadingComment?: boolean;
   userID?: string;
   loading?: boolean;
 }
@@ -80,7 +80,7 @@ class ArticleDetail extends PureComponent<IProps, IState> {
 
       //data cmt
       listComment: [],
-      loadingCommnet: true,
+      loadingComment: true,
 
       //data for cmt
       rating: 5,
@@ -106,38 +106,32 @@ class ArticleDetail extends PureComponent<IProps, IState> {
       this.getComment();
     } else return 0;
   }
-  DetailArticle() {
-    try {
-      _get(
-        null,
-        ANNOUNCEMENTS.DETAIL.replace(
-          "{id}",
-          window.atob(this.props.match.params.id)
-        ),
-        PUBLIC_HOST,
-        noInfoHeader
-      )
-        .then((res) => {
-          let data = res.data;
-          this.setState({
-            author: data.admin,
-            rated: data.averageRating,
-            content: data.content,
-            createdDate: timeConverter(data.createdDate),
-            imageUrl: data.imageUrl === null ? DefaultImage : data.imageUrl,
-            title: data.title,
-            views: data.viewNumber,
-            type: data.announcementType.name,
-            idType: data.announcementType.id,
-            totalComment: data.totalComment,
-            id: this.props.match.params.id,
-            loading: false,
-          });
-        })
-        .catch((e) => {
-          console.log(e);
+  async DetailArticle() {
+    _get(
+      null,
+      ANNOUNCEMENTS.DETAIL.replace(
+        "{id}",
+        window.atob(this.props.match.params.id)
+      ),
+      PUBLIC_HOST,
+      noInfoHeader
+    ).then((res) => {
+        let data = res.data;
+        this.setState({
+          author: data.admin,
+          rated: data.averageRating,
+          content: data.content,
+          createdDate: timeConverter(data.createdDate),
+          imageUrl: data.imageUrl === null ? DefaultImage : data.imageUrl,
+          title: data.title,
+          views: data.viewNumber,
+          type: data.announcementType.name,
+          idType: data.announcementType.id,
+          totalComment: data.totalComment,
+          id: this.props.match.params.id,
+          loading: false,
         });
-    } catch {}
+      })
   }
 
   async getComment() {
@@ -161,7 +155,7 @@ class ArticleDetail extends PureComponent<IProps, IState> {
         .then((res) => {
           this.setState({
             listComment: res.data.items,
-            loadingCommnet: false,
+            loadingComment: false,
             comment: null,
             rating: 5,
           });
@@ -169,7 +163,7 @@ class ArticleDetail extends PureComponent<IProps, IState> {
         .catch((e) => {
           console.log(e);
         });
-    } catch {}
+    } catch { }
   }
   setComment = (e) => {
     this.setState({
@@ -177,7 +171,7 @@ class ArticleDetail extends PureComponent<IProps, IState> {
     });
   };
 
-  async sendCommnet() {
+  async sendComment() {
     let { rating, comment } = this.state;
     let dataSend = {
       comment: comment,
@@ -197,6 +191,7 @@ class ArticleDetail extends PureComponent<IProps, IState> {
     );
     this.getComment();
   }
+  
   DeleteComment = (id) => {
     let dataSend = [id];
     console.log(dataSend);
@@ -212,9 +207,9 @@ class ArticleDetail extends PureComponent<IProps, IState> {
       dataSend,
       false
     ).then((res) => {
-        console.log(res);
-        this.getComment();
-      })
+      console.log(res);
+      this.getComment();
+    })
       .catch((e) => {
         console.log(e);
       });
@@ -249,7 +244,7 @@ class ArticleDetail extends PureComponent<IProps, IState> {
             <Row>
               <Col xs={0} sm={0} md={0} lg={1} xl={1} xxl={1}></Col>
               <Col xs={24} sm={24} md={16} lg={16} xl={16} xxl={16}>
-                <Row gutter={[16, 16]}>
+                <Row gutter={16}>
                   <Col xs={0} sm={0} md={0} lg={3} xl={3} xxl={4}>
                     <Affix offsetTop={200}>
                       <div className="affix-annou-card hidden-only-phone">
@@ -277,16 +272,17 @@ class ArticleDetail extends PureComponent<IProps, IState> {
                                 //   "width=626, height=436"
                                 // );
                                 // console.log("1");
-                                FB.ui(
-                                  {
-                                    display: "popup",
-                                    method: "share",
-                                    href:
-                                      "https://developers.facebook.com/docs/",
-                                    picture: this.state.imageUrl,
-                                  },
-                                  function (response) {}
-                                );
+                                //   FB.ui(
+                                //     {
+                                //       display: "popup",
+                                //       method: "share",
+                                //       href:
+                                //         "https://developers.facebook.com/docs/",
+                                //       picture: this.state.imageUrl,
+                                //     },
+                                //     function (response) {}
+                                //   );
+                                // }
                               }}
                             />
                           </div>
@@ -367,7 +363,7 @@ class ArticleDetail extends PureComponent<IProps, IState> {
                           <Button
                             type={"primary"}
                             onClick={() => {
-                              this.sendCommnet();
+                              this.sendComment();
                             }}
                           >
                             Gửi
@@ -375,20 +371,20 @@ class ArticleDetail extends PureComponent<IProps, IState> {
                         </div>
                       </div>
                     ) : (
-                      <div>
-                        <Divider />
-                        <a
-                          href="/login"
-                          onClick={() => {
-                            let last_access = window.location.href;
-                            localStorage.setItem("last_access", last_access);
-                          }}
-                        >
-                          {" "}
+                        <div>
+                          <Divider />
+                          <a
+                            href="/login"
+                            onClick={() => {
+                              let last_access = window.location.href;
+                              localStorage.setItem("last_access", last_access);
+                            }}
+                          >
+                            {" "}
                           Đăng nhập để bình luận
                         </a>
-                      </div>
-                    )}
+                        </div>
+                      )}
                     <Divider />
                     {this.state.listComment &&
                       this.state.listComment.map((item, index) => (

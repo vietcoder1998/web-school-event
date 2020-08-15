@@ -199,7 +199,7 @@ class FixPerson extends Component<IProps, IState> {
     let birth_day = timeConverter(personalInfo.birthday);
 
     return (
-      <div className="wrapper">
+      <div className="wrapper" id="person">
         {/* Center */}
         <Modal
           visible={show_popup}

@@ -3,7 +3,7 @@ import { Row, Col, Carousel, Card, Icon } from 'antd';
 import { connect } from 'react-redux';
 import { REDUX_SAGA } from '../../const/actions';
 import { IAppState } from '../../redux/store/reducer';
-import { IAnnouncement } from '../../models/announcements';
+import { IAnnouncement } from '../../models/announcements.interface';
 import Meta from 'antd/lib/card/Meta';
 import { limitString } from '../../utils/limitString';
 import { POST } from '../../const/method';

@@ -3,7 +3,7 @@ import { Row, Col, Icon, Skeleton, Avatar, Empty, Pagination } from 'antd';
 import { IptLetter, NotUpdate, JobType } from '../layout/common/Common';
 import moment from 'moment';
 import { weekDays } from '../../utils/day';
-import { IShift } from '../../models/announcements';
+import { IShift } from '../../models/announcements.interface';
 // import { convertStringToArray } from '../../utils/convertStringToArray';
 import { convertSalary } from '../../utils/convertNumber'
 import { Link } from 'react-router-dom';

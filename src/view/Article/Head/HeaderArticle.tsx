@@ -6,17 +6,17 @@ import { POST } from "../../../const/method";
 import { ANNOUNCEMENTS } from "../../../services/api/public.api";
 import { PUBLIC_HOST } from "../../../environment/development";
 
-import Card1 from "../Component/Card1";
-// import Card2 from "../Component/Card2";
-import Title from "../Component/Title";
+import Card1 from "../component/Card1";
+import Card2 from "../component/Card2";
+import Title from "../component/Title";
 
 // import HashLoader from "react-spinners/HashLoader";
-import GoodArticle from "../Component/GoodArticle";
+import GoodArticle from "../component/GoodArticle";
 interface IProps {
   idType?: any;
 }
 interface IState {
-  listArticleRender?: any;
+  listArticleData?: any;
   body?: any;
   loading?: boolean;
   pageIndex?: any;
@@ -27,7 +27,7 @@ class HeaderArticle extends PureComponent<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      listArticleRender: [],
+      listArticleData: [],
       pageIndex: 0,
       pageSize: 10,
       loading: true,
@@ -69,13 +69,16 @@ class HeaderArticle extends PureComponent<IProps, IState> {
     );
     try {
       this.setState({
-        listArticleRender: res.data.items,
+        listArticleData: res.data.items,
         loading: false,
       });
-    } catch (e) {}
+    } catch (e) { }
   }
   render() {
-    // let { listArticleRender } = this.state;
+    let {
+      listArticleData,
+      loading
+    } = this.state;
     const props = {
       dots: true,
       infinite: true,
@@ -83,59 +86,34 @@ class HeaderArticle extends PureComponent<IProps, IState> {
       slidesToScroll: 1,
     };
 
-    if (this.state.loading)
-      return (
-        <div>
+    return (
+      <Row>
+        <Col sm={24} md={24} lg={16} xl={16} xxl={16}>
           <Title title={"Bài viết hay"} />
-          <Skeleton rows={6} />
-        </div>
-      );
-    else {
-      return (
-        <div>
-          <Row>
-            <Col sm={0} md={0} lg={1} xl={1} xxl={1}></Col>
-            <Col sm={24} md={24} lg={22} xl={23} xxl={23}>
-              <div>
-                <Row>
-                  <Col sm={24} md={24} lg={24} xl={16} xxl={16}>
-                    <div
-                      style={{
-                        display: this.props.idType === "all" ? "" : "none",
-                      }}
-                    >
-                      <Title title={"Bài viết hay"} />
-                    </div>
-                    <Carousel
-                      dots={true}
-                      autoplay
-                      autoplaySpeed={3000}
-                      ref={(node) => (this.carousel = node)}
-                      {...props}
-                    >
-                      {this.state.listArticleRender.map((item, index) => (
-                        <div key={index}>
-                          <Card1
-                            id={item.id}
-                            title={item.title}
-                            imageUrl={item.imageUrl}
-                            summary={item.previewContent}
-                          />
-                        </div>
-                      ))}
-                    </Carousel>
-                  </Col>
-                  <Col sm={24} md={24} lg={24} xl={1} xxl={1}></Col>
-                  <Col sm={24} md={24} lg={24} xl={7} xxl={7}>
-                    <GoodArticle />
-                  </Col>
-                </Row>
+          <Carousel
+            dots={true}
+            autoplay
+            autoplaySpeed={3000}
+            // ref={(node) => (this.carousel = node)}
+            {...props}
+          >
+            {this.state.listArticleData.map((item, index) => (
+              <div key={index}>
+                <Card1
+                  id={item.id}
+                  title={item.title}
+                  imageUrl={item.imageUrl}
+                  summary={item.previewContent}
+                />
               </div>
-            </Col>
-          </Row>
-        </div>
-      );
-    }
+            ))}
+          </Carousel>
+        </Col>
+        <Col xs={24} sm={12} md={12} lg={7} xl={7} xxl={7}>
+          <GoodArticle />
+        </Col>
+      </Row>
+    );
   }
 }
 

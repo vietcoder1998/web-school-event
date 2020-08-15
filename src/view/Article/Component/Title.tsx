@@ -1,9 +1,10 @@
 import React from "react";
-import './Title.scss'
+import { limitString } from "../../../utils/limitString";
+
 export default function Title(props) {
   return (
     <div className="text-inner">
-      <p>{props.title}</p>
+      <p>{limitString(props.title, 50) }</p>
     </div>
   );
 }

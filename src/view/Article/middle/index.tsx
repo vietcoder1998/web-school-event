@@ -2,8 +2,8 @@ import React, { PureComponent } from "react";
 import { Row, Col, Button, Divider } from "antd";
 import Title from "../Component/Title";
 import "./Middle.scss";
-import ListMiddle from "./ListMiddle";
-import GoodArticle from "../Component/GoodArticle";
+import ListMiddle from "./ListMidle";
+import GoodArticle from "../component/GoodArticle";
 
 //@ts-ignore
 import bannerImage from "../../../assets/image/Ứng dụng tìm kiếm việc làm hàng đầu.gif";
@@ -11,8 +11,13 @@ import bannerImage from "../../../assets/image/Ứng dụng tìm kiếm việc l
 interface IProps {
   listType?: any;
   idType?: string;
+  
 }
-interface IState {}
+interface IState {
+  listType?: Array<any>;
+  isAll?: boolean;
+}
+
 export default class Middle extends PureComponent<IProps, IState> {
   constructor(props) {
     super(props);
@@ -29,7 +34,6 @@ export default class Middle extends PureComponent<IProps, IState> {
     });
   }
 
-  getTypeArticle() {}
   render() {
     return (
       <div className="article-middle">

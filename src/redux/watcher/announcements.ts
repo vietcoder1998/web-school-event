@@ -1,6 +1,6 @@
 import { ANNOUNCEMENTS } from './../../services/api/public.api';
 import { noInfoHeader } from './../../services/auth';
-import { IAnnouncements } from './../../models/announcements';
+import { IAnnouncements } from '../../models/announcements.interface';
 import { POST } from '../../const/method';
 import { takeEvery, put, call, } from 'redux-saga/effects';
 import { _requestToServer } from '../../services/exec';
@@ -43,7 +43,7 @@ function callAnnouncements(action: any) {
         let res = _requestToServer(
             POST,
             body,
-            ANNOUNCEMENTS,
+            ANNOUNCEMENTS.LIST,
             PUBLIC_HOST,
             noInfoHeader,
             {

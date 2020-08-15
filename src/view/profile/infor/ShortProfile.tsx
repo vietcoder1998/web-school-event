@@ -3,6 +3,7 @@ import { timeConverter } from "../../../utils/convertTime";
 import { connect } from "react-redux";
 import { Avatar, Progress, Icon } from "antd";
 import imageDefault from "../../../assets/image/base-image.jpg";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 
 function GetDate(dateRaw) {
@@ -16,7 +17,8 @@ function ShortProfile(props?: { personalInfo?: any }) {
   let { personalInfo } = props;
 
   return (
-    <div className="wrapper">
+    <div className="wrapper" id="person">
+      <LazyLoadImage />
       <div className="avatar">
         <Avatar
           src={personalInfo.avatarUrl === null ? imageDefault : personalInfo.avatarUrl}
@@ -27,7 +29,6 @@ function ShortProfile(props?: { personalInfo?: any }) {
             border: "solid #1890ff80 3px",
           }}
         />
-
       </div>
       <div className="short-profile">
         <ul>

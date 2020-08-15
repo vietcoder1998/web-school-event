@@ -3,6 +3,7 @@ import { _delete, _get, _post, _put } from "./base-api";
 // import { exceptionShowNoti } from "../config/exception";
 import swal from "sweetalert";
 import { TYPE } from "../const/type";
+// import { PUBLIC_HOST } from "../environment/development";
 
 export const _requestToServer = async (
   method: string,
@@ -17,6 +18,9 @@ export const _requestToServer = async (
   message_success?: string
 ) => {
   let res;
+  // if (!host) {
+  //   host = PUBLIC_HOST
+  // }
   try {
     switch (method) {
       case GET:

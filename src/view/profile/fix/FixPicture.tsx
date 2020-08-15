@@ -26,7 +26,7 @@ interface IState {
   identityCardBackUrl?: any;
   identityCardBack?: any;
   personalInfo?: any;
-  show_popup?:boolean;
+  show_popup?: boolean;
 }
 
 class FixPerson extends Component<IProps, IState> {
@@ -123,9 +123,9 @@ class FixPerson extends Component<IProps, IState> {
     let { identityCardFrontUrl, identityCardBackUrl } = this.state;
 
     return (
-      <div className="wrapper">
-        <Row >
-          <Col xs={24} span={10}>
+      <div id="fix-picture" className="wrapper">
+        <Row className="short-profile" >
+          <Col xs={24} md={12} xl={12} lg={12} xxl={12}>
             <LazyLoadImage
               src={identityCardFrontUrl}
               alt="ảnh CMND"
@@ -133,7 +133,7 @@ class FixPerson extends Component<IProps, IState> {
             />
             <label htmlFor="FrontImg" style={{ fontSize: 15 }}>
               <Icon type="upload" />
-                  Upload ảnh mặt trước CMND
+                Upload ảnh mặt trước CMND
             </label>
             <Input
               id="FrontImg"
@@ -150,18 +150,16 @@ class FixPerson extends Component<IProps, IState> {
               }}
             />
           </Col>
-          <Col xs={24} span={10}>
+          <Col xs={24} md={12} xl={12} lg={12} xxl={12}>
             <LazyLoadImage
               src={identityCardBackUrl}
               alt="ảnh CMND"
               className="identityImage"
             />
-            <form>
-              <label htmlFor="backImg" style={{ fontSize: 15 }}>
-                <Icon type="upload" />
-                  Upload ảnh mặt sau CMND
-                </label>
-            </form>
+            <label htmlFor="backImg" style={{ fontSize: 15 }}>
+              <Icon type="upload" />
+                Upload ảnh mặt trước CMND
+            </label>
             <Input
               id="backImg"
               type="file"

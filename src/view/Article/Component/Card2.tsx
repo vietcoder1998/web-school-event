@@ -1,10 +1,11 @@
 import React, { PureComponent } from "react";
 import { Skeleton, Icon, Row, Col, Rate } from "antd";
-
+//@ts-ignore
 import DefaultImage from "../../../assets/image/base-image.jpg";
 import { Link } from "react-router-dom";
-import "./Card.scss";
+// import "./Card.scss";
 import { timeConverter } from "../../../utils/convertTime";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 interface IProps {
   id?: string;
@@ -51,41 +52,47 @@ export default class Card2 extends PureComponent<IProps, IState> {
   }
 
   render() {
+    let {
+      content,
+      rating,
+      imageUrl,
+      title,
+      id,
+      loading,
+      date
+    } = this.state;
+
     return (
-      <Link to={`/announcementDetail/${window.btoa(this.state.id)}`}>
+      <Link to={`/announcementDetail/${window.btoa(id)}`}>
         <Skeleton
           avatar
           paragraph={{ rows: 2 }}
           active
-          loading={this.state.loading}
+          loading={loading}
         >
-          <div className="card2">
-            <Row>
-              <Col sm={10} md={10} lg={10} xl={10} xxl={10}>
-                <img
-                  className="img-card"
-                  src={this.state.imageUrl}
-                  alt="article"
-                />
-              </Col>
-              <Col sm={14} md={14} lg={14} xl={14} xxl={14}>
-                <div className='info'>
-                  <div className='title-article'>
-                    {this.state.title}
-                  </div>
-                  <div className="summary">{this.state.content}</div>
-                </div>
-                <div className="info">
-                  <div>
-                    <Icon type="calendar" /> {this.state.date}
-                  </div>
-                  <div>
-                    <Rate allowHalf disabled value={this.state.rating} />
-                  </div>
-                </div>
-              </Col>
-            </Row>
-          </div>
+          <Row className="card2">
+            <Col className="a_c" xs={9} sm={10} md={10} lg={10} xl={10} xxl={10}>
+              <LazyLoadImage
+                className="img-card"
+                src={imageUrl}
+                alt={title}
+              />
+            </Col>
+            <Col className="ct-article" style={{ padding: "0 0.5vw" }}xs={13} sm={13} md={13} lg={13} xl={13} xxl={14}>
+              <div className='title-article'>
+                {title}
+              </div>
+              <div className="summary">{content}</div>
+              <div className="info">
+                <p>
+                  <Icon type="calendar" /> {date}
+                </p>
+                <p>
+                  <Rate disabled={true} value={rating} style={{ fontSize: '0.8rem' }} />
+                </p>
+              </div>
+            </Col>
+          </Row>
         </Skeleton>
       </Link>
     );

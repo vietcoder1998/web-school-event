@@ -673,10 +673,10 @@ class SearchBox extends Component<IProps, IState>{
                             <Row>
                                 <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12} style={{ justifyContent: 'flex-end', display: 'flex', padding: '0 15px', borderRight: '1px solid #fff' }}>
                                     <a href={'https://apps.apple.com/vn/app/worksvn-sinh-vi%C3%AAn/id1492437454'}>
-                                        <img src={AppStore} alt='AppleStore Tìm việc' height='50px' width='auto' />
+                                        <LazyLoadImage src={AppStore} alt='AppleStore Tìm việc' height='50px' width='auto' />
                                     </a>
 
-                                    <img onClick={() => { this.setState({ visible: true, showQRImageType: 1 }) }} src={QRCodeAppStore} alt='AppleStore Tìm việc QRCode' height='47px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px', cursor: 'pointer' }} />
+                                    <LazyLoadImage onClick={() => { this.setState({ visible: true, showQRImageType: 1 }) }} src={QRCodeAppStore} alt='AppleStore Tìm việc QRCode' height='47px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px', cursor: 'pointer' }} />
                                 </Col>
                                 <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12} style={{ justifyContent: 'flex-start', display: 'flex', padding: '0 15px' }}>
                                     <a href={'https://play.google.com/store/apps/details?id=com.worksvn.candidate&hl=vi'}>
