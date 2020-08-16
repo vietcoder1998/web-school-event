@@ -6,8 +6,8 @@ import { skillsController } from '../../../services/api/private.api';
 import { _get } from '../../../services/base-api';
 import { SKILLS } from '../../../services/api/public.api';
 import { PUBLIC_HOST } from '../../../environment/development';
-import { Row, Col, Button } from 'antd';
-import { PUT } from '../../../const/method';
+import { Row, Col, Button, Icon } from 'antd';
+import { PUT, GET } from '../../../const/method';
 import { REDUX_SAGA } from '../../../const/actions';
 import { noInfoHeader } from '../../../services/auth';
 
@@ -48,7 +48,6 @@ class FixSkills extends Component<IProps, IState> {
         let { skills } = this.props;
         let { list_skills } = this.state;
         let res = await _get(null, SKILLS, PUBLIC_HOST, noInfoHeader);
-
         list_skills = res.data.items;
         this.setState({ list_skills, skills });
     }
@@ -90,6 +89,10 @@ class FixSkills extends Component<IProps, IState> {
         await this.props._fixData('skills')
     }
 
+    _getSkills = (name?: string) => {
+        
+    }
+
     render() {
         let { list_skills, skills } = this.state;
         return (
@@ -102,7 +105,7 @@ class FixSkills extends Component<IProps, IState> {
                             return (
                                 <label key={index} className='tag-ablity'>
                                     {item.name}
-                                    <i className="fa fa-times" aria-hidden="true" onClick={() => { this._removeTag(index, item.name, item.id) }} />
+                                    <Icon type="close" onClick={() => { this._removeTag(index, item.name, item.id) }} />
                                 </label>
                             );
                         })}

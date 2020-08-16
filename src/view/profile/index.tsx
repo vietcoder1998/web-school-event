@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Col, Row, Icon } from "antd";
 import Layout from "../layout/Layout";
-import { Tooltip } from 'antd';
+import { Tooltip, Affix } from 'antd';
 
 // Layer
 import Block from "../layout/block/Block";
@@ -78,7 +78,7 @@ class Profile extends Component<IProps, IState> {
   async componentDidMount() {
 
     await this.props.getData();
-
+    chat();
     this.setState({ loading: false });
   }
 
@@ -90,6 +90,7 @@ class Profile extends Component<IProps, IState> {
     window.location.assign(`/profile#${id}`);
   };
 
+  
   render() {
     let { profileState } = this.state;
     return (
@@ -228,9 +229,8 @@ class Profile extends Component<IProps, IState> {
                   <div
                     className="icon-fix"
                     onClick={() => this._fixData("education")}
-                    disabled={true}
                   >
-                    <Icon type={"plus"} style={{color: "red"}} twoToneColor={"blue"} />
+                    <Icon type={"plus"} style={{ color: "red" }} twoToneColor={"blue"} />
                   </div>
                 </Tooltip>
 
