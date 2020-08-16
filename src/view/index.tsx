@@ -12,22 +12,24 @@ import { PUBLIC_HOST } from "../environment/development";
 import { noInfoHeader } from "../services/auth";
 import BarLoader from "react-spinners/BarLoader";
 import qs from "query-string";
-import loadBoudary from './routes/ErrorMetaBoundary';
+import loadBoudary from './routes/LoadMeta';
 
 const Home = loadBoudary(() =>
   import("./event").then(module => module.default)
 );
 
-const EventHome = function() { loadBoudary(() =>
+const EventHome = loadBoudary(() =>
   import("./event").then(module => module.default)
-)};
-
-const EventCountDown = React.lazy(() =>
-  import("./event/home/CountDown")
 );
 
-const Profile = React.lazy(() =>
-  import("./profile")
+
+const EventCountDown = loadBoudary(() =>
+  import("./event/home/CountDown").then(module => module.default)
+);
+
+
+const Profile = loadBoudary(() =>
+import("./event/home/CountDown").then(module => module.default)
 );
 
 const NotFound = React.lazy(() =>
@@ -258,48 +260,48 @@ class App extends React.Component<IProps, IState> {
             <Route
               exact
               path="/events"
-              component={<EventHome />}
+              component={EventHome}
             />
             <Route
               exact
               path="/countdown"
-              component={<EventCountDown />}
+              component={EventCountDown}
             />
             <Route
               exact
               path="/event-job-detail/:id"
-              component={<EventJobDetail />}
+              component={EventJobDetail}
             />
-            <Route exact path="/count" component={<EventCountDown />} />
+            <Route exact path="/count" component={EventCountDown} />
             <Route exact path="/home" component={Home} />
-            <Route exact path="/login" component={this.props.isAuthen ? <Home /> : <Login />} />
-            <Route exact path="/reset-password" component={<ResetPassword />} />
+            <Route exact path="/login" component={this.props.isAuthen ? Home : Login} />
+            <Route exact path="/reset-password" component={ResetPassword} />
             <Route
               exact
               path="/profile"
-              component={this.props.isAuthen === true ? <Profile /> : <Home />}
+              component={this.props.isAuthen === true ? Profile : Home}
             />
-            <Route exact path="/register" component={this.props.isAuthen ? <Home /> : <Register />} />
+            <Route exact path="/register" component={this.props.isAuthen ? Home : Register} />
             <Route
               exact
               path="/forgot-password"
               component={ForgotPassword}
             />
-            <Route path="/result" component={<Result />} />
-            <Route exact path="/save-job" component={<SaveJob />} />
+            <Route path="/result" component={Result} />
+            <Route exact path="/save-job" component={SaveJob} />
             {/* <Route exact path="/download-apps-student" component={DownloadApps} /> */}
-            <Route exact path="/history-apply" component={<HistoryApply />} />
-            <Route exact path="/job-detail/:id" component={<JobDetail />} />
-            <Route exact path="/notifications" component={<AllNoti />} />
-            <Route exact path="/tat-ca-cac-tinh" component={<DataRegions />} />
+            <Route exact path="/history-apply" component={HistoryApply} />
+            <Route exact path="/job-detail/:id" component={JobDetail} />
+            <Route exact path="/notifications" component={AllNoti} />
+            <Route exact path="/tat-ca-cac-tinh" component={DataRegions} />
             <Route
               exact
               path="/tat-ca-cac-cong-viec"
               component={DataJobNames}
             />
-            <Route exact path="/employer/:id" component={<EmInfo />} />
-            <Route exact path="/announcement/:id" component={<Article />} />
-            <Route exact path="/announcementDetail/:id" component={<ArticleDetail />} />
+            <Route exact path="/employer/:id" component={EmInfo} />
+            <Route exact path="/announcement/:id" component={Article} />
+            <Route exact path="/announcementDetail/:id" component={ArticleDetail} />
             <Route component={NotFound} />
           </Switch>
         </Suspense>

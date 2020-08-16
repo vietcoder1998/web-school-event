@@ -10,14 +10,16 @@ import { store } from './redux/store/index';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "antd/dist/antd.css";
 // import 'emoji-mart/css/emoji-mart.css';
-import { DocumentMeta } from './view/routes/node_modules/react-document-meta';
 import MetaConvert from './utils/meta.convert';
 
 const rootEl = document.getElementById('root');
 const appRenderer = (Component?: any) => ReactDOM.render(
-    <Provider store={store}>
-        <Component />
-    </Provider>
+    <ErrorBoundary>
+        <Provider store={store}>
+            <Component />
+        </Provider>
+    </ErrorBoundary>
+
     , rootEl);
 appRenderer(App);
 

@@ -38,20 +38,7 @@ export default function loadBoudary(getComponent?: any) {
         return (<DocumentMeta {...MetaConvert()}>
           <Component {...this.props} />
         </DocumentMeta>)
-      } else return (
-        <div style={{padding: '10vw'}}>
-          <h2>Something went wrong. 
-          <i className="em em-bird" aria-role="presentation" aria-label="BIRD"></i>
-          <i className="em em-bird" aria-role="presentation" aria-label="BIRD"></i>
-          <i className="em em-bird" aria-role="presentation" aria-label="BIRD"></i>
-          </h2>
-          <details style={{ whiteSpace: 'pre-wrap' }}>
-            {error && error.toString()}
-            <br />
-            {errorInfo.componentStack}
-          </details>
-        </div>
-      );
+      } else return null
     }
   }
   return AsyncComponent;

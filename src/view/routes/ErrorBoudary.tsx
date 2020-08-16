@@ -33,8 +33,12 @@ class ErrorBoundary extends React.PureComponent<IErrorBoundaryProps, IErrorBound
         if (errorInfo) {
             // Error path
             return (
-                <div>
-                    <h2>Something went wrong.</h2>
+                <div style={{ padding: '10vw' }}>
+                    <h2>Something went wrong.
+                      <i className="em em-bird" aria-role="presentation" aria-label="BIRD"></i>
+                        <i className="em em-bird" aria-role="presentation" aria-label="BIRD"></i>
+                        <i className="em em-bird" aria-role="presentation" aria-label="BIRD"></i>
+                    </h2>
                     <details style={{ whiteSpace: 'pre-wrap' }}>
                         {error && error.toString()}
                         <br />
@@ -43,8 +47,8 @@ class ErrorBoundary extends React.PureComponent<IErrorBoundaryProps, IErrorBound
                 </div>
             );
         } else
-        // Normally, just render children
-        return  <DocumentMeta {...meta}>{children}</DocumentMeta>
+            // Normally, just render children
+            return <DocumentMeta {...meta}>{children}</DocumentMeta>
     }
 }
 
