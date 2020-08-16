@@ -16,7 +16,7 @@ function* getListEventBranch(action) {
 
 function getBranchData(action) {
     let eventID = store.getState().DetailEvent.eventID;
-    console.log(eventID);
+    // console.log(eventID);
     let res = _get(null, `/api/schools/events/${eventID}/jobs/branches`, PUBLIC_HOST, null);
     return res;
 }

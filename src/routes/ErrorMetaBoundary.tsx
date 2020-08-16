@@ -4,6 +4,7 @@ import DocumentMeta from 'react-document-meta';
 import MetaConvert from '../utils/meta.convert';
 
 export default function asyncComponent(getComponent?: any) {
+
   class AsyncComponent extends Component {
     static Component = null;
     state = {
@@ -18,7 +19,9 @@ export default function asyncComponent(getComponent?: any) {
             keywords: 'react,meta,document,html,tags'
           }
         }
-      }
+      },
+      error: null,
+      errorInfo: null,
     };
 
     componentDidMount() {
@@ -31,13 +34,25 @@ export default function asyncComponent(getComponent?: any) {
     }
 
     render() {
-      const { Component } = this.state;
+      const { Component , error, errorInfo} = this.state;
       if (Component) {
         return (<DocumentMeta {...MetaConvert()}>
           <Component {...this.props} />
         </DocumentMeta>)
-      }
-      return null
+      } else return (
+        <div style={{padding: '10vw'}}>
+          <h2>Something went wrong. 
+          <i className="em em-bird" aria-role="presentation" aria-label="BIRD"></i>
+          <i className="em em-bird" aria-role="presentation" aria-label="BIRD"></i>
+          <i className="em em-bird" aria-role="presentation" aria-label="BIRD"></i>
+          </h2>
+          <details style={{ whiteSpace: 'pre-wrap' }}>
+            {error && error.toString()}
+            <br />
+            {errorInfo.componentStack}
+          </details>
+        </div>
+      );
     }
   }
   return AsyncComponent;

@@ -11,7 +11,6 @@ let initState: Object = {
 };
 
 export const TopEmployer = (state = initState, action) => {
-    console.log(action.data)
     switch (action.type) {
         case REDUX.EMPLOYER.GET_TOP_EM:
             return { ...state, data: action.data, loading: false };

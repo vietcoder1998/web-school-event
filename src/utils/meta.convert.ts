@@ -4,7 +4,7 @@ export interface IMeta {
 
 }
 
-export default function MetaConvert (): IMeta {
+export default function MetaConvert(){
     const pathname = window.location.pathname.split('/');
     if (seo) {
         let meta = pathname[1];

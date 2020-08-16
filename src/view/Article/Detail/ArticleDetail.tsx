@@ -161,7 +161,6 @@ class ArticleDetail extends PureComponent<IProps, IState> {
           });
         })
         .catch((e) => {
-          console.log(e);
         });
     } catch { }
   }

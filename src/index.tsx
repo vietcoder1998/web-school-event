@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { ComponentElement } from 'react';
 import ReactDOM from 'react-dom';
 import './view/sass/_keyFrame.scss';
 import App from './view';
-import ErrorBoundary from './view/layout/common/ErrorBoudary';
+import ErrorBoundary from './routes/ErrorBoudary';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import { store } from './redux/store/index';
@@ -10,14 +10,15 @@ import { store } from './redux/store/index';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "antd/dist/antd.css";
 // import 'emoji-mart/css/emoji-mart.css';
+import { DocumentMeta } from 'react-document-meta';
+import MetaConvert from './utils/meta.convert';
 
 const rootEl = document.getElementById('root');
-const appRenderer = Component => ReactDOM.render(
-    <ErrorBoundary >
-        <Provider store={store}>
-            <Component />
-        </Provider>
-    </ErrorBoundary>, rootEl);
+const appRenderer = (Component?: any) => ReactDOM.render(
+    <Provider store={store}>
+        <Component />
+    </Provider>
+    , rootEl);
 appRenderer(App);
 
 // If you want your app to work offline and load faster, you can change
