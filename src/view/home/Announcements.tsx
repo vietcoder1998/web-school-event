@@ -59,7 +59,7 @@ function Announcements(props?: IProps) {
                         {
                             announcements.map((item?: IAnnouncement, i?: number) => (
                                 <div key={i} style={{ height: 'auto' }}>
-                                    <a key={i} href={`/announcementDetail/${window.btoa(item.id)}`}>
+                                    <a key={i} href={`/chi-tiet-bai-viet/${window.btoa(item.id)}`}>
                                         <Card
                                             hoverable
                                             cover={
@@ -112,7 +112,7 @@ function Announcements(props?: IProps) {
                         <Row>
                             {
                                 announcements.map((item?: IAnnouncement, i?: number) => (
-                                    <a key={i} href={`/announcementDetail/${window.btoa(item.id)}`}>
+                                    <a key={i} href={`/chi-tiet-bai-viet/${window.btoa(item.id)}`}>
                                         <Col key={i} span={8} style={{ padding: 10 }} >
                                             <Card
                                                 hoverable

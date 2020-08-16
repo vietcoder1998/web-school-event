@@ -1,6 +1,5 @@
-import React, { ComponentElement } from 'react';
+import React  from 'react';
 import ReactDOM from 'react-dom';
-import './view/sass/_keyFrame.scss';
 import App from './view';
 import ErrorBoundary from './view/routes/ErrorBoudary';
 import { Provider } from 'react-redux';
@@ -9,11 +8,10 @@ import { store } from './redux/store/index';
 // import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "antd/dist/antd.css";
-// import 'emoji-mart/css/emoji-mart.css';
-import MetaConvert from './utils/meta.convert';
+import 'emoji-mart/css/emoji-mart.css';
 
 const rootEl = document.getElementById('root');
-const appRenderer = (Component?: any) => ReactDOM.render(
+const appRenderer = (Component) => ReactDOM.render(
     <ErrorBoundary>
         <Provider store={store}>
             <Component />

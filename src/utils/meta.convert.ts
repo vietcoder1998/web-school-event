@@ -12,8 +12,10 @@ export default function MetaConvert(){
             meta = "home";
         }
 
-        let metart = seo[meta];
-        metart.canonical = window.location.href;
-        return seo[meta];
+        if (seo[meta]) {
+           let metart = seo[meta];
+            metart.canonical = window.location.href;
+            return seo[meta]; 
+        } else return null;
     }
 }

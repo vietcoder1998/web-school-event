@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Col, Row, Icon } from "antd";
 import Layout from "../layout/Layout";
+import { Tooltip } from 'antd';
 
 // Layer
 import Block from "../layout/block/Block";
@@ -223,12 +224,16 @@ class Profile extends Component<IProps, IState> {
                 icon={this.icon_bachelor}
                 id="education"
               >
-                <div
-                  className="icon-fix"
-                  onClick={() => this._fixData("education")}
-                >
-                  <Icon type={"plus"} twoToneColor={"blue"} />
-                </div>
+                <Tooltip title="Mục này đang tạm khóa để sửa" >
+                  <div
+                    className="icon-fix"
+                    onClick={() => this._fixData("education")}
+                    disabled={true}
+                  >
+                    <Icon type={"plus"} style={{color: "red"}} twoToneColor={"blue"} />
+                  </div>
+                </Tooltip>
+
                 {profileState["education"] ? (
                   <FixEducation _fixData={this._fixData} method={POST} />
                 ) : (

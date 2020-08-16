@@ -13,6 +13,7 @@ import QRCodeAppStore from '../../../../assets/image/qr-code-appstore.png';
 import QRCodeCHPlay from '../../../../assets/image/qr-code-chplay.png';
 import qs from 'query-string';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
 
 const InputGroup = Input.Group;
 const { Option } = Select;
@@ -448,12 +449,12 @@ class SearchBox extends Component<IProps, IState>{
                 >
                     {showQRImageType === 1 ?
                         <div style={{ textAlign: 'center' }}>
-                            <LazyLoadImage src={QRCodeAppStore} alt='AppleStore Tìm việc QRCode' height='250px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px' }} />
+                            <LazyLoadImage data-src={QRCodeAppStore} alt='AppleStore Tìm việc QRCode' height='250px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px' }} />
                             <div>Ứng dụng tìm việc Worksvn trên AppleStore</div>
                         </div>
                         :
                         <div style={{ textAlign: 'center' }}>
-                            <LazyLoadImage src={QRCodeCHPlay} alt='CHPlay Tìm việc QRCode' height='250px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px' }} />
+                            <LazyLoadImage data-src={QRCodeCHPlay} alt='CHPlay Tìm việc QRCode' height='250px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px' }} />
                             <div>Ứng dụng tìm việc Worksvn trên CHPlay</div>
                         </div>
                     }
@@ -680,9 +681,9 @@ class SearchBox extends Component<IProps, IState>{
                                 </Col>
                                 <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12} style={{ justifyContent: 'flex-start', display: 'flex', padding: '0 15px' }}>
                                     <a href={'https://play.google.com/store/apps/details?id=com.worksvn.candidate&hl=vi'}>
-                                        <img src={CHPlay} alt='CHPlay Tìm việc' height='50px' width='auto' />
+                                        <LazyLoadImage src={CHPlay} alt='CHPlay Tìm việc' height='50px' width='auto' />
                                     </a>
-                                    <img onClick={() => { this.setState({ visible: true, showQRImageType: 2 }) }} src={QRCodeCHPlay} alt='CHPlay Tìm việc QRCode' height='47px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px', cursor: 'pointer' }} />
+                                    <LazyLoadImage onClick={() => { this.setState({ visible: true, showQRImageType: 2 }) }} src={QRCodeCHPlay} alt='CHPlay Tìm việc QRCode' height='47px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px', cursor: 'pointer' }} />
                                 </Col>
                             </Row>
                         </div>

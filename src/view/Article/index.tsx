@@ -8,10 +8,11 @@ import { GET } from "../../const/method";
 import { ANNOUNCEMENTS } from "../../services/api/public.api";
 import { PUBLIC_HOST } from "../../environment/development";
 import ListMiddle from './middle/ListMidle';
-import {Col, Row} from 'antd';
+import { Col, Row, Affix, Tabs } from 'antd';
 
 interface IProps {
   match?: any,
+  history?: History,
 }
 
 interface IState {
@@ -19,6 +20,10 @@ interface IState {
   idType: any,
   listType: Array<any>,
 }
+
+const { TabPane } = Tabs;
+
+
 
 class Article extends React.Component<IProps, IState> {
   constructor(props) {
@@ -32,6 +37,7 @@ class Article extends React.Component<IProps, IState> {
   }
   componentDidMount() {
     this.getListTypeArticle()
+    console.log(this.props);
     // this comment for test ssh remote to gitlab
   }
 
@@ -54,26 +60,57 @@ class Article extends React.Component<IProps, IState> {
     });
   }
 
+  callback = (key?: string | number) => {
+    this.props.history.push(`/bai-viet/${key}`)
+  }
+
   render() {
     let { listType } = this.state;
     let { match } = this.props;
 
     return (
       <Layout disableFooterData={true}>
-        <Row className="content-an">
-          <Col xs={24} sm={24} lg={24} xl={24} xxl={24}>
-            <div className="Article">
-              <div className="Header">
-                <Header idType={this.props.match.params.id} />
+        <>
+          <Affix
+            offsetTop={0}
+            children={(
+              <Tabs
+                defaultActiveKey="1"
+                onChange={this.callback}
+                style={{
+                  backgroundColor: "white",
+                  marginBottom: 0,
+                  textAlign: "center",
+                  width: '100%',
+                  fontWeight: 500
+                }}
+              >
+                <TabPane tab="Tất cả" key="all" />
+                {listType && listType.length > 0 ?
+                  listType.map(
+                    (item?: any) => <TabPane disabled={true} tab={item.name} key={item.id} />
+                  ) : undefined}
+              </Tabs>
+            )} />
+          <Row className="content-an">
+            <Col xs={24} sm={24} lg={23} xl={22} xxl={22}>
+              <div className="Article">
+                <Row className="head-an">
+                  <Header idType={this.props.match.params.id} />
+                </Row>
+                <Row className="l-middle">
+                  {listType && listType.length > 0 ?
+                    listType.map(
+                      (item?: any, i?: number) => (<ListMiddle key={item.id} type={item} idType={match.params.id} />)
+                    ) : ""}
+                </Row>
               </div>
-              <ListMiddle listType={listType} idType={match.params.id} />
-            </div>
-          </Col>
-        </Row>
+            </Col>
+          </Row>
+        </>
       </Layout>
     );
   }
 }
-
 
 export default Article;

@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Row, Col, Carousel, Skeleton } from "antd";
+import { Col, Carousel} from "antd";
 
 import { _requestToServer } from "../../../services/exec";
 import { POST } from "../../../const/method";
@@ -7,7 +7,7 @@ import { ANNOUNCEMENTS } from "../../../services/api/public.api";
 import { PUBLIC_HOST } from "../../../environment/development";
 
 import Card1 from "../component/Card1";
-import Card2 from "../component/Card2";
+// import Card2 from "../component/Card2";
 import Title from "../component/Title";
 
 // import HashLoader from "react-spinners/HashLoader";
@@ -75,10 +75,6 @@ class HeaderArticle extends PureComponent<IProps, IState> {
     } catch (e) { }
   }
   render() {
-    let {
-      listArticleData,
-      loading
-    } = this.state;
     const props = {
       dots: true,
       infinite: true,
@@ -87,7 +83,7 @@ class HeaderArticle extends PureComponent<IProps, IState> {
     };
 
     return (
-      <Row>
+      <>
         <Col sm={24} md={24} lg={16} xl={16} xxl={16}>
           <Title title={"Bài viết hay"} />
           <Carousel
@@ -112,7 +108,7 @@ class HeaderArticle extends PureComponent<IProps, IState> {
         <Col xs={24} sm={12} md={12} lg={7} xl={7} xxl={7}>
           <GoodArticle />
         </Col>
-      </Row>
+      </>
     );
   }
 }

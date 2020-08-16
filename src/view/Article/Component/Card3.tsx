@@ -53,7 +53,7 @@ export default class Card3 extends PureComponent<IProps, IState> {
 
   render() {
     return (
-      <Link to={`/announcementDetail/${window.btoa(this.state.id)}`}>
+      <Link to={`/chi-tiet-bai-viet/${window.btoa(this.state.id)}`}>
         <Skeleton
           avatar
           paragraph={{ rows: 2 }}

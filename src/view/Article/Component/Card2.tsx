@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { Skeleton, Icon, Row, Col, Rate } from "antd";
 //@ts-ignore
 import DefaultImage from "../../../assets/image/base-image.jpg";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 // import "./Card.scss";
 import { timeConverter } from "../../../utils/convertTime";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -63,14 +63,14 @@ export default class Card2 extends PureComponent<IProps, IState> {
     } = this.state;
 
     return (
-      <Link to={`/announcementDetail/${window.btoa(id)}`}>
+      <div >
         <Skeleton
           avatar
           paragraph={{ rows: 2 }}
           active
           loading={loading}
         >
-          <Row className="card2">
+          <Row className="card2" onClick={() => window.location.assign(`/chi-tiet-bai-viet/${window.btoa(id)}`)}>
             <Col className="a_c" xs={9} sm={10} md={10} lg={10} xl={10} xxl={10}>
               <LazyLoadImage
                 className="img-card"
@@ -78,7 +78,7 @@ export default class Card2 extends PureComponent<IProps, IState> {
                 alt={title}
               />
             </Col>
-            <Col className="ct-article" style={{ padding: "0 0.5vw" }}xs={13} sm={13} md={13} lg={13} xl={13} xxl={14}>
+            <Col className="ct-article" xs={13} sm={13} md={13} lg={13} xl={13} xxl={14}>
               <div className='title-article'>
                 {title}
               </div>
@@ -94,7 +94,7 @@ export default class Card2 extends PureComponent<IProps, IState> {
             </Col>
           </Row>
         </Skeleton>
-      </Link>
+      </div>
     );
   }
 }

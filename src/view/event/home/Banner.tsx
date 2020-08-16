@@ -92,7 +92,7 @@ class Banner extends PureComponent<IProps, IState> {
                       target="_blank"
                       style={{ width: "100px" }}
                     >
-                      <img
+                      <LazyLoadImage
                         className="banner-logo"
                         src={
                           item.employer.logoUrl === null

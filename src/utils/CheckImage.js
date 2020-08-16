@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const testImage = (defaultImage, type) => {
     if (defaultImage !== null) {
         return defaultImage;

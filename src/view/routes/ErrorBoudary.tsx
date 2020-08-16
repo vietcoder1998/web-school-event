@@ -1,6 +1,4 @@
 import React from "react";
-import { DocumentMeta } from 'react-document-meta';
-import MetaConvert from '../../utils/meta.convert';
 
 interface IErrorBoundaryProps {
     children: any;
@@ -29,13 +27,12 @@ class ErrorBoundary extends React.PureComponent<IErrorBoundaryProps, IErrorBound
     render() {
         let { errorInfo, error } = this.state;
         let { children } = this.props;
-        const meta = MetaConvert();
         if (errorInfo) {
             // Error path
             return (
                 <div style={{ padding: '10vw' }}>
-                    <h2>Something went wrong.
-                      <i className="em em-bird" aria-role="presentation" aria-label="BIRD"></i>
+                    <h2>Lỗi trình duyệt.
+                        <i className="em em-bird" aria-role="presentation" aria-label="BIRD"></i>
                         <i className="em em-bird" aria-role="presentation" aria-label="BIRD"></i>
                         <i className="em em-bird" aria-role="presentation" aria-label="BIRD"></i>
                     </h2>
@@ -48,7 +45,7 @@ class ErrorBoundary extends React.PureComponent<IErrorBoundaryProps, IErrorBound
             );
         } else
             // Normally, just render children
-            return <DocumentMeta {...meta}>{children}</DocumentMeta>
+            return children
     }
 }
 

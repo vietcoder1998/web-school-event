@@ -1,10 +1,11 @@
 import React, { Suspense, Fragment } from "react";
+//@ts-ignore
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import Home from './app/home/Home';
 import { connect } from "react-redux";
-// import React.lazy from "../routes/AppRoutes";
+import loadMeta from "./routes/LoadMeta";
 import { REDUX, REDUX_SAGA } from "../const/actions";
-import './sass/_common.scss';
+import './sass/style.scss';
 import $ from "jquery";
 // import { Loading } from "./app/layout/common/Common";
 import { _get } from "../services/base-api";
@@ -12,95 +13,99 @@ import { PUBLIC_HOST } from "../environment/development";
 import { noInfoHeader } from "../services/auth";
 import BarLoader from "react-spinners/BarLoader";
 import qs from "query-string";
-import loadBoudary from './routes/LoadMeta';
 
-const Home = loadBoudary(() =>
-  import("./event").then(module => module.default)
+const EventHome = loadMeta(() =>
+  import("./event").then((module) => module.default)
 );
 
-const EventHome = loadBoudary(() =>
-  import("./event").then(module => module.default)
+const EventCountDown = loadMeta(() =>
+  import("./event/home/CountDown").then((module) => module.default)
+);
+const Home = loadMeta(() =>
+  import("./home").then((module) => module.default)
+);
+const Profile = loadMeta(() =>
+  import("./profile").then((module) => module.default)
 );
 
-
-const EventCountDown = loadBoudary(() =>
-  import("./event/home/CountDown").then(module => module.default)
+const NotFound = loadMeta(() =>
+  import("./home").then((module) => module.default)
 );
 
-
-const Profile = loadBoudary(() =>
-import("./event/home/CountDown").then(module => module.default)
+const Login = loadMeta(() =>
+  import("./login/Login").then((module) => module.default)
 );
 
-const NotFound = React.lazy(() =>
-  import("./home")
+const ResetPassword = loadMeta(() =>
+  import("./reset-password/ResetPassword").then(
+    (module) => module.default
+  )
 );
 
-const Login = React.lazy(() =>
-  import("./login/Login")
+const Register = loadMeta(() =>
+  import("./register/Register").then((module) => module.default)
 );
 
-const ResetPassword = React.lazy(() =>
-  import("./reset-password/ResetPassword")
+const ForgotPassword = loadMeta(() =>
+  import("./forgot/ForgotPassword").then((module) => module.default)
 );
 
-const Register = React.lazy(() =>
-  import("./register/Register")
-);
-
-const ForgotPassword = React.lazy(() =>
-  import("./forgot/ForgotPassword")
-);
-
-// const ChatPage = React.lazy(() =>
+// const ChatPage = loadMeta(() =>
 //   import('./app/chat/ChatPage').then(module => module.default)
 // )
 
-const Result = React.lazy(() =>
-  import("./result")
+const Result = loadMeta(() =>
+  import("./result").then((module) => module.default)
 );
 
-const AllNoti = React.lazy(() =>
-  import("./all-noti/AllNoti")
+const AllNoti = loadMeta(() =>
+  import("./all-noti/AllNoti").then((module) => module.default)
 );
 
-const SaveJob = React.lazy(() =>
-  import("./save-job/SaveJob")
+const SaveJob = loadMeta(() =>
+  import("./save-job/SaveJob").then((module) => module.default)
 );
 
-const HistoryApply = React.lazy(() =>
-  import("./history-apply/HistoryApply")
+const HistoryApply = loadMeta(() =>
+  import("./history-apply/HistoryApply").then(
+    (module) => module.default
+  )
 );
-const JobDetail = React.lazy(() =>
-  import("./job-detail")
-);
-
-const EmInfo = React.lazy(() =>
-  import("./em-info/EmInfo")
+const JobDetail = loadMeta(() =>
+  import("./job-detail").then((module) => module.default)
 );
 
-const DataRegions = React.lazy(() =>
-  import("./data-regions/DataRegions")
+const EmInfo = loadMeta(() =>
+  import("./em-info/EmInfo").then((module) => module.default)
 );
 
-const DataJobNames = React.lazy(() =>
-  import("./data-job-names/DataJobNames")
+const DataRegions = loadMeta(() =>
+  import("./data-regions/DataRegions").then((module) => module.default)
+);
+
+const DataJobNames = loadMeta(() =>
+  import("./data-job-names/DataJobNames").then(
+    (module) => module.default
+  )
 );
 
 //event
 
-const EventJobDetail = React.lazy(() =>
-  import("./event/job-detail")
+const EventJobDetail = loadMeta(() =>
+  import("./event/job-detail").then(
+    (module) => module.default
+  )
 );
 
-const Article = React.lazy(() =>
-  import("./article")
+const Article = loadMeta(() =>
+  import("./article").then((module) => module.default)
 );
 
-const ArticleDetail = React.lazy(() =>
-  import("./article/detail/ArticleDetail")
+const ArticleDetail = loadMeta(() =>
+  import("./article/detail/ArticleDetail").then(
+    (module) => module.default
+  )
 );
-
 
 
 const override = `
@@ -138,10 +143,6 @@ class App extends React.Component<IProps, IState> {
 
   resizeInterface = null;
 
-  componentWillMount() {
-    return (<BarLoader />)
-  }
-
   async componentDidMount() {
     await this._loadLocal();
     if (this.props.isAuthen) {
@@ -151,7 +152,6 @@ class App extends React.Component<IProps, IState> {
     $(window).resize(() => {
       this._callResize();
     });
-
   }
 
   componentWillUnmount() {
@@ -246,66 +246,68 @@ class App extends React.Component<IProps, IState> {
   render() {
     // let { eventStart } = this.props;  
     return (
-      <Router>
-        <Suspense fallback={
-          <BarLoader
-            css={override}
-            //@ts-ignore
-            size={150}
-            color={"#32A3F9"}
-            loading={true}
-          />
-        }>
-          <Switch>
-            <Route
-              exact
-              path="/events"
-              component={EventHome}
+      <Fragment>
+        <Router>
+          <Suspense fallback={
+            <BarLoader
+              css={override}
+              //@ts-ignore
+              size={150}
+              color={"#32A3F9"}
+              loading={true}
             />
-            <Route
-              exact
-              path="/countdown"
-              component={EventCountDown}
-            />
-            <Route
-              exact
-              path="/event-job-detail/:id"
-              component={EventJobDetail}
-            />
-            <Route exact path="/count" component={EventCountDown} />
-            <Route exact path="/home" component={Home} />
-            <Route exact path="/login" component={this.props.isAuthen ? Home : Login} />
-            <Route exact path="/reset-password" component={ResetPassword} />
-            <Route
-              exact
-              path="/profile"
-              component={this.props.isAuthen === true ? Profile : Home}
-            />
-            <Route exact path="/register" component={this.props.isAuthen ? Home : Register} />
-            <Route
-              exact
-              path="/forgot-password"
-              component={ForgotPassword}
-            />
-            <Route path="/result" component={Result} />
-            <Route exact path="/save-job" component={SaveJob} />
-            {/* <Route exact path="/download-apps-student" component={DownloadApps} /> */}
-            <Route exact path="/history-apply" component={HistoryApply} />
-            <Route exact path="/job-detail/:id" component={JobDetail} />
-            <Route exact path="/notifications" component={AllNoti} />
-            <Route exact path="/tat-ca-cac-tinh" component={DataRegions} />
-            <Route
-              exact
-              path="/tat-ca-cac-cong-viec"
-              component={DataJobNames}
-            />
-            <Route exact path="/employer/:id" component={EmInfo} />
-            <Route exact path="/announcement/:id" component={Article} />
-            <Route exact path="/announcementDetail/:id" component={ArticleDetail} />
-            <Route component={NotFound} />
-          </Switch>
-        </Suspense>
-      </Router>
+          }>
+            <Switch>
+              <Route
+                exact
+                path="/events"
+                component={EventHome}
+              />
+              <Route
+                exact
+                path="/countdown"
+                component={EventCountDown}
+              />
+              <Route
+                exact
+                path="/event-job-detail/:id"
+                component={EventJobDetail}
+              />
+              <Route exact path="/count" component={EventCountDown} />
+              <Route exact path="/home" component={Home} />
+              <Route exact path="/login" component={this.props.isAuthen ? Home : Login} />
+              <Route exact path="/reset-password" component={ResetPassword} />
+              <Route
+                exact
+                path="/profile"
+                component={this.props.isAuthen === true ? Profile : Home}
+              />
+              <Route exact path="/register" component={this.props.isAuthen ? Home : Register} />
+              <Route
+                exact
+                path="/forgot-password"
+                component={ForgotPassword}
+              />
+              <Route path="/result" component={Result} />
+              <Route exact path="/save-job" component={SaveJob} />
+              {/* <Route exact path="/download-apps-student" component={DownloadApps} /> */}
+              <Route exact path="/history-apply" component={HistoryApply} />
+              <Route exact path="/job-detail/:id" component={JobDetail} />
+              <Route exact path="/notifications" component={AllNoti} />
+              <Route exact path="/tat-ca-cac-tinh" component={DataRegions} />
+              <Route
+                exact
+                path="/tat-ca-cac-cong-viec"
+                component={DataJobNames}
+              />
+              <Route exact path="/employer/:id" component={EmInfo} />
+              <Route path="/bai-viet" component={Article} />
+              <Route exact path="/chi-tiet-bai-viet/:id" component={ArticleDetail} />
+              <Route component={NotFound} />
+            </Switch>
+          </Suspense>
+        </Router>
+      </Fragment>
     );
     // }
   }

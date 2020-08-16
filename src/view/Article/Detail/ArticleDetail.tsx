@@ -31,10 +31,14 @@ import { _requestToServer } from "../../../services/exec";
 import { POST, DELETE } from "../../../const/method";
 import { ANNOUNCEMENTS_PRIVATE } from "../../../services/api/private.api";
 // import { NotUpdate } from '../../../layout/common/Common';
-import HashLoader from "react-spinners/HashLoader";
+import FadeLoader from "react-spinners/FadeLoader";
+import { Tabs } from "antd";
+import { GET } from './../../../const/method';
+const { TabPane } = Tabs;
 
 interface IProps {
   match?: any;
+  history?: History;
 }
 
 interface IState {
@@ -55,6 +59,7 @@ interface IState {
   loadingComment?: boolean;
   userID?: string;
   loading?: boolean;
+  listType?: any;
 }
 
 class ArticleDetail extends PureComponent<IProps, IState> {
@@ -87,6 +92,8 @@ class ArticleDetail extends PureComponent<IProps, IState> {
       comment: null,
       userID: null,
       loading: true,
+      listType: []
+
     };
   }
 
@@ -95,6 +102,7 @@ class ArticleDetail extends PureComponent<IProps, IState> {
     this.setState({
       userID: localStorage.getItem("userID"),
     });
+    this.getListTypeArticle()
     this.DetailArticle();
     this.getComment();
   }
@@ -116,22 +124,22 @@ class ArticleDetail extends PureComponent<IProps, IState> {
       PUBLIC_HOST,
       noInfoHeader
     ).then((res) => {
-        let data = res.data;
-        this.setState({
-          author: data.admin,
-          rated: data.averageRating,
-          content: data.content,
-          createdDate: timeConverter(data.createdDate),
-          imageUrl: data.imageUrl === null ? DefaultImage : data.imageUrl,
-          title: data.title,
-          views: data.viewNumber,
-          type: data.announcementType.name,
-          idType: data.announcementType.id,
-          totalComment: data.totalComment,
-          id: this.props.match.params.id,
-          loading: false,
-        });
-      })
+      let data = res.data;
+      this.setState({
+        author: data.admin,
+        rated: data.averageRating,
+        content: data.content,
+        createdDate: timeConverter(data.createdDate),
+        imageUrl: data.imageUrl === null ? DefaultImage : data.imageUrl,
+        title: data.title,
+        views: data.viewNumber,
+        type: data.announcementType.name,
+        idType: data.announcementType.id,
+        totalComment: data.totalComment,
+        id: this.props.match.params.id,
+        loading: false,
+      });
+    })
   }
 
   async getComment() {
@@ -170,6 +178,25 @@ class ArticleDetail extends PureComponent<IProps, IState> {
     });
   };
 
+  async getListTypeArticle() {
+    await _requestToServer(
+      GET,
+      null,
+      ANNOUNCEMENTS.TYPE,
+      PUBLIC_HOST,
+      {
+        pageIndex: 0,
+        pageSize: 50,
+        priority: "",
+      },
+      false
+    ).then((res?: any) => {
+      this.setState({
+        listType: res.data.items
+      })
+    });
+  }
+
   async sendComment() {
     let { rating, comment } = this.state;
     let dataSend = {
@@ -190,7 +217,11 @@ class ArticleDetail extends PureComponent<IProps, IState> {
     );
     this.getComment();
   }
-  
+
+  callback = (key?: string | number) => {
+    this.props.history.push(`/bai-viet/${key}`)
+  }
+
   DeleteComment = (id) => {
     let dataSend = [id];
     console.log(dataSend);
@@ -215,6 +246,7 @@ class ArticleDetail extends PureComponent<IProps, IState> {
   };
 
   render() {
+    const { listType } = this.state;
     let isAuthen = store.getState().AuthState.isAuthen;
     const menu = (id) => (
       <Menu
@@ -229,7 +261,7 @@ class ArticleDetail extends PureComponent<IProps, IState> {
     if (this.state.loading) {
       return (
         <div className="article-detail-loading">
-          <HashLoader
+          <FadeLoader
             size={150}
             color={"#32A3F9"}
             loading={this.state.loading}
@@ -239,13 +271,35 @@ class ArticleDetail extends PureComponent<IProps, IState> {
     } else {
       return (
         <Layout disableFooterData={true}>
+
           <div className="article-detail">
+            <Affix
+              offsetTop={0}
+              children={(
+                <Tabs
+                  defaultActiveKey="1"
+                  onChange={this.callback}
+                  style={{
+                    backgroundColor: "white",
+                    marginBottom: 0,
+                    textAlign: "center",
+                    width: '100%',
+                    fontWeight: 500
+                  }}
+                >
+                  <TabPane tab="Tất cả" key="all" />
+                  {listType && listType.length > 0 ?
+                    listType.map(
+                      (item?: any) => <TabPane disabled={true} tab={item.name} key={item.id} />
+                    ) : undefined}
+                </Tabs>
+              )} />
             <Row>
               <Col xs={0} sm={0} md={0} lg={1} xl={1} xxl={1}></Col>
               <Col xs={24} sm={24} md={16} lg={16} xl={16} xxl={16}>
                 <Row gutter={16}>
                   <Col xs={0} sm={0} md={0} lg={3} xl={3} xxl={4}>
-                    <Affix offsetTop={200}>
+                    <Affix offsetTop={200} >
                       <div className="affix-annou-card hidden-only-phone">
                         <div className="affix-annou-card-content">
                           <div>
@@ -265,24 +319,24 @@ class ArticleDetail extends PureComponent<IProps, IState> {
                               type={"facebook"}
                               style={{ fontSize: 22, marginTop: 15 }}
                               onClick={() => {
-                                // window.open(
-                                //   `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`,
-                                //   "facebook-share-dialog",
-                                //   "width=626, height=436"
-                                // );
-                                // console.log("1");
-                                //   FB.ui(
-                                //     {
-                                //       display: "popup",
-                                //       method: "share",
-                                //       href:
-                                //         "https://developers.facebook.com/docs/",
-                                //       picture: this.state.imageUrl,
-                                //     },
-                                //     function (response) {}
-                                //   );
-                                // }
-                              }}
+                                window.open(
+                                  `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`,
+                                  "facebook-share-dialog",
+                                  "width=626, height=436"
+                                );
+                                console.log("1");
+                                  FB.ui(
+                                    {
+                                      display: "popup",
+                                      method: "share",
+                                      href:
+                                        "https://developers.facebook.com/docs/",
+                                      picture: this.state.imageUrl,
+                                    },
+                                    function (response) {}
+                                  );
+                                }
+                              }
                             />
                           </div>
                           <div>
@@ -437,7 +491,7 @@ class ArticleDetail extends PureComponent<IProps, IState> {
                   </Col>
                 </Row>
               </Col>
-              <Col xs={0} sm={0} md={8} lg={7} xl={6} xxl={6}>
+              <Col xs={24} sm={12} md={7} lg={7} xl={6} xxl={6}>
                 <div style={{ marginTop: "15vh" }}>
                   <GoodArticle cardType={3} />
                 </div>

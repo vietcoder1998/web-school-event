@@ -4,6 +4,7 @@ import SearchBox from './searchbox/SearchBox';
 // @ts-ignore
 import IMG2 from '../../../assets/image/crs2.jpg';
 import { Carousel } from 'antd';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 function TabSearch(props) {
     let scaleWidth = '100%'
@@ -19,7 +20,7 @@ function TabSearch(props) {
                     <img src={IMG1} style={{ width: '100%', backgroundSize: 'cover' }} alt={'job-title1'} />
                 </div> */}
                 <div style={{height: '550px'}}>
-                    <img src={IMG2} className="img-background" style={{ backgroundSize: 'cover', width: scaleWidth }} alt={'job-title1'} />
+                    <LazyLoadImage src={IMG2} className="img-background" style={{ backgroundSize: 'cover', width: scaleWidth }} alt={'job-title1'} />
                 </div >
                 {/* <div style={{height: '550px'}}>
                     <img src={IMG3} style={{ width: '100%', backgroundSize: 'cover' }} alt={'job-title1'} />

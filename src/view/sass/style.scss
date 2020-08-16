@@ -50,7 +50,7 @@ code {
 //
 .content {
   background-color: #f2f2f2;
-  min-height: calc(100vh - 334px);
+  min-height: calc(100vh - 324px);
   overflow: hidden;
 }
 
@@ -150,6 +150,7 @@ code {
 .Article {
   text-align: center;
   min-height: 100vh;
+  margin-top: 40px;
 }
 
 .text-inner {
@@ -187,12 +188,12 @@ code {
   transition: transform 0.5s;
 
   .ant-row {
-    padding: 0px;
+    padding: 10px 0px;
   }
 
   .img-card {
     width: 100%;
-    height: 60vh;
+    height: 66vh;
   }
 
   .info-card {
@@ -226,7 +227,7 @@ code {
 }
 
 .ct-article {
-  padding: 10px;
+  padding: 1vw 1vh;
 }
 
 .card2 {
@@ -244,10 +245,10 @@ code {
     width: 100%;
     height: 100%;
     object-fit: over;
+    margin-left: -20px;
   }
 
   .ant-col {
-    overflow: hidden;
     height: 15vh;
   }
 
@@ -266,6 +267,7 @@ code {
     display: -webkit-box;
     max-width: 100%;
     font-size: 0.9rem;
+    margin-top: 10px;
 
     line-height: 1.3;
     -webkit-line-clamp: 2;
@@ -281,9 +283,8 @@ code {
     color: black;
     display: -webkit-box;
     max-width: 100%;
-    height: 4.1vh;
     margin: 5px auto;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
@@ -302,6 +303,7 @@ code {
   .img-card {
     width: 100%;
     height: 30vh;
+    margin-left: -10px;
   }
   @media (min-width: 0px) and (max-width: 1000px) {
     .img-card {
@@ -309,7 +311,7 @@ code {
     }
   }
   .info {
-    margin-left: 5px;
+    margin-left: -15px;
     margin-top: 5px;
     width: auto;
     padding: 0px 5px 5px 5px;
@@ -922,10 +924,6 @@ li.region {
     padding-bottom: 5px;
     margin: 2.5vw 1vw;
   }
-
-  .ant-col {
-    padding: 5px 1vw;
-  }
 }
 
 .location {
@@ -1239,7 +1237,7 @@ label {
   }
   margin-bottom: 1vw;
   overflow: hidden;
-  font-weight: 500!important;
+  font-weight: 500 !important;
   li.profile-info {
     padding: 5px 0px;
   }
@@ -3141,7 +3139,8 @@ html {
 }
 
 .history-content {
-  height: auto;
+  position: relative;
+  min-height: 100%;
   padding: 15px 25px;
   background-color: white;
 
@@ -3568,4 +3567,37 @@ html {
   background-color: white;
   padding: 10px 15px;
   margin-bottom: 10px;
+}
+
+@keyframes fadeInFromNone {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+
+  1% {
+    display: block;
+    opacity: 0;
+  }
+
+  100% {
+    display: block;
+    opacity: 1;
+  }
+}
+
+.l-middle {
+  position: relative;
+  .ant-col {
+    padding: 0px 10px;
+  }
+}
+
+.head-an {
+  position: relative;
+  min-height: auto;
+}
+
+[class~="article"] {
+  cursor: pointer;
 }

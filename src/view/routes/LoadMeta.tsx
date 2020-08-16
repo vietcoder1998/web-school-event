@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { LazyLoadComponent } from "react-lazy-load-image-component";
+// import { LazyLoadComponent } from "react-lazy-load-image-component";
 import DocumentMeta from 'react-document-meta';
 import MetaConvert from '../../utils/meta.convert';
 
@@ -33,7 +33,7 @@ export default function loadBoudary(getComponent?: any) {
     }
 
     render() {
-      const { Component , error, errorInfo} = this.state;
+      const { Component } = this.state;
       if (Component) {
         return (<DocumentMeta {...MetaConvert()}>
           <Component {...this.props} />

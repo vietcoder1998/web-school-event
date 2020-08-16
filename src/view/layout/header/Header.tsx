@@ -85,28 +85,28 @@ class Header extends PureComponent<IProps, IState> {
 
   menuUser = () => {
     return (
-      <Menu>
+      <Menu style={{fontWeight: 500}}>
         <Menu.Item>
-          <a href="/profile">Hồ sơ</a>
+          <Link to="/profile">Hồ sơ</Link>
         </Menu.Item>
         <Menu.Item>
-          <a href="/reset-password">Đổi mật khẩu</a>
+          <Link to="/reset-password">Đổi mật khẩu</Link>
         </Menu.Item>
         <Menu.Item>
-          <a href="/save-job">Công việc đã lưu</a>
+          <Link to="/save-job">Công việc đã lưu</Link>
         </Menu.Item>
         <Menu.Item>
-          <a href="/history-apply">Lịch sử ứng tuyển</a>
+          <Link to="/history-apply">Lịch sử ứng tuyển</Link>
         </Menu.Item>
         <Menu.Item onClick={this._clearStorage}>
-          <a
-            href="/"
+          <Link
+            to="/"
             style={{
               pointerEvents: "none",
             }}
           >
             Đăng xuất
-          </a>
+          </Link>
         </Menu.Item>
       </Menu>
     );
@@ -172,10 +172,10 @@ class Header extends PureComponent<IProps, IState> {
                 Ứng dụng trên điện thoại
               </a>
               <a
-                href="/announcement/all"
+                href="/bai-viet/all"
 
                 style={{
-                  display: window.location.pathname.split('/')[1] === "announcement" ? "none" : "",
+                  display: window.location.pathname.split('/')[1] === "bai-viet" ? "none" : "",
                 }}
               >
                 <Icon type={"fileOut"} />
@@ -216,7 +216,7 @@ class Header extends PureComponent<IProps, IState> {
                 }}
               >
                 <Badge count={number_noti}>
-                  <Icon type="bell" theme="filled" style={{fontSize: 14}} />
+                  <Icon type="bell" theme="filled" style={{ fontSize: 14 }} />
                 </Badge>
               </span>
             </Notification>
@@ -230,7 +230,11 @@ class Header extends PureComponent<IProps, IState> {
             </span>
             {isAuthen ? (
               //@ts-ignore
-              <Dropdown overlay={this.menuUser} placement="bottomRight">
+              <Dropdown
+                overlay={this.menuUser}
+                placement="bottomRight"
+                trigger={["click"]}
+              >
                 <span
                   className="label-function hidden-mobile"
                   style={{ borderRadius: "5%" }}

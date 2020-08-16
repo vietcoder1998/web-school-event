@@ -8,11 +8,9 @@ import TopEm from "./TopEm";
 import Announcements from "./Announcements";
 import JobExpect from "./JobExpect";
 import VideoAd from "./VideoAd";
-import { IAppState } from "../../../redux/store/reducer";
-
+import { IAppState } from "../../redux/store/reducer";
 // import { REDUX_SAGA } from '../../../const/actions';
 import IndayJob from './IndayJob';
-import { MobileState } from '../../../redux/reducers/change-mobile-state';
 
 function Home(props) {
   return (

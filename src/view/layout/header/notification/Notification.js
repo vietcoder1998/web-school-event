@@ -64,11 +64,11 @@ class Notification extends Component {
     };
 
     _openPopup = (item, id) => {
-        
+
         let createdDate = moment(item.createdDate).format('DD/MM/YYYY');
         this.setState({ data: item.data, visible: true, createdDate, id });
         this._createRequest(id)
-       
+
     };
 
     _handleOk = (id) => {
@@ -124,7 +124,7 @@ class Notification extends Component {
                                 Xem tất cả
                             </label>
                         </Link>
-                       
+
                     </p>
                 </div>
             </div>
@@ -167,7 +167,7 @@ class Notification extends Component {
                         <div className='noti-image'>
                             <img src={data.logoUrl} alt='logo-company' />
                         </div>
-                        <br/>
+                        <br />
                         <p>Công ty {data.employerName} đã {data.state === 'ACCEPTED' ? ' chấp nhận' : ' từ chối'} lời mời ứng tuyển của bạn </p>
                         <p style={{ textAlign: "right" }}>
                             Thời gian: {createdDate}
@@ -188,15 +188,23 @@ class Notification extends Component {
                                 {this.content()}
                             </div>
                         </>
-                    ) : <Popover
-                        trigger='click'
-                        content={
-                            <div className='notification'>
-                                {this.content()}
-                            </div>
-                        }
-                        style={{ padding: 'none' }}
-                    >
+                    ) :
+                        <Popover
+                            trigger='click'
+                            placement="bottom"
+                            style={{width: 200}}
+                            content={
+                                // <div className='notification'>
+                                //     {this.content()}
+                                // </div>
+                                <Empty 
+                                style={{height: "40vh"}}
+                                description={<b>Hiện tại thông báo đang được sửa do mắc một số lỗi</b>}
+                                style={{padding: 20}} 
+                                />
+                            }
+                            style={{ padding: 'none' }}
+                        >
                             {this.props.children}
                         </Popover>
                 }

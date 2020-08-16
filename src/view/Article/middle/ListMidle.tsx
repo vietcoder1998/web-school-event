@@ -3,18 +3,20 @@ import { _requestToServer } from "../../../services/exec";
 import { POST } from "../../../const/method";
 import { ANNOUNCEMENTS } from "../../../services/api/public.api";
 import { PUBLIC_HOST } from "../../../environment/development";
-import { Skeleton, Row, Col } from "antd";
-import Card3 from "../component/Card3";
+import { Skeleton, Col } from "antd";
+// import Card3 from "../component/Card3";
 import Card2 from "../component/Card2";
 
 // import ImageDeault from "../../../assets/image/base-image.jpg";
-import { GET } from './../../../const/method';
+// import { GET } from './../../../const/method';
 import Title from './../component/Title';
+import { noInfoHeader } from '../../../services/auth';
 
 interface IProps {
   idType?: any;
   pageIndex?: number;
   listType?: any;
+  type?: any;
 }
 
 interface IState {
@@ -46,18 +48,16 @@ export default class ListMiddle extends PureComponent<IProps, IState> {
 
   componentDidMount() {
     this.getListArticle(
-      this.props.idType,
-      this.props.pageIndex,
-      this.state.pageSize
+      this.props.type.id
     );
   }
 
-  async getListArticle(type, pageIndex, pageSize = 10) {
+  async getListArticle(type?: string | number) {
     let body = {
       adminID: null,
       hidden: null,
       createdDate: null,
-      announcementTypeID: null,
+      announcementTypeID: type,
     };
 
     await _requestToServer(
@@ -65,15 +65,15 @@ export default class ListMiddle extends PureComponent<IProps, IState> {
       body,
       ANNOUNCEMENTS.LIST + `?pageIndex=${0}&pageSize=${5}`,
       PUBLIC_HOST,
-      {
-        pageIndex: pageIndex,
-        pageSize: pageSize,
-      },
-      false
+      noInfoHeader,
+      undefined,
+      false,
+      false,
+      true
     ).then((res?: any) => {
-      if (res) {
+      if (res && res.data && res.data.items) {
         let { listArticleData } = this.state;
-        listArticleData = res.data.items.map((item?: any) => item);
+        listArticleData = res.data.items;
 
         this.setState({
           listArticleData,
@@ -88,34 +88,27 @@ export default class ListMiddle extends PureComponent<IProps, IState> {
     if (loading) return <Skeleton />
     else return (
       <Skeleton avatar loading={loading}>
-        <Row>
-          <Col span={3} xs={12}>
-            <Title title={"Hướng nghiệp"} />
-            {listArticleData &&
-              listArticleData.slice(1).map((item?: any, index?: number) => (
-                <Card2
-                  key={item.id}
-                  id={item.id}
-                  title={item.title}
-                  imageUrl={item.imageUrl}
-                  summary={item.previewContent}
-                  rating={item.averageRating}
-                  date={item.createdDate}
-                />
-              ))}
-          </Col>
-          <Col span={3} xs={12}>
-            <Title title={"Nổi bật"} />
-            <Card3
-              id={listArticleData[0].id}
-              title={listArticleData[0].title}
-              imageUrl={listArticleData[0].imageUrl}
-              summary={listArticleData[0].previewContent}
-              rating={listArticleData[0].averageRating}
-              date={listArticleData[0].createdDate}
-            />
-          </Col>
-        </Row>
+
+        {listArticleData && listArticleData.length > 0 ?
+          (
+            <Col xs={24} sm={10} md={12} lg={8} xl={8} xxl={6}>
+              <Title title={this.props.type.name} />
+              {listArticleData.map((item?: any, index?: number) => {
+                if (index < 4) return (
+                  <Card2
+                    key={item.id}
+                    id={item.id}
+                    title={item.title}
+                    imageUrl={item.imageUrl}
+                    summary={item.previewContent}
+                    rating={item.averageRating}
+                    date={item.createdDate}
+                  />)
+              })}
+            </Col>
+          ) : undefined
+        }
+
       </Skeleton>
     );
   }
