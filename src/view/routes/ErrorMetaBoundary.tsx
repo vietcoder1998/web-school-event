@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
 import DocumentMeta from 'react-document-meta';
-import MetaConvert from '../utils/meta.convert';
+import MetaConvert from '../../utils/meta.convert';
 
-export default function asyncComponent(getComponent?: any) {
-
+export default function loadBoudary(getComponent?: any) {
   class AsyncComponent extends Component {
     static Component = null;
     state = {

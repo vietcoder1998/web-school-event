@@ -1,6 +1,6 @@
 import React from "react";
 import { DocumentMeta } from 'react-document-meta';
-import MetaConvert from '../utils/meta.convert';
+import MetaConvert from '../../utils/meta.convert';
 
 interface IErrorBoundaryProps {
     children: any;
