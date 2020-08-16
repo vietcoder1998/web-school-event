@@ -78,7 +78,6 @@ class Profile extends Component<IProps, IState> {
   async componentDidMount() {
 
     await this.props.getData();
-    chat();
     this.setState({ loading: false });
   }
 
