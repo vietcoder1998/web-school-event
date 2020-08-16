@@ -271,7 +271,7 @@ class App extends React.Component<IProps, IState> {
               component={<EventJobDetail />}
             />
             <Route exact path="/count" component={<EventCountDown />} />
-            <Route exact path="/home" component={<Home />} />
+            <Route exact path="/home" component={Home} />
             <Route exact path="/login" component={this.props.isAuthen ? <Home /> : <Login />} />
             <Route exact path="/reset-password" component={<ResetPassword />} />
             <Route
