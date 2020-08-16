@@ -3601,3 +3601,17 @@ html {
 [class~="article"] {
   cursor: pointer;
 }
+
+.content {
+  position: relative;
+  margin-top: 50px;
+  width: 100%;
+}
+
+.all-content {
+  overflow: hidden;
+  bottom: 0px;
+  h5 {
+    font-size: 1.2rem !important;
+  }
+}

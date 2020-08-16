@@ -147,7 +147,7 @@ class Header extends PureComponent<IProps, IState> {
                 Ngày hội việc làm
               </a>
               <a
-                href={`/${this.props.param}`}
+                href={`/`}
                 style={{
                   display: window.location.pathname === "/" ? "none" : "",
                 }}

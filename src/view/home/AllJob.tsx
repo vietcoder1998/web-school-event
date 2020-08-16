@@ -1,13 +1,13 @@
 import React, {PureComponent} from 'react';
 import {Col, Row, Skeleton, Pagination, Icon} from 'antd';
-import './AllJob.scss'
+// import './AllJob.scss'
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 //@ts-ignore
-import DefaultImage from '../../../../assets/image/base-image.jpg';
-import {REDUX_SAGA} from '../../../const/actions';
+import DefaultImage from '../../assets/image/base-image.jpg';
+import {REDUX_SAGA} from '../../const/actions';
 import {JobType} from '../layout/common/Common';
-import {convertFullSalary} from '../../../utils/convertNumber'
+import {convertFullSalary} from '../../utils/convertNumber'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 interface IProps {

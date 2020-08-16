@@ -3,7 +3,7 @@ import Layout from "../layout/Layout";
 import { connect } from "react-redux";
 import TabSearch from "./tab-search";
 import TopJob from "./TopJob";
-// import AllJob from "./all-job/AllJob";
+import AllJob from "./AllJob";
 import TopEm from "./TopEm";
 import Announcements from "./Announcements";
 import JobExpect from "./JobExpect";
@@ -23,6 +23,7 @@ function Home(props) {
         <TopJob />
         <TopEm />
         <VideoAd {...props} />
+        <AllJob   {...props} />
         <Announcements {...props} />
       </div>
     </Layout>

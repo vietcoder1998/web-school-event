@@ -5,7 +5,10 @@ import CHPlay from '../../../assets/image/CHPlay.png';
 //@ts-ignore
 import AppStore from '../../../assets/image/app-store.png';
 import { Col, Row } from 'antd';
-// import Option from './option/Option'
+//@ts-ignore
+import QRCodeAppStore from '../../../assets/image/qr-code-appstore.png';
+//@ts-ignore
+import QRCodeCHPlay from '../../../assets/image/qr-code-chplay.png';
 import { REDUX_SAGA } from './../../../const/actions';
 
 import { connect } from 'react-redux';
@@ -48,29 +51,26 @@ function Footer(props) {
             </div>
           </Col>
           {/* Market */}
-          <Col xs={24} sm={24} md={8} lg={6} xl={6} className='rule app'>
+          <Col xs={24} sm={24} md={8} lg={8} xl={8} className='rule app'>
             <div className='market-chlay'>
               <p>Ứng dụng di động</p>
-              <div>
-                <div style={{ display: 'flex' }}>
-                  <a href={'https://apps.apple.com/vn/app/worksvn-sinh-vi%C3%AAn/id1492437454'} target="_blank" rel="noopener noreferrer">
-                    <LazyLoadImage src={AppStore} alt='CHPlay tìm việc' height='50px' width='auto' />
-                  </a>
-                  {/* <img src={QRCodeAppStore} alt='AppleStore Tìm việc QRCode' height='47px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px' }} /> */}
-                </div>
-                <div style={{ display: 'flex' }} >
-                  <a
-                    href={'https://play.google.com/store/apps/details?id=com.worksvn.student&hl=vi'}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    
-                  >
-                    <LazyLoadImage src={CHPlay} alt='AppleStore Tìm việc' height='50px' width='auto' />
-                  </a>
-                  {/* <img src={QRCodeCHPlay} alt='CHPlay Tìm việc QRCode' height='47px' width='auto' style={{marginTop: '1.2px', marginLeft: '5px'}}/> */}
-                </div>
+              <div style={{ display: 'flex' }}>
+                <a href={'https://apps.apple.com/vn/app/worksvn-sinh-vi%C3%AAn/id1492437454'} target="_blank" rel="noopener noreferrer">
+                  <LazyLoadImage src={AppStore} alt='CHPlay tìm việc' height='50px' width='auto' />
+                </a>
+                <LazyLoadImage src={QRCodeAppStore} alt='AppleStore Tìm việc QRCode' height='47px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px' }} /> 
               </div>
+              <div style={{ display: 'flex' }} >
+                <a
+                  href={'https://play.google.com/store/apps/details?id=com.worksvn.student&hl=vi'}
+                  target="_blank"
+                  rel="noopener noreferrer"
 
+                >
+                  <LazyLoadImage src={CHPlay} alt='AppleStore Tìm việc' height='50px' width='auto' />
+                </a>
+                 <LazyLoadImage src={QRCodeCHPlay} alt='CHPlay Tìm việc QRCode' height='47px' width='auto' style={{marginTop: '1.2px', marginLeft: '5px'}}/> 
+              </div>
             </div>
           </Col>
         </Row>

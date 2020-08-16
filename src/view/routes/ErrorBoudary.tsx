@@ -30,16 +30,16 @@ class ErrorBoundary extends React.PureComponent<IErrorBoundaryProps, IErrorBound
         if (errorInfo) {
             // Error path
             return (
-                <div style={{ padding: '10vw' }}>
-                    <h2>Lỗi trình duyệt.
-                        <i className="em em-bird" aria-role="presentation" aria-label="BIRD"></i>
-                        <i className="em em-bird" aria-role="presentation" aria-label="BIRD"></i>
-                        <i className="em em-bird" aria-role="presentation" aria-label="BIRD"></i>
-                    </h2>
+                <div style={{ padding: '10vw', backgroundColor: "whitesmoke" }}>
+                    <h2>Hình như có gì đó không ổn 😀😀😀🚧🚧🚧</h2>
                     <details style={{ whiteSpace: 'pre-wrap' }}>
-                        {error && error.toString()}
+                        <p>
+                            {error ? error.toString() : "Lỗi không rõ ràng!💩💩💩"}
+                        </p>
                         <br />
-                        {errorInfo.componentStack}
+                        <p>
+                            {errorInfo ? errorInfo.componentStack : "Có lỗi tại đây!💩💩"}
+                        </p>
                     </details>
                 </div>
             );
