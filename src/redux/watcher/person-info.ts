@@ -1,7 +1,7 @@
 
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { _get } from '../../services/base-api';
-import { fullProfile } from '../../services/api/private.api';
+import { FULL_PROFILE } from '../../services/api/private.api';
 import { STUDENT_HOST } from '../../environment/development';
 import { authHeaders } from '../../services/auth';
 import { REDUX_SAGA, REDUX } from '../../const/actions'
@@ -38,7 +38,8 @@ function* getFullPersonInfo() {
         identityCard: "",
         identityCardFrontImageUrl: "",
         identityCardBackImageUrl: "",
-        cvUrl: ""
+        cvUrl: "",
+        tools: []
     };
 
     personalInfo.avatarUrl = data.avatarUrl;
@@ -70,6 +71,7 @@ function* getFullPersonInfo() {
     personalInfo.studentCode = data.studentCode === null ? "Chưa cập nhật" : data.studentCode;
     personalInfo.createdDate = data.createdDate;
     personalInfo.cvUrl = data.cvUrl;
+    personalInfo.tools =  data.workingTools;
     // description
     let description = data.description;
     // skills
@@ -85,6 +87,7 @@ function* getFullPersonInfo() {
     let languageSkills = [];
     languageSkills = data.languageSkills;
     let rating = data.rating;
+    let tools = data.workingTools;
 
 
     yield put({
@@ -97,11 +100,12 @@ function* getFullPersonInfo() {
         languageSkills,
         rating,
         major,
+        tools
     });
 }
 
 function getData() {
-    let data = _get(null, fullProfile, STUDENT_HOST, authHeaders);
+    let data = _get(null, FULL_PROFILE, STUDENT_HOST, authHeaders);
     return data;
 }
 

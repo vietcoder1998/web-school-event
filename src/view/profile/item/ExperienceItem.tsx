@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { timeConverter } from '../../../utils/convertTime';
 import { Row, Col, DatePicker, Input, Popconfirm, Icon, Button } from 'antd';
-import { experienceController } from '../../../services/api/private.api';
+import { EXPERIENCES } from '../../../services/api/private.api';
 import { _requestToServer } from '../../../services/exec';
 import { connect } from 'react-redux';
 import moment from 'moment';
@@ -104,12 +104,12 @@ class ExperienceItem extends Component<Props, State> {
             } else
                 if (experience.startedDate > experience.finishedDate) {
                 } else {
-                    res = await _requestToServer(PUT, experience, experienceController + '/' + id, null, null, null, true);
+                    res = await _requestToServer(PUT, experience, EXPERIENCES + '/' + id, null, null, null, true);
                 }
         }
 
         if (method === DELETE) {
-            res = await _requestToServer(DELETE, null, experienceController + '/' + id, null, null, null, true);
+            res = await _requestToServer(DELETE, null, EXPERIENCES + '/' + id, null, null, null, true);
         }
 
         if (res && res) {

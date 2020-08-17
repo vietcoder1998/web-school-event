@@ -4,6 +4,7 @@ export const LIST_JOB_NAMES = "/api/jobNames/active";
 export const LIST_REGIONS = "/api/regions/active";
 export const FIND_JOB = "/api/jobs/active";
 export const JOB = "/api/jobs";
+export const TOOLS = '/api/workingTools'
 export const EMPLOYER = "/api/employers";
 export const oauth2 = "/api/users/emailVerification/request";
 

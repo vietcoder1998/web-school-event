@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Col, Row, Input, DatePicker } from 'antd';
 import { connect } from 'react-redux'
-import { educationController } from '../../../services/api/private.api';
+import { EDUCATIONS } from '../../../services/api/private.api';
 import { _requestToServer } from '../../../services/exec';
 import moment from 'moment';
 import { REDUX_SAGA } from '../../../const/actions';
@@ -66,7 +66,7 @@ class FixEducation extends Component<IProps, IState>{
             || education.startedDate === 0
             || education.finishedDate === 0) { } else if (method === POST) {
 
-                let res = await _requestToServer(POST, education, educationController, null, null, null, true);
+                let res = await _requestToServer(POST, education, EDUCATIONS, null, null, null, true);
                 if (res) {
                     await this.props.getData();
                     await this.props._fixData('education');

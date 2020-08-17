@@ -11,7 +11,7 @@ export default class CVviewer extends Component<IProps, IState> {
             <div className="drag-cv">
                 <embed
                     src={this.props.cvUrl}
-                    style={{ width: "100%", height: "30vw" }}
+                    style={{ width: "100%", height: "25vw" }}
                 />
                 <CopyToClipboard
                     text={this.props.cvUrl}

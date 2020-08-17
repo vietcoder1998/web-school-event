@@ -1,0 +1,20 @@
+#left-bar {
+  background: white;
+  position: absolute;
+  width: 14vw;
+  height: 51vh;
+  padding: 10px;
+  top: 70px;
+  z-index: 1;
+  left: 0px;
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
+  transition: 0.25s;
+}
+
+#left {
+    padding: 5px 10px;
+    i {
+        margin-left: 10px;
+    }
+}

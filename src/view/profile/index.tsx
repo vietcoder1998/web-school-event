@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Col, Row, Icon } from "antd";
+import { Col, Row, Icon, Anchor } from "antd";
 import Layout from "../layout/Layout";
 import { Tooltip, Affix } from 'antd';
 
@@ -30,6 +30,11 @@ import { POST, PUT } from "../../const/method";
 import { REDUX_SAGA } from "../../const/actions";
 import CVviewer from './CVviewer';
 import { IAppState } from "../../redux/store/reducer";
+import LeftBar from './../layout/common/SideBar';
+import FixTools from './fix/FixTools';
+import Tools from './infor/Tools';
+import { getPersonInfo } from '../../redux/actions/user-info';
+const { Link } = Anchor;
 
 interface IProps {
   personalInfo?: any;
@@ -46,6 +51,7 @@ interface IState {
     experiences?: boolean;
     education?: boolean;
     picture?: boolean;
+    tools?: boolean;
   };
   loading?: boolean;
 }
@@ -62,6 +68,7 @@ class Profile extends Component<IProps, IState> {
         experiences: false,
         education: false,
         picture: false,
+        tools: false,
       },
       loading: false,
     };
@@ -73,7 +80,7 @@ class Profile extends Component<IProps, IState> {
   icon_tower = (<Icon type="folder" />);
   icon_bachelor = (<Icon type="read" />);
   icon_solid_star = (<Icon type="star" />);
-  icon_regular_star = (<i className="fa fa-star" />);
+  icon_tools = (<Icon type="tool" />);
 
   async componentDidMount() {
 
@@ -89,11 +96,12 @@ class Profile extends Component<IProps, IState> {
     window.location.assign(`/profile#${id}`);
   };
 
-  
+
   render() {
     let { profileState } = this.state;
     return (
       <Layout disableFooterData={false}>
+        <LeftBar />
         <div className="content">
           <Row className="profile">
             {/* Profile */}
@@ -101,9 +109,9 @@ class Profile extends Component<IProps, IState> {
               xs={24}
               sm={24}
               md={12}
-              lg={15}
-              xl={16}
-              xxl={16}
+              lg={14}
+              xl={13}
+              xxl={13}
               className="block-info"
             >
               <Block
@@ -182,6 +190,25 @@ class Profile extends Component<IProps, IState> {
                   )}
               </Block>
 
+              {/*Tool*/}
+              <Block
+                describe="Công cụ chuyên môn"
+                icon={this.icon_tools}
+                id={"tools"}
+              >
+                <div
+                  className="icon-fix"
+                  onClick={() => this._fixData("tools")}
+                >
+                  <Icon type="edit" />
+                </div>
+                {profileState["tools"] ? (
+                  <FixTools _fixData={this._fixData} />
+                ) : (
+                    <Tools />
+                  )}
+              </Block>
+
               {/* Language Skills */}
               <Block
                 describe="Ngoại ngữ"
@@ -251,8 +278,37 @@ class Profile extends Component<IProps, IState> {
               xxl={8}
               className="candicate-info "
             >
-              <UploadConfig />
-              <CVviewer cvUrl={this.props.personalInfo.personalInfo.cvUrl} />
+              <UploadConfig onSuccessUpdate={() => this.props.getData()} />
+              <Affix offsetTop={10}>
+                <CVviewer cvUrl={this.props.personalInfo.personalInfo.cvUrl} />
+              </Affix>
+            </Col>
+            <Col
+              xs={0}
+              sm={0}
+              md={0}
+              lg={3}
+              xl={3}
+              xxl={3}
+            >
+              <Anchor
+                offsetTop={10}
+                showInkInFixed={true}
+                style={{
+                  marginRight: -40,
+                  padding: '5px 10px'
+                  , marginLeft: '10px'
+                }}
+              >
+                <Link href="#person" title="Hồ sơ cá nhân" />
+                <Link href="#picture" title="Ảnh CMND" />
+                <Link href="#skills" title="Kỹ năng mềm" />
+                <Link href="#tools" title="Công cụ chuyên môn" />
+                <Link href="#description" title="Mục tiêu nghề nghiệp" />
+                <Link href="#languageSkill" title="Kỹ năng ngôn ngữ" />
+                <Link href="#experience" title="Kinh nghiệm" />
+                <Link href="#education" title="Học vấn" />
+              </Anchor>
             </Col>
           </Row>
         </div>

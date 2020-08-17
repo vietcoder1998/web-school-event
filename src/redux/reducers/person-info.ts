@@ -44,6 +44,7 @@ export const FullPersonalInfo = (state = personal_data, action): any => {
                 experiences: action.experiences,
                 rating: action.rating,
                 major: action.major,
+                tools: action.tools,
             }
         default:
             return state;

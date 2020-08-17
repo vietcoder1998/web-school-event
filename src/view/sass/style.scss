@@ -882,7 +882,6 @@ li.region {
   }
 
   .profile-info {
-    width: 60%;
     font-weight: 500;
   }
 
@@ -900,6 +899,10 @@ li.region {
       cursor: pointer;
     }
   }
+}
+
+div.avatar {
+  position: relative;
 }
 
 .person-info {
@@ -1245,6 +1248,7 @@ label {
   margin-bottom: 1vw;
   overflow: hidden;
   font-weight: 500 !important;
+
   li.profile-info {
     padding: 5px 0px;
   }

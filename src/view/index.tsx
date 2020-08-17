@@ -280,7 +280,7 @@ class App extends React.Component<IProps, IState> {
               <Route
                 exact
                 path="/profile"
-                component={this.props.isAuthen === true ? Profile : Home}
+                component={this.props.isAuthen === true ? Profile : Login}
               />
               <Route exact path="/register" component={this.props.isAuthen ? Home : Register} />
               <Route

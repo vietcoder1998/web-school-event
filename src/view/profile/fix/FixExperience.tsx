@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Col, Row, DatePicker, Input, Button } from 'antd';
 import { connect } from 'react-redux';
-import { experienceController } from '../../../services/api/private.api';
+import { EXPERIENCES } from '../../../services/api/private.api';
 import { _requestToServer } from '../../../services/exec';
 import moment from 'moment';
 import { REDUX_SAGA } from '../../../const/actions';
@@ -73,7 +73,7 @@ class FixExperience extends Component<IState, IState> {
         }
         
         if (method === POST) {
-            let res = await _requestToServer(POST, experience, experienceController, null, null, null, true);
+            let res = await _requestToServer(POST, experience, EXPERIENCES, null, null, null, true);
             if (res) {
                 await this.props.getData();
                 await this.props._fixData('experience');

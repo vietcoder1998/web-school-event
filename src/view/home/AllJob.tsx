@@ -1,13 +1,13 @@
-import React, {PureComponent} from 'react';
-import {Col, Row, Skeleton, Pagination, Icon} from 'antd';
+import React, { PureComponent } from 'react';
+import { Col, Row, Skeleton, Pagination, Icon } from 'antd';
 // import './AllJob.scss'
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 //@ts-ignore
 import DefaultImage from '../../assets/image/base-image.jpg';
-import {REDUX_SAGA} from '../../const/actions';
-import {JobType} from '../layout/common/Common';
-import {convertFullSalary} from '../../utils/convertNumber'
+import { REDUX_SAGA } from '../../const/actions';
+import { JobType } from '../layout/common/Common';
+import { convertFullSalary } from '../../utils/convertNumber'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 interface IProps {
@@ -28,10 +28,10 @@ class AllJob extends PureComponent<IProps> {
     };
 
     render() {
-        let {allJob, loading_all_job, param} = this.props;
+        let { allJob, loading_all_job, param } = this.props;
         return (
-            <Row className='home-job' style={{display: allJob.totalItems === 0 ? 'none' : ''}}>
-                <h5 style={{textAlign: 'center'}}>VIỆC LÀM ĐANG TUYỂN</h5>
+            <Row className='home-job' style={{ display: allJob.totalItems === 0 ? 'none' : '' }}>
+                <h5 style={{ textAlign: 'center' }}>VIỆC LÀM ĐANG TUYỂN</h5>
                 {
                     allJob && allJob.items ? allJob.items.map((item, index) => {
                         let logoUrl = item.employerLogoUrl;
@@ -44,40 +44,42 @@ class AllJob extends PureComponent<IProps> {
                             {loading_all_job ?
                                 (
                                     <Skeleton key={index}
-                                              loading={true}
-                                              avatar
-                                              paragraph={{rows: 1}}
-                                              active={true}/>
+                                        loading={true}
+                                        avatar
+                                        paragraph={{ rows: 1 }}
+                                        active={true} />
                                 )
                                 :
                                 (
                                     <div key={index} className='h-j-item'>
                                         <div className='img-job'>
-                                            <LazyLoadImage src={logoUrl} alt="employer logo"/>
+                                            <Link to={`/employer/${btoa(item.employerID)}`}>
+                                                <LazyLoadImage src={logoUrl} alt="employer logo" />
+                                            </Link>
                                             <JobType>{item.jobType}</JobType>
                                         </div>
                                         <div className='job-content'>
                                             <ul>
                                                 <li className='j-d'>
                                                     <Link to={`/job-detail/${window.btoa(item.id)}${param}`}
-                                                          target='_blank'>
+                                                        target='_blank'>
                                                         <h6 className='l_c'>{item.jobTitle}</h6>
                                                     </Link>
                                                 </li>
                                                 <li className='l_c'>
                                                     <Link to={`/employer/${window.btoa(item.employerID)}${param}`}
-                                                          target='_blank'
-                                                          className="name_employer">{item.employerName}
+                                                        target='_blank'
+                                                        className="name_employer">{item.employerName}
                                                     </Link>
                                                 </li>
                                                 <li className="region">
-                                                    <Icon type="environment" style={{marginRight: 3}}/>
+                                                    <Icon type="environment" style={{ marginRight: 3 }} />
                                                     {item.region && item.region.name
                                                         ? item.region.name
                                                         : null}
                                                 </li>
                                                 <li className="salary">
-                                                    <Icon type="dollar" style={{marginRight: 3}}/>
+                                                    <Icon type="dollar" style={{ marginRight: 3 }} />
                                                     <span className="salary-label">
                                                         <b>
                                                             {convertFullSalary(item.minSalary, item.minSalaryUnit,
@@ -92,11 +94,11 @@ class AllJob extends PureComponent<IProps> {
                             }
                         </Col>
                     }) : null}
-                <Col span={24} style={{textAlign: 'center'}}>
+                <Col span={24} style={{ textAlign: 'center' }}>
                     <Pagination
                         pageSize={allJob.pageSize}
                         total={allJob.totalItems}
-                        style={{margin: '25px 0px 10px'}}
+                        style={{ margin: '25px 0px 10px' }}
                         onChange={this.changePage}
                     />
                 </Col>

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Row, Col, DatePicker, Input, Popconfirm } from 'antd';
 import { _requestToServer } from '../../../services/exec';
 import { timeConverter } from '../../../utils/convertTime';
-import { educationController } from '../../../services/api/private.api';
+import { EDUCATIONS } from '../../../services/api/private.api';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { PUT, DELETE } from '../../../const/method';
@@ -101,10 +101,10 @@ class EducationItem extends Component<IProps, IStates> {
             ) {
             }
             else {
-                res = await _requestToServer(PUT, education, educationController + '/' + id, null, null, null, true);
+                res = await _requestToServer(PUT, education, EDUCATIONS + '/' + id, null, null, null, true);
             }
         } else if (method === DELETE) {
-            res = await _requestToServer(DELETE, null, educationController + '/' + id, null, null, null, true);
+            res = await _requestToServer(DELETE, null, EDUCATIONS + '/' + id, null, null, null, true);
         }
 
         if (res && res) {

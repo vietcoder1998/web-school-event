@@ -7,7 +7,7 @@ export const _post = async (
   api?: string,
   another_host?: string,
   headers?: any,
-  params?: string
+  params?: any,
 ) => {
   let requestURL =
     (another_host ? another_host : process.env.REACT_APP_API_HOST) + api;

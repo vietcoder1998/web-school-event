@@ -8,34 +8,21 @@ import { STUDENT_HOST } from '../../environment/development';
 
 const { Dragger } = Upload;
 
+function getBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
+}
+
 class UploadConfig extends Component {
-    propsDr: any = {
-        name: 'file',
-        accept: ".pdf",
-        multiple: true,
-        action: "https://run.mocky.io/v3/d239e8ba-ccf3-46c6-9dd6-4fb91557ba10?mocky-delay=5000ms",
-        onChange: (info?: any) => {
-            const { status } = info.file;
-            if (status !== 'uploading') {
-                console.log(info.file, info.fileList);
-            }
-            if (status === 'done') {
-                message.success(`Tải lên Thành công`);
-                console.log(info.file);
-                this.file = info.fileList[0];
-            } else if (status === 'error') {
-                message.error(`${info.file.name} Sai định dạng hoặc file quá nặng`);
-                console.log(info.fileList);
-            }
-        },
-    };
-    file: File = null;
-    loading: boolean = false;
+    handleChange = ({ fileList }) => this.setState({ fileList });
     createRequest = async () => {
-        this.loading = true;
-        if (this.file) {
+        if (this.state.fileList) {
             const formData = new FormData();
-            formData.append("file", this.file)
+            formData.append("file", this.state.fileList[0])
             await _requestToServer(
                 PUT,
                 formData,
@@ -51,7 +38,7 @@ class UploadConfig extends Component {
     render() {
         return (
             <div className="drag-cv">
-                <Dragger {...this.propsDr} >
+                <label htmlFor="id" className="ant-upload ant-upload-drag">
                     <p className="ant-upload-drag-icon">
                         <Icon type="inbox" />
                     </p>
@@ -59,12 +46,13 @@ class UploadConfig extends Component {
                     <p className="ant-upload-hint">
                         Chỉ hỗ trợ cho file PDF Tiếng Việt ( dung lượng 10-50 mb)
                     </p>
-                </Dragger>
+                </label>
+                <input id={"cv"} type={"file"} accept={'.pdf'} maxLength={1} onChange={this.handleChange}/>
                 <Button
                     type="primary"
                     onClick={() => this.createRequest()}
                     loading={this.loading}
-                    icon="upload"
+                    icon="save"
                     style={{ marginTop: 10 }}
                     children="Lưu"
                 />

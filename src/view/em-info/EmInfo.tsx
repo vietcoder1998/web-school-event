@@ -17,6 +17,7 @@ import { PROFILE_EMPLOYER } from '../../services/api/private.api';
 import { authHeaders } from '../../services/auth';
 import swal from 'sweetalert';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { testImage } from '../../utils/CheckImage';
 
 const { TextArea } = Input;
 const { TabPane } = Tabs;
@@ -55,7 +56,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
             workingEnvironmentRating: 0,
             salaryRating: 0,
             comment: null,
-            loadingSubmitRate: false 
+            loadingSubmitRate: false
         }
         this.txtErr = null
     }
@@ -70,7 +71,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
             _requestToServer(GET, null, PROFILE_EMPLOYER + `/${window.atob(this.props.match.params.id)}/rating`, STUDENT_HOST, authHeaders, null, null, false, true)
                 .then((res) => {
                     // console.log(res)
-                    if(res && res.code === 200) {
+                    if (res && res.code === 200) {
                         this.setState({
                             workingEnvironmentRating: res.data.workingEnvironmentRating,
                             salaryRating: res.data.salaryRating,
@@ -98,13 +99,13 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
             _requestToServer(POST, data, PROFILE_EMPLOYER + `/${window.atob(this.props.match.params.id)}/rating`, STUDENT_HOST, authHeaders, null, null)
                 .then((res) => {
                     // console.log(res)
-                    if(res && res.code === 200) {
+                    if (res && res.code === 200) {
                         swal({ title: "Thành công", icon: "success", text: 'Đánh giá nhà tuyển dụng thành công!' })
                     }
                     // setWorkingEnvironmentRating(2)
                 })
                 .finally(() => {
-                    this.setState({ visible: false, loadingSubmitRate: false})
+                    this.setState({ visible: false, loadingSubmitRate: false })
                 })
         }
 
@@ -134,7 +135,8 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
     }
     render() {
         let { employerDetail, employerMoreJob, loading, eventEmployerMoreJob, param } = this.props
-        let { onErrCover, visible, salaryRating, workingEnvironmentRating, comment, onErrLogo, loadingSubmitRate } = this.state
+        let { onErrCover, visible, salaryRating, workingEnvironmentRating, comment, onErrLogo, loadingSubmitRate } = this.state;
+        let coverUrl= employerDetail.coverUrl;
         return (
             <Layout>
                 <div className="employer-info content">
@@ -144,9 +146,8 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                         {employerDetail && employerDetail.coverUrl ?
                             <LazyLoadImage
                                 className="cover-image-profile "
-                                src={!onErrCover && employerDetail && employerDetail.coverUrl ? employerDetail.coverUrl : null}
-                                alt={"base"}
-                                onError={() => this.setState({ onErrCover: true })}
+                                src={testImage(coverUrl)}
+                                onError={() => coverUrl = require("./../../assets/image/countdown.jpg")}
                             /> :
                             <div className="cover-image-profile" style={{ backgroundColor: 'rgb(214, 214, 214)' }} />}
                         {/* </div> */}
@@ -204,12 +205,12 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                         onCancel={this.handleCancel}
                         footer={[
                             <Button key="back" onClick={this.handleCancel}>
-                              Huỷ
+                                Huỷ
                             </Button>,
                             <Button key="submit" type="primary" loading={loadingSubmitRate} onClick={this.handleOk}>
-                              Ok
+                                Ok
                             </Button>,
-                          ]}
+                        ]}
                     >
                         <Row>
                             <Col sm={24} md={12} lg={12} xl={12} xxl={12}>
@@ -311,7 +312,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                     <Col sm={24} md={24} lg={24} xl={24} xxl={24} style={{ border: '0.5px dashed rgb(191, 191, 191)', marginBottom: 15 }}></Col>
                                     <Col sm={24} md={24} lg={24} xl={24} xxl={24}>
                                         <Card bordered={false}>
-                                            <Button type="primary" onClick={this.showModal}><i class="fa fa-pencil" aria-hidden="true" style={{ marginRight: 5 }}></i>Viết đánh giá</Button>
+                                            <Button type="primary" onClick={this.showModal}><Icon type="form" style={{ marginRight: 5 }} />Viết đánh giá</Button>
                                             <Meta
                                                 avatar={
                                                     <Icon type='star' />
@@ -364,7 +365,11 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                                 {loading ? <Skeleton loading={true} avatar paragraph={{ rows: 1 }} /> :
                                                     <div className='item-job ' >
                                                         <div style={{ flex: 3 }}>
-                                                            <Avatar shape={'square'} src={item.employerLogoUrl} size={60} style={{ margin: "10px 10px 0 10px" }} />
+                                                            <Avatar
+                                                                shape={'square'}
+                                                                src={item.employerLogoUrl}
+                                                                size={60} style={{ margin: "10px 10px 0 10px" }}
+                                                            />
                                                             {/* <JobType width='60px' fontSize='0.7em'>
                                                                 {item && item.jobType}
                                                             </JobType> */}

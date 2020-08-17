@@ -77,7 +77,9 @@ class IndayJob extends PureComponent<IProps, IState> {
                                         (
                                             <div key={index} className='h-j-item'>
                                                 <div className='img-job'>
-                                                    <LazyLoadImage src={logoUrl} alt="employer logo" />
+                                                    <Link to={`/employer/${btoa(item.employerID)}`}>
+                                                        <LazyLoadImage src={logoUrl} alt="employer logo" />
+                                                    </Link>
                                                     <JobType>{item.jobType}</JobType>
                                                 </div>
                                                 <div className='job-content'>

@@ -22,6 +22,7 @@ import { TYPE } from "../../const/type";
 import qs from "query-string";
 import { goBackWhenLogined } from '../../utils/goBackWhenLogined'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+
 const { TabPane } = Tabs;
 const { TextArea } = Input;
 
@@ -383,7 +384,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
     }
 
     let coverUrl = require("./../../assets/image/countdown.jpg");
-    
+
     if (jobDetail.employerCoverUrl) {
       coverUrl = jobDetail.employerCoverUrl
     };
@@ -455,7 +456,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
         </Modal>
         <Layout>
           <div className="content">
-            <Row style={{marginTop: '0.5vw'}}>
+            <Row style={{ marginTop: '0.5vw' }}>
               <Col xs={0} sm={0} md={0} lg={1} xl={2} xxl={3} />
               <Col xs={24} sm={24} md={24} lg={22} xl={20} xxl={18}>
                 <div id="requirement-job" className="job-detail-content">
@@ -472,12 +473,14 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
 
                   {/* Cover Image */}
                   <div className="cover-image-job ">
-                    <LazyLoadImage
-                      alt={employerDetail && employerDetail.employerName}
-                      src={testImage(coverUrl)}
-                      onError={() => coverUrl=require("./../../assets/image/countdown.jpg")}
-                      className="company-image"
-                    />
+                    <Link to={`/employer/${btoa(employerDetail.employerID)}`}>
+                      <LazyLoadImage
+                        alt={employerDetail && employerDetail.employerName}
+                        src={testImage(coverUrl)}
+                        onError={() => coverUrl = require("./../../assets/image/countdown.jpg")}
+                        className="company-image"
+                      />
+                    </Link>
                   </div>
                   {/* Header */}
                   <div className="job-header">
