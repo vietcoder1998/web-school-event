@@ -283,7 +283,7 @@ class Profile extends Component<IProps, IState> {
               className="candicate-info "
             >
               <Dropzone onCallSuccess={(cvUrl) => this.setState({ cvUrl }, () => this.forceUpdate())} />
-              <Affix offsetTop={0}>
+              <Affix offsetTop={5}>
                 <CVviewer cvUrl={cvUrl ? cvUrl : this.props.personalInfo.personalInfo.cvUrl} />
               </Affix>
             </Col>
