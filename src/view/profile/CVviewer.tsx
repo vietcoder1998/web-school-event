@@ -10,6 +10,7 @@ export default class CVviewer extends Component<IProps, IState> {
         return (
             <div className="drag-cv">
                 <embed
+                    className="hidden-mobile"
                     key={this.props.cvUrl}
                     src={this.props.cvUrl}
                     style={{ width: "100%", height: "25vw" }}

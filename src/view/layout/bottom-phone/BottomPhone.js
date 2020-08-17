@@ -1,13 +1,17 @@
 import React, { PureComponent } from 'react';
 import './BottomPhone.scss';
 import { Icon } from 'antd';
-import { moveScroll } from '../../../../utils/moveScroll';
+import { moveScroll } from '../../../utils/moveScroll';
 import { connect } from 'react-redux';
-import { REDUX } from '../../../../const/actions';
+import { REDUX } from '../../../const/actions';
 
 class BottomPhone extends PureComponent {
     _toHead = () => {
         moveScroll(0, 0, true)
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("scroll", function () { })
     }
 
     render() {
@@ -22,17 +26,17 @@ class BottomPhone extends PureComponent {
                 </span>
                 <span className='link-to'>
                     <a href='/save-job'>
-                        <li><Icon type="user" /></li>
-                        <li>Lịch sử ứng tuyển</li>
+                        <li><Icon type="solution" /></li>
+                        <li>Ứng tuyển</li>
                     </a>
                 </span>
-                <span className='link-to' style={{display: isAuthen ? '' : 'none'}}>
+                <span className='link-to' style={{ display: isAuthen ? '' : 'none' }}>
                     <a href='/'>
                         <li><Icon type="search" /></li>
                         <li>Tìm việc</li>
                     </a>
                 </span>
-               
+
                 <span className='link-to' onClick={this._toHead}>
                     <span>
                         <li><Icon type="up" /></li>
