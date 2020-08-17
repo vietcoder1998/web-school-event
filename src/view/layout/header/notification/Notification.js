@@ -25,7 +25,6 @@ class Notification extends Component {
         }
     };
 
-
     componentDidMount() {
         this.props.getNotiData(0);
         this.setState({ is_loading: false });
@@ -192,18 +191,16 @@ class Notification extends Component {
                         <Popover
                             trigger='click'
                             placement="bottom"
-                            style={{width: 200}}
+                            style={{ width: 200, padding: 10 }}
                             content={
                                 // <div className='notification'>
                                 //     {this.content()}
                                 // </div>
-                                <Empty 
-                                style={{height: "40vh"}}
-                                description={<b>Hiện tại thông báo đang được sửa do mắc một số lỗi</b>}
-                                style={{padding: 20}} 
+                                <Empty
+                                    style={{ height: "40vh", padding: 20 }}
+                                    description={<b>Hiện tại thông báo đang được sửa do mắc một số lỗi</b>}
                                 />
                             }
-                            style={{ padding: 'none' }}
                         >
                             {this.props.children}
                         </Popover>

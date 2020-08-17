@@ -15,15 +15,15 @@
     input {
       height: 40px;
     }
-
-   
   }
-
   .image-login{
     width: 100%;
     height: auto;
     border-radius: -5px;
     position: relative;
   }
-  
+  b {
+    cursor: pointer;
+    text-decoration: underline;
+  }
 }

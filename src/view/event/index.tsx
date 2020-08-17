@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, {
+  useState
+} from "react";
 import Layout from "../layout/Layout";
 import { connect } from "react-redux";
 import HomeJob from "./home/HomeJob";
@@ -12,20 +14,20 @@ import HashLoader from "react-spinners/HashLoader";
 // import { REDUX_SAGA } from '../../const/actions';
 
 function Home(props) {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoadingItem] = useState(true);
 
   React.useEffect(() => {
     props.getTopEmpoyer(0);
     props.getEvenJob(0);
     props.getEventHotJob(0);
-    setLoading(false)
-  })
+    setLoadingItem(false)
+  },[props])
 
   if (loading) {
     return (
       <div className="loading-page">
         <HashLoader
-          sizeUnit={"17px"}
+          // sizeUnit={"17px"}
           size={150}
           color={"#32A3F9"}
           loading={true}

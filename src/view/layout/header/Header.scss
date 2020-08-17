@@ -87,7 +87,7 @@
 
     // MenuProfile
     .label-function {
-      padding: 4px 12px;
+      padding: 4px 14px;
       font-size: 20px;
       position: relative;
       width: auto;
@@ -132,26 +132,24 @@
       top: 15px;
       right: 0px;
     }
-
     // Login Logout Register
     .label-login {
       font-size: 15px;
-      // padding  : 0px 10px;
-
-      a {
+      padding  : 10px;
+      label {
         color: #ffffff;
         font-weight: 400;
         border-radius: 5px;
+        margin-top: 0px;
         &:hover {
           // color          : #f2f2f2;
           background-color: rgba(184, 216, 255, 0.367);
-          // text-decoration: underline;
+          text-decoration: underline;
+          cursor: pointer;
         }
-
-        line-height: 60px;
         padding: 8px;
-        margin: 5px 5px 0;
         font-size: 0.9pc;
+        font-weight: 600;
       }
     }
   }

@@ -8,9 +8,17 @@ import { _requestToServer } from '../../services/exec';
 import { AUTH_HOST } from '../../environment/development';
 import { forgotPassword } from '../../services/api/private.api';
 import { POST } from '../../const/method';
-import {  noInfoHeader } from '../../services/auth';
+import { noInfoHeader } from '../../services/auth';
 
-class ForgotPassword extends Component {
+function checkEmail(email?: String): Boolean {
+    /*eslint no-useless-escape: "off"*/
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
+interface IProps { }
+interface IState { email?: string, isLoading?: boolean }
+class ForgotPassword extends Component<IProps, IState> {
 
     constructor(props) {
         super(props);
@@ -18,8 +26,9 @@ class ForgotPassword extends Component {
             email: '',
             isLoading: false
         }
-        this.textValid = null
     }
+
+    textValid = null
 
     _handleInput = (e) => {
         this.setState({ email: e.target.value })
@@ -29,17 +38,13 @@ class ForgotPassword extends Component {
             this.textValid = 'Bạn chưa nhập email'
             return false;
         }
-        if(!this.checkEmail()) {
+        if (!checkEmail(this.state.email)) {
             this.textValid = 'Email không hợp lệ'
             return false;
         }
         return true
     }
-    checkEmail() {
-        //@ts-ignore
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(this.state.email)
-    }
+
     onSubmit = () => {
         this.setState({ isLoading: true })
         if (this.valid()) {
@@ -47,29 +52,29 @@ class ForgotPassword extends Component {
                 email: this.state.email,
             }
             _requestToServer(POST, data, forgotPassword, AUTH_HOST, noInfoHeader, null, false)
-            .then(res => {
-           
-                if ( res && res.code === 200) {
-                    swal({ title: "Email đổi mật khẩu đã gửi thành công", icon: "success", text: 'Vui lòng kiểm tra email!'}).then(() => {
+                .then(res => {
+
+                    if (res && res.code === 200) {
+                        swal({ title: "Email đổi mật khẩu đã gửi thành công", icon: "success", text: 'Vui lòng kiểm tra email!' }).then(() => {
                             window.location.assign('/login');
-                    })  
-                }
-            })
-            .finally(() =>{
-                this.setState({ isLoading: false }); 
-            })
+                        })
+                    }
+                })
+                .finally(() => {
+                    this.setState({ isLoading: false });
+                })
         } else {
             this.setState({ isLoading: false })
-            swal({ title: "Lỗi", icon: "error", text: this.textValid})
+            swal({ title: "Lỗi", icon: "error", text: this.textValid })
         }
 
     }
+
     render() {
         let { email, isLoading } = this.state;
         return (
             <Layout disableFooterData={false}>
                 {/* <form> */}
-
                 <Row>
                     <Col xs={4} sm={0} md={6} xl={8} lg={7} ></Col>
                     <Col xs={16} sm={24} md={12} xl={8} lg={10} >

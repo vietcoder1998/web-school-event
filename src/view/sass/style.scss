@@ -57,6 +57,11 @@ code {
   width: 100%;
 }
 
+.job-content {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 .none-footer {
   height: calc(100vh - 120px);
   background-color: whitesmoke;
@@ -135,11 +140,11 @@ code {
 }
 
 .link-em {
-  max-width: 25ch;
   white-space: nowrap;
   text-emphasis: ellipsis;
   font-weight: 500;
   margin-bottom: 10px;
+  height: 40px;
 
   &:hover {
     color: rgb(0, 84, 136);
@@ -342,7 +347,7 @@ code {
       max-width: 100%;
       margin: 5px auto;
       font-size: 1.4vh;
-      line-height: 1.4;
+      line-height: 16pxf;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
@@ -734,7 +739,10 @@ i {
 
 .config-tooltip {
   background-color: rgba(255, 255, 255, 0);
-  overflow: visible;
+  -webkit-line-clamp: 2;
+  white-space: pre-line;
+  min-height: 25px;
+  margin-bottom: -3px;
 
   .tooltiptext {
     visibility: hidden;
@@ -768,9 +776,12 @@ i {
   }
   .ant-pagination-item {
     border: solid rgba($color: #fff, $alpha: 0.5) 1px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03),
+      0 6px 20px 0 rgba(0, 0, 0, 0.06);
   }
+
   .ant-pagination-item-link {
-    border: none;
+    border: solid rgba($color: #fff, $alpha: 0.5) 1px;
   }
 }
 
@@ -816,6 +827,8 @@ i {
 
 li.region {
   font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .push-on {
@@ -903,6 +916,7 @@ li.region {
 
 div.avatar {
   position: relative;
+  height: 18vh;
 }
 
 .person-info {
@@ -1279,6 +1293,10 @@ label {
   }
 }
 
+.h-j-item {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.06);
+}
+
 .home-job {
   font-family: $font_base;
   padding: 10px;
@@ -1308,7 +1326,7 @@ label {
     display: flex;
     margin-right: 10px;
     margin-bottom: 10px;
-    height: 116px !important;
+    height: 114px !important;
     border-radius: 5px;
     border: rgba(255, 255, 255, 0) solid 1px;
     background-color: #ffffff;
@@ -1367,7 +1385,7 @@ label {
 
     .job-content {
       width: 100%;
-      padding-top: 8px;
+      padding-top: 10px;
       padding-right: 8px;
 
       h6 {
@@ -1462,7 +1480,6 @@ label {
     display: flex;
     margin-right: 10px;
     margin-bottom: 10px;
-    height: 116px !important;
     border-radius: 5px;
     border: rgba(255, 255, 255, 0) solid 1px;
     background-color: #ffffff;
@@ -3013,90 +3030,6 @@ html {
   font-weight: bold;
 }
 
-.history-content {
-  height: auto;
-  padding: 15px 25px;
-  background-color: white;
-  margin-top: 10px;
-  h5 {
-    font-weight: 350;
-  }
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
-
-  a {
-    text-transform: capitalize;
-  }
-
-  .history-job {
-    .job-detail {
-      height: auto;
-      min-height: 210px;
-      margin: 5px;
-      display: flex;
-      padding: 5px 10px;
-      min-height: 260px;
-      &:hover {
-        background-color: azure;
-      }
-
-      li {
-        :hover {
-          cursor: pointer;
-        }
-      }
-
-      .image-job {
-        position: relative;
-        flex-direction: column;
-        align-items: center;
-        display: flex;
-        img {
-          object-fit: contain;
-        }
-        .logo-company {
-          position: relative;
-          padding: 2px;
-          height: 85px;
-          width: 85px;
-          // border: solid $color_border 2px;
-        }
-
-        .job-state {
-          position: absolute;
-          top: 60px;
-          left: 60px;
-        }
-      }
-
-      .content-job {
-        padding: 5px 5px 5px 10px;
-        // width: calc(100% -115px);
-        // min-height: 200px;
-
-        p {
-          font-size: 1rem;
-          font-family: $font_base;
-          margin-bottom: 10px;
-          font-weight: 500;
-
-          a {
-            color: rgba(0, 0, 0, 0.734);
-
-            &:hover {
-              text-decoration: underline;
-            }
-          }
-        }
-      }
-
-      li {
-        list-style: none;
-        padding: 5px 2px;
-      }
-    }
-  }
-}
-
 .hl-job {
   .pagination-result {
     .ant-pagination-item-active {
@@ -3153,11 +3086,9 @@ html {
   position: relative;
   min-height: 100%;
   padding: 15px 25px;
-  background-color: white;
-
-  a {
-    text-transform: capitalize;
-  }
+  background-color: rgba(255, 253, 253, 0.794);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.01), 0 6px 20px 0 rgba(0, 0, 0, 0.02);
+  margin: 10px 0px;
 
   .history-job {
     .job-detail {
@@ -3166,6 +3097,28 @@ html {
       margin: 5px;
       display: flex;
       padding: 5px 20px;
+      flex-direction: column;
+      border-radius: 3px;
+      background-color: rgb(255, 255, 255);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.06);
+
+
+      a {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* number of lines to show */
+        -webkit-box-orient: vertical;
+      }
+
+      li {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* number of lines to show */
+        -webkit-box-orient: vertical;
+      }
+
       &:hover {
         background-color: azure;
       }
@@ -3202,12 +3155,11 @@ html {
       .content-job {
         padding: 5px 5px 5px 10px;
         // width: calc(100% -115px);
-        // min-height: 200px;
+        // min-height: 150px;
 
         p {
           font-size: 1rem;
           font-family: $font_base;
-          margin-bottom: 10px;
           font-weight: 500;
 
           a {
@@ -3233,6 +3185,10 @@ html {
   .input_outside {
     width: 100%;
     height: 30px;
+  }
+
+  .ant-col {
+    padding: 0px 10px;
   }
 
   p {
@@ -3316,7 +3272,7 @@ html {
 
     .cover-image-profile {
       width: 100%;
-      height: calc(100% - 109px);
+      height: calc(100vh - 109px);
       opacity: 1;
       min-width: 100%;
       min-height: 100%;
@@ -3345,7 +3301,7 @@ html {
       justify-content: center;
 
       .content-avatar {
-        height: 8vw;
+        height: 140px;
         width: 100%;
         border-radius: 50%;
         position: relative;
@@ -3578,6 +3534,7 @@ html {
   background-color: white;
   padding: 10px 15px;
   margin-bottom: 10px;
+  overflow: hidden;
 }
 
 @keyframes fadeInFromNone {
@@ -3613,12 +3570,11 @@ html {
   cursor: pointer;
 }
 
-
 .all-content {
   // overflow: hidden;
   bottom: 0px;
   h5 {
-    font-size: 1.2rem !important;
+    font-size: 1.3rem !important;
   }
 }
 

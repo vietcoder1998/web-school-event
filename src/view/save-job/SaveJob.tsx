@@ -89,8 +89,8 @@ class SaveJob extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                             <Row>
                                                 {listSavedJobs && listSavedJobs.items && listSavedJobs.items.length > 0 ? listSavedJobs.items.map((item, index) => {
 
-                                                    return (<Col key={index} xs={24} sm={24} md={12} lg={12} xl={12} xxl={8}>
-                                                        <div className='job-detail test'>
+                                                    return (<Col key={index} xs={24} sm={12} md={8} lg={8} xl={8} xxl={8}>
+                                                        <div className='job-detail fixed'>
                                                             <div className='image-job'>
                                                                 <Avatar
                                                                     className='logo-company'
@@ -112,10 +112,14 @@ class SaveJob extends React.PureComponent<ISaveJobProp, ISaveJobState>{
 
                                                             </div>
                                                             <div className='content-job'>
-                                                                <p><Link target='_blank' 
-                                                                to={ item.job.schoolEventID === null ? `/job-detail/${window.btoa(item.job && item.job.id)}` 
-                                                                : `/event-job-detail/${window.btoa(item.job && item.job.id)}`}>
-                                                                    {item.job && item.job.jobTitle}</Link></p>
+                                                                <p>
+                                                                    <Link target='_blank'
+                                                                        to={item.job.schoolEventID === null ? 
+                                                                            `/job-detail/${window.btoa(item.job && item.job.id)}`
+                                                                            : `/event-job-detail/${window.btoa(item.job && item.job.id)}`}>
+                                                                        {item.job && item.job.jobTitle}
+                                                                    </Link>
+                                                                </p>
                                                                 <div className='info-company'>
 
                                                                     <li>
@@ -129,11 +133,11 @@ class SaveJob extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                                                     {moment(item.saveTime).format('DD/MM/YY')}
                                                                 </li>
                                                             </div>
-                                                            <div className='content-job' style={{display: item.job.schoolEventID === null ? 'none' : ''}}>
+                                                            <div className='content-job' style={{ display: item.job.schoolEventID === null ? 'none' : '' }}>
                                                                 <Tooltip placement="bottom" title={"Việc làm sự kiện"}>
-                                                                    <Icon type='tag' style={{color: 'red'}} />
+                                                                    <Icon type='tag' style={{ color: 'red' }} />
                                                                 </Tooltip>
-                                                                
+
                                                             </div>
                                                         </div>
                                                     </Col>)

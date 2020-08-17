@@ -23,7 +23,7 @@ import { _get, _post } from "../../services/base-api";
 import { PUBLIC_HOST } from "../../environment/development";
 import imageLogin from "../../assets/image/image-login.png";
 // import logo from "../../assets/image/logo-01.png";
-import {goBackWhenLogined} from '../../utils/goBackWhenLogined'
+import { goBackWhenLogined } from '../../utils/goBackWhenLogined'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { IAppState } from '../../redux/store/reducer';
 const isNumeric = (value) => {
@@ -147,7 +147,7 @@ class Register extends Component<IProps, IState> {
       });
     }
   }
-  
+
   listYear(min, max) {
     let newListBirthYear = [];
     for (let i = max; i > min; i--) {
@@ -428,7 +428,7 @@ class Register extends Component<IProps, IState> {
     return (
       <Layout disableFooterData={false}>
         {/* Form Register */}
-        <Row justify="center" align="center">
+        <Row justify="center" className="a_c">
           <Col
             xs={mobile ? 24 : 12}
             sm={mobile ? 24 : 12}
@@ -688,38 +688,38 @@ class Register extends Component<IProps, IState> {
                   allowClear={false}
                 /> */}
                 {/* <div> */}
-                  <Select
-                    showSearch
-                    placeholder="Năm học bắt đầu"
-                    style={{ width: "49%", marginRight: 15 }}
-                    optionFilterProp="children"
-                    onChange={this._handleTime("schoolYearStart")}
-                    filterOption={(input, option) =>
-                      // @ts-ignore
-                      option.props.children
-                        .toLowerCase()
-                        .indexOf(input.toLowerCase()) >= 0
-                    }
-                    showArrow={false}
-                  >
-                    {this.state.listBirthYearMin.map((item, index) => {
-                      return (
-                        <Option value={item.id} key={index}>
-                          {item.name}
-                        </Option>
-                      );
-                    })}
-                  </Select>
-                  <Tooltip
-                    title={
-                      is_exactly_schoolYearStart ? "Năm học bắt đầu hợp lệ" : "Chọn năm học bắt đầu"
-                    }
-                  >
-                    <Icon
-                      type={is_exactly_schoolYearStart ? "check" : "warning"}
-                      style={{ color: is_exactly_schoolYearStart ? "green" : "red",  position: 'relative', marginLeft: -35, marginTop: 8}}
-                    />
-                  </Tooltip>
+                <Select
+                  showSearch
+                  placeholder="Năm học bắt đầu"
+                  style={{ width: "49%", marginRight: 15 }}
+                  optionFilterProp="children"
+                  onChange={this._handleTime("schoolYearStart")}
+                  filterOption={(input, option) =>
+                    // @ts-ignore
+                    option.props.children
+                      .toLowerCase()
+                      .indexOf(input.toLowerCase()) >= 0
+                  }
+                  showArrow={false}
+                >
+                  {this.state.listBirthYearMin.map((item, index) => {
+                    return (
+                      <Option value={item.id} key={index}>
+                        {item.name}
+                      </Option>
+                    );
+                  })}
+                </Select>
+                <Tooltip
+                  title={
+                    is_exactly_schoolYearStart ? "Năm học bắt đầu hợp lệ" : "Chọn năm học bắt đầu"
+                  }
+                >
+                  <Icon
+                    type={is_exactly_schoolYearStart ? "check" : "warning"}
+                    style={{ color: is_exactly_schoolYearStart ? "green" : "red", position: 'relative', marginLeft: -35, marginTop: 8 }}
+                  />
+                </Tooltip>
                 {/* </div> */}
 
 
@@ -746,15 +746,15 @@ class Register extends Component<IProps, IState> {
                   })}
                 </Select>
                 <Tooltip
-                      title={
-                        validSchoolYearEnd[exactly_schoolYearEnd]
-                      }
-                    >
-                      <Icon
-                        type={exactly_schoolYearEnd === 1 ? "check" : "warning"}
-                        style={{ color: exactly_schoolYearEnd === 1 ? "green" : "red", position: 'relative', marginLeft: -25, marginTop: 8 }}
-                      />
-                    </Tooltip>
+                  title={
+                    validSchoolYearEnd[exactly_schoolYearEnd]
+                  }
+                >
+                  <Icon
+                    type={exactly_schoolYearEnd === 1 ? "check" : "warning"}
+                    style={{ color: exactly_schoolYearEnd === 1 ? "green" : "red", position: 'relative', marginLeft: -25, marginTop: 8 }}
+                  />
+                </Tooltip>
               </div>
               <div className="normal">
                 {/* <DatePicker
@@ -875,9 +875,9 @@ class Register extends Component<IProps, IState> {
                                     </p> */}
                 <p className="a_c">
                   Bạn đã có tài khoản ?{" "}
-                  <a type="" onClick={() => goBackWhenLogined('login')} style={{ color: "red" }} >
-                    Đăng nhập
-                  </a>
+                  <label onClick={() => goBackWhenLogined('login')} style={{ color: "red" }} >
+                    <b> Đăng nhập</b>
+                  </label>
                 </p>
               </div>
             </form>

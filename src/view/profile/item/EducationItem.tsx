@@ -186,13 +186,13 @@ class EducationItem extends Component<IProps, IStates> {
                             {/* Description */}
                             <div className='education-content'>
                                 <p> <label style={{ color: 'red' }}>*</label>Mô tả nội dung</p>
-                                <textarea
+                                <Input.TextArea
                                     id='description'
                                     placeholder='Mô tả sơ lược quá trình học bạn làm những công việc gì, có tham gia các hoạt động ngoại khóa và chức vụ gì trong lớp'
                                     value={education.description}
                                     onChange={this._handleData}
-                                >
-                                </textarea>
+                                    rows={7}
+                                />
                             </div>
                             <p><label style={{ color: 'red' }}>*</label>Thông tin bắt buộc</p>
                         </div>

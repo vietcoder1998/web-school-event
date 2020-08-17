@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './index.scss';
-import { List, Avatar, Affix, Tooltip } from 'antd';
+import { List, Avatar, Affix, Tooltip, Collapse } from 'antd';
 import Search from 'antd/lib/input/Search';
 import { _post } from '../../../services/base-api';
 import { EMPLOYER } from './../../../services/api/public.api';
@@ -10,10 +10,12 @@ import { Link } from 'react-router-dom';
 import { ITopEmDetail } from '../../../models/employer-detail';
 import { timeConverter } from '../../../utils/convertTime';
 import { limitString } from '../../../utils/limitString';
+import { Icon } from 'antd';
+
+const { Panel } = Collapse;
 
 interface IProps { }
 interface IState { loading: boolean, data?: Array<ITopEmDetail>, chose?: number }
-
 
 export default class LeftBar extends Component<IProps, IState> {
     constructor(props) {
@@ -71,52 +73,70 @@ export default class LeftBar extends Component<IProps, IState> {
     componentWillUnmount() {
         window.removeEventListener("input", () => { console.log("out") });
         window.removeEventListener("scroll", () => { console.log("out") });
+        window.removeEventListener("onKeyDown", () => { console.log("out") });
+        window.removeEventListener("onPressEnter", () => { console.log("out") });
     }
 
     render() {
         let { data, loading, chose } = this.state;
         return (
-            <Affix offsetTop={-60}>
+            <Affix offsetTop={-65}>
                 <div id='left-bar' className='hidden-mobile'>
-                    <Search
-                        onKeyDown={(event?: any) => this.setChosen(event.keyCode)}
-                        placeholder="Tìm kiếm nhà tuyển dụng"
-                        onChange={(event?: any) => this.onSearch(event.target.value)}
-                        onPressEnter={() => window.location.assign(`/employer/${btoa(data[chose].employerID)}`)}
-                    />
-                    <List
-                        style={{
-                            height: 'auto',
-                            overflowY: "auto",
-                            backgroundColor: "white",
-                            margin: '10px -10px',
-                        }}
-                        dataSource={data}
-                        loading={loading}
-                        renderItem={(item?: ITopEmDetail, i?: number) => (
-                            <List.Item
-                                key={item.employerID}
-                                style={{
-                                    backgroundColor: i === this.state.chose ? "whitesmoke" : "",
-                                    padding: 10
-                                }}
-                            >
-                                <Tooltip title={item.employerName} placement="right" style={{ zIndex: 2 }} >
-
-                                    <List.Item.Meta
-                                        avatar={
-                                            <Link to={`/employer/${btoa(item.employerID)}`}>
-                                                <Avatar src={item.employerLogoUrl} alt={item.employerName} />
-                                            </Link>
-                                        }
-                                        title={<Link to={`/employer/${btoa(item.employerID)}`}>{limitString(item.employerName)}</Link>}
-                                        description={timeConverter(item.createdDate)}
-                                    />
-                                </Tooltip>
-                            </List.Item>
-                        )}
-                    />
-
+                    <div className="box-block fixed">
+                        <Search
+                            onKeyDown={(event?: any) => this.setChosen(event.keyCode)}
+                            placeholder="Tìm kiếm nhà tuyển dụng"
+                            onChange={(event?: any) => this.onSearch(event.target.value)}
+                            onPressEnter={() => window.location.assign(`/employer/${btoa(data[chose].employerID)}`)}
+                        />
+                        <List
+                            style={{
+                                height: 'auto',
+                                overflowY: "auto",
+                                backgroundColor: "white",
+                                margin: '10px -10px',
+                            }}
+                            dataSource={data}
+                            loading={loading}
+                            renderItem={(item?: ITopEmDetail, i?: number) => (
+                                <List.Item
+                                    key={item.employerID}
+                                    style={{
+                                        backgroundColor: i === this.state.chose ? "whitesmoke" : "",
+                                        padding: 10
+                                    }}
+                                >
+                                    <Tooltip title={item.employerName} placement="right" style={{ zIndex: 2 }} >
+                                        <List.Item.Meta
+                                            avatar={
+                                                <Link to={`/employer/${btoa(item.employerID)}`}>
+                                                    <Avatar src={item.employerLogoUrl} alt={item.employerName} />
+                                                </Link>
+                                            }
+                                            title={<Link to={`/employer/${btoa(item.employerID)}`}>{limitString(item.employerName)}</Link>}
+                                            description={timeConverter(item.createdDate)}
+                                        />
+                                    </Tooltip>
+                                </List.Item>
+                            )}
+                        />
+                    </div>
+                    <div className="box-block fixed">
+                        <Collapse defaultActiveKey={['1']} bordered={false}>
+                            <Panel header="Mục khác" key="1" style={{borderColor: 'rgba(0,0,0,0)'}}>
+                                <p>
+                                    <Link to='/save-job'>
+                                        <Icon type={"save"} /> Công việc đã lưu
+                                </Link>
+                                </p>
+                                <p>
+                                    <Link to='/history-apply'>
+                                        <Icon type={"tag"} /> Lịch sử ứng tuyển
+                                 </Link>
+                                </p>
+                            </Panel>
+                        </Collapse >
+                    </div>
                 </div>
             </Affix>
 

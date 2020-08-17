@@ -5,7 +5,6 @@ import { IAppState } from '../../redux/store/reducer';
 import { REDUX_SAGA } from '../../const/actions';
 import { ITopEmDetail } from '../../models/employer-detail';
 import LinkToolTip from '../layout/common/LinkToolTip';
-import { limitString } from '../../utils/limitString';
 
 
 interface IProps {
@@ -42,6 +41,7 @@ class TopEm extends PureComponent<IProps, IState> {
                                     lg={6}
                                     xl={6}
                                     xxl={5}
+                                    style={{overflow: 'hidden'}}
                                 >
                                     <a href={`/employer/${btoa(item.employerID)}`}>
                                         {loading ?
@@ -56,12 +56,13 @@ class TopEm extends PureComponent<IProps, IState> {
                                                     />
                                                 </div>
                                             )}
-                                        <div className='link-em a_c'>
+                                        <div className='link-em a_c' style={{padding: "2px 10px"}}>
                                             <LinkToolTip
                                                 title={
                                                     item.employerName
                                                 }
-                                                name={limitString(item.employerName, 15)}
+                                                transform="uppercase"
+                                                name={item.employerName}
                                             />
                                         </div>
                                     </a>

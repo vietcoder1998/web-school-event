@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Col, Row, Skeleton, Pagination, Icon } from 'antd';
 import { connect } from 'react-redux';
-import { limitString } from '../../utils/limitString';
 import { Link } from 'react-router-dom';
 //@ts-ignore
 import DefaultImage from '../../assets/image/base-image.jpg';
@@ -101,7 +100,7 @@ class IndayJob extends PureComponent<IProps, IState> {
                                                                                     style={{ marginRight: 5 }}
                                                                                     children={"GẤP"}
                                                                                 />
-                                                                                {limitString(item.jobTitle, 30)}
+                                                                                {item.jobTitle}
                                                                             </>
                                                                         }
                                                                         transform={"uppercase"}
@@ -121,7 +120,7 @@ class IndayJob extends PureComponent<IProps, IState> {
                                                                             type="shop"
                                                                             style={{ marginRight: 5 }}
                                                                         />
-                                                                        {limitString(item.jobTitle, 20)}
+                                                                        {item.employerName}
                                                                     </>}
                                                                     transform={"initial"}
                                                                 />
@@ -134,8 +133,11 @@ class IndayJob extends PureComponent<IProps, IState> {
                                                                 : null}
                                                         </li>
                                                         <li className="region">
-                                                            <Icon type="dollar" style={{ marginRight: 3 }} />
-                                                            {convertFullSalary(item.minSalary, item.minSalaryUnit, item.maxSalary, item.maxSalaryUnit)}
+                                                            <span className="salary-label">
+                                                                <Icon type="dollar" style={{ marginRight: 3 }} />
+                                                                {convertFullSalary(item.minSalary, item.minSalaryUnit,
+                                                                    item.maxSalary, item.maxSalaryUnit)}
+                                                            </span>
                                                         </li>
                                                     </ul>
                                                 </div>

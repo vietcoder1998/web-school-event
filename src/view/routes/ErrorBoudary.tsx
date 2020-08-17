@@ -1,4 +1,5 @@
 import React from "react";
+import Emoji from 'a11y-react-emoji';
 
 interface IErrorBoundaryProps {
     children: any;
@@ -31,7 +32,7 @@ class ErrorBoundary extends React.PureComponent<IErrorBoundaryProps, IErrorBound
             // Error path
             return (
                 <div style={{ padding: '10vw', backgroundColor: "whitesmoke" }}>
-                    <h2>Hình như có gì đó không ổn 😀😀😀🚧🚧🚧</h2>
+                    <h2>Hình như có gì đó không ổn  <Emoji  symbol="🐑" label="sheep" /> <Emoji  symbol="🐑" label="sheep" /> <Emoji  symbol="🐑" label="sheep" /></h2>
                     <details style={{ whiteSpace: 'pre-wrap' }}>
                         <p>
                             {error ? error.toString() : "Lỗi không rõ ràng!💩💩💩"}

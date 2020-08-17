@@ -15,7 +15,7 @@ interface IProps {
 
 function DataJobNames(props: IProps) {
     let { jobNames } = props;
-    React.useEffect(() => { props.getJobNames() }, []);
+    React.useEffect(() => { props.getJobNames() }, [props]);
 
     let [body, setBody] =
         React.useState({

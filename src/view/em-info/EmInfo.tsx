@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Icon, Avatar, Row, Col, Tabs, Card, Modal, Skeleton, Rate, Pagination, Empty, Button, Input } from 'antd';
+import { Icon, Avatar, Row, Col, Tabs, Card, Modal, Skeleton, Rate, Pagination, Empty, Button, Input, Tooltip } from 'antd';
 import './EmInfo.scss';
 // @ts-ignore
 import defaultImage from './../../assets/image/base-image.jpg';
@@ -135,8 +135,8 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
     }
     render() {
         let { employerDetail, employerMoreJob, loading, eventEmployerMoreJob, param } = this.props
-        let { onErrCover, visible, salaryRating, workingEnvironmentRating, comment, onErrLogo, loadingSubmitRate } = this.state;
-        let coverUrl= employerDetail.coverUrl;
+        let { visible, salaryRating, workingEnvironmentRating, comment, onErrLogo, loadingSubmitRate } = this.state;
+        let coverUrl = employerDetail.coverUrl;
         return (
             <Layout>
                 <div className="employer-info content">
@@ -161,8 +161,8 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                         // @ts-ignore
                                         src={!onErrLogo && employerDetail && employerDetail.logoUrl ? employerDetail.logoUrl : defaultImage}
                                         style={{
-                                            height: "8vw",
-                                            width: "8vw",
+                                            height: "120px",
+                                            width: "120px",
                                             fontSize: 60,
                                             border: 'solid #168ECD 3px',
                                             zIndex: 1
@@ -185,15 +185,20 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                 <div>
                                     {employerDetail && employerDetail.employerName ? employerDetail.employerName : <NotUpdate />}
                                 </div>
-                                <Icon
-                                    type="safety-certificate"
-                                    theme="filled"
-                                    style={{
-                                        color:
-                                            employerDetail &&
-                                                employerDetail.profileVerified ? 'greenyellow' : 'red'
-                                    }}
-                                />
+                                <Tooltip title={employerDetail &&
+                                    employerDetail.profileVerified ? 'Đã hệ thống xác thực' : 'Chưa được xác thực'}
+                                    placement="right" 
+                                    >
+                                    <Icon
+                                        type="safety-certificate"
+                                        theme="filled"
+                                        style={{
+                                            color:
+                                                employerDetail &&
+                                                    employerDetail.profileVerified ? 'greenyellow' : 'red'
+                                        }}
+                                    />
+                                </Tooltip>
                             </div>
                         </div>
                     </div>

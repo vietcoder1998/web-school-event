@@ -108,6 +108,7 @@ class Branch extends PureComponent<IProps, IState> {
             <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={8}>
               <div className="branch-item" style={{ textAlign: "center", padding: 0 }}>
                 <a
+                  href="/#"
                   onClick={() => {
                     this.handleClick(electromechanical.id, electromechanical.name);
                   }}
@@ -121,15 +122,15 @@ class Branch extends PureComponent<IProps, IState> {
                       style={{ borderTopLeftRadius: '10.4528px', borderTopRightRadius: '10.4528px' }}
                     />
                   </div>
-                  {electromechanical ? 
-                  <div style={{ padding: '10px 0', display: 'flex', justifyContent: 'center', alignItems: 'center', height: 106.5 - this.state.width }}>
-                    <img
-                      src={ electromechanical.imageUrl === null ? whileImage : electromechanical.imageUrl}
-                      alt="branch"
-                      style={{ width: 30, marginRight: 10 }}
-                    />
-                    <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{electromechanical.name}{" "}</div>
-                  </div> : null }
+                  {electromechanical ?
+                    <div style={{ padding: '10px 0', display: 'flex', justifyContent: 'center', alignItems: 'center', height: 106.5 - this.state.width }}>
+                      <img
+                        src={electromechanical.imageUrl === null ? whileImage : electromechanical.imageUrl}
+                        alt="branch"
+                        style={{ width: 30, marginRight: 10 }}
+                      />
+                      <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{electromechanical.name}{" "}</div>
+                    </div> : null}
                 </a>
               </div>
             </Col>
@@ -138,6 +139,7 @@ class Branch extends PureComponent<IProps, IState> {
             <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={8} >
               <div className="branch-item" style={{ textAlign: "center", padding: 0 }} >
                 <a
+                  href="/#"
                   onClick={() => {
                     this.handleClick(technique.id, technique.name);
                   }}
@@ -156,19 +158,20 @@ class Branch extends PureComponent<IProps, IState> {
                       style={{ borderTopLeftRadius: '10.4528px', borderTopRightRadius: '10.4528px' }}
                     />
                   </div>
-                {technique ? 
-                  <div style={{ padding: '10px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <img
-                      src={technique.imageUrl === null ? whileImage : technique.imageUrl}
-                      alt="branch"
-                      style={{ width: 30, marginRight: 10 }}
-                    />
-                    <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{technique.name}{" "}</div>
-                  </div> : null }
+                  {technique ?
+                    <div style={{ padding: '10px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                      <img
+                        src={technique.imageUrl === null ? whileImage : technique.imageUrl}
+                        alt="branch"
+                        style={{ width: 30, marginRight: 10 }}
+                      />
+                      <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{technique.name}{" "}</div>
+                    </div> : null}
                 </a>
               </div>
               <div className="branch-item" style={{ textAlign: "center", padding: 0 }}>
                 <a
+                  href="/#"
                   onClick={() => {
                     this.handleClick(business.id, business.name);
                   }}
@@ -187,15 +190,15 @@ class Branch extends PureComponent<IProps, IState> {
                       style={{ borderTopLeftRadius: '10.4528px', borderTopRightRadius: '10.4528px' }}
                     />
                   </div>
-                  {business ? 
-                  <div style={{ padding: '10px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <img
-                      src={business.imageUrl === null ? whileImage : business.imageUrl}
-                      alt="branch"
-                      style={{ width: 25, marginRight: 10 }}
-                    />
-                    <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{business.name}{" "}</div>
-                  </div> : null }
+                  {business ?
+                    <div style={{ padding: '10px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                      <img
+                        src={business.imageUrl === null ? whileImage : business.imageUrl}
+                        alt="branch"
+                        style={{ width: 25, marginRight: 10 }}
+                      />
+                      <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{business.name}{" "}</div>
+                    </div> : null}
                 </a>
               </div>
             </Col>
@@ -210,6 +213,7 @@ class Branch extends PureComponent<IProps, IState> {
                   <Col xs={12} sm={6} md={6} lg={6} xl={4} xxl={4} key={index}>
                     <div className="branch-item" style={{ textAlign: "center" }}>
                       <a
+                        href="/#"
                         id={`a-${item.id}`}
                         onClick={() => {
 
@@ -232,10 +236,7 @@ class Branch extends PureComponent<IProps, IState> {
                   </Col>
                 )
               }
-            }
-            )
-            : null}
-
+              else return ''}): null}
         </Row>
       </div>
     );

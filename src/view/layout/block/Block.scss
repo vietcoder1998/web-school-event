@@ -7,13 +7,21 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
   width: 100%;
   min-width: 300px;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   p {
-    margin: 0px !important;
+    margin: 0px;
   }
 
-  pre{
+  pre {
     font-size: 0.7 rem !important;
+  }
+
+  &.fixed {
+    min-width: 0;
+    padding: 10px;
+    p {
+      margin-bottom: 10px;
+    }
   }
 
   .block-header {
@@ -36,5 +44,9 @@
 
   .anticon {
     top: 50%;
+  }
+
+  .nav-tabs {
+    border-bottom: 1px solid #ddd0;
   }
 }

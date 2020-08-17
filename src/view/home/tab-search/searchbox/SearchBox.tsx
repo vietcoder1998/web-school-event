@@ -13,7 +13,6 @@ import QRCodeAppStore from '../../../../assets/image/qr-code-appstore.png';
 import QRCodeCHPlay from '../../../../assets/image/qr-code-chplay.png';
 import qs from 'query-string';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { LazyLoadComponent } from 'react-lazy-load-image-component';
 
 const InputGroup = Input.Group;
 const { Option } = Select;

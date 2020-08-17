@@ -17,7 +17,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 //@ts-ignore
 
 function Footer(props) {
-  React.useEffect(() => { props.getJobNames() }, []);
+  // React.useEffect((newProps) => { props.getJobNames() }, []);
   return (
     <div className='footer' >
       {/* <Option {...props} /> */}

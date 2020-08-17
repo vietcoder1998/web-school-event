@@ -12,7 +12,6 @@ import FixDescription from "./fix/FixDescription";
 import Description from "./infor/Description";
 import FixSkills from "./fix/FixSkills";
 import Skills from "./infor/Skills";
-import UploadConfig from './Upload'
 
 // import Info from '../layout/info/Info';
 import FixExperience from "./fix/FixExperience";
@@ -33,7 +32,6 @@ import { IAppState } from "../../redux/store/reducer";
 import LeftBar from './../layout/common/SideBar';
 import FixTools from './fix/FixTools';
 import Tools from './infor/Tools';
-import { getPersonInfo } from '../../redux/actions/user-info';
 import { Dropzone } from './../layout/common/Dropzone';
 const { Link } = Anchor;
 
@@ -99,6 +97,9 @@ class Profile extends Component<IProps, IState> {
     window.location.assign(`/profile#${id}`);
   };
 
+  componentWillUnmount() {
+    window.removeEventListener("scroll", () => { console.log("out scroll") })
+  }
 
   render() {
     let { profileState, cvUrl } = this.state;
@@ -282,7 +283,7 @@ class Profile extends Component<IProps, IState> {
               className="candicate-info "
             >
               <Dropzone onCallSuccess={(cvUrl) => this.setState({ cvUrl }, () => this.forceUpdate())} />
-              <Affix offsetTop={10}>
+              <Affix offsetTop={5}>
                 <CVviewer cvUrl={cvUrl ? cvUrl : this.props.personalInfo.personalInfo.cvUrl} />
               </Affix>
             </Col>
@@ -295,13 +296,16 @@ class Profile extends Component<IProps, IState> {
               xxl={3}
             >
               <Anchor
-                offsetTop={10}
+                offsetTop={5}
                 showInkInFixed={true}
                 style={{
                   marginRight: -40,
-                  padding: '5px 10px'
-                  , marginLeft: '10px'
+                  padding: '5px',
+                  marginLeft: '5px',
+                  backgroundColor: 'rgb(0,0,0,0)',
+                  fontWeight: 500
                 }}
+                className="hidden-mobile"
               >
                 <Link href="#person" title="Hồ sơ cá nhân" />
                 <Link href="#picture" title="Ảnh CMND" />

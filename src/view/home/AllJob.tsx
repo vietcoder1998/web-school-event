@@ -69,7 +69,9 @@ class AllJob extends PureComponent<IProps> {
                                                 <li className='l_c'>
                                                     <Link to={`/employer/${window.btoa(item.employerID)}${param}`}
                                                         target='_blank'
-                                                        className="name_employer">{item.employerName}
+                                                        className="name_employer">
+                                                        <Icon type="shop" style={{ marginRight: 3 }} />
+                                                        {item.employerName}
                                                     </Link>
                                                 </li>
                                                 <li className="region">
@@ -78,14 +80,10 @@ class AllJob extends PureComponent<IProps> {
                                                         ? item.region.name
                                                         : null}
                                                 </li>
-                                                <li className="salary">
+                                                <li className="region">
                                                     <Icon type="dollar" style={{ marginRight: 3 }} />
-                                                    <span className="salary-label">
-                                                        <b>
-                                                            {convertFullSalary(item.minSalary, item.minSalaryUnit,
-                                                                item.maxSalary, item.maxSalaryUnit)}
-                                                        </b>
-                                                    </span>
+                                                        {convertFullSalary(item.minSalary, item.minSalaryUnit,
+                                                            item.maxSalary, item.maxSalaryUnit)}
                                                 </li>
                                             </ul>
                                         </div>

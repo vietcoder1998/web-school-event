@@ -103,19 +103,19 @@ class Login extends Component {
               // }
 
               // console.log(this.props.location.search);
-            //   const parsed = queryString.parse(this.props.location.search);
-            //   // console.log(window.atob(parsed.path));
-            //   // setTimeout(() => {
-            //   var base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
-            //   if (base64regex.test(parsed.path)) {
-            //     if (window.atob(parsed.path)) {
-            //       window.location.assign(window.atob(parsed.path));
-            //     } else {
-            //       window.location.assign("/");
-            //     }
-            //   } else {
-            //     window.location.assign("/");
-            //   }
+              //   const parsed = queryString.parse(this.props.location.search);
+              //   // console.log(window.atob(parsed.path));
+              //   // setTimeout(() => {
+              //   var base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+              //   if (base64regex.test(parsed.path)) {
+              //     if (window.atob(parsed.path)) {
+              //       window.location.assign(window.atob(parsed.path));
+              //     } else {
+              //       window.location.assign("/");
+              //     }
+              //   } else {
+              //     window.location.assign("/");
+              //   }
               // }, 3000)
             }
           }
@@ -202,12 +202,12 @@ class Login extends Component {
                 </p>
                 <p className="a_c">
                   Bạn chưa có tài khoản ?{" "}
-                  <a
+                  <label
                     onClick={() => goBackWhenLogined("register")}
                     style={{ color: "#fb4141" }}
                   >
-                    Đăng ký
-                  </a>
+                    <b>Đăng ký</b>
+                  </label>
                 </p>
               </form>
             </div>

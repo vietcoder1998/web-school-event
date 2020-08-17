@@ -2,9 +2,8 @@ import React, { CSSProperties } from 'react';
 import moment from 'moment';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { Icon, message, notification } from 'antd';
+import { Icon, notification } from 'antd';
 import { limitString } from '../../../utils/limitString';
-import { ArgsProps } from 'antd/lib/message';
 
 export const Titlelabel = (props) => {
     return <label className="title-label">{" " + props.value + " "}</label>

@@ -156,7 +156,7 @@ class ExperienceItem extends Component<Props, State> {
                     </div>
                 </Tab>
                 {/* Update */}
-                <Tab eventKey={fix}>
+                <Tab eventKey={fix} title="">
                     <div className='wrapper'>
                         <div className='experience'>
                             {/* jobName */}
@@ -202,6 +202,7 @@ class ExperienceItem extends Component<Props, State> {
                                     placeholder='Nhập nội dung và mô tả cụ thể công việc đã làm'
                                     value={experience.description}
                                     onChange={this._handleInput("description")}
+                                    rows={7}
                                 />
                             </div>
                             <p><label style={{ color: 'red' }}>*</label>Thông tin bắt buộc</p>

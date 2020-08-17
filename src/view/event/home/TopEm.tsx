@@ -60,7 +60,6 @@ class TopEm extends PureComponent<IProps, IState> {
                       className="image-employer"
                       
                     />
-
                   </div>
                   <div className="job-content">
 

@@ -5,10 +5,10 @@
   background-color: white;
   display: block;
   padding: 5% 5% 0px;
-  .title_register{
+  .title_register {
     font-weight: 600;
     font-size: 20px;
-    margin-bottom: 10px
+    margin-bottom: 10px;
   }
   .normal {
     font-weight: 500;
@@ -16,6 +16,11 @@
     padding: 0px 20px;
     .fogot-password {
       margin-bottom: 25px;
+    }
+
+    b {
+      text-decoration: underline;
+      cursor: pointer;
     }
   }
   .normal_2 {
@@ -27,7 +32,6 @@
     float: right;
   }
 
- 
   a {
     &:hover {
       text-decoration: underline;
@@ -39,7 +43,7 @@
     margin: 10px 0px 0px 0px;
   }
 
-  .row-name{
+  .row-name {
     display: inline-flex;
     padding: 10px;
   }
@@ -48,25 +52,25 @@
     text-align: center;
   }
 }
-.image-login{
+.image-login {
   width: 100%;
   height: auto;
   border-radius: -5px;
   position: relative;
 }
-.ant-modal-content{
+.ant-modal-content {
   width: 600px;
   height: 640px;
-  .ant-modal-body{
+  .ant-modal-body {
     height: 530px;
   }
 }
 .ant-calendar-year-panel-last-decade-cell {
-  color: #afafaf
+  color: #afafaf;
 }
 .ant-calendar-year-panel-next-decade-cell {
-  color: #afafaf
+  color: #afafaf;
 }
 .ant-calendar-year-panel-selected-cell {
-  color: #fff
+  color: #fff;
 }

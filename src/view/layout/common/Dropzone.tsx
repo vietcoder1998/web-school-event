@@ -6,7 +6,6 @@ import { Icon, Button, notification } from 'antd';
 import { UPCVSTUDENT } from './../../../services/api/private.api';
 import { Progress } from 'antd';
 import { sendFileHeader } from '../../../services/auth';
-import { random } from 'core-js/fn/number';
 
 export const Dropzone = (props?: { onCallSuccess?: Function }) => {
     const fileInputRef = useRef();
@@ -54,17 +53,20 @@ export const Dropzone = (props?: { onCallSuccess?: Function }) => {
     }
 
     const filesSelected = () => {
-        if (fileInputRef.current.files.length) {
+        //@ts-ignore
+        if (fileInputRef && fileInputRef.current && fileInputRef.current.files && fileInputRef.current.files.length > 0) {
+            //@ts-ignore
             handleFiles(fileInputRef.current.files);
         }
     }
 
     const fileInputClicked = () => {
+        //@ts-ignore
         fileInputRef.current.click();
     }
 
     const handleFiles = (files) => {
-        for (let i = 0; i < files.length; i++) {
+        for (let i = 0; i < 1; i++) {
             if (validateFile(files[i])) {
                 setSelectedFiles(prevArray => [...prevArray, files[i]]);
             } else {
@@ -136,8 +138,7 @@ export const Dropzone = (props?: { onCallSuccess?: Function }) => {
                 if (res) {
                     notification.success({ message: 'upload cv thành công' });
                     setValidFiles([]);
-                    console.log(res);
-                    let date = new Date;
+                    let date = new Date();
                     let number = date.getTime();
                     props.onCallSuccess(res.data.data.downloadUrl + `?time=${number}`);
                 }

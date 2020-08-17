@@ -156,6 +156,7 @@ class App extends React.Component<IProps, IState> {
 
   componentWillUnmount() {
     this.resizeInterface = null;
+    window.removeEventListener("resize", () => {console.log("remove resize")})
 
   }
 

@@ -87,9 +87,7 @@ export default class Card2 extends PureComponent<IProps, IState> {
                 <p>
                   <Icon type="calendar" /> {date}
                 </p>
-                <p>
-                  <Rate disabled={true} value={rating} style={{ fontSize: '0.8rem' }} />
-                </p>
+                <Rate disabled={true} value={rating} style={{ fontSize: '0.8rem' }} />
               </div>
             </Col>
           </Row>

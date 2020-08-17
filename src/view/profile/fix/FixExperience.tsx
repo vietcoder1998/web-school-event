@@ -35,7 +35,7 @@ class FixExperience extends Component<IState, IState> {
 
     _handleInput = (type) => (event) => {
         let value = event.target.value;
-       
+
         let { experience } = this.state;
         experience[type] = value;
         this.setState({ experience });
@@ -56,14 +56,14 @@ class FixExperience extends Component<IState, IState> {
     }
 
     _createRequest = () => {
-        this.requestServer(); 
+        this.requestServer();
     }
 
     async requestServer() {
         let { method } = this.props;
         let { experience } = this.state;
 
-        if(experience.finishedDate < experience.startedDate) {
+        if (experience.finishedDate < experience.startedDate) {
             swal({
                 title: "Worksvns thông báo",
                 text: "Ngày bắt đầu không thể sau ngày kết thúc",
@@ -71,7 +71,7 @@ class FixExperience extends Component<IState, IState> {
                 dangerMode: false,
             });
         }
-        
+
         if (method === POST) {
             let res = await _requestToServer(POST, experience, EXPERIENCES, null, null, null, true);
             if (res) {
@@ -121,7 +121,13 @@ class FixExperience extends Component<IState, IState> {
                     {/* Description */}
                     <div className='experience-content'>
                         <p> <label style={{ color: 'red' }}>*</label>Mô tả nội dung</p>
-                        <Input.TextArea id='description' placeholder='Nhập nội dung và mô tả cụ thể công việc đã làm' value={experience.description} onChange={this._handleInput("description")}/>
+                        <Input.TextArea
+                            id='description'
+                            placeholder='Nhập nội dung và mô tả cụ thể công việc đã làm'
+                            value={experience.description}
+                            onChange={this._handleInput("description")}
+                            rows={7}
+                        />
                     </div>
                     <p><label style={{ color: 'red' }}>*</label>Thông tin bắt buộc</p>
                 </div>

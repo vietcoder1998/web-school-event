@@ -18,7 +18,7 @@ const openNotification = () => {
     const btn = (
         <Button type="primary" size="small" onClick={() => notification.close(key)}>
             Confirm
-      </Button>
+        </Button>
     );
 
     const description = () => (<div >Bạn đã xóa một công việc</div>)
@@ -106,8 +106,8 @@ class HistoryApply extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                                         default:
                                                             break;
                                                     }
-                                                    return (<Col key={index} xs={24} sm={24} md={12} lg={12} xl={12} xxl={8}>
-                                                        <div className='job-detail test'>
+                                                    return (<Col key={index} xs={24} sm={12} md={8} lg={8} xl={6} xxl={6}>
+                                                        <div className='job-detail '>
                                                             <div className='image-job'>
                                                                 <Avatar
                                                                     className='logo-company'
@@ -126,11 +126,9 @@ class HistoryApply extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                                                     <Button type='danger' size='small'> <Icon type="delete" />Xóa</Button>
                                                                 </li>
                                                             </Tooltip> */}
-
-
                                                             </div>
                                                             <div className='content-job'>
-                                                                <p><Link
+                                                                <Link
                                                                     onClick={() => {
                                                                         // this.props.setEventID(null)
                                                                         if (item.job.schoolEventID) {
@@ -139,7 +137,7 @@ class HistoryApply extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                                                             window.open(`/job-detail/${window.btoa(item.job && item.job.id)}`)
                                                                         }
                                                                     }}
-                                                                >{item.job && item.job.jobTitle}</Link></p>
+                                                                >{item.job && item.job.jobTitle}</Link>
                                                                 <div className='info-company'>
                                                                     <li>
                                                                         <Link to={`/employer/${window.btoa(item.job && item.job.employerID)}`}><Icon type="home" style={{ marginRight: 3 }} />{item.job && item.job.employerName}</Link>
@@ -149,8 +147,8 @@ class HistoryApply extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                                                     </li>
                                                                 </div>
                                                                 <span style={{ backgroundColor: typeSpan.color, color: '#fff', padding: '3px 5px' }}>
-                                                                <i className={typeSpan.type} aria-hidden="true" style={{ fontSize: "1.1em" }}></i>
-                                                                 <span style={{ fontWeight: 550, fontSize: '0.9em' }}>{typeSpan.state}</span></span>
+                                                                    <i className={typeSpan.type} aria-hidden="true" style={{ fontSize: "1.1em" }}></i>
+                                                                    <span style={{ fontWeight: 550, fontSize: '0.9em' }}>{typeSpan.state}</span></span>
                                                                 <span style={{ display: 'flex' }}>
                                                                     <li style={{ fontSize: '0.7rem' }}>
                                                                         <i className="fa fa-paper-plane" aria-hidden="true" style={{ marginRight: 3 }}></i>

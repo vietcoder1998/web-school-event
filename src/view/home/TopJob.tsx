@@ -7,7 +7,6 @@ import DefaultImage from '../../assets/image/base-image.jpg';
 import { REDUX_SAGA } from '../../const/actions';
 import { JobType } from '../layout/common/Common';
 import LinkToolTip from '../layout/common/LinkToolTip';
-import { limitString } from '../../utils/limitString';
 import { convertFullSalary } from '../../utils/convertNumber';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
@@ -83,7 +82,7 @@ class TopJob extends PureComponent<IProps> {
                                                                             style={{ marginRight: 5 }}
                                                                             children={"HOT"}
                                                                         />
-                                                                        {limitString(item.jobTitle, 30)}
+                                                                        {item.jobTitle}
                                                                     </>
                                                                 }
                                                                 transform={"uppercase"}
@@ -106,7 +105,7 @@ class TopJob extends PureComponent<IProps> {
                                                                         style={{ marginRight: 5 }}
 
                                                                     />
-                                                                    {limitString(item.jobTitle, 20)}
+                                                                    {item.employerName}
                                                                 </>}
                                                             transform={"initial"}
                                                         />
@@ -119,8 +118,11 @@ class TopJob extends PureComponent<IProps> {
                                                         : null}
                                                 </li>
                                                 <li className="region">
-                                                    <Icon type="dollar" style={{ marginRight: 3 }} />
-                                                    {convertFullSalary(item.minSalary, item.minSalaryUnit, item.maxSalary, item.maxSalaryUnit)}
+                                                    <span className="salary-label">
+                                                        <Icon type="dollar" style={{ marginRight: 3 }} />
+                                                        {convertFullSalary(item.minSalary, item.minSalaryUnit,
+                                                            item.maxSalary, item.maxSalaryUnit)}
+                                                    </span>
                                                 </li>
                                             </ul>
                                         </div>

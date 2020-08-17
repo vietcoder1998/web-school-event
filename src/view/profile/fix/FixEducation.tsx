@@ -120,6 +120,7 @@ class FixEducation extends Component<IProps, IState>{
                             placeholder='Mô tả sơ lược quá trình học bạn làm những công việc gì, có tham gia các hoạt động ngoại khóa và chức vụ gì trong lớp'
                             value={education.description}
                             onChange={this._handleData}
+                            rows={7}
                         />
                     </div>
                     <p><label style={{ color: 'red' }}>*</label>Thông tin bắt buộc</p>
