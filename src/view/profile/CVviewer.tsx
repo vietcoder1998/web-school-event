@@ -10,6 +10,7 @@ export default class CVviewer extends Component<IProps, IState> {
         return (
             <div className="drag-cv">
                 <embed
+                    key={this.props.cvUrl}
                     src={this.props.cvUrl}
                     style={{ width: "100%", height: "25vw" }}
                 />
@@ -17,7 +18,7 @@ export default class CVviewer extends Component<IProps, IState> {
                     text={this.props.cvUrl}
                     onCopy={() => message.info("Sao chép thành công")}
                 >
-                    <p style={{cursor: "pointed"}}>
+                    <p style={{ cursor: "pointed" }}>
                         Link đường dẫn cv <Tooltip title="Copy link">
                             <Icon type="copy" /></Tooltip>
                     </p>

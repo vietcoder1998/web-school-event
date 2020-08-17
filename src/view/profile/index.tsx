@@ -34,6 +34,7 @@ import LeftBar from './../layout/common/SideBar';
 import FixTools from './fix/FixTools';
 import Tools from './infor/Tools';
 import { getPersonInfo } from '../../redux/actions/user-info';
+import { Dropzone } from './../layout/common/Dropzone';
 const { Link } = Anchor;
 
 interface IProps {
@@ -54,6 +55,7 @@ interface IState {
     tools?: boolean;
   };
   loading?: boolean;
+  cvUrl?: string;
 }
 
 class Profile extends Component<IProps, IState> {
@@ -71,6 +73,7 @@ class Profile extends Component<IProps, IState> {
         tools: false,
       },
       loading: false,
+      cvUrl: null,
     };
   }
 
@@ -98,7 +101,7 @@ class Profile extends Component<IProps, IState> {
 
 
   render() {
-    let { profileState } = this.state;
+    let { profileState, cvUrl } = this.state;
     return (
       <Layout disableFooterData={false}>
         <LeftBar />
@@ -278,9 +281,9 @@ class Profile extends Component<IProps, IState> {
               xxl={8}
               className="candicate-info "
             >
-              <UploadConfig onSuccessUpdate={() => this.props.getData()} />
+              <Dropzone onCallSuccess={(cvUrl) => this.setState({ cvUrl }, () => this.forceUpdate())} />
               <Affix offsetTop={10}>
-                <CVviewer cvUrl={this.props.personalInfo.personalInfo.cvUrl} />
+                <CVviewer cvUrl={cvUrl ? cvUrl : this.props.personalInfo.personalInfo.cvUrl} />
               </Affix>
             </Col>
             <Col
