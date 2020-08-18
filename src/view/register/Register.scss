@@ -10,6 +10,14 @@
     font-size: 20px;
     margin-bottom: 10px;
   }
+
+  .ant-modal-content {
+    width: 600px;
+    height: 640px;
+    .ant-modal-body {
+      height: 530px;
+    }
+  }
   .normal {
     font-weight: 500;
     margin: 15px 0px;
@@ -58,13 +66,7 @@
   border-radius: -5px;
   position: relative;
 }
-.ant-modal-content {
-  width: 600px;
-  height: 640px;
-  .ant-modal-body {
-    height: 530px;
-  }
-}
+
 .ant-calendar-year-panel-last-decade-cell {
   color: #afafaf;
 }

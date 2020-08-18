@@ -119,7 +119,6 @@ export const Dropzone = (props?: { onCallSuccess?: Function }) => {
         if (validFiles[0]) {
             const formData = new FormData();
             formData.append('file', validFiles[0]);
-
             axios.put(process.env.REACT_APP_API_HOST + UPCVSTUDENT, formData, {
                 headers: sendFileHeader,
                 onUploadProgress: (progressEvent) => {
@@ -175,6 +174,7 @@ export const Dropzone = (props?: { onCallSuccess?: Function }) => {
                     ref={fileInputRef}
                     className="file-input"
                     type="file"
+                    accept=".pdf"
                     multiple={false}
                     onChange={filesSelected}
                 />

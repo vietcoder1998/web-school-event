@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 //@ts-ignore
 import imageDefault from "../../../assets/image/base-image.jpg";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { Row, Col } from 'antd';
+import { Row, Col, Icon } from 'antd';
 import { IAppState } from '../../../redux/store/reducer';
 
 function ShortProfile(props?: { personalInfo?: any }) {
@@ -14,10 +14,7 @@ function ShortProfile(props?: { personalInfo?: any }) {
       <div className="short-profile">
         <Row>
           <Col xs={24} md={12} xl={12} lg={12} xxl={12}>
-            <p>
-              <b> Ảnh mặt trước</b>
-            </p>
-            <div className="identytiImage">
+            <div className="identity-img">
               <LazyLoadImage
                 src={personalInfo.identityCardFrontImageUrl}
                 onError={(e?: React.SyntheticEvent) => {
@@ -28,15 +25,17 @@ function ShortProfile(props?: { personalInfo?: any }) {
                 height="100%"
                 width="100%"
               />
+              <label>
+                <Icon type="file-image" />
+                <b>
+                  Ảnh mặt trước
+              </b>
+              </label>
             </div>
           </Col>
           <Col xs={24} md={12} xl={12} lg={12} xxl={12}>
-            <p>
-              <b>
-                Ảnh mặt sau
-              </b>
-            </p>
-            <div className="identytiImage">
+            <div className="identity-img">
+
               <LazyLoadImage
                 src={personalInfo.identityCardBackImageUrl}
                 alt="ảnh CMND"
@@ -47,6 +46,12 @@ function ShortProfile(props?: { personalInfo?: any }) {
                 height="100%"
                 width="100%"
               />
+              <label>
+                <Icon type="file-image" />
+                <b>
+                  Ảnh mặt sau
+                </b>
+              </label>
             </div>
           </Col>
         </Row>

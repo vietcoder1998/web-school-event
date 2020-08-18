@@ -631,7 +631,6 @@ class Register extends Component<IProps, IState> {
                     }
                   }}
                   filterOption={(input, option) =>
-                    // @ts-ignore
                     option.props.children
                       .toLowerCase()
                       .indexOf(input.toLowerCase()) >= 0

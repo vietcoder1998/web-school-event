@@ -33,6 +33,7 @@ import LeftBar from './../layout/common/SideBar';
 import FixTools from './fix/FixTools';
 import Tools from './infor/Tools';
 import { Dropzone } from './../layout/common/Dropzone';
+import { TYPE } from './../../const/type';
 const { Link } = Anchor;
 
 interface IProps {
@@ -121,17 +122,17 @@ class Profile extends Component<IProps, IState> {
               <Block
                 describe="Thông tin cá nhân"
                 icon={this.icon_user}
-                id={"person"}
+                id={TYPE.PERSON}
               >
                 <div
                   className="icon-fix"
                   onClick={() => {
-                    this._fixData("person");
+                    this._fixData(TYPE.PERSON);
                   }}
                 >
                   <Icon type="edit" />
                 </div>
-                {profileState["person"] ? (
+                {profileState[TYPE.PERSON] ? (
                   <FixShortProfile _fixData={this._fixData} />
                 ) : (
                     <ShortProfile />
@@ -160,18 +161,18 @@ class Profile extends Component<IProps, IState> {
               <Block
                 describe="Mục tiêu nghề nghiệp"
                 icon={this.icon_list}
-                id={"description"}
+                id={TYPE.DESCRIPTION}
               >
                 <div
                   className="icon-fix"
-                  onClick={() => this._fixData("description")}
+                  onClick={() => this._fixData(TYPE.DESCRIPTION)}
                 >
                   <Icon type="edit" />
                 </div>
-                {profileState["description"] ? (
+                {profileState[TYPE.DESCRIPTION] ? (
                   <FixDescription _fixData={this._fixData} method={PUT} />
                 ) : (
-                    <Description />
+                    <Description onClick={this._fixData} />
                   )}
               </Block>
 
@@ -179,18 +180,18 @@ class Profile extends Component<IProps, IState> {
               <Block
                 describe="Kỹ năng mềm"
                 icon={this.icon_star}
-                id={"skills"}
+                id={TYPE.SKILLS}
               >
                 <div
                   className="icon-fix"
-                  onClick={() => this._fixData("skills")}
+                  onClick={() => this._fixData(TYPE.SKILLS)}
                 >
                   <Icon type="edit" />
                 </div>
-                {profileState["skills"] ? (
+                {profileState[TYPE.SKILLS] ? (
                   <FixSkills _fixData={this._fixData} />
                 ) : (
-                    <Skills />
+                    <Skills onClick={this._fixData} />
                   )}
               </Block>
 
@@ -198,18 +199,18 @@ class Profile extends Component<IProps, IState> {
               <Block
                 describe="Công cụ chuyên môn"
                 icon={this.icon_tools}
-                id={"tools"}
+                id={TYPE.TOOLS}
               >
                 <div
                   className="icon-fix"
-                  onClick={() => this._fixData("tools")}
+                  onClick={() => this._fixData(TYPE.TOOLS)}
                 >
                   <Icon type="edit" />
                 </div>
-                {profileState["tools"] ? (
+                {profileState[TYPE.TOOLS] ? (
                   <FixTools _fixData={this._fixData} />
                 ) : (
-                    <Tools />
+                    <Tools onClick={this._fixData} />
                   )}
               </Block>
 
@@ -217,16 +218,16 @@ class Profile extends Component<IProps, IState> {
               <Block
                 describe="Ngoại ngữ"
                 icon={this.icon_list}
-                id="languageSkill"
+                id={TYPE.LANGUAGE_SKILL}
               >
                 <div
                   className="icon-fix"
-                  onClick={() => this._fixData("languageSkill")}
+                  onClick={() => this._fixData(TYPE.LANGUAGE_SKILL)}
                 >
                   <Icon type={"plus"} twoToneColor={"blue"} />
                 </div>
                 <LanguageSkills />
-                {profileState["languageSkill"] ? (
+                {profileState[TYPE.LANGUAGE_SKILL] ? (
                   <FixLanguageSkills _fixData={this._fixData} method={POST} />
                 ) : null}
               </Block>
@@ -235,16 +236,16 @@ class Profile extends Component<IProps, IState> {
               <Block
                 describe="Kinh nghiệm làm việc"
                 icon={this.icon_tower}
-                id="experience"
+                id={TYPE.EXPERIENCE}
               >
                 <div
                   className="icon-fix"
-                  onClick={() => this._fixData("experience")}
+                  onClick={() => this._fixData(TYPE.EXPERIENCE)}
                 >
                   <Icon type={"plus"} twoToneColor={"blue"} />
                 </div>
                 <Experience />
-                {profileState["experience"] ? (
+                {profileState[TYPE.EXPERIENCE] ? (
                   <FixExperience _fixData={this._fixData} method={POST} />
                 ) : null}
               </Block>
@@ -253,18 +254,18 @@ class Profile extends Component<IProps, IState> {
               <Block
                 describe="Học vấn và bằng cấp"
                 icon={this.icon_bachelor}
-                id="education"
+                id={TYPE.EDUCATION}
               >
                 <Tooltip title="Mục này đang tạm khóa để sửa" >
                   <div
                     className="icon-fix"
-                    onClick={() => this._fixData("education")}
+                    onClick={() => this._fixData(TYPE.EDUCATION)}
                   >
                     <Icon type={"plus"} style={{ color: "red" }} twoToneColor={"blue"} />
                   </div>
                 </Tooltip>
 
-                {profileState["education"] ? (
+                {profileState[TYPE.EDUCATION] ? (
                   <FixEducation _fixData={this._fixData} method={POST} />
                 ) : (
                     <Education />
@@ -280,7 +281,6 @@ class Profile extends Component<IProps, IState> {
               lg={9}
               xl={8}
               xxl={8}
-              className="candicate-info "
             >
               <Dropzone onCallSuccess={(cvUrl) => this.setState({ cvUrl }, () => this.forceUpdate())} />
               <Affix offsetTop={5}>
@@ -291,12 +291,11 @@ class Profile extends Component<IProps, IState> {
               xs={0}
               sm={0}
               md={0}
-              lg={3}
+              lg={0}
               xl={3}
               xxl={3}
             >
               <Anchor
-                offsetTop={5}
                 showInkInFixed={true}
                 style={{
                   marginRight: -40,

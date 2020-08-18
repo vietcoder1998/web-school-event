@@ -126,54 +126,64 @@ class FixPerson extends Component<IProps, IState> {
       <div id="fix-picture" className="wrapper">
         <Row className="short-profile" >
           <Col xs={24} md={12} xl={12} lg={12} xxl={12}>
-            <LazyLoadImage
-              src={identityCardFrontUrl}
-              alt="ảnh CMND"
-              className="identityImage"
-            />
-            <label htmlFor="FrontImg" style={{ fontSize: 15 }}>
-              <Icon type="upload" />
+            <div className="identity-img">
+              <LazyLoadImage
+                src={identityCardFrontUrl}
+                alt="ảnh CMND"
+                height="100%"
+                width="100%"
+              />
+              <label htmlFor="FrontImg">
+                <Icon type="upload" />
+                <b>
                 Upload ảnh mặt trước CMND
+                </b>
             </label>
-            <Input
-              id="FrontImg"
-              type="file"
-              name="file"
-              alt="ảnh CMND"
-              style={{ display: "none" }}
-              onChange={(e) => {
-                this._upLoadFile(
-                  "identityCardFront",
-                  "identityCardFrontUrl",
-                  e
-                );
-              }}
-            />
+              <Input
+                id="FrontImg"
+                type="file"
+                name="file"
+                alt="ảnh CMND"
+                style={{ display: "none" }}
+                onChange={(e) => {
+                  this._upLoadFile(
+                    "identityCardFront",
+                    "identityCardFrontUrl",
+                    e
+                  );
+                }}
+              />
+            </div>
           </Col>
-          <Col xs={24} md={12} xl={12} lg={12} xxl={12}>
-            <LazyLoadImage
-              src={identityCardBackUrl}
-              alt="ảnh CMND"
-              className="identityImage"
-            />
-            <label htmlFor="backImg" style={{ fontSize: 15 }}>
-              <Icon type="upload" />
-                Upload ảnh mặt trước CMND
+          <Col xs={24} md={12} xl={12} lg={12} xxl={12} >
+            <div className="identity-img">
+              <LazyLoadImage
+                src={identityCardBackUrl}
+                alt="ảnh CMND"
+                height="100%"
+                width="100%"
+              />
+              <label htmlFor="backImg">
+                <Icon type="upload" />
+                <b>
+                 Upload ảnh mặt sau CMND
+                </b>
             </label>
-            <Input
-              id="backImg"
-              type="file"
-              name="file"
-              alt="ảnh CMND"
-              style={{ display: "none" }}
-              onChange={(e) => {
-                this._upLoadFile(
-                  "identityCardBack",
-                  "identityCardBackUrl",
-                  e
-                );
-              }}
-            />
+              <Input
+                id="backImg"
+                type="file"
+                name="file"
+                alt="ảnh CMND"
+                style={{ display: "none" }}
+                onChange={(e) => {
+                  this._upLoadFile(
+                    "identityCardBack",
+                    "identityCardBackUrl",
+                    e
+                  );
+                }}
+              />
+            </div>
           </Col>
         </Row>
 

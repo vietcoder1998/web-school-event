@@ -46,6 +46,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.nav-link {
+  padding: 0px !important;
+}
 
 //
 .content {
@@ -416,7 +419,10 @@ ul {
 .wrapper {
   position: relative;
   height: auto;
-  border-bottom: solid $color_border 1px;
+  border-bottom: solid rgba($color: #000000, $alpha: 0) 1px;
+  animation: fadein 2s;
+  background-color: white;
+  border-radius: 5px;
 
   i {
     &:hover {
@@ -610,7 +616,8 @@ i {
 
 .tab-content {
   border-top: none;
-  border-bottom: 1px solid #e8e8e8;
+  margin-top: 5px;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .column {
@@ -904,7 +911,7 @@ li.region {
     top: -60px;
     right: 20px;
     padding: 5px 10px;
-    font-size: 25px;
+    font-size: 20px;
     border-radius: 50%;
 
     &:hover {
@@ -913,10 +920,56 @@ li.region {
     }
   }
 }
+.img-modal-show {
+  position: absolute;
+  width: 135px;
+  height: 135px;
+  border: solid white 4px;
+  top: 15vh;
+  right: 15vw;
+  border-radius: 50%;
+  overflow: hidden;
+}
 
-div.avatar {
-  position: relative;
-  height: 18vh;
+.avatar {
+  height: 26vh;
+  text-align: center;
+  margin-bottom: 30px;
+
+  .cover-url {
+    margin-top: -15px;
+    position: absolute;
+    width: 100%;
+    right: 0px;
+    height: 20vh;
+  }
+
+  image {
+    object-fit: "cover";
+  }
+}
+
+.up-avatar-image {
+  position: absolute;
+  top: 25vh;
+  z-index: 2;
+  right: 16vw;
+  padding: 5px 7px;
+  border-radius: 50%;
+  background-color: whitesmoke;
+  font-size: 15px;
+}
+
+.up-cover-image {
+  position: absolute;
+  top: 2vh;
+  right: 2vw;
+  z-index: 2;
+  padding: 5px 7px;
+  border-radius: 5px;
+  background-color: whitesmoke;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 .person-info {
@@ -967,24 +1020,25 @@ div.avatar {
     background-color: blueviolet;
   }
 }
-.identityImage {
-  margin: 10px 10px;
-  height: 200px;
-  width: 90%;
+.identity-img {
+  border-radius: 5px;
+  margin: 5px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
   padding: 5px;
-  border: 2px solid #1c6ea4;
+
+  img {
+    border-radius: 5px;
+  }
+
+  label {
+    cursor: pointer;
+    text-decoration: underline;
+  }
 }
 .map-container {
   width: 50vw;
   position: relative;
-}
-
-.ant-modal-content {
-  width: 600px;
-  height: 640px;
-  .ant-modal-body {
-    height: 530px;
-  }
 }
 
 .education {
@@ -1267,13 +1321,15 @@ label {
     padding: 5px 0px;
   }
 
-  .identytiImage {
+  .identytity-img {
     position: relative;
-    border: solid #1c6ea4 1px;
     overflow: hidden;
-    height: 30vh;
+    margin-top: 10px;
     background-color: rgba(0, 0, 0, 0.301);
+    border-radius: 10px;
     object-fit: cover;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03),
+      0 6px 20px 0 rgba(0, 0, 0, 0.03);
   }
 }
 
@@ -2021,7 +2077,6 @@ label {
 
             /* width */
             .item-job {
-              display: flex;
               text-align: center;
               min-height: 121px;
               height: 92%;
@@ -2973,6 +3028,7 @@ html {
               padding: 10px;
               border-radius: 3px;
               background-color: white;
+              flex-flow: column;
 
               &:hover {
                 cursor: pointer;
@@ -3100,8 +3156,8 @@ html {
       flex-direction: column;
       border-radius: 3px;
       background-color: rgb(255, 255, 255);
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.06);
-
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03),
+        0 6px 20px 0 rgba(0, 0, 0, 0.06);
 
       a {
         overflow: hidden;
@@ -3230,14 +3286,6 @@ html {
 .map-container {
   width: 50vw;
   position: relative;
-}
-
-.ant-modal-content {
-  width: 600px;
-  height: 640px;
-  .ant-modal-body {
-    height: 530px;
-  }
 }
 
 .employer-info {
@@ -3534,6 +3582,7 @@ html {
   background-color: white;
   padding: 5px 15px;
   overflow: hidden;
+  border-radius: 3px;
 }
 
 @keyframes fadeInFromNone {
@@ -3579,4 +3628,9 @@ html {
 
 .ant-upload-drag {
   margin-bottom: 10px;
+}
+
+.ant-avatar img {
+  width: 100%;
+  height: auto !important;
 }

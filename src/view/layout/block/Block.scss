@@ -1,7 +1,7 @@
 @import "../../sass/variable";
 
 .box-block {
-  background: #fff;
+  border-radius: 3px;
   margin-bottom: 15px;
   // border: solid $color_border 1px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
@@ -19,16 +19,20 @@
   &.fixed {
     min-width: 0;
     padding: 10px;
+    background: #fff;
+
     p {
       margin-bottom: 10px;
     }
   }
 
   .block-header {
-    border-bottom: dashed #b3b3b3 1px;
+    // border-bottom: dashed #b3b3b3 1px;
     font-weight: 600;
     font-size: 1.1rem;
     font-family: IBMPlexSanLights;
+    background-color: white;
+    border-radius: 5px;
     p {
       margin: 0 0;
     }
@@ -45,8 +49,8 @@
   .anticon {
     top: 50%;
   }
+}
 
-  .nav-tabs {
-    border-bottom: 1px solid #ddd0;
-  }
+.nav-tabs {
+  border-bottom: solid rgba($color: #000000, $alpha: 0) 0px;
 }

@@ -1,11 +1,14 @@
 import React from "react";
 import { timeConverter } from "../../../utils/convertTime";
 import { connect } from "react-redux";
-import { Avatar, Progress, Icon } from "antd";
-import imageDefault from "../../../assets/image/base-image.jpg";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { Progress, Icon, Tooltip, Modal, notification } from "antd";
 import { LiCopy } from './../../layout/common/Common';
-
+import { TYPE } from './../../../const/type';
+import ModalImage from "react-modal-image";
+import ReactCrop from "react-image-crop";
+import "react-image-crop/dist/ReactCrop.css";
+import { sendFileHeader } from './../../../services/auth';
+import axios from 'axios';
 
 function GetDate(dateRaw) {
   var date = new Date(dateRaw);
@@ -14,34 +17,242 @@ function GetDate(dateRaw) {
   );
 }
 
+let loadingTime = 0;
+const pixelRatio = 4;
+
+// We resize the canvas down when saving on retina devices otherwise the image
+// will be double or triple the preview size.
+function getResizedCanvas(canvas, newWidth, newHeight) {
+  const tmpCanvas = document.createElement("canvas");
+  tmpCanvas.width = newWidth;
+  tmpCanvas.height = newHeight;
+
+  const ctx = tmpCanvas.getContext("2d");
+  ctx.drawImage(
+    canvas,
+    0,
+    0,
+    canvas.width,
+    canvas.height,
+    0,
+    0,
+    newWidth,
+    newHeight
+  );
+
+  return tmpCanvas;
+}
+
 function ShortProfile(props?: { personalInfo?: any }) {
   let { personalInfo } = props;
+  const [avatarUrl, setAvatarUrl] = React.useState(null);
+  const [coverUrl, setCoverUrl] = React.useState(null);
+
+  let [visible, onSetVisible] = React.useState(false);
+  const [crop, setCrop] = React.useState({ unit: "%", width: 30, aspect: 1 / 1 });
+  const [imgCropUrl, setImgCropUrl] = React.useState(props.personalInfo.avatarUrl);
+  const imgRef = React.useRef(null);
+  const [typeimage, setTypeImage] = React.useState("");
+  const previewCanvasRef = React.useRef(null);
+  const [completedCrop, setCompletedCrop] = React.useState(null);
+  const [percent, setPercent] = React.useState(0);
+  const onChangeFile = React.useCallback((file) => {
+    let fileReader = new FileReader();
+    // Read file image
+    fileReader.onload = function (e) {
+      setImgCropUrl(e.target.result);
+    };
+    fileReader.readAsDataURL(file);
+  }, []);
+
+  const onLoad = React.useCallback(img => {
+    imgRef.current = img;
+  }, []);
+
+  React.useEffect(() => {
+    setCoverUrl(personalInfo.coverUrl);
+    setCoverUrl(personalInfo.avatarUrl);
+    if (!completedCrop || !previewCanvasRef.current || !imgRef.current) {
+      return;
+    }
+    const image = imgRef.current;
+    const canvas = previewCanvasRef.current;
+    const crop = completedCrop;
+    const scaleX = image.naturalWidth / image.width;
+    const scaleY = image.naturalHeight / image.height;
+    const ctx = canvas.getContext("2d");
+    canvas.width = crop.width * pixelRatio;
+    canvas.height = crop.height * pixelRatio;
+
+    ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    ctx.imageSmoothingEnabled = false;
+
+    ctx.drawImage(
+      image,
+      crop.x * scaleX,
+      crop.y * scaleY,
+      crop.width * scaleX,
+      crop.height * scaleY,
+      0,
+      0,
+      crop.width,
+      crop.height
+    );
+  }, [completedCrop]);
+
+  function generateDownload(previewCanvas, crop) {
+    if (!crop || !previewCanvas) {
+      return;
+    }
+
+    const canvas = getResizedCanvas(previewCanvas, crop.width, crop.height);
+    canvas.toBlob(
+      blob => {
+        // const previewUrl = window.URL.createObjectURL(blob);
+        // uploadFiles(blob);
+        uploadFiles(blob);
+        // const anchor = document.createElement("a");
+        // anchor.download = "cropPreview.png";
+        // anchor.href = URL.createObjectURL(blob);
+        // anchor.click();
+        // console.log(blob);
+        // window.URL.revokeObjectURL(previewUrl);
+      },
+      "image/png",
+      1
+    );
+
+  }
+
+  const uploadFiles = async (file) => {
+    if (!file) {
+      notification.warning({ message: "Cần chọn file", description: "Bạn có cần chọn file để cập nhật" })
+
+    } else {
+      const formData = new FormData();
+      formData.append(typeimage, file);
+      axios.put(
+        process.env.REACT_APP_API_HOST + `/api/students/${typeimage}`,
+        formData,
+        {
+          headers: sendFileHeader,
+          onUploadProgress: (progressEvent) => {
+            const uploadPercentage = Math.floor((progressEvent.loaded / progressEvent.total) * 100);
+            setPercent(uploadPercentage)
+          },
+        }).then((res) => {
+          if (res) {
+            let time = new Date();
+            notification.success({ message: 'Cập nhật thành công', description: "Bạn đã  cập nhật ảnh thành công" });
+            setPercent(0);
+            if (TYPE.AVATAR === typeimage) {
+              setAvatarUrl(avatarUrl + `?time=${time.getTime()}`)
+            }
+            setCoverUrl(coverUrl + `?time=${time.getTime()}`)
+          }
+        }).catch((err) => {
+          if (err) {
+            notification.warning({ message: "Lỗi bất ngờ", description: " Thử làm lại xem sao" })
+          }
+        }).finally(() => {
+          setTimeout(() => {
+            onSetVisible(false);
+          }, 2000);
+        })
+    }
+  }
 
   return (
     <div className="wrapper" id="person">
-      <LazyLoadImage />
+      <Modal
+        title={typeimage === TYPE.AVATAR ? "Thay đổi ảnh đại diện" : "Thay đổi ảnh bìa"}
+        visible={visible}
+        onCancel={() => onSetVisible(false)}
+        onOk={() => generateDownload(previewCanvasRef.current, completedCrop)}
+        destroyOnClose={true}
+        confirmLoading={percent !== 0}
+        okText="Cập nhật"
+        children={
+          <div>
+            <input
+              type='file'
+              accept=".jpg,.png"
+              onChange={
+                event => onChangeFile(event.target.files[0])
+              }
+            />
+            <Progress percent={percent} />
+            <div className={"test"} style={{ height: 300, overflowX: "auto" }}>
+              <ReactCrop
+                src={imgCropUrl}
+                onImageLoaded={onLoad}
+                crop={{ ...crop, aspect: TYPE.AVATAR === typeimage ? 1 / 1 : 3 / 1 }}
+                onChange={c => setCrop(c)}
+                onComplete={c => setCompletedCrop(c)}
+              />
+            </div>
+            <div>
+              <canvas
+                ref={previewCanvasRef}
+                style={{
+                  width: completedCrop ? completedCrop.width : 0,
+                  height: completedCrop ? completedCrop.height : 0,
+                  display: 'none'
+                }}
+              />
+            </div>
+          </div>
+        }
+      />
       <div className="avatar">
-        <LazyLoadImage
-          src={personalInfo.coverUrl} alt={"Ảnh ứng viên "}
-          style={{
-            objectFit: "cover",
-            height: "15vh",
-            width: "100%",
-            marginBottom: "10px",
-            border: "solid #1890ff80 2px",
-            borderRadius: "2px"
+        <div className="cover-url">
+          <div
+            style={{
+              height: "25vh",
+              width: "100%",
+              marginBottom: "10px",
+              borderRadius: "2px"
+            }}
+          >
+            <ModalImage
+              small={
+                coverUrl ?
+                  coverUrl :
+                  TYPE.DEFAULT_IMAGE}
+              large={
+                coverUrl ?
+                  coverUrl :
+                  TYPE.DEFAULT_IMAGE}
+            />
+          </div>
+        </div>
+        <div className="img-modal-show">
+          <ModalImage
+            small={!avatarUrl ? TYPE.DEFAULT_IMAGE : avatarUrl}
+            large={!avatarUrl ? TYPE.DEFAULT_IMAGE : avatarUrl}
+          />
+        </div>
+      </div>
+      <Tooltip title="Cập nhật ảnh đại diện" placement={"right"}>
+        <div
+          className="up-avatar-image"
+          onClick={() => {
+            setTypeImage(TYPE.AVATAR)
+            onSetVisible(true);
           }}
-        />
-        <Avatar
-          src={personalInfo.avatarUrl === null ? imageDefault : personalInfo.avatarUrl}
-          style={{
-            width: "100px",
-            height: "100px",
-            float: "right",
-            border: "solid #1890ff80 2px",
-            top: "-50px"
-          }}
-        />
+        >
+          <Icon type="camera" theme="filled" />
+        </div>
+      </Tooltip>
+      <div
+        className="up-cover-image"
+        onClick={() => {
+          setTypeImage(TYPE.COVER)
+          onSetVisible(true)
+        }}
+      >
+        <Icon type="camera" theme="filled" />
+        <b>Thay đổi ảnh bìa</b>
       </div>
       <div className="short-profile">
         <ul>

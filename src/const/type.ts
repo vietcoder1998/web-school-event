@@ -22,5 +22,17 @@ export const TYPE = {
     HIGHLIGHT: 'HIGHLIGHT',
 
     EVENT: 'EVENT',
-    NORMAL: 'NORMAL'
+    NORMAL: 'NORMAL',
+
+    DESCRIPTION: "description",
+    PERSON: "person",
+    SKILLS: "skills",
+    LANGUAGE_SKILL: "languageSkill",
+    EDUCATION: "eduction",
+    TOOLS: "tools",
+    EXPERIENCE: "experience",
+    PICTURE: "picture",
+    DEFAULT_IMAGE: "https://picsum.photos/1200/500",
+    AVATAR: "avatar",
+    COVER: "cover"
 }

@@ -1,7 +1,7 @@
 @import "../../sass/variable";
 
 .info-block {
-  background: #fff;
+  // background: #fff;
   margin-bottom: 15px;
   width: auto;
   margin-bottom: 30px;
@@ -18,9 +18,9 @@
   }
 
   .block-header {
-    border-bottom: solid #e1e1e1 1px;
     font-weight: 600;
     font-size: $font_size_medium;
+    background-color: ghostwhite;
 
     p {
       margin: 0 0;

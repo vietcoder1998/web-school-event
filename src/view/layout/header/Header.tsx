@@ -194,15 +194,12 @@ class Header extends PureComponent<IProps, IState> {
                 />
                 Nhà Tuyển Dụng
               </a>
-
             </div>
           </div>
           <div
             className="function"
             style={{ display: show_bar ? "none" : "flex" }}
           >
-            {/* IconBell */}
-
             <Notification
               show_noti={show_noti}
               hover_on={hover_on}
@@ -216,7 +213,7 @@ class Header extends PureComponent<IProps, IState> {
                 }}
               >
                 <Badge count={number_noti}>
-                  <Icon type="bell" theme="filled" style={{ fontSize: 14 }} />
+                  <Icon type="bell" theme="filled" style={{ fontSize: 18 }} />
                 </Badge>
               </span>
             </Notification>
@@ -237,7 +234,7 @@ class Header extends PureComponent<IProps, IState> {
               >
                 <span
                   className="label-function hidden-mobile"
-                  style={{ borderRadius: "5%" }}
+                  style={{ borderRadius: "5px" }}
                 >
                   <Link to="/profile">
                     <Avatar
@@ -246,7 +243,7 @@ class Header extends PureComponent<IProps, IState> {
                       style={{
                         border: "solid #fff 1.5px",
                         objectFit: "cover",
-                        marginBottom: 5
+                        margin: 2
                       }}
                     />
                   </Link>
