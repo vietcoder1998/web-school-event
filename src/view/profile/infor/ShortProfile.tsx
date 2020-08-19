@@ -146,13 +146,12 @@ function ShortProfile(props?: { personalInfo?: any }) {
           },
         }).then((res) => {
           if (res) {
-            let time = new Date();
             notification.success({ message: 'Thành công', description: "Bạn đã  cập nhật ảnh thành công" });
             setPercent(0);
             if (TYPE.AVATAR === typeImg) {
-              setAvatarUrl(avatarUrl + `#${time.getTime()}`)
+              setAvatarUrl(res.data.data.avatarUrl)
             }
-            setCoverUrl(coverUrl + `#${time.getTime()}`)
+            setCoverUrl(res.data.data.coverUrl)
           }
         }).catch((err) => {
           if (err) {
