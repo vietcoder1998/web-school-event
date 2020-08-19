@@ -920,43 +920,53 @@ li.region {
     }
   }
 }
+
 .img-modal-show {
   position: absolute;
   width: 135px;
   height: 135px;
   border: solid white 4px;
-  top: 15vh;
+  top: 19vh;
   right: 15vw;
   border-radius: 50%;
   overflow: hidden;
 }
 
 .avatar {
-  height: 26vh;
+  height: 37vh;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+  border-bottom: solid $color_border 1px;
 
   .cover-url {
     margin-top: -15px;
     position: absolute;
     width: 100%;
     right: 0px;
-    height: 20vh;
-  }
+    height: 29vh;
+    overflow: hidden;
 
-  image {
-    object-fit: "cover";
+    img {
+      object-fit: cover;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+    }
   }
 }
 
 .up-avatar-image {
   position: absolute;
-  top: 25vh;
+  top: 29vh;
   z-index: 2;
   right: 16vw;
   padding: 5px 7px;
   border-radius: 50%;
   background-color: whitesmoke;
+  &:hover {
+    background-color: ghostwhite;
+  }
   font-size: 15px;
 }
 
@@ -970,6 +980,9 @@ li.region {
   background-color: whitesmoke;
   font-size: 14px;
   cursor: pointer;
+  &:hover {
+    background-color: ghostwhite;
+  }
 }
 
 .person-info {
@@ -1043,6 +1056,7 @@ li.region {
 
 .education {
   background-color: white;
+  margin-top: 5px;
   p {
     font-weight: 800;
     margin-bottom: 0px;

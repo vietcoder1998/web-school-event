@@ -1,7 +1,7 @@
 import React from "react";
 import { timeConverter } from "../../../utils/convertTime";
 import { connect } from "react-redux";
-import { Progress, Icon, Tooltip, Modal, notification } from "antd";
+import { Progress, Icon, Tooltip, Modal, notification, Empty } from "antd";
 import { LiCopy } from './../../layout/common/Common';
 import { TYPE } from './../../../const/type';
 import ModalImage from "react-modal-image";
@@ -17,7 +17,6 @@ function GetDate(dateRaw) {
   );
 }
 
-let loadingTime = 0;
 const pixelRatio = 4;
 
 // We resize the canvas down when saving on retina devices otherwise the image
@@ -44,18 +43,18 @@ function getResizedCanvas(canvas, newWidth, newHeight) {
 }
 
 function ShortProfile(props?: { personalInfo?: any }) {
-  let { personalInfo } = props;
+  const [personalInfo, setPersonalInfo] = React.useState(null);
   const [avatarUrl, setAvatarUrl] = React.useState(null);
   const [coverUrl, setCoverUrl] = React.useState(null);
-
   let [visible, onSetVisible] = React.useState(false);
   const [crop, setCrop] = React.useState({ unit: "%", width: 30, aspect: 1 / 1 });
   const [imgCropUrl, setImgCropUrl] = React.useState(props.personalInfo.avatarUrl);
   const imgRef = React.useRef(null);
-  const [typeimage, setTypeImage] = React.useState("");
+  const [typeImg, setTypeImage] = React.useState("");
   const previewCanvasRef = React.useRef(null);
   const [completedCrop, setCompletedCrop] = React.useState(null);
   const [percent, setPercent] = React.useState(0);
+
   const onChangeFile = React.useCallback((file) => {
     let fileReader = new FileReader();
     // Read file image
@@ -70,8 +69,13 @@ function ShortProfile(props?: { personalInfo?: any }) {
   }, []);
 
   React.useEffect(() => {
+    let { personalInfo } = props;
     setCoverUrl(personalInfo.coverUrl);
-    setCoverUrl(personalInfo.avatarUrl);
+    setAvatarUrl(personalInfo.avatarUrl);
+    setPersonalInfo(props.personalInfo);
+  }, [props])
+
+  React.useEffect(() => {
     if (!completedCrop || !previewCanvasRef.current || !imgRef.current) {
       return;
     }
@@ -130,9 +134,9 @@ function ShortProfile(props?: { personalInfo?: any }) {
 
     } else {
       const formData = new FormData();
-      formData.append(typeimage, file);
+      formData.append(typeImg, file);
       axios.put(
-        process.env.REACT_APP_API_HOST + `/api/students/${typeimage}`,
+        process.env.REACT_APP_API_HOST + `/api/students/${typeImg}`,
         formData,
         {
           headers: sendFileHeader,
@@ -145,10 +149,10 @@ function ShortProfile(props?: { personalInfo?: any }) {
             let time = new Date();
             notification.success({ message: 'Cập nhật thành công', description: "Bạn đã  cập nhật ảnh thành công" });
             setPercent(0);
-            if (TYPE.AVATAR === typeimage) {
-              setAvatarUrl(avatarUrl + `?time=${time.getTime()}`)
+            if (TYPE.AVATAR === typeImg) {
+              setAvatarUrl(avatarUrl + `#${time.getTime()}`)
             }
-            setCoverUrl(coverUrl + `?time=${time.getTime()}`)
+            setCoverUrl(coverUrl + `#${time.getTime()}`)
           }
         }).catch((err) => {
           if (err) {
@@ -157,7 +161,7 @@ function ShortProfile(props?: { personalInfo?: any }) {
         }).finally(() => {
           setTimeout(() => {
             onSetVisible(false);
-          }, 2000);
+          }, 1000);
         })
     }
   }
@@ -165,31 +169,56 @@ function ShortProfile(props?: { personalInfo?: any }) {
   return (
     <div className="wrapper" id="person">
       <Modal
-        title={typeimage === TYPE.AVATAR ? "Thay đổi ảnh đại diện" : "Thay đổi ảnh bìa"}
+        title={typeImg === TYPE.AVATAR ? "Thay đổi ảnh đại diện" : "Thay đổi ảnh bìa"}
         visible={visible}
         onCancel={() => onSetVisible(false)}
         onOk={() => generateDownload(previewCanvasRef.current, completedCrop)}
         destroyOnClose={true}
         confirmLoading={percent !== 0}
         okText="Cập nhật"
+        cancelText={"Hủy"}
         children={
-          <div>
+          <form>
             <input
+              id={"img-set"}
               type='file'
               accept=".jpg,.png"
               onChange={
                 event => onChangeFile(event.target.files[0])
               }
             />
-            <Progress percent={percent} />
-            <div className={"test"} style={{ height: 300, overflowX: "auto" }}>
-              <ReactCrop
-                src={imgCropUrl}
-                onImageLoaded={onLoad}
-                crop={{ ...crop, aspect: TYPE.AVATAR === typeimage ? 1 / 1 : 3 / 1 }}
-                onChange={c => setCrop(c)}
-                onComplete={c => setCompletedCrop(c)}
-              />
+            <Progress size="small" percent={percent && parseInt(percent.toString())} />
+            <div
+              className={"test"}
+              style={{
+                height: 300,
+                overflowX: "auto",
+                marginTop: 5
+              }}
+            >
+              {
+                !imgCropUrl ?
+                  <label
+                    htmlFor={"img-set"}
+                    style={{
+                      padding: 20,
+                      width: "100%",
+                      margin: 0
+                    }}
+                  >
+                    <Empty
+                      description={<b>Nhấp vào để thêm ảnh</b>}
+                    />
+                  </label>
+                  :
+                  <ReactCrop
+                    src={imgCropUrl}
+                    onImageLoaded={onLoad}
+                    crop={{ ...crop, aspect: TYPE.AVATAR === typeImg ? 1 / 1 : 16 / 9 }}
+                    onChange={c => setCrop(c)}
+                    onComplete={c => setCompletedCrop(c)}
+                  />
+              }
             </div>
             <div>
               <canvas
@@ -201,7 +230,7 @@ function ShortProfile(props?: { personalInfo?: any }) {
                 }}
               />
             </div>
-          </div>
+          </form>
         }
       />
       <div className="avatar">
@@ -305,8 +334,8 @@ function ShortProfile(props?: { personalInfo?: any }) {
           </LiCopy>
           <LiCopy >
             <Icon type="safety" />
-            Hoàn thiện hồ sơ:{" "}{personalInfo.completePercent} %
-            <Progress percent={personalInfo.completePercent} />
+            Hoàn thiện hồ sơ:{" "}{personalInfo && personalInfo.completePercent} %
+            <Progress percent={personalInfo ? personalInfo.completePercent : 0} />
           </LiCopy>
         </ul>
       </div>

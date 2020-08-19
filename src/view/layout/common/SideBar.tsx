@@ -122,7 +122,7 @@ export default class LeftBar extends Component<IProps, IState> {
                         />
                     </div>
                     <div className="box-block fixed">
-                        <Collapse defaultActiveKey={['1']} bordered={false}>
+                        <Collapse defaultActiveKey={['1']} bordered={false} style={{margin: "0 -10px"}}>
                             <Panel header="Mục khác" key="1" style={{borderColor: 'rgba(0,0,0,0)'}}>
                                 <p>
                                     <Link to='/save-job'>

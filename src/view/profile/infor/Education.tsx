@@ -39,7 +39,6 @@ class Education extends Component<IProps, IStates> {
   render() {
     let { schools, personalInfo, major } = this.props;
     return (
-
       <div className="education">
         <div className="wrapper">
           <div className="content-school">

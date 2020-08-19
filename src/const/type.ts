@@ -32,7 +32,7 @@ export const TYPE = {
     TOOLS: "tools",
     EXPERIENCE: "experience",
     PICTURE: "picture",
-    DEFAULT_IMAGE: "https://picsum.photos/1200/500",
+    DEFAULT_IMAGE: "https://picsum.photos/1600/900",
     AVATAR: "avatar",
     COVER: "cover"
 }

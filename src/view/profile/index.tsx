@@ -256,10 +256,10 @@ class Profile extends Component<IProps, IState> {
                 icon={this.icon_bachelor}
                 id={TYPE.EDUCATION}
               >
-                <Tooltip title="Mục này đang tạm khóa để sửa" >
+                <Tooltip title="Mục này đang tạm khóa" >
                   <div
                     className="icon-fix"
-                    onClick={() => this._fixData(TYPE.EDUCATION)}
+                    // onClick={() => this._fixData(TYPE.EDUCATION)}
                   >
                     <Icon type={"plus"} style={{ color: "red" }} twoToneColor={"blue"} />
                   </div>
