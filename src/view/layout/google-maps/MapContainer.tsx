@@ -5,11 +5,16 @@ import PlacesAutocomplete, {
     getLatLng,
 } from 'react-places-autocomplete';
 
-import { Input } from 'antd';
+import { Input, Dropdown, Icon } from 'antd';
+import { Menu } from 'antd';
+import MenuItem from 'antd/lib/menu/MenuItem';
 
 interface IProps {
     personalInfo?: any;
-    address?: any;
+    address?: {
+        lat: number,
+        lng: number
+    };
     location?: any;
     marker?: any;
     _fixData?: (params?: string) => any;
@@ -47,7 +52,7 @@ class GoogleMap extends React.Component<IProps, IState>{
                 lat: 21.027763,
                 lng: 105.834160
             },
-            address: null,
+            address: "",
             showInfo: false,
         }
     }
@@ -110,7 +115,7 @@ class GoogleMap extends React.Component<IProps, IState>{
 
     render() {
         return (
-            <div>
+            <div style={{ position: "absolute", height: "80%", width: "100%", top: 0, right: 0 }}>
                 <PlacesAutocomplete
                     value={this.state.address}
                     onChange={this.handleChange}
@@ -118,41 +123,45 @@ class GoogleMap extends React.Component<IProps, IState>{
                 >
                     {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                         <div>
-                            <Input
-
-                                {...getInputProps({
-                                    placeholder: 'Search Places ...',
-                                    className: 'location-search-input',
-                                })}
-                            />
-                            <div className="autocomplete-dropdown-container">
-                                {loading && <div>Loading...</div>}
-                                {suggestions.map(suggestion => {
-                                    const className = suggestion.active
-                                        ? 'suggestion-item--active'
-                                        : 'suggestion-item';
-                                    // inline style for demonstration purpose
-                                    const style = suggestion.active
-                                        ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                                        : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                                    return (
-                                        <div
-                                            {...getSuggestionItemProps(suggestion, {
-                                                className,
-                                                style,
-                                            })}
-                                        >
-                                            <span>{suggestion.description}</span>
-                                        </div>
-                                    );
-                                })}
-                            </div>
+                            <Dropdown overlay={
+                                <Menu className="autocomplete-dropdown-container " >
+                                    {loading && <div>Loading...</div>}
+                                    {suggestions && suggestions.length > 0 ? suggestions.map((suggestion, i) => {
+                                        const className = suggestion.active
+                                            ? 'suggestion-item--active'
+                                            : 'suggestion-item';
+                                        // inline style for demonstration purpose
+                                        return (
+                                            <MenuItem
+                                                {...getSuggestionItemProps(suggestion, {
+                                                    className
+                                                })}
+                                                key={i}
+                                                className="Test"
+                                                style={
+                                                    suggestion.active ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                                                        : { backgroundColor: '#ffffff', cursor: 'pointer' }
+                                                } >
+                                                <Icon type="environment" twoToneColor="red" theme="twoTone" /> <span>{suggestion.description}</span>
+                                            </MenuItem>
+                                        );
+                                    }) : null}
+                                </Menu>
+                            }>
+                                <Input
+                                    {...getInputProps({
+                                        placeholder: 'Gõ để tìm kiếm vị trí...',
+                                        className: 'location-search-input',
+                                    })}
+                                />
+                            </Dropdown>
                         </div>
-                    )}
+                    )
+                    }
 
                 </PlacesAutocomplete>
                 <Map
-                    style={{ width: 570, height: 450, marginTop: 10 }}
+                    style={{ width: "100%", height: "100%", marginTop: 10 }}
                     google={window.google}
                     zoom={14}
                     center={{
@@ -171,7 +180,7 @@ class GoogleMap extends React.Component<IProps, IState>{
                         onDragend={(t, map, coord) => this.getAddress(coord)}
                     />
                 </Map>
-            </div>
+            </div >
         )
     }
 }

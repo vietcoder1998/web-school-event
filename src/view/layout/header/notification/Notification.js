@@ -191,7 +191,7 @@ class Notification extends Component {
                         <Popover
                             trigger='click'
                             placement="bottom"
-                            style={{ width: 200, padding: 10 }}
+                            style={{ width: 200, padding: 10, height: '40vh' }}
                             content={
                                 // <div className='notification'>
                                 //     {this.content()}

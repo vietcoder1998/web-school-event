@@ -946,12 +946,16 @@ li.region {
     height: 29vh;
     overflow: hidden;
 
-    img {
-      object-fit: cover;
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      width: 100%;
+    .small-image {
+      img {
+        &:not(#react-modal-image-img) {
+          object-fit: cover;
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          width: 100%;
+        }
+      }
     }
   }
 }
@@ -3637,6 +3641,7 @@ html {
   bottom: 0px;
   h5 {
     font-size: 1.3rem !important;
+    font-weight: 400 !important;
   }
 }
 

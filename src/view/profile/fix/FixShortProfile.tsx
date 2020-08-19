@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import moment from "moment";
 import ButtonToggle from "../../helper/toggle-button/ToggleButton";
 import { sendFileHeader } from "../../../services/auth";
-import { Icon, Row, Col, Modal, Input, DatePicker, Avatar, Button } from "antd";
+import { Icon, Row, Col, Modal, Input, DatePicker, Button } from "antd";
 import MapContainer from "../../layout/google-maps/MapContainer";
 import { timeConverter } from "../../../utils/convertTime";
 import { REDUX_SAGA } from "../../../const/actions";
@@ -29,10 +29,9 @@ interface IState {
     lat?: number;
     lng?: number;
   };
-
+  avatarUrl?: string;
   location?: string;
   address?: string;
-  avatarUrl?: string;
   avatar?: string;
   isLookingForJobs?: boolean;
   personalInfo?: any;
@@ -195,7 +194,7 @@ class FixPerson extends Component<IProps, IState> {
   };
   render() {
     let { personalInfo } = this.props;
-    let { avatarUrl, show_popup } = this.state;
+    let { show_popup } = this.state;
     let birth_day = timeConverter(personalInfo.birthday);
 
     return (
@@ -205,6 +204,7 @@ class FixPerson extends Component<IProps, IState> {
           visible={show_popup}
           onCancel={this._handleClose}
           onOk={this._setMap}
+          style={{ top: "15vh" }}
           title="Định vị trên bản đồ"
           className="modal-map"
           footer={[
@@ -216,38 +216,18 @@ class FixPerson extends Component<IProps, IState> {
             </Button>,
           ]}
         >
-          <MapContainer
-            //@ts-ignore
-            GetLatLngToParent={this.getLatLngFromMap}
-          />
+          <div style={{ position: "relative", height: "60vh" }}>
+            <MapContainer
+              //@ts-ignore
+              GetLatLngToParent={this.getLatLngFromMap}
+            />
+          </div>
         </Modal>
 
         {/* Fix Infomation */}
         <Row className="person-info">
           {/* left div */}
           {/* right div */}
-          <Col xs={24} sm={24} md={12} lg={12}>
-            <Avatar
-              src={avatarUrl}
-              style={{ width: "95px", height: "95px" }}
-            />
-            <form>
-              <label htmlFor="avatar" style={{ fontSize: 15 }}>
-                <Icon type="upload" />
-                Upload ảnh avatar
-              </label>
-            </form>
-            <Input
-              id="avatar"
-              type="file"
-              name="file"
-              alt="ảnh ứng viên"
-              style={{ display: "none" }}
-              onChange={(e) => {
-                this._upLoadFile("avatar", "avatarUrl", e);
-              }}
-            />
-          </Col>
           <Col xs={24} sm={12} span={12}>
             <p>Họ</p>
             <Input
@@ -347,7 +327,7 @@ class FixPerson extends Component<IProps, IState> {
               id="studentCode"
               type="text"
               className="input_outside"
-              placeholder="Mã sinh viên"
+              placeholder="Mục này không được để trống"
               value={personalInfo.studentCode}
               onChange={this._handleData}
             />

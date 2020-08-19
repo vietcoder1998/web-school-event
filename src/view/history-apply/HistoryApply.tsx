@@ -170,7 +170,7 @@ class HistoryApply extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                                             </div>
                                                         </div>
                                                     </Col>)
-                                                }) : <Empty style={{ padding: '15vh' }} description='Bạn chưa lưu công việc nào' />}
+                                                }) : <Empty style={{ padding: '15vh' }} description={<b>Bạn chưa có ứng tuyển nào</b>}/>}
                                             </Row>
                                         }
                                         <div className='pagination-result'>

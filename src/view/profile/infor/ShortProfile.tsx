@@ -147,7 +147,7 @@ function ShortProfile(props?: { personalInfo?: any }) {
         }).then((res) => {
           if (res) {
             let time = new Date();
-            notification.success({ message: 'Cập nhật thành công', description: "Bạn đã  cập nhật ảnh thành công" });
+            notification.success({ message: 'Thành công', description: "Bạn đã  cập nhật ảnh thành công" });
             setPercent(0);
             if (TYPE.AVATAR === typeImg) {
               setAvatarUrl(avatarUrl + `#${time.getTime()}`)
@@ -242,6 +242,7 @@ function ShortProfile(props?: { personalInfo?: any }) {
               marginBottom: "10px",
               borderRadius: "2px"
             }}
+            className="small-image"
           >
             <ModalImage
               small={

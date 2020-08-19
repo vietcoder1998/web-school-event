@@ -141,7 +141,7 @@ class SaveJob extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                                             </div>
                                                         </div>
                                                     </Col>)
-                                                }) : <Empty style={{ padding: '15vh' }} description='Bạn chưa lưu công việc nào' />}
+                                                }) : <Empty style={{ padding: '15vh' }} description={<b>Bạn chưa lưu công việc nào</b>} />}
                                             </Row>
                                         }
                                         <div className='pagination-result'>
