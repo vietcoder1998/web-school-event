@@ -40,7 +40,7 @@ function getAllJobData(action) {
         isAuthen ? STUDENT_HOST : PUBLIC_HOST, isAuthen ? authHeaders : noInfoHeader,
         {
             pageIndex: action.pageIndex ? action.pageIndex : 0,
-            pageSize: 24
+            pageSize: 15
         },
         false
     );

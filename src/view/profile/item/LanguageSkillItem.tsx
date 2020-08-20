@@ -147,22 +147,24 @@ class LanguageSkillItem extends Component<IProps, IState> {
             </div>
             <div className="language-skills " id={complete}>
               {/* function for button */}
-              <Row>
-                <Col sm={24} md={12} lg={12} xs={12} xxl={6} >
+              <Row style={{ margin: "20px 10px 0px" }}>
+                <Col sm={24} md={12} lg={12} xs={12} xxl={12} >
                   <Icon type="message" />
                   <b>Ngôn ngữ: {item.language.name}</b>
                 </Col>
-                <Col sm={24} md={12} lg={12} xs={12} xxl={6}>
+                <Col sm={24} md={12} lg={12} xs={12} xxl={12}>
                   <Icon type="book" />
                   <b>Trình độ: {item.level}</b>
                 </Col>
-                <Col sm={24} md={12} lg={11} xs={11} xxl={6}>
+              </Row>
+              <Row style={{ margin: 10 }}>
+                <Col sm={24} md={12} lg={11} xs={12} xxl={12}>
                   <b>
                     <Icon type="star" />
                     Chứng chỉ: {item.certificate ? item.certificate : "Không"}
                   </b>
                 </Col>
-                <Col sm={24} md={12} lg={12} xs={11} xxl={6}>
+                <Col sm={24} md={12} lg={12} xs={12} xxl={12}>
                   <b>
                     <Icon type="highlight" />
                     Điểm số: {item.score ? item.score : "Không"}

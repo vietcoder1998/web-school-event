@@ -15,7 +15,6 @@ interface IProps {
     languageSkills?: Array<ILanguageSkill>
 }
 
-
 class LanguageSkills extends Component<IProps, IState> {
     constructor(props) {
         super(props);
@@ -25,7 +24,6 @@ class LanguageSkills extends Component<IProps, IState> {
             list_component: []
         }
     }
-
     static getDerivedStateFromProps(nextProps?: IProps, prevState?: IState) {
         if (nextProps.langSkState !== prevState.langSkState) {
             let { languageSkills } = nextProps;

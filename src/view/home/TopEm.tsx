@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { IAppState } from '../../redux/store/reducer';
 import { REDUX_SAGA } from '../../const/actions';
 import { ITopEmDetail } from '../../models/employer-detail';
-import LinkToolTip from '../layout/common/LinkToolTip';
+// import LinkToolTip from '../layout/common/LinkToolTip';
 
 
 interface IProps {
@@ -20,7 +20,7 @@ interface IState {
 
 class TopEm extends PureComponent<IProps, IState> {
     componentDidMount = async () => {
-        this.props.getTopEmployer(null, 0, 4);
+        this.props.getTopEmployer(null, 0, 8);
     }
 
     render() {
@@ -30,7 +30,7 @@ class TopEm extends PureComponent<IProps, IState> {
                 <div className='top-job'>
                     <h5 className="a_c">DOANH NGHIỆP NỔI BẬT </h5>
                     <Row style={{ padding: '0 3vw' }}>
-                        <Col xl={0} xxl={2} children={"ok"} style={{color: "rgba(0, 0, 0, 0)"}}/>
+                        <Col xl={0} xxl={2} children={"ok"} style={{ color: "rgba(0, 0, 0, 0)" }} />
                         {
                             topEm.map((item: ITopEmDetail, i: number) => (
                                 <Col
@@ -41,7 +41,7 @@ class TopEm extends PureComponent<IProps, IState> {
                                     lg={6}
                                     xl={6}
                                     xxl={5}
-                                    style={{overflow: 'hidden'}}
+                                    style={{ overflow: 'hidden' }}
                                 >
                                     <a href={`/employer/${btoa(item.employerID)}`}>
                                         {loading ?
@@ -56,15 +56,6 @@ class TopEm extends PureComponent<IProps, IState> {
                                                     />
                                                 </div>
                                             )}
-                                        <div className='link-em a_c' style={{padding: "2px 10px"}}>
-                                            <LinkToolTip
-                                                title={
-                                                    item.employerName
-                                                }
-                                                transform="uppercase"
-                                                name={item.employerName}
-                                            />
-                                        </div>
                                     </a>
                                 </Col>
                             ))
@@ -85,7 +76,7 @@ const mapStateToProps = (state: IAppState) => ({
 
 const mapDispatchToProps = dispatch => ({
     getTopEmployer: (body?: any, pageIndex?: number, pageSize?: number) =>
-        dispatch({ type: REDUX_SAGA.EMPLOYER.GET_TOP_EM })
+        dispatch({ type: REDUX_SAGA.EMPLOYER.GET_TOP_EM , body, pageIndex, pageSize})
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopEm);

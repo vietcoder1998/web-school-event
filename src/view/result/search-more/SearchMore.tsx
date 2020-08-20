@@ -129,7 +129,7 @@ class SearchMore extends React.Component<ISearchMore, IStateSearchMore> {
                             disabled={this.props.jobType !== 'PARTTIME'}
 
                         >
-                            Hủy lọc
+                            Bỏ
                         </Button>
                     </Col>
                     <Col md={12} lg={12} xl={12} xxl={12}>

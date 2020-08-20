@@ -172,16 +172,6 @@ class Header extends PureComponent<IProps, IState> {
                 Ứng dụng trên điện thoại
               </a>
               <a
-                href="/bai-viet/all"
-
-                style={{
-                  display: window.location.pathname.split('/')[1] === "bai-viet" ? "none" : "",
-                }}
-              >
-                <Icon type={"book"} />
-                Bài viết
-              </a>
-              <a
                 href="https://employer.works.vn"
                 target="_blank"
                 rel="noopener noreferrer"

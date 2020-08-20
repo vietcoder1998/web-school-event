@@ -9,9 +9,9 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 class JobExpect extends Component {
     render() {
         return (
-            <div className={"home-job"} >
+            <div className={"home-job white"} >
                 <Row>
-                    <h5>TÌM VIỆC THEO NHÓM NGÀNH</h5>
+                    <h5 className="not-color">TÌM VIỆC THEO NHÓM NGÀNH</h5>
                     <Col sm={24} md={12} lg={12} xl={12} xxl={12}>
                         <a href={`/result?brids=${2}`}>
                             <div className="expert-content">

@@ -30,77 +30,80 @@ class AllJob extends PureComponent<IProps> {
     render() {
         let { allJob, loading_all_job, param } = this.props;
         return (
-            <Row className='home-job' style={{ display: allJob.totalItems === 0 ? 'none' : '' }}>
-                <h5 style={{ textAlign: 'center' }}>VIỆC LÀM ĐANG TUYỂN</h5>
-                {
-                    allJob && allJob.items ? allJob.items.map((item, index) => {
-                        let logoUrl = item.employerLogoUrl;
+            <div className="home-job">
+                <Row style={{ display: allJob.totalItems === 0 ? 'none' : '' }}>
+                    <h5 style={{ textAlign: 'center' }}>VIỆC LÀM ĐANG TUYỂN</h5>
+                    {
+                        allJob && allJob.items ? allJob.items.map((item, index) => {
+                            let logoUrl = item.employerLogoUrl;
 
-                        if (!logoUrl) {
-                            logoUrl = DefaultImage
-                        }
+                            if (!logoUrl) {
+                                logoUrl = DefaultImage
+                            }
 
-                        return <Col xs={24} sm={12} md={12} lg={8} xl={8} xxl={6} key={index}>
-                            {loading_all_job ?
-                                (
-                                    <Skeleton key={index}
-                                        loading={true}
-                                        avatar
-                                        paragraph={{ rows: 1 }}
-                                        active={true} />
-                                )
-                                :
-                                (
-                                    <div key={index} className='h-j-item'>
-                                        <div className='img-job'>
-                                            <Link to={`/employer/${btoa(item.employerID)}`}>
-                                                <LazyLoadImage src={logoUrl} alt="employer logo" />
-                                            </Link>
-                                            <JobType>{item.jobType}</JobType>
-                                        </div>
-                                        <div className='job-content'>
-                                            <ul>
-                                                <li className='j-d'>
-                                                    <Link to={`/job-detail/${window.btoa(item.id)}${param}`}
-                                                        target='_blank'>
-                                                        <h6 className='l_c'>{item.jobTitle}</h6>
-                                                    </Link>
-                                                </li>
-                                                <li className='l_c'>
-                                                    <Link to={`/employer/${window.btoa(item.employerID)}${param}`}
-                                                        target='_blank'
-                                                        className="name_employer">
-                                                        <Icon type="shop" style={{ marginRight: 3 }} />
-                                                        {item.employerName}
-                                                    </Link>
-                                                </li>
-                                                <li className="region">
-                                                    <Icon type="environment" style={{ marginRight: 3 }} />
-                                                    {item.region && item.region.name
-                                                        ? item.region.name
-                                                        : null}
-                                                </li>
-                                                <li className="region">
-                                                    <Icon type="dollar" style={{ marginRight: 3 }} />
+                            return <Col xs={24} sm={12} md={12} lg={8} xl={8} xxl={6} key={index}>
+                                {loading_all_job ?
+                                    (
+                                        <Skeleton key={index}
+                                            loading={true}
+                                            avatar
+                                            paragraph={{ rows: 1 }}
+                                            active={true} />
+                                    )
+                                    :
+                                    (
+                                        <div key={index} className='h-j-item'>
+                                            <div className='img-job'>
+                                                <Link to={`/employer/${btoa(item.employerID)}`}>
+                                                    <LazyLoadImage src={logoUrl} alt="employer logo" />
+                                                </Link>
+                                                <JobType>{item.jobType}</JobType>
+                                            </div>
+                                            <div className='job-content'>
+                                                <ul>
+                                                    <li className='j-d'>
+                                                        <Link to={`/job-detail/${window.btoa(item.id)}${param}`}
+                                                            target='_blank'>
+                                                            <h6 className='l_c'>{item.jobTitle}</h6>
+                                                        </Link>
+                                                    </li>
+                                                    <li className='l_c'>
+                                                        <Link to={`/employer/${window.btoa(item.employerID)}${param}`}
+                                                            target='_blank'
+                                                            className="name_employer">
+                                                            <Icon type="shop" style={{ marginRight: 3 }} />
+                                                            {item.employerName}
+                                                        </Link>
+                                                    </li>
+                                                    <li className="region">
+                                                        <Icon type="environment" style={{ marginRight: 3 }} />
+                                                        {item.region && item.region.name
+                                                            ? item.region.name
+                                                            : null}
+                                                    </li>
+                                                    <li className="region">
+                                                        <Icon type="dollar" style={{ marginRight: 3 }} />
                                                         {convertFullSalary(item.minSalary, item.minSalaryUnit,
                                                             item.maxSalary, item.maxSalaryUnit)}
-                                                </li>
-                                            </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
-                                )
-                            }
-                        </Col>
-                    }) : null}
-                <Col span={24} style={{ textAlign: 'center' }}>
-                    <Pagination
-                        pageSize={allJob.pageSize}
-                        total={allJob.totalItems}
-                        style={{ margin: '25px 0px 10px' }}
-                        onChange={this.changePage}
-                    />
-                </Col>
-            </Row>
+                                    )
+                                }
+                            </Col>
+                        }) : null}
+                    <Col span={24} style={{ textAlign: 'center' }}>
+                        <Pagination
+                            pageSize={allJob.pageSize}
+                            total={allJob.totalItems}
+                            style={{ margin: '25px 0px 10px' }}
+                            onChange={this.changePage}
+                        />
+                    </Col>
+                </Row>
+            </div>
+
         );
     }
 }

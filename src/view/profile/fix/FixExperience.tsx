@@ -99,7 +99,7 @@ class FixExperience extends Component<IState, IState> {
                     </div>
 
                     <div className='experience-content'>
-                        <Row >
+                        <Row style={{marginTop: 20}}>
                             {/* Started Date */}
                             <Col xs={24} sm={24} md={12} lg={12} xl={12} className='properties'>
                                 <p> <label style={{ color: 'red' }}>*</label>Từ tháng</p>

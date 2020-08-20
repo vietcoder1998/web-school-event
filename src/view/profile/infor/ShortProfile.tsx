@@ -150,7 +150,7 @@ function ShortProfile(props?: { personalInfo?: any }) {
             setPercent(0);
             if (TYPE.AVATAR === typeImg) {
               setAvatarUrl(res.data.data.avatarUrl)
-            }
+            } else
             setCoverUrl(res.data.data.coverUrl)
           }
         }).catch((err) => {
@@ -182,6 +182,7 @@ function ShortProfile(props?: { personalInfo?: any }) {
               id={"img-set"}
               type='file'
               accept=".jpg,.png"
+              style={{margin: 10}}
               onChange={
                 event => onChangeFile(event.target.files[0])
               }

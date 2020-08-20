@@ -80,50 +80,51 @@ export default class LeftBar extends Component<IProps, IState> {
     render() {
         let { data, loading, chose } = this.state;
         return (
-            <Affix offsetTop={-65}>
-                <div id='left-bar' className='hidden-mobile'>
+            <div id='left-bar' className='hidden-mobile'>
+                <div className="box-block fixed">
+                    <Search
+                        onKeyDown={(event?: any) => this.setChosen(event.keyCode)}
+                        placeholder="Tìm kiếm nhà tuyển dụng"
+                        onChange={(event?: any) => this.onSearch(event.target.value)}
+                        onPressEnter={() => window.location.assign(`/employer/${btoa(data[chose].employerID)}`)}
+                    />
+                    <List
+                        style={{
+                            height: 'auto',
+                            overflowY: "auto",
+                            backgroundColor: "white",
+                            margin: '10px -10px',
+                        }}
+                        dataSource={data}
+                        loading={loading}
+                        renderItem={(item?: ITopEmDetail, i?: number) => (
+                            <List.Item
+                                key={item.employerID}
+                                style={{
+                                    backgroundColor: i === this.state.chose ? "whitesmoke" : "",
+                                    padding: 10
+                                }}
+                            >
+                                <Tooltip title={item.employerName} placement="right" style={{ zIndex: 2 }} >
+                                    <List.Item.Meta
+                                        avatar={
+                                            <Link to={`/employer/${btoa(item.employerID)}`}>
+                                                <Avatar src={item.employerLogoUrl} alt={item.employerName} />
+                                            </Link>
+                                        }
+                                        title={<Link to={`/employer/${btoa(item.employerID)}`}>{limitString(item.employerName)}</Link>}
+                                        description={timeConverter(item.createdDate)}
+                                    />
+                                </Tooltip>
+                            </List.Item>
+                        )}
+                    />
+                </div>
+                <Affix offsetTop={10}>
+
                     <div className="box-block fixed">
-                        <Search
-                            onKeyDown={(event?: any) => this.setChosen(event.keyCode)}
-                            placeholder="Tìm kiếm nhà tuyển dụng"
-                            onChange={(event?: any) => this.onSearch(event.target.value)}
-                            onPressEnter={() => window.location.assign(`/employer/${btoa(data[chose].employerID)}`)}
-                        />
-                        <List
-                            style={{
-                                height: 'auto',
-                                overflowY: "auto",
-                                backgroundColor: "white",
-                                margin: '10px -10px',
-                            }}
-                            dataSource={data}
-                            loading={loading}
-                            renderItem={(item?: ITopEmDetail, i?: number) => (
-                                <List.Item
-                                    key={item.employerID}
-                                    style={{
-                                        backgroundColor: i === this.state.chose ? "whitesmoke" : "",
-                                        padding: 10
-                                    }}
-                                >
-                                    <Tooltip title={item.employerName} placement="right" style={{ zIndex: 2 }} >
-                                        <List.Item.Meta
-                                            avatar={
-                                                <Link to={`/employer/${btoa(item.employerID)}`}>
-                                                    <Avatar src={item.employerLogoUrl} alt={item.employerName} />
-                                                </Link>
-                                            }
-                                            title={<Link to={`/employer/${btoa(item.employerID)}`}>{limitString(item.employerName)}</Link>}
-                                            description={timeConverter(item.createdDate)}
-                                        />
-                                    </Tooltip>
-                                </List.Item>
-                            )}
-                        />
-                    </div>
-                    <div className="box-block fixed">
-                        <Collapse defaultActiveKey={['1']} bordered={false} style={{margin: "0 -10px"}}>
-                            <Panel header="Mục khác" key="1" style={{borderColor: 'rgba(0,0,0,0)'}}>
+                        <Collapse defaultActiveKey={['1']} bordered={false} style={{ margin: "0 -10px" }}>
+                            <Panel header="Mục khác" key="1" style={{ borderColor: 'rgba(0,0,0,0)' }}>
                                 <p>
                                     <Link to='/save-job'>
                                         <Icon type={"save"} /> Công việc đã lưu
@@ -137,9 +138,8 @@ export default class LeftBar extends Component<IProps, IState> {
                             </Panel>
                         </Collapse >
                     </div>
-                </div>
-            </Affix>
-
+                </Affix>
+            </div>
         );
     }
 }

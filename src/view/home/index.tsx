@@ -5,7 +5,7 @@ import TabSearch from "./tab-search";
 import TopJob from "./TopJob";
 import AllJob from "./AllJob";
 import TopEm from "./TopEm";
-import Announcements from "./Announcements";
+// import Announcements from "./Announcements";
 import JobExpect from "./JobExpect";
 import VideoAd from "./VideoAd";
 import { IAppState } from "../../redux/store/reducer";
@@ -17,14 +17,13 @@ function Home(props) {
     <Layout disableFooterData={false}>
       {/* <CarouselUX /> */}
       <TabSearch {...props} />
-      <div className="content" style={{ paddingTop: 20, paddingBottom: 20 }}>
-        <JobExpect />
+      <div className="content">
         <IndayJob />
+        <JobExpect />
         <TopJob />
         <TopEm />
-        <VideoAd {...props} />
         <AllJob   {...props} />
-        <Announcements {...props} />
+        <VideoAd {...props} />
       </div>
     </Layout>
   );

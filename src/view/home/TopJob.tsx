@@ -34,112 +34,114 @@ class TopJob extends PureComponent<IProps> {
     render() {
         let { topJob, loading, param } = this.props;
         return (
-            <Row className='home-job' style={{ display: topJob.totalItems === 0 ? 'none' : '' }}>
-                <h5 style={{ textAlign: 'center' }}>VIỆC LÀM TRONG NGÀY</h5>
-                {
-                    topJob && topJob.items ? topJob.items.map((item, index) => {
-                        let logoUrl = item.employerLogoUrl;
+            <div className='home-job'>
+                <Row  style={{ display: topJob.totalItems === 0 ? 'none' : '' }}>
+                    <h5 style={{ textAlign: 'center' }}>VIỆC LÀM TRONG NGÀY</h5>
+                    {
+                        topJob && topJob.items ? topJob.items.map((item, index) => {
+                            let logoUrl = item.employerLogoUrl;
 
-                        if (!logoUrl) {
-                            logoUrl = DefaultImage
-                        }
+                            if (!logoUrl) {
+                                logoUrl = DefaultImage
+                            }
 
-                        return <Col xs={24} sm={12} md={12} lg={8} xl={8} xxl={6} key={index}>
-                            {loading ?
-                                (
-                                    <Skeleton
-                                        key={index}
-                                        loading={true}
-                                        avatar
-                                        paragraph={{ rows: 1 }}
-                                        active={true} />
-                                )
-                                :
-                                (
-                                    <div key={index} className='h-j-item'>
-                                        <div className='img-job'>
-                                            <Link to={`/employer/${btoa(item.employerID)}`}>
-                                                <LazyLoadImage src={logoUrl} alt="employer logo" />
-                                            </Link>
-                                            <JobType>{item.jobType}</JobType>
-                                        </div>
-                                        <div className='job-content'>
-                                            <ul>
-                                                <li className='j-d'>
-                                                    <Link to={`/job-detail/${window.btoa(item.id)}${param}`}
-                                                        target='_blank'>
-                                                        <h6 className='l_c'
-                                                            style={{
-                                                                color: item.titleHighlight ? "red" : "black",
-                                                            }}
+                            return <Col xs={24} sm={12} md={12} lg={8} xl={8} xxl={6} key={index}>
+                                {loading ?
+                                    (
+                                        <Skeleton
+                                            key={index}
+                                            loading={true}
+                                            avatar
+                                            paragraph={{ rows: 1 }}
+                                            active={true} />
+                                    )
+                                    :
+                                    (
+                                        <div key={index} className='h-j-item'>
+                                            <div className='img-job'>
+                                                <Link to={`/employer/${btoa(item.employerID)}`}>
+                                                    <LazyLoadImage src={logoUrl} alt="employer logo" />
+                                                </Link>
+                                                <JobType>{item.jobType}</JobType>
+                                            </div>
+                                            <div className='job-content'>
+                                                <ul>
+                                                    <li className='j-d'>
+                                                        <Link to={`/job-detail/${window.btoa(item.id)}${param}`}
+                                                            target='_blank'>
+                                                            <h6 className='l_c'
+                                                                style={{
+                                                                    color: item.titleHighlight ? "red" : "black",
+                                                                }}
+                                                            >
+                                                                <LinkToolTip
+                                                                    title={item.jobTitle}
+                                                                    name={
+                                                                        <>
+                                                                            <span
+                                                                                className="top-badge"
+                                                                                style={{ marginRight: 5 }}
+                                                                                children={"HOT"}
+                                                                            />
+                                                                            {item.jobTitle}
+                                                                        </>
+                                                                    }
+                                                                    transform={"uppercase"}
+                                                                />
+                                                            </h6>
+                                                        </Link>
+                                                    </li>
+                                                    <li className='l_c'>
+                                                        <Link
+                                                            to={`/employer/${window.btoa(item.employerID)}${param}`}
+                                                            target='_blank'
+                                                            className="name_employer"
                                                         >
                                                             <LinkToolTip
-                                                                title={item.jobTitle}
+                                                                title={item.employerName}
                                                                 name={
                                                                     <>
-                                                                        <span
-                                                                            className="top-badge"
+                                                                        <Icon
+                                                                            type="shop"
                                                                             style={{ marginRight: 5 }}
-                                                                            children={"HOT"}
-                                                                        />
-                                                                        {item.jobTitle}
-                                                                    </>
-                                                                }
-                                                                transform={"uppercase"}
-                                                            />
-                                                        </h6>
-                                                    </Link>
-                                                </li>
-                                                <li className='l_c'>
-                                                    <Link
-                                                        to={`/employer/${window.btoa(item.employerID)}${param}`}
-                                                        target='_blank'
-                                                        className="name_employer"
-                                                    >
-                                                        <LinkToolTip
-                                                            title={item.employerName}
-                                                            name={
-                                                                <>
-                                                                    <Icon
-                                                                        type="shop"
-                                                                        style={{ marginRight: 5 }}
 
-                                                                    />
-                                                                    {item.employerName}
-                                                                </>}
-                                                            transform={"initial"}
-                                                        />
-                                                    </Link>
-                                                </li>
-                                                <li className="region">
-                                                    <Icon type="environment" style={{ marginRight: 3 }} />
-                                                    {item.region && item.region.name
-                                                        ? item.region.name
-                                                        : null}
-                                                </li>
-                                                <li className="region">
-                                                    <span className="salary-label">
-                                                        <Icon type="dollar" style={{ marginRight: 3 }} />
-                                                        {convertFullSalary(item.minSalary, item.minSalaryUnit,
-                                                            item.maxSalary, item.maxSalaryUnit)}
-                                                    </span>
-                                                </li>
-                                            </ul>
+                                                                        />
+                                                                        {item.employerName}
+                                                                    </>}
+                                                                transform={"initial"}
+                                                            />
+                                                        </Link>
+                                                    </li>
+                                                    <li className="region">
+                                                        <Icon type="environment" style={{ marginRight: 3 }} />
+                                                        {item.region && item.region.name
+                                                            ? item.region.name
+                                                            : null}
+                                                    </li>
+                                                    <li className="region">
+                                                        <span className="salary-label">
+                                                            <Icon type="dollar" style={{ marginRight: 3 }} />
+                                                            {convertFullSalary(item.minSalary, item.minSalaryUnit,
+                                                                item.maxSalary, item.maxSalaryUnit)}
+                                                        </span>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
-                                )
-                            }
-                        </Col>
-                    }) : null}
-                <Col span={24} style={{ textAlign: 'center' }}>
-                    <Pagination
-                        pageSize={topJob.pageSize}
-                        total={topJob.totalItems}
-                        style={{ margin: '25px 0px 10px' }}
-                        onChange={this.changePage}
-                    />
-                </Col>
-            </Row>
+                                    )
+                                }
+                            </Col>
+                        }) : null}
+                    <Col span={24} style={{ textAlign: 'center' }}>
+                        <Pagination
+                            pageSize={topJob.pageSize}
+                            total={topJob.totalItems}
+                            style={{ margin: '25px 0px 10px' }}
+                            onChange={this.changePage}
+                        />
+                    </Col>
+                </Row>
+            </div>
         );
     }
 }

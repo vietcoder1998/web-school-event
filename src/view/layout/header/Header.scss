@@ -8,6 +8,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 0 10px 3px rgba(0,0,0,.1);
+  font-weight: 600;
   // border-bottom   : 1px solid $color_border;
   // box-shadow      : 0 0 8px 0 rgba(0,0,0,.3);
 
@@ -48,7 +50,7 @@
 
   .direct-page {
     position: absolute;
-    left: 15%;
+    left: 20%;
     font-weight: 550;
     font-size: 0.93rem;
 
@@ -57,12 +59,12 @@
       height: 100%;
       padding: 20px;
       font-size: 0.93rem;
-      font-weight: 400;
+      font-weight: 500;
       // background-color: rgb(214, 214, 214);
 
       &:hover {
         background-color: rgba(184, 216, 255, 0.367);
-        border-bottom: solid rgb(226, 226, 226) 1px;
+        // border-bottom: solid rgb(226, 226, 226) 1px;
 
         // color        : rgba(255, 255, 255, 0.639);
       }

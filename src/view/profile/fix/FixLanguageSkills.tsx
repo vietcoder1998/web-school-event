@@ -85,7 +85,7 @@ class FixLanguageSkills extends Component<IProps, IState> {
         let { list_language, languageSkill } = this.state;
         return (
             <div className='wrapper language-skills-fix'>
-                <Row>
+                <Row style={{marginTop: 20}}>
                     <Col xs={24} md={12} lg={12} sm={24}>
                         <b className='language-input'>
                             Chọn ngôn ngữ

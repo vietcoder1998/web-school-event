@@ -117,7 +117,7 @@ class FixPerson extends Component<IProps, IState> {
       );
     }
     await this.props._fixData("picture");
-    window.location.reload();
+    // window.location.reload();
   };
   render() {
     let { identityCardFrontUrl, identityCardBackUrl } = this.state;

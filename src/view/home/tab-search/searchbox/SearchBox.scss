@@ -53,12 +53,20 @@
 
   .search-box {
     transition: 0.5s;
-    background-color: rgba(32, 32, 32, 0.3);
-    padding: 20px 8vw;
+    background-color: rgba(32, 32, 32, 0.658);
+    .ant-select-selection__rendered {
+      line-height: 50px;
+    }
+    .ant-select-selection--single {
+      height: 50px;
+    }
+    .ant-btn-lg {
+      height: 50px;
+    }
+    // padding: 20px 8vw;
     height: auto;
     text-align: center;
     font-family: IBMPlexSanLights;
-    border-radius: 3px;
     
     .ant-tabs-ink-bar-animated {
       height: 2.8px;

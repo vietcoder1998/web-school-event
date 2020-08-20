@@ -164,7 +164,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                             height: "120px",
                                             width: "120px",
                                             fontSize: 60,
-                                            border: 'solid #168ECD 3px',
+                                            border: 'solid white 3px',
                                             zIndex: 1
                                         }}
                                         // @ts-ignore

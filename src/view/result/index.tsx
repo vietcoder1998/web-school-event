@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../layout/Layout";
-import { Row, Col, Pagination, Affix } from "antd";
+import { Row, Col, Pagination } from "antd";
 import { connect } from "react-redux";
 import { moveScroll } from "../../utils/moveScroll";
 // @ts-ignore
@@ -348,10 +348,9 @@ class Result extends React.Component<IProps, IStateResult> {
     const listResult = results.items;
     return (
       <Layout>
-        <div className="content">
-          <Row>
+          <Row className="content">
             <Col xs={0} sm={0} md={0} lg={0} xl={0} xxl={2}></Col>
-            <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={20}>
+            <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
               <div className="search-result">
                 {/* Search Result */}
                 <Row>
@@ -367,17 +366,15 @@ class Result extends React.Component<IProps, IStateResult> {
                   />
                 </Row>
                 {/* SearChTab */}
-                <Affix offsetTop={-65}>
-                  <div className="search-tab">
-                    <SearchFilter
-                      loading={loading}
-                      jobNames={jobNames}
-                      regions={regions}
-                      onChangeJobFilter={this.onChangeJobFilter}
-                      location={this.props.location}
-                    />
-                  </div>
-                </Affix>
+                <div className="search-tab">
+                  <SearchFilter
+                    loading={loading}
+                    jobNames={jobNames}
+                    regions={regions}
+                    onChangeJobFilter={this.onChangeJobFilter}
+                    location={this.props.location}
+                  />
+                </div>
                 <ResultFilter
                   numberRs={results.totalItems}
                   regionName={region && region.name}
@@ -420,7 +417,6 @@ class Result extends React.Component<IProps, IStateResult> {
             </Col>
             <Col xs={0} sm={0} md={0} lg={0} xl={0} xxl={2}></Col>
           </Row>
-        </div>
       </Layout>
     );
   }

@@ -71,11 +71,13 @@ code {
 }
 
 .expert-content {
-  margin: 10px;
+  margin: 10px 5px;
   border-radius: 5px;
   height: 100%;
   position: relative;
   background-color: white;
+  // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.06);
+  border: solid $color_border 1px;
 
   &:hover {
     box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.01), 0 2px 4px rgba(0, 0, 0, 0.02),
@@ -90,7 +92,6 @@ code {
 
   img {
     border-radius: 5px 5px 0px 0px;
-    min-height: 140px;
     object-fit: over;
   }
 }
@@ -112,7 +113,6 @@ code {
   line-height: 30px;
   padding: 10px;
   min-height: 8vw;
-  margin-bottom: 10px;
   border-radius: 0px 0px 5px 5px;
   border: solid $color_border 1px;
   border-top: none;
@@ -125,15 +125,13 @@ code {
 .top-em-detail {
   background-color: white;
   margin: 20px;
-  height: 12vw;
-  min-height: 120px;
   border-radius: 10px;
-  box-shadow: 0 4px 5px 2px rgba(0, 0, 0, 0.1);
   font-size: large;
   font-weight: 500px;
   text-align: center;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.06);
+  // box-shadow: 0 1px 4px 0px rgba(0,0,0,0.35);
   overflow: hidden;
+  border: solid $color_border 1px;
 
   image {
     object-fit: cover;
@@ -710,7 +708,7 @@ i {
 // Grid
 
 .ant-modal-body {
-  padding: 15px !important;
+  padding: 0px !important;
 }
 
 .wt-container {
@@ -776,8 +774,6 @@ i {
 }
 
 .home-job {
-  background-color: $color_background;
-  margin-bottom: 1vw;
   .ant-pagination {
     font-weight: 500;
   }
@@ -789,6 +785,10 @@ i {
 
   .ant-pagination-item-link {
     border: solid rgba($color: #fff, $alpha: 0.5) 1px;
+  }
+
+  &.white {
+    background-color: white;
   }
 }
 
@@ -1373,15 +1373,25 @@ label {
 
 .home-job {
   font-family: $font_base;
-  padding: 10px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.02), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
+  // padding: 10px;
+  // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.02), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
   position: relative;
 
   h5 {
-    margin: 10px 0 !important;
+    margin: 10px 5px !important;
     text-align: center;
-    padding: 15px 0 25px;
+    padding: 15px 0;
     font-weight: 400;
+    color: white;
+    border-radius: 5px;
+    background-color: rgb(24, 144, 255);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.02),
+      0 6px 20px 0 rgba(0, 0, 0, 0.03);
+    &.not-color {
+      background-color: white;
+      color: black;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0);
+    }
   }
 
   .ant-skeleton {
@@ -1398,8 +1408,7 @@ label {
 
   .h-j-item {
     display: flex;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    margin: 0 5px 10px;
     height: 114px !important;
     border-radius: 5px;
     border: rgba(255, 255, 255, 0) solid 1px;
@@ -1497,7 +1506,7 @@ label {
 
 .search-content {
   text-align: center;
-  padding: 4vw 1vw;
+  // padding: 4vw 1vw;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.02), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
 }
 
@@ -1526,9 +1535,8 @@ label {
 .top-job {
   font-family: $font_base;
   background-color: $color_background;
-  padding: 10px;
-  margin-bottom: 1vw;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.02), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
+  margin-bottom: 3vw;
+  // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.02), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
   position: relative;
 
   h5 {
@@ -1552,8 +1560,7 @@ label {
 
   .h-j-item {
     display: flex;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    margin: 0 5px 10px;
     border-radius: 5px;
     border: rgba(255, 255, 255, 0) solid 1px;
     background-color: #ffffff;
@@ -2205,6 +2212,9 @@ label {
     margin: 0px;
   }
 
+  div {
+    border-radius: 3px;
+  }
   margin-bottom: 30px;
 
   .pagination-result {
@@ -2221,7 +2231,6 @@ label {
     margin-bottom: 15px;
 
     .filter-name-job {
-      padding: 10px;
       text-align: center;
       transition: 0.5s;
       // background-color: #32a3f9;
@@ -2301,12 +2310,18 @@ label {
       .item-hl-job {
         display: flex;
         text-align: center;
-        padding: 10px 15px 5px;
+        font-weight: 500;
+
+        padding: 5px;
         background-color: white;
         // box-shadow      : 0 0.5px 0 rgba(0, 0, 0, .1);
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.01),
           0 6px 20px 0 rgba(0, 0, 0, 0.02);
         margin: 5px;
+
+        a {
+          color: red !important;
+        }
 
         i {
           margin-right: 5px;
@@ -2329,10 +2344,6 @@ label {
 
         .name-job {
           margin-left: 10px;
-
-          a {
-            font-size: 0.5rem;
-          }
 
           ul {
             margin-bottom: 0px;
@@ -2357,10 +2368,6 @@ label {
       // box-shadow: 0 0.5px 0 rgba(0, 0, 0, .1);
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03),
         0 6px 20px 0 rgba(0, 0, 0, 0.03);
-
-      h4 {
-        font-display: IBMPlexSanLights;
-      }
 
       &:hover {
         // cursor          : pointer;
@@ -2449,12 +2456,13 @@ label {
 
           .item-detail {
             font-weight: 480;
+            margin-right: -5px;
             span {
               margin: 0px 3px;
             }
 
             .ant-col {
-              padding: 5px;
+              padding: 5px 5px 5px 0;
             }
           }
         }
@@ -3144,14 +3152,18 @@ html {
   font-weight: 550;
 }
 .item-hl-job {
-  min-height: 101px;
+  min-height: 100px;
+  overflow: nowrap;
+  text-transform: capitalize;
 }
+
 .ant-skeleton {
   padding: 10px 15px 5px;
   background-color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.01), 0 6px 20px 0 rgba(0, 0, 0, 0.02);
   margin: 5px;
 }
+
 .ant-skeleton {
   width: auto;
 }

@@ -607,10 +607,16 @@ class SearchBox extends Component<IProps, IState>{
                             </TabPane>
                         </Tabs>
                         <div className='search-type' style={{ margin: choose_advanced ? '0px' : '20px 0px' }}>
-                            <InputGroup size="large" compact>
+                            <InputGroup 
+                                size="large" 
+                                compact
+                                style={{fontSize: "1.2rem"}}
+                            >
                                 <Select
                                     showSearch={true}
-                                    defaultValue={area ? area.name : 'Chọn tỉnh thành bạn muốn'} style={{ width: '32%' }}
+                                    defaultValue={
+                                        area ? area.name : 'Chọn tỉnh thành'}
+                                    style={{ width: '25%' }}
                                     size="large"
                                 >
                                     <Option
@@ -628,7 +634,7 @@ class SearchBox extends Component<IProps, IState>{
                                     })}
                                 </Select>
                                 <Select
-                                    style={{ width: '45%' }}
+                                    style={{ width: '50%' }}
                                     placeholder="Tìm kiếm công việc của bạn"
                                     size="large"
                                     showSearch
@@ -655,12 +661,10 @@ class SearchBox extends Component<IProps, IState>{
                                         </Option>)
                                     })}
                                 </Select>
-
-
                                 <Button size="large"
                                     // type='primary'
                                     type='danger'
-                                    style={{ width: '23%' }}
+                                    style={{ width: '25%' }}
                                     // onClick={this._openModal}
                                     onClick={() => this._createRequest()}
                                 >

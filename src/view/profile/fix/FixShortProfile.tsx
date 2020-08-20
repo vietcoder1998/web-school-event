@@ -53,9 +53,7 @@ class FixPerson extends Component<IProps, IState> {
         lat: 21.0223575259305,
         lon: 105.82227458143632,
       },
-
       show_popup: false,
-
       addressChange: {
         address: "",
         lat: 0,

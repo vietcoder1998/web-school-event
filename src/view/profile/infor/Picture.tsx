@@ -35,7 +35,6 @@ function ShortProfile(props?: { personalInfo?: any }) {
           </Col>
           <Col xs={24} md={12} xl={12} lg={12} xxl={12}>
             <div className="identity-img">
-
               <LazyLoadImage
                 src={personalInfo.identityCardBackImageUrl}
                 alt="ảnh CMND"

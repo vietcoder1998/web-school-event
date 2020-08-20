@@ -23,6 +23,10 @@ $color_border: rgb(231, 231, 231);
     padding: 10px 30px;
   }
 
+  .search-box {
+    padding: 2vw 30px;
+  }
+
   .content-footer {
     padding: 5px 20px;
   }
@@ -46,10 +50,6 @@ $color_border: rgb(231, 231, 231);
 
 // phone
 @media (min-width: 0px) and (max-width: 767px) {
-  .content {
-    padding: 0px 2px;
-  }
-
   .content-footer {
     padding: 2px 10px;
   }
@@ -77,19 +77,40 @@ $color_border: rgb(231, 231, 231);
   .image-content {
     padding: 6vw 0%;
   }
+
+  .filter-name-job {
+    padding: 1vw;
+  }
 }
 
 // desktop
 @media only screen and (min-width: 1061px) {
   .content {
-    padding: 0px 15%;
-    
+    padding: 0px 20vw;
+  }
+  // .search-content {
+  //   padding: 0px 20%;
+  // }
+  .search-box {
+    padding: 5vw 20vw;
+  }
+  .top-job {
+    margin: 0 -20vw;
+    padding: 2vw 20vw;
   }
 
+  .filter-name-job {
+    margin: 0 -20vw;
+    padding: 1vw 20vw!important;
+  }
+  .home-job {
+    margin-right: -20vw;
+    margin-left: -20vw;
+    padding: 15px 20vw 30px;
+  }
   .content-footer {
     padding: 10px 10%;
   }
-
   .hidden-mobile {
     display: block;
   }
@@ -102,9 +123,9 @@ $color_border: rgb(231, 231, 231);
     display: none;
   }
 
-  .search-content {
-    padding:0 10vw;
-  }
+  // .search-content {
+  //   padding:0 10vw;
+  // }
 
   .wrapper {
     padding: 15px 40px;
@@ -113,7 +134,6 @@ $color_border: rgb(231, 231, 231);
   fillset {
     padding: 15px 40px;
   }
-
 
   .block-header {
     padding: 20px 30px;
@@ -135,15 +155,14 @@ $color_border: rgb(231, 231, 231);
   }
 
   .detail-job {
-    border-bottom: solid $color_border 1px  ;
+    border-bottom: solid $color_border 1px;
   }
-
-  
 }
-h5{
-    font-size: 1.3rem !important;
-    font-weight: 800;
-  }
+h5 {
+  font-size: 1.3rem !important;
+  font-weight: 800;
+}
+
 // for phone
 @media (min-width: 0px) and (max-width: 560px) {
   .show-only-phone {
@@ -168,4 +187,3 @@ h5{
     display: visible !important;
   }
 }
-

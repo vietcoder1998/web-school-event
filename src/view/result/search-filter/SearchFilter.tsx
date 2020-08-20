@@ -1,5 +1,5 @@
 import React from "react";
-import { Select, Row, Col, Button, Icon } from "antd";
+import { Select, Row, Col, Button } from "antd";
 import { TYPE } from "../../../const/type";
 import { connect } from "react-redux";
 import qs from "query-string";
@@ -81,9 +81,9 @@ class SearchFilter extends React.Component<
     // console.log(this.props.jobNames)
 
     return (
-      <div className="filter-name-job" style={{ padding: "10px 2%", backgroundColor: primaryColor}}>
+      <div className="filter-name-job" style={{ backgroundColor: primaryColor}}>
         <Row>
-          <Col xs={11} sm={12} md={5} lg={4} xl={4} xxl={4}>
+          <Col xs={11} sm={12} md={5} lg={4} xl={4} xxl={5}>
             <Select
               size={"large"}
               showSearch
@@ -149,7 +149,7 @@ class SearchFilter extends React.Component<
                 this.props.onChangeJobFilter(newFilter);
               }}
               >
-                Tất cả các tỉnh thành
+                Tất cả
               </Option>
               {regions.length > 0
                 ? regions.map((item, index) => {
@@ -188,15 +188,15 @@ class SearchFilter extends React.Component<
             xs={24}
             sm={12}
             md={7}
-            lg={isAuthen ? 6 : 12}
-            xl={isAuthen ? 6 : 12}
-            xxl={isAuthen ? 6 : 12}
+            lg={isAuthen ? 8 : 12}
+            xl={isAuthen ? 8 : 12}
+            xxl={isAuthen ? 7 : 12}
           >
             <Select
               size={"large"}
               showSearch
               style={{ width: "100%", margin: "5px 0px" }}
-              placeholder={"Chọn loại công việc"}
+              placeholder={"Chọn tên công việc"}
               value={jobNameID && jobNames.length > 0 ? jobNames.find(element => element.id === jobNameID).name : undefined}
             >
               <Option key={"1"} value={"Tất cả"}
@@ -240,10 +240,10 @@ class SearchFilter extends React.Component<
           <Col
             xs={24}
             sm={12}
-            md={3}
-            lg={6}
-            xl={6}
-            xxl={6}
+            md={6}
+            lg={4}
+            xl={4}
+            xxl={4}
             style={{ display: isAuthen ? "" : "none" }}
           >
             <Select
@@ -277,7 +277,8 @@ class SearchFilter extends React.Component<
             <Button
               size="large"
               type="danger"
-              children={loading ? <Icon type="loading" /> : "Tìm kiếm"}
+              icon={loading? "loading": "search"}
+              children={"Tìm"}
               style={{
                 width: "100%",
                 margin: "5px 0px",
