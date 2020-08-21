@@ -242,7 +242,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                         <Tabs defaultActiveKey="1">
                             <TabPane tab="Giới thiệu" key="1">
                                 <Row>
-                                    <Col sm={24} md={12} lg={12} xl={12} xxl={8}>
+                                    <Col sm={24} md={17} lg={17} xl={17} xxl={8}>
                                         <Card bordered={false}>
                                             <Meta
                                                 avatar={
@@ -258,7 +258,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                             />
                                         </Card>
                                     </Col>
-                                    <Col sm={24} md={12} lg={12} xl={12} xxl={8}>
+                                    <Col sm={24} md={12} lg={8} xl={8} xxl={8}>
                                         <Card bordered={false}>
                                             <Meta
                                                 avatar={
@@ -269,7 +269,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                             />
                                         </Card>
                                     </Col>
-                                    <Col sm={24} md={12} lg={12} xl={12} xxl={8}>
+                                    <Col sm={24} md={12} lg={8} xl={8} xxl={8}>
                                         <Card bordered={false}>
                                             <Meta
                                                 avatar={
@@ -280,7 +280,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                             />
                                         </Card>
                                     </Col>
-                                    <Col sm={24} md={12} lg={12} xl={12} xxl={8}>
+                                    <Col sm={24} md={12} lg={8} xl={8} xxl={8}>
                                         <Card bordered={false}>
                                             <Meta
                                                 avatar={

@@ -13,43 +13,18 @@
   <meta property="og:image:width" content="1024">
   <meta property="og:image:height" content="1024">
   <meta name="theme-color" content="#000000" />
+  <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
   <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  <script type="text/javascript">
-    window.twttr = (function(d, s, id) {
-      var js, fjs=d.getElementsByTagName(s)[0], t=window.twttr || {};
-      if (d.getElementById(id)) {return t;}
-      js=d.createElement(s); js.id=id;
-      js.src="https://platform.twitter.com/widgets.js";
-      fjs.parentNode.insertBefore(js, fjs);
-      t._e=[];
-      t.ready = function(f) {
-        t._e.push(f);
-      };
-      return t;
-    }(document, "script", "twitter-wjs"));
-  </script>
-  <script type="text/javascript">
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId: "2645790149071853",
-        cookie: true,
-        status: true,
-        xfbml: true,
-        version: "v2.5"
-      });
-    };
-    (function(d, s, id) {
-      var js, fjs=d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {return;}
-      js=d.createElement(s); js.id=id;
-      js.src="//connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, "script", "facebook-jssdk"));
-  </script>
+  <link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+  crossorigin="anonymous"
+/>
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYQTUU1rbxfmp5_ik3euXX9B5-VSnDos4&libraries=places"></script>
   <!-- <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> -->

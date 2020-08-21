@@ -67,7 +67,7 @@ class VideoAd extends Component<IProps, IState> {
     render() {
         let { mobileState } = this.props;
         return (
-            <div className={"home-job"} >
+            <div className={"top-job white"} >
                 {!mobileState.isMobile ? <Modal
                     visible={this.state.vm}
                     width="50vw"
@@ -84,7 +84,7 @@ class VideoAd extends Component<IProps, IState> {
                     ></iframe>
                 </Modal> : ""}
                 <Row>
-                    <h5>CHỦ ĐỀ TIÊU BIỂU</h5>
+                    <h5 >CHỦ ĐỀ TIÊU BIỂU</h5>
                     <Col sm={24} md={8} lg={8} xl={8} xxl={8}>
                         <div className="expert-content">
                             <OnDiv

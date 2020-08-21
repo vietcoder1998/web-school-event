@@ -34,5 +34,6 @@ export const TYPE = {
     PICTURE: "picture",
     DEFAULT_IMAGE: "https://picsum.photos/1600/900",
     AVATAR: "avatar",
-    COVER: "cover"
+    COVER: "cover",
+    FACEBOOK: "facebook",
 }

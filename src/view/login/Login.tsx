@@ -4,7 +4,7 @@ import swal from "sweetalert";
 // import * as auth from '../../service/auth';
 import { connect } from "react-redux";
 import { authUserPassword } from "../../services/api/private.api";
-import { setAuthSate, loginHeaders } from "../../services/auth";
+import { setAuthSate, loginHeaders } from '../../services/auth';
 import { AUTH_HOST } from "../../environment/development";
 import { Input, Tooltip, Icon, Button } from "antd";
 import { Col } from "antd";
@@ -13,10 +13,15 @@ import { POST } from "../../const/method";
 import Layout from "../layout/Layout";
 import { REDUX } from "../../const/actions";
 // import queryString from "query-string";
+//@ts-ignore
 import logo from "../../assets/image/logo-01.png";
+//@ts-ignore
 import imageLogin from "../../assets/image/image-login.png";
 import { goBackWhenLogined } from "../../utils/goBackWhenLogined";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { FacebookProvider, LoginButton } from 'react-facebook';
+// import { TYPE } from './../../const/type';
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -47,6 +52,88 @@ class Login extends Component {
     this.getResponse();
   };
 
+
+  onLoginFB = async (data) => {
+    if (data) {
+      await _requestToServer(
+        POST,
+        {
+          client_id: process.env.REACT_APP_CLIENT_ID,
+          sercret: process.env.REACT_APP_CLIENT_SECRET,
+          fbAccessToken: data.tokenDetail.accessToken
+        },
+        "/api/authentication/facebook",
+        process.env.REACT_APP_API_HOST,
+        loginHeaders
+      ).then((res) => {
+        if (res) {
+          this._loginAction(res)
+        }
+      })
+    }
+  }
+
+  handleError = (error) => {
+    this.setState({ error });
+  }
+
+  _loginAction = (res?: any, type?: string) => {
+    if (res.data.target !== "STUDENT") {
+      swal({
+        title: "Worksvns thông báo",
+        text: "Sai tên đăng nhập hoặc mật khẩu!",
+        icon: "error",
+        dangerMode: true,
+      });
+    } else {
+      if (res.data.userExists === false) {
+        localStorage.setItem("user_exists", false);
+        localStorage.setItem("user_exists_userName", data.username);
+        localStorage.setItem("user_exists_password", data.password);
+        swal({
+          title: "Worksvn thông báo",
+          text: "Xác thực thông tin để đăng nhập",
+          icon: "success",
+          dangerMode: true,
+        }).then(() => {
+          window.location.assign("/register");
+        });
+      } else {
+        setAuthSate(res);
+        // this.props.setAuthen();
+        let last_access = localStorage.getItem("last_access");
+        last_access
+          ? window.location.href = last_access
+          : window.location.assign("/");
+        // const parsed = queryString.parse(this.props.location.search);
+        // console.log(parsed);
+        // if (parsed.path) {
+        //     window.location.assign(parsed.path);
+        // } else if (last_access) {
+        //     window.location.assign(last_access);
+        // } else {
+        //     window.location.assign('/');
+        // }
+
+        // console.log(this.props.location.search);
+        //   const parsed = queryString.parse(this.props.location.search);
+        //   // console.log(window.atob(parsed.path));
+        //   // setTimeout(() => {
+        //   var base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+        //   if (base64regex.test(parsed.path)) {
+        //     if (window.atob(parsed.path)) {
+        //       window.location.assign(window.atob(parsed.path));
+        //     } else {
+        //       window.location.assign("/");
+        //     }
+        //   } else {
+        //     window.location.assign("/");
+        //   }
+        // }, 3000)
+      }
+    }
+  }
+
   getResponse = async () => {
     let data = {
       username: this.state.user_name,
@@ -64,61 +151,7 @@ class Login extends Component {
     )
       .then((res) => {
         if (res) {
-          if (res.data.target !== "STUDENT") {
-            swal({
-              title: "Worksvns thông báo",
-              text: "Sai tên đăng nhập hoặc mật khẩu!",
-              icon: "error",
-              dangerMode: true,
-            });
-          } else {
-            if (res.data.userExists === false) {
-              localStorage.setItem("user_exists", false);
-              localStorage.setItem("user_exists_userName", data.username);
-              localStorage.setItem("user_exists_password", data.password);
-              swal({
-                title: "Worksvn thông báo",
-                text: "Xác thực thông tin để đăng nhập",
-                icon: "success",
-                dangerMode: true,
-              }).then(() => {
-                window.location.assign("/register");
-              });
-            } else {
-              setAuthSate(res);
-              // this.props.setAuthen();
-              let last_access = localStorage.getItem("last_access");
-
-              last_access
-                ? window.location.href = last_access
-                : window.location.assign("/");
-              // const parsed = queryString.parse(this.props.location.search);
-              // console.log(parsed);
-              // if (parsed.path) {
-              //     window.location.assign(parsed.path);
-              // } else if (last_access) {
-              //     window.location.assign(last_access);
-              // } else {
-              //     window.location.assign('/');
-              // }
-
-              // console.log(this.props.location.search);
-              //   const parsed = queryString.parse(this.props.location.search);
-              //   // console.log(window.atob(parsed.path));
-              //   // setTimeout(() => {
-              //   var base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
-              //   if (base64regex.test(parsed.path)) {
-              //     if (window.atob(parsed.path)) {
-              //       window.location.assign(window.atob(parsed.path));
-              //     } else {
-              //       window.location.assign("/");
-              //     }
-              //   } else {
-              //     window.location.assign("/");
-              //   }
-              // }, 3000)
-            }
-          }
+          this._loginAction(res)
         }
       })
       .finally(() => {
@@ -143,6 +176,7 @@ class Login extends Component {
             xl={mobile ? 24 : 10}
             xxl={mobile ? 24 : 10}
           >
+
             <div className="login-form">
               <LazyLoadImage src={logo} alt="logo" width="240" height="80" />
               <p className="title a_c" style={{ fontWeight: 600 }}>
@@ -200,6 +234,27 @@ class Login extends Component {
                     {loading ? <Icon type="loading" /> : "Đăng nhập"}
                   </Button>
                 </p>
+                <p>
+                  <label>hoặc</label>
+                </p>
+                <p className="a_c">
+                  <FacebookProvider
+                    appId="184179509691561"
+                    version='v8.0'
+                    cookie={true}
+                    xfbml={true}
+                  >
+                    <LoginButton
+                      scope="email"
+                      className="fb-login-btn btn-login a_l"
+
+                      onCompleted={this.onLoginFB}
+                      onError={this.handleError}
+                    >
+                      <Icon type="facebook" />Đăng nhập với facebook
+                    </LoginButton>
+                  </FacebookProvider>
+                </p>
                 <p className="a_c">
                   Bạn chưa có tài khoản ?{" "}
                   <label
@@ -213,8 +268,8 @@ class Login extends Component {
             </div>
           </Col>
           <Col
-            xs={mobile ? 0 : 12}
-            sm={mobile ? 0 : 12}
+            xs={mobile ? 0 : 0}
+            sm={mobile ? 0 : 0}
             md={mobile ? 0 : 12}
             lg={mobile ? 0 : 14}
             xl={mobile ? 0 : 14}
@@ -225,7 +280,7 @@ class Login extends Component {
         </div>
 
         {/* </form> */}
-      </Layout>
+      </Layout >
     );
   }
 }

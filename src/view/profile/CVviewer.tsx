@@ -25,7 +25,7 @@ export default class CVviewer extends Component<IProps, IState> {
                     </p>
                 </CopyToClipboard>
                 <p>
-                    <a href={this.props.cvUrl} target="_blank" rel="noopener noreferrer">{limitString(this.props.cvUrl, 50)}</a>
+                    <a href={this.props.cvUrl} target="_blank" rel="noopener noreferrer">{limitString(this.props.cvUrl, 30)}</a>
                 </p>
             </div >
         )
