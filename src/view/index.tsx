@@ -102,7 +102,7 @@ const Article = loadMeta(() =>
 );
 
 const ArticleDetail = loadMeta(() =>
-  import("./article/detail/ArticleDetail").then(
+  import("./article/Detail/ArticleDetail").then( 
     (module) => module.default
   )
 );

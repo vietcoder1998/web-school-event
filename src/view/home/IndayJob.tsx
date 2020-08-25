@@ -55,7 +55,7 @@ class IndayJob extends PureComponent<IProps, IState> {
             return (
                 <div className="home-job">
                     <Row style={{ display: indayJob.totalItems === 0 ? 'none' : '' }}>
-                        <h5 style={{ textAlign: 'center' }}>VIỆC LÀM TUYỂN GẤP</h5>
+                        <h5 style={{ textAlign: 'center' }}>VIỆC LÀM TRONG NGÀY</h5>
                         {
                             indayJob && indayJob.items ? indayJob.items.map((item, index) => {
                                 let logoUrl = item.employerLogoUrl;
@@ -97,9 +97,9 @@ class IndayJob extends PureComponent<IProps, IState> {
                                                                             name={
                                                                                 <>
                                                                                     <span
-                                                                                        className="in-day-badge"
+                                                                                        className="top-badge "
                                                                                         style={{ marginRight: 5 }}
-                                                                                        children={"GẤP"}
+                                                                                        children={"HOT"}
                                                                                     />
                                                                                     {item.jobTitle}
                                                                                 </>

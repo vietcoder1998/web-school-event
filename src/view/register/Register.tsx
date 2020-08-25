@@ -66,6 +66,7 @@ interface IState {
   listBirthYearMax?: Array<any>;
   typeUpdateInfor?: boolean
   mobile?: boolean;
+  inviteCode?: string
 }
 
 class Register extends Component<IProps, IState> {
@@ -86,6 +87,7 @@ class Register extends Component<IProps, IState> {
         show_password: false,
         show_re_password: false,
         schoolID: '',
+        inviteCode: ''
       },
 
       marker: {
@@ -117,7 +119,8 @@ class Register extends Component<IProps, IState> {
       time: null,
       listBirthYearMin: [],
       listBirthYearMax: [],
-      typeUpdateInfor: false
+      typeUpdateInfor: false,
+      // inviteCode: ''
     };
   }
   async componentDidMount() {
@@ -126,9 +129,24 @@ class Register extends Component<IProps, IState> {
     let res_school = await _post(null, SCHOOLS, PUBLIC_HOST, noInfoHeader);
     // console.log(res_school);
     this.setState({ list_school: res_school.data.items })
-
-
-
+    let url = new URL(window.location.href);
+    let schoolID = url.searchParams.get('schoolID')
+    if (schoolID) {
+      // console.log(schoolID)
+      email_register_dto.schoolID = schoolID
+      this.setState({ email_register_dto, is_exactly_schoolID: true })
+      _get(null, `/api/schools/${schoolID}/education/majors/query`, PUBLIC_HOST, noInfoHeader)
+        .then((res_major) => {
+          this.setState({
+            list_major: res_major.data.items
+          })
+        })
+    }
+    let inviteCode = url.searchParams.get('inviteCode')
+    if(inviteCode) {
+      email_register_dto.inviteCode = inviteCode
+      this.setState({ email_register_dto })
+    }
     if (localStorage.getItem("user_exists") === "false") {
       email_register_dto.email = localStorage.getItem("user_exists_userName");
       email_register_dto.password = localStorage.getItem(
@@ -405,6 +423,8 @@ class Register extends Component<IProps, IState> {
       firstName,
       lastName,
       phone,
+      schoolID,
+      inviteCode
     } = this.state.email_register_dto;
     let {
       repassword,
@@ -590,6 +610,7 @@ class Register extends Component<IProps, IState> {
                       .indexOf(input.toLowerCase()) >= 0
                   }
                   showArrow={false}
+                  value={schoolID ? schoolID : undefined}
                 >
                   {list_school.map((item, index) => {
                     return (
@@ -658,68 +679,41 @@ class Register extends Component<IProps, IState> {
                 </Tooltip>
               </div>
 
-              <div className="normal" style={{ display: 'flex', flexDirection: 'row' }}>
-                {/* <DatePicker
-                  style={{ width: "100%" }}
-                  // onChange={this._handleTime("schoolYearStart")}
-                  onFocus={() => { this.setState({ isOpenStartYear: true }) }}
-                  // onBlur={() => {this.setState({isOpenStartYear: false})}} 
-                  onPanelChange={(v) => {
-                    this.setState({ isOpenStartYear: false, time: v })
-                  }}
-                  value={this.state.time}
-                  placeholder="Năm học bắt đầu"
-                  mode={'year'}
-                  format="YYYY"
-                  open={this.state.isOpenStartYear}
-                  suffixIcon={
-                    <Tooltip
-                      title={
-                        is_exactly_schoolYearStart ? "Năm học bắt đầu hợp lệ" : "Chọn năm học bắt đầu"
-                      }
-                    >
-                      <Icon
-                        type={is_exactly_schoolYearStart ? "check" : "warning"}
-                        style={{ color: is_exactly_schoolYearStart ? "green" : "red" }}
-                      />
-                    </Tooltip>
-                  }
-                  allowClear={false}
-                /> */}
-                {/* <div> */}
-                <Select
-                  showSearch
-                  placeholder="Năm học bắt đầu"
-                  style={{ width: "49%", marginRight: 15 }}
-                  optionFilterProp="children"
-                  onChange={this._handleTime("schoolYearStart")}
-                  filterOption={(input, option) =>
-                    // @ts-ignore
-                    option.props.children
-                      .toLowerCase()
-                      .indexOf(input.toLowerCase()) >= 0
-                  }
-                  showArrow={false}
-                >
-                  {this.state.listBirthYearMin.map((item, index) => {
-                    return (
-                      <Option value={item.id} key={index}>
-                        {item.name}
-                      </Option>
-                    );
-                  })}
-                </Select>
-                <Tooltip
-                  title={
-                    is_exactly_schoolYearStart ? "Năm học bắt đầu hợp lệ" : "Chọn năm học bắt đầu"
-                  }
-                >
-                  <Icon
-                    type={is_exactly_schoolYearStart ? "check" : "warning"}
-                    style={{ color: is_exactly_schoolYearStart ? "green" : "red", position: 'relative', marginLeft: -35, marginTop: 8 }}
-                  />
-                </Tooltip>
-                {/* </div> */}
+              {/* <div className="normal" style={{ display: 'flex', flexDirection: 'row' }}>
+                
+                  <Select
+                    showSearch
+                    placeholder="Năm học bắt đầu"
+                    style={{ width: "49%", marginRight: 15 }}
+                    optionFilterProp="children"
+                    onChange={this._handleTime("schoolYearStart")}
+                    filterOption={(input, option) =>
+                      // @ts-ignore
+                      option.props.children
+                        .toLowerCase()
+                        .indexOf(input.toLowerCase()) >= 0
+                    }
+                    showArrow={false}
+                  >
+                    {this.state.listBirthYearMin.map((item, index) => {
+                      return (
+                        <Option value={item.id} key={index}>
+                          {item.name}
+                        </Option>
+                      );
+                    })}
+                  </Select>
+                  <Tooltip
+                    title={
+                      is_exactly_schoolYearStart ? "Năm học bắt đầu hợp lệ" : "Chọn năm học bắt đầu"
+                    }
+                  >
+                    <Icon
+                      type={is_exactly_schoolYearStart ? "check" : "warning"}
+                      style={{ color: is_exactly_schoolYearStart ? "green" : "red",  position: 'relative', marginLeft: -35, marginTop: 8}}
+                    />
+                  </Tooltip>
+             
 
 
                 <Select
@@ -755,28 +749,7 @@ class Register extends Component<IProps, IState> {
                   />
                 </Tooltip>
               </div>
-              <div className="normal">
-                {/* <DatePicker
-                  style={{ width: "100%" }}
-                  onChange={this._handleTime("schoolYearEnd")}
-                  placeholder="Năm học kết thúc"
-                  suffixIcon={
-                    <Tooltip
-                      title={
-                        validSchoolYearEnd[exactly_schoolYearEnd]
-                      }
-                    >
-                      <Icon
-                        type={exactly_schoolYearEnd === 1 ? "check" : "warning"}
-                        style={{ color: exactly_schoolYearEnd === 1 ? "green" : "red" }}
-                      />
-                    </Tooltip>
-                  }
-                  allowClear={false}
-                /> */}
-
-              </div>
-
+              */}
               {/* Password */}
               <div className="normal">
                 <Input
@@ -848,6 +821,19 @@ class Register extends Component<IProps, IState> {
                   type={!this.state.show_re_password ? "password" : null}
                 />
               </div>
+              {/* inviteCode */}
+              <div className="normal">
+                <Input
+                  id="inviteCode"
+                  placeholder="Mã giới thiệu (nếu có)"
+
+                  prefix={
+                    <Icon type="qrcode" style={{ color: "rgba(0,0,0,.4)" }} />
+                  }
+                  value={inviteCode}
+                  onChange={this._handleInput}
+                />
+              </div>
               {/* Except */}
               <div className="normal" style={{ marginTop: 25 }}>
                 <p className="fogot-password">
@@ -879,6 +865,7 @@ class Register extends Component<IProps, IState> {
                   </label>
                 </p>
               </div>
+
             </form>
           </Col>
           <Col
