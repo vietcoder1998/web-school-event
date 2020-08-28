@@ -156,7 +156,7 @@ class SearchBox extends Component<IProps, IState>{
 
     async componentDidMount() {
         this.props.getRegions();
-        // this.props.getJobNames();
+        this.props.getJobNames();
         if (!this.props.area) {
             // this.setState({ area: region })
             this.props.setFilterArea({ id: 24, name: 'Hà Nội' });

@@ -49,7 +49,7 @@ class Education extends Component<IProps, IStates> {
               {schools.name} ({schools.shortName})
         </li>
           </div>
-          <div className="content-school">
+          {/* <div className="content-school">
             <p>
               <b> Thời gian học:</b>
             </p>
@@ -57,7 +57,7 @@ class Education extends Component<IProps, IStates> {
               {personalInfo.schoolYearStart} -{" "}
               {personalInfo.schoolYearEnd}
             </li>
-          </div>
+          </div> */}
           <div className="content-school">
             <p>
               <b> Mã sinh viên:</b>

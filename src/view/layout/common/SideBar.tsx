@@ -81,7 +81,7 @@ export default class LeftBar extends Component<IProps, IState> {
         let { data, loading, chose } = this.state;
         return (
             <div id='left-bar' className='hidden-mobile'>
-                <div className="box-block fixed">
+                {/* <div className="box-block fixed">
                     <Search
                         onKeyDown={(event?: any) => this.setChosen(event.keyCode)}
                         placeholder="Tìm kiếm nhà tuyển dụng"
@@ -119,10 +119,10 @@ export default class LeftBar extends Component<IProps, IState> {
                             </List.Item>
                         )}
                     />
-                </div>
+                </div> */}
                 <Affix offsetTop={10}>
                     <div className="box-block fixed">
-                        <Collapse bordered={false} style={{ margin: "0 -10px" }}>
+                        <Collapse bordered={false} defaultActiveKey={['1']} style={{ margin: "0 -10px" }}>
                             <Panel header="Mục khác" key="1" style={{ borderColor: 'rgba(0,0,0,0)' }}>
                                 <p>
                                     <Link to='/save-job'>

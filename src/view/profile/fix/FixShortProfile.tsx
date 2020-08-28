@@ -36,6 +36,7 @@ interface IState {
   isLookingForJobs?: boolean;
   personalInfo?: any;
   addressChange?: any;
+  onPressSave?: boolean
 }
 
 class FixPerson extends Component<IProps, IState> {
@@ -64,10 +65,12 @@ class FixPerson extends Component<IProps, IState> {
       avatarUrl: "",
       avatar: "",
       isLookingForJobs: true,
+      onPressSave: false
     };
   }
 
   async componentDidMount() {
+    console.log("onPressSave: " + this.state.onPressSave)
     let { personalInfo, address, location } = this.props;
     address = personalInfo.address;
     location = address;
@@ -181,6 +184,10 @@ class FixPerson extends Component<IProps, IState> {
     await this.props._fixData("person");
     window.location.reload();
   };
+  checkValid = () => {
+    this.setState({onPressSave: true})
+    // this._createRequest()
+  }
   getLatLngFromMap = (lat, lng, address) => {
     let { addressChange } = this.state;
     addressChange.address = address;
@@ -302,7 +309,7 @@ class FixPerson extends Component<IProps, IState> {
             <p>Ngày sinh</p>
             <DatePicker
               className="input_outside"
-              defaultValue={moment(birth_day, 'DD/MM/YYYY') ? moment(birth_day, 'DD/MM/YYYY') : null}
+              defaultValue={personalInfo.birthday !== -1 ? moment(birth_day, 'DD/MM/YYYY') : undefined}
               format="DD-MM-YYYY"
               onChange={this._handleTime}
               placeholder="Ngày sinh"
@@ -348,7 +355,7 @@ class FixPerson extends Component<IProps, IState> {
             <Button
               type="primary"
               icon="save"
-              onClick={() => this._createRequest()}
+              onClick={this.checkValid}
             >
               Lưu
               </Button>

@@ -86,7 +86,12 @@ $color_border: rgb(231, 231, 231);
 // desktop
 @media only screen and (min-width: 1061px) {
   .content {
-    padding: 0px 20vw;
+    padding: 0px 15vw;
+  }
+  .content-profile {
+    padding: 0px 8vw;
+    background-color: #f2f2f2;
+
   }
   // .search-content {
   //   padding: 0px 20%;
@@ -96,7 +101,7 @@ $color_border: rgb(231, 231, 231);
   }
   .top-job {
     margin: 0 -20vw;
-    padding: 2vw 20vw;
+    padding: 2vw 15vw;
   }
 
   // .filter-name-job {
@@ -106,7 +111,7 @@ $color_border: rgb(231, 231, 231);
   .home-job {
     margin-right: -20vw;
     margin-left: -20vw;
-    padding: 15px 20vw 30px;
+    padding: 15px 15vw 30px;
   }
   .content-footer {
     padding: 10px 10%;

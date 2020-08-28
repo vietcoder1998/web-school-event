@@ -6,10 +6,10 @@ import { STUDENT_HOST } from '../../environment/development';
 import { authHeaders } from '../../services/auth';
 import { REDUX_SAGA, REDUX } from '../../const/actions'
 import imageDefault from "../../assets/image/base-image.jpg";
-function* getFullPersonInfo() {
+function* getFullPersonInfo(action: any) {
    
     let res = yield call(getData);
-   
+    
     let data = res.data
     let personalInfo = {
         id: "",
@@ -48,7 +48,7 @@ function* getFullPersonInfo() {
     personalInfo.firstName = data.firstName;
     personalInfo.lastName = data.lastName;
     personalInfo.gender = data.gender;
-    personalInfo.address = data.address === null ? "Chưa cập nhật" : data.address;
+    personalInfo.address = data.address;
     personalInfo.identityCard =
         data.identityCard === null ? "Chưa cập nhật" : data.identityCard;
     personalInfo.identityCardBackImageUrl =
@@ -71,6 +71,12 @@ function* getFullPersonInfo() {
     personalInfo.studentCode = data.studentCode === null ? "Chưa cập nhật" : data.studentCode;
     personalInfo.createdDate = data.createdDate;
     personalInfo.cvUrl = data.cvUrl;
+    if(data.cvUrl && action.setActiveKeyCV) {
+        action.setActiveKeyCV()
+    }
+    if(!data.cvUrl && action.setActiveKeyCV2) {
+        action.setActiveKeyCV2()
+    }
     personalInfo.tools =  data.workingTools;
     // description
     let description = data.description;
