@@ -322,15 +322,15 @@ function ShortProfile(props?: { personalInfo?: any }) {
           </LiCopy>
           <LiCopy copy={personalInfo && personalInfo.phone}>
             <Icon type="phone" />
-            Điện thoại liên hệ:{" "}{personalInfo && personalInfo.phone}
+            Điện thoại liên hệ:{" "}{personalInfo && personalInfo.phone ? personalInfo.phone : '_'}
           </LiCopy>
           <LiCopy copy={personalInfo && personalInfo.identityCard}>
             <Icon type="idcard" />
-            Số CMND:{personalInfo && personalInfo.identityCard}
+            Số CMND:{personalInfo && personalInfo.identityCard ? personalInfo.identityCard : '_'}
           </LiCopy>
           <LiCopy copy={personalInfo && personalInfo.studentCode}>
             <Icon type="idcard" />
-            Mã sinh viên :{" "}{personalInfo && personalInfo.studentCode}
+            Mã sinh viên :{" "}{personalInfo && personalInfo.studentCode ? personalInfo.studentCode : '_'}
           </LiCopy>
           <LiCopy >
             <Icon type="database" />

@@ -49,8 +49,7 @@ function* getFullPersonInfo(action: any) {
     personalInfo.lastName = data.lastName;
     personalInfo.gender = data.gender;
     personalInfo.address = data.address;
-    personalInfo.identityCard =
-        data.identityCard === null ? "Chưa cập nhật" : data.identityCard;
+    personalInfo.identityCard = data.identityCard;
     personalInfo.identityCardBackImageUrl =
         data.identityCardBackImageUrl === null
             ? imageDefault
@@ -68,7 +67,7 @@ function* getFullPersonInfo(action: any) {
 
     personalInfo.schoolYearStart = data.schoolYearStart;
     personalInfo.schoolYearEnd = data.schoolYearEnd;
-    personalInfo.studentCode = data.studentCode === null ? "Chưa cập nhật" : data.studentCode;
+    personalInfo.studentCode = data.studentCode;
     personalInfo.createdDate = data.createdDate;
     personalInfo.cvUrl = data.cvUrl;
     if(data.cvUrl && action.setActiveKeyCV) {

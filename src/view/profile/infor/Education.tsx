@@ -71,8 +71,8 @@ class Education extends Component<IProps, IStates> {
               <b>Chuyên ngành học / Ngành học:</b>
             </p>
             <li>
-              {major.name} /{" "}
-              {major.branch && major.branch.name}
+              {major && major.name} /{" "}
+              {major && major.branch && major.branch.name}
             </li>
           </div>
         </div>

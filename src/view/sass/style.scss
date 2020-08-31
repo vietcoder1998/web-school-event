@@ -3699,7 +3699,7 @@ html {
 
 .ant-avatar img {
   width: 100%;
-  height: auto !important;
+  // height: auto !important;
 }
 
 .fb-login-btn {
@@ -3729,4 +3729,16 @@ html {
 }
 .ant-collapse-no-arrow {
   border-bottom: unset !important;
+}
+.ant-form-item {
+  margin-bottom: 0 !important;
+}
+.ant-form-item-control-wrapper {
+  padding: 0 !important;
+}
+.person-info {
+  padding: 0
+}
+.ant-avatar-circle {
+  border: unset !important;
 }
