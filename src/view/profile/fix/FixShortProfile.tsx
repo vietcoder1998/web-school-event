@@ -215,7 +215,7 @@ class FixPerson extends Component<IProps, IState> {
     
   }
   onSave = () => {
-    this.setState({loading: false})
+    this.setState({loading: true})
     if(this.checkValid()) {
       this._createRequest()
     } else {
@@ -310,7 +310,7 @@ class FixPerson extends Component<IProps, IState> {
                 name="gender"
                 value="MALE"
                 onClick={this._handleGender}
-                defaultChecked={personalInfo.gender === "MALE" ? true : false}
+                checked={personalInfo.gender === "MALE" ? true : false}
               />{" "}
               Nam
               </label>
@@ -321,7 +321,7 @@ class FixPerson extends Component<IProps, IState> {
                 name="gender"
                 value="FEMALE"
                 onClick={this._handleGender}
-                defaultChecked={personalInfo.gender === "MALE" ? false : true}
+                checked={personalInfo.gender === "MALE" ? false : true}
               />{" "}
               Nữ
               </label>
@@ -418,7 +418,7 @@ class FixPerson extends Component<IProps, IState> {
               icon="save"
               onClick={this.onSave}
             >
-              Lưu
+              {this.state.loading ? <Icon type="loading" /> : 'Lưu'}
               </Button>
           </Col>
         </Row>
