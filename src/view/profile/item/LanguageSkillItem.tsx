@@ -52,12 +52,16 @@ class LanguageSkillItem extends Component<IProps, IState> {
       list_language: [],
     };
   }
-
+  
   async componentDidMount() {
     let { languageSkill, activeKey, list_language } = this.state;
+    let {item} = this.props
+    console.log(item)
+
     let res_language = await _get(null, LANGUAGES, PUBLIC_HOST, noInfoHeader);
     list_language = res_language.data.items;
-    this.setState({ languageSkill, activeKey, list_language });
+    let newLanguageSkill = {...this.state.languageSkill, level: item.level, certificate: item.certificate, score: item.score, languageID: item.language && item.language.id}
+    this.setState({ languageSkill: newLanguageSkill, activeKey, list_language });
   }
 
   _deleteLanguageSkill = () => {
@@ -92,7 +96,7 @@ class LanguageSkillItem extends Component<IProps, IState> {
 
   async requestServer(method) {
     // let res;
-    let { id } = this.props;
+    let { id, complete } = this.props;
     let { languageSkill } = this.state;
     if (method === PUT) {
       await _requestToServer(
@@ -115,10 +119,9 @@ class LanguageSkillItem extends Component<IProps, IState> {
         params,
         true
       );
-      if (res) {
-        await this.props.getData();
-      }
     }
+    await this.props.getData();
+    await this._handleSelect(complete);
   }
 
   render() {
@@ -193,6 +196,7 @@ class LanguageSkillItem extends Component<IProps, IState> {
                         .toLowerCase()
                         .indexOf(input.toLowerCase()) >= 0
                     }
+                    defaultValue={item.language.id}
                   >
                     {list_language.map((item, index) => {
                       return (

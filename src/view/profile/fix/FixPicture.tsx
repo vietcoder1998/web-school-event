@@ -18,6 +18,7 @@ interface IProps {
   location?: any;
   marker?: any;
   _fixData?: (params?: string) => any;
+  getData?: any;
 }
 
 interface IState {
@@ -118,8 +119,9 @@ class FixPerson extends Component<IProps, IState> {
         null,
         sendFileHeader
       );
-      await this.setState({loading: false})
     }
+    await this.props.getData();
+    await this.setState({loading: false})
     await this.props._fixData("picture");
     // window.location.reload();
   };

@@ -3,7 +3,7 @@ import { update_description } from '../../../services/api/private/profile'
 import { sendStringHeader } from '../../../services/auth';
 import { connect } from 'react-redux';
 import { _requestToServer } from '../../../services/exec';
-import { Row, Col, Input } from 'antd';
+import { Row, Col, Input, Icon } from 'antd';
 import { REDUX_SAGA } from '../../../const/actions';
 import { Button } from 'antd';
 
@@ -17,6 +17,7 @@ interface IProps {
 interface IState {
     description?: string;
     method?: string;
+    loading?: boolean
 }
 
 
@@ -24,7 +25,8 @@ class FixDescription extends Component<IProps, IState>{
     constructor(props) {
         super(props)
         this.state = {
-            description: ''
+            description: '',
+            loading: false
         }
     }
 
@@ -44,8 +46,11 @@ class FixDescription extends Component<IProps, IState>{
 
     _createRequest = async () => {
         let { description } = this.state;
+        this.setState({loading: true})
         await _requestToServer(this.props.method, description, update_description, null, sendStringHeader, null, true);
         await this.props._fixData('description');
+        await this.props.reloadData();
+        await this.setState({loading: true})
     }
 
     render() {
@@ -79,7 +84,7 @@ class FixDescription extends Component<IProps, IState>{
                             icon="save"
                             onClick={() => this._createRequest()}
                         >
-                            Lưu
+                        {this.state.loading ? <Icon type="loading" /> : 'Lưu'}
                   </Button>
                     </Col>
                 </Row>

@@ -12,7 +12,7 @@ interface IState {
 interface IProps {
     langSkState?: any;
     updateLgState?: Function;
-    languageSkills?: Array<ILanguageSkill>
+    languageSkills?: Array<ILanguageSkill>;
 }
 
 class LanguageSkills extends Component<IProps, IState> {

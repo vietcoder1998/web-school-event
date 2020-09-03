@@ -237,7 +237,7 @@ class Profile extends Component<IProps, IState> {
                 >
                   <Icon type={"plus"} twoToneColor={"blue"} />
                 </div>
-                <LanguageSkills />
+                <LanguageSkills/>
                 {profileState[TYPE.LANGUAGE_SKILL] ? (
                   <FixLanguageSkills _fixData={this._fixData} method={POST} />
                 ) : null}
