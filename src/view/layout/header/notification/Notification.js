@@ -193,13 +193,13 @@ class Notification extends Component {
                             placement="bottom"
                             style={{ width: 200, padding: 10, height: '40vh' }}
                             content={
-                                // <div className='notification'>
-                                //     {this.content()}
-                                // </div>
-                                <Empty
-                                    style={{ height: "40vh", padding: 20 }}
-                                    description={<b>Hiện tại thông báo đang được sửa do mắc một số lỗi</b>}
-                                />
+                                <div className='notification'>
+                                    {this.content()}
+                                </div>
+                                // <Empty
+                                //     style={{ height: "40vh", padding: 20 }}
+                                //     description={<b>Hiện tại thông báo đang được sửa do mắc một số lỗi</b>}
+                                // />
                             }
                         >
                             {this.props.children}
