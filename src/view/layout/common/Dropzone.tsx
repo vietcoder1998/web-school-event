@@ -168,8 +168,11 @@ export const Dropzone = (props?: { onCallSuccess?: Function }) => {
                 </p>
                 <p className="ant-upload-text">Thêm hoặc kéo thả CV vào đây</p>
                 <p className="ant-upload-hint">
-                    Chỉ hỗ trợ cho file PDF Tiếng Việt ( dung lượng 10-50 mb)
-                    </p>
+                    Chỉ hỗ trợ cho file PDF
+                </p>
+                <p className="ant-upload-hint">
+                    (dung lượng 0-50 MB)
+                </p>
                 <input
                     ref={fileInputRef}
                     className="file-input"
@@ -192,13 +195,13 @@ export const Dropzone = (props?: { onCallSuccess?: Function }) => {
                     )
                 }
             </div>
+            {validFiles && validFiles.length > 0 ? 
             <Button type="primary" icon="save" onClick={() => uploadFiles()}>
                 Tải lên CV
                     {
                     validFiles && validFiles.length > 0 && <span className="file-size">( {fileSize(validFiles[0].size)} )</span>
                 }
-
-            </Button>
+            </Button> : null}
         </div>
     );
 }

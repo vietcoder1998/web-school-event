@@ -306,7 +306,7 @@ class Profile extends Component<IProps, IState> {
                   }
                 }}
               >
-                <Panel header="CV cá nhân" key="1" extra={this.state.activeKeyCV ? <Icon type="caret-up" /> : <Icon type="edit" /> } showArrow={false}>
+                <Panel header={!this.props.personalInfo.personalInfo.cvUrl ? "CV cá nhân" : "Sửa CV cá nhân"} key="1" extra={this.state.activeKeyCV ? <Icon type="caret-up" /> : <Icon type="edit" /> } showArrow={false}>
                   <Dropzone onCallSuccess={(cvUrl) => this.setState({ cvUrl }, () => this.forceUpdate())} />
                   
                 </Panel>
