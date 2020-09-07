@@ -184,6 +184,14 @@ class Header extends PureComponent<IProps, IState> {
                 />
                 Nhà Tuyển Dụng
               </a>
+              <a href="/salarycalculator">
+                <Icon 
+                type={"dollar"} 
+                style={{ fontSize: "16.8px" }}
+                theme='outlined'
+                />
+                Công cụ tính lương 
+              </a>
             </div>
           </div>
           <div

@@ -50,7 +50,7 @@
 
   .direct-page {
     position: absolute;
-    left: 20%;
+    left: 13%;
     font-weight: 550;
     font-size: 0.93rem;
 
@@ -77,6 +77,11 @@
     }
     svg[data-icon="apple"] {
       margin-bottom: 0.65px;
+    }
+    svg[data-icon="calculator"] {
+      margin-bottom: 1px;
+      height: 2.5vh;
+      width: 2vw;
     }
   }
 

@@ -310,10 +310,11 @@ class Profile extends Component<IProps, IState> {
                   <Dropzone onCallSuccess={(cvUrl) => this.setState({ cvUrl }, () => this.forceUpdate())} />
                   
                 </Panel>
-              </Collapse>
-              {cvUrl || this.props.personalInfo.personalInfo.cvUrl ? <Affix offsetTop={5}>
+                {cvUrl || this.props.personalInfo.personalInfo.cvUrl ? <Affix  offsetTop={-105} offsetBottom={5}>
                 <CVviewer cvUrl={cvUrl ? cvUrl : this.props.personalInfo.personalInfo.cvUrl} />
               </Affix> : null}
+              </Collapse>
+              
             </Col>
             <Col
               xs={0}
@@ -336,9 +337,9 @@ class Profile extends Component<IProps, IState> {
               >
                 <Link href="#person" title="Hồ sơ cá nhân" />
                 <Link href="#picture" title="Ảnh CMND" />
+                <Link href="#description" title="Mục tiêu nghề nghiệp" />
                 <Link href="#skills" title="Kỹ năng mềm" />
                 <Link href="#tools" title="Công cụ chuyên môn" />
-                <Link href="#description" title="Mục tiêu nghề nghiệp" />
                 <Link href="#languageSkill" title="Kỹ năng ngôn ngữ" />
                 <Link href="#experience" title="Kinh nghiệm" />
                 <Link href="#education" title="Học vấn" />

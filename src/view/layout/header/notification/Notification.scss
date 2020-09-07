@@ -137,7 +137,7 @@
 .notification {
   background: white;
   font-size : 0.8rem;
-  width     : 200px;
+  width     : 300px;
   z-index   : 4;
   padding: 5px;
   .ant-popover {
@@ -255,4 +255,7 @@
     text-align : center;
     line-height: 100%;
   }
+}
+.ant-popover ant-popover-placement-bottom {
+  left: 890px;
 }

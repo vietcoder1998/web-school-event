@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import './indayJob.scss'
 import { Col, Row, Skeleton, Pagination, Icon } from 'antd';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -10,6 +11,7 @@ import LinkToolTip from '../layout/common/LinkToolTip';
 import { IAppState } from '../../redux/store/reducer';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { convertFullSalary } from '../../utils/convertNumber';
+
 
 interface IProps {
     getHotJob?: Function;
@@ -55,7 +57,7 @@ class IndayJob extends PureComponent<IProps, IState> {
             return (
                 <div className="home-job">
                     <Row style={{ display: indayJob.totalItems === 0 ? 'none' : '' }}>
-                        <h5 style={{ textAlign: 'center' }}>VIỆC LÀM TRONG NGÀY</h5>
+                        <h5 className='h5index' style={{ textAlign: 'center' }}>VIỆC LÀM TRONG NGÀY</h5>
                         {
                             indayJob && indayJob.items ? indayJob.items.map((item, index) => {
                                 let logoUrl = item.employerLogoUrl;
@@ -64,7 +66,7 @@ class IndayJob extends PureComponent<IProps, IState> {
                                     logoUrl = DefaultImage
                                 }
 
-                                return <Col xs={24} sm={12} md={12} lg={8} xl={8} xxl={6} key={index}>
+                                return <Col xs={24} sm={12} md={12} lg={8} xl={8} xxl={6} key={index} >
                                     {
                                         loading ?
                                             (

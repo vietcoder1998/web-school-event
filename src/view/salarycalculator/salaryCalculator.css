@@ -1,0 +1,104 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+ .table1 {
+   display: flex;
+   flex: 1;
+   justify-content : flex-end; 
+   align-items: flex-end ;
+   font-weight: bold;
+   padding: 5px;
+   
+ }
+ .table2 {
+  display: flex;
+  flex: 1;
+  justify-content : flex-end; 
+  align-items: flex-end ;
+ min-width: 80px;
+  padding: 10px;
+  font-size: 15px;
+}
+
+.ant-form-item-explain{
+  min-height: 0;
+}
+
+.ant-form-item-explain, .ant-form-item-extra {
+  min-height: 0;
+}
+.ant-form-item{
+  margin-bottom: unset !important;
+}
+
+.TEXT_AREA{
+  white-space: break-spaces;
+}
+
+#textBanner {
+  animation: shake 2s infinite;
+  animation-direction: alternate;
+  transform: skew(0.5deg);
+}
+@keyframes shake {
+  0% {
+    transform: skewY(0.5deg);
+  }
+  100% {
+    transform: skewY(-0.5deg);
+  }
+}
+
+.btnClick{
+  box-shadow: 0 0 16px 14px rgba(0, 0, 0, 0.04);
+
+}
+.btnClick:hover {
+    cursor: pointer;
+    transform: scale(1.15);
+    z-index: 1;  
+   
+}
+
+svg {
+  margin-top: 3px;
+  margin-right: 3px;
+}
+.ant-modal-body {
+  padding: 24px !important;
+}

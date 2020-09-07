@@ -70,14 +70,14 @@ class VideoAd extends Component<IProps, IState> {
             <div className={"top-job white"} >
                 {!mobileState.isMobile ? <Modal
                     visible={this.state.vm}
-                    width="50vw"
+                    width="45vw"
                     destroyOnClose={true}
                     onCancel={() => this.props.history.push('?vm=false')}
                     title={this.state.title}
                 >
                     <iframe
                         title={this.state.title}
-                        height="500"
+                        height="350vh"
                         width="100%"
                         src={`https://www.youtube.com/embed/${this.state.vl}?autoplay=1`}
                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"

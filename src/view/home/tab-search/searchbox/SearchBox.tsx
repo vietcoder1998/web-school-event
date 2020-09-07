@@ -672,7 +672,7 @@ class SearchBox extends Component<IProps, IState>{
                                 </Button>
                             </InputGroup>
                         </div>
-                        <div style={{ paddingTop: "25px", paddingBottom: "15px" }}>
+                        {/* <div style={{ paddingTop: "25px", paddingBottom: "15px" }}>
                             <p style={{ color: '#fff' }}>Trải nghiệm tìm việc đỉnh cao bằng ứng dụng Worksvn trên điện thoại!</p>
                             <Row>
                                 <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12} style={{ justifyContent: 'flex-end', display: 'flex', padding: '0 15px', borderRight: '1px solid #fff' }}>
@@ -689,7 +689,7 @@ class SearchBox extends Component<IProps, IState>{
                                     <LazyLoadImage onClick={() => { this.setState({ visible: true, showQRImageType: 2 }) }} src={QRCodeCHPlay} alt='CHPlay Tìm việc QRCode' height='47px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px', cursor: 'pointer' }} />
                                 </Col>
                             </Row>
-                        </div>
+                        </div> */}
 
                     </div>
                 </div>

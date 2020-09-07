@@ -33,7 +33,7 @@ export default class JobProperties extends PureComponent<JobPropertiesProps, Job
                     {/* Description job */}
                     <Col xs={24} sm={24} md={24} lg={15} xl={15}>
                         <div className='description-job '>
-                            <h6>Mô tả công việc</h6>
+                            <h6>Thông tin công việc</h6>
                             <div style={{ padding: 10, whiteSpace: 'pre-line', color: '#000' }} dangerouslySetInnerHTML={{ __html: jobDetail && jobDetail.description }} />
                         </div>
                     </Col>

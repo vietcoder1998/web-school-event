@@ -14,6 +14,7 @@ import { noInfoHeader } from "../services/auth";
 import BarLoader from "react-spinners/BarLoader";
 import qs from "query-string";
 
+
 const EventHome = loadMeta(() =>
   import("./event").then((module) => module.default)
 );
@@ -106,6 +107,12 @@ const ArticleDetail = loadMeta(() =>
     (module) => module.default
   )
 );
+
+const SalaryCalculator = loadMeta(() => 
+    import("./salarycalculator/salaryCalculator").then(
+      (module) => module.default
+    )
+)
 
 
 const override = `
@@ -304,7 +311,9 @@ class App extends React.Component<IProps, IState> {
               <Route exact path="/employer/:id" component={EmInfo} />
               <Route path="/bai-viet" component={Article} />
               <Route exact path="/chi-tiet-bai-viet/:id" component={ArticleDetail} />
+              <Route exact path='/salarycalculator' component={SalaryCalculator} />
               <Route component={NotFound} />
+              
             </Switch>
           </Suspense>
         </Router>
