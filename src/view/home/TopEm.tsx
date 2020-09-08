@@ -52,7 +52,7 @@ class TopEm extends PureComponent<IProps, IState> {
                                                         src={item.employerLogoUrl}
                                                         alt={item.employerName}
                                                         width="100%"
-                                                        height="100%"
+                                                        height="210vh"
                                                     />
                                                 </div>
                                             )}
