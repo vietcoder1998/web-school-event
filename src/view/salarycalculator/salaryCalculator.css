@@ -75,14 +75,14 @@
   animation-direction: alternate;
   transform: skew(0.5deg);
 }
-@keyframes shake {
+/* @keyframes shake {
   0% {
     transform: skewY(0.5deg);
   }
   100% {
     transform: skewY(-0.5deg);
   }
-}
+} */
 
 .btnClick{
   box-shadow: 0 0 16px 14px rgba(0, 0, 0, 0.04);

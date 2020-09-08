@@ -9,7 +9,7 @@ import { POST } from '../../../../../../const/method';
 import { Input } from 'antd';
 import './EmployerDetail.scss';
 import { NotUpdate, JobType } from '../../../../layout/common/Common';
-import { IEmployerDetail } from '../../../../../../models/employer-detail';
+import { IEmployerDetail } from '../../../../../src/models/employer-detail';
 const { TextArea } = Input;
 const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
 

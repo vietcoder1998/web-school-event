@@ -66,7 +66,7 @@ class ResetPassword extends Component {
         this.setState({ isLoading: true });
         if (!this.checkValid()) {
             // alert('Thông báo', this.messageError, () => this.setState({ isLoading: false }));
-            swal({ title: "Thông báo", icon: "error", text: this.messageError })
+            swal({ title: "Thông báo", icon: "error", text: this.messageError,buttons: false })
             this.setState({ isLoading: false }); 
         } else {
             this.getResponse()

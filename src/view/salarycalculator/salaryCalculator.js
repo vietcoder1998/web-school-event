@@ -438,8 +438,8 @@ export class App extends Component {
           <div className="App" style={{ paddingTop: '1%', paddingBottom: '1%', backgroundColor: 'white', minHeight: '80vh' }}>
 
             {/* BANNER */}
-            <p id='textBanner' style={{ color: 'Indigo', fontFamily: '"Palatino Linotype", "Book Antiqua", Palatino, serif', fontSize: 20, fontWeight: 'bold' }}>Công cụ tính lương Gross sang Net / Net sang Gross chuẩn 2020</p>
-            <p style={{ fontWeight: 'initial', fontSize: 15 }}>Áp dụng mức giảm trừ gia cảnh mới nhất 11 triệu đồng/tháng (132 triệu đồng/năm) với nguời nộp thuế và 4,4 triệu đồng/tháng với mỗi người phụ thuộc</p>
+            <p id='textBanner' style={{  fontSize: 20, fontWeight: 'bold' }}>Công cụ tính lương Gross sang Net / Net sang Gross chuẩn 2020</p>
+            <p style={{ fontWeight: 'initial', fontSize: 15,fontWeight: 500 }}>Áp dụng mức giảm trừ gia cảnh mới nhất 11 triệu đồng/tháng (132 triệu đồng/năm) với nguời nộp thuế và 4,4 triệu đồng/tháng với mỗi người phụ thuộc</p>
             <p style={{ fontWeight: 'initial', fontSize: 15 }}> (Theo Nghị quyết số 954/2020/UBTVQH14)</p>
 
             {/* MAIN */}

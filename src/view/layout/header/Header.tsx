@@ -5,7 +5,7 @@ import logo from "../../../assets/image/logo-02.png";
 import { connect } from "react-redux";
 import "./Header.scss";
 import clearStorage from "../../../services/clear-storage";
-import { Icon, Badge, Menu, Dropdown, Avatar } from "antd";
+import { Icon, Badge, Menu, Dropdown, Avatar, Tooltip } from "antd";
 import Notification from "./notification/Notification";
 import { REDUX } from "../../../const/actions";
 import { goBackWhenLogined } from "../../../utils/goBackWhenLogined";
@@ -185,12 +185,12 @@ class Header extends PureComponent<IProps, IState> {
                 Nhà Tuyển Dụng
               </a>
               <a href="/salarycalculator">
-                <Icon 
-                type={"dollar"} 
-                style={{ fontSize: "16.8px" }}
-                theme='outlined'
+                <Icon
+                  type={"dollar"}
+                  style={{ fontSize: "16.8px" }}
+                  theme='outlined'
                 />
-                Công cụ tính lương 
+                Công cụ tính lương
               </a>
             </div>
           </div>
@@ -198,22 +198,27 @@ class Header extends PureComponent<IProps, IState> {
             className="function"
             style={{ display: show_bar ? "none" : "flex" }}
           >
+
             <Notification
               show_noti={show_noti}
               hover_on={hover_on}
               _closeNoti={this._closeNoti}
               _openNoti={this._openNoti}
             >
-              <span
-                className="label-function"
-                onClick={() => {
-                  this.setState({ show_noti: !show_noti });
-                }}
-              >
-                <Badge count={number_noti}>
-                  <Icon type="bell" theme="filled" style={{ fontSize: 18 }} />
-                </Badge>
-              </span>
+              <Tooltip title='Thông báo'>
+                <span
+                  className="label-function"
+                  onClick={() => {
+                    this.setState({ show_noti: !show_noti });
+                  }}
+                >
+                  <Badge count={number_noti}>
+
+                    <Icon type="bell" theme="filled" style={{ fontSize: 18 }} />
+
+                  </Badge>
+                </span>
+              </Tooltip>
             </Notification>
 
             {/* Side Bar */}

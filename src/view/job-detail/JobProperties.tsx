@@ -138,8 +138,10 @@ export default class JobProperties extends PureComponent<JobPropertiesProps, Job
                                 (<Col key={index} xs={24} sm={12} md={12} lg={12} xl={12}>
                                     {is_loading_similar ? <Skeleton loading={true} avatar paragraph={{ rows: 1 }} /> :
                                         (<div className='item-job' >
-                                            <div style={{ flex: 3 }}>
-                                                <Avatar shape={'square'} src={item.employerLogoUrl} size={60} style={{ margin: "10px 10px 0 10px" }} />
+                                            <div style={{ flex: 3, display: 'flex', flexDirection: 'column', justifyContent: 'center',alignItems: 'center' }}>
+                                                <Avatar shape={'square'} src={item.employerLogoUrl} size={60}
+                                                    // style={{ margin: "10px 10px 0 10px" }}
+                                                />
                                                 <JobType width='60px' fontSize='0.7em'>
                                                     {item && item.jobType}
                                                 </JobType>
@@ -154,7 +156,7 @@ export default class JobProperties extends PureComponent<JobPropertiesProps, Job
                             }
                         </div>
                     </Row>
-                    <div style={{textAlign: 'center'}}>
+                    <div style={{ textAlign: 'center' }}>
                         <Pagination defaultCurrent={1} total={paging} onChange={(event) => this.props._getSimilarJob(event)} />
                     </div>
                 </div>
