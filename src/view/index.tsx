@@ -311,7 +311,7 @@ class App extends React.Component<IProps, IState> {
               <Route exact path="/employer/:id" component={EmInfo} />
               <Route path="/bai-viet" component={Article} />
               <Route exact path="/chi-tiet-bai-viet/:id" component={ArticleDetail} />
-              <Route exact path='/salarycalculator' component={SalaryCalculator} />
+              <Route exact path='/gross-to-net' component={SalaryCalculator} />
               <Route component={NotFound} />
               
             </Switch>
