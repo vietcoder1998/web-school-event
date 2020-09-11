@@ -77,7 +77,7 @@ function Footer(props) {
       </div>
       {/* CopyRight */}
       <div className='copy-right'>
-        <p>Copyright @ Công ty Cổ Phần Worksvn</p>
+        <p>Copyright @ Công Ty Cổ Phần Worksvn</p>
       </div>
     </div >
   );
