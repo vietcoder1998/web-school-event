@@ -357,7 +357,9 @@ export class App extends Component {
 
     return (
       <Layout disableFooterData={false}>
-        <div style={{ padding: '5%', paddingTop: '2%', backgroundColor: '#f2f2f2', minHeight: '100vh' }}>
+        <div style={{ padding: '5%', paddingTop: '2%', backgroundColor: '#f2f2f2', minHeight: '100vh' ,fontFamily: 'Arial, Helvetica, sans-serif'}}
+          className='mother-div'
+        >
           <Modal
             title={
               <span>
@@ -424,14 +426,14 @@ export class App extends Component {
             }
           >
 
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
-              <p>Lương cơ sở: </p><p style={{ marginLeft: 10, color: 'brown' }}>1,490,000đ</p>  <br />
+            <div style={{ display: 'flex', flexDirection: 'row' }} >
+              <p>Lương cơ sở: </p><p style={{ marginLeft: 10, color: 'red' }}>1,490,000đ</p>  <br />
             </div>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
-              <p>Giảm trừ gia cảnh bản thân: </p><p style={{ marginLeft: 5, color: 'brown' }}>11,000,000đ/tháng</p>  <br />
+              <p>Giảm trừ gia cảnh bản thân: </p><p style={{ marginLeft: 5, color: 'red' }}>11,000,000đ/tháng</p>  <br />
             </div>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
-              <p>Người phụ thuộc: </p><p style={{ marginLeft: 10, color: 'brown' }}>4,400,000đ/người/tháng</p>  <br />
+              <p>Người phụ thuộc: </p><p style={{ marginLeft: 10, color: 'red' }}>4,400,000đ/người/tháng</p>  <br />
             </div>
 
           </Modal>
@@ -439,7 +441,7 @@ export class App extends Component {
 
             {/* BANNER */}
             <p id='textBanner' style={{  fontSize: 20, fontWeight: 'bold' }}>Công cụ tính lương Gross sang Net / Net sang Gross chuẩn 2020</p>
-            <p style={{ fontWeight: 'initial', fontSize: 15,fontWeight: 500 }}>Áp dụng mức giảm trừ gia cảnh mới nhất 11 triệu đồng/tháng (132 triệu đồng/năm) với nguời nộp thuế và 4,4 triệu đồng/tháng với mỗi người phụ thuộc</p>
+            <p style={{ fontWeight: 'initial', fontSize: 15,fontWeight: 520 }}>Áp dụng mức giảm trừ gia cảnh mới nhất 11 triệu đồng/tháng (132 triệu đồng/năm) với nguời nộp thuế và 4,4 triệu đồng/tháng với mỗi người phụ thuộc</p>
             <p style={{ fontWeight: 'initial', fontSize: 15 }}> (Theo Nghị quyết số 954/2020/UBTVQH14)</p>
 
             {/* MAIN */}
@@ -451,15 +453,15 @@ export class App extends Component {
                 <p style={{ color: 'red', fontStyle: 'italic' }}>(Mới nhất)</p>
                 <Button style={{ fontStyle: 'italic', marginLeft: 10, borderRadius: 50, fontSize: 11, padding: 5, }} onClick={this.handlOpen}>Chi tiết</Button>
               </div>
-              <Row style={{ width: '80vw', textAlign: 'start' }}>
+              <Row style={{ width: '80vw', textAlign: 'start' }} >
                 <Col xs={12} sm={4} md={4} lg={3} xl={3} >
-                  <p style={{ fontStyle: 'italic', fontSize: 13 }}>Lương cơ sở: 1,490,000 VNĐ</p>
+                  <p style={{  fontStyle: 'italic', fontSize: 13 ,fontWeight: 545}} >Lương cơ sở: 1,490,000 VNĐ</p>
                 </Col>
                 <Col xs={12} sm={4} md={6} lg={5} xl={4} >
-                  <p style={{ fontStyle: 'italic', fontSize: 13 }}>Giảm trừ gia cảnh bản thân: 11,000,000 VNĐ</p>
+                  <p style={{ fontStyle: 'italic', fontSize: 13,fontWeight: 520 }}>Giảm trừ gia cảnh bản thân: 11,000,000 VNĐ</p>
                 </Col>
                 <Col xs={12} sm={4} md={5} lg={4} xl={3} >
-                  <p style={{ fontStyle: 'italic', fontSize: 13 }}>Người phụ thuộc: 4,400,000 VNĐ</p>
+                  <p style={{ fontStyle: 'italic', fontSize: 13,fontWeight: 520 }}>Người phụ thuộc: 4,400,000 VNĐ</p>
                 </Col>
               </Row>
               <div style={{ marginTop: 30, width: '100%', borderTopColor: 'black', borderTopWidth: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
@@ -607,14 +609,16 @@ export class App extends Component {
 
                 {/* Diễn giải chi tiết */}
                 {this.state.salaryTemp !== null ?
-                  <div style={{ width: '90%', marginTop: 50 }}>
-                    <p style={{ fontSize: 15, fontWeight: 'bold', color: 'blueviolet', textAlign: 'start' }}>Diễn giải chi tiết (VND)</p>
+                  <div style={{ width: '90%', marginTop: 50 }} className='text'>
+                    <p style={{ fontSize: 15, fontWeight: 'bold', color: 'DodgerBlue', textAlign: 'start' }}>Diễn giải chi tiết (VND)</p>
 
-                    <div style={{ display: 'flex', flexDirection: 'row', backgroundColor: 'Gainsboro', height: 40, alignItems: 'center', borderBottomColor: 'Gainsboro', borderWidth: 1, paddingRight: 10 }} >
+                    <div style={{ display: 'flex', flexDirection: 'row', backgroundColor: 'Gainsboro', height: 40, alignItems: 'center', borderBottomColor: 'Gainsboro', borderWidth: 1, paddingRight: 10 }} 
+                    
+                      >
                       <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
                         Lương GROSS
                   </div>
-                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
                         {/* {getNumberWithDot(this.state.salaryGross)} */}
                         {this.state.salaryGross ? getNumberWithDot((this.state.salaryGross).toFixed()) : 0}
 
@@ -625,7 +629,7 @@ export class App extends Component {
                       <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
                         Bảo hiểm xã hội (8%)
                   </div>
-                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
                         - {getNumberWithDot(this.state.SocialInsurance.toFixed())}
                       </div>
                     </div >
@@ -634,7 +638,7 @@ export class App extends Component {
                       <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
                         Bảo hiểm y tế (1.5%)
                   </div>
-                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
                         - {getNumberWithDot(this.state.HealthInsurance.toFixed())}
                       </div>
                     </div >
@@ -643,7 +647,7 @@ export class App extends Component {
                       <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
                         Bảo hiểm thất nghiệp (1%)
                   </div>
-                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
                         - {getNumberWithDot(this.state.UnemploymentInsurance.toFixed())}
                       </div>
                     </div >
@@ -652,7 +656,7 @@ export class App extends Component {
                       <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
                         Thu nhập trước thuế
                   </div>
-                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
                         {getNumberWithDot(this.state.salaryBeforeTaxGross.toFixed())}
                       </div>
                     </div >
@@ -661,7 +665,7 @@ export class App extends Component {
                       <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
                         Giảm trừ gia cảnh bản thân
                   </div>
-                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
                         - {getNumberWithDot(this.state.PersonalDeductions)}
                       </div>
                     </div >
@@ -670,7 +674,7 @@ export class App extends Component {
                       <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
                         Giảm trừ gia cảnh người phụ thuộc
                   </div>
-                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
                         - {getNumberWithDot(this.state.dependentPerson * 4400000)}
                       </div>
                     </div >
@@ -679,7 +683,7 @@ export class App extends Component {
                       <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
                         Thu nhập chịu thuế
                   </div>
-                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
                         {getNumberWithDot((this.state.IncomeBeforeTax > 0 ? this.state.IncomeBeforeTax : 0).toFixed())}
                       </div>
                     </div >
@@ -688,7 +692,7 @@ export class App extends Component {
                       <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
                         Thuế thu nhập cá nhân(*)
                   </div>
-                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
                         - {getNumberWithDot(this.state.TaxMoney.toFixed())}
                       </div>
                     </div >
@@ -698,13 +702,13 @@ export class App extends Component {
                         <p style={{ fontWeight: 'bold' }}>Lương NET</p>
                         <p style={{ marginTop: -20 }}>(Thu nhập trước thuế - Thuế thu nhập cá nhân) </p>
                       </div>
-                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
                         {getNumberWithDot(this.state.salaryNet.toFixed())}
                       </div>
                     </div >
 
                     {/* Chi tiết thuế thu nhập cá nhân (VNĐ) */}
-                    <p style={{ fontSize: 15, fontWeight: 'bold', color: 'blueviolet', marginTop: 50, textAlign: 'start' }}>(*) Chi tiết thuế thu nhập cá nhân (VNĐ)</p>
+                    <p style={{ fontSize: 15, fontWeight: 'bold', color: 'DodgerBlue', marginTop: 50, textAlign: 'start' }}>(*) Chi tiết thuế thu nhập cá nhân (VNĐ)</p>
                     <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 40, backgroundColor: 'Gainsboro', alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
                       <div style={{ flex: 3, fontSize: 15, flexDirection: 'column', fontWeight: 'bold' }}>
                         Mức chịu thuế
@@ -717,7 +721,7 @@ export class App extends Component {
                     </div>
                     </div >
 
-                    <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
+                    <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} className='number'>
                       <div style={{ flex: 3, fontSize: 15, flexDirection: 'column' }}>
                         Đến 5 triệu VNĐ
                     </div>
@@ -729,7 +733,7 @@ export class App extends Component {
                       </div>
                     </div >
 
-                    <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 50, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
+                    <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 50, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} className='number'>
                       <div style={{ flex: 3, fontSize: 15, flexDirection: 'column' }}>
                         Trên 5 đến 10 triệu VNĐ
                     </div>
@@ -741,7 +745,7 @@ export class App extends Component {
                       </div>
                     </div >
 
-                    <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 50, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
+                    <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 50, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} className='number'>
                       <div style={{ flex: 3, fontSize: 15, flexDirection: 'column' }}>
                         Trên 10 đến 18 triệu VNĐ
                     </div>
@@ -753,7 +757,7 @@ export class App extends Component {
                       </div>
                     </div >
 
-                    <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 50, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
+                    <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 50, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} className='number'>
                       <div style={{ flex: 3, fontSize: 15, flexDirection: 'column' }}>
                         Trên 18 đến 32 triệu VNĐ
                     </div>
@@ -765,7 +769,7 @@ export class App extends Component {
                       </div>
                     </div >
 
-                    <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 50, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
+                    <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 50, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} className='number'>
                       <div style={{ flex: 3, fontSize: 15, flexDirection: 'column' }}>
                         Trên 32 đến 52 triệu VNĐ
                     </div>
@@ -777,7 +781,7 @@ export class App extends Component {
                       </div>
                     </div >
 
-                    <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 50, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
+                    <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 50, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} className='number'>
                       <div style={{ flex: 3, fontSize: 15, flexDirection: 'column' }}>
                         Trên 52 đến 80 triệu VNĐ
                     </div>
@@ -789,7 +793,7 @@ export class App extends Component {
                       </div>
                     </div >
 
-                    <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 50, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
+                    <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 50, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} className='number'>
                       <div style={{ flex: 3, fontSize: 15, flexDirection: 'column' }}>
                         Trên 80 triệu VNĐ
                     </div>
@@ -802,12 +806,12 @@ export class App extends Component {
                     </div >
 
                     {/* Người sử dụng lao động trả */}
-                    <p style={{ fontSize: 15, fontWeight: 'bold', color: 'blueviolet', marginTop: 50, textAlign: 'start' }}>Người sử dụng lao động trả (VNĐ)</p>
+                    <p style={{ fontSize: 15, fontWeight: 'bold', color: 'DodgerBlue', marginTop: 50, textAlign: 'start' }}>Người sử dụng lao động trả (VNĐ)</p>
                     <div style={{ display: 'flex', flexDirection: 'row', backgroundColor: 'Gainsboro', height: 40, alignItems: 'center', borderBottomColor: 'Gainsboro', borderWidth: 1, paddingRight: 10 }} >
                       <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
                         Lương GROSS
                   </div>
-                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
                         {/* {getNumberWithDot(this.state.salaryGross)} */}
                         {this.state.salaryGross ? getNumberWithDot((this.state.salaryGross).toFixed()) : 0}
 
@@ -818,7 +822,7 @@ export class App extends Component {
                       <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
                         Bảo hiểm xã hội (17%)
                   </div>
-                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
                         + {getNumberWithDot(this.state.SocialInsuranceAfterTax)}
                       </div>
                     </div >
@@ -827,7 +831,7 @@ export class App extends Component {
                       <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
                         Bảo hiểm Tai nạn lao động - Bệnh nghề nghiệp (0.5%)
                   </div>
-                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
                         + {getNumberWithDot(this.state.HealthInsuranceAfterTax)}
                       </div>
                     </div >
@@ -836,7 +840,7 @@ export class App extends Component {
                       <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
                         Bảo hiểm y tế (3%)
                   </div>
-                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
                         + {getNumberWithDot(this.state.UnemploymentInsuranceAfterTax)}
                       </div>
                     </div >
@@ -845,7 +849,7 @@ export class App extends Component {
                       <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
                         Bảo hiểm thất nghiệp (1%)
                   </div>
-                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
                         + {getNumberWithDot(this.state.LaborAccidentInsurance)}
                       </div>
                     </div >
@@ -854,7 +858,7 @@ export class App extends Component {
                       <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
                         Tổng cộng
                   </div>
-                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
                         {getNumberWithDot(this.state.IncomeAfterTax)}
                       </div>
                     </div >

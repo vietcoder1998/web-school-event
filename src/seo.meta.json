@@ -10,7 +10,7 @@
             }
         }
     },
-    "salarycalculator": {
+    "gross-to-net": {
         "title": "Công cụ tính lương ",
         "description": "Công cụ tính lương Gross sang Net, Net sang Gross chuẩn 2020",
         "canonical": "http://example.com/path/to/page",

@@ -50,9 +50,11 @@
   flex: 1;
   justify-content : flex-end; 
   align-items: flex-end ;
- min-width: 80px;
+  min-width: 80px;
   padding: 10px;
   font-size: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 500;
 }
 
 .ant-form-item-explain{
@@ -101,4 +103,34 @@ svg {
 }
 .ant-modal-body {
   padding: 24px !important;
+}
+
+.mother-div{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+p{
+  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: "Times New Roman", Times, serif; */
+}
+Input{
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+text{
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+span{
+  font-weight: 500;
+}
+
+.number{
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 500;
+}
+.text{
+  font-family: Arial, Helvetica, sans-serif;
+
 }

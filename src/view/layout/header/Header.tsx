@@ -171,6 +171,14 @@ class Header extends PureComponent<IProps, IState> {
                 />
                 Ứng dụng trên điện thoại
               </a>
+              <a href="/gross-to-net">
+                <Icon
+                  type={"dollar"}
+                  style={{ fontSize: "16.8px" }}
+                  theme='outlined'
+                />
+                Công cụ tính lương
+              </a>
               <a
                 href="https://employer.works.vn"
                 target="_blank"
@@ -184,14 +192,7 @@ class Header extends PureComponent<IProps, IState> {
                 />
                 Nhà Tuyển Dụng
               </a>
-              <a href="/salarycalculator">
-                <Icon
-                  type={"dollar"}
-                  style={{ fontSize: "16.8px" }}
-                  theme='outlined'
-                />
-                Công cụ tính lương
-              </a>
+             
             </div>
           </div>
           <div
