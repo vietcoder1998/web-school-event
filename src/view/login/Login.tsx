@@ -67,6 +67,7 @@ class Login extends Component {
         loginHeaders
       ).then((res) => {
         if (res) {
+          
           this._loginAction(res)
         }
       })
@@ -77,7 +78,7 @@ class Login extends Component {
     this.setState({ error });
   }
 
-  _loginAction = (res?: any, type?: string) => {
+  _loginAction = (res?: any, data?: any) => {
     if (res.data.target !== "STUDENT") {
       swal({
         title: "Worksvns thông báo",
@@ -87,7 +88,8 @@ class Login extends Component {
       });
     } else {
       if (res.data.userExists === false) {
-        localStorage.setItem("user_exists", false);
+        console.log(res)
+        localStorage.setItem("user_exists", 'false');
         localStorage.setItem("user_exists_userName", data.username);
         localStorage.setItem("user_exists_password", data.password);
         swal({
@@ -151,7 +153,8 @@ class Login extends Component {
     )
       .then((res) => {
         if (res) {
-          this._loginAction(res)
+          console.log(data)
+          this._loginAction(res,data)
         }
       })
       .finally(() => {
