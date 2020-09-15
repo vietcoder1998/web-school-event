@@ -169,7 +169,7 @@ export default class EmployerDetail extends React.PureComponent<EmployerDetailPr
                     </div>
                     <div className='company-description b_b'>
                         <h6>Mô tả sơ lược</h6>
-                        <p style={{ padding: '15px' }}>
+                        <p style={{ padding: '15px' ,whiteSpace: 'pre-line',color: 'rgb(0, 0, 0)'}}>
                             {employerDetail.description ? employerDetail.description : <NotUpdate />}
                         </p>
                     </div>
@@ -181,8 +181,10 @@ export default class EmployerDetail extends React.PureComponent<EmployerDetailPr
                                     (<Col key={index} xs={24} sm={12} md={12} lg={12} xl={12}>
                                         {is_loading_more ? <Skeleton loading={true} avatar paragraph={{ rows: 1 }} /> :
                                             (<div className='item-job' >
-                                                <div style={{ flex: 3 }}>
-                                                    <Avatar shape={'square'} src={item.employerLogoUrl} size={60} style={{ margin: "10px 10px 0 10px"}} />
+                                                <div style={{ flex: 3 , display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+                                                    <Avatar shape={'square'} src={item.employerLogoUrl} size={60} 
+                                                    // style={{ margin: "10px 10px 0 10px"}} 
+                                                    />
                                                     <JobType width='60px' fontSize='0.7em'>
                                                         {item && item.jobType}
                                                     </JobType>

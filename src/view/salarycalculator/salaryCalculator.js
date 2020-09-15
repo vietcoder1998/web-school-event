@@ -7,7 +7,7 @@ import { Button, DatePicker, version, Input, Radio, InputNumber, Modal, notifica
 import "./index.css";
 import 'antd/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import Layout from '../layout/Layout';
 import { TEXT_AREA, TEXT_AREA_I, TEXT_AREA_II, TEXT_AREA_III } from './data'
 import { Container, Row, Col } from 'react-bootstrap';
 
@@ -356,165 +356,167 @@ export class App extends Component {
 
 
     return (
-
-      <div style={{ padding: '5%', paddingTop: '2%', backgroundColor: '#f2f2f2', minHeight: '100vh' }}>
-        <Modal
-          title={
-            <span>
-              <p style={{ fontSize: 18, fontWeight: 'bold', padding: '5px' }}>Mức lương tối thiểu vùng</p>
-              <p>Áp dụng mức lương tối thiểu vùng mới nhất có hiệu lực từ ngày 1/1/2020 (Theo điều 3, Nghị định 90/2019/NĐ-CP)</p>
-            </span>
-          }
-          visible={this.state.visible}
-          onCancel={this.cancelModal}
-          footer={
-            <Button
-              onClick={this.cancelModal}
-              type='primary'
-            >
-              Đóng
-            </Button>
-          }
-          width={900}
-          style={{ top: 20 }}
+      <Layout disableFooterData={false}>
+        <div style={{ padding: '5%', paddingTop: '2%', backgroundColor: '#f2f2f2', minHeight: '100vh' ,fontFamily: 'Arial, Helvetica, sans-serif'}}
+          className='mother-div'
         >
-          <div style={{ display: 'flex', flexDirection: 'column', color: 'black' }}>
-            <p className='TEXT_AREA'>
-              {TEXT_AREA}
-            </p>
-            <p style={{ fontWeight: 'bold' }}>
-              1. Vùng I, gồm các địa bàn:
-            </p>
-            <p className='TEXT_AREA'>
-              {TEXT_AREA_I}
-            </p>
-            <p style={{ fontWeight: 'bold' }}>
-              2. Vùng II, gồm các địa bàn:
-            </p>
-            <p className='TEXT_AREA'>
-              {TEXT_AREA_II}
-            </p>
-            <p style={{ fontWeight: 'bold' }}>
-              3. Vùng III, gồm các địa bàn:
-            </p>
-            <p className='TEXT_AREA'>
-              {TEXT_AREA_III}
-            </p>
-            <p style={{ fontWeight: 'bold' }}>
-              4. Vùng IV, gồm các địa bàn còn lại
-            </p>
-          </div>
-        </Modal>
-        <Modal
-          title={
-            <span style={{ fontStyle: 18, fontWeight: 'bold', padding: '5px', textAlign: 'center' }}>
-              Quy định tính lương mới nhất áp dụng từ 1/7/2020
-            </span>
-          }
-          visible={this.state.openModal}
-          onCancel={this.handleCancel}
-          style={{padding: 10}}
-          footer={
-            <Button
-              onClick={this.handleCancel}
-              type='primary'
-            >
-              Đóng
+          <Modal
+            title={
+              <span>
+                <p style={{ fontSize: 18, fontWeight: 'bold', padding: '5px' }}>Mức lương tối thiểu vùng</p>
+                <p>Áp dụng mức lương tối thiểu vùng mới nhất có hiệu lực từ ngày 1/1/2020 (Theo điều 3, Nghị định 90/2019/NĐ-CP)</p>
+              </span>
+            }
+            visible={this.state.visible}
+            onCancel={this.cancelModal}
+            footer={
+              <Button
+                onClick={this.cancelModal}
+                type='primary'
+              >
+                Đóng
             </Button>
-          }
-        >
-
-          <div style={{ display: 'flex', flexDirection: 'row' }}>
-            <p>Lương cơ sở: </p><p style={{ marginLeft: 10, color: 'brown' }}>1,490,000đ</p>  <br />
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'row' }}>
-            <p>Giảm trừ gia cảnh bản thân: </p><p style={{ marginLeft: 5, color: 'brown' }}>11,000,000đ/tháng</p>  <br />
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'row' }}>
-            <p>Người phụ thuộc: </p><p style={{ marginLeft: 10, color: 'brown' }}>4,400,000đ/người/tháng</p>  <br />
-          </div>
-
-        </Modal>
-        <div className="App" style={{ paddingTop: '1%', paddingBottom: '1%', backgroundColor: 'white', minHeight: '80vh' }}>
-
-          {/* BANNER */}
-          <p id='textBanner' style={{ color: 'Indigo', fontFamily: '"Palatino Linotype", "Book Antiqua", Palatino, serif', fontSize: 20, fontWeight: 'bold' }}>Công cụ tính lương Gross sang Net / Net sang Gross chuẩn 2020</p>
-          <p style={{ fontWeight: 'initial', fontSize: 15 }}>Áp dụng mức giảm trừ gia cảnh mới nhất 11 triệu đồng/tháng (132 triệu đồng/năm) với nguời nộp thuế và 4,4 triệu đồng/tháng với mỗi người phụ thuộc</p>
-          <p style={{ fontWeight: 'initial', fontSize: 15 }}> (Theo Nghị quyết số 954/2020/UBTVQH14)</p>
-
-          {/* MAIN */}
-
-          <Container >
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
-              <p style={{ fontWeight: 'bold' }}>Áp dụng quy Định:</p>
-              <p style={{ color: 'RoyalBlue', marginLeft: 10 }}>Từ 1/7/2020</p>
-              <p style={{ color: 'red', fontStyle: 'italic' }}>(Mới nhất)</p>
-              <Button style={{ fontStyle: 'italic', marginLeft: 10, borderRadius: 50, fontSize: 11, padding: 5, }} onClick={this.handlOpen}>Chi tiết</Button>
+            }
+            width={900}
+            style={{ top: 20 }}
+          >
+            <div style={{ display: 'flex', flexDirection: 'column', color: 'black' }}>
+              <p className='TEXT_AREA'>
+                {TEXT_AREA}
+              </p>
+              <p style={{ fontWeight: 'bold' }}>
+                1. Vùng I, gồm các địa bàn:
+            </p>
+              <p className='TEXT_AREA'>
+                {TEXT_AREA_I}
+              </p>
+              <p style={{ fontWeight: 'bold' }}>
+                2. Vùng II, gồm các địa bàn:
+            </p>
+              <p className='TEXT_AREA'>
+                {TEXT_AREA_II}
+              </p>
+              <p style={{ fontWeight: 'bold' }}>
+                3. Vùng III, gồm các địa bàn:
+            </p>
+              <p className='TEXT_AREA'>
+                {TEXT_AREA_III}
+              </p>
+              <p style={{ fontWeight: 'bold' }}>
+                4. Vùng IV, gồm các địa bàn còn lại
+            </p>
             </div>
-            <Row style={{ width: '80vw', textAlign: 'start' }}>
-              <Col xs={12} sm={4} md={4} lg={3} xl={3} >
-                <p style={{ fontStyle: 'italic', fontSize: 13 }}>Lương cơ sở: 1,490,000 VNĐ</p>
-              </Col>
-              <Col xs={12} sm={4} md={6} lg={5} xl={4} >
-                <p style={{ fontStyle: 'italic', fontSize: 13 }}>Giảm trừ gia cảnh bản thân: 11,000,000 VNĐ</p>
-              </Col>
-              <Col xs={12} sm={4} md={5} lg={4} xl={3} >
-                <p style={{ fontStyle: 'italic', fontSize: 13 }}>Người phụ thuộc: 4,400,000 VNĐ</p>
-              </Col>
-            </Row>
-            <div style={{ marginTop: 30, width: '100%', borderTopColor: 'black', borderTopWidth: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-              <Form>
-                <Form.Item
-                  validateStatus={!this.state.salaryTempText && this.state.isOnClicked === true ? 'error' : null}
-                  help={!this.state.salaryTempText && this.state.isOnClicked === true ? <p style={{ textAlign: 'start', marginLeft: '20vw' }}>Bạn chưa nhập lương</p> : ''}
-                >
-                  <Row style={{ width: '87vw', textAlign: 'start' }}>
-                    <Col xs={5} sm={4} md={4} lg={3} xl={3} >
-                      <text style={{ fontWeight: 'bold' }}>Thu nhập(VNĐ) : </text>
-                    </Col>
-                    <Col xs={7} sm={4} md={4} lg={3} xl={2}>
-                      <Input placeholder="10,000,000"
-                        value={this.state.salaryTempText}
-                        style={{ borderRadius: 5 }}
-                        onChange={this.onChangeSalary}
-                        allowClear
-                        defaultValue={null}
-                        min={0}
-                      />
-                    </Col>
-                  </Row>
-                </Form.Item>
-              </Form>
-              <Row style={{ width: '87vw', textAlign: 'start' , marginTop: 20}}>
-                <Col xs={5} sm={4} md={4} lg={3} xl={3}>
-                  <text style={{ fontWeight: 'bold', fontSize: 14, textAlign: 'start' }}>Người phụ thuộc(Người) : </text>
-                </Col>
-                <Col xs={7} sm={4} md={4} lg={3} xl={2}>
-                  <Input
-                    style={{ borderRadius: 5 }}
-                    onChange={this.onChangeDependentPerson}
-                    allowClear
-                    defaultValue={0}
-                    type='number'
-                    min={0}
-                  />
-                </Col>
+          </Modal>
+          <Modal
+            title={
+              <span style={{ fontStyle: 18, fontWeight: 'bold', padding: '5px', textAlign: 'center' }}>
+                Quy định tính lương mới nhất áp dụng từ 1/7/2020
+            </span>
+            }
+            visible={this.state.openModal}
+            onCancel={this.handleCancel}
+            style={{ padding: 10 }}
+            footer={
+              <Button
+                onClick={this.handleCancel}
+                type='primary'
+              >
+                Đóng
+            </Button>
+            }
+          >
 
+            <div style={{ display: 'flex', flexDirection: 'row' }} >
+              <p>Lương cơ sở: </p><p style={{ marginLeft: 10, color: 'red' }}>1,490,000đ</p>  <br />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+              <p>Giảm trừ gia cảnh bản thân: </p><p style={{ marginLeft: 5, color: 'red' }}>11,000,000đ/tháng</p>  <br />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+              <p>Người phụ thuộc: </p><p style={{ marginLeft: 10, color: 'red' }}>4,400,000đ/người/tháng</p>  <br />
+            </div>
+
+          </Modal>
+          <div className="App" style={{ paddingTop: '1%', paddingBottom: '1%', backgroundColor: 'white', minHeight: '80vh' }}>
+
+            {/* BANNER */}
+            <p id='textBanner' style={{  fontSize: 20, fontWeight: 'bold' }}>Công cụ tính lương Gross sang Net / Net sang Gross chuẩn 2020</p>
+            <p style={{ fontWeight: 'initial', fontSize: 15,fontWeight: 520 }}>Áp dụng mức giảm trừ gia cảnh mới nhất 11 triệu đồng/tháng (132 triệu đồng/năm) với nguời nộp thuế và 4,4 triệu đồng/tháng với mỗi người phụ thuộc</p>
+            <p style={{ fontWeight: 'initial', fontSize: 15 }}> (Theo Nghị quyết số 954/2020/UBTVQH14)</p>
+
+            {/* MAIN */}
+
+            <Container >
+              <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <p style={{ fontWeight: 'bold' }}>Áp dụng quy Định:</p>
+                <p style={{ color: 'RoyalBlue', marginLeft: 10 }}>Từ 1/7/2020</p>
+                <p style={{ color: 'red', fontStyle: 'italic' }}>(Mới nhất)</p>
+                <Button style={{ fontStyle: 'italic', marginLeft: 10, borderRadius: 50, fontSize: 11, padding: 5, }} onClick={this.handlOpen}>Chi tiết</Button>
+              </div>
+              <Row style={{ width: '80vw', textAlign: 'start' }} >
+                <Col xs={12} sm={4} md={4} lg={3} xl={3} >
+                  <p style={{  fontStyle: 'italic', fontSize: 13 ,fontWeight: 545}} >Lương cơ sở: 1,490,000 VNĐ</p>
+                </Col>
+                <Col xs={12} sm={4} md={6} lg={5} xl={4} >
+                  <p style={{ fontStyle: 'italic', fontSize: 13,fontWeight: 520 }}>Giảm trừ gia cảnh bản thân: 11,000,000 VNĐ</p>
+                </Col>
+                <Col xs={12} sm={4} md={5} lg={4} xl={3} >
+                  <p style={{ fontStyle: 'italic', fontSize: 13,fontWeight: 520 }}>Người phụ thuộc: 4,400,000 VNĐ</p>
+                </Col>
               </Row>
-              <Form>
-                <Form.Item
-                  validateStatus={!this.state.insurancePremiums && this.state.isOnClicked === true && this.state.insurance === 1 ? 'error' : null}
-                  help={!this.state.insurancePremiums && this.state.isOnClicked === true && this.state.insurance === 1 ? <p style={{ textAlign: 'start', marginLeft: '20vw', fontSize: 14, width: '80vw' }}>Bạn chưa nhập tiền đóng bảo hiểm</p> : ''}
-                >
-                  <Row style={{ width: '87vw', marginTop: 20, textAlign: 'start' }} >
-                    <Col xs={5} sm={4} md={4} lg={3} xl={3}>
-                      <text style={{ fontWeight: 'bold', }}>Đóng bảo hiểm : </text>
-                    </Col>
-                    <Col xs={7} sm={4} md={4} lg={3} xl={2}>
-                      <Radio.Group onChange={this.onChangeInsurance} value={this.state.insurance} style={{ }}>
-                        
+              <div style={{ marginTop: 30, width: '100%', borderTopColor: 'black', borderTopWidth: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                <Form>
+                  <Form.Item
+                    validateStatus={!this.state.salaryTempText && this.state.isOnClicked === true ? 'error' : null}
+                    help={!this.state.salaryTempText && this.state.isOnClicked === true ? <p style={{ textAlign: 'start', marginLeft: '20vw' }}>Bạn chưa nhập lương</p> : ''}
+                  >
+                    <Row style={{ width: '87vw', textAlign: 'start' }}>
+                      <Col xs={5} sm={4} md={4} lg={3} xl={3} >
+                        <text style={{ fontWeight: 'bold' }}>Thu nhập(VNĐ) : </text>
+                      </Col>
+                      <Col xs={7} sm={4} md={4} lg={3} xl={2}>
+                        <Input placeholder="10,000,000"
+                          value={this.state.salaryTempText}
+                          style={{ borderRadius: 5 }}
+                          onChange={this.onChangeSalary}
+                          allowClear
+                          defaultValue={null}
+                          min={0}
+                        />
+                      </Col>
+                    </Row>
+                  </Form.Item>
+                </Form>
+                <Row style={{ width: '87vw', textAlign: 'start', marginTop: 20 }}>
+                  <Col xs={5} sm={4} md={4} lg={3} xl={3}>
+                    <text style={{ fontWeight: 'bold', fontSize: 14, textAlign: 'start' }}>Người phụ thuộc(Người) : </text>
+                  </Col>
+                  <Col xs={7} sm={4} md={4} lg={3} xl={2}>
+                    <Input
+                      style={{ borderRadius: 5 }}
+                      onChange={this.onChangeDependentPerson}
+                      allowClear
+                      defaultValue={0}
+                      type='number'
+                      min={0}
+                    />
+                  </Col>
+
+                </Row>
+                <Form>
+                  <Form.Item
+                    validateStatus={!this.state.insurancePremiums && this.state.isOnClicked === true && this.state.insurance === 1 ? 'error' : null}
+                    help={!this.state.insurancePremiums && this.state.isOnClicked === true && this.state.insurance === 1 ? <p style={{ textAlign: 'start', marginLeft: '20vw', fontSize: 14, width: '80vw' }}>Bạn chưa nhập tiền đóng bảo hiểm</p> : ''}
+                  >
+                    <Row style={{ width: '87vw', marginTop: 20, textAlign: 'start' }} >
+                      <Col xs={5} sm={4} md={4} lg={3} xl={3}>
+                        <text style={{ fontWeight: 'bold', }}>Đóng bảo hiểm : </text>
+                      </Col>
+                      <Col xs={7} sm={4} md={4} lg={3} xl={2}>
+                        <Radio.Group onChange={this.onChangeInsurance} value={this.state.insurance} style={{}}>
+
                           <Radio value={0}>Trên lương chính thức</Radio>
-                        
+
                           <Radio value={1}>Khác:<Input
                             placeholder={this.state.insurance !== 0 ? '1,000,000' : null}
                             style={{ borderRadius: 5, marginLeft: 2 }}
@@ -522,347 +524,350 @@ export class App extends Component {
                             value={this.state.insurancePremiumsText}
                             allowClear
                             defaultValue={null}
-                            style={{width: '70%', marginLeft: '5px'}}
+                            style={{ width: '70%', marginLeft: '5px' }}
                             disabled={this.state.insurance === 0 ? true : false}
                           /> </Radio>
-                        
-                      </Radio.Group>
-                    </Col>
-                  </Row>
-                </Form.Item>
-              </Form>
-              <Row style={{ width: '87vw', textAlign: 'start' }}>
-                <Col style={{marginTop: 10}} xs={5} sm={4} md={4} lg={3} xl={3}>
-                  <text style={{ fontWeight: 'bold' }} >Vùng <a onClick={this.showModal} style={{ fontSize: 13, color: 'RoyalBlue' }}>(Giải thích) </a>:</text>
-                </Col>
-                <Col xs={7} sm={4} md={7} lg={6} xl={6} style={{ marginLeft: '-1px' }}>
-                  <Radio.Group onChange={this.onChangeArea} value={this.state.area} >
-                    <Radio style={{ marginTop: '5px' }} value={0}>Vùng 1</Radio>
-                    <Radio style={{ marginTop: '10px' }} value={1}>Vùng 2</Radio>
-                    <Radio style={{ marginTop: '10px' }} value={2}>Vùng 3</Radio>
-                    <Radio style={{ marginTop: '10px' }} value={3}>Vùng 4</Radio>
-                  </Radio.Group>
-                </Col>
-              </Row>
 
-              <Row style={{ width: '87vw', marginTop: 20, justifyContent: 'center' }}>
-                <Col xs={6} sm={4} md={4} lg={3} xl={2} >
-                  <Button type="primary"
-                    style={{ borderRadius: 10, }}
-                    onClick={this.grosstoNet}
-                    className='btnClick'
-                  >
-                    <Icon type="calculator" style={{ fontSize: 20, marginBottom: 10 }} />
+                        </Radio.Group>
+                      </Col>
+                    </Row>
+                  </Form.Item>
+                </Form>
+                <Row style={{ width: '87vw', textAlign: 'start' }}>
+                  <Col style={{ marginTop: 10 }} xs={5} sm={4} md={4} lg={3} xl={3}>
+                    <text style={{ fontWeight: 'bold' }} >Vùng <a onClick={this.showModal} style={{ fontSize: 13, color: 'RoyalBlue' }}>(Giải thích) </a>:</text>
+                  </Col>
+                  <Col xs={7} sm={4} md={7} lg={6} xl={6} style={{ marginLeft: '-1px' }}>
+                    <Radio.Group onChange={this.onChangeArea} value={this.state.area} >
+                      <Radio style={{ marginTop: '5px' }} value={0}>Vùng 1</Radio>
+                      <Radio style={{ marginTop: '10px' }} value={1}>Vùng 2</Radio>
+                      <Radio style={{ marginTop: '10px' }} value={2}>Vùng 3</Radio>
+                      <Radio style={{ marginTop: '10px' }} value={3}>Vùng 4</Radio>
+                    </Radio.Group>
+                  </Col>
+                </Row>
+
+                <Row style={{ width: '87vw', marginTop: 20, justifyContent: 'center' }}>
+                  <Col xs={6} sm={4} md={4} lg={3} xl={2} >
+                    <Button type="primary"
+                      style={{ borderRadius: 10, }}
+                      onClick={this.grosstoNet}
+                      className='btnClick'
+                    >
+                      <Icon type="calculator" style={{ fontSize: 20, marginBottom: 10 }} />
                     Gross to Net
                   </Button>
-                </Col>
-                <Col xs={6} sm={4} md={4} lg={3} xl={2}>
-                  <Button type="primary"
-                    style={{ borderRadius: 10, }}
-                    onClick={this.CalcNetToGross}
-                    className='btnClick'
+                  </Col>
+                  <Col xs={6} sm={4} md={4} lg={3} xl={2}>
+                    <Button type="primary"
+                      style={{ borderRadius: 10, }}
+                      onClick={this.CalcNetToGross}
+                      className='btnClick'
 
-                  >
-                    <Icon type="appstore" style={{ fontSize: 20, marginBottom: 10 }} />
+                    >
+                      <Icon type="appstore" style={{ fontSize: 20, marginBottom: 10 }} />
                     Net to Gross
                   </Button>
-                </Col>
-              </Row>
+                  </Col>
+                </Row>
 
-            </div>
-          </Container>
-          {/* TABLE SALARY/ */}
-
-
-          {(this.state.isOnClicked === true && this.state.salaryGross) ?
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 20 }}>
-              <div style={{ display: "flex", flexDirection: 'row', width: '90%', backgroundColor: 'Gainsboro' }}>
-                <div className="table1">
-                  <p>Lương Gross</p>
-                </div>
-                <div className="table1">
-                  <p>Bảo hiểm</p>
-                </div>
-                <div className="table1">
-                  <p>Thuế TNCN</p>
-                </div>
-                <div className="table1">
-                  <p>Lương Net</p>
-                </div>
               </div>
-              <div style={{ display: "flex", flexDirection: 'row', width: '90%' }}>
-                <div className="table2">
-                  {this.state.salaryGross ? getNumberWithDot((this.state.salaryGross).toFixed()) : 0}
+            </Container>
+            {/* TABLE SALARY/ */}
+
+
+            {(this.state.isOnClicked === true && this.state.salaryGross) ?
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 20 }}>
+                <div style={{ display: "flex", flexDirection: 'row', width: '90%', backgroundColor: 'Gainsboro' }}>
+                  <div className="table1">
+                    <p>Lương Gross</p>
+                  </div>
+                  <div className="table1">
+                    <p>Bảo hiểm</p>
+                  </div>
+                  <div className="table1">
+                    <p>Thuế TNCN</p>
+                  </div>
+                  <div className="table1">
+                    <p>Lương Net</p>
+                  </div>
                 </div>
-                <div className="table2">
-                  -  {getNumberWithDot(this.state.InsuranceMoney.toFixed())}
+                <div style={{ display: "flex", flexDirection: 'row', width: '90%' }}>
+                  <div className="table2">
+                    {this.state.salaryGross ? getNumberWithDot((this.state.salaryGross).toFixed()) : 0}
+                  </div>
+                  <div className="table2">
+                    -  {getNumberWithDot(this.state.InsuranceMoney.toFixed())}
+                  </div>
+                  <div className="table2">
+                    -  {getNumberWithDot(this.state.TaxMoney.toFixed())}
+                  </div>
+                  <div className="table2">
+                    {getNumberWithDot(this.state.salaryNet.toFixed())}
+                  </div>
                 </div>
-                <div className="table2">
-                  -  {getNumberWithDot(this.state.TaxMoney.toFixed())}
-                </div>
-                <div className="table2">
-                  {getNumberWithDot(this.state.salaryNet.toFixed())}
-                </div>
+
+                {/* Diễn giải chi tiết */}
+                {this.state.salaryTemp !== null ?
+                  <div style={{ width: '90%', marginTop: 50 }} className='text'>
+                    <p style={{ fontSize: 15, fontWeight: 'bold', color: 'DodgerBlue', textAlign: 'start' }}>Diễn giải chi tiết (VND)</p>
+
+                    <div style={{ display: 'flex', flexDirection: 'row', backgroundColor: 'Gainsboro', height: 40, alignItems: 'center', borderBottomColor: 'Gainsboro', borderWidth: 1, paddingRight: 10 }} 
+                    
+                      >
+                      <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
+                        Lương GROSS
+                  </div>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
+                        {/* {getNumberWithDot(this.state.salaryGross)} */}
+                        {this.state.salaryGross ? getNumberWithDot((this.state.salaryGross).toFixed()) : 0}
+
+                      </div>
+                    </div >
+
+                    <div style={{ display: 'flex', flexDirection: 'row', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
+                      <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
+                        Bảo hiểm xã hội (8%)
+                  </div>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
+                        - {getNumberWithDot(this.state.SocialInsurance.toFixed())}
+                      </div>
+                    </div >
+
+                    <div style={{ display: 'flex', flexDirection: 'row', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
+                      <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
+                        Bảo hiểm y tế (1.5%)
+                  </div>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
+                        - {getNumberWithDot(this.state.HealthInsurance.toFixed())}
+                      </div>
+                    </div >
+
+                    <div style={{ display: 'flex', flexDirection: 'row', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
+                      <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
+                        Bảo hiểm thất nghiệp (1%)
+                  </div>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
+                        - {getNumberWithDot(this.state.UnemploymentInsurance.toFixed())}
+                      </div>
+                    </div >
+
+                    <div style={{ display: 'flex', flexDirection: 'row', backgroundColor: 'Gainsboro', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
+                      <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
+                        Thu nhập trước thuế
+                  </div>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
+                        {getNumberWithDot(this.state.salaryBeforeTaxGross.toFixed())}
+                      </div>
+                    </div >
+
+                    <div style={{ display: 'flex', flexDirection: 'row', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
+                      <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
+                        Giảm trừ gia cảnh bản thân
+                  </div>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
+                        - {getNumberWithDot(this.state.PersonalDeductions)}
+                      </div>
+                    </div >
+
+                    <div style={{ display: 'flex', flexDirection: 'row', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
+                      <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
+                        Giảm trừ gia cảnh người phụ thuộc
+                  </div>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
+                        - {getNumberWithDot(this.state.dependentPerson * 4400000)}
+                      </div>
+                    </div >
+
+                    <div style={{ display: 'flex', flexDirection: 'row', backgroundColor: 'Gainsboro', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
+                      <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
+                        Thu nhập chịu thuế
+                  </div>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
+                        {getNumberWithDot((this.state.IncomeBeforeTax > 0 ? this.state.IncomeBeforeTax : 0).toFixed())}
+                      </div>
+                    </div >
+
+                    <div style={{ display: 'flex', flexDirection: 'row', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
+                      <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
+                        Thuế thu nhập cá nhân(*)
+                  </div>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
+                        - {getNumberWithDot(this.state.TaxMoney.toFixed())}
+                      </div>
+                    </div >
+
+                    <div style={{ display: 'flex', flexDirection: 'row', backgroundColor: 'Gainsboro', alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
+                      <div style={{ flex: 3, textAlign: 'end', fontSize: 15, flexDirection: 'column' }}>
+                        <p style={{ fontWeight: 'bold' }}>Lương NET</p>
+                        <p style={{ marginTop: -20 }}>(Thu nhập trước thuế - Thuế thu nhập cá nhân) </p>
+                      </div>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
+                        {getNumberWithDot(this.state.salaryNet.toFixed())}
+                      </div>
+                    </div >
+
+                    {/* Chi tiết thuế thu nhập cá nhân (VNĐ) */}
+                    <p style={{ fontSize: 15, fontWeight: 'bold', color: 'DodgerBlue', marginTop: 50, textAlign: 'start' }}>(*) Chi tiết thuế thu nhập cá nhân (VNĐ)</p>
+                    <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 40, backgroundColor: 'Gainsboro', alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
+                      <div style={{ flex: 3, fontSize: 15, flexDirection: 'column', fontWeight: 'bold' }}>
+                        Mức chịu thuế
+                    </div>
+                      <div style={{ flex: 3, fontWeight: 'bold', alignItems: 'flex-end' }}>
+                        Thuế suất
+                    </div>
+                      <div style={{ flex: 2, fontWeight: 'bold' }}>
+                        Tiền nộp
+                    </div>
+                    </div >
+
+                    <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} className='number'>
+                      <div style={{ flex: 3, fontSize: 15, flexDirection: 'column' }}>
+                        Đến 5 triệu VNĐ
+                    </div>
+                      <div style={{ flex: 3, padding: '5px' }}>
+                        5%
+                    </div>
+                      <div style={{ flex: 2, minWidth: '100px' }}>
+                        {getNumberWithDot((this.state.TaxMoney <= 0 ? 0 : (this.state.TaxMoney > 0 && this.state.TaxMoney <= 250000 ? this.state.TaxMoney : 250000)).toFixed())}
+                      </div>
+                    </div >
+
+                    <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 50, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} className='number'>
+                      <div style={{ flex: 3, fontSize: 15, flexDirection: 'column' }}>
+                        Trên 5 đến 10 triệu VNĐ
+                    </div>
+                      <div style={{ flex: 3 }}>
+                        10%
+                    </div>
+                      <div style={{ flex: 2, minWidth: '100px' }}>
+                        {getNumberWithDot((this.state.TaxMoney <= 250000 ? 0 : (this.state.TaxMoney > 250000 && this.state.TaxMoney <= 750000 ? this.state.TaxMoney - 250000 : 500000)).toFixed())}
+                      </div>
+                    </div >
+
+                    <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 50, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} className='number'>
+                      <div style={{ flex: 3, fontSize: 15, flexDirection: 'column' }}>
+                        Trên 10 đến 18 triệu VNĐ
+                    </div>
+                      <div style={{ flex: 3 }}>
+                        15%
+                    </div>
+                      <div style={{ flex: 2, minWidth: '100px' }}>
+                        {getNumberWithDot((this.state.TaxMoney <= 750000 ? 0 : (this.state.TaxMoney > 750000 && this.state.TaxMoney <= 1950000 ? this.state.TaxMoney - 750000 : 1200000)).toFixed())}
+                      </div>
+                    </div >
+
+                    <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 50, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} className='number'>
+                      <div style={{ flex: 3, fontSize: 15, flexDirection: 'column' }}>
+                        Trên 18 đến 32 triệu VNĐ
+                    </div>
+                      <div style={{ flex: 3 }}>
+                        20%
+                    </div>
+                      <div style={{ flex: 2, minWidth: '100px' }}>
+                        {getNumberWithDot((this.state.TaxMoney <= 1950000 ? 0 : (this.state.TaxMoney > 1950000 && this.state.TaxMoney <= 4750000 ? this.state.TaxMoney - 1950000 : 2800000)).toFixed())}
+                      </div>
+                    </div >
+
+                    <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 50, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} className='number'>
+                      <div style={{ flex: 3, fontSize: 15, flexDirection: 'column' }}>
+                        Trên 32 đến 52 triệu VNĐ
+                    </div>
+                      <div style={{ flex: 3 }}>
+                        25%
+                    </div>
+                      <div style={{ flex: 2, minWidth: '100px' }}>
+                        {getNumberWithDot((this.state.TaxMoney <= 4750000 ? 0 : (this.state.TaxMoney > 4750000 && this.state.TaxMoney <= 9750000 ? this.state.TaxMoney - 4750000 : 5000000)).toFixed())}
+                      </div>
+                    </div >
+
+                    <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 50, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} className='number'>
+                      <div style={{ flex: 3, fontSize: 15, flexDirection: 'column' }}>
+                        Trên 52 đến 80 triệu VNĐ
+                    </div>
+                      <div style={{ flex: 3 }}>
+                        30%
+                    </div>
+                      <div style={{ flex: 2, minWidth: '100px' }}>
+                        {getNumberWithDot((this.state.TaxMoney <= 9750000 ? 0 : (this.state.TaxMoney > 9750000 && this.state.TaxMoney <= 18150000 ? this.state.TaxMoney - 9750000 : 8400000)).toFixed())}
+                      </div>
+                    </div >
+
+                    <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 50, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} className='number'>
+                      <div style={{ flex: 3, fontSize: 15, flexDirection: 'column' }}>
+                        Trên 80 triệu VNĐ
+                    </div>
+                      <div style={{ flex: 3 }}>
+                        35%
+                    </div>
+                      <div style={{ flex: 2, minWidth: '100px' }}>
+                        {getNumberWithDot((this.state.TaxMoney <= 18150000 ? 0 : (this.state.TaxMoney > 18150000 ? this.state.TaxMoney - 18150000 : 0)).toFixed())}
+                      </div>
+                    </div >
+
+                    {/* Người sử dụng lao động trả */}
+                    <p style={{ fontSize: 15, fontWeight: 'bold', color: 'DodgerBlue', marginTop: 50, textAlign: 'start' }}>Người sử dụng lao động trả (VNĐ)</p>
+                    <div style={{ display: 'flex', flexDirection: 'row', backgroundColor: 'Gainsboro', height: 40, alignItems: 'center', borderBottomColor: 'Gainsboro', borderWidth: 1, paddingRight: 10 }} >
+                      <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
+                        Lương GROSS
+                  </div>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
+                        {/* {getNumberWithDot(this.state.salaryGross)} */}
+                        {this.state.salaryGross ? getNumberWithDot((this.state.salaryGross).toFixed()) : 0}
+
+                      </div>
+                    </div >
+
+                    <div style={{ display: 'flex', flexDirection: 'row', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
+                      <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
+                        Bảo hiểm xã hội (17%)
+                  </div>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
+                        + {getNumberWithDot(this.state.SocialInsuranceAfterTax)}
+                      </div>
+                    </div >
+
+                    <div style={{ display: 'flex', flexDirection: 'row', height: 60, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
+                      <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
+                        Bảo hiểm Tai nạn lao động - Bệnh nghề nghiệp (0.5%)
+                  </div>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
+                        + {getNumberWithDot(this.state.HealthInsuranceAfterTax)}
+                      </div>
+                    </div >
+
+                    <div style={{ display: 'flex', flexDirection: 'row', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
+                      <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
+                        Bảo hiểm y tế (3%)
+                  </div>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
+                        + {getNumberWithDot(this.state.UnemploymentInsuranceAfterTax)}
+                      </div>
+                    </div >
+
+                    <div style={{ display: 'flex', flexDirection: 'row', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
+                      <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
+                        Bảo hiểm thất nghiệp (1%)
+                  </div>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
+                        + {getNumberWithDot(this.state.LaborAccidentInsurance)}
+                      </div>
+                    </div >
+
+                    <div style={{ display: 'flex', flexDirection: 'row', backgroundColor: 'Gainsboro', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
+                      <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
+                        Tổng cộng
+                  </div>
+                      <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }} className='number'>
+                        {getNumberWithDot(this.state.IncomeAfterTax)}
+                      </div>
+                    </div >
+                  </div> : null}
               </div>
-
-              {/* Diễn giải chi tiết */}
-              {this.state.salaryTemp !== null ?
-                <div style={{ width: '90%', marginTop: 50 }}>
-                  <p style={{ fontSize: 15, fontWeight: 'bold', color: 'blueviolet', textAlign: 'start' }}>Diễn giải chi tiết (VND)</p>
-
-                  <div style={{ display: 'flex', flexDirection: 'row', backgroundColor: 'Gainsboro', height: 40, alignItems: 'center', borderBottomColor: 'Gainsboro', borderWidth: 1, paddingRight: 10 }} >
-                    <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
-                      Lương GROSS
-                  </div>
-                    <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
-                      {/* {getNumberWithDot(this.state.salaryGross)} */}
-                      {this.state.salaryGross ? getNumberWithDot((this.state.salaryGross).toFixed()) : 0}
-
-                    </div>
-                  </div >
-
-                  <div style={{ display: 'flex', flexDirection: 'row', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
-                    <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
-                      Bảo hiểm xã hội (8%)
-                  </div>
-                    <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
-                      - {getNumberWithDot(this.state.SocialInsurance.toFixed())}
-                    </div>
-                  </div >
-
-                  <div style={{ display: 'flex', flexDirection: 'row', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
-                    <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
-                      Bảo hiểm y tế (1.5%)
-                  </div>
-                    <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
-                      - {getNumberWithDot(this.state.HealthInsurance.toFixed())}
-                    </div>
-                  </div >
-
-                  <div style={{ display: 'flex', flexDirection: 'row', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
-                    <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
-                      Bảo hiểm thất nghiệp (1%)
-                  </div>
-                    <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
-                      - {getNumberWithDot(this.state.UnemploymentInsurance.toFixed())}
-                    </div>
-                  </div >
-
-                  <div style={{ display: 'flex', flexDirection: 'row', backgroundColor: 'Gainsboro', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
-                    <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
-                      Thu nhập trước thuế
-                  </div>
-                    <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
-                      {getNumberWithDot(this.state.salaryBeforeTaxGross.toFixed())}
-                    </div>
-                  </div >
-
-                  <div style={{ display: 'flex', flexDirection: 'row', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
-                    <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
-                      Giảm trừ gia cảnh bản thân
-                  </div>
-                    <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
-                      - {getNumberWithDot(this.state.PersonalDeductions)}
-                    </div>
-                  </div >
-
-                  <div style={{ display: 'flex', flexDirection: 'row', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
-                    <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
-                      Giảm trừ gia cảnh người phụ thuộc
-                  </div>
-                    <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
-                      - {getNumberWithDot(this.state.dependentPerson * 4400000)}
-                    </div>
-                  </div >
-
-                  <div style={{ display: 'flex', flexDirection: 'row', backgroundColor: 'Gainsboro', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
-                    <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
-                      Thu nhập chịu thuế
-                  </div>
-                    <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
-                      {getNumberWithDot((this.state.IncomeBeforeTax > 0 ? this.state.IncomeBeforeTax : 0).toFixed())}
-                    </div>
-                  </div >
-
-                  <div style={{ display: 'flex', flexDirection: 'row', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
-                    <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
-                      Thuế thu nhập cá nhân(*)
-                  </div>
-                    <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
-                      - {getNumberWithDot(this.state.TaxMoney.toFixed())}
-                    </div>
-                  </div >
-
-                  <div style={{ display: 'flex', flexDirection: 'row', backgroundColor: 'Gainsboro', alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
-                    <div style={{ flex: 3, textAlign: 'end', fontSize: 15, flexDirection: 'column' }}>
-                      <p style={{ fontWeight: 'bold' }}>Lương NET</p>
-                      <p style={{ marginTop: -20 }}>(Thu nhập trước thuế - Thuế thu nhập cá nhân) </p>
-                    </div>
-                    <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
-                      {getNumberWithDot(this.state.salaryNet.toFixed())}
-                    </div>
-                  </div >
-
-                  {/* Chi tiết thuế thu nhập cá nhân (VNĐ) */}
-                  <p style={{ fontSize: 15, fontWeight: 'bold', color: 'blueviolet', marginTop: 50, textAlign: 'start' }}>(*) Chi tiết thuế thu nhập cá nhân (VNĐ)</p>
-                  <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 40, backgroundColor: 'Gainsboro', alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
-                    <div style={{ flex: 3, fontSize: 15, flexDirection: 'column', fontWeight: 'bold' }}>
-                      Mức chịu thuế
-                    </div>
-                    <div style={{ flex: 3, fontWeight: 'bold', alignItems: 'flex-end' }}>
-                      Thuế suất
-                    </div>
-                    <div style={{ flex: 2, fontWeight: 'bold' }}>
-                      Tiền nộp
-                    </div>
-                  </div >
-
-                  <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
-                    <div style={{ flex: 3, fontSize: 15, flexDirection: 'column' }}>
-                      Đến 5 triệu VNĐ
-                    </div>
-                    <div style={{ flex: 3, padding: '5px' }}>
-                      5%
-                    </div>
-                    <div style={{ flex: 2, minWidth: '100px' }}>
-                      {getNumberWithDot((this.state.TaxMoney <= 0 ? 0 : (this.state.TaxMoney > 0 && this.state.TaxMoney <= 250000 ? this.state.TaxMoney : 250000)).toFixed())}
-                    </div>
-                  </div >
-
-                  <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 50, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
-                    <div style={{ flex: 3, fontSize: 15, flexDirection: 'column' }}>
-                      Trên 5 đến 10 triệu VNĐ
-                    </div>
-                    <div style={{ flex: 3 }}>
-                      10%
-                    </div>
-                    <div style={{ flex: 2, minWidth: '100px' }}>
-                      {getNumberWithDot((this.state.TaxMoney <= 250000 ? 0 : (this.state.TaxMoney > 250000 && this.state.TaxMoney <= 750000 ? this.state.TaxMoney - 250000 : 500000)).toFixed())}
-                    </div>
-                  </div >
-
-                  <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 50, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
-                    <div style={{ flex: 3, fontSize: 15, flexDirection: 'column' }}>
-                      Trên 10 đến 18 triệu VNĐ
-                    </div>
-                    <div style={{ flex: 3 }}>
-                      15%
-                    </div>
-                    <div style={{ flex: 2, minWidth: '100px' }}>
-                      {getNumberWithDot((this.state.TaxMoney <= 750000 ? 0 : (this.state.TaxMoney > 750000 && this.state.TaxMoney <= 1950000 ? this.state.TaxMoney - 750000 : 1200000)).toFixed())}
-                    </div>
-                  </div >
-
-                  <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 50, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
-                    <div style={{ flex: 3, fontSize: 15, flexDirection: 'column' }}>
-                      Trên 18 đến 32 triệu VNĐ
-                    </div>
-                    <div style={{ flex: 3 }}>
-                      20%
-                    </div>
-                    <div style={{ flex: 2, minWidth: '100px' }}>
-                      {getNumberWithDot((this.state.TaxMoney <= 1950000 ? 0 : (this.state.TaxMoney > 1950000 && this.state.TaxMoney <= 4750000 ? this.state.TaxMoney - 1950000 : 2800000)).toFixed())}
-                    </div>
-                  </div >
-
-                  <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 50, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
-                    <div style={{ flex: 3, fontSize: 15, flexDirection: 'column' }}>
-                      Trên 32 đến 52 triệu VNĐ
-                    </div>
-                    <div style={{ flex: 3 }}>
-                      25%
-                    </div>
-                    <div style={{ flex: 2, minWidth: '100px' }}>
-                      {getNumberWithDot((this.state.TaxMoney <= 4750000 ? 0 : (this.state.TaxMoney > 4750000 && this.state.TaxMoney <= 9750000 ? this.state.TaxMoney - 4750000 : 5000000)).toFixed())}
-                    </div>
-                  </div >
-
-                  <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 50, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
-                    <div style={{ flex: 3, fontSize: 15, flexDirection: 'column' }}>
-                      Trên 52 đến 80 triệu VNĐ
-                    </div>
-                    <div style={{ flex: 3 }}>
-                      30%
-                    </div>
-                    <div style={{ flex: 2, minWidth: '100px' }}>
-                      {getNumberWithDot((this.state.TaxMoney <= 9750000 ? 0 : (this.state.TaxMoney > 9750000 && this.state.TaxMoney <= 18150000 ? this.state.TaxMoney - 9750000 : 8400000)).toFixed())}
-                    </div>
-                  </div >
-
-                  <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'end', height: 50, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
-                    <div style={{ flex: 3, fontSize: 15, flexDirection: 'column' }}>
-                      Trên 80 triệu VNĐ
-                    </div>
-                    <div style={{ flex: 3 }}>
-                      35%
-                    </div>
-                    <div style={{ flex: 2, minWidth: '100px' }}>
-                      {getNumberWithDot((this.state.TaxMoney <= 18150000 ? 0 : (this.state.TaxMoney > 18150000 ? this.state.TaxMoney - 18150000 : 0)).toFixed())}
-                    </div>
-                  </div >
-
-                  {/* Người sử dụng lao động trả */}
-                  <p style={{ fontSize: 15, fontWeight: 'bold', color: 'blueviolet', marginTop: 50, textAlign: 'start' }}>Người sử dụng lao động trả (VNĐ)</p>
-                  <div style={{ display: 'flex', flexDirection: 'row', backgroundColor: 'Gainsboro', height: 40, alignItems: 'center', borderBottomColor: 'Gainsboro', borderWidth: 1, paddingRight: 10 }} >
-                    <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
-                      Lương GROSS
-                  </div>
-                    <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
-                      {/* {getNumberWithDot(this.state.salaryGross)} */}
-                      {this.state.salaryGross ? getNumberWithDot((this.state.salaryGross).toFixed()) : 0}
-
-                    </div>
-                  </div >
-
-                  <div style={{ display: 'flex', flexDirection: 'row', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
-                    <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
-                      Bảo hiểm xã hội (17%)
-                  </div>
-                    <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
-                      + {getNumberWithDot(this.state.SocialInsuranceAfterTax)}
-                    </div>
-                  </div >
-
-                  <div style={{ display: 'flex', flexDirection: 'row', height: 60, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
-                    <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
-                      Bảo hiểm Tai nạn lao động - Bệnh nghề nghiệp (0.5%)
-                  </div>
-                    <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
-                      + {getNumberWithDot(this.state.HealthInsuranceAfterTax)}
-                    </div>
-                  </div >
-
-                  <div style={{ display: 'flex', flexDirection: 'row', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
-                    <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
-                      Bảo hiểm y tế (3%)
-                  </div>
-                    <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
-                      + {getNumberWithDot(this.state.UnemploymentInsuranceAfterTax)}
-                    </div>
-                  </div >
-
-                  <div style={{ display: 'flex', flexDirection: 'row', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
-                    <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
-                      Bảo hiểm thất nghiệp (1%)
-                  </div>
-                    <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
-                      + {getNumberWithDot(this.state.LaborAccidentInsurance)}
-                    </div>
-                  </div >
-
-                  <div style={{ display: 'flex', flexDirection: 'row', backgroundColor: 'Gainsboro', height: 40, alignItems: 'center', borderBottom: '1px solid Gainsboro', paddingRight: 10 }} >
-                    <div style={{ flex: 3, textAlign: 'end', fontSize: 15, fontWeight: 'bold' }}>
-                      Tổng cộng
-                  </div>
-                    <div style={{ flex: 1, textAlign: 'end', minWidth: '100px' }}>
-                      {getNumberWithDot(this.state.IncomeAfterTax)}
-                    </div>
-                  </div >
-                </div> : null}
-            </div>
-            : this.openNotificationn}
-        </div>
-      </div >
+              : this.openNotificationn}
+          </div>
+        </div >
+      </Layout>
     );
   }
 }

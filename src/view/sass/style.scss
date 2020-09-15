@@ -135,12 +135,13 @@ code {
   // box-shadow: 0 1px 4px 0px rgba(0,0,0,0.35);
   overflow: hidden;
   border: solid $color_border 1px;
-
+  
   image {
     object-fit: cover;
     width: 100%;
     border-radius: 10px;
   }
+  box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;
 }
 
 .link-em {
@@ -3741,4 +3742,14 @@ html {
 }
 .ant-avatar-circle {
   border: unset !important;
+}
+
+// .ant-rate ant-rate-disabled{
+//   margin-left: 15px;
+// }
+.star-rating{
+  margin-left: 15px;
+}
+.job-detail-content .job-header .company-header .d_j_t i{
+  padding-top: 10px;
 }

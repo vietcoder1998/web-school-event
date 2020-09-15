@@ -128,16 +128,19 @@ class HistoryApply extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                                             </Tooltip> */}
                                                             </div>
                                                             <div className='content-job'>
-                                                                <Link
-                                                                    onClick={() => {
-                                                                        // this.props.setEventID(null)
-                                                                        if (item.job.schoolEventID) {
-                                                                            window.open(`/event-job-detail/${window.btoa(item.job && item.job.id)}?data=${window.btoa('eventID=' + item.job.schoolEventID)}`)
-                                                                        } else {
-                                                                            window.open(`/job-detail/${window.btoa(item.job && item.job.id)}`)
-                                                                        }
-                                                                    }}
-                                                                >{item.job && item.job.jobTitle}</Link>
+                                                                <div style={{}} className='job-content'>
+                                                                    <Link
+
+                                                                        onClick={() => {
+                                                                            // this.props.setEventID(null)
+                                                                            if (item.job.schoolEventID) {
+                                                                                window.open(`/event-job-detail/${window.btoa(item.job && item.job.id)}?data=${window.btoa('eventID=' + item.job.schoolEventID)}`)
+                                                                            } else {
+                                                                                window.open(`/job-detail/${window.btoa(item.job && item.job.id)}`)
+                                                                            }
+                                                                        }}
+                                                                    >{item.job && item.job.jobTitle}</Link>
+                                                                </div>
                                                                 <div className='info-company'>
                                                                     <li>
                                                                         <Link to={`/employer/${window.btoa(item.job && item.job.employerID)}`}><Icon type="home" style={{ marginRight: 3 }} />{item.job && item.job.employerName}</Link>
@@ -170,7 +173,7 @@ class HistoryApply extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                                             </div>
                                                         </div>
                                                     </Col>)
-                                                }) : <Empty style={{ padding: '15vh' }} description={<b>Bạn chưa có ứng tuyển nào</b>}/>}
+                                                }) : <Empty style={{ padding: '15vh' }} description={<b>Bạn chưa có ứng tuyển nào</b>} />}
                                             </Row>
                                         }
                                         <div className='pagination-result'>
