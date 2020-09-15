@@ -32,7 +32,7 @@ export const TYPE = {
     TOOLS: "tools",
     EXPERIENCE: "experience",
     PICTURE: "picture",
-    DEFAULT_IMAGE: "https://i.vdoc.vn/data/image/2019/07/15/anh-bia-dep-cay-coi.jpg",
+    DEFAULT_IMAGE: "https://storage.googleapis.com/worksvn-prod.appspot.com/static/images/cover.jpg",
     DEFAULT_AVATAR: "https://www.kindpng.com/picc/m/269-2697881_computer-icons-user-clip-art-transparent-png-icon.png",
     AVATAR: "avatar",
     COVER: "cover",
