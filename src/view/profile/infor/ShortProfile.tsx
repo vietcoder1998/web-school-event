@@ -1,7 +1,7 @@
 import React from "react";
 import { timeConverter } from "../../../utils/convertTime";
 import { connect } from "react-redux";
-import { Progress, Icon, Tooltip, Modal, notification, Empty } from "antd";
+import { Progress, Icon, Tooltip, Modal, notification, Empty,  } from "antd";
 import { LiCopy } from './../../layout/common/Common';
 import { TYPE } from './../../../const/type';
 import ModalImage from "react-modal-image";
@@ -9,6 +9,7 @@ import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import { sendFileHeader } from './../../../services/auth';
 import axios from 'axios';
+// import {image} from './full-size-icon.png'
 
 function GetDate(dateRaw) {
   var date = new Date(dateRaw);
@@ -258,8 +259,8 @@ function ShortProfile(props?: { personalInfo?: any }) {
         </div>
         <div className="img-modal-show">
           <ModalImage
-            small={!avatarUrl ? TYPE.DEFAULT_IMAGE : avatarUrl}
-            large={!avatarUrl ? TYPE.DEFAULT_IMAGE : avatarUrl}
+            small={!avatarUrl ? TYPE.DEFAULT_AVATAR : avatarUrl}
+            large={!avatarUrl ? TYPE.DEFAULT_AVATAR : avatarUrl}
           />
           
         </div>
