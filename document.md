@@ -68,6 +68,11 @@ h3 VIEW: gồm các file chứa các router của app. Chú ý một số file s
    const EventHome = loadMeta(() =>
    import("./event").then((module) => module.default)
    );
+3. routes: Chứa 2 file ErrorBoudary và LoadMeta.
+
+- ErrorBoudary: giúp hiện lỗi nhưng không crash app. Chi tiết tại https://reactjs.org/docs/error-boundaries.html
+- LoadMeta: Chưa nghiên cứu
+- Nhớ là quản lý data lấy từ api đều bằng redux nên cần đọc kỹ code trước khi làm.
 
 Các file ngoài:
 h3 .gitgnore: Các file mình không muốn đưa lên git bằng lệnh push
