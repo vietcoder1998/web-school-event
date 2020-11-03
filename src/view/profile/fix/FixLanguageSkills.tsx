@@ -66,6 +66,7 @@ class FixLanguageSkills extends Component<IProps, IState> {
 
     _createRequest = () => {
         this.requestServer(this.props.method);
+        
     }
 
     async requestServer(method) {

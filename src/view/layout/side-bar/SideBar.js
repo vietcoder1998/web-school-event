@@ -50,7 +50,8 @@ class SideBar extends Component {
                                 <li><a href={'/'}><Icon type="home" />Trang chủ</a></li>
                                 <li><a href='/event' style={{ display: eventStart === false ? 'none' : window.location.pathname === '/' ? "none" : '' }}><Icon type="tags" />Sự kiện</a></li>
             
-                                
+                                <li style={{ display: isAuthen ? 'block' : 'none' }}><a href='/gross-to-net'><Icon type="dollar" /><label className='text-icon'>Công cụ tính lương</label></a></li>
+
                                 <li style={{ color: 'gray', cursor: 'not-allowed', opacity: 0.5, pointerEvents: 'none' }}><a href='/'><Icon type="user-add" />Tạo CV</a></li>
                                 <li style={{ display: isAuthen ? 'block' : 'none' }}><a href='/result'><Icon type="search" /><label className='text-icon'>Tìm việc</label></a></li>
 

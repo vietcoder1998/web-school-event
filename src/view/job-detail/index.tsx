@@ -473,7 +473,11 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
 
                   {/* Cover Image */}
                   <div className="cover-image-job ">
-                    <Link to={`/employer/${btoa(employerDetail.employerID)}`}>
+                    {/* <Link to={`/employer/${btoa(employerDetail.employerID)}`}> */}
+                    <Link to={`/employer/${window.btoa(employerDetail.id)}${param}`}
+                     target="_blank"
+                     style={{ fontSize: "1.05em", fontWeight: 450 }}
+                    >
                       <LazyLoadImage
                         alt={employerDetail && employerDetail.employerName}
                         src={testImage(coverUrl)}
@@ -501,9 +505,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                             <Icon type="home" style={{ color: "#168ECD" }} />
                             <label>
                               <Link
-                                to={`/employer/${window.btoa(
-                                  employerDetail.id
-                                )}${param}`}
+                                to={`/employer/${window.btoa(employerDetail.id)}${param}`}
                                 target="_blank"
                                 style={{ fontSize: "1.05em", fontWeight: 450 }}
                               >

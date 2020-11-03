@@ -18,6 +18,7 @@ interface IProps {
   location?: any;
   marker?: any;
   _fixData?: (params?: string) => any;
+  getData?: any;
 }
 
 interface IState {
@@ -27,6 +28,7 @@ interface IState {
   identityCardBack?: any;
   personalInfo?: any;
   show_popup?: boolean;
+  loading?: boolean;
 }
 
 class FixPerson extends Component<IProps, IState> {
@@ -38,7 +40,8 @@ class FixPerson extends Component<IProps, IState> {
       identityCardBackUrl: "",
       identityCardBack: "",
       personalInfo: null,
-      show_popup: false
+      show_popup: false,
+      loading: false
     };
   }
 
@@ -105,6 +108,7 @@ class FixPerson extends Component<IProps, IState> {
   _createRequest = async () => {
     let { identityCardBack, identityCardFront } = this.state;
     if (identityCardBack !== "" || identityCardFront !== "") {
+      this.setState({loading: true})
       let form = new FormData();
       form.append("front", identityCardFront);
       form.append("back", identityCardBack);
@@ -116,6 +120,8 @@ class FixPerson extends Component<IProps, IState> {
         sendFileHeader
       );
     }
+    await this.props.getData();
+    await this.setState({loading: false})
     await this.props._fixData("picture");
     // window.location.reload();
   };
@@ -208,7 +214,7 @@ class FixPerson extends Component<IProps, IState> {
               icon="save"
               onClick={() => this._createRequest()}
             >
-              Lưu
+              {this.state.loading ? <Icon type="loading" /> : 'Lưu'}
             </Button>
           </Col>
         </Row>

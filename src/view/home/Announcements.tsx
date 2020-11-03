@@ -117,8 +117,8 @@ function Announcements(props?: IProps) {
                                             <Card
                                                 hoverable
                                                 cover={
-                                                    <div style={{ height: 300, overflow: "hidden" }}>
-                                                        <img width={'100%'} style={{ minHeight: '100%' }} alt="example" src={item.imageUrl} />
+                                                    <div style={{ height: 200, overflow: "hidden" }}>
+                                                        <img width={'100%'} style={{ minHeight: '100%', objectFit: 'cover' }} alt="example" src={item.imageUrl} />
                                                     </div>
                                                 }
                                                 // actions={
@@ -150,7 +150,7 @@ function Announcements(props?: IProps) {
                                                             marginBottom: "5px", 
                                                             textTransform: 'uppercase' 
                                                         }}> 
-                                                        <LinkToolTip  name={limitString(item.title, 30)} title={item.title}/>
+                                                        <LinkToolTip  name={item.title} title={item.title}/>
                                                         </div>
                                                         <div className="data_card" style={{ color: '#3a3a3a' }}>{limitString(item.previewContent, 50)} </div>
                                                         <div style={{ fontStyle: 'italic', fontSize: '0.9em', marginTop: 5, textDecoration: 'underline', color: 'rgb(99, 99, 99)' }}>Xem thêm&gt;&gt;</div>

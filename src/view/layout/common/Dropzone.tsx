@@ -135,7 +135,7 @@ export const Dropzone = (props?: { onCallSuccess?: Function }) => {
                 },
             }).then((res) => {
                 if (res) {
-                    notification.success({ message: 'upload cv thành công' });
+                    notification.success({ message: 'Tải lên CV thành công' });
                     setValidFiles([]);
                     let date = new Date();
                     let number = date.getTime();
@@ -166,10 +166,13 @@ export const Dropzone = (props?: { onCallSuccess?: Function }) => {
                 <p className="ant-upload-drag-icon">
                     <Icon type="inbox" />
                 </p>
-                <p className="ant-upload-text">Thêm hoặc kéo thả cv vào đây</p>
+                <p className="ant-upload-text">Thêm hoặc kéo thả CV vào đây</p>
                 <p className="ant-upload-hint">
-                    Chỉ hỗ trợ cho file PDF Tiếng Việt ( dung lượng 10-50 mb)
-                    </p>
+                    Chỉ hỗ trợ cho file PDF
+                </p>
+                <p className="ant-upload-hint">
+                    (dung lượng 0-50 MB)
+                </p>
                 <input
                     ref={fileInputRef}
                     className="file-input"
@@ -192,13 +195,13 @@ export const Dropzone = (props?: { onCallSuccess?: Function }) => {
                     )
                 }
             </div>
+            {validFiles && validFiles.length > 0 ? 
             <Button type="primary" icon="save" onClick={() => uploadFiles()}>
-                Upload cv
+                Tải lên CV
                     {
                     validFiles && validFiles.length > 0 && <span className="file-size">( {fileSize(validFiles[0].size)} )</span>
                 }
-
-            </Button>
+            </Button> : null}
         </div>
     );
 }

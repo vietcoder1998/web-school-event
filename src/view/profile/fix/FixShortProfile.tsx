@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import moment from "moment";
 import ButtonToggle from "../../helper/toggle-button/ToggleButton";
 import { sendFileHeader } from "../../../services/auth";
-import { Icon, Row, Col, Modal, Input, DatePicker, Button } from "antd";
+import { Icon, Row, Col, Modal, Input, DatePicker, Button, Form } from "antd";
 import MapContainer from "../../layout/google-maps/MapContainer";
 import { timeConverter } from "../../../utils/convertTime";
 import { REDUX_SAGA } from "../../../const/actions";
@@ -21,6 +21,7 @@ interface IProps {
   location?: any;
   marker?: any;
   _fixData?: (params?: string) => any;
+  getData?: any
 }
 
 interface IState {
@@ -36,6 +37,8 @@ interface IState {
   isLookingForJobs?: boolean;
   personalInfo?: any;
   addressChange?: any;
+  onPressSave?: boolean;
+  loading?: boolean
 }
 
 class FixPerson extends Component<IProps, IState> {
@@ -64,18 +67,22 @@ class FixPerson extends Component<IProps, IState> {
       avatarUrl: "",
       avatar: "",
       isLookingForJobs: true,
+      onPressSave: false,
+      loading: false
     };
   }
 
   async componentDidMount() {
+    console.log("onPressSave: " + this.state.onPressSave)
     let { personalInfo, address, location } = this.props;
     address = personalInfo.address;
     location = address;
     let isLookingForJobs = personalInfo.isLookingForJobs;
     let { avatarUrl } = this.state;
     avatarUrl = personalInfo.avatarUrl;
+    let newPersonalInfo = {...personalInfo}
     await this.setState({
-      personalInfo,
+      personalInfo: newPersonalInfo,
       location,
       address,
       avatarUrl,
@@ -179,8 +186,42 @@ class FixPerson extends Component<IProps, IState> {
       );
     }
     await this.props._fixData("person");
-    window.location.reload();
+    await this.props.getData()
+    await this.setState({loading: false})
+    // window.location.reload();
   };
+  checkValid() {
+    this.setState({ onPressSave: true })
+    let {personalInfo} = this.state
+    if(!personalInfo.lastName) {
+      return false
+    } 
+    else if(!personalInfo.firstName){
+      return false
+    }
+    else if(!personalInfo.address){
+      return false
+    }
+    else if(!personalInfo.phone){
+      return false
+    }
+    else if(!personalInfo.address){
+      return false
+    }
+    else if(personalInfo.birthday === -1) {
+      return false
+    }
+    return true
+    
+  }
+  onSave = () => {
+    this.setState({loading: true})
+    if(this.checkValid()) {
+      this._createRequest()
+    } else {
+      this.setState({loading: false})
+    }
+  }
   getLatLngFromMap = (lat, lng, address) => {
     let { addressChange } = this.state;
     addressChange.address = address;
@@ -191,9 +232,9 @@ class FixPerson extends Component<IProps, IState> {
     });
   };
   render() {
-    let { personalInfo } = this.props;
-    let { show_popup } = this.state;
-    let birth_day = timeConverter(personalInfo.birthday);
+    // let { personalInfo } = this.props;
+    let { show_popup, onPressSave, personalInfo } = this.state;
+    let birth_day = personalInfo.birthday !== -1 ? timeConverter(personalInfo.birthday): null;
 
     return (
       <div className="wrapper" id="person">
@@ -224,30 +265,39 @@ class FixPerson extends Component<IProps, IState> {
 
         {/* Fix Infomation */}
         <Row className="person-info">
-          {/* left div */}
-          {/* right div */}
           <Col xs={24} sm={12} span={12}>
-            <p>Họ</p>
-            <Input
-              id="lastName"
-              type="text"
-              className="input_outside"
-              placeholder="LastName"
-              value={personalInfo.lastName}
-              onChange={this._handleData}
-            />
+            <p>Họ*</p>
+            <Form style={{ width: '100%' }}>
+              <Form.Item validateStatus={!personalInfo.lastName && onPressSave ? 'error' : null} help={!personalInfo.lastName && onPressSave ? 'Chưa điền thông tin' : null}  >
+                <Input
+                  id="lastName"
+                  type="text"
+                  className="input_outside"
+                  placeholder="Họ và đệm"
+                  value={personalInfo.lastName}
+                  onChange={this._handleData}
+                />
+              </Form.Item>
+            </Form>
+
           </Col>
           <Col xs={24} sm={12} span={12}>
-            <p>Tên</p>
-            <Input
-              id="firstName"
-              type="text"
-              className="input_outside"
-              placeholder="FirstName"
-              value={personalInfo.firstName}
-              onChange={this._handleData}
-            />
+            <p>Tên*</p>
+            <Form style={{ width: '100%' }}>
+              <Form.Item validateStatus={!personalInfo.firstName && onPressSave ? 'error' : null} help={!personalInfo.firstName && onPressSave ? 'Chưa điền thông tin' : null}  >
+                <Input
+                  id="firstName"
+                  type="text"
+                  className="input_outside"
+                  placeholder="Tên"
+                  value={personalInfo.firstName}
+                  onChange={this._handleData}
+                />
+              </Form.Item>
+            </Form>
           </Col>
+        </Row>
+        <Row className="person-info">
           <Col xs={24} sm={12} span={12}>
             <ButtonToggle />
           </Col>
@@ -260,9 +310,9 @@ class FixPerson extends Component<IProps, IState> {
                 name="gender"
                 value="MALE"
                 onClick={this._handleGender}
-                defaultChecked={personalInfo.gender === "MALE" ? true : false}
-              />
-                Nam
+                checked={personalInfo.gender === "MALE" ? true : false}
+              />{" "}
+              Nam
               </label>
             <Icon type="woman" />
             <label>
@@ -271,22 +321,61 @@ class FixPerson extends Component<IProps, IState> {
                 name="gender"
                 value="FEMALE"
                 onClick={this._handleGender}
-                defaultChecked={personalInfo.gender === "MALE" ? false : true}
+                checked={personalInfo.gender === "MALE" ? false : true}
               />{" "}
-                Nữ
+              Nữ
               </label>
           </Col>
+
           <Col span={24}>
-            <p>Địa chỉ</p>
-            <Input
-              id="address"
-              type="text"
-              className="input_outside"
-              placeholder="Địa chỉ"
-              value={personalInfo.address}
-              onClick={this._openLocation}
-            />
+            <p>Địa chỉ*</p>
+            <Form style={{ width: '100%' }}>
+              <Form.Item validateStatus={!personalInfo.address && onPressSave ? 'error' : null} help={!personalInfo.address && onPressSave ? 'Chưa chọn địa chỉ' : null}  >
+                <Input
+                  id="address"
+                  type="text"
+                  className="input_outside"
+                  placeholder="Địa chỉ"
+                  value={personalInfo.address}
+                  onClick={this._openLocation}
+                />
+              </Form.Item>
+            </Form>
           </Col>
+        </Row>
+        <Row className="person-info">
+          <Col xs={24} sm={12} span={12}>
+            <p>Điện thoại*</p>
+            <Form style={{ width: '100%' }}>
+              <Form.Item validateStatus={!personalInfo.phone && onPressSave ? 'error' : null} help={!personalInfo.phone && onPressSave ? 'Chưa điền thông tin' : null}  >
+                <Input
+                  id="phone"
+                  type="text"
+                  className="input_outside"
+                  placeholder="Phone"
+                  value={personalInfo.phone}
+                  onChange={this._handleData}
+                />
+              </Form.Item>
+            </Form>
+          </Col>
+
+          <Col xs={24} sm={12} span={12}>
+            <p>Ngày sinh*</p>
+            <Form style={{ width: '100%' }}>
+              <Form.Item validateStatus={personalInfo.birthday === -1 && onPressSave ? 'error' : null} help={personalInfo.birthday === -1  && onPressSave ? 'Chưa chọn ngày sinh' : null}  >
+                <DatePicker
+                  className="input_outside"
+                  value={personalInfo.birthday !== -1 && birth_day ? moment(birth_day, 'DD/MM/YYYY') : null}
+                  format="DD-MM-YYYY"
+                  onChange={this._handleTime}
+                  placeholder="Ngày sinh"
+                />
+              </Form.Item>
+            </Form>
+          </Col>
+        </Row>
+        <Row className="person-info">
           <Col xs={24} sm={12} span={12}>
             <p>Số CMND</p>
             <Input
@@ -299,33 +388,12 @@ class FixPerson extends Component<IProps, IState> {
             />
           </Col>
           <Col xs={24} sm={12} span={12}>
-            <p>Ngày sinh</p>
-            <DatePicker
-              className="input_outside"
-              defaultValue={moment(birth_day, 'DD/MM/YYYY') ? moment(birth_day, 'DD/MM/YYYY') : null}
-              format="DD-MM-YYYY"
-              onChange={this._handleTime}
-              placeholder="Ngày sinh"
-            />
-          </Col>
-          <Col xs={24} sm={12} span={12}>
-            <p>Điện thoại</p>
-            <Input
-              id="phone"
-              type="text"
-              className="input_outside"
-              placeholder="Phone"
-              value={personalInfo.phone}
-              onChange={this._handleData}
-            />
-          </Col>
-          <Col xs={24} sm={12} span={12}>
             <p>Mã sinh viên</p>
             <Input
               id="studentCode"
               type="text"
               className="input_outside"
-              placeholder="Mục này không được để trống"
+              placeholder="Mã sinh viên"
               value={personalInfo.studentCode}
               onChange={this._handleData}
             />
@@ -348,9 +416,9 @@ class FixPerson extends Component<IProps, IState> {
             <Button
               type="primary"
               icon="save"
-              onClick={() => this._createRequest()}
+              onClick={this.onSave}
             >
-              Lưu
+              {this.state.loading ? <Icon type="loading" /> : 'Lưu'}
               </Button>
           </Col>
         </Row>

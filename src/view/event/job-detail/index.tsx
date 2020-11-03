@@ -262,7 +262,7 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
         if (res.data.success === true) {
           swal({
             buttons: {
-              cancel: "OK",
+              // cancel: "OK",
               catch: {
                 text: "Lịch sử ứng tuyển",
                 value: "catch",

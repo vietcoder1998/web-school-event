@@ -15,6 +15,7 @@ import BarLoader from "react-spinners/BarLoader";
 import qs from "query-string";
 import ReactGa from 'react-ga';
 
+
 const EventHome = loadMeta(() =>
   import("./event").then((module) => module.default)
 );
@@ -103,10 +104,16 @@ const Article = loadMeta(() =>
 );
 
 const ArticleDetail = loadMeta(() =>
-  import("./article/detail/ArticleDetail").then(
+  import("./article/detail/ArticleDetail").then( 
     (module) => module.default
   )
 );
+
+const SalaryCalculator = loadMeta(() => 
+    import("./salarycalculator/salaryCalculator").then(
+      (module) => module.default
+    )
+)
 
 
 const override = `
@@ -317,7 +324,9 @@ class App extends React.Component<IProps, IState> {
               <Route exact path="/employer/:id" component={EmInfo} />
               <Route path="/bai-viet" component={Article} />
               <Route exact path="/chi-tiet-bai-viet/:id" component={ArticleDetail} />
+              <Route exact path='/gross-to-net' component={SalaryCalculator} />
               <Route component={NotFound} />
+              
             </Switch>
           </Suspense>
         </Router>

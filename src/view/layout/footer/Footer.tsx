@@ -46,7 +46,7 @@ function Footer(props) {
             </div>
             <div>
               <label style={{ fontSize: '0.95em' }}>
-                Văn phòng: BT08-TT2, KĐT Kim văn kim lũ, Đại kim, Hoàng mai, Hà nội
+                Văn phòng: 54 Lê Văn Thiêm, Nhân Chính, Thanh Xuân, Hà Nội
                 </label>
             </div>
           </Col>
@@ -77,7 +77,7 @@ function Footer(props) {
       </div>
       {/* CopyRight */}
       <div className='copy-right'>
-        <p>Copy right @ Works.vn 2020</p>
+        <p>Copyright @ Công Ty Cổ Phần Worksvn</p>
       </div>
     </div >
   );

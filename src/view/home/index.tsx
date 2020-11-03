@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import TabSearch from "./tab-search";
 import TopJob from "./TopJob";
 import AllJob from "./AllJob";
-import TopEm from "./TopEm";
-// import Announcements from "./Announcements";
+// import TopEm from "./TopEm";
+import Announcements from "./Announcements";
 import JobExpect from "./JobExpect";
 import VideoAd from "./VideoAd";
 import { IAppState } from "../../redux/store/reducer";
@@ -21,9 +21,9 @@ function Home(props) {
         <IndayJob />
         <JobExpect />
         <TopJob />
-        <TopEm />
         <AllJob   {...props} />
         <VideoAd {...props} />
+        <Announcements  {...props} />
       </div>
     </Layout>
   );

@@ -16,10 +16,10 @@ if (process.env.NODE_ENV === 'test') {
 console.log("process.env.NODE_ENV", process.env.NODE_ENV);
 
 module.exports = {
-    
-    entry: "./src/index.js",
+
+    entry: "./src/index.tsx",
     output: {
-        path: path.join(__dirname, 'public'),
+        path: path.join(__dirname, 'dist'),
         filename: "bundle.js"
     },
     module: {
@@ -34,7 +34,19 @@ module.exports = {
                     { loader: 'css-loader', options: { sourceMap: true } },
                     { loader: 'sass-loader', options: { sourceMap: true } }
                 ],
-            }]
+            },
+            {
+                test: /\.(png|jpg|gif)$/i,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 8192,
+                        },
+                    },
+                ],
+            },
+        ]
     },
 
     plugins: [
@@ -50,9 +62,10 @@ module.exports = {
     },
 
     devtool: 'inline-source-map',
-    devServer:{
-        contentBase: path.join(__dirname, 'public'),
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
         historyApiFallback: true
     },
-    externals: [nodeExternals()]
+    externals: [nodeExternals()],
+    watch: true
 }

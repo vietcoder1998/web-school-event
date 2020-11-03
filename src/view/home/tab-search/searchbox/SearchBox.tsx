@@ -156,7 +156,7 @@ class SearchBox extends Component<IProps, IState>{
 
     async componentDidMount() {
         this.props.getRegions();
-        // this.props.getJobNames();
+        this.props.getJobNames();
         if (!this.props.area) {
             // this.setState({ area: region })
             this.props.setFilterArea({ id: 24, name: 'Hà Nội' });
@@ -607,10 +607,10 @@ class SearchBox extends Component<IProps, IState>{
                             </TabPane>
                         </Tabs>
                         <div className='search-type' style={{ margin: choose_advanced ? '0px' : '20px 0px' }}>
-                            <InputGroup 
-                                size="large" 
+                            <InputGroup
+                                size="large"
                                 compact
-                                style={{fontSize: "1.2rem"}}
+                                style={{ fontSize: "1.2rem" }}
                             >
                                 <Select
                                     showSearch={true}
@@ -672,25 +672,26 @@ class SearchBox extends Component<IProps, IState>{
                                 </Button>
                             </InputGroup>
                         </div>
-                        <div style={{ paddingTop: "25px", paddingBottom: "15px" }}>
-                            <p style={{ color: '#fff' }}>Trải nghiệm tìm việc đỉnh cao bằng ứng dụng Worksvn trên điện thoại!</p>
-                            <Row>
-                                <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12} style={{ justifyContent: 'flex-end', display: 'flex', padding: '0 15px', borderRight: '1px solid #fff' }}>
-                                    <a href={'https://apps.apple.com/vn/app/worksvn-sinh-vi%C3%AAn/id1492437454'}>
-                                        <LazyLoadImage src={AppStore} alt='AppleStore Tìm việc' height='50px' width='auto' />
-                                    </a>
+                        <div>{this.props.jobType === 'PARTTIME' ? null :
+                            <div style={{ paddingTop: "25px", paddingBottom: "15px" }}>
+                                <p style={{ color: '#fff' }}>Trải nghiệm tìm việc đỉnh cao bằng ứng dụng Worksvn trên điện thoại!</p>
+                                <Row>
+                                    <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12} style={{ justifyContent: 'flex-end', display: 'flex', padding: '0 15px', borderRight: '1px solid #fff' }}>
+                                        <a href={'https://apps.apple.com/vn/app/worksvn-sinh-vi%C3%AAn/id1492437454'}>
+                                            <LazyLoadImage src={AppStore} alt='AppleStore Tìm việc' height='50px' width='auto' />
+                                        </a>
 
-                                    <LazyLoadImage onClick={() => { this.setState({ visible: true, showQRImageType: 1 }) }} src={QRCodeAppStore} alt='AppleStore Tìm việc QRCode' height='47px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px', cursor: 'pointer' }} />
-                                </Col>
-                                <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12} style={{ justifyContent: 'flex-start', display: 'flex', padding: '0 15px' }}>
-                                    <a href={'https://play.google.com/store/apps/details?id=com.worksvn.candidate&hl=vi'}>
-                                        <LazyLoadImage src={CHPlay} alt='CHPlay Tìm việc' height='50px' width='auto' />
-                                    </a>
-                                    <LazyLoadImage onClick={() => { this.setState({ visible: true, showQRImageType: 2 }) }} src={QRCodeCHPlay} alt='CHPlay Tìm việc QRCode' height='47px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px', cursor: 'pointer' }} />
-                                </Col>
-                            </Row>
+                                        <LazyLoadImage onClick={() => { this.setState({ visible: true, showQRImageType: 1 }) }} src={QRCodeAppStore} alt='AppleStore Tìm việc QRCode' height='47px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px', cursor: 'pointer' }} />
+                                    </Col>
+                                    <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12} style={{ justifyContent: 'flex-start', display: 'flex', padding: '0 15px' }}>
+                                        <a href={'https://play.google.com/store/apps/details?id=com.worksvn.candidate&hl=vi'}>
+                                            <LazyLoadImage src={CHPlay} alt='CHPlay Tìm việc' height='50px' width='auto' />
+                                        </a>
+                                        <LazyLoadImage onClick={() => { this.setState({ visible: true, showQRImageType: 2 }) }} src={QRCodeCHPlay} alt='CHPlay Tìm việc QRCode' height='47px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px', cursor: 'pointer' }} />
+                                    </Col>
+                                </Row>
+                            </div>  }
                         </div>
-
                     </div>
                 </div>
             </>

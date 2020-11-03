@@ -3,8 +3,7 @@ import { Row, Col, Icon, Pagination, Skeleton, Tooltip } from 'antd';
 import { Link } from 'react-router-dom';
 //@ts-ignore
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { limitString } from './../../../utils/limitString';
-
+// import { limitString } from './../../../utils/limitString';
 
 interface IListHlJobProps {
     highlightData?: any;
@@ -40,15 +39,15 @@ export default class ListHlJob extends React.Component<IListHlJobProps> {
                                                         {item.jobType === 'INTERNSHIP' ? <div className='l_c' style={{ display: 'inline-block', padding: '0 2px', backgroundColor: 'rgb(255, 153, 51)', color: '#fff', fontSize: '0.7em', width: '60px', marginTop: 4 }}>InternShip</div> : null}
                                                     </div>
                                                     <ul style={{ flex: 4, marginLeft: 10, marginBottom: 0 }}>
-                                                        <li style={{ marginBottom: 5 }} >
+                                                        <li style={{ marginBottom: 5 }} className="maxline-2">
                                                             <Link to={`/job-detail/${window.btoa(item.id)}${param}`}
                                                                 target='_blank'
                                                             >
-                                                                <Icon type='fire' /> {limitString(item.jobTitle, 30) + "[HOT]"}
+                                                                <Icon type='fire' /> {item.jobTitle + " [HOT]"}
                                                             </Link>
                                                         </li>
-                                                        <li >
-                                                            <Icon type='shop' />{limitString(item.employerName, 15)}
+                                                        <li className="maxline-1">
+                                                            <Icon type='shop' />{item.employerName}
                                                         </li>
                                                         <li >
                                                             <Icon type="environment" /> {item.region.name}

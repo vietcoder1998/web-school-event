@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Col, Row, Icon, Anchor } from "antd";
+import { Col, Row, Icon, Anchor, Collapse } from "antd";
 import Layout from "../layout/Layout";
 import { Tooltip, Affix } from 'antd';
 
@@ -35,7 +35,7 @@ import Tools from './infor/Tools';
 import { Dropzone } from './../layout/common/Dropzone';
 import { TYPE } from './../../const/type';
 const { Link } = Anchor;
-
+const { Panel } = Collapse;
 interface IProps {
   personalInfo?: any;
   getData?: Function;
@@ -55,6 +55,8 @@ interface IState {
   };
   loading?: boolean;
   cvUrl?: string;
+  listActiveKeyCV?: any,
+  activeKeyCV?: any
 }
 
 class Profile extends Component<IProps, IState> {
@@ -73,6 +75,8 @@ class Profile extends Component<IProps, IState> {
       },
       loading: false,
       cvUrl: null,
+      activeKeyCV: true,
+      listActiveKeyCV: []
     };
   }
 
@@ -86,10 +90,18 @@ class Profile extends Component<IProps, IState> {
 
   async componentDidMount() {
 
-    await this.props.getData();
+    await this.props.getData(this.setActiveKeyCV, this.setActiveKeyCV2);
     this.setState({ loading: false });
   }
-
+  setActiveKeyCV= () =>  {
+    this.setState({activeKeyCV: false, listActiveKeyCV: []})
+  }
+  setActiveKeyCV2= () => {
+    this.setState({activeKeyCV: true, listActiveKeyCV: ['1']})
+  }
+  // static getDerivedStateFromProps(props, state) { 
+  //   if(props.)
+  // }
   _fixData = (id?: string) => {
     let { profileState } = this.state;
     let param = id;
@@ -101,13 +113,12 @@ class Profile extends Component<IProps, IState> {
   componentWillUnmount() {
     window.removeEventListener("scroll", () => { console.log("out scroll") })
   }
-
   render() {
     let { profileState, cvUrl } = this.state;
     return (
       <Layout disableFooterData={false}>
-        <LeftBar />
-        <div className="content">
+        {/* <LeftBar /> */}
+        <div className="content-profile">
           <Row className="profile">
             {/* Profile */}
             <Col
@@ -226,7 +237,7 @@ class Profile extends Component<IProps, IState> {
                 >
                   <Icon type={"plus"} twoToneColor={"blue"} />
                 </div>
-                <LanguageSkills />
+                <LanguageSkills/>
                 {profileState[TYPE.LANGUAGE_SKILL] ? (
                   <FixLanguageSkills _fixData={this._fixData} method={POST} />
                 ) : null}
@@ -259,7 +270,7 @@ class Profile extends Component<IProps, IState> {
                 <Tooltip title="Mục này đang tạm khóa" >
                   <div
                     className="icon-fix"
-                    // onClick={() => this._fixData(TYPE.EDUCATION)}
+                  // onClick={() => this._fixData(TYPE.EDUCATION)}
                   >
                     <Icon type={"plus"} style={{ color: "red" }} twoToneColor={"blue"} />
                   </div>
@@ -282,10 +293,28 @@ class Profile extends Component<IProps, IState> {
               xl={8}
               xxl={8}
             >
-              <Dropzone onCallSuccess={(cvUrl) => this.setState({ cvUrl }, () => this.forceUpdate())} />
-              <Affix offsetTop={5}>
+
+              <Collapse
+                expandIconPosition={'left'}
+                activeKey={this.state.listActiveKeyCV}
+                onChange={e => {
+                  this.setState({listActiveKeyCV: e})
+                  if(e.length > 0 ) {
+                    this.setState({activeKeyCV: true})
+                  } else {
+                    this.setState({activeKeyCV: false})
+                  }
+                }}
+              >
+                <Panel header={!this.props.personalInfo.personalInfo.cvUrl ? "CV cá nhân" : "Sửa CV cá nhân"} key="1" extra={this.state.activeKeyCV ? <Icon type="caret-up" /> : <Icon type="edit" /> } showArrow={false}>
+                  <Dropzone onCallSuccess={(cvUrl) => this.setState({ cvUrl }, () => this.forceUpdate())} />
+                  
+                </Panel>
+                {cvUrl || this.props.personalInfo.personalInfo.cvUrl ? <Affix  offsetTop={-105} offsetBottom={5}>
                 <CVviewer cvUrl={cvUrl ? cvUrl : this.props.personalInfo.personalInfo.cvUrl} />
-              </Affix>
+              </Affix> : null}
+              </Collapse>
+              
             </Col>
             <Col
               xs={0}
@@ -298,7 +327,7 @@ class Profile extends Component<IProps, IState> {
               <Anchor
                 showInkInFixed={true}
                 style={{
-                  marginRight: -40,
+                  marginRight: -80,
                   padding: '5px',
                   marginLeft: '5px',
                   backgroundColor: 'rgb(0,0,0,0)',
@@ -308,9 +337,9 @@ class Profile extends Component<IProps, IState> {
               >
                 <Link href="#person" title="Hồ sơ cá nhân" />
                 <Link href="#picture" title="Ảnh CMND" />
+                <Link href="#description" title="Mục tiêu nghề nghiệp" />
                 <Link href="#skills" title="Kỹ năng mềm" />
                 <Link href="#tools" title="Công cụ chuyên môn" />
-                <Link href="#description" title="Mục tiêu nghề nghiệp" />
                 <Link href="#languageSkill" title="Kỹ năng ngôn ngữ" />
                 <Link href="#experience" title="Kinh nghiệm" />
                 <Link href="#education" title="Học vấn" />
@@ -331,9 +360,9 @@ const mapStateToProps = (state?: IAppState) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  getData: () =>
+  getData: (setActiveKeyCV, setActiveKeyCV2) =>
     dispatch({
-      type: REDUX_SAGA.PERSON_INFO.GET_FULL_PERSON_INFO,
+      type: REDUX_SAGA.PERSON_INFO.GET_FULL_PERSON_INFO, setActiveKeyCV, setActiveKeyCV2
     }),
 });
 

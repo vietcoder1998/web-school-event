@@ -1,7 +1,7 @@
 import React from "react";
 import { timeConverter } from "../../../utils/convertTime";
 import { connect } from "react-redux";
-import { Progress, Icon, Tooltip, Modal, notification, Empty } from "antd";
+import { Progress, Icon, Tooltip, Modal, notification, Empty,  } from "antd";
 import { LiCopy } from './../../layout/common/Common';
 import { TYPE } from './../../../const/type';
 import ModalImage from "react-modal-image";
@@ -9,6 +9,7 @@ import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import { sendFileHeader } from './../../../services/auth';
 import axios from 'axios';
+// import {image} from './full-size-icon.png'
 
 function GetDate(dateRaw) {
   var date = new Date(dateRaw);
@@ -258,9 +259,10 @@ function ShortProfile(props?: { personalInfo?: any }) {
         </div>
         <div className="img-modal-show">
           <ModalImage
-            small={!avatarUrl ? TYPE.DEFAULT_IMAGE : avatarUrl}
-            large={!avatarUrl ? TYPE.DEFAULT_IMAGE : avatarUrl}
+            small={!avatarUrl ? TYPE.DEFAULT_AVATAR : avatarUrl}
+            large={!avatarUrl ? TYPE.DEFAULT_AVATAR : avatarUrl}
           />
+          
         </div>
       </div>
       <Tooltip title="Cập nhật ảnh đại diện" placement={"right"}>
@@ -286,12 +288,14 @@ function ShortProfile(props?: { personalInfo?: any }) {
       </div>
       <div className="short-profile">
         <ul>
-          <LiCopy show={true}>
+          {/* <LiCopy show={true}>
             <Icon type="user" />
             Họ và tên:{" "}
             {personalInfo &&
               personalInfo.lastName + " " + personalInfo.firstName}
-          </LiCopy >
+          </LiCopy > */}
+          <li className="profile-info" style={{fontSize: '1.9em', fontWeight: 'bold', marginBottom: 10}}>{personalInfo &&
+              personalInfo.lastName + " " + personalInfo.firstName}</li>
           <LiCopy >
             <Icon type="share-alt" />
             Trạng thái:
@@ -302,7 +306,7 @@ function ShortProfile(props?: { personalInfo?: any }) {
           <LiCopy >
             <Icon type="reconciliation" />
             Ngày sinh:{" "}
-            {timeConverter(personalInfo && personalInfo.birthday)}
+            {personalInfo && personalInfo.birthday !== -1 ? timeConverter(personalInfo && personalInfo.birthday): '_'}
           </LiCopy>
           <LiCopy >
             <Icon type={personalInfo && personalInfo.gender === "MALE" ? "man" : "woman"} />
@@ -311,7 +315,7 @@ function ShortProfile(props?: { personalInfo?: any }) {
           </LiCopy>
           <LiCopy copy={personalInfo && personalInfo.addres}>
             <Icon type="environment" />
-            Địa chỉ:{" "} {personalInfo && personalInfo.address}
+            Địa chỉ:{" "} {personalInfo && personalInfo.address ? personalInfo.address : "_"}
           </LiCopy>
           <LiCopy copy={personalInfo && personalInfo.email}>
             <Icon type="mail" />
@@ -319,15 +323,15 @@ function ShortProfile(props?: { personalInfo?: any }) {
           </LiCopy>
           <LiCopy copy={personalInfo && personalInfo.phone}>
             <Icon type="phone" />
-            Điện thoại liên hệ:{" "}{personalInfo && personalInfo.phone}
+            Điện thoại liên hệ:{" "}{personalInfo && personalInfo.phone ? personalInfo.phone : '_'}
           </LiCopy>
           <LiCopy copy={personalInfo && personalInfo.identityCard}>
             <Icon type="idcard" />
-            Số CMND:{personalInfo && personalInfo.identityCard}
+            Số CMND:{personalInfo && personalInfo.identityCard ? personalInfo.identityCard : '_'}
           </LiCopy>
           <LiCopy copy={personalInfo && personalInfo.studentCode}>
             <Icon type="idcard" />
-            Mã sinh viên :{" "}{personalInfo && personalInfo.studentCode}
+            Mã sinh viên :{" "}{personalInfo && personalInfo.studentCode ? personalInfo.studentCode : '_'}
           </LiCopy>
           <LiCopy >
             <Icon type="database" />
