@@ -13,6 +13,7 @@ import { PUBLIC_HOST } from "../environment/development";
 import { noInfoHeader } from "../services/auth";
 import BarLoader from "react-spinners/BarLoader";
 import qs from "query-string";
+import ReactGa from 'react-ga';
 
 const EventHome = loadMeta(() =>
   import("./event").then((module) => module.default)
@@ -143,7 +144,19 @@ class App extends React.Component<IProps, IState> {
 
   resizeInterface = null;
 
+  trackPage = (page) => {
+    ReactGa.set({
+      page
+    });
+    ReactGa.pageview(page);
+  };
+
+
   async componentDidMount() {
+    ReactGa.initialize('G-M58JJVL6Y0', {debug: true});
+    const page = window.location.pathname + window.location.search;
+
+    this.trackPage(page);
     await this._loadLocal();
     if (this.props.isAuthen) {
       this.props.getData();
@@ -156,7 +169,7 @@ class App extends React.Component<IProps, IState> {
 
   componentWillUnmount() {
     this.resizeInterface = null;
-    window.removeEventListener("resize", () => {console.log("remove resize")})
+    window.removeEventListener("resize", () => { console.log("remove resize") })
 
   }
 
