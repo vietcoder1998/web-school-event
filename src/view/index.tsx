@@ -160,7 +160,7 @@ class App extends React.Component<IProps, IState> {
 
 
   async componentDidMount() {
-    ReactGa.initialize('G-M58JJVL6Y0', {debug: true});
+    ReactGa.initialize(process.env.REACT_GOOGLE_ANALYTIS_ID, {debug: true});
     const page = window.location.pathname + window.location.search;
 
     this.trackPage(page);
