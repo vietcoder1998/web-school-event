@@ -19,7 +19,7 @@ import logo from "../../assets/image/logo-01.png";
 import imageLogin from "../../assets/image/image-login.png";
 import { goBackWhenLogined } from "../../utils/goBackWhenLogined";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { FacebookProvider, LoginButton } from 'react-facebook';
+// import { FacebookProvider, LoginButton } from 'react-facebook';
 // import { TYPE } from './../../const/type';
 
 class Login extends Component {

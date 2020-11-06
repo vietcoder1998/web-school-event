@@ -43,7 +43,7 @@ export default class JobProperties extends PureComponent<JobPropertiesProps, Job
                     </Col>
                     <Col xs={24} sm={24} md={24} lg={9} xl={9}>
                         <div className='short-info'>
-                            <h6>Thông tin sơ lược</h6>
+                            <IptLetter>Thông tin sơ lược</IptLetter>
                             <ul style={{ marginBottom: '5px' }}>
                                 {/* <li className='d_j_t'>
                                     <Icon type="environment-o" style={{ color: '#168ECD' }} />

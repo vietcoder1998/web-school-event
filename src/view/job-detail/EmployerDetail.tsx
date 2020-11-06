@@ -122,7 +122,7 @@ export default class EmployerDetail extends React.PureComponent<EmployerDetailPr
                         </div>
                         <Row>
                             <Col xs={12} className='b_r'>
-                                <div className='rating b_b'>
+                                <div className='rating'>
                                     <p style={{ fontSize: '1.05em', color: 'black' }}>Môi trường làm việc </p>
                                     <div className='star-rating'>
                                         <Rate
@@ -135,7 +135,7 @@ export default class EmployerDetail extends React.PureComponent<EmployerDetailPr
                                 </div>
                             </Col>
                             <Col xs={12}>
-                                <div className='rating b_b'>
+                                <div className='rating'>
                                     <p style={{ fontSize: '1.05em', color: 'black' }}>Đãi ngộ nhân viên</p>
                                     <div className='star-rating'>
                                         <Rate
@@ -178,22 +178,22 @@ export default class EmployerDetail extends React.PureComponent<EmployerDetailPr
                         <Row>
                             <div className='company-job-more a_c'>
                                 {employerMoreJob.items && employerMoreJob ? employerMoreJob.items.map((item, index) =>
-                                    (<Col key={index} xs={24} sm={12} md={12} lg={12} xl={12}>
+                                    (<Col key={index} xs={24} sm={12} md={12} lg={8} xl={8}>
                                         {is_loading_more ? <Skeleton loading={true} avatar paragraph={{ rows: 1 }} /> :
-                                            (<div className='item-job' >
-                                                <div style={{ flex: 3 , display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+                                            (<Row className='item-job' >
+                                                <Col span={8} style={{ flex: 3, display: 'flex', flexDirection: 'column' }}>
                                                     <Avatar shape={'square'} src={item.employerLogoUrl} size={60} 
                                                     // style={{ margin: "10px 10px 0 10px"}} 
                                                     />
                                                     <JobType width='60px' fontSize='0.7em'>
                                                         {item && item.jobType}
                                                     </JobType>
-                                                </div>
-                                                <div style={{ flex: 9 }}>
+                                                </Col>
+                                                <Col span={16}>
                                                     <p style={{ textAlign: 'left', fontSize: '1.1em', fontWeight: 500 }} className="info-silimar-job"><Link to={`/job-detail/${window.btoa(item.id)}${param}`} target='_blank'>{item.jobTitle}</Link></p>
                                                     <p style={{ textAlign: 'left' }} className="info-silimar-job"><span><Icon type='environment' style={{marginRight: 3}} />{item.address}</span></p>
-                                                </div>
-                                            </div>)}
+                                                </Col>
+                                            </Row>)}
                                     </Col>)
                                 ) : <Empty description={"Không tìm thấy công việc nào"} />
                                 }

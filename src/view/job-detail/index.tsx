@@ -490,16 +490,16 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                   <div className="job-header">
                     <div className="company-header">
                       <Row>
-                        <Col xs={4} sm={8} md={4} lg={3} xl={3} xxl={3} className="a_c">
+                        <Col xs={4} sm={8} md={4} lg={3} xl={3} xxl={3} className="a_c" style={{padding: 5}}>
                           <Avatar
                             shape={"square"}
                             src={testImage(logoUrl, "logo")}
                             alt={employerDetail && employerDetail.employerName}
-                            style={{ marginBottom: 5, width: "90%", height: "100%" }}
+                            style={{ marginBottom: 5, width: '100%', height: "100%" }}
                           />
                           <JobType>{jobDetail && jobDetail.jobType}</JobType>
                         </Col>
-                        <Col xs={20} sm={12} md={16} lg={17} xl={16} xxl={17}>
+                        <Col xs={20} sm={12} md={16} lg={15} xl={16} xxl={17}>
                           <h4>{jobDetail && jobDetail.jobTitle}</h4>
                           <div className="d_j_t">
                             <Icon type="home" style={{ color: "#168ECD" }} />
@@ -507,7 +507,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                               <Link
                                 to={`/employer/${window.btoa(employerDetail.id)}${param}`}
                                 target="_blank"
-                                style={{ fontSize: "1.05em", fontWeight: 450 }}
+                                style={{ fontSize: "1.05em", fontWeight: 600 }}
                               >
                                 {employerDetail && employerDetail.employerName}
                               </Link>
@@ -524,7 +524,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                             </label>
                           </div>
                         </Col>
-                        <Col xs={24} sm={24} md={4} lg={4} xl={4} xxl={4}>
+                        <Col xs={24} sm={24} md={4} lg={5} xl={4} xxl={4}>
                           <Row className="btn-s-c">
                             {/* <Col
                             xs={8}

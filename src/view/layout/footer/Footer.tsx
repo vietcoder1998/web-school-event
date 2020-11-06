@@ -4,7 +4,7 @@ import './Footer.scss';
 import CHPlay from '../../../assets/image/CHPlay.png';
 //@ts-ignore
 import AppStore from '../../../assets/image/app-store.png';
-import { Col, Row } from 'antd';
+import { Col, Row, Icon } from 'antd';
 //@ts-ignore
 import QRCodeAppStore from '../../../assets/image/qr-code-appstore.png';
 //@ts-ignore
@@ -27,49 +27,50 @@ function Footer(props) {
           {/* Rule */}
           <Col xs={24} sm={24} md={8} lg={8} className='rule'>
             <ul>
-              <li># <a href='https://about.works.vn/ve-chung-toi/' target="_blank" rel="noopener noreferrer">Giới thiệu</a></li>
-              <li># <a href='https://about.works.vn/privacy-policy/' target="_blank" rel="noopener noreferrer">Điều khoản sử dụng</a></li>
-              <li># <a href='https://about.works.vn' target="_blank" rel="noopener noreferrer">Về chúng tôi</a></li>
+              <li><b>Về Works.vn</b></li>
+              <li><a href='https://about.works.vn/ve-chung-toi/' target="_blank" rel="noopener noreferrer">Giới thiệu</a></li>
+              <li><a href='https://about.works.vn/privacy-policy/' target="_blank" rel="noopener noreferrer">Điều khoản sử dụng</a></li>
+              <li> <a href='https://about.works.vn' target="_blank" rel="noopener noreferrer">Về chúng tôi</a></li>
+              <li> <a href='https://works.vn/result' target="_blank" rel="noopener noreferrer">Tìm việc</a></li>
             </ul>
           </Col>
           {/* Contact */}
           <Col xs={24} sm={24} md={8} lg={8} xl={8} className="rule contact">
-            <div>
+            <li>
+                <b> Kết nối với chúng tôi:</b>
+            </li>
+            <li>
               <a href='https://www.facebook.com/workss.vn/?epa=SEARCH_BOX' target="_blank" rel="noopener noreferrer">
-                Kết nối với chúng tôi:
-              </a> <i className="fa fa-facebook-square" style={{ fontSize: 18 }}></i>
-            </div>
-            <div>
-              <label style={{ fontSize: '0.95em' }}>
-                Địa chỉ: Số 09 Duy tân, Dịch vọng hậu, Cầu giấy, Hà nội
-                </label>
-            </div>
-            <div>
-              <label style={{ fontSize: '0.95em' }}>
-                Văn phòng: 54 Lê Văn Thiêm, Nhân Chính, Thanh Xuân, Hà Nội
-                </label>
-            </div>
+                <Icon type={"facebook"} style={{marginRight: 10}} />
+                Facebook: works.vn
+              </a>
+            </li>
+            <li style={{fontStyle: "italic"}}>
+              Địa chỉ: Số 09 Duy tân, Dịch vọng hậu, Cầu giấy, Hà nội
+            </li>
+            <li style={{fontStyle: "italic"}}>
+              Văn phòng: 54 Lê Văn Thiêm, Nhân Chính, Thanh Xuân, Hà Nội
+            </li>
           </Col>
           {/* Market */}
           <Col xs={24} sm={24} md={8} lg={8} xl={8} className='rule app'>
-            <div className='market-chlay'>
-              <p>Ứng dụng di động</p>
-              <div style={{ display: 'flex' }}>
+            <div>
+              <li><b>Ứng dụng di động</b></li>
+              <div style={{ display: 'flex', marginBottom: 10 }}>
                 <a href={'https://apps.apple.com/vn/app/worksvn-sinh-vi%C3%AAn/id1492437454'} target="_blank" rel="noopener noreferrer">
                   <LazyLoadImage src={AppStore} alt='CHPlay tìm việc' height='50px' width='auto' />
                 </a>
-                <LazyLoadImage src={QRCodeAppStore} alt='AppleStore Tìm việc QRCode' height='47px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px' }} /> 
+                <LazyLoadImage src={QRCodeAppStore} alt='AppleStore Tìm việc QRCode' height='47px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px' }} />
               </div>
               <div style={{ display: 'flex' }} >
                 <a
                   href={'https://play.google.com/store/apps/details?id=com.worksvn.student&hl=vi'}
                   target="_blank"
                   rel="noopener noreferrer"
-
                 >
                   <LazyLoadImage src={CHPlay} alt='AppleStore Tìm việc' height='50px' width='auto' />
                 </a>
-                 <LazyLoadImage src={QRCodeCHPlay} alt='CHPlay Tìm việc QRCode' height='47px' width='auto' style={{marginTop: '1.2px', marginLeft: '5px'}}/> 
+                <LazyLoadImage src={QRCodeCHPlay} alt='CHPlay Tìm việc QRCode' height='47px' width='auto' style={{ marginTop: '1.2px', marginLeft: '5px' }} />
               </div>
             </div>
           </Col>

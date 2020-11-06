@@ -57,6 +57,7 @@ export function JobType(props: { children?: any, width?: any, fontSize?: any }) 
         display: 'inline-block',
         position: 'relative',
         marginTop: '5px',
+        borderRadius: '3px'
     };
     let label;
     switch (props.children) {

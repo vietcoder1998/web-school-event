@@ -101,6 +101,7 @@
       color: white;
       margin: 8px;
       border-radius: 50%;
+      background-color: rgba(245, 245, 245, 0.15);
       cursor: pointer;
 
       &:hover {
@@ -118,12 +119,19 @@
       .label_name {
         color: white;
         font-size: 0.93rem;
-        font-weight: 600;
+        font-weight: 400!important;
         padding: 0px 10px;
+        font-style: italic;
 
         &:hover {
           text-decoration: underline;
+          cursor: pointer;
         }
+      }
+
+      img {
+        border: solid white 2px;
+        border-radius: 50%;
       }
     }
 

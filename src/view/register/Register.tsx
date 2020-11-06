@@ -29,7 +29,7 @@ import { IAppState } from '../../redux/store/reducer';
 const isNumeric = (value) => {
   return /^-{0,1}\d+$/.test(value);
 };
-const validSchoolYearEnd = ["Chọn năm học kết thúc", "Năm học kết thúc hợp lệ", "Năm học kết thúc phải lớn hơn năm học bắt đầu"]
+// const validSchoolYearEnd = ["Chọn năm học kết thúc", "Năm học kết thúc hợp lệ", "Năm học kết thúc phải lớn hơn năm học bắt đầu"]
 const validRePassword = ["Mật khẩu quá ngắn", "Mật khẩu không trùng khớp", "Mật khẩu hợp lệ"]
 interface IProps {
   marker?: any;
@@ -437,8 +437,8 @@ class Register extends Component<IProps, IState> {
       is_exactly_pw,
       list_major,
       is_exists,
-      is_exactly_schoolYearStart,
-      exactly_schoolYearEnd,
+      // is_exactly_schoolYearStart,
+      // exactly_schoolYearEnd,
       is_exactly_majorID,
       is_exactly_schoolID,
       loading,

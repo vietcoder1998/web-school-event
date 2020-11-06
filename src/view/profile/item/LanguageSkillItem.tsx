@@ -54,9 +54,8 @@ class LanguageSkillItem extends Component<IProps, IState> {
   }
   
   async componentDidMount() {
-    let { languageSkill, activeKey, list_language } = this.state;
+    let {  activeKey, list_language } = this.state;
     let {item} = this.props
-    console.log(item)
 
     let res_language = await _get(null, LANGUAGES, PUBLIC_HOST, noInfoHeader);
     list_language = res_language.data.items;
@@ -110,7 +109,7 @@ class LanguageSkillItem extends Component<IProps, IState> {
       );
     } else if (method === DELETE) {
       let params = [id];
-      let res = await _requestToServer(
+      await _requestToServer(
         DELETE,
         null,
         LANGUAGE_SKILL,

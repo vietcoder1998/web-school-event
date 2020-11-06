@@ -29,7 +29,7 @@ import { POST, PUT } from "../../const/method";
 import { REDUX_SAGA } from "../../const/actions";
 import CVviewer from './CVviewer';
 import { IAppState } from "../../redux/store/reducer";
-import LeftBar from './../layout/common/SideBar';
+// import LeftBar from './../layout/common/SideBar';
 import FixTools from './fix/FixTools';
 import Tools from './infor/Tools';
 import { Dropzone } from './../layout/common/Dropzone';

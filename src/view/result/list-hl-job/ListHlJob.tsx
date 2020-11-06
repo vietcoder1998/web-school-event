@@ -30,7 +30,7 @@ export default class ListHlJob extends React.Component<IListHlJobProps> {
                                             <Link to={`/job-detail/${window.btoa(item.id)}${param}`}
                                                 target='_blank'>
                                                 <div key={index} className='item-hl-job'>
-                                                    <div style={{ flex: 1, padding: "5px 0px" }}>
+                                                    <div style={{ flex: 1}}>
                                                         {item.employerLogoUrl ? <LazyLoadImage src={item.employerLogoUrl} alt='works result' height='60px' width='60px' style={{ objectFit: 'contain' }} /> :
                                                             <div style={{ width: 60, height: 60, backgroundColor: '#f2f2f2', borderRadius: 3, display: 'inline-block' }}></div>
                                                         }

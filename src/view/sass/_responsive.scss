@@ -86,7 +86,7 @@ $color_border: rgb(231, 231, 231);
 // desktop
 @media only screen and (min-width: 1061px) {
   .content {
-    padding: 0px 15vw;
+    padding: 0px 12.5vw;
   }
   .content-profile {
     padding: 0px 8vw;
@@ -114,7 +114,7 @@ $color_border: rgb(231, 231, 231);
     padding: 15px 15vw 30px;
   }
   .content-footer {
-    padding: 10px 10%;
+    padding: 10vh 12.5vw;
   }
   .hidden-mobile {
     display: block;

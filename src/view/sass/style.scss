@@ -74,13 +74,12 @@ code {
 }
 
 .expert-content {
-  margin: 10px 5px;
+  margin: 10px 2vw;
   border-radius: 5px;
   height: 100%;
   position: relative;
   background-color: white;
-  // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.06);
-  border: solid $color_border 1px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.06);
 
   &:hover {
     box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.01), 0 2px 4px rgba(0, 0, 0, 0.02),
@@ -116,8 +115,9 @@ code {
   line-height: 30px;
   padding: 10px;
   min-height: 8vw;
+  font-size: 15px;
   border-radius: 0px 0px 5px 5px;
-  border: solid $color_border 1px;
+  // border: solid $color_border 1px;
   border-top: none;
 }
 
@@ -396,7 +396,7 @@ code {
 .important-letter {
   padding: 0px;
   margin: 0px;
-  font-weight: 500;
+  font-weight: bold;
   color: black;
 }
 
@@ -750,7 +750,7 @@ i {
   background-color: rgba(255, 255, 255, 0);
   -webkit-line-clamp: 2;
   white-space: pre-line;
-  min-height: 25px;
+  min-height: 20px;
   // margin-bottom: -3px;
 
   .tooltiptext {
@@ -787,9 +787,6 @@ i {
       0 6px 20px 0 rgba(0, 0, 0, 0.06);
   }
 
-  .ant-pagination-item-link {
-    // border: solid rgba($color: #fff, $alpha: 0.5) 1px;
-  }
   .ant-pagination-item-active a {
     color: #1890ff !important;
   }
@@ -1400,7 +1397,7 @@ label {
     font-weight: 400;
     color: white;
     border-radius: 5px;
-    background-color: rgb(24, 144, 255);
+    background-color: rgb(8, 73, 133);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.02),
       0 6px 20px 0 rgba(0, 0, 0, 0.03);
     &.not-color {
@@ -1840,7 +1837,7 @@ label {
     box-shadow: 0 0.5px 0 rgba(0, 0, 0, 0.1);
 
     .company-header {
-      padding: 1.25vw 10px;
+      padding: 1.25vw 0.5vh;
       margin: 10px 0;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03),
         0 6px 20px 0 rgba(0, 0, 0, 0.03);
@@ -1863,6 +1860,7 @@ label {
         text-align: justify;
         text-justify: inter-word;
         color: black;
+        font-weight: 600;
         i {
           margin-right: 5px;
           padding-top: 3px;
@@ -1927,11 +1925,15 @@ label {
   .job-content {
     position: relative;
     // box-shadow: 0 0.5px 0 rgba(0, 0, 0, .1);
-
     .ant-tabs {
       .ant-tabs-nav {
         width: 100%;
         background-color: white;
+        font-weight: 500;
+      }
+
+      .ant-tabs-tab-active {
+        font-style: italic;
       }
 
       .ant-tabs-bar {
@@ -1959,7 +1961,7 @@ label {
           height: 100%;
           margin: 15px;
           background-color: #30a3f924;
-          border: 1px dashed #31a3f9;
+          border: 1px solid #31a3f9;
 
           h6 {
             margin-bottom: 20px;
@@ -2122,45 +2124,6 @@ label {
             }
 
             /* width */
-            .item-job {
-              text-align: center;
-              min-height: 121px;
-              height: 92%;
-              width: 92%;
-              margin: 5px 5px;
-              border: solid $color_border 1px;
-              margin: none;
-              padding: 10px;
-              border-radius: 3px;
-              background-color: white;
-
-              &:hover {
-                cursor: pointer;
-                background-color: azure;
-
-                a {
-                  text-decoration: underline;
-                }
-              }
-
-              p {
-                font-family: $font_base;
-                font-size: 0.8rem;
-                font-weight: 400;
-              }
-
-              .item-job-logo {
-                width: 60px;
-                height: 60px;
-                border: solid #1890ff 2px;
-                padding: 2px;
-                margin: 10px;
-              }
-            }
-          }
-
-          .ant-pagination {
-            margin-top: 10px;
           }
 
           .pagination-job {
@@ -2220,7 +2183,7 @@ label {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   text-transform: inherit;
 }
@@ -2233,9 +2196,6 @@ label {
     margin: 0px;
   }
 
-  div {
-    border-radius: 3px;
-  }
   margin-bottom: 30px;
 
   .pagination-result {
@@ -2256,6 +2216,7 @@ label {
       // background-color: #32a3f9;
       position: relative;
       padding: 10px 5px;
+      border-radius: 3px;
       .ant-select-lg {
         font-size: 14.5px;
       }
@@ -2304,6 +2265,8 @@ label {
 
     .sub-filter {
       margin: 5px 0px;
+      font-weight: 500;
+      font-style: italic;
     }
 
     label {
@@ -2334,6 +2297,7 @@ label {
         font-weight: 500;
         padding: 5px;
         background-color: white;
+        border-radius: 5px;
         // box-shadow      : 0 0.5px 0 rgba(0, 0, 0, .1);
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.01),
           0 6px 20px 0 rgba(0, 0, 0, 0.02);
@@ -2370,9 +2334,9 @@ label {
           text-align: left;
         }
         img {
-          width: 60px;
-          height: 60px;
+          width: 100%;
           border-radius: 3px;
+          border: solid rgb(241, 241, 241) 1px;
         }
 
         .name-job {
@@ -2398,7 +2362,7 @@ label {
       max-height: 230px;
       transition: 0.3s;
       background: white;
-      // box-shadow: 0 0.5px 0 rgba(0, 0, 0, .1);
+      border-radius: 5px;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03),
         0 6px 20px 0 rgba(0, 0, 0, 0.03);
 
@@ -2407,35 +2371,37 @@ label {
         background-color: rgb(230, 244, 255);
 
         .item-content {
-          border-right: solid rgb(90, 153, 255) 1px;
-          border-left: solid rgb(90, 153, 255) 1px;
+          border: solid rgb(90, 153, 255) 1px;
           cursor: default;
+        }
+
+        .image-content {
+          border: solid rgb(90, 153, 255) 1px;
         }
       }
 
       .item-content {
-        border-right: solid rgb(228, 228, 228) 1px;
-        border-left: solid rgb(228, 228, 228) 1px;
+        border: solid rgb(255, 255, 255) 1px;
       }
 
       .image-content {
         position: relative;
         overflow: hidden;
         height: 100%;
+        border: solid white 1px;
 
         img {
           position: relative;
           padding: 0px;
           width: 100%;
           max-height: 100px;
+          border-radius: 15px;
         }
       }
 
       //Content
       .item-content {
         padding: 1vh 2.5vw !important;
-        transition: 0.2s;
-        // background-color: rgba(240, 255, 255, 0.507);
         position: relative;
         height: auto;
 
@@ -2447,8 +2413,8 @@ label {
           h4 {
             margin-bottom: 5px;
             width: 90%;
-            font-size: 1.1rem;
-            font-weight: 400;
+            font-size: 1.2em;
+            font-weight: 500;
 
             a {
               &:hover {
@@ -2785,80 +2751,6 @@ html {
     }
   }
 
-  .job-header {
-    position: relative;
-    height: auto;
-    margin: 5px 0px;
-    background-color: white;
-    box-shadow: 0 0.5px 0 rgba(0, 0, 0, 0.1);
-
-    .company-header {
-      padding: vw 10px;
-      margin: 10px 0;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03),
-        0 6px 20px 0 rgba(0, 0, 0, 0.03);
-      a {
-        color: #585858;
-        &:hover {
-          color: #1890ff;
-        }
-      }
-      .ant-avatar > img {
-        width: 100%;
-        height: 100%;
-        max-height: 120px;
-        object-fit: contain;
-      }
-      .d_j_t {
-        margin: 0px 10px;
-        padding: 0px 10px;
-        display: flex;
-        text-align: justify;
-        text-justify: inter-word;
-        color: black;
-        i {
-          margin-right: 5px;
-          padding-top: 3px;
-        }
-      }
-      .btn-s-c {
-        vertical-align: top;
-      }
-      .a_c {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .company-logo {
-        display: relative;
-        height: 100%;
-        padding: 0px 10px;
-        z-index: 0;
-        text-align: center;
-
-        img {
-          animation: fadeInFromNone 0.75s ease-out;
-          border: solid gray 1px;
-        }
-
-        li {
-          list-style-type: none;
-        }
-      }
-
-      h4 {
-        display: relative;
-        margin: 0px;
-        // min-height : 70px;
-        font-size: 1.2rem;
-        padding: 0px 20px;
-        font-weight: 650;
-        margin-bottom: 10px;
-      }
-    }
-  }
-
   .job-business {
     background-color: white;
     margin-bottom: 5px;
@@ -2912,7 +2804,8 @@ html {
           height: 100%;
           margin: 15px;
           background-color: #30a3f924;
-          border: 1px dashed #31a3f9;
+          border: 1px solid #31a3f9;
+          border-radius: 3px;
 
           h6 {
             margin-bottom: 20px;
@@ -3030,6 +2923,7 @@ html {
 
           p {
             padding-left: 15px;
+            margin-top: 10px;
           }
 
           i {
@@ -3074,44 +2968,7 @@ html {
               }
             }
 
-            /* width */
-            .item-job {
-              display: flex;
-              text-align: center;
-              min-height: 121px;
-              height: 92%;
-              width: 92%;
-              margin: 5px 5px;
-              border: solid $color_border 1px;
-              margin: none;
-              padding: 10px;
-              border-radius: 3px;
-              background-color: white;
-              flex-flow: column;
-
-              &:hover {
-                cursor: pointer;
-                background-color: azure;
-
-                a {
-                  text-decoration: underline;
-                }
-              }
-
-              p {
-                font-family: $font_base;
-                font-size: 0.8rem;
-                font-weight: 400;
-              }
-
-              .item-job-logo {
-                width: 60px;
-                height: 60px;
-                border: solid #1890ff 2px;
-                padding: 2px;
-                margin: 10px;
-              }
-            }
+            
           }
 
           .pagination-job {
@@ -3364,6 +3221,14 @@ html {
   padding-top: 10px;
   padding-bottom: 10px;
 
+  .ant-tabs-tab {
+    font-weight: bold;
+  }
+
+  .ant-tabs-tab-active {
+    font-style: italic;
+  }
+
   .employer-info-header {
     top: 0px;
     left: 0px;
@@ -3371,7 +3236,7 @@ html {
     border-radius: 3px;
     position: relative;
     // border: solid rgb(255, 255, 255) 1px;
-    height: 70vh;
+    height: 50vh;
     transition: 0.25s;
     z-index: 2;
     margin-bottom: 15px;
@@ -3383,7 +3248,7 @@ html {
 
     .cover-image-profile {
       width: 100%;
-      height: calc(100vh - 109px);
+      height: calc(50vh);
       opacity: 1;
       min-width: 100%;
       min-height: 100%;
@@ -3414,7 +3279,6 @@ html {
       .content-avatar {
         height: 140px;
         width: 100%;
-        border-radius: 50%;
         position: relative;
         text-align: center;
         display: flex;
@@ -3429,9 +3293,10 @@ html {
       .name-employer {
         background-color: white;
         text-align: center;
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         font-weight: 600;
         padding: 10px;
+        text-transform: uppercase;
       }
     }
   }
@@ -3453,22 +3318,7 @@ html {
     .ant-card-body {
       padding: 15px;
     }
-    .item-job {
-      display: flex;
-      text-align: center;
-      min-height: 140px;
-      height: 92%;
-      width: 92%;
-      margin: 5px 5px;
-      border: solid $color_border 1px;
-      margin: none;
-      padding: 10px;
-      border-radius: 3px;
-      background-color: white;
-      img {
-        object-fit: contain;
-      }
-    }
+
     .ant-skeleton {
       display: table;
       width: auto;
@@ -3481,7 +3331,7 @@ html {
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
       text-transform: inherit;
     }
@@ -3504,14 +3354,13 @@ html {
       // min-height: 50vh;
 
       .ic-ct-img {
-        padding: 20px 40px;
+        padding: 10px 40px;
         width: 100%;
         height: 100%;
+        margin-bottom: 20px;
 
         .ic {
-          border: solid gray 1px;
           border-radius: 3px;
-          padding: 3px;
           height: 300px;
           width: 100%;
           object-fit: cover;
@@ -3690,7 +3539,7 @@ html {
   bottom: 0px;
   h5 {
     font-size: 1.3rem !important;
-    font-weight: 400 !important;
+    font-weight: 500 !important;
   }
 }
 
@@ -3752,4 +3601,61 @@ html {
 }
 .job-detail-content .job-header .company-header .d_j_t i{
   padding-top: 10px;
+}
+#requirement-job {
+  h6 {
+    font-size: 1.3em;
+  }
+}
+.item-job {
+  margin: 5px 5px!important;
+  border-radius: 3px;
+  background-color: white;
+  flex-flow: column;
+  padding: 5px;
+  box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.06);
+
+  &:hover {
+    cursor: pointer;
+    background-color: azure;
+
+    a {
+      text-decoration: underline;
+    }
+  }
+
+  p {
+    font-family: $font_base;
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
+
+  .item-job-logo {
+    width: 60px;
+    height: 60px;
+    border: solid #1890ff 2px;
+    padding: 2px;
+    margin: 10px;
+  }
+}
+
+.ant-pagination {
+  margin-top: 10px !important;
+  .ant-pagination-item {
+    background-color: white!important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.03)!important;
+  }
+}
+
+.ant-select-selection-selected-value {
+  font-weight: 500;
+}
+
+.name_employer {
+  line-height: 18px;
+  min-height: 18px;
+}
+
+.login-btn {
+  background-color: rgba(255, 255, 255, 0.089);;
 }

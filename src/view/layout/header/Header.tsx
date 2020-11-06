@@ -85,20 +85,20 @@ class Header extends PureComponent<IProps, IState> {
 
   menuUser = () => {
     return (
-      <Menu style={{ fontWeight: 500 }}>
-        <Menu.Item>
+      <Menu style={{ fontWeight: 500,  }}>
+        <Menu.Item style={{ fontWeight: 500,  }}>
           <Link to="/profile">Hồ sơ</Link>
         </Menu.Item>
-        <Menu.Item>
+        <Menu.Item style={{ fontWeight: 500,  }}>
           <Link to="/reset-password">Đổi mật khẩu</Link>
-        </Menu.Item>
-        <Menu.Item>
+        </Menu.Item >
+        <Menu.Item style={{ fontWeight: 500,  }}>
           <Link to="/save-job">Công việc đã lưu</Link>
         </Menu.Item>
-        <Menu.Item>
+        <Menu.Item style={{ fontWeight: 500,  }}>
           <Link to="/history-apply">Lịch sử ứng tuyển</Link>
         </Menu.Item>
-        <Menu.Item onClick={this._clearStorage}>
+        <Menu.Item style={{ fontWeight: 500,fontStyle: "italic", color: "red"  }} onClick={this._clearStorage}>
           <Link
             to="/"
             style={{
@@ -238,7 +238,7 @@ class Header extends PureComponent<IProps, IState> {
               >
                 <span
                   className="label-function hidden-mobile"
-                  style={{ borderRadius: "5px" }}
+                  style={{ borderRadius: "25px", padding: 5 }}
                 >
                   <Link to="/profile">
                     <Avatar
@@ -251,7 +251,6 @@ class Header extends PureComponent<IProps, IState> {
                       }}
                     />
                   </Link>
-
                   {localStorage.getItem("name") ? (
                     <label className="label_name">
                       {localStorage.getItem("name")}
@@ -261,14 +260,14 @@ class Header extends PureComponent<IProps, IState> {
               </Dropdown>
             ) : (
                 <span className="label-login hidden-mobile">
-                  <label onClick={() => goBackWhenLogined("login")}>Đăng nhập</label>
+                  <label className="login-btn" onClick={() => goBackWhenLogined("login")}>Đăng nhập</label>
                   <span
                     style={{
                       borderRight: "solid #efefef 0.8px",
                       padding: "0px 0px 2.2px",
                     }}
                   ></span>
-                  <label onClick={() => goBackWhenLogined("register")}>Đăng ký</label>
+                  <label className="login-btn" onClick={() => goBackWhenLogined("register")}>Đăng ký</label>
                 </span>
               )}
           </div>

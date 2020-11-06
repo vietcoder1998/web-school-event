@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { Icon, Avatar, Row, Col, Tabs, Card, Modal, Skeleton, Rate, Pagination, Empty, Button, Input, Tooltip } from 'antd';
-import './EmInfo.scss';
 // @ts-ignore
 import defaultImage from './../../assets/image/base-image.jpg';
 // @ts-ignore
-import { NotUpdate, IptLetterP } from './../layout/common/Common';
+import { NotUpdate } from './../layout/common/Common';
 import { IEmControllerDetail } from './../../models/em-controller-detail';
 import { connect } from 'react-redux';
 import { REDUX_SAGA } from '../../const/actions';
@@ -161,10 +160,10 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                         // @ts-ignore
                                         src={!onErrLogo && employerDetail && employerDetail.logoUrl ? employerDetail.logoUrl : defaultImage}
                                         style={{
-                                            height: "120px",
-                                            width: "120px",
+                                            height: "15vh",
+                                            width: "15vh",
                                             fontSize: 60,
-                                            border: 'solid white 3px',
+                                            borderColor: "white",
                                             zIndex: 1
                                         }}
                                         // @ts-ignore
@@ -173,7 +172,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                 <div
                                     style={{
                                         width: '100%',
-                                        height: '50%',
+                                        height: '30%',
                                         position: 'absolute',
                                         bottom: -1,
                                         zIndex: 0,
@@ -182,9 +181,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                 />
                             </div>
                             <div className={'name-employer'}>
-                                <div>
-                                    {employerDetail && employerDetail.employerName ? employerDetail.employerName : <NotUpdate />}
-                                </div>
+                                {employerDetail && employerDetail.employerName ? employerDetail.employerName : <NotUpdate />}
                                 <Tooltip title={employerDetail &&
                                     employerDetail.profileVerified ? 'Đã hệ thống xác thực' : 'Chưa được xác thực'}
                                     placement="right" 
@@ -195,7 +192,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                         style={{
                                             color:
                                                 employerDetail &&
-                                                    employerDetail.profileVerified ? 'greenyellow' : 'red'
+                                                    employerDetail.profileVerified ? 'green' : 'red'
                                         }}
                                     />
                                 </Tooltip>
@@ -345,7 +342,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                     <Row>
                                         <Col xs={24} md={12} lg={12} xl={12} xxl={24} >
                                             <div className="ic-ct-img">
-                                                <IptLetterP children={"Mặt trước giấy phép"} />
+                                                <h6>Mặt trước giấy phép</h6>
                                                 <Skeleton avatar loading={employerDetail ? false : true} >
                                                     <img className='ic' src={employerDetail && employerDetail.identityCardFrontImageUrl === null ? defaultImage : employerDetail.identityCardFrontImageUrl} alt='front description' />
                                                 </Skeleton>
@@ -353,7 +350,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                         </Col>
                                         <Col xs={24} md={12} lg={12} xl={12} xxl={24} >
                                             <div className="ic-ct-img">
-                                                <IptLetterP children={"Ảnh văn phòng sau"} />
+                                                <h6>Ảnh văn phòng</h6>
                                                 <Skeleton avatar loading={employerDetail ? false : true} >
                                                     <img className='ic' src={employerDetail && employerDetail.identityCardBackImageUrl === null ? defaultImage : employerDetail.identityCardBackImageUrl} alt='front description' />
                                                 </Skeleton>
@@ -368,8 +365,8 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                         {employerMoreJob && employerMoreJob.items ? employerMoreJob.items.map((item, index) =>
                                             (<Col key={index} xs={24} sm={12} md={12} lg={12} xl={8}>
                                                 {loading ? <Skeleton loading={true} avatar paragraph={{ rows: 1 }} /> :
-                                                    <div className='item-job ' >
-                                                        <div style={{ flex: 3 }}>
+                                                    <Row className='item-job ' >
+                                                        <Col span={8}>
                                                             <Avatar
                                                                 shape={'square'}
                                                                 src={item.employerLogoUrl}
@@ -378,17 +375,16 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                                             {/* <JobType width='60px' fontSize='0.7em'>
                                                                 {item && item.jobType}
                                                             </JobType> */}
-                                                        </div>
-                                                        <div style={{ flex: 9 }}>
+                                                        </Col>
+                                                        <Col span={16}>
                                                             <p style={{ textAlign: 'left', fontSize: '1.1em', fontWeight: 500 }} className="info-silimar-job"><Link to={`/job-detail/${window.btoa(item.id)}${param}`} target='_blank'>{item.jobTitle}</Link></p>
                                                             <p style={{ textAlign: 'left' }} className="info-silimar-job"><span><Icon type='environment' style={{ marginRight: 3 }} />{item.address}</span></p>
-                                                        </div>
+                                                        </Col>
 
                                                         {/* <Avatar src={item.employerLogoUrl} style={{ width: "60px", height: "60px", margin: "10px", borderRadius: 0 }} /> */}
                                                         {/* <p><Link to={`/job-detail/${window.btoa(item.id)}`} target='_blank'>{limitString(item.jobTitle)}</Link></p>
                                                         <p><span><Icon type='environment' />{limitString(item.address)}</span></p> */}
-                                                    </div>}
-                                                {/* </Skeleton> */}
+                                                    </Row>}
                                             </Col>)
                                         ) : <Empty description={"Không tìm thấy công việc nào"} />
                                         }
@@ -410,23 +406,22 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                         {eventEmployerMoreJob && eventEmployerMoreJob.items ? eventEmployerMoreJob.items.map((item, index) =>
                                             (<Col key={index} xs={24} sm={12} md={12} lg={12} xl={8}>
                                                 {loading ? <Skeleton loading={true} avatar paragraph={{ rows: 1 }} /> :
-                                                    <div className='item-job ' >
-                                                        <div style={{ flex: 3 }}>
-                                                            <Avatar shape={'square'} src={item.employerLogoUrl} size={60} style={{ margin: "10px 10px 0 10px" }} />
-                                                            {/* <JobType width='60px' fontSize='0.7em'>
-                                                                {item && item.jobType}
-                                                            </JobType> */}
-                                                        </div>
-                                                        <div style={{ flex: 9 }}>
-                                                            <p style={{ textAlign: 'left', fontSize: '1.1em', fontWeight: 500 }} className="info-silimar-job"><Link to={`/event-job-detail/${window.btoa(item.id)}${param}`} target='_blank'>{item.jobTitle}</Link></p>
-                                                            <p style={{ textAlign: 'left' }} className="info-silimar-job"><span><Icon type='environment' style={{ marginRight: 3 }} />{item.address}</span></p>
-                                                        </div>
-
-                                                        {/* <Avatar src={item.employerLogoUrl} style={{ width: "60px", height: "60px", margin: "10px", borderRadius: 0 }} /> */}
-                                                        {/* <p><Link to={`/job-detail/${window.btoa(item.id)}`} target='_blank'>{limitString(item.jobTitle)}</Link></p>
-                                                        <p><span><Icon type='environment' />{limitString(item.address)}</span></p> */}
-                                                    </div>}
-                                                {/* </Skeleton> */}
+                                                   <Row className='item-job ' >
+                                                   <Col span={8}>
+                                                       <Avatar
+                                                           shape={'square'}
+                                                           src={item.employerLogoUrl}
+                                                           size={60} style={{ margin: "10px 10px 0 10px" }}
+                                                       />
+                                                       {/* <JobType width='60px' fontSize='0.7em'>
+                                                           {item && item.jobType}
+                                                       </JobType> */}
+                                                   </Col>
+                                                   <Col span={16}>
+                                                       <p style={{ textAlign: 'left', fontSize: '1.1em', fontWeight: 500 }} className="info-silimar-job"><Link to={`/job-detail/${window.btoa(item.id)}${param}`} target='_blank'>{item.jobTitle}</Link></p>
+                                                       <p style={{ textAlign: 'left' }} className="info-silimar-job"><span><Icon type='environment' style={{ marginRight: 3 }} />{item.address}</span></p>
+                                                   </Col>
+                                               </Row>}
                                             </Col>)
                                         ) : <Empty description={"Không tìm thấy công việc nào"} />
                                         }
