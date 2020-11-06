@@ -115,14 +115,12 @@ const SalaryCalculator = loadMeta(() =>
     )
 )
 
-
 const override = `
 display: block;
 margin: 0 auto;
 border-color: red;
 font-size: 150px;
 `;
-
 
 interface IProps {
   checkAuthen?: Function;
@@ -140,6 +138,9 @@ interface IState {
   loading?: boolean;
 }
 
+// ReactGa.initialize('G-VJC5PRK3K5', {debug: true});
+// window.gtag('event', 'gooon', {method: 'Google'});
+
 class App extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
@@ -152,18 +153,10 @@ class App extends React.Component<IProps, IState> {
   resizeInterface = null;
 
   trackPage = (page) => {
-    ReactGa.set({
-      page
-    });
     ReactGa.pageview(page);
   };
 
-
   async componentDidMount() {
-    ReactGa.initialize(process.env.REACT_GOOGLE_ANALYTIS_ID, {debug: true});
-    const page = window.location.pathname + window.location.search;
-
-    this.trackPage(page);
     await this._loadLocal();
     if (this.props.isAuthen) {
       this.props.getData();
@@ -177,7 +170,6 @@ class App extends React.Component<IProps, IState> {
   componentWillUnmount() {
     this.resizeInterface = null;
     window.removeEventListener("resize", () => { console.log("remove resize") })
-
   }
 
   _callResize = () => {
