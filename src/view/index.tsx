@@ -13,8 +13,6 @@ import { PUBLIC_HOST } from "../environment/development";
 import { noInfoHeader } from "../services/auth";
 import BarLoader from "react-spinners/BarLoader";
 import qs from "query-string";
-import ReactGa from 'react-ga';
-
 
 const EventHome = loadMeta(() =>
   import("./event").then((module) => module.default)
