@@ -358,19 +358,6 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
     let content = "Ứng tuyển";
     let applyState = jobDetail.applyState;
 
-    // let color = "rgba(255, 238, 224, 0.38)";
-    // switch (jobDetail.jobType) {
-    //   case "PARTTIME":
-    //     color = "rgb(239, 253, 239)";
-    //     break;
-
-    //   case "FULLTIME":
-    //     color = "rgb(229, 239, 255)";
-    //     break;
-    //   default:
-    //     break;
-    // }
-
     if (isAuthen === false) {
       content = "Ứng tuyển";
     } else {
@@ -395,7 +382,14 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
       <>
         {/* Info Requirement */}
         <Modal
-          title="Thông tin ứng tuyển"
+          title={
+            <div>
+              <h6><b>Ứng tuyển vào công việc:</b></h6>
+              <p>
+                <i>{jobDetail && jobDetail.jobTitle ? jobDetail.jobTitle: ""}</i>
+              </p>
+            </div>
+            }
           visible={visible}
           onOk={this._handleOk}
           footer={[
@@ -444,8 +438,12 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                       );
                     })}
                 </div>
-                <div style={{ fontStyle: 'italic' }}><span className="asterisk">*</span> Hồ sơ của bạn sẽ được gửi đến Nhà tuyển dụng! <a href="/profile" target="_blank">Hoàn thiện hồ sơ</a></div>
-
+                <div style={{ fontStyle: 'italic' }}>
+                  <span className="asterisk">*</span> Hồ sơ của bạn sẽ được gửi đến Nhà tuyển dụng! 
+                  <a href="/profile" target="_blank">
+                    Hoàn thiện hồ sơ
+                  </a>
+                </div>
               </div>
             ) : (
                 <div>
@@ -575,11 +573,10 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                                   size="large"
                                   style={{
                                     padding: 5,
-                                    backgroundColor: applyState ? "" : "#31a3f9",
+                                    backgroundColor: applyState ? "" : "rgb(249, 96, 49)",
                                     borderColor: applyState ? "" : "white",
                                     color: applyState ? "" : "white",
                                   }}
-                                  icon={"solution"}
                                   onClick={() => {
                                     isAuthen
                                       ? this.setState({ visible: true })

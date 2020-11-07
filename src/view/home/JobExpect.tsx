@@ -11,7 +11,7 @@ class JobExpect extends Component {
         return (
             <div className={"home-job white"} >
                 <Row>
-                    <h5 className="not-color">TÌM VIỆC THEO NHÓM NGÀNH</h5>
+                    <h5 className="not-color"><Icon type="branches" /> TÌM VIỆC THEO NHÓM NGÀNH</h5>
                     <Col sm={24} md={12} lg={12} xl={12} xxl={12}>
                         <a href={`/result?brids=${2}`}>
                             <div className="expert-content">

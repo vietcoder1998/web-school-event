@@ -169,7 +169,7 @@ class Header extends PureComponent<IProps, IState> {
                   theme="filled"
                   style={{ fontSize: "16.3px" }}
                 />
-                Ứng dụng trên điện thoại
+                Ứng dụng di động
               </a>
               <a href="/gross-to-net">
                 <Icon
@@ -214,9 +214,7 @@ class Header extends PureComponent<IProps, IState> {
                   }}
                 >
                   <Badge count={number_noti}>
-
-                    <Icon type="bell" theme="filled" style={{ fontSize: 18 }} />
-
+                    <Icon type="bell" theme="filled" style={{ fontSize: 16 }} />
                   </Badge>
                 </span>
               </Tooltip>
@@ -261,12 +259,6 @@ class Header extends PureComponent<IProps, IState> {
             ) : (
                 <span className="label-login hidden-mobile">
                   <label className="login-btn" onClick={() => goBackWhenLogined("login")}>Đăng nhập</label>
-                  <span
-                    style={{
-                      borderRight: "solid #efefef 0.8px",
-                      padding: "0px 0px 2.2px",
-                    }}
-                  ></span>
                   <label className="login-btn" onClick={() => goBackWhenLogined("register")}>Đăng ký</label>
                 </span>
               )}

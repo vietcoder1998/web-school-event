@@ -52,7 +52,7 @@ function Announcements(props?: IProps) {
     let { isMobile } = props;
     return (
         <div className='announcements'>
-            <h5>BÀI VIẾT CHO BẠN</h5>
+            <h5><Icon type="book" />BÀI VIẾT CHO BẠN</h5>
             {
                 isMobile ?
                     (announcements.length > 0 ? <Carousel effect="fade" style={{ height: 400 }} autoplay>

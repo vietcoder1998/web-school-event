@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Row, Modal } from 'antd';
+import { Col, Row, Modal, Icon } from 'antd';
 
 //@ts-ignore
 import imgvd1 from './../../assets/image/video/1.png';
@@ -84,7 +84,7 @@ class VideoAd extends Component<IProps, IState> {
                     ></iframe>
                 </Modal> : ""}
                 <Row>
-                    <h5 >CHỦ ĐỀ TIÊU BIỂU</h5>
+                    <h5 ><Icon type="tags" />CHỦ ĐỀ TIÊU BIỂU</h5>
                     <Col sm={24} md={8} lg={8} xl={8} xxl={8}>
                         <div className="expert-content">
                             <OnDiv

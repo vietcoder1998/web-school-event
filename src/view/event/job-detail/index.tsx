@@ -365,14 +365,18 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
       <>
         {/* Info Requirement */}
         <Modal
-          title="Thông tin ứng tuyển"
+          title={
+            <div>
+              <h6>Ứng tuyển công việc</h6>
+              <i>{jobDetail ? jobDetail.jobTitle : "" }</i>
+            </div>
+            }
           visible={visible}
           onOk={this._handleOk}
           footer={[
             <Button key="cancel" onClick={this._handleCancel} type="danger">
               Huỷ
             </Button>,
-
             <Button
               key="ok"
               disabled={shiftIDs.length === 0}
@@ -550,7 +554,6 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
                       </div>
                     </div>
                   </Affix>
-
                   <div className="job-content ">
                     <Tabs defaultActiveKey="1" className="">
                       <TabPane tab="Chi tiết công việc" key="1">

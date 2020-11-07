@@ -61,6 +61,7 @@
       font-size: 0.93rem;
       font-weight: 500;
       // background-color: rgb(214, 214, 214);
+      transition: 0.1s;
 
       &:hover {
         background-color: rgba(184, 216, 255, 0.367);
@@ -94,8 +95,8 @@
 
     // MenuProfile
     .label-function {
-      padding: 5px 13px;
-      font-size: 20px;
+      padding: 8px 14px;
+      font-size: 18px;
       position: relative;
       width: auto;
       color: white;

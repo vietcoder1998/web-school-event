@@ -32,7 +32,7 @@ class AllJob extends PureComponent<IProps> {
         return (
             <div className="home-job">
                 <Row style={{ display: allJob.totalItems === 0 ? 'none' : '' }}>
-                    <h5 style={{ textAlign: 'center' }}>VIỆC LÀM ĐANG TUYỂN</h5>
+                    <h5 style={{ textAlign: 'center' }}><Icon type="flag" /> VIỆC LÀM ĐANG TUYỂN</h5>
                     {
                         allJob && allJob.items ? allJob.items.map((item, index) => {
                             let logoUrl = item.employerLogoUrl;
