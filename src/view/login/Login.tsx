@@ -19,7 +19,7 @@ import logo from "../../assets/image/logo-01.png";
 import imageLogin from "../../assets/image/image-login.png";
 import { goBackWhenLogined } from "../../utils/goBackWhenLogined";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-// import { FacebookProvider, LoginButton } from 'react-facebook';
+import { FacebookProvider, LoginButton } from 'react-facebook';
 // import { TYPE } from './../../const/type';
 
 class Login extends Component {
@@ -237,7 +237,7 @@ class Login extends Component {
                     {loading ? <Icon type="loading" /> : "Đăng nhập"}
                   </Button>
                 </p>
-                {/* <p>
+                <p>
                   <label>hoặc</label>
                 </p>
                 <p className="a_c">
@@ -257,7 +257,7 @@ class Login extends Component {
                       <Icon type="facebook" />Đăng nhập với facebook
                     </LoginButton>
                   </FacebookProvider>
-                </p> */}
+                </p>
                 <p className="a_c">
                   Bạn chưa có tài khoản ?{" "}
                   <label
