@@ -79,11 +79,11 @@ code {
   height: 100%;
   position: relative;
   background-color: white;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.01), 0 2px 4px rgba(0, 0, 0, 0.02),
+  0 4px 8px rgba(0, 0, 0, 0.04);
 
   &:hover {
-    box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.01), 0 2px 4px rgba(0, 0, 0, 0.02),
-      0 4px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.06);
 
     cursor: pointer;
     .job-expert {
@@ -1380,10 +1380,6 @@ label {
   }
 }
 
-.h-j-item {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.06);
-}
-
 .home-job {
   font-family: $font_base;
   // padding: 10px;
@@ -1427,9 +1423,13 @@ label {
     border: rgba(255, 255, 255, 0) solid 1px;
     background-color: #ffffff;
     position: relative;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.06);
+
 
     &:hover {
       background-color: rgba(223, 243, 255, 0.691);
+      border: rgba(14, 14, 14, 0.246) solid 1px;
+
     }
 
     .img-job {
@@ -1443,6 +1443,7 @@ label {
         border-radius: 8px;
         object-fit: contain;
         border: 1px solid $color_border;
+        background-color: rgba(255, 255, 255, 0.801);
       }
     }
 
@@ -1580,6 +1581,8 @@ label {
     border: rgba(255, 255, 255, 0) solid 1px;
     background-color: #ffffff;
     position: relative;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.06);
+
 
     &:hover {
       background-color: rgba(223, 243, 255, 0.691);
@@ -2115,6 +2118,7 @@ label {
               height: 92%;
               width: 92%;
               margin: 5px 5px;
+              padding: 10px;
               // border: solid #e7e7e7 1px;
 
               .ant-skeleton-header .ant-skeleton-avatar-lg {
@@ -3663,3 +3667,7 @@ html {
 .content-requirement {
   padding: 7px 10px;
 }
+
+// img {
+//   background-color: white;
+// }

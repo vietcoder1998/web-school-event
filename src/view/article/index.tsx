@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../layout/Layout";
-import Header from "./Head/HeaderArticle";
+import Header from "./head/HeaderArticle";
 // import "./Article.scss";
 // import Middle from "./middle";
 import { _requestToServer } from "../../services/exec";
