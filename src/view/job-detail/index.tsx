@@ -259,7 +259,8 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
   _createRequest = () => {
     let { message, shiftIDs } = this.state;
     let id = window.atob(this.props.match.params.id);
-    this.requestToServer({ message, shiftIDs }, id);
+    let newMsg = message + '\n' + "Link CV:" + (localStorage.getItem("cvUrl") ? localStorage.getItem("cvUrl")  : "Ứng viên chưa cập nhật CV")
+    this.requestToServer({ newMsg, shiftIDs }, id);
     this.setState({ visible: false });
   };
 
@@ -443,6 +444,9 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                   <a href="/profile" target="_blank">
                     Hoàn thiện hồ sơ
                   </a>
+                </div>
+                <div>
+                  <a>Link: {localStorage.getItem("cvUrl")}</a>
                 </div>
               </div>
             ) : (
@@ -662,6 +666,8 @@ const mapDispatchToprops = (dispatch) => ({
     }),
   getEmployerDetail: (id?: string) =>
     dispatch({ type: REDUX_SAGA.EMPLOYER_DETAIL.GET_EMPLOYER_DETAIL, id }),
+    getFullProfile: () => 
+    dispatch({type: REDUX_SAGA.PERSON_INFO.GET_FULL_PERSON_INFO})
 });
 
 type StateProps = ReturnType<typeof mapStateToProps>;

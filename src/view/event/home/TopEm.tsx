@@ -62,11 +62,9 @@ class TopEm extends PureComponent<IProps, IState> {
                     />
                   </div>
                   <div className="job-content">
-
                     <p style={{ color: "#415167", fontWeight: "bold" }}>
                       {item.employer.employerName}
                     </p>
-
                   </div>
                 </Link>
               </Col>

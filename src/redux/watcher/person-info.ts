@@ -94,6 +94,10 @@ function* getFullPersonInfo(action: any) {
     let rating = data.rating;
     let tools = data.workingTools;
 
+    if (data && data.cvUrl) {
+        localStorage.setItem("cvUrl", data.cvUrl);
+    }
+
 
     yield put({
         type: REDUX.PERSON_INFO.GET_FULL_PERSON_INFO,
