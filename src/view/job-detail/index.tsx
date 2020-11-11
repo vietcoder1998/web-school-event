@@ -155,6 +155,9 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
     this._loadData();
     this._loadState();
     moveScroll(0, 0);
+    if (!localStorage.getItem("cvUrl")){
+      this.props.getFullProfile()
+    }
     this.props.getSimilarJob(0, 6);
   }
 
@@ -446,7 +449,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                   </a>
                 </div>
                 <div>
-                  <a>Link: {localStorage.getItem("cvUrl")}</a>
+                  <a href={localStorage.getItem("cvUrl")} target="_blank" >LinkCV: {localStorage.getItem("cvUrl")}</a>
                 </div>
               </div>
             ) : (
