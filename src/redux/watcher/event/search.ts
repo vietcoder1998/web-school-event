@@ -42,7 +42,7 @@ function getJobResults(action) {
             lat: null,
             lon: null,
         },
-        majorIDs: [],
+        majorIDs: null,
         jobTitle: null,
     };
 

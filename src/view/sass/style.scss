@@ -2215,11 +2215,12 @@ label {
     margin-bottom: 15px;
 
     .filter-name-job {
+      background-color: rgba(11, 55, 97, 0.609);
       text-align: center;
       transition: 0.5s;
       // background-color: #32a3f9;
       position: relative;
-      padding: 10px 5px;
+      padding: 5px;
       border-radius: 3px;
       .ant-select-lg {
         font-size: 14.5px;
@@ -3666,6 +3667,21 @@ html {
 
 .content-requirement {
   padding: 7px 10px;
+}
+
+.ant-select-search {
+  font-weight: 550!important;
+}
+
+.search-type {
+  .ant-select-arrow {
+    color: $color_base
+  }
+}
+
+.ant-input-group.ant-input-group-compact  .ant-select .ant-select-selection {
+  border-width: 3px!important;
+  // border-color: #151c29be
 }
 
 // img {

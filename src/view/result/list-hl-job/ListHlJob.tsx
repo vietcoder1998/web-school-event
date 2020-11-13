@@ -10,7 +10,8 @@ interface IListHlJobProps {
     is_loading?: boolean;
     getHighLightJobs?: Function;
     loadingHlData?: boolean;
-    param?: string
+    param?: string;
+    history?: any;
 }
 
 export default class ListHlJob extends React.Component<IListHlJobProps> {
@@ -27,37 +28,33 @@ export default class ListHlJob extends React.Component<IListHlJobProps> {
                                     {loadingHlData ?
                                         <Skeleton key={index} loading={true} avatar paragraph={{ rows: 1 }} active={true} /> :
                                         <Tooltip title="Công việc hot" style={{ backgroundColor: "white", color: "black" }}>
-                                            <Link to={`/job-detail/${window.btoa(item.id)}${param}`}
-                                                target='_blank'>
-                                                <div key={index} className='item-hl-job'>
-                                                    <div style={{ flex: 1}}>
-                                                        {item.employerLogoUrl ? <LazyLoadImage src={item.employerLogoUrl} alt='works result' height='60px' width='60px' style={{ objectFit: 'contain' }} /> :
-                                                            <div style={{ width: 60, height: 60, backgroundColor: '#f2f2f2', borderRadius: 3, display: 'inline-block' }}></div>
-                                                        }
-                                                        {item.jobType === 'FULLTIME' ? <div className='l_c' style={{ display: 'inline-block', padding: '0 2px', backgroundColor: '#32A3F9', color: '#fff', fontSize: '0.7em', width: '60px', marginTop: 4 }}>FullTime</div> : null}
-                                                        {item.jobType === 'PARTTIME' ? <div className='l_c' style={{ display: 'inline-block', padding: '0 2px', backgroundColor: 'rgb(0, 179, 60)', color: '#fff', fontSize: '0.7em', width: '60px', marginTop: 4 }}>Part-Time</div> : null}
-                                                        {item.jobType === 'INTERNSHIP' ? <div className='l_c' style={{ display: 'inline-block', padding: '0 2px', backgroundColor: 'rgb(255, 153, 51)', color: '#fff', fontSize: '0.7em', width: '60px', marginTop: 4 }}>InternShip</div> : null}
-                                                    </div>
-                                                    <ul style={{ flex: 4, marginLeft: 10, marginBottom: 0 }}>
-                                                        <li style={{ marginBottom: 5 }} className="maxline-2">
-                                                            <Link to={`/job-detail/${window.btoa(item.id)}${param}`}
-                                                                target='_blank'
-                                                            >
-                                                                <Icon type='fire' /> {item.jobTitle + " [HOT]"}
-                                                            </Link>
-                                                        </li>
-                                                        <li className="maxline-1">
-                                                            <Icon type='shop' />{item.employerName}
-                                                        </li>
-                                                        <li >
-                                                            <Icon type="environment" /> {item.region.name}
-                                                            {/* <i className="fa fa-briefcase" aria-hidden="true" style={{ color: '#168ECD' }} /> */}
-                                                        </li>
-
-                                                    </ul>
-
+                                            <div key={index} className='item-hl-job' onClick={() => this.props.history.push(`/job-detail/${window.btoa(item.id)}${param}`)}>
+                                                <div style={{ flex: 1}}>
+                                                    {item.employerLogoUrl ? <LazyLoadImage src={item.employerLogoUrl} alt='works result' height='60px' width='60px' style={{ objectFit: 'contain' }} /> :
+                                                        <div style={{ width: 60, height: 60, backgroundColor: '#f2f2f2', borderRadius: 3, display: 'inline-block' }}></div>
+                                                    }
+                                                    {item.jobType === 'FULLTIME' ? <div className='l_c' style={{ display: 'inline-block', padding: '0 2px', backgroundColor: '#32A3F9', color: '#fff', fontSize: '0.7em', width: '60px', marginTop: 4 }}>FullTime</div> : null}
+                                                    {item.jobType === 'PARTTIME' ? <div className='l_c' style={{ display: 'inline-block', padding: '0 2px', backgroundColor: 'rgb(0, 179, 60)', color: '#fff', fontSize: '0.7em', width: '60px', marginTop: 4 }}>Part-Time</div> : null}
+                                                    {item.jobType === 'INTERNSHIP' ? <div className='l_c' style={{ display: 'inline-block', padding: '0 2px', backgroundColor: 'rgb(255, 153, 51)', color: '#fff', fontSize: '0.7em', width: '60px', marginTop: 4 }}>InternShip</div> : null}
                                                 </div>
-                                            </Link>
+                                                <ul style={{ flex: 4, marginLeft: 10, marginBottom: 0 }}>
+                                                    <li style={{ marginBottom: 5 }} className="maxline-2">
+                                                        <Link to={`/job-detail/${window.btoa(item.id)}${param}`}
+                                                            target='_blank'
+                                                        >
+                                                            <Icon type='fire' /> {item.jobTitle + " [HOT]"}
+                                                        </Link>
+                                                    </li>
+                                                    <li className="maxline-1">
+                                                        <Icon type='shop' />{item.employerName}
+                                                    </li>
+                                                    <li >
+                                                        <Icon type="environment" /> {item.region.name}
+                                                        {/* <i className="fa fa-briefcase" aria-hidden="true" style={{ color: '#168ECD' }} /> */}
+                                                    </li>
+
+                                                </ul>
+                                            </div>
                                         </Tooltip>
                                     }
                                 </Col>)

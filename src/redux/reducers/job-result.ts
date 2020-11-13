@@ -26,8 +26,8 @@ let data = {
             SUN: true,
         },
         area: JSON.parse(localStorage.getItem('region')),
-        job_dto: { name: null, id: 0 },
-        major: { name: null, id: 0 }
+        jobName: { name: null, id: null },
+        major: { name: null, id: null }
     },
     loading: true,
     setFilter: false,
@@ -75,7 +75,7 @@ export const JobResult = (state = data, action) => {
                 ...state,
                 filter: {
                     ...state.filter,
-                    job_dto: action.job_dto
+                    jobName: action.jobName
                 }
             };
         case REDUX.JOB_RESULT.SET_LOADING_RESULT:

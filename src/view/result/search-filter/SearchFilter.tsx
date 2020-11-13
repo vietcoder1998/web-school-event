@@ -3,6 +3,7 @@ import { Select, Row, Col, Button } from "antd";
 import { TYPE } from "../../../const/type";
 import { connect } from "react-redux";
 import qs from "query-string";
+import { REDUX_SAGA } from '../../../const/actions';
 
 const { Option } = Select;
 
@@ -13,23 +14,25 @@ interface ISearchFilterProps {
   loading?: boolean;
   onChangeJobFilter?: (event?: any) => any;
   area?: any;
-  job_dto?: any;
+  jobName?: any;
   location?: any;
   setFilter?: boolean;
   eventName?: string;
   isAuthen?: boolean;
-  primaryColor?: string
+  primaryColor?: string;
+  getJobNames?: Function;
 }
 interface IStateSearchFilter {
   jobType?: any;
   regionID?: any;
   jobNameID?: any;
   isEvent?: any;
+  jobTitle?: any;
 }
 class SearchFilter extends React.Component<
   ISearchFilterProps,
   IStateSearchFilter
-> {
+  > {
   constructor(props) {
     super(props);
     this.state = {
@@ -37,6 +40,7 @@ class SearchFilter extends React.Component<
       regionID: null,
       jobNameID: null,
       isEvent: false,
+      jobTitle: null,
     };
   }
   componentDidMount() {
@@ -48,8 +52,8 @@ class SearchFilter extends React.Component<
       if (this.props.jobType) {
         this.setState({ jobType: this.props.jobType });
       }
-      if (this.props.job_dto && this.props.job_dto.name) {
-        this.setState({ jobNameID: this.props.job_dto.id });
+      if (this.props.jobName && this.props.jobName.name) {
+        this.setState({ jobNameID: this.props.jobName.id });
       }
       if (this.props.area && this.props.area.id) {
         this.setState({ regionID: this.props.area.id });
@@ -58,7 +62,7 @@ class SearchFilter extends React.Component<
       if (queryParam.jobNameID) {
         this.setState({ jobNameID: Number(queryParam.jobNameID) });
       } else {
-        this.setState({ jobNameID: this.props.job_dto.id });
+        this.setState({ jobNameID: this.props.jobName.id });
       }
       if (queryParam.regionID) {
         this.setState({ regionID: Number(queryParam.regionID) });
@@ -72,16 +76,21 @@ class SearchFilter extends React.Component<
       } else {
         this.setState({ jobType: this.props.jobType });
       }
+      if (queryParam.jobTitle) {
+        this.setState({ jobTitle: queryParam.jobTitle });
+      } else {
+        this.setState({ jobTitle: this.props.jobTitle });
+      }
     }
   }
   render() {
-    let { regions, jobNames, loading, eventName, isAuthen, primaryColor} = this.props;
-    let { jobType, jobNameID, regionID, isEvent } = this.state;
+    let { regions, jobNames, loading, eventName, isAuthen } = this.props;
+    let { jobType, regionID, isEvent, jobTitle } = this.state;
     // let [filter, setFilter] = React.useState({ regionID: null, jobNameID: null });
     // console.log(this.props.jobNames)
 
     return (
-      <div className="filter-name-job" style={{ backgroundColor: primaryColor}}>
+      <div className="filter-name-job">
         <Row>
           <Col xs={11} sm={12} md={5} lg={4} xl={4} xxl={5}>
             <Select
@@ -104,7 +113,7 @@ class SearchFilter extends React.Component<
               value={jobType ? jobType : undefined}
             >
               <Option key={"1"} value={null}>
-                Tất cả 
+                Tất cả
               </Option>
               <Option key={"2"} value={TYPE.FULLTIME}>
                 Fulltime
@@ -124,37 +133,41 @@ class SearchFilter extends React.Component<
               showSearch
               style={{ width: "100%", margin: "5px 0px" }}
               placeholder={"Chọn tỉnh thành"}
-              value={regionID && regions.length > 0 ? regions.find(element => element.id === regionID).name  : undefined}
+              value={regionID && regions.length > 0 ? regions.find(element => element.id === regionID).name : undefined}
             >
               <Option key={"1"} value={'Tất cả '}
-              onClick={() => {
-                let newFilter = {
-                  jobType: null,
-                  regionID: this.state.regionID,
-                  jobNameID: this.state.jobNameID,
-                  isEvent: this.state.isEvent,
-                };
-                // let region =
-                //   regions && regions.filter((element) => item.id === element.id);
-                // let regionID = null;
+                onClick={() => {
+                  let newFilter = {
+                    jobType: null,
+                    regionID: this.state.regionID,
+                    jobNameID: this.state.jobNameID,
+                    isEvent: this.state.isEvent,
+                  };
+                  // let region =
+                  //   regions && regions.filter((element) => item.id === element.id);
+                  // let regionID = null;
 
-                // if (region && region.length > 0) {
-                //   regionID = region[0].id;
-                // }
+                  // if (region && region.length > 0) {
+                  //   regionID = region[0].id;
+                  // }
 
-                newFilter.regionID = null;
-                // setFilter(newFilter);
-                this.setState({ regionID: null });
+                  newFilter.regionID = null;
+                  // setFilter(newFilter);
+                  this.setState({ regionID: null });
 
-                this.props.onChangeJobFilter(newFilter);
-              }}
+                  this.props.onChangeJobFilter(newFilter);
+                }}
               >
                 Tất cả
               </Option>
               {regions.length > 0
                 ? regions.map((item, index) => {
-                    return (
-                      <Option key={index} id={item.id} value={item.name} 
+                  return (
+                    <Option 
+                      key={index} 
+                      id={item.id} 
+                      value={item.name}
+                      style={{fontWeight:"bold"}}
                       onClick={() => {
                         let newFilter = {
                           jobType: null,
@@ -165,22 +178,22 @@ class SearchFilter extends React.Component<
                         let region =
                           regions && regions.filter((element) => item.id === element.id);
                         let regionID = null;
-        
+
                         if (region && region.length > 0) {
                           regionID = region[0].id;
                         }
-        
+
                         newFilter.regionID = regionID;
                         // setFilter(newFilter);
                         this.setState({ regionID });
-        
+
                         this.props.onChangeJobFilter(newFilter);
                       }}
-                      >
-                        {item.name}
-                      </Option>
-                    );
-                  })
+                    >
+                      {item.name}
+                    </Option>
+                  );
+                })
                 : null}
             </Select>
           </Col>
@@ -197,43 +210,62 @@ class SearchFilter extends React.Component<
               showSearch
               style={{ width: "100%", margin: "5px 0px" }}
               placeholder={"Chọn tên công việc"}
-              value={jobNames && jobNameID && jobNames.length > 0 ? jobNames.filter(element => element.id === jobNameID).name : undefined}
-            >
-              <Option key={"1"} value={"Tất cả"}
-              onClick={() => {
+              onChange={(e) => {
                 let newFilter = {
                   jobType: this.state.jobType,
                   regionID: this.state.regionID,
                   jobNameID: this.state.jobNameID,
                   isEvent: this.state.isEvent,
+                  jobTitle: this.state.jobTitle
                 };
-                newFilter.jobNameID = null;
-                this.setState({ jobNameID: null });
+
+                if (jobNames && jobNames.length > 0) {
+                  let jobName = jobNames.find(element => element.name === e);
+                  if (jobName && jobName.id) {
+                    newFilter.jobNameID = jobName.id;
+                    this.setState({ jobNameID: jobName.id });
+                  } else {
+                    newFilter.jobTitle = e;
+                    this.setState({ jobTitle: e });
+                  }
+                } else {
+                  newFilter.jobTitle = e;
+                  this.setState({ jobTitle: e });
+                }
                 this.props.onChangeJobFilter(newFilter);
               }}
-              >
-                Tất cả các công việc
-              </Option>
-              {jobNames.length > 0
-                ? jobNames.map((item, index) => {
-                    return (
-                      <Option key={index} id={item.name} value={item.name}
-                      onClick={() => {
-                        let newFilter = {
-                          jobType: this.state.jobType,
-                          regionID: this.state.regionID,
-                          jobNameID: this.state.jobNameID,
-                          isEvent: this.state.isEvent,
-                        };
-                        newFilter.jobNameID = item.id;
-                        this.setState({ jobNameID: item.id });
-                        this.props.onChangeJobFilter(newFilter);
-                      }}
-                      >
-                        {item.name}
-                      </Option>
-                    );
-                  })
+              onSearch={e => this.props.getJobNames(e)}
+              defaultValue={localStorage.getItem("wls") ? localStorage.getItem("wls") : null}
+            >
+              <Option 
+                key={"1"} 
+                value={""} 
+                style={{
+                  fontWeight:"bold", 
+                  color: "red",
+                  fontStyle: "italic"
+                }} 
+                children="Tất cả các công việc"
+              />
+              {
+                jobTitle ?
+                  <Option
+                    key={"1"}
+                    value={jobTitle}
+                    style={{fontWeight:"bold"}}
+                    children={jobTitle}
+                  /> : null
+              }
+              {
+                jobNames.length > 0
+                ? jobNames.map(item =>
+                  <Option
+                    key={item.id}
+                    value={item.name}
+                    style={{fontWeight:"bold"}}
+                    children={item.name}
+                  />
+                )
                 : null}
             </Select>
           </Col>
@@ -277,7 +309,7 @@ class SearchFilter extends React.Component<
             <Button
               size="large"
               type="danger"
-              icon={loading? "loading": "search"}
+              icon={loading ? "loading" : "search"}
               children={"Tìm"}
               style={{
                 width: "100%",
@@ -302,10 +334,18 @@ const mapStateToProps = (state) => ({
   isAuthen: state.AuthState.isAuthen,
   jobType: state.JobResult.filter.jobType,
   area: state.JobResult.filter.area,
-  job_dto: state.JobResult.filter.job_dto,
+  jobName: state.JobResult.filter.jobName,
   setFilter: state.JobResult.setFilter,
   eventName: state.EventStatusReducer.name,
   primaryColor: state.DetailEvent.primaryColor,
+  JobNames: state.JobNames.items
 });
 
-export default connect(mapStateToProps)(SearchFilter);
+const mapDispatchToProps = (dispatch) => ({
+  getJobNames: (jobName) => dispatch({ type: REDUX_SAGA.JOB_NAMES.GET_JOB_NAMES, jobName })
+});
+
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchFilter);

@@ -41,7 +41,6 @@ function* getFullPersonInfo(action: any) {
         cvUrl: "",
         tools: []
     };
-
     personalInfo.avatarUrl = data.avatarUrl;
     personalInfo.phone = data.phone;
     personalInfo.email = data.email;

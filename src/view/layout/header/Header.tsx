@@ -168,7 +168,7 @@ class Header extends PureComponent<IProps, IState> {
                 Tìm việc
               </a>
               
-                <Dropdown trigger={'click'} overlay={
+                <Dropdown trigger={['click']} overlay={
                     () => <Menu>
                     <Menu.Item key="0">
                       <Row>
@@ -179,7 +179,7 @@ class Header extends PureComponent<IProps, IState> {
                         </Col>
                         <Col span={6}>
                           <LazyLoadImage 
-                          onClick={() => { this.setState({ visible: true, showQRImageType: 1 }) }} 
+                          onClick={() => this.setState({ visible: true, showQRImageType: 1 }) }
                           src={QRCodeAppStore} alt='AppleStore Tìm việc QRCode' 
                           height='47px' 
                           width='auto' 

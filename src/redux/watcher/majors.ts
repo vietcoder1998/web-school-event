@@ -1,5 +1,5 @@
 import { GET } from './../../const/method';
-import { LIST_JOB_NAMES, MAJORS } from './../../services/api/public.api';
+import { MAJORS } from './../../services/api/public.api';
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { _requestToServer } from '../../services/exec';
 import { PUBLIC_HOST } from '../../environment/development';
@@ -25,9 +25,6 @@ function getMajorData(action) {
         { pageIndex: 0, pageSize: 0, name: action.name ? action.name : null },
         false
     );
-
-    console.log(res);
-
     return res;
 }
 

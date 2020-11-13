@@ -25,9 +25,6 @@ function getJobNameData(action) {
         { pageIndex: 0, pageSize: 0, name: action.name ? action.name : null },
         false
     );
-
-    console.log(res);
-
     return res;
 }
 

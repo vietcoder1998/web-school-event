@@ -117,8 +117,8 @@ class Result extends React.Component<IProps, IStateResult> {
       if (this.props.jobType) {
         jobType = this.props.jobType;
       }
-      if (this.props.job_dto && this.props.job_dto.name) {
-        jobNameID = this.props.job_dto.id;
+      if (this.props.jobName && this.props.jobName.name) {
+        jobNameID = this.props.jobName.id;
       }
       if (this.props.area && this.props.area.id) {
         regionID = this.props.area.id;
@@ -138,7 +138,7 @@ class Result extends React.Component<IProps, IStateResult> {
       if (queryParam.jobNameID) {
         jobNameID = Number(queryParam.jobNameID);
       } else {
-        jobNameID = this.props.job_dto.id;
+        jobNameID = this.props.jobName.id;
       }
       if (queryParam.regionID) {
         regionID = Number(queryParam.regionID);
@@ -274,6 +274,7 @@ class Result extends React.Component<IProps, IStateResult> {
   };
 
   onChangeJobFilter = async (event?: any) => {
+    console.log(event)
     let queryParam = qs.parse(this.props.location.search);
     let { body, isSearchEvent } = this.state;
     isSearchEvent = event.isEvent;
@@ -343,7 +344,8 @@ class Result extends React.Component<IProps, IStateResult> {
       regions,
       loadingHlData,
       loading,
-      param
+      param,
+      history
     } = this.props;
     const listResult = results.items;
     return (
@@ -355,6 +357,7 @@ class Result extends React.Component<IProps, IStateResult> {
                 {/* Search Result */}
                 <Row>
                   <ListHlJob
+                    history={history}
                     loadingHlData={loadingHlData}
                     highlightData={highlightData}
                     //@ts-ignore
@@ -434,7 +437,7 @@ const mapStateToProps = (state) => ({
   jobType: state.JobResult.filter.jobType,
   area: state.JobResult.filter.area,
   setFilter: state.JobResult.setFilter,
-  job_dto: state.JobResult.filter.job_dto,
+  jobName: state.JobResult.filter.jobName,
   list_day: state.JobResult.filter.list_day,
   list_shift: state.JobResult.filter.list_shift,
   param: state.DetailEvent.param
