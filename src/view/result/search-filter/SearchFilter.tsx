@@ -197,7 +197,7 @@ class SearchFilter extends React.Component<
               showSearch
               style={{ width: "100%", margin: "5px 0px" }}
               placeholder={"Chọn tên công việc"}
-              value={jobNameID && jobNames.length > 0 ? jobNames.find(element => element.id === jobNameID).name : undefined}
+              value={jobNames && jobNameID && jobNames.length > 0 ? jobNames.filter(element => element.id === jobNameID).name : undefined}
             >
               <Option key={"1"} value={"Tất cả"}
               onClick={() => {

@@ -30,6 +30,7 @@ function getJobResults(action) {
     jobGroupIDs: null,
     jobType: null,
     jobShiftFilter: null,
+    jobTitle: null,
     jobLocationFilter: {
       regionID: null,
       lat: null,
@@ -50,6 +51,8 @@ function getJobResults(action) {
   var rid = url.searchParams.get("regionID");
   var jt = url.searchParams.get("jt");
   var brids = url.searchParams.get("brids");
+  var title = url.searchParams.get("jobTitle");
+  var mjid = url.searchParams.get("majorID")
 
   if (jnids) {
     body.jobNameIDs = [parseInt(jnids)];
@@ -67,10 +70,16 @@ function getJobResults(action) {
     body.branchIDs = [parseInt(brids)];
   }
 
+  if (mjid) {
+    body.majorIDs = [parseInt(mjid)]
+  }
+  if (title) {
+    body.jobTitle = title
+  }
+
   body.jobLocationFilter.distance=null;
   body.jobLocationFilter.lat=null;
   body.jobLocationFilter.lon=null;
-
 
   let isAuthen = store.getState().AuthState.isAuthen;
   let res = _requestToServer(

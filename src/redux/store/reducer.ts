@@ -35,8 +35,7 @@ import { AllJobResult } from '../reducers/all-job';
 import { HighLightResult } from '../reducers/highlight-job';
 import { ChatRoom } from '../reducers/chat-room';
 import { MobileState } from './../reducers/change-mobile-state';
-
-
+import {Majors} from './../reducers/major';
 
 let rootReducer = {
   ShortPersonalInfo,
@@ -74,6 +73,7 @@ let rootReducer = {
   GetEventJobSave,
   EventEmployerMoreJob,
   EventStatusReducer,
+  Majors
 };
 
 const myReducer = combineReducers(rootReducer);

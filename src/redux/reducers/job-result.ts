@@ -10,6 +10,7 @@ let data = {
     filter: {
         jobType: null,
         show_days: true,
+        jobTitle: null,
         list_shift: {
             MOR: true,
             AFT: true,
@@ -25,7 +26,8 @@ let data = {
             SUN: true,
         },
         area: JSON.parse(localStorage.getItem('region')),
-        job_dto: { name: null, id: 0 }
+        job_dto: { name: null, id: 0 },
+        major: { name: null, id: 0 }
     },
     loading: true,
     setFilter: false,
@@ -85,6 +87,22 @@ export const JobResult = (state = data, action) => {
             return {
                 ...state,
                 setFilter: action.setFilter
+            };
+        case REDUX.JOB_RESULT.SET_FILTER_MAJOR:
+            return {
+                ...state,
+                filter: {
+                    ...state.filter,
+                    major: action.major
+                }
+            };
+        case REDUX.JOB_RESULT.SET_JOB_TITLE:
+            return {
+                ...state,
+                filter: {
+                    ...state.filter,
+                    jobTitle: action.jobTitle
+                }
             };
         default:
             return { ...state };

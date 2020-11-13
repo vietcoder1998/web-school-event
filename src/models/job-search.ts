@@ -9,6 +9,7 @@ export interface IJobSearchFilter {
     shuffle?: boolean,
     startCreatedDate?: number,
     endCreatedDate?: number,
+    jobTitle: string,
     jobPriorityFilter?: {
       homePriority?: string,
       excludeHomePriority?: boolean,

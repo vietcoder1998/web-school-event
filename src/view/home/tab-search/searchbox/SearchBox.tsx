@@ -56,7 +56,14 @@ interface IProps {
     show_days?: any;
     setFilter?: any;
     primaryColor?: string;
-    param?: string
+    param?: string;
+    textSearch?: string;
+    getMajors: (name?: string) =>any;
+    majors?: Array<any>
+    setFilterMajor: Function;
+    major?: any;
+    title?: string;
+    setFilterJobtitle?: Function;
 };
 
 interface IState {
@@ -100,7 +107,7 @@ interface IState {
     choose_location?: boolean,
     visible?: boolean,
     showQRImageType?: any,
-
+    title?: string;
 };
 
 class SearchBox extends Component<IProps, IState>{
@@ -148,6 +155,7 @@ class SearchBox extends Component<IProps, IState>{
             show_location: false,
             choose_location: false,
             visible: false,
+            title: null,
             showQRImageType: 0
         }
     }
@@ -157,6 +165,7 @@ class SearchBox extends Component<IProps, IState>{
     async componentDidMount() {
         this.props.getRegions();
         this.props.getJobNames();
+        this.props.getMajors();
         if (!this.props.area) {
             // this.setState({ area: region })
             this.props.setFilterArea({ id: 24, name: 'Hà Nội' });
@@ -224,8 +233,17 @@ class SearchBox extends Component<IProps, IState>{
         let { job_dto } = this.props;
         job_dto.name = e.key;
         job_dto.id = e.item.props.id;
+        console.log(e);
         // this.setState({ job_dto });
         this.props.setFilterJobName(job_dto);
+    }
+
+    _selectMajor = (e) => {
+        let { major } = this.props;
+        major.name = e.key;
+        major.id = e.item.props.id;
+        // this.setState({ job_dto });
+        this.props.setFilterMajor(major);
     }
 
     _handleOk = () => {
@@ -241,6 +259,7 @@ class SearchBox extends Component<IProps, IState>{
 
     _onSearch = (event?: string) => {
         // console.log(event)
+        this.props.setFilterJobtitle(event)
         this.props.getJobNames(event)
     }
 
@@ -328,12 +347,13 @@ class SearchBox extends Component<IProps, IState>{
             location,
             choose_location,
         } = this.state;
-        let { jobType, list_shift, list_day, area, job_dto, show_days } = this.props
+        let { jobType, list_shift, list_day, area, job_dto, show_days, major,title } = this.props
 
         let employerID = null;
         let excludedJobIDs = null;
         let excludePriority = null;
         let jobNameIDs = job_dto.id ? [job_dto.id] : null;
+        let majorIDs = major ? [major.id]: null;
         let jobGroupID = null;
         let shuffle = true;
         let jobShiftFilter = {
@@ -341,7 +361,7 @@ class SearchBox extends Component<IProps, IState>{
             weekDays: [],
             dayTimes: []
         };
-
+        let jobTitle = job_dto && job_dto.id ? null: title
         let jobLocationFilter = {
             regionID: null,
             lat: null,
@@ -387,15 +407,19 @@ class SearchBox extends Component<IProps, IState>{
                 jobGroupID,
                 jobType,
                 jobShiftFilter,
-                jobLocationFilter
+                jobLocationFilter,
+                majorIDs,
+                jobTitle
             }
         )
     }
 
     requestToServer(data) {
-        let { job_dto, area, list_day, list_shift } = this.props
+        let { job_dto, area, list_day, list_shift, major, title } = this.props
         let jobNameID = job_dto.id ? job_dto.id : null;
+        let majorID = major ? major.id: null;
         let regionID = area.id ? area.id : null;
+        let jobTitle = title ? title : null;
         this.props.setFilter(true);
         localStorage.setItem('paging', JSON.stringify({ pageIndex: 0, pageSize: 10 }));
         localStorage.setItem('searchData', data);
@@ -404,7 +428,9 @@ class SearchBox extends Component<IProps, IState>{
         let queryParam: Object = {
             jobType: this.props.jobType,
             jobNameID,
-            regionID
+            regionID, 
+            majorID,
+            jobTitle
         };
 
         queryParam = Object.assign(queryParam, list_day)
@@ -415,7 +441,6 @@ class SearchBox extends Component<IProps, IState>{
         if (this.props.param) {
             // let param = this.props.param.substring(1)
             let param = qs.parse(this.props.param)
-
             this.props.history.push('/result?' + queryParam + '&eventID=' + param.eventID + '&schoolID=' + param.schoolID)
         } else {
             this.props.history.push('/result?' + queryParam);
@@ -425,14 +450,14 @@ class SearchBox extends Component<IProps, IState>{
     componentWillUnmount() {
         this._isMounted = true;
     }
+    
     render() {
         let {
-
             choose_advanced,
             showQRImageType
         } = this.state;
 
-        let { jobNames, regions, list_shift, list_day, area, job_dto, show_days, primaryColor } = this.props;
+        let { jobNames, regions, list_shift, list_day, area, job_dto, show_days, primaryColor, majors, title, major } = this.props;
 
         return (
             <>
@@ -537,8 +562,6 @@ class SearchBox extends Component<IProps, IState>{
                             <TabPane tab="Thực tập" key="3">
                             </TabPane>
                         </Tabs>
-
-
                         <div className='find-now'>
                             <Button
                                 size='large'
@@ -558,7 +581,7 @@ class SearchBox extends Component<IProps, IState>{
                     {/* Search in Computer */}
                     <div className='search-box hidden-only-phone'>
                         <div>
-                            <p style={{ fontSize: '1.5rem', color: 'white', fontWeight: 550, marginBottom: '5px' }}>Tìm Công Việc Mơ Ước. Nâng Bước Thành Công!</p>
+                            <p style={{ fontSize: '1.5rem', color: 'white', fontWeight: 550, marginBottom: '5px' }}>Định Hướng Việc Hay, Nhận Ngay Khi Rảnh!</p>
                         </div>
                         {/* Choose Type Job */}
                         <Tabs defaultActiveKey={this.keyJobType(this.props.jobType)} onChange={this._handleTabs}>
@@ -616,7 +639,7 @@ class SearchBox extends Component<IProps, IState>{
                                     showSearch={true}
                                     defaultValue={
                                         area ? area.name : 'Chọn tỉnh thành'}
-                                    style={{ width: '25%' }}
+                                    style={{ width: '20%' }}
                                     size="large"
                                 >
                                     <Option
@@ -634,41 +657,86 @@ class SearchBox extends Component<IProps, IState>{
                                     })}
                                 </Select>
                                 <Select
-                                    style={{ width: '50%' }}
+                                    style={{ width: '35%' }}
                                     placeholder="Tìm kiếm công việc của bạn"
                                     size="large"
                                     showSearch
                                     optionFilterProp="children"
                                     onSearch={(event) => this._onSearch(event)}
-                                    defaultValue={job_dto && job_dto.name ? job_dto.name : undefined}
+                                    defaultValue={(job_dto && job_dto.name  ) || title ? job_dto.name : "Tất cả các công việc"}
                                 >
                                     <Option
                                         key={'1'}
-                                        value={null}
+                                        value={"Tất cả các công việc"}
                                         onClick={() => {
-                                            this.props.setFilterJobName({ id: null, name: 'Tất cả các công việc' })
+                                            this.setState({title: "Tất cả các công việc" })
                                         }}
                                     >
                                         Tất cả các công việc
                                     </Option>
+                                    {
+                                        title ? 
+                                        <Option
+                                            key={'title'}
+                                            value={title}
+                                            onClick={() => {
+                                                this.props.setFilterJobName({id: null, name: null})
+                                            }}
+                                        >
+                                            {title}
+                                        </Option>: null
+                                    }
                                     {jobNames && jobNames.map((item, index) => {
                                         return (<Option key={index}
                                             id={item.id}
                                             value={item.name}
                                             onClick={this._selectJob}
-
                                         >{item.name + '  '}
                                         </Option>)
                                     })}
                                 </Select>
+                                <Select
+                                    style={{ width: '20%' }}
+                                    placeholder="Chuyên ngành"
+                                    size="large"
+                                    showSearch
+                                    optionFilterProp="children"
+                                    onSearch={(event) => this.props.getMajors(event)}
+                                    defaultValue={
+                                        major && 
+                                        major.name ? 
+                                        major.name : 
+                                            "Tất cả các chuyên ngành"
+                                        }
+                                >
+                                    <Option
+                                        key={'1'}
+                                        value={null}
+                                        onClick={() => {
+                                            this.props.setFilterMajor({ id: null, name: "Tất cả các chuyên ngành" })
+                                        }}
+                                    >
+                                        Tất cả các chuyên ngành
+                                    </Option>
+                                    {majors && majors.length > 0 ? majors.map((item, index) => {
+                                        return (<Option key={index}
+                                            id={item.id}
+                                            value={item.name}
+                                            onClick={this._selectMajor}
+
+                                        >{item.name + '  '}
+                                        </Option>)
+                                    }): ""}
+                                </Select>
                                 <Button size="large"
                                     // type='primary'
                                     type='danger'
-                                    style={{ width: '25%' }}
+                                    style={{ width: '20%' }}
                                     // onClick={this._openModal}
                                     onClick={() => this._createRequest()}
+                                    icon="search"
                                 >
-                                    <Icon type='search' />Tìm việc ngay
+                                    Tìm việc ngay   
                                 </Button>
                             </InputGroup>
                         </div>
@@ -710,22 +778,26 @@ const mapStateToProps = state => ({
     list_day: state.JobResult.filter.list_day,
     area: state.JobResult.filter.area,
     job_dto: state.JobResult.filter.job_dto,
+    major: state.JobResult.filter.major,
     primaryColor: state.DetailEvent.primaryColor,
     param: state.DetailEvent.param,
-
+    majors: state.Majors.items,
+    jobTitle: state.JobResult.filter.jobTitle
 })
 
 const mapDispatchToProps = (dispatch) => ({
     getJobResult: (body) => dispatch({ type: REDUX_SAGA.JOB_RESULT.GET_JOB_RESULT, body }),
     getJobNames: (name?: string) => dispatch({ type: REDUX_SAGA.JOB_NAMES.GET_JOB_NAMES, name }),
+    getMajors: (name?: string) => dispatch({type: REDUX_SAGA.MAJOR.GET_MAJOR, name}),
     getRegions: () => dispatch({ type: REDUX_SAGA.REGIONS.GET_REGIONS }),
     setFilterJobType: (jobType, show_days) => dispatch({ type: REDUX.JOB_RESULT.SET_FILTER_JOB_TYPE, jobType, show_days }),
     setFilterListShift: (list_shift) => dispatch({ type: REDUX.JOB_RESULT.SET_FILTER_LIST_SHIFT, list_shift }),
     setFilterListDay: (list_day) => dispatch({ type: REDUX.JOB_RESULT.SET_FILTER_LIST_DAY, list_day }),
     setFilterArea: (area) => dispatch({ type: REDUX.JOB_RESULT.SET_FILTER_AREA, area }),
     setFilterJobName: (job_dto) => dispatch({ type: REDUX.JOB_RESULT.SET_FILTER_JOBNAME, job_dto }),
+    setFilterMajor: (major) => dispatch({ type: REDUX.JOB_RESULT.SET_FILTER_MAJOR, major}),
     setFilter: (setFilter) => dispatch({ type: REDUX.JOB_RESULT.SET_FILTER, setFilter }),
-
+    setFilterJobtitle: (jobTitle) => dispatch({type: REDUX.JOB_RESULT.SET_JOB_TITLE, jobTitle})
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBox);

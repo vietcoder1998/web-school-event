@@ -5,11 +5,19 @@ import logo from "../../../assets/image/logo-02.png";
 import { connect } from "react-redux";
 import "./Header.scss";
 import clearStorage from "../../../services/clear-storage";
-import { Icon, Badge, Menu, Dropdown, Avatar, Tooltip } from "antd";
+import { Icon, Badge, Menu, Dropdown, Avatar, Tooltip, Row, Col } from "antd";
 import Notification from "./notification/Notification";
 import { REDUX } from "../../../const/actions";
 import { goBackWhenLogined } from "../../../utils/goBackWhenLogined";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+//@ts-ignore
+import CHPlay from '../../../assets/image/CHPlay.png';
+//@ts-ignore
+import AppStore from '../../../assets/image/app-store.png';
+//@ts-ignore
+import QRCodeAppStore from '../../../assets/image/qr-code-appstore.png';
+//@ts-ignore
+import QRCodeCHPlay from '../../../assets/image/qr-code-chplay.png';
 interface IProps {
   isAuthen?: boolean;
   show_noti?: boolean;
@@ -159,9 +167,56 @@ class Header extends PureComponent<IProps, IState> {
                 <Icon type={"search"} />
                 Tìm việc
               </a>
+              
+                <Dropdown trigger={'click'} overlay={
+                    () => <Menu>
+                    <Menu.Item key="0">
+                      <Row>
+                        <Col span={18}>
+                          <a href={'https://apps.apple.com/vn/app/worksvn-sinh-vi%C3%AAn/id1492437454'}>
+                            <LazyLoadImage src={AppStore} alt='AppleStore Tìm việc' height='50px' width='auto' />
+                          </a>
+                        </Col>
+                        <Col span={6}>
+                          <LazyLoadImage 
+                          onClick={() => { this.setState({ visible: true, showQRImageType: 1 }) }} 
+                          src={QRCodeAppStore} alt='AppleStore Tìm việc QRCode' 
+                          height='47px' 
+                          width='auto' 
+                          style={{ 
+                            marginTop: '1.2px', 
+                            marginLeft: '5px', 
+                            cursor: 'pointer' }} 
+                        />
+                        </Col>
+                      </Row>
+                    </Menu.Item>
+                    <Menu.Item key="1">
+                      <Row>
+                        <Col span={18}>
+                          <a href={'https://play.google.com/store/apps/details?id=com.worksvn.candidate&hl=vi'}>
+                            <LazyLoadImage src={CHPlay} alt='CHPlay Tìm việc' height='50px' width='auto' />
+                          </a>
+                        </Col>
+                        <Col span={6}>
+                          <LazyLoadImage 
+                            onClick={() => { this.setState({ visible: true, showQRImageType: 2 }) }} 
+                            src={QRCodeCHPlay} alt='CHPlay Tìm việc QRCode' 
+                            height='47px' width='auto' 
+                            style={{ marginTop: '1.2px', marginLeft: '5px', cursor: 'pointer' }} 
+                          />
+                        </Col>
+                      </Row>
+                    </Menu.Item>
+                    <Menu.Divider />
+                    <Menu.Item key="3" disabled>
+                      ứng dụng Worksvn trên điện thoại!
+                    </Menu.Item>
+                  </Menu>
+                }>
               <a
-                href="http://qrco.de/worksvn-vieclam?fbclid=IwAR2nRSwHv0aFQyVagAIb1EmFBA-0SX4NY3VVDevPwAb5VXQN_qnywhvJfwI"
-                target="_blank"
+                // href="http://qrco.de/worksvn-vieclam?fbclid=IwAR2nRSwHv0aFQyVagAIb1EmFBA-0SX4NY3VVDevPwAb5VXQN_qnywhvJfwI"
+                // target="_blank"
                 rel="noopener noreferrer"
               >
                 <Icon
@@ -171,6 +226,8 @@ class Header extends PureComponent<IProps, IState> {
                 />
                 Ứng dụng di động
               </a>
+
+                </Dropdown>
               <a href="/gross-to-net">
                 <Icon
                   type={"dollar"}

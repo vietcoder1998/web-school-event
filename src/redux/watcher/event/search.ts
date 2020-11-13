@@ -41,7 +41,9 @@ function getJobResults(action) {
             regionID: null,
             lat: null,
             lon: null,
-        }
+        },
+        majorIDs: [],
+        jobTitle: null,
     };
 
     if (action.body) {
