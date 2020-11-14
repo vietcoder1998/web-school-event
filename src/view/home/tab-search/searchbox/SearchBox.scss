@@ -58,9 +58,7 @@
       line-height: 50px;
       font-weight: 500;
     }
-    .ant-tabs-nav-container {
-      border:solid 1px rgba(0, 0, 0, 0)!important;
-    }
+
     .ant-select-selection--single {
       height: 50px;
     }
@@ -78,10 +76,21 @@
     }
     .ant-tabs-bar {
       // margin: 0 0 1px 0;
-      // border-bottom: 10;
+      border-color:  #ffffff00;
+      transition: 0.3s;
       border-width: 1;
       .ant-tabs-nav-wrap{
         transition: 0.5sf;
+      }
+    
+    }
+
+    .ant-tabs-tab[aria-selected="false"]:hover{
+      transition: 10000000000000000s;
+    }
+    .ant-tabs-tab{
+      &:hover {
+        border-radius: 5px;
       }
     }
     //Location-address
@@ -104,7 +113,6 @@
     // Search-type
     .search-type {
       transition: 0.5s;
-      padding: 0 0px;
       .ant-btn {
         padding: 0px 5px;
       }
@@ -131,8 +139,6 @@
     }
 
     .choose-time {
-      padding: 10px;
-
       .choose-shift {
         margin: 5px 0px;
 

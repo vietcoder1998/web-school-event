@@ -9,7 +9,7 @@ let data = {
     },
     filter: {
         jobType: null,
-        show_days: true,
+        show_days: false,
         jobTitle: null,
         list_shift: {
             MOR: true,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Row, Col, Icon, Spin, Tooltip, Empty } from 'antd';
 import { Link } from 'react-router-dom';
 import { limitString } from '../../../utils/limitString';
@@ -10,6 +10,8 @@ import { IJobDetail } from '../../../models/job-detail';
 // import { IAnnouncement } from '../../../models/announcements';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import LinkToolTip from '../../layout/common/LinkToolTip';
+import {_requestToServer} from './../../../services/exec';
+import { DELETE, POST } from '../../../const/method';
 
 
 interface IListResultProps {
@@ -19,8 +21,40 @@ interface IListResultProps {
     param?: any
 }
 
+
+
 export default function ListResult(props?: IListResultProps) {
     let { loading, listResult, isSearchEvent, param } = props;
+
+    const [saveState, setSaveState] = React.useState([])
+    React.useEffect(() => {
+        if (props.listResult) {
+            let saveMap = props.listResult.map(item => item.saved)
+            setSaveState(saveMap)
+        }
+    })
+
+    const saveJob =(id:string, saved?: boolean, index?: number) => {
+        if (id) {
+            _requestToServer(
+                !saved ? POST : DELETE,
+                saved ? [id]:undefined,
+                !saved ?`/api/students/jobs/${id}/saved` : '/api/students/jobs/saved',
+                undefined,
+                undefined,
+                undefined,
+                true
+            ).then(res => {
+                if(res) {
+                   let newSavestate =  saveState
+                   newSavestate[index] = !saved
+                   setSaveState(newSavestate => [...newSavestate])
+                }
+            })
+        }
+        
+    }
+
     return (
         <div className='result' >
             {loading ? <div className='loading'><Spin /></div> : (listResult.length > 0 ? listResult.map((item?: IJobDetail, index?: number) => {
@@ -49,7 +83,7 @@ export default function ListResult(props?: IListResultProps) {
 
                         </Col>
                         {/* Content */}
-                        <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20} className='item-content'>
+                        <Col xs={20} sm={20} md={18} lg={18} xl={18} xxl={18} className='item-content'>
                             <div className='item-header'>
                                 <h4 >
                                     <Link
@@ -105,21 +139,16 @@ export default function ListResult(props?: IListResultProps) {
                             </div>
                         </Col>
                         {/* Save */}
-                        {/* <Col xs={2} sm={2} md={4} lg={3} xl={3} className='item-option '> */}
-                        {/* <div className='item-job-type hidden-only-phone'  >
-                            <span className={item.jobType}>
-                                {item.jobType}
-                            </span>
-                        </div> */}
-
-                        {/* <Tooltip title='Lưu lại'> */}
-                        {/* <div className='item-save' style={{ display: isAuthen ? 'block' : 'none' }}> */}
-                        {/* <Icon type="save" style={{ color }} /> */}
-                        {/* </div> */}
-                        {/* </Tooltip> */}
-                        {/* </Col> */}
+                        <Col xs={2} sm={2} md={2} lg={2} xl={2} className='item-option '>
+                            <Tooltip title='Lưu lại'>
+                                <div className='item-save' style={{ display: localStorage.getItem("accessToken") ? 'block' : 'none' }}>
+                                    <Icon 
+                                        type="heart" 
+                                        theme={saveState[index] ? "filled":"outlined"} style={{color: "red", fontSize: 18}} onClick={() => saveJob(item.id, item.saved, index)}/>
+                                </div>
+                            </Tooltip>
+                        </Col>
                     </Row >
-                    // </LazyLoadComponent>
                 )
             }) : <Empty style={{ minHeight: '500px', backgroundColor: 'white', padding: '8.5vw 0', margin: '0' }} description={'Không tìm thấy công việc liên quan'} />)}
         </div >

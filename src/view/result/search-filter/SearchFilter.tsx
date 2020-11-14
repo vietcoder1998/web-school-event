@@ -235,7 +235,7 @@ class SearchFilter extends React.Component<
                 this.props.onChangeJobFilter(newFilter);
               }}
               onSearch={e => this.props.getJobNames(e)}
-              defaultValue={localStorage.getItem("wls") ? localStorage.getItem("wls") : null}
+              defaultValue={localStorage.getItem("wls") && localStorage.getItem("wls")!=='null' ? localStorage.getItem("wls") : "Tất cả các công việc"}
             >
               <Option 
                 key={"1"} 

@@ -14,6 +14,9 @@ import { REDUX_SAGA } from './../../../const/actions';
 import { connect } from 'react-redux';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+
+import {Link} from 'react-router-dom';
+
 //@ts-ignore
 
 function Footer(props) {
@@ -25,13 +28,13 @@ function Footer(props) {
       <div className="content-footer" style={{ display: props.disableFooterData ? "none" : "block", paddingTop: 18 }}>
         <Row >
           {/* Rule */}
-          <Col xs={24} sm={24} md={8} lg={8} className='rule'>
+          <Col xs={24} sm={24} md={7} lg={7} className='rule'>
             <ul>
               <li><b>Về Works.vn</b></li>
-              <li><a href='https://about.works.vn/ve-chung-toi/' target="_blank" rel="noopener noreferrer">Giới thiệu</a></li>
-              <li><a href='https://about.works.vn/privacy-policy/' target="_blank" rel="noopener noreferrer">Điều khoản sử dụng</a></li>
-              <li> <a href='https://about.works.vn' target="_blank" rel="noopener noreferrer">Về chúng tôi</a></li>
-              <li> <a href='https://works.vn/result' target="_blank" rel="noopener noreferrer">Tìm việc</a></li>
+              <li><a href='https://about.works.vn/ve-chung-toi/' target="_blank" rel="noopener noreferrer"><Icon type="caret-right" />Giới thiệu</a></li>
+              <li><a href='https://about.works.vn/privacy-policy/' target="_blank" rel="noopener noreferrer"><Icon type="caret-right" />Điều khoản sử dụng</a></li>
+              <li> <a href='https://about.works.vn' target="_blank" rel="noopener noreferrer"><Icon type="caret-right" />Về chúng tôi</a></li>
+              <li> <a href='https://works.vn/result' target="_blank" rel="noopener noreferrer"><Icon type="caret-right" />Tìm việc</a></li>
             </ul>
           </Col>
           {/* Contact */}
@@ -40,23 +43,65 @@ function Footer(props) {
                 <b> Kết nối với chúng tôi:</b>
             </li>
             <li>
-              <a href='https://www.facebook.com/workss.vn/?epa=SEARCH_BOX' target="_blank" rel="noopener noreferrer">
-                <Icon type={"facebook"} style={{marginRight: 10}} />
-                Facebook: works.vn
+              <a href='https://www.facebook.com/WORKSVN.Official' target="_blank" rel="noopener noreferrer" style={{marginRight: 10}}>
+                <Icon type={"facebook"} style={{marginRight: 5}} theme="filled" />
+                Facebook 
+              </a>
+              <a href='https://www.youtube.com/channel/UCTU8sxb4_pvFbpcHmdZGzmg' target="_blank" rel="noopener noreferrer">
+                <Icon type={"youtube"} style={{marginRight: 5}} theme="filled" />
+                Youtube
               </a>
             </li>
             <li style={{fontStyle: "italic"}}>
-              Địa chỉ: Số 09 Duy tân, Dịch vọng hậu, Cầu giấy, Hà nội
+             
+              <Icon type={"environment"} style={{marginRight: 10}} theme="filled" />
+              Văn phòng: 54 Lê Văn Thiêm, Nhân Chính, Thanh Xuân, Hà Nội
+            </li>
+            <li>
+
             </li>
             <li style={{fontStyle: "italic"}}>
-              Văn phòng: 54 Lê Văn Thiêm, Nhân Chính, Thanh Xuân, Hà Nội
+              <Link to="/result?AFT=true&EVN=true&FRI=true&MON=true&MOR=true&SAT=true&SUN=true&THU=true&TUE=true&WED=true&jobNameID&jobTitle&jobType&majorID&regionID" >
+               <Icon type={"swap-right"} style={{marginRight: 10}}/>
+                Tất cả các việc làm
+              </Link>
+            </li>
+            <li style={{fontStyle: "italic"}}>
+            <Link to="/result?AFT=true&EVN=true&FRI=true&MON=true&MOR=true&SAT=true&SUN=true&THU=true&TUE=true&WED=true&jobNameID&jobTitle&jobType=PARTTIME&majorID&regionID" >
+              <Icon type={"swap-right"} style={{marginRight: 10}} />
+              Việc làm parttime
+            </Link>
+            </li>
+            <li style={{fontStyle: "italic"}}>
+              <Link to="/result?AFT=true&EVN=true&FRI=true&MON=true&MOR=true&SAT=true&SUN=true&THU=true&TUE=true&WED=true&jobNameID&jobTitle&jobType=INTERNSHIP&majorID&regionID" >
+                <Icon type={"swap-right"} style={{marginRight: 10}} />
+                Việc làm thực tập
+              </Link>
+            </li>
+            <li style={{fontStyle: "italic"}}>
+              <Link to="/result?AFT=true&EVN=true&FRI=true&MON=true&MOR=true&SAT=true&SUN=true&THU=true&TUE=true&WED=true&jobNameID&jobTitle&jobType=FULLTIME&majorID&regionID" >
+                <Icon type={"swap-right"} style={{marginRight: 10}} />
+                Việc làm chính thức
+              </Link>
+            </li>
+            <li style={{fontStyle: "italic"}}>
+              <Link to="/result?AFT=true&EVN=true&FRI=true&MON=true&MOR=true&SAT=true&SUN=true&THU=true&TUE=true&WED=true&jobNameID&jobTitle&jobType&majorID&regionID=24" >
+                <Icon type={"swap-right"} style={{marginRight: 10}} />
+                Việc làm Hà Nội
+              </Link>
+            </li>
+            <li style={{fontStyle: "italic"}}>
+              <Link to="/result?AFT=true&EVN=true&FRI=true&MON=true&MOR=true&SAT=true&SUN=true&THU=true&TUE=true&WED=true&jobNameID&jobTitle&jobType&majorID&regionID=29" >
+              <Icon type={"swap-right"} style={{marginRight: 10}} />
+                Việc làm tại TP.Hồ Chí Minh
+              </Link>
             </li>
           </Col>
           {/* Market */}
           <Col xs={24} sm={24} md={8} lg={8} xl={8} className='rule app'>
-            <div>
+            <div className="rule">
               <li><b>Ứng dụng di động</b></li>
-              <div style={{ display: 'flex', marginBottom: 10 }}>
+              <div style={{ display: 'flex', marginBottom: 10, marginTop: 10 }}>
                 <a href={'https://apps.apple.com/vn/app/worksvn-sinh-vi%C3%AAn/id1492437454'} target="_blank" rel="noopener noreferrer">
                   <LazyLoadImage src={AppStore} alt='CHPlay tìm việc' height='50px' width='auto' />
                 </a>

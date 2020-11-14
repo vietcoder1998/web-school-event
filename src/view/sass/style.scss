@@ -2315,6 +2315,7 @@ label {
           text-transform: inherit;
           white-space: pre-line;
           overflow: hidden;
+          font-size: 0.75rem;
         }
         .maxline-2 {
           text-overflow: ellipsis;
@@ -2342,6 +2343,7 @@ label {
           width: 100%;
           border-radius: 3px;
           border: solid rgb(241, 241, 241) 1px;
+          margin-bottom: 6px;
         }
 
         .name-job {
@@ -2368,20 +2370,20 @@ label {
       transition: 0.3s;
       background: white;
       border-radius: 5px;
+      overflow: hidden;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03),
         0 6px 20px 0 rgba(0, 0, 0, 0.03);
+      border: solid rgba(90, 153, 255, 0) 1px;
+
 
       &:hover {
         // cursor          : pointer;
         background-color: rgb(230, 244, 255);
+        border: solid rgb(90, 153, 255) 1px;
+
 
         .item-content {
-          border: solid rgb(90, 153, 255) 1px;
           cursor: default;
-        }
-
-        .image-content {
-          border: solid rgb(90, 153, 255) 1px;
         }
       }
 
@@ -3047,7 +3049,6 @@ html {
   font-weight: 550;
 }
 .item-hl-job {
-  min-height: 110px;
   overflow: nowrap;
   text-transform: capitalize;
 }
@@ -3677,6 +3678,11 @@ html {
   .ant-select-arrow {
     color: $color_base
   }
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 3px 2px 0px 2px;
+  background-color: rgba(109, 105, 105, 0.589);
+
 }
 
 .ant-input-group.ant-input-group-compact  .ant-select .ant-select-selection {

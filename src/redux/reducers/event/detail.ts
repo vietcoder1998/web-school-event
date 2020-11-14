@@ -6,7 +6,7 @@ let initListDetailEvent = {
     start: false,
     loading: true,
     logo: null,
-    primaryColor: '#1890ff',
+    primaryColor: '#1890ff22    ',
     primaryDarkColor: 'rgba(38, 150, 253, 0.59)',
     param: '',
     schoolID: '',

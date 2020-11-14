@@ -132,7 +132,7 @@ class SearchBox extends Component<IProps, IState>{
                 AFT: true,
                 EVN: true,
             },
-            show_days: true,
+            show_days: false,
             choose_advanced: false,
             jobNames: [],
             regions: [],
@@ -593,47 +593,12 @@ class SearchBox extends Component<IProps, IState>{
                         <Tabs defaultActiveKey={this.keyJobType(this.props.jobType)} onChange={this._handleTabs}>
                             <TabPane tab="Tất cả loại công việc" key="0" />
                             <TabPane tab="Làm thêm" key="1">
-                                <div className='choose-time' style={{ display: show_days === true ? 'block' : 'none' }}>
-                                    <div className='choose-shift'>
-                                        {list_day_times.map((item, index) => {
-                                            return <Button
-                                                id={item.shortcut}
-                                                key={index}
-                                                onClick={this._handleShift}
-                                                style={{
-                                                    background: list_shift[item.shortcut] ? primaryColor : 'white',
-                                                    color: list_shift[item.shortcut] ? 'white' : 'black',
-                                                    border: list_day[item.shortcut] ? `solid 1px ${primaryColor}` : 'white'
-                                                }}>
-                                                {item.name}
-
-                                            </Button>
-                                        })}
-                                    </div>
-                                    {/* Choose day in week */}
-                                    <div className='choose-day'>
-                                        {list_week.map((item, index) => {
-                                            return (
-                                                <Button
-                                                    id={item.shortcut}
-                                                    key={index}
-                                                    className='choose_btn'
-                                                    onClick={this._handleTime}
-                                                    style={{
-                                                        fontStyle: "bold",
-                                                        background: list_day[item.shortcut] ? primaryColor : 'white',
-                                                        color: list_day[item.shortcut] ? 'white' : 'black',
-                                                        border: list_day[item.shortcut] ? `solid 1px ${primaryColor}` : 'white'
-                                                    }}
-                                                >{item.shortcut === 'SUN' ? 'CN' : 'Thứ ' + (index + 2)}</Button>)
-                                        })}
-                                    </div>
-                                </div>
+                         
                             </TabPane>
                             <TabPane tab="Chính thức" key="2" />
                             <TabPane tab="Thực tập" key="3" />
                         </Tabs>
-                        <Affix offsetTop={10}>
+                        <Affix offsetTop={-10}>
                             <div className='search-type' style={{ margin: choose_advanced ? '0px' : '20px 0px' }}>
                                 <InputGroup
                                     size="large"
@@ -654,7 +619,7 @@ class SearchBox extends Component<IProps, IState>{
                                             key={'1'}
                                             value={null}
                                             style={{fontWeight: "bold", color: "red"}}
-                                            children={ "Tất cả các công việc"}
+                                            children={ "Tất cả các tỉnh thành"}
                                         />
                                         {
                                             regions && regions.length > 0 ?
@@ -676,6 +641,7 @@ class SearchBox extends Component<IProps, IState>{
                                         onChange={this._selectJob}
                                         defaultValue={"Tất cả các công việc"}
                                         suffixIcon={<Icon type="tool" />}
+                                        // onInputKeyDown={event => {if (event.keyCode === 13){this._createRequest()}}}
                                     >
                                         <Option
                                             key={'1'}
@@ -742,8 +708,45 @@ class SearchBox extends Component<IProps, IState>{
                                 </InputGroup>
                             </div>
                         </Affix>
-                        
-                        <div>{this.props.jobType === 'PARTTIME' ? null :
+                        <div className='choose-time' style={{ display: show_days === true ? 'block' : 'none' }}>
+                            <div className='choose-shift'>
+                                {list_day_times.map((item, index) => {
+                                    return <Button
+                                        id={item.shortcut}
+                                        key={index}
+                                        onClick={this._handleShift}
+                                        style={{
+                                            background: list_shift[item.shortcut] ? primaryColor : 'white',
+                                            color: list_shift[item.shortcut] ? 'white' : 'black',
+                                            border: list_day[item.shortcut] ? `solid ${primaryColor} 2px` : 'white',
+                                            fontWeight: "bold"
+                                        }}>
+                                        {item.name}
+
+                                    </Button>
+                                })}
+                            </div>
+                            {/* Choose day in week */}
+                            <div className='choose-day'>
+                                {list_week.map((item, index) => {
+                                    return (
+                                        <Button
+                                            id={item.shortcut}
+                                            key={index}
+                                            className='choose_btn'
+                                            onClick={this._handleTime}
+                                            style={{
+                                                fontStyle: "bold",
+                                                background: list_day[item.shortcut] ? primaryColor : 'white',
+                                                color: list_day[item.shortcut] ? 'white' : 'black',
+                                                border: list_day[item.shortcut] ? `solid 1px ${primaryColor}` : 'white',
+                                                fontWeight: 'bold'
+                                            }}
+                                        >{item.shortcut === 'SUN' ? 'CN' : 'Thứ ' + (index + 2)}</Button>)
+                                })}
+                            </div>
+                        </div>
+                        {/* <div>{this.props.jobType === 'PARTTIME' ? null :
                             <div style={{ paddingTop: "25px", paddingBottom: "15px" }}>
                                 <p style={{ color: '#fff' }}>Trải nghiệm tìm việc đỉnh cao bằng ứng dụng Worksvn trên điện thoại!</p>
                                 <Row>
@@ -762,7 +765,7 @@ class SearchBox extends Component<IProps, IState>{
                                     </Col>
                                 </Row>
                             </div>}
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </>
