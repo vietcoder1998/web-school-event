@@ -49,7 +49,7 @@ export const _delete = async (
     headers = authHeaders;
   }
 
-  let response = await axios.delete(requestURL, { data: params, headers });
+  let response = await axios.delete(requestURL, { data, headers, params });
   return response.data;
 };
 
