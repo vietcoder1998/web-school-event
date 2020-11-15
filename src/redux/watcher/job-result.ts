@@ -82,19 +82,19 @@ function getJobResults(action) {
   body.jobLocationFilter.lon=null;
 
   let isAuthen = store.getState().AuthState.isAuthen;
-  let res = _requestToServer(
-    POST,
-    body,
-    isAuthen ? NORMAL_PRIVATE.JOBS.SEARCH : NORMAL_PUBLIC.JOBS.SEARCH,
-    isAuthen ? STUDENT_HOST : PUBLIC_HOST,
-    isAuthen ? authHeaders : noInfoHeader,
-    {
-      pageIndex: action.pageIndex ? action.pageIndex : 0,
-      pageSize: action.pageSize ? action.pageSize : 10,
-    },
-    false
-  );
-
+  let res= _requestToServer(
+      POST,
+      body,
+      isAuthen ? NORMAL_PRIVATE.JOBS.SEARCH : NORMAL_PUBLIC.JOBS.SEARCH,
+      isAuthen ? STUDENT_HOST : PUBLIC_HOST,
+      isAuthen ? authHeaders : noInfoHeader,
+      {
+        pageIndex: action.pageIndex ? action.pageIndex : 0,
+        pageSize: action.pageSize ? action.pageSize : 10,
+      },
+      false
+    );
+   
   return res;
 }
 
