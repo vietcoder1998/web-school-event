@@ -103,8 +103,8 @@ class SearchFilter extends React.Component<
         <Option key={"1"} value={'Tất cả '}
           onClick={() => {
             let newFilter = {
-              jobType: null,
-              regionID,
+              jobType:null,
+              regionID: null,
               jobNameID,
               isEvent,
             };
@@ -127,7 +127,7 @@ class SearchFilter extends React.Component<
                 onClick={() => {
                   let newFilter = {
                     jobType: null,
-                    regionID: this.state.regionID,
+                    regionID: null,
                     jobNameID: this.state.jobNameID,
                     isEvent: this.state.isEvent,
                   };
@@ -165,7 +165,7 @@ class SearchFilter extends React.Component<
         onChange={(event: string) => {
           let newFilter = {
             jobType: null,
-            regionID,
+            regionID: null,
             jobNameID,
             isEvent,
           };
@@ -180,7 +180,7 @@ class SearchFilter extends React.Component<
         placeholder={"Chọn loại công việc"}
         value={jobType ? jobType : "Tất cả loại việc"}
       >
-        <Option key={"1"} value={null}>
+        <Option key={"1"} value={""}>
           Tất cả
               </Option>
         <Option key={"2"} value={TYPE.FULLTIME}>
@@ -196,7 +196,7 @@ class SearchFilter extends React.Component<
     )
   }
   render() {
-    let {jobNames, loading,isMobile } = this.props;
+    let {jobNames, loading, isMobile } = this.props;
     let {jobTitle, openFilter } = this.state;
     // let [filter, setFilter] = React.useState({ regionID: null, jobNameID: null });
     // console.log(this.props.jobNames)
@@ -207,7 +207,6 @@ class SearchFilter extends React.Component<
           className="show-only-phone"
           visible={openFilter}
           onClose={() => this.setState({ openFilter: !openFilter })}
-          destroyOnClose={true}
           title="Bộ lọc công việc"
         >
           {this.areaFilterOption()}
