@@ -3,6 +3,7 @@ import { Row, Col, Icon, Pagination, Skeleton, Tooltip } from 'antd';
 import { Link } from 'react-router-dom';
 //@ts-ignore
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { JobType } from '../../layout/common/Common';
 // import { limitString } from './../../../utils/limitString';
 
 interface IListHlJobProps {
@@ -33,9 +34,7 @@ export default class ListHlJob extends React.Component<IListHlJobProps> {
                                                     {item.employerLogoUrl ? <LazyLoadImage src={item.employerLogoUrl} alt='works result' height='60px' width='60px' style={{ objectFit: 'contain' }} /> :
                                                         <div style={{ width: 60, height: 60, backgroundColor: '#f2f2f2', borderRadius: 3, display: 'inline-block' }}></div>
                                                     }
-                                                    {item.jobType === 'FULLTIME' ? <div className='l_c' style={{ display: 'inline-block', padding: '0 2px', backgroundColor: '#32A3F9', color: '#fff', fontSize: '0.7em', width: '60px', marginTop: 4 }}>FullTime</div> : null}
-                                                    {item.jobType === 'PARTTIME' ? <div className='l_c' style={{ display: 'inline-block', padding: '0 2px', backgroundColor: 'rgb(0, 179, 60)', color: '#fff', fontSize: '0.7em', width: '60px', marginTop: 4 }}>Part-Time</div> : null}
-                                                    {item.jobType === 'INTERNSHIP' ? <div className='l_c' style={{ display: 'inline-block', padding: '0 2px', backgroundColor: 'rgb(255, 153, 51)', color: '#fff', fontSize: '0.7em', width: '60px', marginTop: 4 }}>InternShip</div> : null}
+                                                    <JobType>{item.jobType}</JobType>
                                                 </div>
                                                 <ul style={{ flex: 4, marginLeft: 10, marginBottom: 0 }}>
                                                     <li className="maxline-2">
@@ -67,6 +66,7 @@ export default class ListHlJob extends React.Component<IListHlJobProps> {
                         defaultCurrent={1}
                         size={'6'}
                         total={highlightData.totalItems}
+                        style={{padding: -6}}
                         onChange={
                             (page?: number) => {
                                 // console.log(page);

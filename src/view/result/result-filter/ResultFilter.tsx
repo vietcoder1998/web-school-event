@@ -12,10 +12,10 @@ export default function ResultFilter(props?: IResultFilter) {
     let { numberRs } = props;
 
     return (
-        <Affix offsetTop={0}>
             <div className='result-filter'>
                 <div className='sub-filter'>
-                    <p>
+                <Affix offsetTop={75}>
+                    <p style={{backgroundColor: "white", marginLeft: -10, width: "30%", borderRadius: 5}}>
                         <label style={{ paddingLeft: 10 }}>
                             <label>Đã tìm thấy</label>
                             <label style={{ color: 'red', padding: '0 3px 0 4px' }}><b>{numberRs}</b></label>
@@ -23,8 +23,8 @@ export default function ResultFilter(props?: IResultFilter) {
                             {/* <Icon type={numberRs === 0 ? 'frown' : 'smile'} theme="twoTone" /> */}
                         </label>
                     </p>
+                </Affix>
                 </div>
             </div>
-        </Affix>
     )
 }

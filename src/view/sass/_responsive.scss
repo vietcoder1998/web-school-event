@@ -24,7 +24,11 @@ $color_border: rgb(231, 231, 231);
   }
 
   .search-box {
-    padding: 2vw 30px;
+    padding: 3vw 30px;
+  }
+  
+  .search-tab {
+    padding: 10px 30px;
   }
 
   .content-footer {
@@ -44,7 +48,7 @@ $color_border: rgb(231, 231, 231);
   }
 
   .image-content {
-    padding: 25% 15%;
+    padding: 25% 1vw;
   }
 }
 
@@ -92,6 +96,10 @@ $color_border: rgb(231, 231, 231);
     padding: 0px 8vw;
     background-color: #f2f2f2;
 
+  }
+
+  .search-tab {
+    padding: 0px 12.5vw;
   }
   // .search-content {
   //   padding: 0px 20%;

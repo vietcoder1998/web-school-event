@@ -60,5 +60,10 @@ export interface IJobDetail {
     offerState?: 'PENDING' | 'ACCEPTED' | 'REJECTED', 
     saved?: boolean,
     schoolIgnored?: boolean,
-    schoolConnected?: boolean
+    schoolConnected?: boolean,
+    maxSalary?: number
+    minSalary?: number
+    finishedDate?: number
+    minSalaryUnit?: string
+    maxSalaryUnit?: string
 }

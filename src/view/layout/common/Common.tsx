@@ -49,15 +49,13 @@ export function Timer(props) {
 
 export function JobType(props: { children?: any, width?: any, fontSize?: any }) {
     let style: CSSProperties = {
-        color: 'black',
-        backgroundColor: 'white',
         fontSize: props.fontSize ? props.fontSize : '0.8em',
         textAlign: 'center',
         width: props.width ? props.width : '100%',
         display: 'inline-block',
         position: 'relative',
         marginTop: '5px',
-        borderRadius: '3px'
+        borderRadius: '3px',
     };
     let label;
     switch (props.children) {

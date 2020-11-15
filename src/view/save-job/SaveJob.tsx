@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '../layout/Layout';
-import { Row, Col, Icon, Pagination, Tooltip, Button, Empty, Avatar, Spin } from 'antd';
+import { Row, Col, Icon, Pagination, Tooltip, Empty, Avatar, Spin } from 'antd';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import moment from 'moment'
@@ -95,33 +95,25 @@ class SaveJob extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                                                 <Avatar
                                                                     className='logo-company'
                                                                     shape='square'
-                                                                    size={70}
                                                                     src={item.job && item.job.employerLogoUrl ? item.job.employerLogoUrl : ''}
-                                                                    style={{ margin: '10px 0' }}
+                                                                    style={{ border: "solid #00000012 1px"  }}
                                                                     icon="shop"
                                                                     alt='history job'
                                                                 />
                                                                 <JobType>
                                                                     {item.job && item.job.jobType}
                                                                 </JobType>
-                                                                <Tooltip title='Bạn có muốn xóa công việc' placement="bottom" >
-                                                                    <li onClick={() => { this._removejob(item.job.id) }}>
-                                                                        <Button type='danger' size='small'> <Icon type="delete" />Xóa</Button>
-                                                                    </li>
-                                                                </Tooltip>
-
+                                                                
                                                             </div>
                                                             <div className='content-job'>
                                                                 <p>
                                                                     <Link target='_blank'
-                                                                        to={item.job.schoolEventID === null ? 
-                                                                            `/job-detail/${window.btoa(item.job && item.job.id)}`
-                                                                            : `/event-job-detail/${window.btoa(item.job && item.job.id)}`}>
+                                                                        to={    
+                                                                            `/job-detail/${window.btoa(item.job && item.job.id)}`}>
                                                                         {item.job && item.job.jobTitle}
                                                                     </Link>
                                                                 </p>
                                                                 <div className='info-company'>
-
                                                                     <li>
                                                                         <Link to={`/employer/${window.btoa(item.job && item.job.employerID)}`}><Icon type="home" style={{ marginRight: 3 }} />{item.job && item.job.employerName}</Link>
                                                                     </li>
@@ -130,14 +122,16 @@ class SaveJob extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                                                     </li>
                                                                 </div>
                                                                 <li style={{ fontSize: '0.7rem' }}>
-                                                                    {moment(item.saveTime).format('DD/MM/YY')}
+                                                                    <Icon type="calendar" />{moment(item.saveTime).format('DD/MM/YY')}
                                                                 </li>
                                                             </div>
                                                             <div className='content-job' style={{ display: item.job.schoolEventID === null ? 'none' : '' }}>
                                                                 <Tooltip placement="bottom" title={"Việc làm sự kiện"}>
-                                                                    <Icon type='tag' style={{ color: 'red' }} />
+                                                                    <Icon type='tag' style={{ color: '#1890ff', marginBottom: 20 }} theme="filled" />
                                                                 </Tooltip>
-
+                                                                <Tooltip title='Bạn có muốn xóa công việc' placement="bottom" >
+                                                                    <Icon type="delete" onClick={() => { this._removejob(item.job.id) }} twoToneColor="red"  theme="twoTone"/>
+                                                                </Tooltip>
                                                             </div>
                                                         </div>
                                                     </Col>)

@@ -22,7 +22,7 @@ function TabSearch(props) {
                 {/* <div style={{height: '550px'}}>
                     <img src={IMG1} style={{ width: '100%', backgroundSize: 'cover' }} alt={'job-title1'} />
                 </div> */}
-                <div style={{ height: '550px' }}>
+                <div style={{ height: '570px' }}>
                     <LazyLoadImage
                         src={IMG1} className="img-background"
                         style={{ 

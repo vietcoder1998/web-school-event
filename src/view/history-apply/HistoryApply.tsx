@@ -106,17 +106,19 @@ class HistoryApply extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                                         default:
                                                             break;
                                                     }
-                                                    return (<Col key={index} xs={24} sm={12} md={8} lg={8} xl={6} xxl={6}>
+                                                    return (<Col key={index} xs={24} sm={12} md={8} lg={6} xl={5} xxl={6}>
                                                         <div className='job-detail '>
                                                             <div className='image-job'>
                                                                 <Avatar
                                                                     className='logo-company'
                                                                     shape='square'
-                                                                    size={70}
                                                                     src={item.job && item.job.employerLogoUrl ? item.job.employerLogoUrl : ''}
-                                                                    style={{ margin: '10px 0' }}
                                                                     icon="shop"
                                                                     alt='history job'
+                                                                    style={{
+                                                                        borderRadius: 5,
+                                                                        border: "solid gray 1px"
+                                                                    }}
                                                                 />
                                                                 <JobType>
                                                                     {item.job && item.job.jobType}
@@ -154,12 +156,12 @@ class HistoryApply extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                                                     <span style={{ fontWeight: 550, fontSize: '0.9em' }}>{typeSpan.state}</span></span>
                                                                 <span style={{ display: 'flex' }}>
                                                                     <li style={{ fontSize: '0.7rem' }}>
-                                                                        <i className="fa fa-paper-plane" aria-hidden="true" style={{ marginRight: 3 }}></i>
+                                                                        <Icon type="calendar" />
                                                                         Ngày gửi: {moment(item.createdDate).format('DD/MM/YYYY')}
                                                                     </li>
                                                                     {item.repliedDate !== -1 ?
                                                                         <li style={{ fontSize: '0.7rem', marginLeft: 10 }}>
-                                                                            <i className="fa fa-reply" aria-hidden="true" style={{ marginRight: 3 }}></i>
+                                                                            <Icon type="calendar" />
                                                                             Ngày phản hồi: {moment(item.repliedDate).format('DD/MM/YYYY')}
                                                                         </li> : null}
                                                                 </span>
@@ -169,7 +171,6 @@ class HistoryApply extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                                                 <Tooltip placement="bottom" title={"Việc làm sự kiện"}>
                                                                     <Icon type='tag' style={{ color: 'red' }} />
                                                                 </Tooltip>
-
                                                             </div>
                                                         </div>
                                                     </Col>)

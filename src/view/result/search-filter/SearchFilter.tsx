@@ -84,8 +84,8 @@ class SearchFilter extends React.Component<
     }
   }
   render() {
-    let { regions, jobNames, loading, eventName, isAuthen } = this.props;
-    let { jobType, regionID, isEvent, jobTitle } = this.state;
+    let { regions, jobNames, loading } = this.props;
+    let { jobType, regionID, jobTitle } = this.state;
     // let [filter, setFilter] = React.useState({ regionID: null, jobNameID: null });
     // console.log(this.props.jobNames)
 
@@ -110,7 +110,7 @@ class SearchFilter extends React.Component<
               }}
               style={{ width: "100%", margin: "5px 0px" }}
               placeholder={"Chọn loại công việc"}
-              value={jobType ? jobType : undefined}
+              value={jobType ? jobType : "Tất cả loại việc"}
             >
               <Option key={"1"} value={null}>
                 Tất cả
@@ -133,7 +133,7 @@ class SearchFilter extends React.Component<
               showSearch
               style={{ width: "100%", margin: "5px 0px" }}
               placeholder={"Chọn tỉnh thành"}
-              value={regionID && regions.length > 0 ? regions.find(element => element.id === regionID).name : undefined}
+              value={regionID && regions.length > 0 ? regions.find(element => element.id === regionID).name : "Toàn quốc"}
             >
               <Option key={"1"} value={'Tất cả '}
                 onClick={() => {
@@ -201,9 +201,9 @@ class SearchFilter extends React.Component<
             xs={24}
             sm={12}
             md={7}
-            lg={isAuthen ? 8 : 12}
-            xl={isAuthen ? 8 : 12}
-            xxl={isAuthen ? 7 : 12}
+            lg={12}
+            xl={ 12}
+            xxl={12}
           >
             <Select
               size={"large"}
@@ -269,7 +269,7 @@ class SearchFilter extends React.Component<
                 : null}
             </Select>
           </Col>
-          <Col
+          {/* <Col
             xs={24}
             sm={12}
             md={6}
@@ -304,7 +304,7 @@ class SearchFilter extends React.Component<
                 {eventName}
               </Option>
             </Select>
-          </Col>
+          </Col> */}
           <Col xs={24} sm={12} md={4} lg={4} xl={4} xxl={4}>
             <Button
               size="large"

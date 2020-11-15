@@ -12,6 +12,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import LinkToolTip from '../../layout/common/LinkToolTip';
 import {_requestToServer} from './../../../services/exec';
 import { DELETE, POST } from '../../../const/method';
+import { JobType } from '../../layout/common/Common';
 
 
 interface IListResultProps {
@@ -21,9 +22,7 @@ interface IListResultProps {
     param?: any
 }
 
-
-
-export default function ListResult(props?: IListResultProps) {
+export default function ListResult(props?: IListResultProps): JSX.Element {
     let { loading, listResult, isSearchEvent, param } = props;
 
     const [saveState, setSaveState] = React.useState([])
@@ -38,7 +37,7 @@ export default function ListResult(props?: IListResultProps) {
         if (id) {
             _requestToServer(
                 !saved ? POST : DELETE,
-                saved ? [id]:undefined,
+                !saved ? undefined:[id],
                 !saved ?`/api/students/jobs/${id}/saved` : '/api/students/jobs/saved',
                 undefined,
                 undefined,
@@ -48,12 +47,15 @@ export default function ListResult(props?: IListResultProps) {
                 if(res) {
                    let newSavestate =  saveState
                    newSavestate[index] = !saved
-                   setSaveState(newSavestate => [...newSavestate])
+                   forceUpdate(newSavestate)
                 }
             })
         }
-        
     }
+
+    const forceUpdate = React.useCallback((saveState)=> {
+        setSaveState(saveState)
+    }, [])
 
     return (
         <div className='result' >
@@ -67,20 +69,16 @@ export default function ListResult(props?: IListResultProps) {
                     <Row key={index} className='result-item' >
                         {/* Image */}
                         <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4} >
-                            <Link to={`/job-detail/${window.btoa(item.id)}`} target='_blank'>
+                            {/* <Link to={`/job-detail/${window.btoa(item.id)}`} target='_blank'> */}
                                 <div className='image-content'>
-
                                     <Link to={`/employer/${btoa(item.employerID)}`}>
                                         <LazyLoadImage src={item.employerLogoUrl ? item.employerLogoUrl : TextImage} alt={item.employerName} />
                                     </Link>
-                                    <span className={item.jobType}>
-                                        {item.jobType === 'FULLTIME' ? 'FullTime' : null}
-                                        {item.jobType === 'PARTTIME' ? 'Part-Time' : null}
-                                        {item.jobType === 'INTERNSHIP' ? 'InternShip' : null}
-                                    </span>
+                                    <JobType>
+                                        {item.jobType}
+                                    </JobType>
                                 </div>
-                            </Link>
-
+                            {/* </Link> */}
                         </Col>
                         {/* Content */}
                         <Col xs={20} sm={20} md={18} lg={18} xl={18} xxl={18} className='item-content'>
@@ -144,7 +142,7 @@ export default function ListResult(props?: IListResultProps) {
                                 <div className='item-save' style={{ display: localStorage.getItem("accessToken") ? 'block' : 'none' }}>
                                     <Icon 
                                         type="heart" 
-                                        theme={saveState[index] ? "filled":"outlined"} style={{color: "red", fontSize: 18}} onClick={() => saveJob(item.id, item.saved, index)}/>
+                                        theme={saveState[index] ? "filled":"outlined"} style={{color: "red", fontSize: 18}} onClick={async () => saveJob(item.id, item.saved, index)}/>
                                 </div>
                             </Tooltip>
                         </Col>

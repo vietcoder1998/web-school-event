@@ -57,7 +57,8 @@ class SideBar extends Component {
 
                                 <li style={{ display: isAuthen ? 'block' : 'none' }}><a href='/notifications'><Icon type="notification" /><label className='text-icon'>Thông báo</label></a></li>
                                 <li style={{ display: isAuthen ? 'block' : 'none' }}><a href='/profile'><Icon type="user" /><label className='text-icon'>Hồ sơ</label></a></li>
-                                <li style={{ display: isAuthen ? 'block' : 'none' }}><a href='/save-job'><Icon type="history" /><label className='text-icon'>Lịch sử ứng tuyển</label></a></li>
+                                <li style={{ display: isAuthen ? 'block' : 'none' }}><a href='/history-apply'><Icon type="solution" /><label className='text-icon'>Lịch sử ứng tuyển</label></a></li>
+                                <li style={{ display: isAuthen ? 'block' : 'none' }}><a href='/save-job'><Icon type="history" /><label className='text-icon'>Công việc đã lưu</label></a></li>
                                 <li style={{ display: isAuthen ? 'block' : 'none' }} onClick={this._clearStorage}><a style={{ pointerEvents: "none" }} href='/'><Icon type="logout" /><label className='text-icon'>Đăng xuất</label></a></li>
                                 <li style={{ display: isAuthen ? 'none' : 'block' }}><a href='/login'><Icon type="key" /><label className='text-icon'>Đăng nhập</label></a></li>
                                 <li style={{ display: isAuthen ? 'none' : 'block' }}><a href='/register'><Icon type="solution" /><label className='text-icon'>Đăng kí</label></a></li>

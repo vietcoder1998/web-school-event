@@ -81,7 +81,7 @@ class Notification extends Component {
         return (
             <div className='noti-content b_l b_r b_b'>
                 <div className='noti-header b_b'>
-                    <h6 >Thông báo</h6>
+                    <h6 ><b>Thông báo</b></h6>
                 </div>
                 <div className='noti-info b_b'>
                     {is_loading ? loadingCpn : noti && noti.totalItems > 0 ?
