@@ -114,7 +114,7 @@ export default class JobProperties extends PureComponent<JobPropertiesProps, Job
                     <Col xs={24} sm={24} md={24} lg={24} xl={24}>
                         <div className='skills-job-detail '>
                             <h6>Kĩ năng khác</h6>
-                            <div style={{ padding: 15, overflowX:"scroll" }}>
+                            <div style={{ padding: 15, overflowX:"auto" }}>
                                 {jobDetail.requiredSkills && jobDetail.requiredSkills.length > 0 ?
                                     jobDetail.requiredSkills.map(
                                         (item, index) => { return <label key={index} className='skills-detail'>{item.name}</label> })
