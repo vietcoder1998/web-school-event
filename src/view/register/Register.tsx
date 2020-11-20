@@ -21,6 +21,7 @@ import swal from "sweetalert";
 import { POST } from "../../const/method";
 import { _get, _post } from "../../services/base-api";
 import { PUBLIC_HOST } from "../../environment/development";
+//@ts-ignore
 import imageLogin from "../../assets/image/image-login.png";
 // import logo from "../../assets/image/logo-01.png";
 import { goBackWhenLogined } from '../../utils/goBackWhenLogined'
@@ -37,7 +38,7 @@ interface IProps {
 }
 let { Option } = Select;
 interface IState {
-  email_register_dto?: any;
+  body?: any;
   is_exactly_firstname?: boolean;
   is_exactly_lastname?: boolean;
   is_exactly_email?: boolean;
@@ -74,7 +75,7 @@ class Register extends Component<IProps, IState> {
     super(props);
     this.state = {
       loading: false,
-      email_register_dto: {
+      body: {
         email: "",
         password: "",
         firstName: "",
@@ -84,19 +85,17 @@ class Register extends Component<IProps, IState> {
         schoolYearStart: 0,
         schoolYearEnd: 0,
         majorID: undefined,
-        show_password: false,
-        show_re_password: false,
         schoolID: '',
         inviteCode: ''
       },
-
+      show_password: false,
+      show_re_password: false,
       marker: {
         lat: 21.0223575259305,
         lng: 105.82227458143632,
         x: 0,
         y: 0,
       },
-
       checked: true,
       is_exactly_email: false,
       is_exactly_pw: false,
@@ -124,7 +123,7 @@ class Register extends Component<IProps, IState> {
     };
   }
   async componentDidMount() {
-    let { email_register_dto, repassword } = this.state;
+    let { body, repassword } = this.state;
     this.setState({ listBirthYearMin: this.listYear(1970, 2035), listBirthYearMax: this.listYear(1970, 2035) })
     let res_school = await _post(null, SCHOOLS, PUBLIC_HOST, noInfoHeader);
     // console.log(res_school);
@@ -134,8 +133,8 @@ class Register extends Component<IProps, IState> {
 
     if (schoolID && schoolID!==undefined) {
       // console.log(schoolID)
-      email_register_dto.schoolID = schoolID
-      this.setState({ email_register_dto, is_exactly_schoolID: true })
+      body.schoolID = schoolID
+      this.setState({ body, is_exactly_schoolID: true })
       _get(null, `/api/schools/${schoolID}/education/majors/query`, PUBLIC_HOST, noInfoHeader)
         .then((res_major) => {
           this.setState({
@@ -146,20 +145,20 @@ class Register extends Component<IProps, IState> {
     let inviteCode = url.searchParams.get('inviteCode')
 
     if(inviteCode) {
-      email_register_dto.inviteCode = inviteCode
-      this.setState({ email_register_dto })
+      body.inviteCode = inviteCode
+      this.setState({ body })
     }
 
     if (localStorage.getItem("user_exists") === "false") {
-      email_register_dto.email = localStorage.getItem("user_exists_userName");
-      email_register_dto.password = localStorage.getItem(
-        "user_exists_password"
-      );
-      repassword = localStorage.getItem("user_exists_password");
+      body.email = localStorage.getItem("user_exists_userName");
+      // body.password = localStorage.getItem(
+        // "body"
+      // );
+      // repassword = localStorage.getItem("body");
       localStorage.setItem('user_exists', "true");
       this.setState({
         is_exists: true,
-        email_register_dto,
+        body,
         repassword,
         is_exactly_email: true,
         is_exactly_pw: true,
@@ -178,48 +177,48 @@ class Register extends Component<IProps, IState> {
   }
   _handleTime = (name) => (value) => {
 
-    let { email_register_dto } = this.state;
+    let { body } = this.state;
     // let time = moment(value, "YYYY/MM/DD").unix();
 
     let time = parseInt(value)
     // console.log(typeof(time))
     if (name === "schoolYearStart") {
-      email_register_dto.schoolYearStart = time;
-      if (time && time <= email_register_dto.schoolYearEnd) {
+      body.schoolYearStart = time;
+      if (time && time <= body.schoolYearEnd) {
         this.setState({ is_exactly_schoolYearStart: true, exactly_schoolYearEnd: 1 })
-      } else if (time && time > email_register_dto.schoolYearEnd) {
+      } else if (time && time > body.schoolYearEnd) {
         this.setState({ is_exactly_schoolYearStart: true })
         this.setState({ exactly_schoolYearEnd: 2 })
       } else {
         this.setState({ is_exactly_schoolYearStart: false })
       }
     } else {
-      email_register_dto.schoolYearEnd = time;
-      if (time && time >= email_register_dto.schoolYearStart) {
+      body.schoolYearEnd = time;
+      if (time && time >= body.schoolYearStart) {
         this.setState({ exactly_schoolYearEnd: 1 })
-      } else if (time && time < email_register_dto.schoolYearStart) {
+      } else if (time && time < body.schoolYearStart) {
         this.setState({ exactly_schoolYearEnd: 2 })
       } else {
         this.setState({ exactly_schoolYearEnd: 0 })
       }
     }
     this.setState({
-      email_register_dto,
+      body,
     });
   };
 
   _choseMajor = (value) => {
-    let { email_register_dto } = this.state;
+    let { body } = this.state;
     this.setState({ is_exactly_majorID: true })
-    email_register_dto.majorID = value;
-    this.setState({ email_register_dto });
+    body.majorID = value;
+    this.setState({ body });
   };
   _choseSchool = (value) => {
-    let { email_register_dto } = this.state;
+    let { body } = this.state;
     this.setState({ is_exactly_schoolID: true, is_exactly_majorID: false })
-    email_register_dto.schoolID = value;
-    email_register_dto.majorID = undefined;
-    this.setState({ email_register_dto });
+    body.schoolID = value;
+    body.majorID = undefined;
+    this.setState({ body });
     _get(null, `/api/schools/${value}/education/majors/query`, PUBLIC_HOST, noInfoHeader)
       .then((res_major) => {
         this.setState({
@@ -229,7 +228,7 @@ class Register extends Component<IProps, IState> {
   };
   _handleInput = (event) => {
     let {
-      email_register_dto,
+      body,
       is_exactly_pw,
       is_exactly_firstname,
       is_exactly_lastname,
@@ -293,7 +292,7 @@ class Register extends Component<IProps, IState> {
 
       case "repassword":
         console.log('repassword')
-        if (value === email_register_dto.password) {
+        if (value === body.password) {
           is_exactly_rpw = 2;
         } else {
           is_exactly_rpw = 1;
@@ -306,11 +305,11 @@ class Register extends Component<IProps, IState> {
     if (param === "repassword") {
       repassword = value;
     } else {
-      email_register_dto[param] = value;
+      body[param] = value;
     }
 
     this.setState({
-      email_register_dto,
+      body,
       is_exactly_firstname,
       is_exactly_lastname,
       is_exactly_email,
@@ -327,12 +326,12 @@ class Register extends Component<IProps, IState> {
 
   _setMap = () => {
     let { marker } = this.props;
-    let { location, email_register_dto } = this.state;
-    email_register_dto.lat = marker.lat;
-    email_register_dto.lon = marker.lng;
+    let { location, body } = this.state;
+    body.lat = marker.lat;
+    body.lon = marker.lng;
     let address = localStorage.getItem("location");
     location = address;
-    this.setState({ marker, location, show_popup: false, email_register_dto });
+    this.setState({ marker, location, show_popup: false, body });
   };
 
   _handleClose = () => {
@@ -346,26 +345,26 @@ class Register extends Component<IProps, IState> {
   };
 
   _handleGender = (e) => {
-    let { email_register_dto, checked } = this.state;
-    email_register_dto.gender = e.target.value;
+    let { body, checked } = this.state;
+    body.gender = e.target.value;
     checked = !checked;
-    this.setState({ email_register_dto, checked });
+    this.setState({ body, checked });
   };
   getLatLngFromMap = (lat, lng, address) => {
-    let { location, email_register_dto } = this.state;
-    email_register_dto.lat = lat;
-    email_register_dto.lon = lng;
+    let { location, body } = this.state;
+    body.lat = lat;
+    body.lon = lng;
     location = address;
     this.setState({
       location,
       show_popup: false,
-      email_register_dto,
+      body,
     });
   };
   requestToServer = async () => {
     this.setState({ loading: true });
     let {
-      email_register_dto,
+      body,
       is_exactly_firstname,
       is_exactly_lastname,
       is_exactly_email,
@@ -410,8 +409,8 @@ class Register extends Component<IProps, IState> {
       }
       await _requestToServer(
         POST,
-        email_register_dto,
-        `/api/students/registration?schoolID=${email_register_dto.schoolID}`,
+        body,
+        `/api/students/registration?schoolID=${body.schoolID}`,
         null,
         noInfoHeader,
         null,
@@ -431,7 +430,7 @@ class Register extends Component<IProps, IState> {
       phone,
       schoolID,
       inviteCode
-    } = this.state.email_register_dto;
+    } = this.state.body;
 
     console.log(email);
     let {
@@ -665,7 +664,7 @@ class Register extends Component<IProps, IState> {
                       .indexOf(input.toLowerCase()) >= 0
                   }
                   showArrow={false}
-                  value={this.state.email_register_dto.majorID}
+                  value={this.state.body.majorID}
                 >
                   {list_major.map((item, index) => {
                     return (
