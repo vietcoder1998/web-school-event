@@ -62,7 +62,7 @@ class Login extends Component {
           sercret: process.env.REACT_APP_CLIENT_SECRET,
           fbAccessToken: data.tokenDetail.accessToken
         },
-        "/api/authentication/facebook",
+        "/api/authentication/facebook/confirm",
         process.env.REACT_APP_API_HOST,
         loginHeaders
       ).then((res) => {
@@ -237,10 +237,10 @@ class Login extends Component {
                     {loading ? <Icon type="loading" /> : "Đăng nhập"}
                   </Button>
                 </p>
-                {/* <p>
+                <p>
                   <label>hoặc</label>
-                </p> */}
-                {/* <p className="a_c">
+                </p>
+                <p className="a_c">
                   <FacebookProvider
                     appId="184179509691561"
                     version='v8.0'
@@ -257,7 +257,7 @@ class Login extends Component {
                       <Icon type="facebook" />Đăng nhập với facebook
                     </LoginButton>
                   </FacebookProvider>
-                </p> */}
+                </p>
                 <p className="a_c">
                   Bạn chưa có tài khoản ?{" "}
                   <label
