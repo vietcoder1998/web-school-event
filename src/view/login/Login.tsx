@@ -52,7 +52,6 @@ class Login extends Component {
     this.getResponse();
   };
 
-
   onLoginFB = async (data) => {
     if (data) {
       console.log(data);
@@ -68,8 +67,7 @@ class Login extends Component {
         loginHeaders
       ).then((res) => {
         if (res) {
-          
-          this._loginAction(res)
+          this._loginAction(res, res.data)
         }
       })
     }
