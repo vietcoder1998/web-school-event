@@ -55,6 +55,7 @@ class Login extends Component {
 
   onLoginFB = async (data) => {
     if (data) {
+      console.log(data);
       await _requestToServer(
         POST,
         {
@@ -62,7 +63,7 @@ class Login extends Component {
           sercret: process.env.REACT_APP_CLIENT_SECRET,
           fbAccessToken: data.tokenDetail.accessToken
         },
-        "/api/oauth2/authentication/facebook/confirm",
+        "/api/oauth2/authentication/facebook",
         process.env.REACT_APP_API_HOST,
         loginHeaders
       ).then((res) => {
