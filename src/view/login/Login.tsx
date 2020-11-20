@@ -62,7 +62,7 @@ class Login extends Component {
           sercret: process.env.REACT_APP_CLIENT_SECRET,
           fbAccessToken: data.tokenDetail.accessToken
         },
-        "/api/authentication/facebook/confirm",
+        "/api/oauth2/authentication/facebook/confirm",
         process.env.REACT_APP_API_HOST,
         loginHeaders
       ).then((res) => {
