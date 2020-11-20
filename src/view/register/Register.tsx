@@ -402,6 +402,9 @@ class Register extends Component<IProps, IState> {
       });
       this.setState({ loading: false });
     } else {
+      if (localStorage.getItem("login_type") === "FB") {
+
+      }
       await _requestToServer(
         POST,
         email_register_dto,
@@ -564,7 +567,7 @@ class Register extends Component<IProps, IState> {
                     </Tooltip>
                   }
                   value={email}
-                  disabled={is_exists}
+                  disabled={email && is_exists}
                   onChange={this._handleInput}
                   type="text"
                 />

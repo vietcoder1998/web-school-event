@@ -67,7 +67,9 @@ class Login extends Component {
         loginHeaders
       ).then((res) => {
         if (res) {
-          this._loginAction(res, res.data)
+          console.log(res);
+          localStorage.setItem("login_type", "FB")
+          this._loginAction(res, res.data, data.tokenDetail.accessToken)
         }
       })
     }
@@ -77,7 +79,10 @@ class Login extends Component {
     this.setState({ error });
   }
 
-  _loginAction = (res?: any, data?: any) => {
+  _loginAction = (res?: any, data?: any, token?: string) => {
+    if(data) {
+      localStorage.setItem("fbAccessToken", token)
+    }
     if (res.data.target !== "STUDENT") {
       swal({
         title: "Worksvns thông báo",
@@ -232,8 +237,9 @@ class Login extends Component {
                     type="primary"
                     onClick={this._createResponse}
                     block
+                    icon={!loading ? "key": "loading"}
                   >
-                    {loading ? <Icon type="loading" /> : "Đăng nhập"}
+                    {loading? "": "Đăng nhập"}
                   </Button>
                 </p>
                 <p>
@@ -252,7 +258,7 @@ class Login extends Component {
                       onCompleted={this.onLoginFB}
                       onError={this.handleError}
                     >
-                      <Icon type="facebook" />Đăng nhập với facebook
+                      <Icon type="facebook" style={{marginRight: 10}} />Đăng nhập với facebook
                     </LoginButton>
                   </FacebookProvider>
                 </p>
