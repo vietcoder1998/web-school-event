@@ -86,6 +86,10 @@ class SearchFilter extends React.Component<
     }
   }
 
+  onChangeFilter = (key?: string|number, value?: string) => {
+
+  }
+
   areaFilterOption = () => {
     let { regionID, jobNameID, isEvent} = this.state
     let { regions } = this.props
@@ -98,7 +102,7 @@ class SearchFilter extends React.Component<
         onSelect={()=> setTimeout(() => {
           this.setState({openFilter: false})
         }, 500) }
-        value={regionID && regions.length > 0 ? regions.find(element => element.id === regionID).name : "Toàn quốc"}
+        value={regionID && regions && regions.length > 0 ? regions.find(element => element.id === regionID).name : "Toàn quốc"}
       >
         <Option key={"1"} value={'Tất cả '}
           onClick={() => {

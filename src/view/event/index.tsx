@@ -38,9 +38,7 @@ function Home(props) {
   else {
     return (
       <Layout disableFooterData={false}>
-        <div>
-          <Banner {...props} />
-        </div>
+        <Banner {...props} />
         <Branch />
         <TopEm />
         <div className="content"
