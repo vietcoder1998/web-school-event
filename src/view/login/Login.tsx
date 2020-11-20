@@ -250,7 +250,6 @@ class Login extends Component {
                     <LoginButton
                       scope="email"
                       className="fb-login-btn btn-login a_l"
-
                       onCompleted={this.onLoginFB}
                       onError={this.handleError}
                     >
@@ -281,7 +280,6 @@ class Login extends Component {
             <LazyLoadImage alt="Đăng nhập tìm việc" src={imageLogin} className="image-login" />
           </Col>
         </div>
-
         {/* </form> */}
       </Layout >
     );
