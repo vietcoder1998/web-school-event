@@ -53,6 +53,8 @@ function getJobResults(action) {
   var brids = url.searchParams.get("brids");
   var title = url.searchParams.get("jobTitle");
   var mjid = url.searchParams.get("majorID")
+  var pageIndex = url.searchParams.get("pi")
+  var pageSize = url.searchParams.get("ps")
 
   if (jnids) {
     body.jobNameIDs = [parseInt(jnids)];
@@ -82,19 +84,30 @@ function getJobResults(action) {
   body.jobLocationFilter.lon=null;
 
   let isAuthen = store.getState().AuthState.isAuthen;
-  let res = _requestToServer(
-    POST,
-    body,
-    isAuthen ? NORMAL_PRIVATE.JOBS.SEARCH : NORMAL_PUBLIC.JOBS.SEARCH,
-    isAuthen ? STUDENT_HOST : PUBLIC_HOST,
-    isAuthen ? authHeaders : noInfoHeader,
-    {
-      pageIndex: action.pageIndex ? action.pageIndex : 0,
-      pageSize: action.pageSize ? action.pageSize : 10,
-    },
-    false
-  );
 
+  if (action.pageIndex) {
+    pageIndex = action.pageIndex
+    url.searchParams.append("pi", pageIndex)
+  }
+  
+  if (action.pageSize) {
+    pageSize = action.pageSize
+    url.searchParams.append("ps", pageSize)
+  }
+
+  let res= _requestToServer(
+      POST,
+      body,
+      isAuthen ? NORMAL_PRIVATE.JOBS.SEARCH : NORMAL_PUBLIC.JOBS.SEARCH,
+      isAuthen ? STUDENT_HOST : PUBLIC_HOST,
+      isAuthen ? authHeaders : noInfoHeader,
+      {
+        pageIndex: pageIndex ? pageIndex : 0,
+        pageSize: pageSize ? pageSize : 15,
+      },
+      false
+    );
+   
   return res;
 }
 

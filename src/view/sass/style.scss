@@ -2345,7 +2345,7 @@ label {
           text-align: left;
         }
         img {
-          width: 100%;
+          width: 60px;
           border-radius: 3px;
           border: solid rgb(241, 241, 241) 1px;
           margin-bottom: 6px;
@@ -2374,7 +2374,7 @@ label {
       max-height: 230px;
       transition: 0.3s;
       background: white;
-      border-radius: 5px;
+      border-radius: 1px;
       overflow: hidden;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03),
         0 6px 20px 0 rgba(0, 0, 0, 0.03);
@@ -2399,12 +2399,11 @@ label {
         border: solid white 1px;
 
         img {
-          padding: 10px;
           position: relative;
           padding: 0px;
           width: 100%;
           height: 8vw;
-          border-radius: 15px;
+          border-radius: 5px;
           object-fit: cover!important;
         }
       }
@@ -2498,6 +2497,8 @@ label {
           //   background-color: whitesmoke;
           margin: 10px 0px;
           right: 0px;
+
+          cursor: pointer;
         }
 
         .item-job-type {

@@ -4,15 +4,16 @@ import { Link } from 'react-router-dom';
 import { limitString } from '../../../utils/limitString';
 import moment from 'moment';
 //@ts-ignore
-import TextImage from '../../../assets/image/carouselGroup/carousel1.jpg';
+import TextImage from '../../../assets/image/phone.jpg';
 import { convertFullSalary } from '../../../utils/convertNumber';
 import { IJobDetail } from '../../../models/job-detail';
 // import { IAnnouncement } from '../../../models/announcements';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import LinkToolTip from '../../layout/common/LinkToolTip';
-import {_requestToServer} from './../../../services/exec';
+import { _requestToServer } from './../../../services/exec';
 import { DELETE, POST } from '../../../const/method';
 import { JobType } from '../../layout/common/Common';
+import { number } from 'prop-types';
 
 
 interface IListResultProps {
@@ -22,40 +23,43 @@ interface IListResultProps {
     param?: any
 }
 
+
 export default function ListResult(props?: IListResultProps): JSX.Element {
     let { loading, listResult, isSearchEvent, param } = props;
+    const [result, setResult] = React.useState([])
+    const [saveMap, setSaveMap] = React.useState([])
 
-    const [saveState, setSaveState] = React.useState([])
+
     React.useEffect(() => {
-        if (props.listResult) {
-            let saveMap = props.listResult.map(item => item.saved)
-            setSaveState(saveMap)
+        if (props.listResult && props.listResult !== result) {
+            setSaveMap(() => props.listResult.map(item => item.saved))
+            setResult(props.listResult)
         }
-    })
+    }, [props.listResult])
 
-    const saveJob =(id:string, saved?: boolean, index?: number) => {
+    React.useEffect(() => console.log(saveMap), [saveMap])
+
+    function saveJob(id: string, saved?: boolean, index?: number) {
+        setSaveMap(saveMap => {
+            let newMap = saveMap;
+            newMap[index] = !saved
+            return newMap
+        })
+
         if (id) {
+        
+
             _requestToServer(
                 !saved ? POST : DELETE,
-                !saved ? undefined:[id],
-                !saved ?`/api/students/jobs/${id}/saved` : '/api/students/jobs/saved',
+                !saved ? undefined : [id],
+                !saved ? `/api/students/jobs/${id}/saved` : '/api/students/jobs/saved',
                 undefined,
                 undefined,
                 undefined,
                 true
-            ).then(res => {
-                if(res) {
-                   let newSavestate =  saveState
-                   newSavestate[index] = !saved
-                   forceUpdate(newSavestate)
-                }
-            })
+            )
         }
     }
-
-    const forceUpdate = React.useCallback((saveState)=> {
-        setSaveState(saveState)
-    }, [])
 
     return (
         <div className='result' >
@@ -68,20 +72,20 @@ export default function ListResult(props?: IListResultProps): JSX.Element {
                     // <LazyLoadComponent>
                     <Row key={index} className='result-item' >
                         {/* Image */}
-                        <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4} >
+                        <Col xs={3} sm={4} md={4} lg={4} xl={4} xxl={4} >
                             {/* <Link to={`/job-detail/${window.btoa(item.id)}`} target='_blank'> */}
-                                <div className='image-content'>
-                                    <Link to={`/employer/${btoa(item.employerID)}`}>
-                                        <LazyLoadImage src={item.employerLogoUrl ? item.employerLogoUrl : TextImage} alt={item.employerName} />
-                                    </Link>
-                                    <JobType>
-                                        {item.jobType}
-                                    </JobType>
-                                </div>
+                            <div className='image-content'>
+                                <Link to={`/employer/${btoa(item.employerID)}`}>
+                                    <LazyLoadImage src={item.employerLogoUrl ? item.employerLogoUrl : TextImage} alt={item.employerName} />
+                                </Link>
+                                <JobType>
+                                    {item.jobType}
+                                </JobType>
+                            </div>
                             {/* </Link> */}
                         </Col>
                         {/* Content */}
-                        <Col xs={20} sm={20} md={18} lg={18} xl={18} xxl={18} className='item-content'>
+                        <Col xs={19} sm={19} md={18} lg={18} xl={18} xxl={18} className='item-content'>
                             <div className='item-header'>
                                 <h4 >
                                     <Link
@@ -137,12 +141,19 @@ export default function ListResult(props?: IListResultProps): JSX.Element {
                             </div>
                         </Col>
                         {/* Save */}
-                        <Col xs={2} sm={2} md={2} lg={2} xl={2} className='item-option '>
+                        <Col xs={1} sm={1} md={2} lg={2} xl={2} className='item-option '>
                             <Tooltip title='Lưu lại'>
-                                <div className='item-save' style={{ display: localStorage.getItem("accessToken") ? 'block' : 'none' }}>
-                                    <Icon 
-                                        type="heart" 
-                                        theme={saveState[index] ? "filled":"outlined"} style={{color: "red", fontSize: 18}} onClick={async () => saveJob(item.id, item.saved, index)}/>
+                                <div className='item-save'
+                                    style={{ display: localStorage.getItem("accessToken") ? 'block' : 'none' }}
+                                    onClick={() => {
+                                        saveJob(item.id, item.saved, index);
+                                    }}
+                                >
+                                    <Icon
+                                        type="heart"
+                                        theme={saveMap[index] ? "filled" : null}
+                                        style={{ color: "red", fontSize: 18 }}
+                                    />
                                 </div>
                             </Tooltip>
                         </Col>
