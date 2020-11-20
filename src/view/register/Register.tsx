@@ -131,7 +131,8 @@ class Register extends Component<IProps, IState> {
     this.setState({ list_school: res_school.data.items })
     let url = new URL(window.location.href);
     let schoolID = url.searchParams.get('schoolID')
-    if (schoolID) {
+
+    if (schoolID && schoolID!==undefined) {
       // console.log(schoolID)
       email_register_dto.schoolID = schoolID
       this.setState({ email_register_dto, is_exactly_schoolID: true })
@@ -143,10 +144,12 @@ class Register extends Component<IProps, IState> {
         })
     }
     let inviteCode = url.searchParams.get('inviteCode')
+
     if(inviteCode) {
       email_register_dto.inviteCode = inviteCode
       this.setState({ email_register_dto })
     }
+
     if (localStorage.getItem("user_exists") === "false") {
       email_register_dto.email = localStorage.getItem("user_exists_userName");
       email_register_dto.password = localStorage.getItem(
@@ -429,6 +432,8 @@ class Register extends Component<IProps, IState> {
       schoolID,
       inviteCode
     } = this.state.email_register_dto;
+
+    console.log(email);
     let {
       repassword,
       checked,
@@ -567,7 +572,7 @@ class Register extends Component<IProps, IState> {
                     </Tooltip>
                   }
                   value={email}
-                  disabled={email && is_exists}
+                  disabled={email && !is_exists}
                   onChange={this._handleInput}
                   type="text"
                 />
@@ -868,7 +873,6 @@ class Register extends Component<IProps, IState> {
                   </label>
                 </p>
               </div>
-
             </form>
           </Col>
           <Col
