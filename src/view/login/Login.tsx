@@ -135,7 +135,7 @@ class Login extends Component {
         //   } else {
         //     window.location.assign("/");
         //   }
-        // }, 3000)
+        // }, 3000)loading
       }
     }
   }

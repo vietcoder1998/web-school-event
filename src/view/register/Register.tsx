@@ -150,7 +150,9 @@ class Register extends Component<IProps, IState> {
     }
 
     if (localStorage.getItem("user_exists") === "false") {
-      body.email = localStorage.getItem("user_exists_userName");
+      if (body.email) {
+        body.email = localStorage.getItem("user_exists_userName");
+      }
       // body.password = localStorage.getItem(
         // "body"
       // );
@@ -720,9 +722,6 @@ class Register extends Component<IProps, IState> {
                       style={{ color: is_exactly_schoolYearStart ? "green" : "red",  position: 'relative', marginLeft: -35, marginTop: 8}}
                     />
                   </Tooltip>
-             
-
-
                 <Select
                   showSearch
                   placeholder="Năm học kết thúc"
@@ -762,7 +761,6 @@ class Register extends Component<IProps, IState> {
                 <Input
                   id="password"
                   placeholder="Mật khẩu"
-                  disabled={is_exists}
                   prefix={
                     <Icon type="lock" style={{ color: "rgba(0,0,0,.4)" }} />
                   }
@@ -798,7 +796,6 @@ class Register extends Component<IProps, IState> {
                 <Input
                   id="repassword"
                   placeholder="Nhập lại mật khẩu"
-                  disabled={is_exists}
                   prefix={
                     <Icon type="lock" style={{ color: "rgba(0,0,0,.4)" }} />
                   }
@@ -833,7 +830,6 @@ class Register extends Component<IProps, IState> {
                 <Input
                   id="inviteCode"
                   placeholder="Mã giới thiệu (nếu có)"
-
                   prefix={
                     <Icon type="qrcode" style={{ color: "rgba(0,0,0,.4)" }} />
                   }
