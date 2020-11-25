@@ -160,9 +160,9 @@ export default class EmployerDetail extends React.PureComponent<EmployerDetailPr
                         <p>
                             <Icon type="environment" style={{ color: '#168ECD' }} />  Địa chỉ: {employerDetail.address ? employerDetail.address : <NotUpdate />}
                         </p>
-                        <p>
+                        {/* <p>
                             <Icon type="mail" style={{ color: '#168ECD' }} />  Mail: {employerDetail.email ? employerDetail.email : <NotUpdate />}
-                        </p>
+                        </p> */}
                         <p style={{ textAlign: "right" }}>
 
                         </p>
