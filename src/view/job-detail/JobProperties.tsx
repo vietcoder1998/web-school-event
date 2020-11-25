@@ -79,7 +79,7 @@ export default class JobProperties extends PureComponent<JobPropertiesProps, Job
                                                 {convertSalary(item.minSalary, item.maxSalary, item.unit)}
                                             </p>
 
-                                            <div className='week-day'>
+                                            <div className='week-day' style={{overflowX: "auto"}}>
                                                 {weekDays.map((itemWeek, index) => {
                                                     if (item[itemWeek] === true) {
                                                         let day = 'T' + (index + 2);
@@ -114,7 +114,7 @@ export default class JobProperties extends PureComponent<JobPropertiesProps, Job
                     <Col xs={24} sm={24} md={24} lg={24} xl={24}>
                         <div className='skills-job-detail '>
                             <h6>Kĩ năng khác</h6>
-                            <div style={{ padding: 15 }}>
+                            <div style={{ padding: 15, overflowX:"auto" }}>
                                 {jobDetail.requiredSkills && jobDetail.requiredSkills.length > 0 ?
                                     jobDetail.requiredSkills.map(
                                         (item, index) => { return <label key={index} className='skills-detail'>{item.name}</label> })
@@ -126,19 +126,18 @@ export default class JobProperties extends PureComponent<JobPropertiesProps, Job
                 </Row>
                 <div className='company-more '>
                     <h6> Công việc tương tự</h6>
-                    <Row>
-                        <div className='company-job-more a_c'>
+                    <Row style={{margin: '10px -5px'}}>
                             {similarJob && similarJob.items ? similarJob.items.map((item, index) =>
                                 (<Col key={index} xs={24} sm={12} md={12} lg={8} xl={8}>
                                     {is_loading_similar ? <Skeleton loading={true} avatar paragraph={{ rows: 1 }} /> :
                                         (<Row className='item-job' >
-                                            <Col span={8} style={{ flex: 3, display: 'flex', flexDirection: 'column' }}>
+                                            <Col span={7} style={{ flex: 3, display: 'flex', flexDirection: 'column' }}>
                                                 <Avatar shape={'square'} src={item.employerLogoUrl} size={60}/>
                                                 <JobType width='60px' fontSize='0.7em'>
                                                     {item && item.jobType}
                                                 </JobType>
                                             </Col>
-                                            <Col  span={15}>
+                                            <Col  span={14}>
                                                 <p style={{ textAlign: 'left', fontSize: '1.1em', fontWeight: 500 }} className="info-silimar-job"><Link to={`/job-detail/${window.btoa(item.id)}${param}`} target='_blank'>{item.jobTitle}</Link></p>
                                                 <p style={{ textAlign: 'left' }} className="info-silimar-job"><span><Icon type='environment' style={{ marginRight: 3 }} />{item.address}</span></p>
                                             </Col>
@@ -146,7 +145,6 @@ export default class JobProperties extends PureComponent<JobPropertiesProps, Job
                                 </Col>)
                             ) : <Empty description={"Không tìm thấy công việc nào"} />
                             }
-                        </div>
                     </Row>
                     <div style={{ textAlign: 'center' }}>
                         <Pagination defaultCurrent={1} total={paging} onChange={(event) => this.props._getSimilarJob(event)} />

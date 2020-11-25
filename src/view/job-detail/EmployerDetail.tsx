@@ -175,13 +175,12 @@ export default class EmployerDetail extends React.PureComponent<EmployerDetailPr
                     </div>
                     <div className='company-more '>
                         <h6> Công việc đang tuyển</h6>
-                        <Row>
-                            <div className='company-job-more a_c'>
-                                {employerMoreJob.items && employerMoreJob ? employerMoreJob.items.map((item, index) =>
+                        <Row style={{margin: '0 -5px'}}>
+                            {employerMoreJob.items && employerMoreJob ? employerMoreJob.items.map((item, index) =>
                                     (<Col key={index} xs={24} sm={12} md={12} lg={8} xl={8}>
                                         {is_loading_more ? <Skeleton loading={true} avatar paragraph={{ rows: 1 }} /> :
                                             (<Row className='item-job' >
-                                                <Col span={8} style={{ flex: 3, display: 'flex', flexDirection: 'column' }}>
+                                                <Col span={9} style={{ flex: 3, display: 'flex', flexDirection: 'column' }}>
                                                     <Avatar shape={'square'} src={item.employerLogoUrl} size={60} 
                                                     // style={{ margin: "10px 10px 0 10px"}} 
                                                     />
@@ -189,15 +188,14 @@ export default class EmployerDetail extends React.PureComponent<EmployerDetailPr
                                                         {item && item.jobType}
                                                     </JobType>
                                                 </Col>
-                                                <Col span={16}>
+                                                <Col span={14}>
                                                     <p style={{ textAlign: 'left', fontSize: '1.1em', fontWeight: 500 }} className="info-silimar-job"><Link to={`/job-detail/${window.btoa(item.id)}${param}`} target='_blank'>{item.jobTitle}</Link></p>
                                                     <p style={{ textAlign: 'left' }} className="info-silimar-job"><span><Icon type='environment' style={{marginRight: 3}} />{item.address}</span></p>
                                                 </Col>
                                             </Row>)}
                                     </Col>)
                                 ) : <Empty description={"Không tìm thấy công việc nào"} />
-                                }
-                            </div>
+                            }
                         </Row>
                         <div className='pagination-job a_c'>
                             <Pagination defaultCurrent={1} total={paging} onChange={(event) => this.props._getMoreJob(event)} />

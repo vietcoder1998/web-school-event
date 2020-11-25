@@ -445,7 +445,6 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
                       <i className="fa fa-paper-plane-o" aria-hidden="true" />
                     </Button>
                   </div>
-
                   {/* Cover Image */}
                   <div className="cover-image-job ">
                     <LazyLoadImage alt={jobDetail.employerName} src={testImage(coverUrl)} className="company-image" />
@@ -489,7 +488,7 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
                           </Col>
                           <Col xs={24} sm={24} md={4} lg={4} xl={4}>
                             <Row className="btn-s-c">
-                              {/* <Col
+                              <Col
                               xs={8}
                               sm={8}
                               md={24}
@@ -497,22 +496,14 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
                               xl={24}
                               style={{ marginTop: 10 }}
                             >
-                              <Button
-                                size="large"
-                                type={
-                                  isAuthen && !isSaved ? "primary" : "ghost"
-                                }
+                              <Icon
+                                type={"heart"}
                                 onClick={() => this._saveJob()}
-                                disabled={isSaved}
                                 style={{
                                   marginRight: 5,
                                 }}
-                                children={
-                                  isAuthen && !isSaved ? "Lưu" : "Đã lưu"
-                                }
-                                block
                               />
-                            </Col> */}
+                            </Col>
                               <Col
                                 xs={4}
                                 sm={4}

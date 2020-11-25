@@ -255,7 +255,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                             />
                                         </Card>
                                     </Col>
-                                    <Col sm={24} md={12} lg={8} xl={8} xxl={8}>
+                                    {/* <Col sm={24} md={12} lg={8} xl={8} xxl={8}>
                                         <Card bordered={false}>
                                             <Meta
                                                 avatar={
@@ -276,7 +276,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                                 description={employerDetail && employerDetail.phone ? employerDetail.phone : <NotUpdate />}
                                             />
                                         </Card>
-                                    </Col>
+                                    </Col> */}
                                     <Col sm={24} md={12} lg={8} xl={8} xxl={8}>
                                         <Card bordered={false}>
                                             <Meta

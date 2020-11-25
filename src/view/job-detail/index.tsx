@@ -22,6 +22,7 @@ import { TYPE } from "../../const/type";
 import qs from "query-string";
 import { goBackWhenLogined } from '../../utils/goBackWhenLogined'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import SearchFilter from './../result/search-filter/SearchFilter';
 
 const { TabPane } = Tabs;
 const { TextArea } = Input;
@@ -155,7 +156,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
     this._loadData();
     this._loadState();
     moveScroll(0, 0);
-    if (!localStorage.getItem("cvUrl") && localStorage.getItem("accessToken")){
+    if (!localStorage.getItem("cvUrl") && localStorage.getItem("accessToken")) {
       this.props.getFullProfile()
     }
     this.props.getSimilarJob(0, 6);
@@ -262,7 +263,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
   _createRequest = () => {
     let { message, shiftIDs } = this.state;
     let id = window.atob(this.props.match.params.id);
-    let newMsg = message + '\n' + "Link CV:" + (localStorage.getItem("cvUrl") ? localStorage.getItem("cvUrl")  : "Ứng viên chưa cập nhật CV")
+    let newMsg = message + '\n' + "Link CV:" + (localStorage.getItem("cvUrl") ? localStorage.getItem("cvUrl") : "Ứng viên chưa cập nhật CV")
     this.requestToServer({ newMsg, shiftIDs }, id);
     this.setState({ visible: false });
   };
@@ -390,10 +391,10 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
             <div>
               <h6><b>Ứng tuyển vào công việc:</b></h6>
               <p>
-                <i>{jobDetail && jobDetail.jobTitle ? jobDetail.jobTitle: ""}</i>
+                <i>{jobDetail && jobDetail.jobTitle ? jobDetail.jobTitle : ""}</i>
               </p>
             </div>
-            }
+          }
           visible={visible}
           onOk={this._handleOk}
           footer={[
@@ -443,7 +444,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                     })}
                 </div>
                 <div style={{ fontStyle: 'italic' }}>
-                  <span className="asterisk">*</span> Hồ sơ của bạn sẽ được gửi đến Nhà tuyển dụng! 
+                  <span className="asterisk">*</span> Hồ sơ của bạn sẽ được gửi đến Nhà tuyển dụng!
                   <a href="/profile" target="_blank">
                     Hoàn thiện hồ sơ
                   </a>
@@ -460,6 +461,21 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
           </div>
         </Modal>
         <Layout>
+          {/* Cover Image */}
+          <div className="cover-image-job ">
+            {/* <Link to={`/employer/${btoa(employerDetail.employerID)}`}> */}
+            <Link to={`/employer/${window.btoa(employerDetail.id)}${param}`}
+              target="_blank"
+              style={{ fontSize: "1.05em", fontWeight: 450 }}
+            >
+              <LazyLoadImage
+                alt={employerDetail && employerDetail.employerName}
+                src={testImage(coverUrl)}
+                onError={() => coverUrl = require("./../../assets/image/countdown.jpg")}
+                className="company-image"
+              />
+            </Link>
+          </div>
           <div className="content">
             <Row style={{ marginTop: '0.5vw' }}>
               <Col xs={0} sm={0} md={0} lg={1} xl={2} xxl={3} />
@@ -475,36 +491,20 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                       <Icon type="solution" />
                     </Button>
                   </div>
-
-                  {/* Cover Image */}
-                  <div className="cover-image-job ">
-                    {/* <Link to={`/employer/${btoa(employerDetail.employerID)}`}> */}
-                    <Link to={`/employer/${window.btoa(employerDetail.id)}${param}`}
-                     target="_blank"
-                     style={{ fontSize: "1.05em", fontWeight: 450 }}
-                    >
-                      <LazyLoadImage
-                        alt={employerDetail && employerDetail.employerName}
-                        src={testImage(coverUrl)}
-                        onError={() => coverUrl = require("./../../assets/image/countdown.jpg")}
-                        className="company-image"
-                      />
-                    </Link>
-                  </div>
                   {/* Header */}
                   <div className="job-header">
                     <div className="company-header">
                       <Row>
-                        <Col xs={4} sm={8} md={4} lg={3} xl={3} xxl={3} className="a_c" style={{padding: 5}}>
+                        <Col xs={6} sm={8} md={4} lg={3} xl={3} xxl={3} className="a_c" style={{ padding: 5, marginRight: 5 }}>
                           <Avatar
                             shape={"square"}
                             src={testImage(logoUrl, "logo")}
                             alt={employerDetail && employerDetail.employerName}
-                            style={{ marginBottom: 5, width: '100%', height: "100%" }}
+                            style={{ margin: '5px 0', width: '80px', height: "80px", border: "solid #80808038 1px" }}
                           />
                           <JobType>{jobDetail && jobDetail.jobType}</JobType>
                         </Col>
-                        <Col xs={20} sm={12} md={16} lg={15} xl={16} xxl={17}>
+                        <Col xs={17} sm={11} md={15} lg={14} xl={15} xxl={16}>
                           <h4>{jobDetail && jobDetail.jobTitle}</h4>
                           <div className="d_j_t">
                             <Icon type="home" style={{ color: "#168ECD" }} />
@@ -531,7 +531,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                         </Col>
                         <Col xs={24} sm={24} md={4} lg={5} xl={4} xxl={4}>
                           <Row className="btn-s-c">
-                            {/* <Col
+                            <Col
                             xs={8}
                             sm={8}
                             md={24}
@@ -539,22 +539,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                             xl={24}
                             style={{ marginTop: 10 }}
                           >
-                            <Button
-                              size="large"
-                              type={
-                                isAuthen && !isSaved ? "primary" : "ghost"
-                              }
-                              onClick={() => this._saveJob()}
-                              disabled={isSaved}
-                              style={{
-                                marginRight: 5,
-                              }}
-                              children={
-                                isAuthen && !isSaved ? "Lưu" : "Đã lưu"
-                              }
-                              block
-                            />
-                          </Col> */}
+                          </Col>
                             <Col
                               xs={4}
                               sm={4}
@@ -569,17 +554,16 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                               sm={12}
                               md={24}
                               lg={23}
-                              xl={22}
-                              xxl={22}
-
-                              style={{ marginTop: 30 }}
+                              xl={23}
+                              xxl={23}
+                              style={{ marginTop: 10 }}
                             >
                               <Affix offsetTop={20}>
                                 <Button
                                   type={applyState ? "ghost" : "default"}
-                                  size="large"
                                   style={{
-                                    padding: 5,
+                                    height: 40,
+                                    width: '100%',
                                     backgroundColor: applyState ? "" : "rgb(249, 96, 49)",
                                     borderColor: applyState ? "" : "white",
                                     color: applyState ? "" : "white",
@@ -669,8 +653,8 @@ const mapDispatchToprops = (dispatch) => ({
     }),
   getEmployerDetail: (id?: string) =>
     dispatch({ type: REDUX_SAGA.EMPLOYER_DETAIL.GET_EMPLOYER_DETAIL, id }),
-    getFullProfile: () => 
-    dispatch({type: REDUX_SAGA.PERSON_INFO.GET_FULL_PERSON_INFO})
+  getFullProfile: () =>
+    dispatch({ type: REDUX_SAGA.PERSON_INFO.GET_FULL_PERSON_INFO })
 });
 
 type StateProps = ReturnType<typeof mapStateToProps>;
