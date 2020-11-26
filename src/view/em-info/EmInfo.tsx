@@ -418,7 +418,7 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                                        </JobType> */}
                                                    </Col>
                                                    <Col span={16}>
-                                                       <p style={{ textAlign: 'left', fontSize: '1.1em', fontWeight: 500 }} className="info-silimar-job"><Link to={`/job-detail/${window.btoa(item.id)}${param}`} target='_blank'>{item.jobTitle}</Link></p>
+                                                       <p style={{ textAlign: 'left', fontSize: '1.1em', fontWeight: 500 }} className="info-silimar-job"><Link to={`/chi-tiet-cong-viec/${window.btoa(item.id)}${param}`} target='_blank'>{item.jobTitle}</Link></p>
                                                        <p style={{ textAlign: 'left' }} className="info-silimar-job"><span><Icon type='environment' style={{ marginRight: 3 }} />{item.address}</span></p>
                                                    </Col>
                                                </Row>}

@@ -62,7 +62,7 @@ class AllJob extends PureComponent<IProps> {
                                             <div className='job-content'>
                                                 <ul>
                                                     <li className='j-d'>
-                                                        <Link to={`/job-detail/${window.btoa(item.id)}${param}`}
+                                                        <Link to={`/chi-tiet-cong-viec/${window.btoa(item.id)}${param}`}
                                                             target='_blank'>
                                                             <h6 className='l_c'>{item.jobTitle}</h6>
                                                         </Link>

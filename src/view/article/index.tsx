@@ -88,7 +88,7 @@ class Article extends React.Component<IProps, IState> {
                 <TabPane tab="Tất cả" key="all" />
                 {listType && listType.length > 0 ?
                   listType.map(
-                    (item?: any) => <TabPane disabled={true} tab={item.name} key={item.id} />
+                    (item?: any) => <TabPane tab={item.name} key={item.id} />
                   ) : undefined}
               </Tabs>
             )} />

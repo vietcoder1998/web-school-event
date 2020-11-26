@@ -90,7 +90,6 @@ class HeaderArticle extends PureComponent<IProps, IState> {
             dots={true}
             autoplay
             autoplaySpeed={3000}
-            // ref={(node) => (this.carousel = node)}
             {...props}
           >
             {this.state.listArticleData.map((item, index) => (

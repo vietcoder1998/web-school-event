@@ -138,7 +138,7 @@ class HistoryApply extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                                                             if (item.job.schoolEventID) {
                                                                                 window.open(`/event-job-detail/${window.btoa(item.job && item.job.id)}?data=${window.btoa('eventID=' + item.job.schoolEventID)}`)
                                                                             } else {
-                                                                                window.open(`/job-detail/${window.btoa(item.job && item.job.id)}`)
+                                                                                window.open(`/chi-tiet-cong-viec/${window.btoa(item.job && item.job.id)}`)
                                                                             }
                                                                         }}
                                                                     >{item.job && item.job.jobTitle}</Link>

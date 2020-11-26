@@ -241,7 +241,7 @@ code {
 }
 
 .ct-article {
-  padding: 1vw 1vh;
+  padding: 0px 1vh;
 }
 
 .card2 {
@@ -250,9 +250,11 @@ code {
   margin-bottom: 2vh;
   transition: transform 0.5s;
   overflow: hidden;
+  padding: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
   &:hover {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.021);
   }
 
   .img-card {
@@ -263,12 +265,13 @@ code {
   }
 
   .ant-col {
-    height: 15vh;
+    height: 19vh;
   }
 
   .info {
     width: auto;
     font-weight: 500;
+    font-size: 0.7rem;
     p {
       margin: 0 !important;
     }
@@ -297,9 +300,9 @@ code {
     color: black;
     display: -webkit-box;
     max-width: 100%;
-    margin: 5px auto;
+    margin: 3px auto;
     font-size: 0.8rem;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -337,7 +340,7 @@ code {
       font-weight: bold;
       display: -webkit-box;
       max-width: 100%;
-      font-size: 1.5vh;
+      font-size: 0.9rem;
       line-height: 1.3;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
@@ -352,7 +355,7 @@ code {
       display: -webkit-box;
       max-width: 100%;
       margin: 5px auto;
-      font-size: 1.4vh;
+      font-size: 0.8rem;
       line-height: 16pxf;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;

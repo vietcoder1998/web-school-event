@@ -95,7 +95,7 @@ export default class ListMiddle extends PureComponent<IProps, IState> {
               <Title title={this.props.type.name} />
               {
                 listArticleData.map((item?: any, index?: number) => {
-                  if (index < 4) return (
+                  if (index < 3) return (
                     <Card2
                       key={item.id}
                       id={item.id}

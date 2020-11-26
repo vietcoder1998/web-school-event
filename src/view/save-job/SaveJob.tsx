@@ -109,7 +109,7 @@ class SaveJob extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                                                 <p>
                                                                     <Link target='_blank'
                                                                         to={    
-                                                                            `/job-detail/${window.btoa(item.job && item.job.id)}`}>
+                                                                            `/chi-tiet-cong-viec/${window.btoa(item.job && item.job.id)}`}>
                                                                         {item.job && item.job.jobTitle}
                                                                     </Link>
                                                                 </p>

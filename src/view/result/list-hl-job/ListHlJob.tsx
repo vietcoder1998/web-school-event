@@ -38,7 +38,7 @@ export default class ListHlJob extends React.Component<IListHlJobProps> {
                                                 </div>
                                                 <ul style={{ flex: 4, marginLeft: 10, marginBottom: 0 }}>
                                                     <li className="maxline-2">
-                                                        <Link to={`/job-detail/${window.btoa(item.id)}${param}`}
+                                                        <Link to={`/chi-tiet-cong-viec/${window.btoa(item.id)}${param}`}
                                                             target='_blank'
                                                             style={{fontStyle: "italic", fontWeight: "bold"}}
                                                         >

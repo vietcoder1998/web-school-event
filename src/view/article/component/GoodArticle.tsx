@@ -84,8 +84,9 @@ class GoodArticle extends PureComponent<IProps, IState> {
       return (
         <div className="good-article">
           <Title title={"Nhiều người đọc"} />
-          {listArticleData.map((item, index) => (
-            <div
+          {listArticleData.map((item, index) => {
+            if (index < 4) {
+              return <div
               key={index}
               style={{ display: index === 0 ? "none" : "", marginTop: 20 }}
             >
@@ -110,7 +111,9 @@ class GoodArticle extends PureComponent<IProps, IState> {
                 />
               )}
             </div>
-          ))}
+            }
+           
+  })}
         </div>
       );
     }

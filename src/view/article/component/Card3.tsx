@@ -77,7 +77,7 @@ export default class Card3 extends PureComponent<IProps, IState> {
                 <Icon type="calendar" /> {this.state.date}
               </div>
               <div>
-                <Rate allowHalf disabled value={this.state.rating} />
+                <Rate allowHalf disabled value={this.state.rating} style={{fontSize: '0.7rem'}} />
               </div>
             </div>
           </div>

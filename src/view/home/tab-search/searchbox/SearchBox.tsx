@@ -598,7 +598,7 @@ class SearchBox extends Component<IProps, IState>{
                             <TabPane tab="Chính thức" key="2" />
                             <TabPane tab="Thực tập" key="3" />
                         </Tabs>
-                        <Affix offsetTop={-10}>
+                        <Affix offsetTop={-20}>
                             <div className='search-type' style={{ margin: choose_advanced ? '0px' : '20px 0px' }}>
                                 <InputGroup
                                     size="large"
