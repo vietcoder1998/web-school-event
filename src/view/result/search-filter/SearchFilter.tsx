@@ -160,7 +160,7 @@ class SearchFilter extends React.Component<
   }
 
   jobTypeFilterOption = () => {
-    let { regionID, jobNameID, isEvent} = this.state
+    let { jobNameID, isEvent} = this.state
     let { jobType } = this.props
     return (
       <Select

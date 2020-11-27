@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Input, Select, Button, Icon, Modal, Tabs, Col, Row, Affix } from 'antd';
+import { Input, Select, Button, Icon, Modal, Tabs,Affix } from 'antd';
 import './SearchBox.scss';
 import { connect } from 'react-redux';
 import { REDUX_SAGA, REDUX } from '../../../../const/actions';
 //@ts-ignore
-import CHPlay from '../../../../assets/image/CHPlay.png';
+// import CHPlay from '../../../../assets/image/CHPlay.png';
 //@ts-ignore
-import AppStore from '../../../../assets/image/app-store.png';
+// import AppStore from '../../../../assets/image/app-store.png';
 //@ts-ignore
 import QRCodeAppStore from '../../../../assets/image/qr-code-appstore.png';
 //@ts-ignore

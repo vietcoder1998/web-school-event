@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Row, Col, Icon, Spin, Tooltip, Empty } from 'antd';
 import { Link } from 'react-router-dom';
 import { limitString } from '../../../utils/limitString';
