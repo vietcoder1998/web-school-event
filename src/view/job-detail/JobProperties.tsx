@@ -61,7 +61,7 @@ export default class JobProperties extends PureComponent<JobPropertiesProps, Job
                                 </li>
                             </ul>
                             <div style={{height: "40vh", marginTop: 20,padding: 10, position: "relative"}}>
-                            <MapContainer address={{lat: jobDetail.lat, lng: jobDetail.long}} location={jobDetail && jobDetail.address} hidden={true}/>
+                                {jobDetail ? <MapContainer address={{lat: jobDetail.lat, lng: jobDetail.long}} location={jobDetail && jobDetail.address} hidden={true}/>: ""}
                             </div>
                         </div>
                         
