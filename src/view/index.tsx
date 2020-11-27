@@ -303,7 +303,7 @@ class App extends React.Component<IProps, IState> {
               <Route exact path="/save-job" component={SaveJob} />
               {/* <Route exact path="/download-apps-student" component={DownloadApps} /> */}
               <Route exact path="/lich-su-cong-viec" component={HistoryApply} />
-              <Route exact path="/chi-tiet-viec/:id" component={JobDetail} />
+              <Route exact path="/chi-tiet-cong-viec/:id" component={JobDetail} />
               <Route exact path="/notifications" component={AllNoti} />
               <Route exact path="/tat-ca-cac-tinh" component={DataRegions} />
               <Route
