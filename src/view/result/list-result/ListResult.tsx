@@ -88,7 +88,7 @@ export default function ListResult(props?: IListResultProps): JSX.Element {
                                 <h4 >
                                     <Link
                                         style={{ color: item.priority === 'TOP' ? 'red' : 'black' }}
-                                        to={isSearchEvent ? `event-job-detail/${window.btoa(item.id)}${param}` : `/chii-tiet-cong-viec/${window.btoa(item.id)}${param}`}
+                                        to={isSearchEvent ? `event-job-detail/${window.btoa(item.id)}${param}` : `/chi-tiet-cong-viec/${window.btoa(item.id)}${param}`}
                                         target='_blank'
                                     >
                                         <LinkToolTip
