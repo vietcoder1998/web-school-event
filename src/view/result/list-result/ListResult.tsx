@@ -13,8 +13,6 @@ import LinkToolTip from '../../layout/common/LinkToolTip';
 import { _requestToServer } from './../../../services/exec';
 import { DELETE, POST } from '../../../const/method';
 import { JobType } from '../../layout/common/Common';
-import { number } from 'prop-types';
-
 
 interface IListResultProps {
     listResult?: Array<IJobDetail>;
@@ -90,7 +88,7 @@ export default function ListResult(props?: IListResultProps): JSX.Element {
                                 <h4 >
                                     <Link
                                         style={{ color: item.priority === 'TOP' ? 'red' : 'black' }}
-                                        to={isSearchEvent ? `event-job-detail/${window.btoa(item.id)}${param}` : `/job-detail/${window.btoa(item.id)}${param}`}
+                                        to={isSearchEvent ? `event-job-detail/${window.btoa(item.id)}${param}` : `/chi-tiet-viec-lam/${window.btoa(item.id)}${param}`}
                                         target='_blank'
                                     >
                                         <LinkToolTip

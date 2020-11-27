@@ -272,7 +272,7 @@ class ArticleDetail extends PureComponent<IProps, IState> {
       return (
         <Layout disableFooterData={true}>
           <div className="article-detail">
-            <Affix
+            {/* <Affix
               offsetTop={0}
               children={(
                 <Tabs
@@ -292,7 +292,7 @@ class ArticleDetail extends PureComponent<IProps, IState> {
                       (item?: any) => <TabPane tab={item.name} key={item.id} />
                     ) : undefined}
                 </Tabs>
-              )} />
+              )} /> */}
             <Row>
               <Col xs={0} sm={0} md={0} lg={1} xl={1} xxl={1}></Col>
               <Col xs={24} sm={24} md={16} lg={16} xl={16} xxl={16}>
@@ -372,7 +372,7 @@ class ArticleDetail extends PureComponent<IProps, IState> {
                         {this.state.totalComment}
                       </div>
                       <div>
-                        <a href={`/chi-tiet-bai-viet/${this.state.idType}`}>
+                        <a href={`/bai-viet/${this.state.idType}`}>
                           {this.state.type}
                         </a>
                       </div>
