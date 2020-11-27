@@ -6,6 +6,7 @@ import { POST } from "../../const/method";
 import { APPLY_JOB, SAVED_JOB } from "../../services/api/private.api";
 import { STUDENT_HOST } from "../../environment/development";
 import { authHeaders } from "../../services/auth";
+import Headroom from "react-headroom";
 //@ts-ignore
 import _ from "lodash";
 import { moveScroll } from "../../utils/moveScroll";
@@ -178,7 +179,6 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
         employerID: nextProps.jobDetail.employerID,
       };
     }
-
 
     return null;
   }
@@ -463,7 +463,6 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
         <Layout>
           {/* Cover Image */}
           <div className="cover-image-job ">
-            {/* <Link to={`/employer/${btoa(employerDetail.employerID)}`}> */}
             <Link to={`/employer/${window.btoa(employerDetail.id)}${param}`}
               target="_blank"
               style={{ fontSize: "1.05em", fontWeight: 450 }}
@@ -504,15 +503,15 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                           />
                           <JobType>{jobDetail && jobDetail.jobType}</JobType>
                         </Col>
-                        <Col xs={17} sm={11} md={15} lg={14} xl={15} xxl={16}>
-                          <h4>{jobDetail && jobDetail.jobTitle}</h4>
+                        <Col xs={17} sm={11} md={15} lg={14} xl={15} xxl={16} style={{padding: 10}}>
+                          <h4 style={{textTransform: "capitalize"}}>{jobDetail && jobDetail.jobTitle}</h4>
                           <div className="d_j_t">
                             <Icon type="home" style={{ color: "#168ECD" }} />
                             <label>
                               <Link
                                 to={`/employer/${window.btoa(employerDetail.id)}${param}`}
                                 target="_blank"
-                                style={{ fontSize: "1.05em", fontWeight: 600 }}
+                                style={{ fontSize: "1.05em"}}
                               >
                                 {employerDetail && employerDetail.employerName}
                               </Link>
@@ -584,7 +583,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                       </Row>
                     </div>
                   </div>
-                  <div className="job-content ">
+                  <div className="job-content">
                     <Tabs defaultActiveKey="1" className="">
                       <TabPane tab="Chi tiết công việc" key="1">
                         <JobProperties

@@ -111,7 +111,7 @@ export default function ListResult(props?: IListResultProps): JSX.Element {
                                     <Link
                                         to={`/employer/${window.btoa(item.employerID)}${param}`}
                                         target='_blank'
-                                        className="name_employer" style={{ fontWeight: 550 }}
+                                        className="name_employer"
                                     >
                                         <Icon type="shop" style={{ color: '#168ECD', marginRight: 5 }} />
                                         {item.employerName ? item.employerName.toUpperCase() : null}

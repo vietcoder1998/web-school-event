@@ -5,9 +5,10 @@ import moment from 'moment';
 import { weekDays } from '../../utils/day';
 import { IShift } from '../../models/announcements.interface';
 // import { convertStringToArray } from '../../utils/convertStringToArray';
-import { convertSalary } from '../../utils/convertNumber'
+import { convertFullSalary, convertSalary } from '../../utils/convertNumber'
 import { Link } from 'react-router-dom';
 import { _checkGender } from './../event/job-detail';
+import MapContainer from './../layout/google-maps/MapContainer';
 
 interface JobPropertiesProps {
     jobDetail?: any;
@@ -29,7 +30,6 @@ export default class JobProperties extends PureComponent<JobPropertiesProps, Job
         return (
             <div className='job-detail'>
                 <Row className='des-job' style={{ backgroundColor: 'white' }} >
-
                     {/* Description job */}
                     <Col xs={24} sm={24} md={24} lg={15} xl={15}>
                         <div className='description-job '>
@@ -46,16 +46,25 @@ export default class JobProperties extends PureComponent<JobPropertiesProps, Job
                                 <li className='d_j_t'>
                                     <Icon type="calendar" style={{ color: 'rgb(74, 74, 74)' }} />
                                     <IptLetter value={"Ngày đăng: "} />
-                                    <b> {jobDetail && moment(jobDetail.createdDate).format('DD/MM/YYYY')}
-                                    </b>
-                                </li>
+                                    {jobDetail && moment(jobDetail.createdDate).format('DD/MM/YYYY')}
+                                    </li>
                                 <li className='d_j_t'>
                                     <Icon type="calendar" style={{ color: 'rgb(74, 74, 74)' }} />
                                     <IptLetter value={"Ngày hết hạn: "} />
-                                    <b> {jobDetail && moment(jobDetail.expirationDate).format('DD/MM/YYYY')}</b>
+                                    {jobDetail && moment(jobDetail.expirationDate).format('DD/MM/YYYY')}
+                                </li>
+                                <li className='d_j_t'>
+                                    <Icon type="dollar" style={{ color: 'rgb(15, 74, 74)' }} />
+                                    <IptLetter value={"Lương: "} />
+                                    {jobDetail && convertFullSalary(jobDetail.minSalary, jobDetail.minSalaryUnit,
+                                                            jobDetail.maxSalary, jobDetail.maxSalaryUnit)}
                                 </li>
                             </ul>
+                            <div style={{height: "40vh", marginTop: 20,padding: 10, position: "relative"}}>
+                            <MapContainer address={{lat: jobDetail.lat, lng: jobDetail.long}} location={jobDetail && jobDetail.address} hidden={true}/>
+                            </div>
                         </div>
+                        
                     </Col>
                 </Row>
                 <Row>
@@ -124,7 +133,7 @@ export default class JobProperties extends PureComponent<JobPropertiesProps, Job
                         </div>
                     </Col >
                 </Row>
-                <div className='company-more '>
+                <div className='company-more'>
                     <h6> Công việc tương tự</h6>
                     <Row style={{margin: '10px -5px'}}>
                             {similarJob && similarJob.items ? similarJob.items.map((item, index) =>
@@ -137,9 +146,29 @@ export default class JobProperties extends PureComponent<JobPropertiesProps, Job
                                                     {item && item.jobType}
                                                 </JobType>
                                             </Col>
-                                            <Col  span={14}>
-                                                <p style={{ textAlign: 'left', fontSize: '1.1em', fontWeight: 500 }} className="info-silimar-job"><Link to={`/job-detail/${window.btoa(item.id)}${param}`} target='_blank'>{item.jobTitle}</Link></p>
-                                                <p style={{ textAlign: 'left' }} className="info-silimar-job"><span><Icon type='environment' style={{ marginRight: 3 }} />{item.address}</span></p>
+                                            <Col  span={16} style={{fontWeight:500}}>
+                                                <p style={{ 
+                                                    textAlign: 'left', 
+                                                    fontSize: '1.1em', 
+                                                    fontWeight: 500,
+                                                    fontStyle:'italic',
+                                                    textTransform:"capitalize",
+                                                    color: item.saved ?"red": ""
+                                                }} className="info-silimar-job">
+                                                    <Link to={`/chi-tiet-cong-viec/${window.btoa(item.id)}${param}`} target='_blank'>
+                                                      {item.jobTitle}
+                                                    </Link>
+                                                </p>
+                                                <p style={{ textAlign: 'left' }} className="info-silimar-job">
+                                                    <span>
+                                                        <Icon type='environment' style={{ marginRight: 3 }} />{item.address}
+                                                    </span>
+                                                </p>
+                                                <p style={{ textAlign: 'left' }} className="info-silimar-job">
+                                                    <span>
+                                                        <Icon type='home' style={{ marginRight: 3 }} />{item.employerName}
+                                                    </span>
+                                                </p>
                                             </Col>
                                         </Row>)}
                                 </Col>)

@@ -17,6 +17,7 @@ interface IProps {
     };
     location?: any;
     marker?: any;
+    hidden?: boolean;
     _fixData?: (params?: string) => any;
 }
 
@@ -55,10 +56,6 @@ class GoogleMap extends React.Component<IProps, IState>{
             address: "",
             showInfo: false,
         }
-    }
-
-    componentDidMount() {
-
     }
 
     SendData = (lat, lng, address) => {
@@ -120,10 +117,13 @@ class GoogleMap extends React.Component<IProps, IState>{
                     value={this.state.address}
                     onChange={this.handleChange}
                     onSelect={this.handleSelect}
+                 
                 >
                     {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                         <div>
-                            <Dropdown overlay={
+                            <Dropdown 
+                              
+                                overlay={
                                 <Menu className="autocomplete-dropdown-container " >
                                     {loading && <div>Loading...</div>}
                                     {suggestions && suggestions.length > 0 ? suggestions.map((suggestion, i) => {
@@ -153,6 +153,7 @@ class GoogleMap extends React.Component<IProps, IState>{
                                         placeholder: 'Gõ để tìm kiếm vị trí...',
                                         className: 'location-search-input',
                                     })}
+                                    style={{display: this.props.hidden ? "none":""}}
                                 />
                             </Dropdown>
                         </div>
@@ -161,7 +162,7 @@ class GoogleMap extends React.Component<IProps, IState>{
 
                 </PlacesAutocomplete>
                 <Map
-                    style={{ width: "100%", height: "100%", marginTop: 10 }}
+                    style={{ width: "100%", height: "100%", marginTop: 10, padding: 10 }}
                     google={window.google}
                     zoom={14}
                     center={{
@@ -176,7 +177,7 @@ class GoogleMap extends React.Component<IProps, IState>{
                     <Marker
                         name={this.state.address}
                         position={this.state.position}
-                        draggable={true}
+                        draggable={false}
                         onDragend={(t, map, coord) => this.getAddress(coord)}
                     />
                 </Map>

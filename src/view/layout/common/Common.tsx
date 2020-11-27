@@ -54,21 +54,23 @@ export function JobType(props: { children?: any, width?: any, fontSize?: any }) 
         width: props.width ? props.width : '100%',
         display: 'inline-block',
         position: 'relative',
-        marginTop: '5px',
+        margin: '5px 0',
         borderRadius: '3px',
+        padding: '2px 2px'
+
     };
     let label;
     switch (props.children) {
         case 'FULLTIME':
             style.color = 'white';
             style.backgroundColor = '#06bbe4';
-            label = 'FULL-TIME';
+            label = 'FULLTIME';
             break;
 
         case 'PARTTIME':
             style.color = 'white';
             style.backgroundColor = '#00b33c';
-            label = 'PART-TIME';
+            label = 'PARTTIME';
             break;
 
         case 'INTERNSHIP':
