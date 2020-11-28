@@ -59,6 +59,9 @@ export const REDUX = {
     GET_ALL_JOB: "GET_ALL_JOB",
     SET_LOADING_ALL_JOB: "SET_LOADING_ALL_JOB",
   },
+  MATCHING_JOB: {
+    GET_MATCHING_JOB: "GET_MATCHING_JOB"
+  },
   JOB_DETAIL: {
     GET_JOB_DETAIL: "GET_JOB_DETAIL",
   },
@@ -209,5 +212,8 @@ export const REDUX_SAGA = {
   },
   MAJOR: {
     GET_MAJOR: "GET_MAJOR_DATA"
-  }
+  },
+  MATCHING_JOB: {
+    GET_MATCHING_JOB: "GET_MATCHING_JOB_DATA"
+  },
 };
