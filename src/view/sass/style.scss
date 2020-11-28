@@ -33,9 +33,13 @@ $font_super_small: 8px;
 $color_border: rgb(231, 231, 231);
 $font_base: Roboto, Segoe UI, BlinkMacSystemFont, -apple-system, sans-serif;
 
+.all-content {
+  font-family: Roboto, Segoe UI, BlinkMacSystemFont, -apple-system, sans-serif;
+}
+
 body {
   margin: 0;
-  font-family: Roboto, Segoe UI, BlinkMacSystemFont, -apple-system, sans-serif;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   .anticon {
