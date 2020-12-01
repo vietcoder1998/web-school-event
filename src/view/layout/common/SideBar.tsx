@@ -125,12 +125,12 @@ export default class LeftBar extends Component<IProps, IState> {
                         <Collapse bordered={false} defaultActiveKey={['1']} style={{ margin: "0 -10px" }}>
                             <Panel header="Mục khác" key="1" style={{ borderColor: 'rgba(0,0,0,0)' }}>
                                 <p>
-                                    <Link to='/save-job'>
+                                    <Link to='/cong-viec-da-luu'>
                                         <Icon type={"save"} /> Công việc đã lưu
                                 </Link>
                                 </p>
                                 <p>
-                                    <Link to='/history-apply'>
+                                    <Link to='/lich-su-ung-tuyen'>
                                         <Icon type={"tag"} /> Lịch sử ứng tuyển
                                  </Link>
                                 </p>

@@ -6,7 +6,6 @@ import { POST } from "../../const/method";
 import { APPLY_JOB, SAVED_JOB } from "../../services/api/private.api";
 import { STUDENT_HOST } from "../../environment/development";
 import { authHeaders } from "../../services/auth";
-import Headroom from "react-headroom";
 //@ts-ignore
 import _ from "lodash";
 import { moveScroll } from "../../utils/moveScroll";
@@ -23,7 +22,7 @@ import { TYPE } from "../../const/type";
 import qs from "query-string";
 import { goBackWhenLogined } from '../../utils/goBackWhenLogined'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import SearchFilter from './../result/search-filter/SearchFilter';
+// import SearchFilter from './../result/search-filter/SearchFilter';
 
 const { TabPane } = Tabs;
 const { TextArea } = Input;
@@ -279,7 +278,6 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
       false
     ).then((res) => {
       if (res) {
-
         let { results } = res.data;
         if (res.data.success === true) {
           swal({
@@ -298,7 +296,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
           }).then((value) => {
             switch (value) {
               case "catch":
-                window.open('/history-apply')
+                window.open('/lich-su-ung-tuyen')
                 break;
             }
           })
@@ -306,9 +304,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
           this._loadState();
         }
         else {
-
           for (let i in results) {
-
             if (results[i].full === true) {
               swal({
                 title: "Worksvns thông báo",
@@ -462,20 +458,21 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
         </Modal>
         <Layout>
           {/* Cover Image */}
-          <div className="cover-image-job ">
-            <Link to={`/employer/${window.btoa(employerDetail.id)}${param}`}
-              target="_blank"
-              style={{ fontSize: "1.05em", fontWeight: 450 }}
-            >
-              <LazyLoadImage
-                alt={employerDetail && employerDetail.employerName}
-                src={testImage(coverUrl)}
-                onError={() => coverUrl = require("./../../assets/image/countdown.jpg")}
-                className="company-image"
-              />
-            </Link>
-          </div>
+
           <div className="content">
+            <div className="cover-image-job ">
+              <Link to={`/employer/${window.btoa(employerDetail.id)}${param}`}
+                target="_blank"
+                style={{ fontSize: "1.05em", fontWeight: 450 }}
+              >
+                <LazyLoadImage
+                  alt={employerDetail && employerDetail.employerName}
+                  src={coverUrl}
+                  onError={() => coverUrl = require("./../../assets/image/countdown.jpg")}
+                  className="company-image"
+                />
+              </Link>
+            </div>
             <Row style={{ marginTop: '0.5vw' }}>
               <Col xs={0} sm={0} md={0} lg={1} xl={2} xxl={3} />
               <Col xs={24} sm={24} md={24} lg={22} xl={20} xxl={18}>
@@ -501,17 +498,17 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                             alt={employerDetail && employerDetail.employerName}
                             style={{ margin: '5px 0', width: '80px', height: "80px", border: "solid #80808038 1px" }}
                           />
-                          <JobType>{jobDetail && jobDetail.jobType}</JobType>
+                          <JobType width={'60px'}>{jobDetail && jobDetail.jobType}</JobType>
                         </Col>
-                        <Col xs={17} sm={11} md={15} lg={14} xl={15} xxl={16} style={{padding: 10}}>
-                          <h4 style={{textTransform: "capitalize"}}>{jobDetail && jobDetail.jobTitle}</h4>
+                        <Col xs={17} sm={11} md={15} lg={14} xl={15} xxl={16} style={{ padding: 10 }}>
+                          <h4 style={{ textTransform: "capitalize" }}>{jobDetail && jobDetail.jobTitle}</h4>
                           <div className="d_j_t">
                             <Icon type="home" style={{ color: "#168ECD" }} />
                             <label>
                               <Link
                                 to={`/employer/${window.btoa(employerDetail.id)}${param}`}
                                 target="_blank"
-                                style={{ fontSize: "1.05em"}}
+                                style={{ fontSize: "1.05em" }}
                               >
                                 {employerDetail && employerDetail.employerName}
                               </Link>
@@ -531,14 +528,14 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                         <Col xs={24} sm={24} md={4} lg={5} xl={4} xxl={4}>
                           <Row className="btn-s-c">
                             <Col
-                            xs={8}
-                            sm={8}
-                            md={24}
-                            lg={24}
-                            xl={24}
-                            style={{ marginTop: 10 }}
-                          >
-                          </Col>
+                              xs={8}
+                              sm={8}
+                              md={24}
+                              lg={24}
+                              xl={24}
+                              style={{ marginTop: 10 }}
+                            >
+                            </Col>
                             <Col
                               xs={4}
                               sm={4}

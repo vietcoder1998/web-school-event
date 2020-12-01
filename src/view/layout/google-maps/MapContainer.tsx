@@ -166,8 +166,8 @@ class GoogleMap extends React.Component<IProps, IState>{
                     google={window.google}
                     zoom={14}
                     center={{
-                        lat: this.state.position.lat,
-                        lng: this.state.position.lng,
+                        lat: this.props.lat,
+                        lng: this.props.lng,
                     }}
                     initialCenter={{
                         lat: this.state.position.lat,

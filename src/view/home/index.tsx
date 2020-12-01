@@ -25,8 +25,8 @@ function Home(props) {
         <IndayJob />
         <JobExpect />
         <TopJob />
-        <AllJob   {...props} />
         <VideoAd {...props} />
+        <AllJob   {...props} />
         <Announcements  {...props} />
       </div>
     </Layout>

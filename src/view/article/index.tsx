@@ -8,7 +8,7 @@ import { GET } from "../../const/method";
 import { ANNOUNCEMENTS } from "../../services/api/public.api";
 import { PUBLIC_HOST } from "../../environment/development";
 import ListMiddle from './middle/ListMidle';
-import { Col, Row, Affix, Tabs } from 'antd';
+import { Col, Row } from 'antd';
 
 interface IProps {
   match?: any,
@@ -20,10 +20,6 @@ interface IState {
   idType: any,
   listType: Array<any>,
 }
-
-const { TabPane } = Tabs;
-
-
 
 class Article extends React.Component<IProps, IState> {
   constructor(props) {

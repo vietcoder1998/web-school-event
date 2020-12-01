@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { Component, useEffect } from 'react';
 
 // import logo from './logo.svg';
 import './salaryCalculator.css';

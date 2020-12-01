@@ -159,11 +159,12 @@ class EmployerInfo extends Component<IEmployerInfoProps, IState> {
                                     <Avatar
                                         // @ts-ignore
                                         src={!onErrLogo && employerDetail && employerDetail.logoUrl ? employerDetail.logoUrl : defaultImage}
+                                        shape="square"
                                         style={{
                                             height: "15vh",
                                             width: "15vh",
                                             fontSize: 60,
-                                            borderColor: "white",
+                                            borderColor: "solid gray 2px",
                                             zIndex: 1
                                         }}
                                         // @ts-ignore

@@ -57,11 +57,11 @@ export default class JobProperties extends PureComponent<JobPropertiesProps, Job
                                     <Icon type="dollar" style={{ color: 'rgb(15, 74, 74)' }} />
                                     <IptLetter value={"Lương: "} />
                                     {jobDetail && convertFullSalary(jobDetail.minSalary, jobDetail.minSalaryUnit,
-                                                            jobDetail.maxSalary, jobDetail.maxSalaryUnit)}
+                                    jobDetail.maxSalary, jobDetail.maxSalaryUnit)}
                                 </li>
                             </ul>
                             <div style={{height: "40vh", marginTop: 20,padding: 10, position: "relative"}}>
-                                {jobDetail ? <MapContainer address={{lat: jobDetail.lat, lng: jobDetail.long}} location={jobDetail && jobDetail.address} hidden={true}/>: ""}
+                                {jobDetail ? <MapContainer address={{lat: jobDetail.lat, lng: jobDetail.lon}} location={jobDetail && jobDetail.address} hidden={true}/>: ""}
                             </div>
                         </div>
                         

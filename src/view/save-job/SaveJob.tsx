@@ -82,7 +82,7 @@ class SaveJob extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                             <Col></Col>
                             <Col>
                                 <div className='history-content ' >
-                                    <h5>Công việc đã lưu</h5>
+                                    <h5><Icon type="history" style={{marginRight: 10}} />Công việc đã lưu</h5>
                                     <div className='history-job'>
                                         {this.props.loading ? <div className='loading'><Spin /></div> :
                                             <Row>

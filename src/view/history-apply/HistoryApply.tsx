@@ -80,7 +80,7 @@ class HistoryApply extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                             <Col></Col>
                             <Col>
                                 <div className='history-content ' >
-                                    <h5>Lịch sử ứng tuyển</h5>
+                                    <h5><Icon type="solution" style={{ marginRight: 10 }} />Lịch sử ứng tuyển</h5>
                                     <div className='history-job'>
                                         {this.props.loading ? <div className='loading'><Spin /></div> :
                                             <Row>
@@ -106,74 +106,72 @@ class HistoryApply extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                                         default:
                                                             break;
                                                     }
-                                                    return (<Col key={index} xs={24} sm={12} md={8} lg={6} xl={5} xxl={6}>
-                                                        <div className='job-detail '>
-                                                            <div className='image-job'>
-                                                                <Avatar
-                                                                    className='logo-company'
-                                                                    shape='square'
-                                                                    src={item.job && item.job.employerLogoUrl ? item.job.employerLogoUrl : ''}
-                                                                    icon="shop"
-                                                                    alt='history job'
-                                                                    style={{
-                                                                        borderRadius: 5,
-                                                                        border: "solid gray 1px"
-                                                                    }}
-                                                                />
-                                                                <JobType>
-                                                                    {item.job && item.job.jobType}
-                                                                </JobType>
-                                                                {/* <Tooltip title='Bạn có muốn xóa công việc' placement="bottom" >
-                                                                <li onClick={() => { this._removejob(item.id) }}>
-                                                                    <Button type='danger' size='small'> <Icon type="delete" />Xóa</Button>
-                                                                </li>
-                                                            </Tooltip> */}
-                                                            </div>
-                                                            <div className='content-job'>
-                                                                <div style={{}} className='job-content'>
-                                                                    <Link
-
-                                                                        onClick={() => {
-                                                                            // this.props.setEventID(null)
-                                                                            if (item.job.schoolEventID) {
-                                                                                window.open(`/event-job-detail/${window.btoa(item.job && item.job.id)}?data=${window.btoa('eventID=' + item.job.schoolEventID)}`)
-                                                                            } else {
-                                                                                window.open(`/chi-tiet-cong-viec/${window.btoa(item.job && item.job.id)}`)
-                                                                            }
+                                                    return (
+                                                        <Col key={index} xs={24} sm={12} md={12} lg={8} xl={8} xxl={6}>
+                                                            <Row className='job-detail '>
+                                                                <Col xs={8} sm={8} md={8} lg={6} xl={5} xxl={6} className='image-job'>
+                                                                    <Avatar
+                                                                        className='logo-company'
+                                                                        shape='square'
+                                                                        src={item.job && item.job.employerLogoUrl ? item.job.employerLogoUrl : ''}
+                                                                        icon="shop"
+                                                                        alt='history job'
+                                                                        style={{
+                                                                            borderRadius: 5,
+                                                                            border: "solid #8080804f 1px",
+                                                                            width: 70,
+                                                                            height: 70
                                                                         }}
-                                                                    >{item.job && item.job.jobTitle}</Link>
-                                                                </div>
-                                                                <div className='info-company'>
-                                                                    <li>
-                                                                        <Link to={`/employer/${window.btoa(item.job && item.job.employerID)}`}><Icon type="home" style={{ marginRight: 3 }} />{item.job && item.job.employerName}</Link>
-                                                                    </li>
-                                                                    <li>
-                                                                        <Icon type='environment' style={{ marginRight: 3 }} />{item.job && item.job.address}
-                                                                    </li>
-                                                                </div>
-                                                                <span style={{ backgroundColor: typeSpan.color, color: '#fff', padding: '3px 5px' }}>
-                                                                    <i className={typeSpan.type} aria-hidden="true" style={{ fontSize: "1.1em" }}></i>
-                                                                    <span style={{ fontWeight: 550, fontSize: '0.9em' }}>{typeSpan.state}</span></span>
-                                                                <span style={{ display: 'flex' }}>
-                                                                    <li style={{ fontSize: '0.7rem' }}>
-                                                                        <Icon type="calendar" />
-                                                                        Ngày gửi: {moment(item.createdDate).format('DD/MM/YYYY')}
-                                                                    </li>
-                                                                    {item.repliedDate !== -1 ?
-                                                                        <li style={{ fontSize: '0.7rem', marginLeft: 10 }}>
+                                                                    />
+                                                                    <JobType>
+                                                                        {item.job && item.job.jobType}
+                                                                    </JobType>
+                                                                </Col>
+                                                                <Col xs={14} sm={14} md={14} lg={18} xl={18} xxl={18} className='content-job'>
+                                                                    <div style={{}} className='job-content'>
+                                                                        <Link
+                                                                            onClick={() => {
+                                                                                // this.props.setEventID(null)
+                                                                                if (item.job.schoolEventID) {
+                                                                                    window.open(`/event-job-detail/${window.btoa(item.job && item.job.id)}?data=${window.btoa('eventID=' + item.job.schoolEventID)}`)
+                                                                                } else {
+                                                                                    window.open(`/chi-tiet-cong-viec/${window.btoa(item.job && item.job.id)}`)
+                                                                                }
+                                                                            }}
+                                                                        >{item.job && item.job.jobTitle}</Link>
+                                                                    </div>
+                                                                    <div className='info-company'>
+                                                                        <li>
+                                                                            <Link to={`/employer/${window.btoa(item.job && item.job.employerID)}`}><Icon type="home" style={{ marginRight: 3 }} />{item.job && item.job.employerName}</Link>
+                                                                        </li>
+                                                                        <li>
+                                                                            <Icon type='environment' style={{ marginRight: 3 }} />{item.job && item.job.address}
+                                                                        </li>
+                                                                    </div>
+                                                                    <span style={{ backgroundColor: typeSpan.color, color: '#fff', padding: '3px 5px', marginBottom: 10 }}>
+                                                                        <i className={typeSpan.type} aria-hidden="true" style={{ fontSize: "1.1em" }}></i>
+                                                                        <span style={{ fontWeight: 550, fontSize: '0.9em' }}>{typeSpan.state}</span></span>
+                                                                    <span style={{ display: 'flex' }}>
+                                                                        <li style={{ fontSize: '0.8rem' }}>
                                                                             <Icon type="calendar" />
-                                                                            Ngày phản hồi: {moment(item.repliedDate).format('DD/MM/YYYY')}
-                                                                        </li> : null}
-                                                                </span>
+                                                                            Ngày gửi: {moment(item.createdDate).format('DD/MM/YYYY')}
+                                                                        </li>
+                                                                        <li style={{ fontSize: '0.8rem', marginLeft: 10 }}>
+                                                                            <Icon type="calendar" />
+                                                                            Ngày phản hồi:  {item.repliedDate !== -1 ? moment(item.repliedDate).format('DD/MM/YYYY') : <i style={{color: "red"}}>Chưa có</i>}
+                                                                        </li>
+                                                                    </span>
 
-                                                            </div>
-                                                            <div className='content-job' style={{ display: item.job.schoolEventID === null ? 'none' : '' }}>
-                                                                <Tooltip placement="bottom" title={"Việc làm sự kiện"}>
-                                                                    <Icon type='tag' style={{ color: 'red' }} />
-                                                                </Tooltip>
-                                                            </div>
-                                                        </div>
-                                                    </Col>)
+                                                                </Col>
+                                                                <Col xs={2} sm={2} md={2} lg={2} xl={2} xxl={2} className='content-job'
+                                                                    style={{ display: item.job.schoolEventID === null ? 'none' : '' }}>
+                                                                    <Tooltip placement="bottom" title={"Việc làm sự kiện"}>
+                                                                        <Icon type='tag' style={{ color: 'red' }} />
+                                                                    </Tooltip>
+                                                                </Col>
+                                                            </Row>
+                                                        </Col>
+                                                    )
                                                 }) : <Empty style={{ padding: '15vh' }} description={<b>Bạn chưa có ứng tuyển nào</b>} />}
                                             </Row>
                                         }

@@ -692,7 +692,7 @@ i {
 // text-tranform
 
 .l_c {
-  text-transform: lowercase;
+  text-transform: uppercase;
   list-style-type: none;
   margin: 0px !important;
   font-weight: 500;
@@ -1390,7 +1390,7 @@ label {
   // padding: 10px;
   // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.02), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
   position: relative;
-
+  margin: 0 -20vw;
   h5 {
     margin: 10px 5px !important;
     text-align: center;
@@ -1486,7 +1486,7 @@ label {
 
     .job-content {
       width: 100%;
-      padding-top: 10px;
+      padding-top: 5px;
       padding-right: 8px;
 
       h6 {
@@ -1671,12 +1671,11 @@ label {
 .announcements {
   font-family: $font_base;
   // background-color: white;
-  margin-right: -20vw;
-  margin-left: -20vw;
   padding: 15px 15vw 30px !important;
   border-radius: 1px;
   padding: 1vw;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.02), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
+  margin: 0px -20vw;
 
   .title_card {
     overflow: hidden;
@@ -1818,11 +1817,12 @@ label {
 
     .company-header {
       h4 {
+        margin-top: 10px!important;
         padding: 0px;
         font-weight: 550;
       }
       border-radius: 3px;
-      padding: 0 0.5vw;
+      padding: 1vh 0.5vw;
       background-color: white;
       z-index: 1;
       a {
@@ -2293,7 +2293,6 @@ label {
           width: 60px;
           border-radius: 3px;
           border: solid rgb(241, 241, 241) 1px;
-          margin-bottom: 6px;
         }
 
         .name-job {
@@ -2736,8 +2735,6 @@ html {
     }
 
     .job-detail {
-      min-height: 200px;
-
       .short-info {
         padding: 10px;
         background-color: white;
@@ -2887,7 +2884,7 @@ html {
           h6 {
             padding: 15px 20px;
             background-color: white;
-            margin-bottom: 5px;
+            margin-bottom: px;
           }
 
         .company-job-more {
@@ -2973,6 +2970,7 @@ html {
 
 .l_c {
   overflow: hidden;
+  padding: 3px;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2; /* number of lines to show */
@@ -2983,7 +2981,6 @@ html {
 }
 .item-hl-job {
   overflow: nowrap;
-  text-transform: capitalize;
 }
 
 .ant-skeleton {
@@ -3017,8 +3014,7 @@ html {
 
   .history-job {
     .job-detail {
-      margin: 12px 15px;
-      display: flex;
+      margin: 2px 5px;
       padding: 10px;
       border-radius: 3px;
       background-color: rgb(255, 255, 255);
@@ -3026,20 +3022,21 @@ html {
         0 6px 20px 0 rgba(0, 0, 0, 0.06);
 
       a {
-        height: 48px;
-        overflow: hidden;
+        font-weight: 550;
         text-overflow: ellipsis;
         display: -webkit-box;
         -webkit-line-clamp: 2; /* number of lines to show */
         -webkit-box-orient: vertical;
+        overflow: hidden;
       }
 
       li {
-        overflow: hidden;
         text-overflow: ellipsis;
+        overflow: hidden;
         display: -webkit-box;
         -webkit-line-clamp: 2; /* number of lines to show */
         -webkit-box-orient: vertical;
+        margin-bottom: 5px;
       }
 
       &:hover {
@@ -3077,7 +3074,7 @@ html {
 
       .content-job {
         padding: 0 5px;
-        // width: calc(100% -115px);
+        position: relative;
         // min-height: 150px;
 
         p {
@@ -3232,10 +3229,12 @@ html {
         text-align: center;
         display: flex;
         justify-content: center;
+        
 
         img {
           object-fit: contain;
           background-color: white;
+          border: solid rgba(128, 128, 128, 0.24) 1px;
         }
       }
 
@@ -3553,7 +3552,6 @@ html {
 }
 #requirement-job {
   z-index: 1;
-  margin-top: 42vh;
   h6 {
     font-size: 1.3em;
   }
@@ -3640,22 +3638,20 @@ html {
 // }
 
 .cover-image-job {
-  // margin-top      : 5px;
-  // height          : 55vh;
   background-color: #98cdff50;
-  left: 0px;
-  top: 60px;
   text-align: center;
   animation: fadeInFromNone 0.3s ease-out;
   transition: 1s;
   overflow: hidden;
   left: 0px !important;
-  position: absolute;
+  width: 100vw;
+  // position: absolute;
   z-index: 1;
   // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08), 0 6px 20px 0 rgba(0, 0, 0, 0.08);
 
   img {
-    width: 100vw;
+    width: 100%;
+    object-fit: cover;
     transition: 0.7s;
   }
 
