@@ -256,7 +256,8 @@ code {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
   &:hover {
-  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.021);
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.021);
   }
 
   .img-card {
@@ -1813,11 +1814,12 @@ label {
     overflow: hidden;
     border: solid rgba(128, 128, 128, 0.119) 1px;
     background-color: white;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.048);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03),
+      0 6px 20px 0 rgba(0, 0, 0, 0.048);
 
     .company-header {
       h4 {
-        margin-top: 10px!important;
+        margin-top: 10px !important;
         padding: 0px;
         font-weight: 550;
       }
@@ -1845,10 +1847,9 @@ label {
         line-height: 15px;
         -webkit-box-orient: vertical;
         font-size: 0.9rem;
-       
+
         i {
-          margin-right: 5px;
-          padding-top: 3px;
+          margin: -5 5px 0;
         }
       }
       .btn-s-c {
@@ -2137,7 +2138,7 @@ label {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
-  text-transform: inherit;
+  text-transform: capitalize;
 }
 
 .search-tab {
@@ -2882,11 +2883,11 @@ html {
 
       .company-more {
         // box-shadow      : 0 0.5px 0 rgba(0, 0, 0, .1);
-          h6 {
-            padding: 15px 20px;
-            background-color: white;
-            margin-bottom: px;
-          }
+        h6 {
+          padding: 15px 20px;
+          background-color: white;
+          margin-bottom: 2px;
+        }
 
         .company-job-more {
           background-color: white;
@@ -2925,7 +2926,6 @@ html {
     }
   }
 }
-
 
 .asterisk {
   top: 4px;
@@ -2995,6 +2995,9 @@ html {
   // padding: 15px 25px;
   // background-color: rgba(255, 253, 253, 0.794);
   margin: 10px 0px;
+  i {
+    margin-right: 5px;
+  }
 
   h5 {
     margin-left: 5px;
@@ -3071,6 +3074,12 @@ html {
         padding: 0 5px;
         position: relative;
         // min-height: 150px;
+        li {
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
 
         p {
           font-size: 1rem;
@@ -3080,7 +3089,10 @@ html {
 
           a {
             color: rgba(0, 0, 0, 0.734);
-
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
             &:hover {
               text-decoration: underline;
             }
@@ -3091,7 +3103,7 @@ html {
       li {
         list-style: none;
         padding: 2px;
-        font-size: 0.8rem;
+        font-size: 0.9rem;
       }
     }
   }
@@ -3224,7 +3236,6 @@ html {
         text-align: center;
         display: flex;
         justify-content: center;
-        
 
         img {
           object-fit: contain;
@@ -3543,7 +3554,7 @@ html {
   margin-left: 15px;
 }
 .job-detail-content .job-header .company-header .d_j_t i {
-  padding-top: 10px;
+  padding-top: 5px;
 }
 #requirement-job {
   z-index: 1;
@@ -3659,6 +3670,7 @@ html {
 
 img {
   &:hover {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.11);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03),
+      0 6px 20px 0 rgba(0, 0, 0, 0.11);
   }
 }

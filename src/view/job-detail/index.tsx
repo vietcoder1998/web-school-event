@@ -41,6 +41,7 @@ interface IJobDetailState {
   isSaved?: boolean;
   jobID?: string;
   employerID?: string;
+  loading: boolean;
 }
 
 // @ts-ignore
@@ -133,6 +134,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
       isSaved: true,
       jobID: null,
       employerID: null,
+      loading: false,
     };
   }
 
@@ -174,10 +176,12 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
       nextProps.getEmployerDetail(nextProps.jobDetail.employerID);
       nextProps.getEmployerMoreJob(0, 6, nextProps.jobDetail.employerID);
       let isSaved = nextProps.jobDetail.saved
+      let jobState = nextProps.jobDetail.applyState;
 
       return {
         employerID: nextProps.jobDetail.employerID,
-        isSaved
+        isSaved,
+        jobState
       };
     }
 
@@ -255,6 +259,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
         body = [jobDetail.id];
         method = DELETE
       }
+      this.setState({ loading: true })
       await _requestToServer(
         method,
         body,
@@ -264,7 +269,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
         undefined,
         true
       );
-      this.setState({ isSaved: !isSaved });
+      this.setState({ isSaved: !isSaved, loading: false });
     }
   }
 
@@ -351,9 +356,8 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
       totalSimilarJob,
       is_loading_similar,
       param,
-
     } = this.props;
-    let { is_loading, visible, confirmLoading, jobState, isSaved } = this.state;
+    let { is_loading, visible, confirmLoading, jobState, isSaved, loading } = this.state;
     // let isSaved = jobDetail.saved;
 
     if (is_loading) {
@@ -365,20 +369,21 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
         </Layout>
       );
     }
-
-    let content = "Ứng tuyển";
+    let content;
     let applyState = jobDetail.applyState;
-
-    if (isAuthen === false) {
-      content = "Ứng tuyển";
-    } else {
-      if (jobState === "PENDING") {
-        content = "Đang chờ";
-        applyState = true;
-      } else if (jobState === "ACCEPTED") {
+    if (!isAuthen) {
+      content = <i>Đăng nhập để ứng tuyển</i>;
+    }
+    switch (jobState) {
+      case "PENDING":
+        content = "Đang chờ nhà tuyển dụng";
+        break;
+      case "ACCEPTED":
         content = "Đã chấp nhận";
-        applyState = true;
-      }
+        break;
+      default:
+        content = "Ứng tuyển"
+        break;
     }
 
     let coverUrl = require("./../../assets/image/countdown.jpg");
@@ -519,15 +524,18 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                         </Col>
                         <Col xs={17} sm={11} md={15} lg={14} xl={15} xxl={16} style={{ padding: 10 }}>
                           <h4 style={{ textTransform: "capitalize" }}>{jobDetail && jobDetail.jobTitle}</h4>
+                          <i>Chi nhánh: {jobDetail && jobDetail.employerBranchName ? jobDetail.employerBranchName: "Chính"}</i>
                           <div className="d_j_t">
                             <Icon type="home" style={{ color: "#168ECD" }} />
                             <label>
                               <Link
                                 to={`/employer/${window.btoa(employerDetail.id)}${param}`}
                                 target="_blank"
-                                style={{ fontSize: "1.05em" }}
+                                style={{ fontSize: "1.1em" }}
                               >
-                                {employerDetail && employerDetail.employerName}
+                                <b>
+                                  {employerDetail && employerDetail.employerName}
+                                </b>
                               </Link>
                             </label>
                           </div>
@@ -563,16 +571,18 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                             children={content}
                             block
                           />
-                          <Button
-                            onClick={() => this._saveJob()}
-                            style={{
-                              height: 48, fontSize: '1rem',
-                              color: isSaved ? "#21252959" : "orange",
-                              borderColor: isSaved ? "" : "navajowhite"
-                            }}
-                          >
-                            {is_loading ? <Icon type="loading" /> : (isSaved ? "Đã lưu" : "Lưu")}
-                          </Button>
+                          {
+                            isAuthen ? <Button
+                              onClick={() => this._saveJob()}
+                              style={{
+                                height: 48, fontSize: '1rem',
+                                color: isSaved ? "#21252959" : "orange",
+                                borderColor: isSaved ? "" : "navajowhite"
+                              }}
+                            >
+                              {loading ? <Icon type="loading" /> : (isSaved ? "Đã lưu" : "Lưu")}
+                            </Button> : null
+                          }
                         </Col>
                       </Row>
                     </div>

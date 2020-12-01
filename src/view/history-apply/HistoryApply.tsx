@@ -151,16 +151,16 @@ class HistoryApply extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                                                     <span style={{ backgroundColor: typeSpan.color, color: '#fff', padding: '3px 5px', marginBottom: 10 }}>
                                                                         <i className={typeSpan.type} aria-hidden="true" style={{ fontSize: "1.1em" }}></i>
                                                                         <span style={{ fontWeight: 550, fontSize: '0.9em' }}>{typeSpan.state}</span></span>
-                                                                    <span style={{ display: 'flex' }}>
-                                                                        <li style={{ fontSize: '0.8rem' }}>
+                                                                    <div style={{ display: 'flex', marginTop: 5 }}>
+                                                                        <span style={{ fontSize: '0.8rem' }}>
                                                                             <Icon type="calendar" />
                                                                             Ngày gửi: {moment(item.createdDate).format('DD/MM/YYYY')}
-                                                                        </li>
-                                                                        <li style={{ fontSize: '0.8rem', marginLeft: 10 }}>
+                                                                        </span>
+                                                                        <span style={{ fontSize: '0.8rem', marginLeft: 10 }}>
                                                                             <Icon type="calendar" />
                                                                             Ngày phản hồi:  {item.repliedDate !== -1 ? moment(item.repliedDate).format('DD/MM/YYYY') : <i style={{color: "red"}}>Chưa có</i>}
-                                                                        </li>
-                                                                    </span>
+                                                                        </span>
+                                                                    </div>
 
                                                                 </Col>
                                                                 <Col xs={2} sm={2} md={2} lg={2} xl={2} xxl={2} className='content-job'

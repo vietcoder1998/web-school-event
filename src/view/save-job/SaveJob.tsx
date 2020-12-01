@@ -120,8 +120,8 @@ class SaveJob extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                                                         <Icon type='environment' style={{ marginRight: 3 }} />{item.job && item.job.address}
                                                                     </li>
                                                                 </div>
-                                                                <li style={{ fontSize: '0.7rem' }}>
-                                                                    <Icon type="calendar" />{moment(item.saveTime).format('DD/MM/YY')}
+                                                                <li style={{ fontSize: '0.8rem' }}>
+                                                                    <Icon type="calendar" />{moment(item.saveTime).format('DD/MM/YYYY')}
                                                                 </li>
                                                             </div>
                                                             <div className='content-job' style={{ display: item.job.schoolEventID === null ? 'none' : '' }}>
