@@ -1,7 +1,7 @@
 import swal from "sweetalert";
 import { TYPE } from './../const/type';
 
-export default function clearStorage() {
+export default function     clearStorage() {
     localStorage.clear();
     swal({
         title: "Workvns thông báo",

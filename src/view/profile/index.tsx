@@ -293,7 +293,6 @@ class Profile extends Component<IProps, IState> {
               xl={8}
               xxl={8}
             >
-
               <Collapse
                 expandIconPosition={'left'}
                 activeKey={this.state.listActiveKeyCV}
@@ -365,6 +364,5 @@ const mapDispatchToProps = (dispatch) => ({
       type: REDUX_SAGA.PERSON_INFO.GET_FULL_PERSON_INFO, setActiveKeyCV, setActiveKeyCV2
     }),
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

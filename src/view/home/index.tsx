@@ -11,6 +11,7 @@ import VideoAd from "./VideoAd";
 import { IAppState } from "../../redux/store/reducer";
 // import { REDUX_SAGA } from '../../../const/actions';
 import IndayJob from './IndayJob';
+import FitJob from "./FitJob";
 
 function Home(props) {
   return (
@@ -18,6 +19,9 @@ function Home(props) {
       {/* <CarouselUX /> */}
       <TabSearch {...props} />
       <div className="content">
+        {
+          props.isAuthen ? <FitJob/>: null
+        }
         <IndayJob />
         <JobExpect />
         <TopJob />

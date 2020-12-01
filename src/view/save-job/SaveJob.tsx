@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '../layout/Layout';
-import { Row, Col, Icon, Pagination, Tooltip, Empty, Avatar, Spin } from 'antd';
+import { Row, Col, Icon, Pagination, Tooltip, Empty, Avatar, Spin, Popconfirm } from 'antd';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import moment from 'moment'
@@ -61,8 +61,7 @@ class SaveJob extends React.PureComponent<ISaveJobProp, ISaveJobState>{
     async _removejob(id) {
         let { isAuthen } = this.props;
         if (isAuthen) {
-            let params = [id]
-            let res = await _requestToServer(DELETE, null, SAVED_JOB + `/saved`, STUDENT_HOST, authHeaders, params, true);
+            let res = await _requestToServer(DELETE, [id], SAVED_JOB + `/saved`, STUDENT_HOST, authHeaders, true);
             if (res) {
                 // openNotification();
                 this.props.getJobSaveData(0)
@@ -129,9 +128,14 @@ class SaveJob extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                                                 <Tooltip placement="bottom" title={"Việc làm sự kiện"}>
                                                                     <Icon type='tag' style={{ color: '#1890ff', marginBottom: 20 }} theme="filled" />
                                                                 </Tooltip>
-                                                                <Tooltip title='Bạn có muốn xóa công việc' placement="bottom" >
-                                                                    <Icon type="delete" onClick={() => { this._removejob(item.job.id) }} twoToneColor="red"  theme="twoTone"/>
-                                                                </Tooltip>
+                                                                <Popconfirm
+                                                                    okType="danger"
+                                                                    title="Bạn muốn xóa công việc này?"
+                                                                    style={{padding: '10px important'}}
+                                                                    onConfirm={() => { this._removejob(item.job.id) }}
+                                                                >
+                                                                    <Icon type="delete"  twoToneColor="red"  theme="twoTone"/>
+                                                                </Popconfirm>
                                                             </div>
                                                         </div>
                                                     </Col>)

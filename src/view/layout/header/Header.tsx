@@ -95,16 +95,24 @@ class Header extends PureComponent<IProps, IState> {
     return (
       <Menu style={{ fontWeight: 500,  }}>
         <Menu.Item style={{ fontWeight: 500,  }}>
-          <Link to="/profile">Hồ sơ</Link>
+          <div>
+            <Icon type="user" style={{marginRight: 5, color: "#1890ff"}}/><Link to="/profile">Hồ sơ</Link>
+          </div>
         </Menu.Item>
         <Menu.Item style={{ fontWeight: 500,  }}>
-          <Link to="/reset-password">Đổi mật khẩu</Link>
+          <div>
+            <Icon type="key"style={{marginRight: 5, color: "#1890ff"}}/><Link to="/reset-password">Đổi mật khẩu</Link>
+          </div>
         </Menu.Item >
         <Menu.Item style={{ fontWeight: 500,  }}>
-          <Link to="/save-job">Công việc đã lưu</Link>
+          <div>
+          <Icon type="history"style={{marginRight: 5, color: "#1890ff"}}/><Link to="/save-job">Công việc đã lưu</Link>
+          </div>
         </Menu.Item>
         <Menu.Item style={{ fontWeight: 500,  }}>
-          <Link to="/history-apply">Lịch sử ứng tuyển</Link>
+          <div>
+          <Icon type="solution"style={{marginRight: 5, color: "#1890ff"}}/><Link to="/history-apply">Lịch sử ứng tuyển</Link>
+          </div>
         </Menu.Item>
         <Menu.Item style={{ fontWeight: 500,fontStyle: "italic", color: "red"  }} onClick={this._clearStorage}>
           <Link
@@ -113,7 +121,9 @@ class Header extends PureComponent<IProps, IState> {
               pointerEvents: "none",
             }}
           >
-            Đăng xuất
+            <div style={{color: "red"}}>
+              Đăng xuất
+            </div>
           </Link>
         </Menu.Item>
       </Menu>
@@ -210,7 +220,7 @@ class Header extends PureComponent<IProps, IState> {
                     </Menu.Item>
                     <Menu.Divider />
                     <Menu.Item key="3" disabled>
-                      ứng dụng Worksvn trên điện thoại!
+                    Ứng dụng Worksvn trên điện thoại!
                     </Menu.Item>
                   </Menu>
                 }>
@@ -308,7 +318,7 @@ class Header extends PureComponent<IProps, IState> {
                   </Link>
                   {localStorage.getItem("name") ? (
                     <label className="label_name">
-                      {localStorage.getItem("name")}
+                      <b>{localStorage.getItem("name")}</b>
                     </label>
                   ) : null}
                 </span>

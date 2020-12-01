@@ -1,10 +1,11 @@
 import { TYPE } from "./../../const/type";
-import { SHORT_PROFILE } from "./../../services/api/private.api";
+import { PERSON_INFO_P, SHORT_PROFILE } from "./../../services/api/private.api";
 import { takeEvery, call } from "redux-saga/effects";
 import { _get } from "../../services/base-api";
 import { STUDENT_HOST } from "../../environment/development";
 import { authHeaders } from "../../services/auth";
 import { REDUX_SAGA } from "../../const/actions";
+//@ts-ignore
 import imageDefault from "../../assets/image/base-image.jpg";
 import swal from "sweetalert";
 // import clearStorage from "../../services/clear-storage";
@@ -12,14 +13,17 @@ import swal from "sweetalert";
 function* getShortPersonInfo() {
   try {
     let res = yield call(getData);
-    let data = res.data;
-    localStorage.setItem("name", data.firstName);
-    localStorage.setItem(
-      "avatarUrl",
-      data.avatarUrl === null ? imageDefault : data.avatarUrl
-    );
-  } catch (e) {
+    if (res && res.data) {
+      let data = res.data;
+      localStorage.setItem("name", data.firstName);
+      localStorage.setItem(
+        "avatarUrl",
+        data.avatarUrl === null ? imageDefault : data.avatarUrl
+      );
+      localStorage.setItem("branchIDs", data.major.branch.id);
+    }
    
+  } catch (e) {
     if (e.response.data.code === 4014) {
       swal({
         title: "Worksvn thông báo",
@@ -33,7 +37,7 @@ function* getShortPersonInfo() {
 }
 
 function getData() {
-  let data = _get(null, SHORT_PROFILE, STUDENT_HOST, authHeaders);
+  let data = _get(null, PERSON_INFO_P, STUDENT_HOST, authHeaders);
   return data;
 }
 

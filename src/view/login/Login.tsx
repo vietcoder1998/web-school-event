@@ -80,6 +80,7 @@ class Login extends Component {
   }
 
   _loginAction = (res?: any, data?: any, token?: string) => {
+    console.log(data);
     if(data) {
       localStorage.setItem("fbAccessToken", token)
     }
@@ -92,7 +93,6 @@ class Login extends Component {
       });
     } else {
       if (res.data.userExists === false) {
-        console.log(res)
         localStorage.setItem("user_exists", 'false');
         localStorage.setItem("user_exists_userName", data.username);
         localStorage.setItem("user_exists_password", data.password);

@@ -9,17 +9,17 @@ import { JOBS } from '../../services/api/private.api';
 import { REDUX_SAGA, REDUX } from '../../const/actions'
 import { POST } from '../../const/method';
 
-function* getListHotJobData(action) {
-    yield put({ type: REDUX.HOT_JOB.SET_LOADING_HOT_JOB, loading: true });
-    let res = yield call(getHotJobData, action);
+function* getListFitJobData(action) {
+    yield put({ type: REDUX.FIT_JOB.SET_LOADING_FIT_JOB, loading: true });
+    let res = yield call(getFitJobData, action);
     if (res) {
         let data = res.data;
-        yield put({ type: REDUX.HOT_JOB.GET_HOT_JOB, data });
+        yield put({ type: REDUX.FIT_JOB.GET_FIT_JOB, data });
     }
-    yield put({ type: REDUX.HOT_JOB.SET_LOADING_HOT_JOB, loading: false });
+    yield put({ type: REDUX.FIT_JOB.SET_LOADING_FIT_JOB, loading: false });
 }
 
-function getHotJobData(action) {
+function getFitJobData(action) {
     let data: IJobSearchFilter = {
         employerID: null,
         excludedJobIDs: null,
@@ -28,9 +28,8 @@ function getHotJobData(action) {
         jobType: null,
         jobShiftFilter: null,
         jobLocationFilter: null,
-        jobPriorityFilter: {
-            homePriority: 'TOP'
-        }
+        jobPriorityFilter: null,
+        branchIDs: action.branchIDs?action.branchIDs:[]
     };
     let isAuthen = store.getState().AuthState.isAuthen;
     let res = _requestToServer(
@@ -45,9 +44,9 @@ function getHotJobData(action) {
         },
         false
     );
-    return res
+    return res;
 }
 
-export function* HotJobWatcher() {
-    yield takeEvery(REDUX_SAGA.HOT_JOB.GET_HOT_JOB, getListHotJobData)
+export function* FitJobWatcher() {
+    yield takeEvery(REDUX_SAGA.FIT_JOB.GET_FIT_JOB, getListFitJobData)
 }
