@@ -1844,6 +1844,7 @@ label {
         color: black;
         line-height: 15px;
         -webkit-box-orient: vertical;
+        font-size: 0.9rem;
        
         i {
           margin-right: 5px;
@@ -2744,7 +2745,7 @@ html {
         background-color: #30a3f924;
         border: 1px solid #31a3f9;
         border-radius: 3px;
-
+        text-overflow: ellipsis;
 
         h6 {
           margin-bottom: 20px;
@@ -2925,12 +2926,6 @@ html {
   }
 }
 
-@media only screen and (min-width: 900px) {
-  .cover-image-job {
-    // margin-top      : 5px;
-    height: 42vh;
-  }
-}
 
 .asterisk {
   top: 4px;
@@ -3646,6 +3641,7 @@ html {
   left: 0px !important;
   width: 100vw;
   // position: absolute;
+  max-height: 42vh;
   z-index: 1;
   // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08), 0 6px 20px 0 rgba(0, 0, 0, 0.08);
 
@@ -3658,5 +3654,11 @@ html {
   .no-company-img {
     background-color: rgba(88, 208, 255, 0.568);
     height: 75px;
+  }
+}
+
+img {
+  &:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.11);
   }
 }

@@ -444,6 +444,9 @@ class EventJobDetail extends Component<IJobDetailProps, IJobDetailState> {
                     >
                       <i className="fa fa-paper-plane-o" aria-hidden="true" />
                     </Button>
+                    <Button>
+                      Lưu
+                    </Button>
                   </div>
                   {/* Cover Image */}
                   <div className="cover-image-job ">
