@@ -149,8 +149,7 @@ export default function ListResult(props?: IListResultProps): JSX.Element {
                                 >
                                     <Icon
                                         type="heart"
-                                        theme={saveMap[index] ? "filled" : null}
-                                        style={{ color: "red", fontSize: 18 }}
+                                        style={{ color: saveMap[index] ? "red" : null, fontSize: 18 }}
                                     />
                                 </div>
                             </Tooltip>

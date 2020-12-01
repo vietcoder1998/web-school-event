@@ -174,7 +174,7 @@ export default class EmployerDetail extends React.PureComponent<EmployerDetailPr
                         </p>
                     </div>
                     <div className='company-more '>
-                        <h6> Công việc đang tuyển tại <Link>{employerDetail ? employerDetail.employerName : ""}</Link></h6>
+                        <h6> Công việc đang tuyển tại <Link to={'/employer' + btoa(employerDetail.id)}>{employerDetail ? employerDetail.employerName : ""}</Link></h6>
                         <Row style={{margin: '0 -5px'}}>
                             {employerMoreJob.items && employerMoreJob ? employerMoreJob.items.map((item, index) =>
                                     (<Col key={index} xs={24} sm={12} md={12} lg={8} xl={8}>
