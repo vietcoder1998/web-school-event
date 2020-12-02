@@ -23,6 +23,8 @@ import qs from "query-string";
 import { goBackWhenLogined } from '../../utils/goBackWhenLogined'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 // import SearchFilter from './../result/search-filter/SearchFilter';
+//@ts-ignore
+import CoverDefault from '../../assets/image/default-cover.jpg';
 
 const { TabPane } = Tabs;
 const { TextArea } = Input;
@@ -388,8 +390,8 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
 
     let coverUrl = require("./../../assets/image/countdown.jpg");
 
-    if (jobDetail.employerCoverUrl) {
-      coverUrl = jobDetail.employerCoverUrl
+    if (jobDetail.coverUrl) {
+      coverUrl = jobDetail.coverUrl
     };
 
     let logoUrl = jobDetail.employerLogoUrl;
