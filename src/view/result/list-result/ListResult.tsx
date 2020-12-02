@@ -27,15 +27,12 @@ export default function ListResult(props?: IListResultProps): JSX.Element {
     const [result, setResult] = React.useState([])
     const [saveMap, setSaveMap] = React.useState([])
 
-
     React.useEffect(() => {
         if (props.listResult && props.listResult !== result) {
             setSaveMap(() => props.listResult.map(item => item.saved))
             setResult(props.listResult)
         }
     }, [props.listResult])
-
-    React.useEffect(() => console.log(saveMap), [saveMap])
 
     function saveJob(id: string, saved?: boolean, index?: number) {
         setSaveMap(saveMap => {
@@ -126,7 +123,7 @@ export default function ListResult(props?: IListResultProps): JSX.Element {
                                             <Icon type="calendar" style={{ color: '#168ECD' }} /> <span>Ngày đăng: {moment(item.createdDate).format('DD/MM/YY')}</span>
                                         </Col>
                                         <Col xs={24} sm={24} md={12} lg={10} xl={12} >
-                                            <Icon type="calendar" style={{ color: '#168ECD' }} /> <span>Hết hạn: {moment(item.finishedDate).format('DD/MM/YY')}</span>
+                                            <Icon type="calendar" style={{ color: '#168ECD' }} /> <span>Hết hạn: {moment(item.expirationDate).format('DD/MM/YY')}</span>
                                         </Col>
                                         <Col xs={24} sm={24} md={10} lg={10} xl={10} >
                                             <Icon type='environment' style={{ color: '#168ECD' }} /><span>Tỉnh thành: {item.region.name}</span>

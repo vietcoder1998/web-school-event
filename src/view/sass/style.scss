@@ -1519,7 +1519,7 @@ label {
         .l_c {
           text-align: left;
           text-overflow: ellipsis;
-          text-transform: initial;
+          text-transform: uppercase;
           line-height: 18px;
           -webkit-line-clamp: 2;
           white-space: pre-line;
@@ -2969,13 +2969,13 @@ html {
 
 .l_c {
   overflow: hidden;
-  text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2; /* number of lines to show */
   -webkit-box-orient: vertical;
   text-transform: inherit;
   color: black;
   font-weight: 550;
+  margin-bottom: 5px!important;
 }
 .item-hl-job {
   overflow: nowrap;
@@ -3695,12 +3695,5 @@ html {
   .no-company-img {
     background-color: rgba(88, 208, 255, 0.568);
     height: 75px;
-  }
-}
-
-img {
-  &:hover {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03),
-      0 6px 20px 0 rgba(0, 0, 0, 0.11);
   }
 }
