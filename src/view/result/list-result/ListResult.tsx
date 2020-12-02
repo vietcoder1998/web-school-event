@@ -120,10 +120,10 @@ export default function ListResult(props?: IListResultProps): JSX.Element {
                                 >
                                     <Row style={{ margin: "10px 0px" }}>
                                         <Col xs={24} sm={24} md={10} lg={10} xl={10} >
-                                            <Icon type="calendar" style={{ color: '#168ECD' }} /> <span>Ngày đăng: {moment(item.createdDate).format('DD/MM/YY')}</span>
+                                            <Icon type="calendar" style={{ color: '#168ECD' }} /> <span>Ngày đăng: {moment(item.createdDate).format('DD/MM/YYYY')}</span>
                                         </Col>
                                         <Col xs={24} sm={24} md={12} lg={10} xl={12} >
-                                            <Icon type="calendar" style={{ color: '#168ECD' }} /> <span>Hết hạn: {moment(item.expirationDate).format('DD/MM/YY')}</span>
+                                            <Icon type="calendar" style={{ color: '#168ECD' }} /> <span>Hết hạn: {moment(item.expirationDate).format('DD/MM/YYYY')}</span>
                                         </Col>
                                         <Col xs={24} sm={24} md={10} lg={10} xl={10} >
                                             <Icon type='environment' style={{ color: '#168ECD' }} /><span>Tỉnh thành: {item.region.name}</span>
