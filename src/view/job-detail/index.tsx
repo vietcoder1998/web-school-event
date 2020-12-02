@@ -24,7 +24,7 @@ import { goBackWhenLogined } from '../../utils/goBackWhenLogined'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 // import SearchFilter from './../result/search-filter/SearchFilter';
 //@ts-ignore
-import CoverDefault from '../../assets/image/default-cover.jpg';
+import coverUrl from '../../assets/image/default-cover.jpg';
 
 const { TabPane } = Tabs;
 const { TextArea } = Input;
@@ -388,11 +388,6 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
         break;
     }
 
-    let coverUrl = require("../../assets/image/countdown.jpg");
-    if (jobDetail.coverUrl) {
-      coverUrl = jobDetail.coverUrl
-    };
-
     let logoUrl = jobDetail.employerLogoUrl;
     return (
       <>
@@ -483,7 +478,6 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                 <LazyLoadImage
                   alt={employerDetail && employerDetail.employerName}
                   src={employerDetail.coverUrl ? employerDetail.coverUrl: coverUrl  }
-                  onError={() => coverUrl = require("./../../assets/image/countdown.jpg")}
                   className="company-image"
                 />
               </Link>
