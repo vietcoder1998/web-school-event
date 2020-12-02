@@ -25,7 +25,7 @@ class BottomPhone extends PureComponent {
                     </a>
                 </span>
                 <span className='link-to'>
-                    <a href='/save-job'>
+                    <a href='/cong-viec-da-luu'>
                         <li><Icon type="solution" /></li>
                         <li>Ứng tuyển</li>
                     </a>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Tabs, Row, Col, Icon, Button, Modal, Checkbox, Avatar, Affix } from "antd";
+import { Tabs, Row, Col, Icon, Button, Modal, Checkbox, Avatar } from "antd";
 import { connect } from "react-redux";
 import { _requestToServer } from "../../services/exec";
 import { POST, DELETE } from '../../const/method';

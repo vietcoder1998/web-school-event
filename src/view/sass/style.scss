@@ -432,6 +432,10 @@ ul {
   animation: fadein 2s;
   background-color: white;
   border-radius: 5px;
+  li {
+    list-style: none;
+    padding-left: 10px;
+  }
 
   i {
     &:hover {
@@ -678,11 +682,6 @@ i {
 
   .ant-pagination {
     margin: 10px 0px;
-  }
-
-  .ant-pagination-item-active {
-    background-color: rgb(0, 132, 255);
-    color: white !important;
   }
 
   .ant-select-dropdown-menu-item {
@@ -1392,6 +1391,8 @@ label {
   // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.02), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
   position: relative;
   margin: 0 -20vw;
+  padding: 2vw 20vw;
+
   h5 {
     margin: 10px 5px !important;
     text-align: center;
@@ -3010,6 +3011,32 @@ html {
     border-radius: 5px;
   }
 
+  .ant-carousel {
+    .slick-dots {
+      display: block;
+      position: absolute;
+      margin: 35px 0px;
+      padding: 0;
+      text-align: center;
+      li {
+        button {
+          height: 15px !important;
+          width: 15px;
+          border-radius: 50%;
+          margin: 0 5px;
+          background: unset;
+          border: 2px solid white;
+        }
+      }
+      li.slick-active {
+        button {
+          width: 15px;
+        }
+      }
+      // button
+    }
+  }
+
   .history-job {
     .job-detail {
       margin: 2px 5px;
@@ -3598,6 +3625,7 @@ html {
   margin-top: 10px !important;
   .ant-pagination-item {
     background-color: white !important;
+    color: 9o;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03),
       0 6px 20px 0 rgba(0, 0, 0, 0.03) !important;
   }

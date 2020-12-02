@@ -238,9 +238,6 @@ class ArticleDetail extends PureComponent<IProps, IState> {
       console.log(res);
       this.getComment();
     })
-      .catch((e) => {
-        console.log(e);
-      });
   };
 
   render() {
