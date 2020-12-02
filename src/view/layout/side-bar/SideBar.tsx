@@ -39,7 +39,7 @@ class SideBar extends Component {
             <Drawer
                 placement="left"
                 title={
-                    <LazyLoadImage src={logo} alt="logo" width="240" height="80" style={{marginL: -20}} />
+                    <LazyLoadImage src={logo} alt="logo" width="240" height="80" style={{marginLeft: -20}} />
                 }
                 visible={show}
                 onClose={() => this._closeSideBar()}
