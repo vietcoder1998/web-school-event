@@ -388,14 +388,12 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
         break;
     }
 
-    let coverUrl = require("./../../assets/image/countdown.jpg");
-
+    let coverUrl = require("../../assets/image/countdown.jpg");
     if (jobDetail.coverUrl) {
       coverUrl = jobDetail.coverUrl
     };
 
     let logoUrl = jobDetail.employerLogoUrl;
-
     return (
       <>
         {/* Info Requirement */}
@@ -484,7 +482,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
               >
                 <LazyLoadImage
                   alt={employerDetail && employerDetail.employerName}
-                  src={coverUrl}
+                  src={employerDetail.coverUrl ? employerDetail.coverUrl: coverUrl  }
                   onError={() => coverUrl = require("./../../assets/image/countdown.jpg")}
                   className="company-image"
                 />
