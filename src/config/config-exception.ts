@@ -4,13 +4,12 @@ import Swal from 'sweetalert2';
 export const exceptionShowNotiConfig = async (err: any, hidden_alert_err?:boolean) => {
     if (err && err && err.response && err.response.data) {
         let res = err.response.data;
-        let code = res.code.toString()
-        console.log(res);
-
+        let code = res.code.toString();
+        console.log(code);
         if (code.includes("401")) {
             console.log("ok");
             tkNotInvalid();
-        } else if (!hidden_alert_err) {
+        } else {
             Swal.fire({
                 titleText: 'Worksvn thông báo',
                 icon: 'error',
@@ -22,9 +21,7 @@ export const exceptionShowNotiConfig = async (err: any, hidden_alert_err?:boolea
                 timer: 5000
             })
         }
-    } else {
-        Swal.fire({ text: `${"máy chủ gặp vấn đề hoặc kiểm tra lại kết nối của bạn"} (code=${500})`, titleText: "Worksvn thông báo" })
-    }
+    } else Swal.fire({ text: `${"máy chủ gặp vấn đề hoặc kiểm tra lại kết nối của bạn"} (code=${500})`, titleText: "Worksvn thông báo" })
 }
 
 function tkNotInvalid() {

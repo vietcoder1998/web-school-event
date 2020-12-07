@@ -39,24 +39,19 @@ function callAnnouncements(action: any) {
         body = action.body;
     }
 
-    try {
-        let res = _requestToServer(
-            POST,
-            body,
-            ANNOUNCEMENTS.LIST,
-            PUBLIC_HOST,
-            noInfoHeader,
-            {
-                pageIndex: action.pageIndex ? action.pageIndex : 0,
-                pageSize: action.pageSize ? action.pageSize : 10
-            },
-            false,
-        )
-
-        return res
-    } catch (e) {
-        throw e
-    }
+    let res = _requestToServer(
+        POST,
+        body,
+        ANNOUNCEMENTS.LIST,
+        PUBLIC_HOST,
+        noInfoHeader,
+        {
+            pageIndex: action.pageIndex ? action.pageIndex : 0,
+            pageSize: action.pageSize ? action.pageSize : 10
+        },
+        false,
+    )
+    return res
 }
 
 export function* AnnouncementsWatcher() {

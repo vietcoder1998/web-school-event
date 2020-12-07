@@ -23,6 +23,10 @@ import { FacebookProvider, LoginButton } from 'react-facebook';
 import setupLogin from "../../config/setup-login";
 // import { TYPE } from './../../const/type';
 
+interface IState {
+  
+}
+
 class Login extends Component {
   constructor(props) {
     super(props);

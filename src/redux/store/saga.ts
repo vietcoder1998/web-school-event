@@ -28,6 +28,7 @@ import { EventJobResultWatcher } from '../watcher/event/search';
 import { TopEmployersWatcher} from'../watcher/top-employer';
 import { MajorsWatcher} from '../watcher/majors';
 import { FitJobWatcher } from '../watcher/fit-job';
+import { exceptionShowNotiConfig } from '../../config/config-exception';
 
 
 export default function* rootSaga() {
@@ -63,7 +64,7 @@ export default function* rootSaga() {
             FitJobWatcher()
         ])
     } catch(err) {
-        console.log(err);
+        throw(exceptionShowNotiConfig(err))
     }
     
 } 
