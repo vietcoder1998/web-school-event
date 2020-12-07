@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './Notification.scss';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Icon, Modal, Avatar, Empty, Popover } from 'antd';
+import { Icon, Modal, Avatar, Empty, Popover, Row, Col } from 'antd';
 import moment from 'moment';
 import { _requestToServer } from '../../../../services/exec';
 import { notiController } from '../../../../services/api/private.api';
@@ -92,7 +92,7 @@ class Notification extends Component {
                                     onClick={() => this._openPopup(item, item.id)}
                                     style={{ backgroundColor: item.seen ? 'white' : 'azure' }}>
                                     <div className='img-logo-noti'>
-                                        <Avatar src={item.data.logoUrl} alt='type noti' style={{ width: "50px", height: "50px" }} />
+                                        <Avatar shape="square" src={item.data.logoUrl} alt='type noti' style={{ width: "50px", height: "50px" }} />
                                     </div>
                                     <div className='data-noti'>
                                         <div className="content_li-info">
@@ -155,19 +155,44 @@ class Notification extends Component {
             <>
                 <Modal
                     visible={visible}
-                    title="Thông báo "
+                    title={
+                        <Row>
+                            <Col span={4}>
+                                <Avatar 
+                                shape="square"
+                                src={data.logoUrl} 
+                                style={{width: 60, height: 60}}
+                                alt='logo-company' />
+                            </Col>
+                            <Col>
+                                <ul>
+                                    <li>
+                                        {data && data.title}
+                                    </li>
+                                    <li>
+                                        <i>
+                                            {data && data.employerName}
+                                        </i>
+                                    </li>
+                                </ul>
+                            </Col>
+                        </Row>
+                    }
                     onOk={() => { this._handleOk(id) }}
                     onCancel={() => {
                         this.setState({ visible: false })
                     }}
                 >
                     <div className='popup-noti'>
-                        <h5>Đơn ứng tuyển: {data.jobName}</h5>
-                        <div className='noti-image'>
-                            <img src={data.logoUrl} alt='logo-company' />
-                        </div>
                         <br />
-                        <p>Công ty {data.employerName} đã {data.state === 'ACCEPTED' ? ' chấp nhận' : ' từ chối'} lời mời ứng tuyển của bạn </p>
+                        <p>
+                            Công ty <b><i>{data.employerName + " "}</i></b> 
+                            đã {data.state === 'ACCEPTED' ? <span style={{color: "green"}}>chấp nhận </span> : ' từ chối '} 
+                            lời mời ứng tuyển của bạn vào công việc
+                            <Link to={'/chi-tiet-cong-viec/' + btoa(data && data.data && data.data.jobID)}>
+                                <b><i>{" " + data && data.jobTitle}</i></b>
+                            </Link>
+                        </p>
                         <p style={{ textAlign: "right" }}>
                             Thời gian: {createdDate}
                         </p>

@@ -166,8 +166,8 @@ class GoogleMap extends React.Component<IProps, IState>{
                     google={window.google}
                     zoom={14}
                     center={{
-                        lat: this.state.position.lat,
-                        lng: this.state.position.lng,
+                        lat: this.props.address.lat,
+                        lng: this.props.address.lng,
                     }}
                     initialCenter={{
                         lat: this.state.position.lat,
@@ -175,8 +175,8 @@ class GoogleMap extends React.Component<IProps, IState>{
                     }}
                 >
                     <Marker
-                        name={this.state.address}
-                        position={this.state.position}
+                        name={this.props.location}
+                        position={this.props.address}
                         draggable={false}
                         onDragend={(t, map, coord) => this.getAddress(coord)}
                     />

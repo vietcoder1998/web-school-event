@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import { Tabs, Row, Col, Icon, Button, Modal, Checkbox, Avatar, Affix } from "antd";
+import { Tabs, Row, Col, Icon, Button, Modal, Checkbox, Avatar } from "antd";
 import { connect } from "react-redux";
 import { _requestToServer } from "../../services/exec";
-import { POST } from "../../const/method";
+import { POST, DELETE } from '../../const/method';
 import { APPLY_JOB, SAVED_JOB } from "../../services/api/private.api";
 import { STUDENT_HOST } from "../../environment/development";
 import { authHeaders } from "../../services/auth";
-import Headroom from "react-headroom";
 //@ts-ignore
 import _ from "lodash";
 import { moveScroll } from "../../utils/moveScroll";
@@ -23,7 +22,9 @@ import { TYPE } from "../../const/type";
 import qs from "query-string";
 import { goBackWhenLogined } from '../../utils/goBackWhenLogined'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import SearchFilter from './../result/search-filter/SearchFilter';
+// import SearchFilter from './../result/search-filter/SearchFilter';
+//@ts-ignore
+import coverUrl from '../../assets/image/default-cover.jpg';
 
 const { TabPane } = Tabs;
 const { TextArea } = Input;
@@ -42,6 +43,7 @@ interface IJobDetailState {
   isSaved?: boolean;
   jobID?: string;
   employerID?: string;
+  loading: boolean;
 }
 
 // @ts-ignore
@@ -134,6 +136,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
       isSaved: true,
       jobID: null,
       employerID: null,
+      loading: false,
     };
   }
 
@@ -168,15 +171,19 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
     prevState?: IJobDetailState
   ) {
     if (
+      nextProps.jobDetail &&
       nextProps.jobDetail.employerID &&
       nextProps.jobDetail.employerID !== prevState.employerID
     ) {
       nextProps.getEmployerDetail(nextProps.jobDetail.employerID);
       nextProps.getEmployerMoreJob(0, 6, nextProps.jobDetail.employerID);
-      // console.log(nextProps.jobDetail)
+      let isSaved = nextProps.jobDetail.saved
+      let jobState = nextProps.jobDetail.applyState;
 
       return {
         employerID: nextProps.jobDetail.employerID,
+        isSaved,
+        jobState
       };
     }
 
@@ -186,7 +193,6 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
   _loadData = () => {
     let { jobDetail } = this.props;
     this.props.getJobDetail(window.atob(this.props.match.params.id));
-    this.setState({ isSaved: jobDetail.isSaved });
   };
 
   _getMoreJob = (pageIndex?: number) => {
@@ -244,19 +250,28 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
 
   async _saveJob() {
     let { isAuthen, jobDetail } = this.props;
+    let { isSaved } = this.state;
+
     if (isAuthen) {
-      let res = await _requestToServer(
-        POST,
-        null,
-        SAVED_JOB + `/${jobDetail.id}/saved`,
-        STUDENT_HOST,
-        authHeaders
-      );
-      if (res && res.data === null) {
-        this.setState({ isSaved: true });
-      } else {
+      let body;
+      let method = POST;
+      let API = SAVED_JOB + `/${jobDetail.id}/saved`
+      if (isSaved) {
+        API = SAVED_JOB + '/saved';
+        body = [jobDetail.id];
+        method = DELETE
       }
-      this.props.getJobDetail(window.atob(this.props.match.params.id));
+      this.setState({ loading: true })
+      await _requestToServer(
+        method,
+        body,
+        API,
+        STUDENT_HOST,
+        authHeaders,
+        undefined,
+        true
+      );
+      this.setState({ isSaved: !isSaved, loading: false });
     }
   }
 
@@ -279,7 +294,6 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
       false
     ).then((res) => {
       if (res) {
-
         let { results } = res.data;
         if (res.data.success === true) {
           swal({
@@ -298,7 +312,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
           }).then((value) => {
             switch (value) {
               case "catch":
-                window.open('/history-apply')
+                window.open('/lich-su-ung-tuyen')
                 break;
             }
           })
@@ -306,9 +320,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
           this._loadState();
         }
         else {
-
           for (let i in results) {
-
             if (results[i].full === true) {
               swal({
                 title: "Worksvns thông báo",
@@ -345,9 +357,9 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
       similarJob,
       totalSimilarJob,
       is_loading_similar,
-      param
+      param,
     } = this.props;
-    let { is_loading, visible, confirmLoading, jobState } = this.state;
+    let { is_loading, visible, confirmLoading, jobState, isSaved, loading } = this.state;
     // let isSaved = jobDetail.saved;
 
     if (is_loading) {
@@ -359,30 +371,24 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
         </Layout>
       );
     }
-
-    let content = "Ứng tuyển";
+    let content;
     let applyState = jobDetail.applyState;
-
-    if (isAuthen === false) {
-      content = "Ứng tuyển";
-    } else {
-      if (jobState === "PENDING") {
-        content = "Đang chờ";
-        applyState = true;
-      } else if (jobState === "ACCEPTED") {
+    if (!isAuthen) {
+      content = <i>Đăng nhập để ứng tuyển</i>;
+    }
+    switch (jobState) {
+      case "PENDING":
+        content = "Đang chờ nhà tuyển dụng";
+        break;
+      case "ACCEPTED":
         content = "Đã chấp nhận";
-        applyState = true;
-      }
+        break;
+      default:
+        content = "Ứng tuyển"
+        break;
     }
 
-    let coverUrl = require("./../../assets/image/countdown.jpg");
-
-    if (jobDetail.employerCoverUrl) {
-      coverUrl = jobDetail.employerCoverUrl
-    };
-
     let logoUrl = jobDetail.employerLogoUrl;
-
     return (
       <>
         {/* Info Requirement */}
@@ -462,20 +468,20 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
         </Modal>
         <Layout>
           {/* Cover Image */}
-          <div className="cover-image-job ">
-            <Link to={`/employer/${window.btoa(employerDetail.id)}${param}`}
-              target="_blank"
-              style={{ fontSize: "1.05em", fontWeight: 450 }}
-            >
-              <LazyLoadImage
-                alt={employerDetail && employerDetail.employerName}
-                src={testImage(coverUrl)}
-                onError={() => coverUrl = require("./../../assets/image/countdown.jpg")}
-                className="company-image"
-              />
-            </Link>
-          </div>
+
           <div className="content">
+            <div className="cover-image-job ">
+              <Link to={`/employer/${window.btoa(employerDetail.id)}${param}`}
+                target="_blank"
+                style={{ fontSize: "1.05em", fontWeight: 450 }}
+              >
+                <LazyLoadImage
+                  alt={employerDetail && employerDetail.employerName}
+                  src={employerDetail.coverUrl ? employerDetail.coverUrl: coverUrl  }
+                  className="company-image"
+                />
+              </Link>
+            </div>
             <Row style={{ marginTop: '0.5vw' }}>
               <Col xs={0} sm={0} md={0} lg={1} xl={2} xxl={3} />
               <Col xs={24} sm={24} md={24} lg={22} xl={20} xxl={18}>
@@ -494,26 +500,36 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                   <div className="job-header">
                     <div className="company-header">
                       <Row>
-                        <Col xs={6} sm={8} md={4} lg={3} xl={3} xxl={3} className="a_c" style={{ padding: 5, marginRight: 5 }}>
+                        <Col onClick={() => window.location.assign(`/employer/${window.btoa(employerDetail.id)}${param}`)}
+                          xs={6} sm={8} md={4} lg={3} xl={3} xxl={3} className="a_c" style={{ padding: 5, marginRight: 5 }}>
                           <Avatar
                             shape={"square"}
                             src={testImage(logoUrl, "logo")}
                             alt={employerDetail && employerDetail.employerName}
-                            style={{ margin: '5px 0', width: '80px', height: "80px", border: "solid #80808038 1px" }}
+                            style={{
+                              margin: '5px 0',
+                              width: '80px',
+                              height: "80px",
+                              border: "solid #80808038 1px",
+                              cursor: "pointer"
+                            }}
                           />
-                          <JobType>{jobDetail && jobDetail.jobType}</JobType>
+                          <JobType width={'80px'}>{jobDetail && jobDetail.jobType}</JobType>
                         </Col>
-                        <Col xs={17} sm={11} md={15} lg={14} xl={15} xxl={16} style={{padding: 10}}>
-                          <h4 style={{textTransform: "capitalize"}}>{jobDetail && jobDetail.jobTitle}</h4>
+                        <Col xs={17} sm={11} md={15} lg={14} xl={15} xxl={16} style={{ padding: 10 }}>
+                          <h4 style={{ textTransform: "capitalize" }}>{jobDetail && jobDetail.jobTitle}</h4>
+                          <i>Chi nhánh: {jobDetail && jobDetail.employerBranchName ? jobDetail.employerBranchName: "Chính"}</i>
                           <div className="d_j_t">
                             <Icon type="home" style={{ color: "#168ECD" }} />
                             <label>
                               <Link
                                 to={`/employer/${window.btoa(employerDetail.id)}${param}`}
                                 target="_blank"
-                                style={{ fontSize: "1.05em"}}
+                                style={{ fontSize: "1.1em" }}
                               >
-                                {employerDetail && employerDetail.employerName}
+                                <b>
+                                  {employerDetail && employerDetail.employerName}
+                                </b>
                               </Link>
                             </label>
                           </div>
@@ -528,57 +544,39 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
                             </label>
                           </div>
                         </Col>
-                        <Col xs={24} sm={24} md={4} lg={5} xl={4} xxl={4}>
-                          <Row className="btn-s-c">
-                            <Col
-                            xs={8}
-                            sm={8}
-                            md={24}
-                            lg={24}
-                            xl={24}
-                            style={{ marginTop: 10 }}
-                          >
-                          </Col>
-                            <Col
-                              xs={4}
-                              sm={4}
-                              md={4}
-                              lg={0}
-                              xl={0}
-                              className="a_c"
+                        <Col xs={24} sm={24} md={12} lg={10} xl={14} xxl={10}>
+                          <Button
+                            type={applyState ? "ghost" : "default"}
+                            style={{
+                              height: 50,
+                              width: '68%',
+                              margin: "10px",
+                              backgroundColor: applyState ? "" : "rgb(249, 96, 49)",
+                              borderColor: applyState ? "" : "white",
+                              color: applyState ? "" : "white",
+                              fontSize: '1rem'
+                            }}
+                            onClick={() => {
+                              isAuthen
+                                ? this.setState({ visible: true })
+                                : this._toLogin();
+                            }}
+                            disabled={applyState}
+                            children={content}
+                            block
+                          />
+                          {
+                            isAuthen ? <Button
+                              onClick={() => this._saveJob()}
+                              style={{
+                                height: 48, fontSize: '1rem',
+                                color: isSaved ? "#21252959" : "orange",
+                                borderColor: isSaved ? "" : "navajowhite"
+                              }}
                             >
-                            </Col>
-                            <Col
-                              xs={12}
-                              sm={12}
-                              md={24}
-                              lg={23}
-                              xl={23}
-                              xxl={23}
-                              style={{ marginTop: 10 }}
-                            >
-                              <Affix offsetTop={20}>
-                                <Button
-                                  type={applyState ? "ghost" : "default"}
-                                  style={{
-                                    height: 40,
-                                    width: '100%',
-                                    backgroundColor: applyState ? "" : "rgb(249, 96, 49)",
-                                    borderColor: applyState ? "" : "white",
-                                    color: applyState ? "" : "white",
-                                  }}
-                                  onClick={() => {
-                                    isAuthen
-                                      ? this.setState({ visible: true })
-                                      : this._toLogin();
-                                  }}
-                                  disabled={applyState}
-                                  children={content}
-                                  block
-                                />
-                              </Affix>
-                            </Col>
-                          </Row>
+                              {loading ? <Icon type="loading" /> : (isSaved ? "Đã lưu" : "Lưu")}
+                            </Button> : null
+                          }
                         </Col>
                       </Row>
                     </div>

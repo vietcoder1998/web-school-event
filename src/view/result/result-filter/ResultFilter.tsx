@@ -1,5 +1,4 @@
 import React from 'react';
-import { Affix } from 'antd';
 // import { Icon } from 'antd';
 
 interface IResultFilter {

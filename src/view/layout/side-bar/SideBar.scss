@@ -69,37 +69,35 @@
       }
     }
   }
+  }
 
-  .content-sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-    top: 10%;
-    padding: 10px;
-    margin-top: 100px;
+.content-sidebar {
+  width: 100%;
+  height: auto;
+  position: relative;
+  top: 10%;
 
-    ul {
-      li {
-        font-weight: 600;
-        font-size: 16px;
-        font-family: IBMPlexSanLights;
-        padding: 0px;
-        display: flex;
+  ul {
+    li {
+      font-weight: 600;
+      font-size: 16px;
+      font-family: IBMPlexSanLights;
+      padding: 0px;
+      display: flex;
 
-        i {
-          width: 20px;
-          height: 20px;
-        }
+      i {
+        width: 20px;
+        height: 20px;
+      }
 
-        a {
-          display: block;
-          width: 100%;
-          line-height: 20px;
-          padding: 10px;
-          color: rgba(0, 0, 0, 0.65);
-          &:hover {
-            color: #1890ff;
-          }
+      a {
+        display: block;
+        width: 100%;
+        line-height: 20px;
+        padding: 10px;
+        color: rgba(0, 0, 0, 0.65);
+        &:hover {
+          color: #1890ff;
         }
       }
     }

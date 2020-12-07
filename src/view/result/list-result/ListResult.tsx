@@ -27,15 +27,12 @@ export default function ListResult(props?: IListResultProps): JSX.Element {
     const [result, setResult] = React.useState([])
     const [saveMap, setSaveMap] = React.useState([])
 
-
     React.useEffect(() => {
         if (props.listResult && props.listResult !== result) {
             setSaveMap(() => props.listResult.map(item => item.saved))
             setResult(props.listResult)
         }
     }, [props.listResult])
-
-    React.useEffect(() => console.log(saveMap), [saveMap])
 
     function saveJob(id: string, saved?: boolean, index?: number) {
         setSaveMap(saveMap => {
@@ -123,10 +120,10 @@ export default function ListResult(props?: IListResultProps): JSX.Element {
                                 >
                                     <Row style={{ margin: "10px 0px" }}>
                                         <Col xs={24} sm={24} md={10} lg={10} xl={10} >
-                                            <Icon type="calendar" style={{ color: '#168ECD' }} /> <span>Ngày đăng: {moment(item.createdDate).format('DD/MM/YY')}</span>
+                                            <Icon type="calendar" style={{ color: '#168ECD' }} /> <span>Ngày đăng: {moment(item.createdDate).format('DD/MM/YYYY')}</span>
                                         </Col>
                                         <Col xs={24} sm={24} md={12} lg={10} xl={12} >
-                                            <Icon type="calendar" style={{ color: '#168ECD' }} /> <span>Hết hạn: {moment(item.finishedDate).format('DD/MM/YY')}</span>
+                                            <Icon type="calendar" style={{ color: '#168ECD' }} /> <span>Hết hạn: {moment(item.expirationDate).format('DD/MM/YYYY')}</span>
                                         </Col>
                                         <Col xs={24} sm={24} md={10} lg={10} xl={10} >
                                             <Icon type='environment' style={{ color: '#168ECD' }} /><span>Tỉnh thành: {item.region.name}</span>
@@ -149,8 +146,7 @@ export default function ListResult(props?: IListResultProps): JSX.Element {
                                 >
                                     <Icon
                                         type="heart"
-                                        theme={saveMap[index] ? "filled" : null}
-                                        style={{ color: "red", fontSize: 18 }}
+                                        style={{ color: saveMap[index] ? "red" : null, fontSize: 18 }}
                                     />
                                 </div>
                             </Tooltip>

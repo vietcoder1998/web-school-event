@@ -256,7 +256,8 @@ code {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
   &:hover {
-  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.021);
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.021);
   }
 
   .img-card {
@@ -431,6 +432,10 @@ ul {
   animation: fadein 2s;
   background-color: white;
   border-radius: 5px;
+  li {
+    list-style: none;
+    padding-left: 10px;
+  }
 
   i {
     &:hover {
@@ -679,11 +684,6 @@ i {
     margin: 10px 0px;
   }
 
-  .ant-pagination-item-active {
-    background-color: rgb(0, 132, 255);
-    color: white !important;
-  }
-
   .ant-select-dropdown-menu-item {
     width: 100%;
   }
@@ -692,7 +692,7 @@ i {
 // text-tranform
 
 .l_c {
-  text-transform: lowercase;
+  text-transform: uppercase;
   list-style-type: none;
   margin: 0px !important;
   font-weight: 500;
@@ -756,7 +756,6 @@ i {
   background-color: rgba(255, 255, 255, 0);
   -webkit-line-clamp: 2;
   white-space: pre-line;
-  min-height: 20px;
   // margin-bottom: -3px;
 
   .tooltiptext {
@@ -799,6 +798,10 @@ i {
   &.white {
     background-color: white;
   }
+}
+
+.ant-drawer-close {
+ display: none!important;
 }
 
 .conner {
@@ -1390,6 +1393,8 @@ label {
   // padding: 10px;
   // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.02), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
   position: relative;
+  margin: 0 -20vw;
+  padding: 2vw 20vw;
 
   h5 {
     margin: 10px 5px !important;
@@ -1486,7 +1491,7 @@ label {
 
     .job-content {
       width: 100%;
-      padding-top: 10px;
+      padding-top: 5px;
       padding-right: 8px;
 
       h6 {
@@ -1514,7 +1519,7 @@ label {
         .l_c {
           text-align: left;
           text-overflow: ellipsis;
-          text-transform: initial;
+          text-transform: uppercase;
           line-height: 18px;
           -webkit-line-clamp: 2;
           white-space: pre-line;
@@ -1671,12 +1676,11 @@ label {
 .announcements {
   font-family: $font_base;
   // background-color: white;
-  margin-right: -20vw;
-  margin-left: -20vw;
   padding: 15px 15vw 30px !important;
   border-radius: 1px;
   padding: 1vw;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.02), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
+  margin: 0px -20vw;
 
   .title_card {
     overflow: hidden;
@@ -1814,15 +1818,17 @@ label {
     overflow: hidden;
     border: solid rgba(128, 128, 128, 0.119) 1px;
     background-color: white;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.048);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03),
+      0 6px 20px 0 rgba(0, 0, 0, 0.048);
 
     .company-header {
       h4 {
+        margin-top: 10px !important;
         padding: 0px;
         font-weight: 550;
       }
       border-radius: 3px;
-      padding: 0 0.5vw;
+      padding: 1vh 0.5vw;
       background-color: white;
       z-index: 1;
       a {
@@ -1844,10 +1850,10 @@ label {
         color: black;
         line-height: 15px;
         -webkit-box-orient: vertical;
-       
+        font-size: 0.9rem;
+
         i {
-          margin-right: 5px;
-          padding-top: 3px;
+          margin: -5 5px 0;
         }
       }
       .btn-s-c {
@@ -2136,7 +2142,7 @@ label {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
-  text-transform: inherit;
+  text-transform: capitalize;
 }
 
 .search-tab {
@@ -2293,7 +2299,6 @@ label {
           width: 60px;
           border-radius: 3px;
           border: solid rgb(241, 241, 241) 1px;
-          margin-bottom: 6px;
         }
 
         .name-job {
@@ -2736,8 +2741,6 @@ html {
     }
 
     .job-detail {
-      min-height: 200px;
-
       .short-info {
         padding: 10px;
         background-color: white;
@@ -2747,7 +2750,7 @@ html {
         background-color: #30a3f924;
         border: 1px solid #31a3f9;
         border-radius: 3px;
-
+        text-overflow: ellipsis;
 
         h6 {
           margin-bottom: 20px;
@@ -2884,11 +2887,11 @@ html {
 
       .company-more {
         // box-shadow      : 0 0.5px 0 rgba(0, 0, 0, .1);
-          h6 {
-            padding: 15px 20px;
-            background-color: white;
-            margin-bottom: 5px;
-          }
+        h6 {
+          padding: 15px 20px;
+          background-color: white;
+          margin-bottom: 2px;
+        }
 
         .company-job-more {
           background-color: white;
@@ -2925,13 +2928,6 @@ html {
         }
       }
     }
-  }
-}
-
-@media only screen and (min-width: 900px) {
-  .cover-image-job {
-    // margin-top      : 5px;
-    height: 42vh;
   }
 }
 
@@ -2973,17 +2969,16 @@ html {
 
 .l_c {
   overflow: hidden;
-  text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2; /* number of lines to show */
   -webkit-box-orient: vertical;
   text-transform: inherit;
   color: black;
   font-weight: 550;
+  margin-bottom: 5px!important;
 }
 .item-hl-job {
   overflow: nowrap;
-  text-transform: capitalize;
 }
 
 .ant-skeleton {
@@ -3003,6 +2998,9 @@ html {
   // padding: 15px 25px;
   // background-color: rgba(255, 253, 253, 0.794);
   margin: 10px 0px;
+  i {
+    margin-right: 5px;
+  }
 
   h5 {
     margin-left: 5px;
@@ -3015,10 +3013,35 @@ html {
     border-radius: 5px;
   }
 
+  .ant-carousel {
+    .slick-dots {
+      display: block;
+      position: absolute;
+      margin: 35px 0px;
+      padding: 0;
+      text-align: center;
+      li {
+        button {
+          height: 15px !important;
+          width: 15px;
+          border-radius: 50%;
+          margin: 0 5px;
+          background: unset;
+          border: 2px solid white;
+        }
+      }
+      li.slick-active {
+        button {
+          width: 15px;
+        }
+      }
+      // button
+    }
+  }
+
   .history-job {
     .job-detail {
-      margin: 12px 15px;
-      display: flex;
+      margin: 2px 5px;
       padding: 10px;
       border-radius: 3px;
       background-color: rgb(255, 255, 255);
@@ -3026,20 +3049,21 @@ html {
         0 6px 20px 0 rgba(0, 0, 0, 0.06);
 
       a {
-        height: 48px;
-        overflow: hidden;
+        font-weight: 550;
         text-overflow: ellipsis;
         display: -webkit-box;
         -webkit-line-clamp: 2; /* number of lines to show */
         -webkit-box-orient: vertical;
+        overflow: hidden;
       }
 
       li {
-        overflow: hidden;
         text-overflow: ellipsis;
+        overflow: hidden;
         display: -webkit-box;
         -webkit-line-clamp: 2; /* number of lines to show */
         -webkit-box-orient: vertical;
+        margin-bottom: 5px;
       }
 
       &:hover {
@@ -3077,8 +3101,14 @@ html {
 
       .content-job {
         padding: 0 5px;
-        // width: calc(100% -115px);
+        position: relative;
         // min-height: 150px;
+        li {
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
 
         p {
           font-size: 1rem;
@@ -3088,7 +3118,10 @@ html {
 
           a {
             color: rgba(0, 0, 0, 0.734);
-
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
             &:hover {
               text-decoration: underline;
             }
@@ -3099,7 +3132,7 @@ html {
       li {
         list-style: none;
         padding: 2px;
-        font-size: 0.8rem;
+        font-size: 0.9rem;
       }
     }
   }
@@ -3236,6 +3269,7 @@ html {
         img {
           object-fit: contain;
           background-color: white;
+          border: solid rgba(128, 128, 128, 0.24) 1px;
         }
       }
 
@@ -3549,11 +3583,10 @@ html {
   margin-left: 15px;
 }
 .job-detail-content .job-header .company-header .d_j_t i {
-  padding-top: 10px;
+  padding-top: 5px;
 }
 #requirement-job {
   z-index: 1;
-  margin-top: 42vh;
   h6 {
     font-size: 1.3em;
   }
@@ -3594,6 +3627,7 @@ html {
   margin-top: 10px !important;
   .ant-pagination-item {
     background-color: white !important;
+    color: 9o;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03),
       0 6px 20px 0 rgba(0, 0, 0, 0.03) !important;
   }
@@ -3640,22 +3674,21 @@ html {
 // }
 
 .cover-image-job {
-  // margin-top      : 5px;
-  // height          : 55vh;
   background-color: #98cdff50;
-  left: 0px;
-  top: 60px;
   text-align: center;
   animation: fadeInFromNone 0.3s ease-out;
   transition: 1s;
   overflow: hidden;
   left: 0px !important;
-  position: absolute;
+  width: 100vw;
+  // position: absolute;
+  max-height: 42vh;
   z-index: 1;
   // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08), 0 6px 20px 0 rgba(0, 0, 0, 0.08);
 
   img {
-    width: 100vw;
+    width: 100%;
+    object-fit: cover;
     transition: 0.7s;
   }
 

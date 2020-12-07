@@ -32,9 +32,7 @@ import { POST, DELETE } from "../../../const/method";
 import { ANNOUNCEMENTS_PRIVATE } from "../../../services/api/private.api";
 // import { NotUpdate } from '../../../layout/common/Common';
 import FadeLoader from "react-spinners/FadeLoader";
-import { Tabs } from "antd";
 import { GET } from './../../../const/method';
-const { TabPane } = Tabs;
 
 interface IProps {
   match?: any;
@@ -240,9 +238,6 @@ class ArticleDetail extends PureComponent<IProps, IState> {
       console.log(res);
       this.getComment();
     })
-      .catch((e) => {
-        console.log(e);
-      });
   };
 
   render() {

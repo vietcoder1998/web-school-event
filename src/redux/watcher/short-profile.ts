@@ -1,5 +1,5 @@
 import { TYPE } from "./../../const/type";
-import { PERSON_INFO_P, SHORT_PROFILE } from "./../../services/api/private.api";
+import { PERSON_INFO_P } from "./../../services/api/private.api";
 import { takeEvery, call } from "redux-saga/effects";
 import { _get } from "../../services/base-api";
 import { STUDENT_HOST } from "../../environment/development";

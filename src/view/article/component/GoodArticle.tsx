@@ -49,7 +49,7 @@ class GoodArticle extends PureComponent<IProps, IState> {
       ? (body.announcementTypeID = null)
       : (body.announcementTypeID = this.props.idType);
 
-   await _requestToServer(
+    await _requestToServer(
       POST,
       body,
       ANNOUNCEMENTS.LIST +
@@ -80,13 +80,12 @@ class GoodArticle extends PureComponent<IProps, IState> {
     //   slidesToScroll: 1,
     // };
     if (this.state.loading) return <div>loading .....</div>;
-    else {
-      return (
-        <div className="good-article">
-          <Title title={"Nhiều người đọc"} />
-          {listArticleData.map((item, index) => {
-            if (index < 4) {
-              return <div
+    return (
+      <div className="good-article">
+        <Title title={"Nhiều người đọc"} />
+        {listArticleData.map((item, index) => {
+          if (index < 4) {
+            return <div
               key={index}
               style={{ display: index === 0 ? "none" : "", marginTop: 20 }}
             >
@@ -111,12 +110,11 @@ class GoodArticle extends PureComponent<IProps, IState> {
                 />
               )}
             </div>
-            }
-           
-  })}
-        </div>
-      );
-    }
+          }
+
+        })}
+      </div>
+    );
   }
 }
 

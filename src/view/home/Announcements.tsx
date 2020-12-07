@@ -51,7 +51,7 @@ function Announcements(props?: IProps) {
     }
     let { isMobile } = props;
     return (
-        <div className='announcements'>
+        <div className='announcements white'>
             <h5><Icon type="book" />BÀI VIẾT CHO BẠN</h5>
             {
                 isMobile ?

@@ -106,12 +106,12 @@ class Header extends PureComponent<IProps, IState> {
         </Menu.Item >
         <Menu.Item style={{ fontWeight: 500,  }}>
           <div>
-          <Icon type="history"style={{marginRight: 5, color: "#1890ff"}}/><Link to="/save-job">Công việc đã lưu</Link>
+          <Icon type="history"style={{marginRight: 5, color: "#1890ff"}}/><Link to="/cong-viec-da-luu">Công việc đã lưu</Link>
           </div>
         </Menu.Item>
         <Menu.Item style={{ fontWeight: 500,  }}>
           <div>
-          <Icon type="solution"style={{marginRight: 5, color: "#1890ff"}}/><Link to="/history-apply">Lịch sử ứng tuyển</Link>
+          <Icon type="solution"style={{marginRight: 5, color: "#1890ff"}}/><Link to="/lich-su-ung-tuyen">Lịch sử ứng tuyển</Link>
           </div>
         </Menu.Item>
         <Menu.Item style={{ fontWeight: 500,fontStyle: "italic", color: "red"  }} onClick={this._clearStorage}>
