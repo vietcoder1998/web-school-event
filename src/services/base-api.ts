@@ -27,6 +27,7 @@ export const _get = async (
 ) => {
   let requestURL =
     (another_host ? another_host : process.env.REACT_APP_API_HOST) + api;
+    
   if (headers === null || headers === undefined) {
     headers = authHeaders;
   }

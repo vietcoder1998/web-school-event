@@ -4,7 +4,7 @@ import swal from "sweetalert";
 // import * as auth from '../../service/auth';
 import { connect } from "react-redux";
 import { authUserPassword } from "../../services/api/private.api";
-import { setAuthSate, loginHeaders } from '../../services/auth';
+import { loginHeaders } from '../../services/auth';
 import { AUTH_HOST } from "../../environment/development";
 import { Input, Tooltip, Icon, Button } from "antd";
 import { Col } from "antd";
@@ -20,6 +20,7 @@ import imageLogin from "../../assets/image/image-login.png";
 import { goBackWhenLogined } from "../../utils/goBackWhenLogined";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { FacebookProvider, LoginButton } from 'react-facebook';
+import setupLogin from "../../config/setup-login";
 // import { TYPE } from './../../const/type';
 
 class Login extends Component {
@@ -60,7 +61,7 @@ class Login extends Component {
         {
           client_id: process.env.REACT_APP_CLIENT_ID,
           sercret: process.env.REACT_APP_CLIENT_SECRET,
-          fbAccessToken: data.tokenDetail.accessToken
+          fbAccessToken: data.tokenDetail.actk
         },
         "/api/oauth2/authentication/facebook",
         process.env.REACT_APP_API_HOST,
@@ -69,7 +70,7 @@ class Login extends Component {
         if (res) {
           console.log(res);
           localStorage.setItem("login_type", "FB")
-          this._loginAction(res, res.data, data.tokenDetail.accessToken)
+          this._loginAction(res, res.data, data.tokenDetail.actk)
         }
       })
     }
@@ -81,8 +82,8 @@ class Login extends Component {
 
   _loginAction = (res?: any, data?: any, token?: string) => {
     console.log(data);
-    if(data) {
-      localStorage.setItem("fbAccessToken", token)
+    if(res) {
+      setupLogin(res.data)
     }
     if (res.data.target !== "STUDENT") {
       swal({
@@ -105,7 +106,6 @@ class Login extends Component {
           window.location.assign("/register");
         });
       } else {
-        setAuthSate(res);
         // this.props.setAuthen();
         let last_access = localStorage.getItem("last_access");
         last_access

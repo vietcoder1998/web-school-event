@@ -31,34 +31,39 @@ import { FitJobWatcher } from '../watcher/fit-job';
 
 
 export default function* rootSaga() {
-    yield all([
-        PersonInfoWatcher(),
-        ShortProfileWatcher(),
-        JobResultWatcher(),
-        JobDetailWatcher(),
-        EmployerWatcher(),
-        EmployerMoreJobWatcher(),
-        JobSaveWatcher(),
-        notiInfoWatcher(),
-        HotJobWatcher(),
-        AllJobWatcher(),
-        HighLightJobWatcher(),
-        JobNameWatcher(),
-        RegionWatcher(),
-        InDayWatcher(),
-        AnnouncementsWatcher(),
-        HistoryApplyWatcher(),
-        SimilarJobWatcher(),
-        EventHotJobWatcher(),
-        EventJobWatcher(),
-        EventTopEmployerWatcher(),
-        EventBannerEmployerWatcher(),
-        EventDetail(),
-        EventJobDetailWatcher(),
-        EventEmployerMoreJobWatcher(),
-        EventJobResultWatcher(),
-        TopEmployersWatcher(),
-        MajorsWatcher(),
-        FitJobWatcher()
-    ])
+    try {
+        yield all([
+            PersonInfoWatcher(),
+            ShortProfileWatcher(),
+            JobResultWatcher(),
+            JobDetailWatcher(),
+            EmployerWatcher(),
+            EmployerMoreJobWatcher(),
+            JobSaveWatcher(),
+            notiInfoWatcher(),
+            HotJobWatcher(),
+            AllJobWatcher(),
+            HighLightJobWatcher(),
+            JobNameWatcher(),
+            RegionWatcher(),
+            InDayWatcher(),
+            AnnouncementsWatcher(),
+            HistoryApplyWatcher(),
+            SimilarJobWatcher(),
+            EventHotJobWatcher(),
+            EventJobWatcher(),
+            EventTopEmployerWatcher(),
+            EventBannerEmployerWatcher(),
+            EventDetail(),
+            EventJobDetailWatcher(),
+            EventEmployerMoreJobWatcher(),
+            EventJobResultWatcher(),
+            TopEmployersWatcher(),
+            MajorsWatcher(),
+            FitJobWatcher()
+        ])
+    } catch(err) {
+        console.log(err);
+    }
+    
 } 

@@ -5,11 +5,10 @@ import { FULL_PROFILE } from '../../services/api/private.api';
 import { STUDENT_HOST } from '../../environment/development';
 import { authHeaders } from '../../services/auth';
 import { REDUX_SAGA, REDUX } from '../../const/actions'
+//@ts-ignore
 import imageDefault from "../../assets/image/base-image.jpg";
 function* getFullPersonInfo(action: any) {
-   
     let res = yield call(getData);
-    
     let data = res.data
     let personalInfo = {
         id: "",
@@ -81,7 +80,6 @@ function* getFullPersonInfo(action: any) {
     // skills
     let skills = data.skills;
     // education
-
     let educations = data.school;
     let major = data.major;
 
@@ -96,7 +94,6 @@ function* getFullPersonInfo(action: any) {
     if (data && data.cvUrl) {
         localStorage.setItem("cvUrl", data.cvUrl);
     }
-
 
     yield put({
         type: REDUX.PERSON_INFO.GET_FULL_PERSON_INFO,

@@ -17,7 +17,7 @@ function* getListHistoryApplyData(action) {
 }
 
 function getHistoryApplyData(action) {
-    let token = localStorage.getItem('accessToken');
+    let token = localStorage.getItem('actk');
 
     if (token) {
         let res = _requestToServer(

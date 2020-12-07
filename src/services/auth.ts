@@ -10,7 +10,7 @@ export const createAuthozization = (username, password) => {
 // Check invalid header
 export const authHeaders = {
     'Access-Control-Allow-Headers': '*',
-    'Authorization': `Bearer ${localStorage.getItem("accessToken")}`,
+    'Authorization': `Bearer ${localStorage.getItem("actk")}`,
 }
 
 // Check Login User
@@ -38,20 +38,20 @@ export const deleteLoginState = () => {
 export const sendStringHeader = {
     'Access-Control-Allow-Headers': '*',
     "Content-Type": "text/plain",
-    'Authorization': `Bearer ${localStorage.getItem("accessToken")}`,
+    'Authorization': `Bearer ${localStorage.getItem("actk")}`,
 }
 
 export const sendFileHeader = {
     'Access-Control-Allow-Headers': '*',
     'Content-Type': 'multipart/form-data',
-    'Authorization': `Bearer ${localStorage.getItem("accessToken")}`,
+    'Authorization': `Bearer ${localStorage.getItem("actk")}`,
 }
 
 // Set State of authenticate
 export const setAuthSate = async (response) => {
     if (response.code === 200) {
         localStorage.setItem('userID', response.data.userID);
-        localStorage.setItem('accessToken', response.data.accessToken);
+        localStorage.setItem('actk', response.data.actk);
     }
 }
 

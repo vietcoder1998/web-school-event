@@ -3,6 +3,7 @@ import { _delete, _get, _post, _put } from "./base-api";
 // import { exceptionShowNoti } from "../config/exception";
 import swal from "sweetalert";
 import { TYPE } from "../const/type";
+import { exceptionShowNotiConfig } from "../config/config-exception";
 // import { PUBLIC_HOST } from "../environment/development";
 
 export const _requestToServer = async (
@@ -28,7 +29,6 @@ export const _requestToServer = async (
         break;
       case POST:
         res = await _post(data, api, host, headers, params);
-
         break;
       case PUT:
         res = await _put(data, api, host, headers, params);
@@ -49,13 +49,6 @@ export const _requestToServer = async (
     }
 
     if (show_alert && res) {
-      // swal({
-      //   title: "Worksvns thông báo",
-      //   text: res.msg,
-      //   icon: TYPE.SUCCESS,
-      //   dangerMode: false,
-      // });
-
       let msg = res.msg
       if (res.code === 200 && message_success) {
         msg = message_success
@@ -70,39 +63,13 @@ export const _requestToServer = async (
           if(message_success === `Hoàn tất thông tin thành công!`) {
             window.location.assign(`/${window.location.search}`);
           } else {
-            // window.open('https://mail.google.com/mail/u/0/')
             window.location.assign(`/login${window.location.search}`);
           }
         }
       })
     }
-    if (log_query) {
-      // console.log(host + api);
-      // console.log(params);
-      // console.log(data);
-      // console.log(res);
-    }
   } catch (err) {
-    // console.log(err.response.data);
-
-    // exceptionShowNoti(err, hide_alert_error);
-    if (err && err && err.response && err.response.data && !hide_alert_error) {
-      let msg = err.response.data.msg;
-      if (err.response.data.code === 40927 && message_success) {
-        msg = `${err.response.data.msg}. Vui lòng đăng nhập!`
-      }
-      swal({
-          title: "Worksvn thông báo",
-          text: msg,
-          icon: TYPE.ERROR,
-          dangerMode: true,
-      }).then(() => {
-        if ((err.response.data.code === 40927) && message_success) {
-          window.location.assign('/login');
-        }
-      })
+    exceptionShowNotiConfig(err);
   }
-  }
-
   return res;
 };

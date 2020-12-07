@@ -197,7 +197,7 @@ class App extends React.Component<IProps, IState> {
     return res
   }
   _loadLocal = async () => {
-    let token = localStorage.getItem("accessToken");
+    let token = localStorage.getItem("actk");
 
     let queryParam = qs.parse(window.location.search, {
       //@ts-ignore
@@ -341,7 +341,7 @@ const mapDispatchToProps = (dispatch) => ({
   checkAuthen: (token) =>
     dispatch({
       type: REDUX.AUTHEN.EXACT_AUTHEN,
-      accessToken: token,
+      actk: token,
     }),
 
   getData: () =>

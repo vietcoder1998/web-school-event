@@ -8,6 +8,7 @@ export const JOB = "/api/jobs";
 export const TOOLS = '/api/workingTools'
 export const EMPLOYER = "/api/employers";
 export const oauth2 = "/api/users/emailVerification/request";
+export const RFGTK= "/api/authentication/refresh-token"
 
 export let EVENT_PUBLIC = {
   // DETAIL: `/api/schools/${process.env.REACT_APP_SCHOOL_ID}/events/${process.env.REACT_APP_EVENT_ID}`,
