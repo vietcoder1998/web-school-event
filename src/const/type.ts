@@ -5,6 +5,7 @@ export const TYPE = {
     FULLTIME: "FULLTIME",
     PARTTIME:  "PARTTIME",
     INTERNSHIP: "INTERNSHIP",
+    ALL:"ALL",
 
     MON: 'MON',
     TUE: 'TUE',

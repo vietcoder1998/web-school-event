@@ -277,6 +277,7 @@ class Result extends React.Component<IProps, IStateResult> {
     console.log(event)
     let queryParam = qs.parse(this.props.location.search);
     let { body, isSearchEvent } = this.state;
+    console.log(queryParam);
     isSearchEvent = event.isEvent;
     if (event.jobType !== "PARTTIME") {
       body.jobShiftFilter = {
@@ -301,8 +302,10 @@ class Result extends React.Component<IProps, IStateResult> {
     } else {
       body.jobNameIDs = [];
     }
+    queryParam.branchIDs = null
     queryParam.regionID = event.regionID;
     body.jobLocationFilter.regionID = event.regionID;
+    body.branchIDs = null
 
     this.props.history.replace("?" + qs.stringify(queryParam));
     await this.setState({ body, pageIndex: 0, isSearchEvent });

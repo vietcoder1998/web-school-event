@@ -266,7 +266,6 @@ class Header extends PureComponent<IProps, IState> {
             className="function"
             style={{ display: show_bar ? "none" : "flex" }}
           >
-
             <Notification
               show_noti={show_noti}
               hover_on={hover_on}

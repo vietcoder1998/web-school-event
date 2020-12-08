@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './Notification.scss';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Icon, Modal, Avatar, Empty, Popover, Row, Col } from 'antd';
+import { Icon, Modal, Avatar, Empty, Popover, Row, Col, Drawer } from 'antd';
 import moment from 'moment';
 import { _requestToServer } from '../../../../services/exec';
 import { notiController } from '../../../../services/api/private.api';
@@ -201,17 +201,16 @@ class Notification extends Component {
                 {/* Notification */}
                 {
                     isMobile ? (
-                        <>
+                        <Drawer visible={this.props.show_noti}>
                             {this.props.children}
                             <div
                                 className={
                                     'notification-mobile'
                                 }
-                                style={noti_style}
                             >
                                 {this.content()}
                             </div>
-                        </>
+                        </Drawer>
                     ) :
                         <Popover
                             trigger='click'
@@ -221,10 +220,6 @@ class Notification extends Component {
                                 <div className='notification'>
                                     {this.content()}
                                 </div>
-                                // <Empty
-                                //     style={{ height: "40vh", padding: 20 }}
-                                //     description={<b>Hiện tại thông báo đang được sửa do mắc một số lỗi</b>}
-                                // />
                             }
                         >
                             {this.props.children}

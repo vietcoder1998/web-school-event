@@ -13,7 +13,7 @@ class JobExpect extends Component {
                 <Row>
                     <h5 className="not-color"><Icon type="branches" /> TÌM VIỆC THEO NHÓM NGÀNH</h5>
                     <Col sm={24} md={12} lg={12} xl={12} xxl={12}>
-                        <a href={`/result?brids=${2}`}>
+                        <a href={`/result?branchIDs=${2}`}>
                             <div className="expert-content">
                                 <LazyLoadImage style={{ width: '100%', height: '100%' , marginBottom: "0.6vw"}} src={Banner1} alt={"Công việc liên quan đến kinh doanh"} />
                                 <div className="job-expert">
@@ -24,7 +24,7 @@ class JobExpect extends Component {
                         </a>
                     </Col >
                     <Col sm={24} md={12} lg={12} xl={12} xxl={12}>
-                        <a href={`/result?brids=${13}`}>
+                        <a href={`/result?branchIDs=${13}`}>
                             <div className="expert-content">
                                 <LazyLoadImage style={{width: '100%', height: '100%' }} src={Banner2} alt={"Công việc liên quan đến kĩ thuật"} />
                                 <div className="job-expert">

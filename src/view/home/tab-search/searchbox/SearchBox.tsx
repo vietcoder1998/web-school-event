@@ -13,6 +13,7 @@ import QRCodeAppStore from '../../../../assets/image/qr-code-appstore.png';
 import QRCodeCHPlay from '../../../../assets/image/qr-code-chplay.png';
 import qs from 'query-string';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { TYPE } from '../../../../const/type';
 
 const InputGroup = Input.Group;
 const { Option } = Select;
@@ -297,25 +298,18 @@ class SearchBox extends Component<IProps, IState>{
         this.setState({ choose_location });
     }
 
-    _handleTabs = (key) => {
-        switch (key) {
-            case '0':
-                this._handleShowDay(null, false)
-                break;
-            case '1':
-                this._handleShowDay('PARTTIME', true)
-                break;
-            case '2':
-                this._handleShowDay('FULLTIME', false)
-                break;
-            case '3':
-                this._handleShowDay('INTERNSHIP', false)
-                break;
-
-            default:
-                break;
+    _handleTabs = (jobType?:  string) => {
+        let showDay = false
+        if (jobType===TYPE.ALL) {
+            jobType=null
         }
+        if (jobType===TYPE.PARTTIME) {
+            showDay=true
+        }
+
+        this._handleShowDay(jobType,showDay )
     }
+
     keyJobType(jobType) {
         switch (jobType) {
             case null:
@@ -529,8 +523,8 @@ class SearchBox extends Component<IProps, IState>{
                             </InputGroup>
                         </div>
                         {/* Choose Type Job */}
-                        <Tabs defaultActiveKey={this.props.jobType === 'PARTTIME' ? '1' : (this.props.jobType === 'FULLTIME' ? '2' : '3')} onChange={this._handleTabs}>
-                            <TabPane tab="Làm thêm" key="1" >
+                        <Tabs defaultActiveKey={this.props.jobType} onChange={this._handleTabs}>
+                            <TabPane tab="Làm thêm" key={TYPE.PARTTIME} >
                                 <div className='choose-time' style={{ display: show_days === true ? 'block' : 'none' }}>
                                     <div className='choose-shift'>
                                         {list_day_times.map((item, index) => {
@@ -565,8 +559,8 @@ class SearchBox extends Component<IProps, IState>{
                                     </div>
                                 </div>
                             </TabPane>
-                            <TabPane tab="Chính thức" key="2" />
-                            <TabPane tab="Thực tập" key="3" />
+                            <TabPane tab="Chính thức" key={TYPE.FULLTIME} />
+                            <TabPane tab="Thực tập" key={TYPE.INTERNSHIP} />
                         </Tabs>
                         <div className='find-now'>
                             <Button
@@ -590,13 +584,11 @@ class SearchBox extends Component<IProps, IState>{
                             <p style={{ fontSize: '1.8rem', color: 'white', fontWeight: 550, marginBottom: '5px' }}>Định Hướng Việc Hay, Nhận Ngay Khi Rảnh!</p>
                         </div>
                         {/* Choose Type Job */}
-                        <Tabs defaultActiveKey={this.keyJobType(this.props.jobType)} onChange={this._handleTabs}>
-                            <TabPane tab="Tất cả loại công việc" key="0" />
-                            <TabPane tab="Làm thêm" key="1">
-                         
-                            </TabPane>
-                            <TabPane tab="Chính thức" key="2" />
-                            <TabPane tab="Thực tập" key="3" />
+                        <Tabs defaultActiveKey={TYPE.ALL} onChange={this._handleTabs}>
+                            <TabPane tab="Tất cả loại công việc" key={TYPE.ALL} />
+                            <TabPane tab="Làm thêm" key={TYPE.PARTTIME}/>
+                            <TabPane tab="Chính thức" key={TYPE.FULLTIME} />
+                            <TabPane tab="Thực tập" key={TYPE.INTERNSHIP} />
                         </Tabs>
                         <Affix offsetTop={-20}>
                             <div className='search-type' style={{ margin: choose_advanced ? '0px' : '20px 0px' }}>

@@ -50,7 +50,7 @@ function getJobResults(action) {
   var jnids = url.searchParams.get("jobNameID");
   var rid = url.searchParams.get("regionID");
   var jt = url.searchParams.get("jt");
-  var brids = url.searchParams.get("brids");
+  var brids = url.searchParams.get("branchIDs");
   var title = url.searchParams.get("jobTitle");
   var mjid = url.searchParams.get("majorID")
   var pageIndex = url.searchParams.get("pi")

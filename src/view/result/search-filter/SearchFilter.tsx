@@ -184,21 +184,22 @@ class SearchFilter extends React.Component<
         placeholder={"Chọn loại công việc"}
         value={jobType ? jobType : "Tất cả loại việc"}
       >
-        <Option key={"1"} value={""}>
+        <Option key={TYPE.ALL} value={""}>
           Tất cả
-              </Option>
-        <Option key={"2"} value={TYPE.FULLTIME}>
+        </Option>
+        <Option key={TYPE.FULLTIME} value={TYPE.FULLTIME}>
           Fulltime
-              </Option>
-        <Option key={"3"} value={TYPE.PARTTIME}>
+        </Option>
+        <Option key={TYPE.PARTTIME} value={TYPE.PARTTIME}>
           Parttime
-              </Option>
-        <Option key={"4"} value={TYPE.INTERNSHIP}>
-          Internship
-              </Option>
+        </Option>
+        <Option key={TYPE.INTERNSHIP} value={TYPE.INTERNSHIP}>
+          Thực tập
+        </Option>
       </Select>
     )
   }
+
   render() {
     let {jobNames, loading, isMobile } = this.props;
     let {jobTitle, openFilter } = this.state;
