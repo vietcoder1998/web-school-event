@@ -40,6 +40,7 @@ class TopJob extends PureComponent<IProps> {
             <div className='home-job'>
                 <Row  style={{ display: topJob.totalItems === 0 ? 'none' : '' }}>
                     <h5 style={{ textAlign: 'center' }}><Icon type="check"style={{marginRight:10}} />VIỆC LÀM PHÙ HỢP</h5>
+                    {/* <LazyLoadImage style={{width: "calc(100% - 10px)", margin: "-25px 5px 15px"}} src={require('./../../assets/image/InternKyThuat.jpg')} /> */}
                     {
                         topJob && topJob.items ? topJob.items.map((item, index) => {
                             let logoUrl = item.employerLogoUrl;

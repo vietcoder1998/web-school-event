@@ -49,7 +49,7 @@ function getJobResults(action) {
   var url = new URL(url_string);
   var jnids = url.searchParams.get("jobNameID");
   var rid = url.searchParams.get("regionID");
-  var jt = url.searchParams.get("jt");
+  var jobType = url.searchParams.get("jobType");
   var brids = url.searchParams.get("branchIDs");
   var title = url.searchParams.get("jobTitle");
   var mjid = url.searchParams.get("majorID")
@@ -64,8 +64,8 @@ function getJobResults(action) {
     body.jobLocationFilter.regionID = rid;
   }
 
-  if (jt) {
-    body.jobType = jt;
+  if (jobType) {
+    body.jobType = jobType;
   }
 
   if (brids) {

@@ -66,7 +66,7 @@ code {
 }
 
 .job-content {
-  overflow: hidden;
+  // overflow: hidden;
   white-space: nowrap;
 }
 
@@ -410,6 +410,7 @@ code {
 ul {
   list-style: none;
   padding: 0px;
+  margin-bottom: 0px;
 }
 
 .text-icon {
@@ -836,7 +837,7 @@ i {
   text-transform: uppercase;
   color: white;
   background-color: #f3612c;
-  border-radius: 5px;
+  border-radius: 3px;
   padding: 0px 4px;
 }
 
@@ -1467,6 +1468,7 @@ label {
     .region {
       text-align: left;
       font-size: 0.8rem;
+      text-transform: capitalize;
     }
 
     .salary {
@@ -1491,8 +1493,9 @@ label {
 
     .job-content {
       width: 100%;
-      padding-top: 5px;
+      padding-top: 11px;
       padding-right: 8px;
+      text-transform: lowercase;
 
       h6 {
         font-size: 0.95em;
@@ -1521,7 +1524,7 @@ label {
           text-overflow: ellipsis;
           text-transform: uppercase;
           line-height: 18px;
-          -webkit-line-clamp: 2;
+          -webkit-line-clamp: 1;
           white-space: pre-line;
         }
       }
@@ -3696,4 +3699,17 @@ html {
     background-color: rgba(88, 208, 255, 0.568);
     height: 75px;
   }
+}
+
+@keyframes bannerChangeColor {
+  0% { border: solid yellow 1px; }
+  50% {border: solid red 1px; }
+  100% { border: solid yellow 1px; }
+}
+
+.banner-intern {
+  animation-name: bannerChangeColor;
+  /* -webkit-animation-name: blackWhiteFade; */
+  animation-iteration-count: infinite;  
+  animation-duration: 1s; 
 }

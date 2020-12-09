@@ -14,17 +14,13 @@ export default function LinkToolTip(props: {
         if (props.placement === "top") {
             return (
                 <>
-                    <div className="tooltiptext">
-                        {props.title}
-                    </div>
+
                     {props.name}
                 </>
 
             )
         } else return <>
-         <div className="tooltiptext">
-                {props.title}
-            </div>
+ 
             {props.name}
            
         </>

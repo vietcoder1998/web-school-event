@@ -97,6 +97,7 @@ class Result extends React.Component<IProps, IStateResult> {
   componentDidMount() {
     let { search_word, body, pageIndex, pageSize } = this.state;
     let { regions, jobNames } = this.props;
+
     if (regions.length === 0) {
       this.props.getListRegions(); // lấy list vùng
     }
@@ -107,7 +108,6 @@ class Result extends React.Component<IProps, IStateResult> {
     this.props.getHighLightData(0); // job ở bên trên
     // this._callLoading();
     this._callLastWord();
-
     let queryParam = qs.parse(this.props.location.search);
     let jobType, jobNameID, regionID;
     let newWeekDays = [];

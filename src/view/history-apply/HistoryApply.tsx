@@ -128,7 +128,7 @@ class HistoryApply extends React.PureComponent<ISaveJobProp, ISaveJobState>{
                                                                     </JobType>
                                                                 </Col>
                                                                 <Col xs={14} sm={14} md={14} lg={18} xl={18} xxl={18} className='content-job'>
-                                                                    <div style={{}} className='job-content'>
+                                                                    <div className='job-content'>
                                                                         <Link
                                                                             onClick={() => {
                                                                                 // this.props.setEventID(null)
