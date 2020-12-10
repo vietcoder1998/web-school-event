@@ -266,9 +266,9 @@ class Result extends React.Component<IProps, IStateResult> {
     cookie.set("list_last_word", list_last_word, { path: "/result" });
 
     if (this.state.isSearchEvent) {
-      this.props.getEventJobResults(pageIndex, pageSize, body);
+      this.props.getEventJobResults(pageIndex, pageSize);
     } else {
-      this.props.getJobResults(pageIndex, pageSize, body);
+      this.props.getJobResults(pageIndex, pageSize);
     }
 
     this._callLoading();
@@ -287,10 +287,6 @@ class Result extends React.Component<IProps, IStateResult> {
         dayTimes: null,
       };
     }
-
-    if (event.jobType) {
-      body.jobType = event.jobType;
-    } 
 
     if (
       event.jobNameID !== null &&
@@ -311,12 +307,12 @@ class Result extends React.Component<IProps, IStateResult> {
       body.branchIDs = [];
     }
 
+
     queryParam.regionID = event.regionID;
     queryParam.branchIDs = event.branchIDs;
-    queryParam.jobType = event.jobType;
     queryParam.jobNameID = event.jobNameID;
-    body.jobLocationFilter.regionID = event.regionID;
-
+    queryParam.jobType = event.jobType;
+    
     this.setState({body})
 
     this.props.history.replace("?" + qs.stringify(queryParam));

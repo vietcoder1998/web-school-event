@@ -46,9 +46,7 @@ class SearchFilter extends React.Component<
     };
   }
   componentDidMount() {
-    let queryParam = qs.parse(this.props.location.search, {
-      ignoreQueryPrefix: true,
-    });
+    let queryParam = qs.parse(this.props.location.search);
 
     if (this.props.setFilter) {
       if (this.props.jobType) {
@@ -126,7 +124,6 @@ class SearchFilter extends React.Component<
                 style={{ fontWeight: "bold" }}
                 onClick={() => {
                   let newFilter = {
-                    jobType: null,
                     regionID: null,
                     jobNameID: this.state.jobNameID,
                     isEvent: this.state.isEvent,
@@ -180,7 +177,7 @@ class SearchFilter extends React.Component<
         placeholder={"Chọn loại công việc"}
         value={jobType ? jobType : "Tất cả loại việc"}
       >
-        <Option key={TYPE.ALL} value={""} style={{color: "red", fontWeight: 500, fontStyle: "italic"}}>
+        <Option key={TYPE.ALL} value={null} style={{color: "red", fontWeight: 500, fontStyle: "italic"}}>
           Tất cả
         </Option>
         <Option key={TYPE.FULLTIME} value={TYPE.FULLTIME}>
@@ -326,7 +323,7 @@ class SearchFilter extends React.Component<
                 color: "white",
               }}
               onClick={() => {
-                // this.props.onChangeJobFilter(filter)
+                this.props.onChangeJobFilter()
               }}
             />
           </Col>
