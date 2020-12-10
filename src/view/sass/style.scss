@@ -3703,16 +3703,16 @@ html {
 }
 
 @keyframes bannerChangeColor {
-  0% { border: solid yellow 1px; }
-  50% {border: solid red 1px; }
-  100% { border: solid yellow 1px; }
+  0% { border: solid yellow 2px; }
+  50% {border: solid red 2px; }
+  100% { border: solid yellow 2px; }
 }
 
 .banner-intern {
   animation-name: bannerChangeColor;
   /* -webkit-animation-name: blackWhiteFade; */
   animation-iteration-count: infinite;  
-  animation-duration: 1s; 
+  animation-duration: 2s; 
 }
 
 .right-filter {
