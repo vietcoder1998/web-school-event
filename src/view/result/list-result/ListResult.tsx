@@ -168,7 +168,7 @@ export default class ListResult extends React.Component<IListResultProps, IListR
                                     >
                                         <Icon
                                             type="heart"
-                                            style={{ color: saveMap[index] ? "red" : null, fontSize: 18 }}
+                                            style={{ color: saveMap && saveMap[index] ? "red" : null, fontSize: 18 }}
                                         />
                                     </div>
                                 </Tooltip>

@@ -290,10 +290,7 @@ class Result extends React.Component<IProps, IStateResult> {
 
     if (event.jobType) {
       body.jobType = event.jobType;
-    } else {
-      body.jobType = null;
-    }
-
+    } 
 
     if (
       event.jobNameID !== null &&
@@ -302,8 +299,6 @@ class Result extends React.Component<IProps, IStateResult> {
       event.jobNameID !== 0
     ) {
       body.jobNameIDs = [event.jobNameID];
-    } else {
-      body.jobNameIDs = [];
     }
 
     if (
@@ -321,7 +316,7 @@ class Result extends React.Component<IProps, IStateResult> {
     queryParam.jobType = event.jobType;
     queryParam.jobNameID = event.jobNameID;
     body.jobLocationFilter.regionID = event.regionID;
-    body.branchIDs = null
+
     this.setState({body})
 
     this.props.history.replace("?" + qs.stringify(queryParam));
@@ -377,7 +372,7 @@ class Result extends React.Component<IProps, IStateResult> {
                     loading={loading}
                     jobNames={jobNames}
                     regions={regions}
-                    jobNameID={body.jobGroupIDs && body.jobNameIDs.length >0 ? body.jobNameIDs[0]:null}
+                    jobNameID={body.jobNameIDs && body.jobNameIDs.length >0 ? body.jobNameIDs[0]:null}
                     jobType={body.jobType}
                     onChangeJobFilter={this.onChangeJobFilter}
                     location={this.props.location}

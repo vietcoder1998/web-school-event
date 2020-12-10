@@ -39,12 +39,12 @@ export default function ResultFilter(props?: IResultFilter) {
                             <Button
                                 type={props.branchIDs===13?"primary":null}
                                 style={{marginRight: 5}}
-                                onClick={()=>{props.onChangeJobFilter({branchIDs:13})}}
+                                onClick={()=>{props.onChangeJobFilter({branchIDs:13, jobType: TYPE.INTERNSHIP})}}
                             >Kỹ thuật</Button>
                             <Button
                                 type={props.branchIDs===31?"primary":null}
                                 style={{marginRight: 5}}
-                                onClick={()=>{props.onChangeJobFilter({branchIDs:31})}}
+                                onClick={()=>{props.onChangeJobFilter({branchIDs:31, jobType: TYPE.INTERNSHIP})}}
                             >Kinh tế</Button>
                         </div> : null
                     }
