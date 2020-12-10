@@ -38,13 +38,16 @@ export default class ListResult extends React.Component<IListResultProps, IListR
     }
 
     static getDerivedStateFromProps(props, state) {
-        if (props.listResult && props.listResult.length>0 && props.listResult !==state.listResult ){
+        if (props.listResult && props.listResult.length>0 ){
             return {
                 listResult: props.listResult,
                 saveMap: props.listResult.map(item => item.saved)
             }
         }
-        return null   
+        return {
+            listResult: [],
+            saveMap: []
+        }   
     }
    
 

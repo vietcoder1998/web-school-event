@@ -86,10 +86,6 @@ class SearchFilter extends React.Component<
     }
   }
 
-  onChangeFilter = (key?: string|number, value?: string) => {
-
-  }
-
   areaFilterOption = () => {
     let { regionID, jobNameID, isEvent} = this.state
     let { regions } = this.props
@@ -105,11 +101,11 @@ class SearchFilter extends React.Component<
         value={regionID && regions && regions.length > 0 ? regions.find(element => element.id === regionID).name : "Toàn quốc"}
       >
         <Option key={"1"} value={'Tất cả '}
+          style={{color: "red", fontWeight: 500, fontStyle: "italic"}}
           onClick={() => {
             let newFilter = {
               jobType:null,
               regionID: null,
-              jobNameID,
               isEvent,
             };
 
@@ -160,16 +156,16 @@ class SearchFilter extends React.Component<
   }
 
   jobTypeFilterOption = () => {
-    let { jobNameID, isEvent} = this.state
-    let { jobType } = this.props
+    let { jobNameID, isEvent, jobType, regionID} = this.state
     return (
       <Select
         size={"large"}
         showSearch
         onChange={(event: string) => {
+          // console.log(event)
           let newFilter = {
-            jobType: null,
-            regionID: null,
+            jobType,
+            regionID,
             jobNameID,
             isEvent,
           };
@@ -184,7 +180,7 @@ class SearchFilter extends React.Component<
         placeholder={"Chọn loại công việc"}
         value={jobType ? jobType : "Tất cả loại việc"}
       >
-        <Option key={TYPE.ALL} value={""}>
+        <Option key={TYPE.ALL} value={""} style={{color: "red", fontWeight: 500, fontStyle: "italic"}}>
           Tất cả
         </Option>
         <Option key={TYPE.FULLTIME} value={TYPE.FULLTIME}>
@@ -204,7 +200,7 @@ class SearchFilter extends React.Component<
     let {jobNames, loading, isMobile } = this.props;
     let {jobTitle, openFilter } = this.state;
     // let [filter, setFilter] = React.useState({ regionID: null, jobNameID: null });
-    // console.log(this.props.jobNames)
+    // console.log(this.props)
 
     return (
       <div className="filter-name-job">
@@ -249,6 +245,7 @@ class SearchFilter extends React.Component<
               style={{ width: "100%", margin: "5px 0px" }}
               placeholder={"Chọn tên công việc"}
               onChange={(e) => {
+                console.log(e)
                 let newFilter = {
                   jobType: this.state.jobType,
                   regionID: this.state.regionID,
@@ -257,7 +254,8 @@ class SearchFilter extends React.Component<
                   jobTitle: this.state.jobTitle
                 };
 
-                if (jobNames && jobNames.length > 0) {
+                if (e && e!=="" ){
+                   if (jobNames && jobNames.length > 0) {
                   let jobName = jobNames.find(element => element.name === e);
                   if (jobName && jobName.id) {
                     newFilter.jobNameID = jobName.id;
@@ -270,6 +268,10 @@ class SearchFilter extends React.Component<
                   newFilter.jobTitle = e;
                   this.setState({ jobTitle: e });
                 }
+                } else {
+                  newFilter.jobNameID = null
+                }
+
                 this.props.onChangeJobFilter(newFilter);
               }}
               onSearch={e => this.props.getJobNames(e)}

@@ -63,13 +63,13 @@ export function JobType(props: { children?: any, width?: any, fontSize?: any }) 
         case 'FULLTIME':
             style.color = 'white';
             style.backgroundColor = '#06bbe4';
-            label = 'FULLTIME';
+            label = 'FULL TIME';
             break;
 
         case 'PARTTIME':
             style.color = 'white';
             style.backgroundColor = '#00b33c';
-            label = 'PARTTIME';
+            label = 'PART TIME';
             break;
 
         case 'INTERNSHIP':

@@ -50,7 +50,7 @@ function getJobResults(action) {
   var jnids = url.searchParams.get("jobNameID");
   var rid = url.searchParams.get("regionID");
   var jobType = url.searchParams.get("jobType");
-  var brids = url.searchParams.get("branchIDs");
+  var branchIDs = url.searchParams.get("branchIDs");
   var title = url.searchParams.get("jobTitle");
   var mjid = url.searchParams.get("majorID")
   var pageIndex = url.searchParams.get("pi")
@@ -68,8 +68,8 @@ function getJobResults(action) {
     body.jobType = jobType;
   }
 
-  if (brids) {
-    body.branchIDs = [parseInt(brids)];
+  if (branchIDs) {
+    body.branchIDs = [parseInt(branchIDs)];
   }
 
   if (mjid) {

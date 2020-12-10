@@ -87,6 +87,7 @@ class Result extends React.Component<IProps, IStateResult> {
           lat: null,
           lon: null,
         },
+        branchIDs: []
         // schoolConnected: null,
       },
 
@@ -277,8 +278,8 @@ class Result extends React.Component<IProps, IStateResult> {
     console.log(event)
     let queryParam = qs.parse(this.props.location.search);
     let { body, isSearchEvent } = this.state;
-    console.log(queryParam);
     isSearchEvent = event.isEvent;
+
     if (event.jobType !== "PARTTIME") {
       body.jobShiftFilter = {
         gender: null,
@@ -286,26 +287,42 @@ class Result extends React.Component<IProps, IStateResult> {
         dayTimes: null,
       };
     }
+
     if (event.jobType) {
       body.jobType = event.jobType;
-      queryParam.jobType = event.jobType;
     } else {
       body.jobType = null;
     }
-    queryParam.jobNameID = event.jobNameID;
+
+
     if (
       event.jobNameID !== null &&
       event.jobNameID !== undefined &&
+      event.jobNameID !== "" &&
       event.jobNameID !== 0
     ) {
       body.jobNameIDs = [event.jobNameID];
     } else {
       body.jobNameIDs = [];
     }
-    queryParam.branchIDs = null
+
+    if (
+      event.branchIDs !== null &&
+      event.branchIDs !== undefined &&
+      event.branchIDs !== 0
+    ) {
+      body.branchIDs = [event.branchIDs];
+    } else {
+      body.branchIDs = [];
+    }
+
     queryParam.regionID = event.regionID;
+    queryParam.branchIDs = event.branchIDs;
+    queryParam.jobType = event.jobType;
+    queryParam.jobNameID = event.jobNameID;
     body.jobLocationFilter.regionID = event.regionID;
     body.branchIDs = null
+    this.setState({body})
 
     this.props.history.replace("?" + qs.stringify(queryParam));
     await this.setState({ body, pageIndex: 0, isSearchEvent });
@@ -348,7 +365,8 @@ class Result extends React.Component<IProps, IStateResult> {
       loadingHlData,
       loading,
       param,
-      history
+      history,
+
     } = this.props;
     const listResult = results.items;
     return (
@@ -359,6 +377,8 @@ class Result extends React.Component<IProps, IStateResult> {
                     loading={loading}
                     jobNames={jobNames}
                     regions={regions}
+                    jobNameID={body.jobGroupIDs && body.jobNameIDs.length >0 ? body.jobNameIDs[0]:null}
+                    jobType={body.jobType}
                     onChangeJobFilter={this.onChangeJobFilter}
                     location={this.props.location}
                   />
@@ -386,9 +406,11 @@ class Result extends React.Component<IProps, IStateResult> {
                 {/* SearChTab */}
 
                 <ResultFilter
+                  branchIDs={ body.branchIDs && body.branchIDs.length > 0 ?body.branchIDs[0]:null}
                   numberRs={results.totalItems}
                   regionName={region && region.name}
                   totalJobs={region && region.totalJobs}
+                  onChangeJobFilter={this.onChangeJobFilter}
                 />
                 <Row>
                   <Col xs={24} sm={24} md={16} lg={16} xl={17} xxl={19}>

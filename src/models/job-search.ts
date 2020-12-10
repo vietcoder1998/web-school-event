@@ -32,4 +32,5 @@ export interface IJobSearchFilter {
     schoolID?: string,
     schoolIgnored?: boolean,
     schoolEventID?: string
+    branchIDs?: Array<any>
   }

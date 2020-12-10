@@ -2225,6 +2225,7 @@ label {
     .sub-filter {
       font-weight: 500;
       font-style: italic;
+      position: relative;
     }
 
     label {
@@ -3712,4 +3713,12 @@ html {
   /* -webkit-animation-name: blackWhiteFade; */
   animation-iteration-count: infinite;  
   animation-duration: 1s; 
+}
+
+.right-filter {
+  text-align: right;
+  position: absolute;
+  right: -10px;
+  top: 10px;
+  width: 300px;
 }
