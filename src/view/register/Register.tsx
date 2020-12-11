@@ -573,7 +573,6 @@ class Register extends Component<IProps, IState> {
                     </Tooltip>
                   }
                   value={email}
-                  disabled={email && !is_exists}
                   onChange={this._handleInput}
                   type="text"
                 />
