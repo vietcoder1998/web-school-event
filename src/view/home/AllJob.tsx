@@ -33,12 +33,12 @@ class AllJob extends PureComponent<IProps> {
             <div className="home-job">
                 <Row style={{ display: allJob.totalItems === 0 ? 'none' : '' }}>
                     <h5 style={{ textAlign: 'center' }}><Icon type="flag" /> VIỆC LÀM ĐANG TUYỂN</h5>
-                    <Link to={'/result?branchIDs=31&branchIDs=22&jobType=INTERNSHIP'}>
+                    
+                    <Link to={'/result?branchIDs=13&jobType=INTERNSHIP'}>
                         <LazyLoadImage 
                             className="banner-intern"
                             style={{width: "calc(100% - 10px)", margin: "-25px 5px 15px"}} 
-                            src={require('./../../assets/image/internngonngu.jpg')} 
-                        />
+                            src={require('./../../assets/image/InternKyThuat.jpg')} />
                     </Link>
                     {
                         allJob && allJob.items ? allJob.items.map((item, index) => {

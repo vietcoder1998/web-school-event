@@ -94,24 +94,24 @@ class Header extends PureComponent<IProps, IState> {
   menuUser = () => {
     return (
       <Menu style={{ fontWeight: 500,  }}>
-        <Menu.Item style={{ fontWeight: 500,  }}>
+        <Menu.Item style={{ fontWeight: 500,  }} onClick={()=>window.location.assign("/profile")}>
           <div>
-            <Icon type="user" style={{marginRight: 5, color: "#1890ff"}}/><Link to="/profile">Hồ sơ</Link>
+            <Icon type="user" style={{marginRight: 5, color: "#1890ff"}}/>Hồ sơ
           </div>
         </Menu.Item>
-        <Menu.Item style={{ fontWeight: 500,  }}>
+        <Menu.Item style={{ fontWeight: 500,  }}onClick={()=>window.location.assign("/reset-password")}>
           <div>
-            <Icon type="key"style={{marginRight: 5, color: "#1890ff"}}/><Link to="/reset-password">Đổi mật khẩu</Link>
+            <Icon type="key"style={{marginRight: 5, color: "#1890ff"}}/>Đổi mật khẩu
           </div>
         </Menu.Item >
-        <Menu.Item style={{ fontWeight: 500,  }}>
+        <Menu.Item style={{ fontWeight: 500,  }}onClick={()=>window.location.assign("/cong-viec-da-luu")}>
           <div>
-          <Icon type="history"style={{marginRight: 5, color: "#1890ff"}}/><Link to="/cong-viec-da-luu">Công việc đã lưu</Link>
+          <Icon type="history"style={{marginRight: 5, color: "#1890ff"}}/>Công việc đã lưu
           </div>
         </Menu.Item>
-        <Menu.Item style={{ fontWeight: 500,  }}>
+        <Menu.Item style={{ fontWeight: 500,  }}onClick={()=>window.location.assign("/lich-su-ung-tuyen")}>
           <div>
-          <Icon type="solution"style={{marginRight: 5, color: "#1890ff"}}/><Link to="/lich-su-ung-tuyen">Lịch sử ứng tuyển</Link>
+          <Icon type="solution"style={{marginRight: 5, color: "#1890ff"}}/>Lịch sử ứng tuyển
           </div>
         </Menu.Item>
         <Menu.Item style={{ fontWeight: 500,fontStyle: "italic", color: "red"  }} onClick={this._clearStorage}>

@@ -3722,3 +3722,13 @@ html {
   top: 8px;
   width: 300px;
 }
+
+.info-company{
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.ant-popover-inner-content {
+  padding: 10px!important;
+}

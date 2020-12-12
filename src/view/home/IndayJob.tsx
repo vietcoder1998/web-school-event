@@ -58,11 +58,12 @@ class IndayJob extends PureComponent<IProps, IState> {
                 <div className="home-job">
                     <Row style={{ display: indayJob.totalItems === 0 ? 'none' : '' }}>
                         <h5 className='h5index' style={{ textAlign: 'center' }}><Icon type="clock-circle" />  VIỆC LÀM NỔI BẬT</h5>
-                        <Link to={'/result?branchIDs=13&jobType=INTERNSHIP'}>
+                        <Link to={'/result?branchIDs=31&branchIDs=22&jobType=INTERNSHIP'}>
                             <LazyLoadImage 
                                 className="banner-intern"
                                 style={{width: "calc(100% - 10px)", margin: "-25px 5px 15px"}} 
-                                src={require('./../../assets/image/InternKyThuat.jpg')} />
+                                src={require('./../../assets/image/internngonngu.jpg')} 
+                            />
                         </Link>
                         {
                             indayJob && indayJob.items ? indayJob.items.map((item, index) => {
