@@ -14,6 +14,7 @@ import QRCodeCHPlay from '../../../../assets/image/qr-code-chplay.png';
 import qs from 'query-string';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { TYPE } from '../../../../const/type';
+import { Link } from 'react-router-dom';
 
 const InputGroup = Input.Group;
 const { Option } = Select;
@@ -540,7 +541,7 @@ class SearchBox extends Component<IProps, IState>{
 
                                             </Button>
                                         })}
-                                    </div>
+                                    </div> 
                                     {/* Choose day in week */}
                                     <div className='choose-day'>
                                         {list_week.map((item, index) => {
@@ -700,26 +701,26 @@ class SearchBox extends Component<IProps, IState>{
                                 </InputGroup>
                             </div>
                         </Affix>
-                        <div className='choose-time' style={{ display: show_days === true ? 'block' : 'none' }}>
-                            <div className='choose-shift'>
-                                {list_day_times.map((item, index) => {
-                                    return <Button
-                                        id={item.shortcut}
-                                        key={index}
-                                        onClick={this._handleShift}
-                                        style={{
-                                            background: list_shift[item.shortcut] ? primaryColor : 'white',
-                                            color: list_shift[item.shortcut] ? 'white' : 'black',
-                                            border: list_day[item.shortcut] ? `solid ${primaryColor} 2px` : 'white',
-                                            fontWeight: "bold"
-                                        }}>
-                                        {item.name}
+                        <div className='choose-time'>
+                            {
+                                show_days?<> <div className='choose-shift'>
+                                    {list_day_times.map((item, index) => {
+                                        return <Button
+                                            id={item.shortcut}
+                                            key={index}
+                                            onClick={this._handleShift}
+                                            style={{
+                                                background: list_shift[item.shortcut] ? primaryColor : 'white',
+                                                color: list_shift[item.shortcut] ? 'white' : 'black',
+                                                border: list_day[item.shortcut] ? `solid ${primaryColor} 2px` : 'white',
+                                                fontWeight: "bold"
+                                            }}>
+                                            {item.name}
 
-                                    </Button>
-                                })}
-                            </div>
-                            {/* Choose day in week */}
-                            <div className='choose-day'>
+                                        </Button>
+                                    })}
+                                </div>
+                                <div className='choose-day'>
                                 {list_week.map((item, index) => {
                                     return (
                                         <Button
@@ -737,6 +738,19 @@ class SearchBox extends Component<IProps, IState>{
                                         >{item.shortcut === 'SUN' ? 'CN' : 'Thứ ' + (index + 2)}</Button>)
                                 })}
                             </div>
+
+                            </>
+                                
+                                : <Link to={'/result?jobType=INTERNSHIP'}>
+                                        <LazyLoadImage 
+                                            style={{width: "50%", margin: "25px 15px"}} 
+                                            src={require('./../../../../assets/image/Banner-Breakthelimit.jpg')} 
+                                        />
+                                    </Link>
+                            }
+
+                            {/* Choose day in week */}
+                            
                         </div>
                         {/* <div>{this.props.jobType === 'PARTTIME' ? null :
                             <div style={{ paddingTop: "25px", paddingBottom: "15px" }}>

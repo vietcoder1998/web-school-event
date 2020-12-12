@@ -376,7 +376,7 @@ class ArticleDetail extends PureComponent<IProps, IState> {
                       <Rate value={this.state.rated} disabled />
                     </div>
                     <Divider />
-                    <div className="content">
+                    <div className="content-annou">
                       <div className="title">{this.state.title}</div>
                       <div
                         dangerouslySetInnerHTML={{ __html: this.state.content }}

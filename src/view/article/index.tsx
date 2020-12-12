@@ -8,7 +8,9 @@ import { GET } from "../../const/method";
 import { ANNOUNCEMENTS } from "../../services/api/public.api";
 import { PUBLIC_HOST } from "../../environment/development";
 import ListMiddle from './middle/ListMidle';
-import { Col, Row } from 'antd';
+import { Col, Row, Affix, Tabs } from 'antd';
+
+const {TabPane} = Tabs
 
 interface IProps {
   match?: any,
@@ -67,7 +69,7 @@ class Article extends React.Component<IProps, IState> {
     return (
       <Layout disableFooterData={true}>
         <>
-          {/* <Affix
+          <Affix
             offsetTop={0}
             children={(
               <Tabs
@@ -87,7 +89,7 @@ class Article extends React.Component<IProps, IState> {
                     (item?: any) => <TabPane tab={item.name} key={item.id} />
                   ) : undefined}
               </Tabs>
-            )} /> */}
+            )} />
           <Row className="content-an">
             <Col xs={24} sm={24} lg={23} xl={22} xxl={22}>
               <div className="Article">
