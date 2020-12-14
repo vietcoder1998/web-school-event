@@ -1,7 +1,7 @@
 // import { _requestToServer } from './../services/exec';
 import Swal from 'sweetalert2';
 
-export const exceptionShowNotiConfig = async (err: any, hidden_alert_err?:boolean) => {
+export const exceptionShowNotiConfig = async (err: any, hidden_alert_err?:boolean, disabled_routing?:boolean) => {
     if (err && err && err.response && err.response.data) {
         let res = err.response.data;
         let code = res.code.toString();
@@ -10,14 +10,22 @@ export const exceptionShowNotiConfig = async (err: any, hidden_alert_err?:boolea
             console.log("ok");
             tkNotInvalid();
         } else {
+            if (!disabled_routing){
+                Swal.fire({
+                    titleText: 'Worksvn thông báo',
+                    icon: 'error',
+                    onClose: () => {
+                        localStorage.clear();
+                        window.location.assign('/');
+                    },
+                    text: "Có lỗi xảy ra",
+                    timer: 5000
+                })
+            }
             Swal.fire({
                 titleText: 'Worksvn thông báo',
                 icon: 'error',
-                onClose: () => {
-                    localStorage.clear();
-                    window.location.assign('/');
-                },
-                text: "Có lỗi xảy ra",
+                text:res.msg,
                 timer: 5000
             })
         }

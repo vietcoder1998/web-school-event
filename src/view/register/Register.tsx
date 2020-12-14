@@ -21,6 +21,7 @@ import swal from "sweetalert";
 import { POST } from "../../const/method";
 import { _get, _post } from "../../services/base-api";
 import { PUBLIC_HOST } from "../../environment/development";
+import  {exceptionShowNotiConfig} from '../../config/config-exception'
 //@ts-ignore
 import imageLogin from "../../assets/image/image-login.png";
 // import logo from "../../assets/image/logo-01.png";
@@ -419,7 +420,9 @@ class Register extends Component<IProps, IState> {
         null,
         true, null, null, this.state.typeUpdateInfor ? `Hoàn tất thông tin thành công!` : `Đăng ký thành công,
         Vui lòng kích hoạt tài khoản trong mail và tiếp tục đăng nhập!`
-      );
+      ).then().catch(err => {
+        throw exceptionShowNotiConfig(err, false, true)
+      })
       this.setState({ loading: false });
     }
   };
