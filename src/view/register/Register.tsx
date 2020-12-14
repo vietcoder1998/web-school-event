@@ -374,7 +374,8 @@ class Register extends Component<IProps, IState> {
       is_exactly_pw,
       is_exactly_phone,
       is_except_rule,
-      is_exactly_schoolID
+      is_exactly_schoolID,
+      repassword
     } = this.state;
 
     if (
@@ -391,7 +392,7 @@ class Register extends Component<IProps, IState> {
         text: "Vui lòng nhật đầy đủ các trường thông tin",
       });
       this.setState({ loading: false });
-    } else if (is_exactly_rpw === 1) {
+    } else if (body && body.password !== repassword) {
       swal({
         title: "Workvn thông báo",
         icon: "error",

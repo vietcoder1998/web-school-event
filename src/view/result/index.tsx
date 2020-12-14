@@ -278,7 +278,10 @@ class Result extends React.Component<IProps, IStateResult> {
     console.log(event)
     let queryParam = qs.parse(this.props.location.search);
     let { body, isSearchEvent } = this.state;
-    isSearchEvent = event.isEvent;
+    
+    if(event && event.isEvent) {
+      isSearchEvent = event.isEvent;
+    }
 
     if (event.jobType !== "PARTTIME") {
       body.jobShiftFilter = {
