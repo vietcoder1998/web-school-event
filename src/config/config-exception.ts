@@ -21,7 +21,7 @@ export const exceptionShowNotiConfig = async (err: any, hidden_alert_err?:boolea
                     text: "Có lỗi xảy ra",
                     timer: 5000
                 })
-            }
+            } else
             Swal.fire({
                 titleText: 'Worksvn thông báo',
                 icon: 'error',
