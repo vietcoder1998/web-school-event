@@ -738,15 +738,7 @@ class SearchBox extends Component<IProps, IState>{
                                         >{item.shortcut === 'SUN' ? 'CN' : 'Thứ ' + (index + 2)}</Button>)
                                 })}
                             </div>
-
-                            </>
-                                
-                                : <Link to={'/result?jobType=INTERNSHIP'}>
-                                        <LazyLoadImage 
-                                            style={{width: "50%", margin: "25px 15px"}} 
-                                            src={require('./../../../../assets/image/Banner-Breakthelimit.jpg')} 
-                                        />
-                                    </Link>
+                            </>:null
                             }
 
                             {/* Choose day in week */}

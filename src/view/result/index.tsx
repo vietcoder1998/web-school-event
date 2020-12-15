@@ -14,8 +14,9 @@ import SearchFilter from "./search-filter/SearchFilter";
 import ResultFilter from "./result-filter/ResultFilter";
 import qs from "query-string";
 //@ts-ignore
-import banner from '../../assets/image/event/banner-worksvn.jpg'
+import banner from '../../assets/image/Break270.jpg'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { TYPE } from "../../const/type";
 const cookie = new Cookie();
 
 interface IProps extends StateProps, DispatchProps {
@@ -52,7 +53,8 @@ interface IStateResult {
   job?: any;
   pageIndexHighLight?: any;
   isSearchEvent?: boolean;
-  param?: string
+  param?: string;
+  showBanner?: boolean;
 }
 
 class Result extends React.Component<IProps, IStateResult> {
@@ -70,6 +72,7 @@ class Result extends React.Component<IProps, IStateResult> {
       region: JSON.parse(localStorage.getItem("region")),
       job: JSON.parse(localStorage.getItem("job")),
       list_last_word: [],
+      showBanner: false,
       body: {
         employerID: null,
         excludedJobIDs: null,
@@ -96,7 +99,7 @@ class Result extends React.Component<IProps, IStateResult> {
   }
 
   componentDidMount() {
-    let { search_word, body, pageIndex, pageSize } = this.state;
+    let { search_word, body, pageIndex, pageSize, showBanner } = this.state;
     let { regions, jobNames } = this.props;
 
     if (regions.length === 0) {
@@ -278,8 +281,8 @@ class Result extends React.Component<IProps, IStateResult> {
     console.log(event)
     let queryParam = qs.parse(this.props.location.search);
     let { body, isSearchEvent } = this.state;
-    
-    if(event && event.isEvent) {
+
+    if (event && event.isEvent) {
       isSearchEvent = event.isEvent;
     }
 
@@ -315,8 +318,8 @@ class Result extends React.Component<IProps, IStateResult> {
     queryParam.branchIDs = event.branchIDs;
     queryParam.jobNameID = event.jobNameID;
     queryParam.jobType = event.jobType;
-    
-    this.setState({body})
+
+    this.setState({ body })
 
     this.props.history.replace("?" + qs.stringify(queryParam));
     await this.setState({ body, pageIndex: 0, isSearchEvent });
@@ -365,84 +368,96 @@ class Result extends React.Component<IProps, IStateResult> {
     const listResult = results.items;
     return (
       <Layout>
-          <Affix offsetTop={0}>
-            <div className="search-tab">
-                <SearchFilter
+        <Affix offsetTop={0}>
+          <div className="search-tab">
+            <SearchFilter
+              loading={loading}
+              jobNames={jobNames}
+              regions={regions}
+              jobNameID={body.jobNameIDs && body.jobNameIDs.length > 0 ? body.jobNameIDs[0] : null}
+              jobType={body.jobType}
+              onChangeJobFilter={this.onChangeJobFilter}
+              location={this.props.location}
+            />
+          </div>
+        </Affix>
+        <Row className="content">
+          <Col xs={0} sm={0} md={0} lg={0} xl={0} xxl={2}></Col>
+          <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
+
+            <div className="search-result">
+              {/* Search Result */}
+              <Row>
+                <ListHlJob
+                  history={history}
+                  loadingHlData={loadingHlData}
+                  highlightData={highlightData}
+                  //@ts-ignore
+                  isSearchEvent={isSearchEvent}
+                  getHighLightJobs={(pageIndex) => {
+                    this.props.getHighLightData(pageIndex, 6);
+                  }}
+                  param={param}
+                />
+              </Row>
+              {/* SearChTab */}
+
+              <ResultFilter
+                branchIDs={body.branchIDs && body.branchIDs.length > 0 ? body.branchIDs[0] : null}
+                numberRs={results.totalItems}
+                regionName={region && region.name}
+                totalJobs={region && region.totalJobs}
+                onChangeJobFilter={this.onChangeJobFilter}
+              />
+              <Row>
+                <Col xs={24} sm={24} md={16} lg={16} xl={17} xxl={19}>
+                  <ListResult
                     loading={loading}
-                    jobNames={jobNames}
-                    regions={regions}
-                    jobNameID={body.jobNameIDs && body.jobNameIDs.length >0 ? body.jobNameIDs[0]:null}
-                    jobType={body.jobType}
-                    onChangeJobFilter={this.onChangeJobFilter}
-                    location={this.props.location}
-                  />
-            </div>
-          </Affix>
-          <Row className="content">
-            <Col xs={0} sm={0} md={0} lg={0} xl={0} xxl={2}></Col>
-            <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
-             
-              <div className="search-result">
-                {/* Search Result */}
-                <Row>
-                  <ListHlJob
-                    history={history}
-                    loadingHlData={loadingHlData}
-                    highlightData={highlightData}
-                    //@ts-ignore
+                    listResult={listResult}
                     isSearchEvent={isSearchEvent}
-                    getHighLightJobs={(pageIndex) => {
-                      this.props.getHighLightData(pageIndex, 6);
-                    }}
                     param={param}
                   />
-                </Row>
-                {/* SearChTab */}
-
-                <ResultFilter
-                  branchIDs={ body.branchIDs && body.branchIDs.length > 0 ?body.branchIDs[0]:null}
-                  numberRs={results.totalItems}
-                  regionName={region && region.name}
-                  totalJobs={region && region.totalJobs}
-                  onChangeJobFilter={this.onChangeJobFilter}
-                />
-                <Row>
-                  <Col xs={24} sm={24} md={16} lg={16} xl={17} xxl={19}>
-                    <ListResult
-                      loading={loading}
-                      listResult={listResult}
-                      isSearchEvent={isSearchEvent}
-                      param={param}
+                  {/* Paginition */}
+                  <div style={{ paddingTop: 10, textAlign: 'center' }}>
+                    <Pagination
+                      defaultCurrent={1}
+                      pageSize={results.pageSize}
+                      total={results.totalItems}
+                      onChange={this._handleIndex}
+                      current={this.state.pageIndex + 1}
+                      onShowSizeChange={(current?: number, size?: number) =>
+                        this._handleIndex(current, size)
+                      }
                     />
-                    {/* Paginition */}
-                    <div style={{ paddingTop: 10, textAlign: 'center' }}>
-                      <Pagination
-                        defaultCurrent={1}
-                        pageSize={results.pageSize}
-                        total={results.totalItems}
-                        onChange={this._handleIndex}
-                        current={this.state.pageIndex + 1}
-                        onShowSizeChange={(current?: number, size?: number) =>
-                          this._handleIndex(current, size)
-                        }
+                  </div>
+                </Col>
+                <Col xs={0} sm={0} md={8} lg={8} xl={7} xxl={5}>
+                  <SearchMore
+                    loading={loading}
+                    onChangeShiftsFilter={this.onChangeShiftsFilter}
+                    jobType={body.jobType}
+                    location={this.props.location}
+                  />
+                  <Affix offsetTop={65}>
+                      <LazyLoadImage
+                        style={{
+                          boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.03)',
+                          marginLeft: 11,
+                          zIndex: -1,
+                          width: 'calc(100% - 12px)'
+                        }}
+                        onClick={()=> this.onChangeJobFilter({jobType: TYPE.INTERNSHIP})}
+                        alt="banner" src={banner}
                       />
-                    </div>
-                  </Col>
-                  <Col xs={0} sm={0} md={8} lg={8} xl={7} xxl={5}>
-                    <SearchMore
-                      loading={loading}
-                      onChangeShiftsFilter={this.onChangeShiftsFilter}
-                      jobType={body.jobType}
-                      location={this.props.location}
-                    />
-                    <LazyLoadImage style={{ boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.03)', marginLeft: 11, width: 'calc(100% - 12px)' }} alt="banner" src={banner} />
-                  </Col>
-                </Row>
-                {/* {Job} */}
-              </div>
-            </Col>
-            <Col xs={0} sm={0} md={0} lg={0} xl={0} xxl={2}></Col>
-          </Row>
+
+                  </Affix>
+                </Col>
+              </Row>
+              {/* {Job} */}
+            </div>
+          </Col>
+          <Col xs={0} sm={0} md={0} lg={0} xl={0} xxl={2}></Col>
+        </Row>
       </Layout>
     );
   }

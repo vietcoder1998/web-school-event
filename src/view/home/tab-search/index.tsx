@@ -4,7 +4,7 @@ import SearchBox from './searchbox/SearchBox';
 // @ts-ignore
 // import IMG2 from '../../../assets/image/crs2.jpg';
 // @ts-ignore
-import IMG1 from '../../../assets/image/conference-room-768441_1280.jpg';
+import IMG1 from '../../../assets/image/Break1310.jpg';
 
 import { Carousel } from 'antd';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -28,7 +28,6 @@ function TabSearch(props) {
                         style={{ 
                             backgroundSize: 'cover', 
                             width: scaleWidth,
-                            marginTop: '-20vw',
                             opacity: 0.8
                         }}
                         alt={'job-title1'} />

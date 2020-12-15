@@ -9,7 +9,8 @@ import {
   Row,
   Col,
   // DatePicker,
-  Select
+  Select,
+  Affix
 } from "antd";
 // import moment from "moment";
 import "./Register.scss";
@@ -21,9 +22,9 @@ import swal from "sweetalert";
 import { POST } from "../../const/method";
 import { _get, _post } from "../../services/base-api";
 import { PUBLIC_HOST } from "../../environment/development";
-import  {exceptionShowNotiConfig} from '../../config/config-exception'
+import { exceptionShowNotiConfig } from '../../config/config-exception';
 //@ts-ignore
-import imageLogin from "../../assets/image/image-login.png";
+import imageLogin from "../../assets/image/Break750x600.jpg";
 // import logo from "../../assets/image/logo-01.png";
 import { goBackWhenLogined } from '../../utils/goBackWhenLogined'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -132,7 +133,7 @@ class Register extends Component<IProps, IState> {
     let url = new URL(window.location.href);
     let schoolID = url.searchParams.get('schoolID')
 
-    if (schoolID && schoolID!==undefined) {
+    if (schoolID && schoolID !== undefined) {
       // console.log(schoolID)
       body.schoolID = schoolID
       this.setState({ body, is_exactly_schoolID: true })
@@ -145,7 +146,7 @@ class Register extends Component<IProps, IState> {
     }
     let inviteCode = url.searchParams.get('inviteCode')
 
-    if(inviteCode) {
+    if (inviteCode) {
       body.inviteCode = inviteCode
       this.setState({ body })
     }
@@ -155,7 +156,7 @@ class Register extends Component<IProps, IState> {
         body.email = localStorage.getItem("user_exists_userName");
       }
       // body.password = localStorage.getItem(
-        // "body"
+      // "body"
       // );
       // repassword = localStorage.getItem("body");
       localStorage.setItem('user_exists', "true");
@@ -371,7 +372,6 @@ class Register extends Component<IProps, IState> {
       is_exactly_firstname,
       is_exactly_lastname,
       is_exactly_email,
-      is_exactly_rpw,
       is_exactly_pw,
       is_exactly_phone,
       is_except_rule,
@@ -461,103 +461,97 @@ class Register extends Component<IProps, IState> {
     return (
       <Layout disableFooterData={false}>
         {/* Form Register */}
-        <Row justify="center" className="a_c">
+        <Row justify="center" className="a_c register-content" style={{ backgroundColor: "#f2f2f2!important" }}>
           <Col
             xs={mobile ? 24 : 12}
             sm={mobile ? 24 : 12}
             md={mobile ? 24 : 12}
             lg={mobile ? 24 : 10}
-            xl={mobile ? 24 : 10}
-            xxl={mobile ? 24 : 10}
+            xl={mobile ? 24 : 8}
+            xxl={mobile ? 24 : 8}
+            style={{ backgroundColor: "#f2f2f2" }}
+            className={"register-content"}
           >
             <form className="register">
               <div className="title_register a_c">ĐĂNG KÝ</div>
               {/* FirstName And LastName */}
-              <Row>
-                <Col xs={24} >
-                  <div className="normal">
-                    <Input
-                      id="firstName"
-                      placeholder="Họ (đệm)"
-                      style={{ marginBottom: 5 }}
-                      prefix={
-                        <Icon type="user" style={{ color: "rgba(0,0,0,.4)" }} />
-                      }
-                      suffix={
-                        <Tooltip
-                          title={is_exactly_firstname ? "Họ" : "Điền họ"}
-                        >
-                          <Icon
-                            type={is_exactly_firstname ? "check" : "warning"}
-                            style={{
-                              color: is_exactly_firstname ? "green" : "red",
-                            }}
-                          />
-                        </Tooltip>
-                      }
-                      value={firstName}
-                      onChange={this._handleInput}
-                      type="text"
-                    />
-                  </div>
-                  <div className="normal">
-                    <Input
-                      id="lastName"
-                      placeholder="Tên"
-                      // prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                      suffix={
-                        <Tooltip
-                          title={is_exactly_lastname ? "Tên" : "Điền Tên"}
-                        >
-                          <Icon
-                            type={is_exactly_lastname ? "check" : "warning"}
-                            style={{
-                              color: is_exactly_lastname ? "green" : "red",
-                            }}
-                          />
-                        </Tooltip>
-                      }
-                      value={lastName}
-                      onChange={this._handleInput}
-                      type="text"
-                    />
-                  </div>
-                </Col>
-              </Row>
+              <Col span={12} className="normal">
+                <Input
+                  id="firstName"
+                  size={"large"}
+                  placeholder="Họ (đệm)"
+                  style={{ marginBottom: 5 }}
+                  prefix={
+                    <Icon type="user" style={{ color: "rgba(0,0,0,.4)" }} />
+                  }
+                  suffix={
+                    <Tooltip
+                      title={is_exactly_firstname ? "Họ" : "Điền họ"}
+                    >
+                      <Icon
+                        type={is_exactly_firstname ? "check" : "exclamation"}
+                        style={{
+                          color: is_exactly_firstname ? "green" : "red",
+                        }}
+                      />
+                    </Tooltip>
+                  }
+                  value={firstName}
+                  onChange={this._handleInput}
+                  type="text"
+                />
+              </Col>
+              <Col span={12} className="normal">
+                <Input
+                  size={"large"}
+                  id="lastName"
+                  placeholder="Tên"
+                  // prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  suffix={
+                    <Tooltip
+                      title={is_exactly_lastname ? "Tên" : "Điền Tên"}
+                    >
+                      <Icon
+                        type={is_exactly_lastname ? "check" : "exclamation"}
+                        style={{
+                          color: is_exactly_lastname ? "green" : "red",
+                        }}
+                      />
+                    </Tooltip>
+                  }
+                  value={lastName}
+                  onChange={this._handleInput}
+                  type="text"
+                />
+              </Col>
               {/* Gender */}
-              <div
-                className="normal"
-                style={{ margin: "5px 0px", fontWeight: 400 }}
-              >
-                <Row>
-                  <Col xs={24}>
-                    Giới tính:
+              <Col span={24} className="normal a_l"
+                style={{ margin: "5px 0px", fontWeight: 400 }}>
+                Giới tính:
                     <input
-                      name="gender"
-                      type="checkbox"
-                      checked={checked}
-                      value="MALE"
-                      onChange={this._handleGender}
-                      style={{ margin: "0 5px 0 10px" }}
-                    />
-                    <span>Nam</span>
-                    <input
-                      name="gender"
-                      type="checkbox"
-                      checked={!checked}
-                      value="FEMALE"
-                      onChange={this._handleGender}
-                      style={{ margin: "0 5px 0 15px" }}
-                    />
-                    <span>Nữ</span>
-                  </Col>
-                </Row>
-              </div>
-
+                  name="gender"
+                  type="checkbox"
+                  checked={checked}
+                  value="MALE"
+                  onChange={this._handleGender}
+                  style={{ margin: "0 5px 0 10px" }}
+                />
+                <span>Nam</span>
+                <input
+                  name="gender"
+                  type="checkbox"
+                  checked={!checked}
+                  value="FEMALE"
+                  onChange={this._handleGender}
+                  style={{ margin: "0 5px 0 15px" }}
+                />
+                <span>Nữ</span>
+              </Col>
               {/* Mail */}
-              <div className="normal">
+              <Col span={24} className="normal">
                 <Input
                   id="email"
+                  size="large"
                   placeholder="Email"
                   prefix={
                     <Icon type="mail" style={{ color: "rgba(0,0,0,.4)" }} />
@@ -571,7 +565,7 @@ class Register extends Component<IProps, IState> {
                       }
                     >
                       <Icon
-                        type={is_exactly_email ? "check" : "warning"}
+                        type={is_exactly_email ? "check" : "exclamation"}
                         style={{ color: is_exactly_email ? "green" : "red" }}
                       />
                     </Tooltip>
@@ -580,11 +574,12 @@ class Register extends Component<IProps, IState> {
                   onChange={this._handleInput}
                   type="text"
                 />
-              </div>
+              </Col>
               {/* Phone */}
-              <div className="normal">
+              <Col span={24} className="normal">
                 <Input
                   id="phone"
+                  size="large"
                   placeholder="Số điện thoại"
                   prefix={
                     <Icon type="phone" style={{ color: "rgba(0,0,0,.4)" }} />
@@ -598,7 +593,7 @@ class Register extends Component<IProps, IState> {
                       }
                     >
                       <Icon
-                        type={is_exactly_phone ? "check" : "warning"}
+                        type={is_exactly_phone ? "check" : "exclamation"}
                         style={{ color: is_exactly_phone ? "green" : "red" }}
                       />
                     </Tooltip>
@@ -607,9 +602,10 @@ class Register extends Component<IProps, IState> {
                   onChange={this._handleInput}
                   type="text"
                 />
-              </div>
-              <div className="normal">
+              </Col>
+              <Col span={24} className="normal">
                 <Select
+                  size="large"
                   showSearch
                   placeholder="Chọn trường học"
                   style={{ width: "100%" }}
@@ -638,31 +634,33 @@ class Register extends Component<IProps, IState> {
                   }
                 >
                   <Icon
-                    type={is_exactly_schoolID ? "check" : "warning"}
+                    type={is_exactly_schoolID ? "check" : "exclamation"}
                     style={{ color: is_exactly_schoolID ? "green" : "red", position: 'absolute', marginLeft: -25, marginTop: 8 }}
                   />
                 </Tooltip>
-              </div>
-              <div className="normal">
+              </Col>
+              <Col span={24} className="normal">
                 <Select
+                  size="large"
                   showSearch
-                  placeholder="Chọn ngành học"
+                  placeholder={!schoolID ? <i>Vui lòng chọn trường!</i> : "Chọn ngành học"}
                   style={{ width: "100%" }}
                   optionFilterProp="children"
                   onChange={(event) => this._choseMajor(event)}
-                  dropdownRender={menu => {
-                    if (is_exactly_schoolID) {
-                      return menu
-                    } else {
-                      return (
-                        <React.Fragment>
-                          <div style={{ color: 'red', padding: 10 }}>
-                            Vui lòng chọn Trường Học trước khi chọn Ngành Nghề
-                          </div>
-                        </React.Fragment>
-                      )
-                    }
-                  }}
+                  disabled={schoolID ? false : true}
+                  // dropdownRender={menu => {
+                  //   if (is_exactly_schoolID) {
+                  //     return menu
+                  //   } else {
+                  //     return (
+                  //       <React.Fragment>
+                  //         <div style={{ color: 'red', padding: 10 }}>
+                  //           Vui lòng chọn Trường Học trước khi chọn Ngành Nghề
+                  //         </div>
+                  //       </React.Fragment>
+                  //     )
+                  //   }
+                  // }}
                   filterOption={(input, option) =>
                     option.props.children
                       .toLowerCase()
@@ -685,14 +683,13 @@ class Register extends Component<IProps, IState> {
                   }
                 >
                   <Icon
-                    type={is_exactly_majorID ? "check" : "warning"}
+                    type={is_exactly_majorID ? "check" : "exclamation"}
                     style={{ color: is_exactly_majorID ? "green" : "red", position: 'absolute', marginLeft: -25, marginTop: 8 }}
                   />
                 </Tooltip>
-              </div>
+              </Col>
 
               {/* <div className="normal" style={{ display: 'flex', flexDirection: 'row' }}>
-                
                   <Select
                     showSearch
                     placeholder="Năm học bắt đầu"
@@ -721,7 +718,7 @@ class Register extends Component<IProps, IState> {
                     }
                   >
                     <Icon
-                      type={is_exactly_schoolYearStart ? "check" : "warning"}
+                      type={is_exactly_schoolYearStart ? "check" : "exclamation"}
                       style={{ color: is_exactly_schoolYearStart ? "green" : "red",  position: 'relative', marginLeft: -35, marginTop: 8}}
                     />
                   </Tooltip>
@@ -753,16 +750,17 @@ class Register extends Component<IProps, IState> {
                   }
                 >
                   <Icon
-                    type={exactly_schoolYearEnd === 1 ? "check" : "warning"}
+                    type={exactly_schoolYearEnd === 1 ? "check" : "exclamation"}
                     style={{ color: exactly_schoolYearEnd === 1 ? "green" : "red", position: 'relative', marginLeft: -25, marginTop: 8 }}
                   />
                 </Tooltip>
               </div>
               */}
               {/* Password */}
-              <div className="normal">
+              <Col span={24} className="normal">
                 <Input
                   id="password"
+                  size="large"
                   placeholder="Mật khẩu"
                   prefix={
                     <Icon type="lock" style={{ color: "rgba(0,0,0,.4)" }} />
@@ -782,7 +780,7 @@ class Register extends Component<IProps, IState> {
                         }
                       >
                         <Icon
-                          type={is_exactly_pw ? "check" : "warning"}
+                          type={is_exactly_pw ? "check" : "exclamation"}
                           style={{ color: is_exactly_pw ? "green" : "red" }}
                         />
                       </Tooltip>
@@ -792,12 +790,13 @@ class Register extends Component<IProps, IState> {
                   onChange={this._handleInput}
                   type={!this.state.show_password ? "password" : null}
                 />
-              </div>
+              </Col>
 
               {/* RePassword */}
-              <div className="normal">
+              <Col span={24} className="normal">
                 <Input
                   id="repassword"
+                  size="large"
                   placeholder="Nhập lại mật khẩu"
                   prefix={
                     <Icon type="lock" style={{ color: "rgba(0,0,0,.4)" }} />
@@ -817,7 +816,7 @@ class Register extends Component<IProps, IState> {
                         }
                       >
                         <Icon
-                          type={is_exactly_rpw === 2 ? "check" : "warning"}
+                          type={is_exactly_rpw === 2 ? "check" : "exclamation"}
                           style={{ color: is_exactly_rpw === 2 ? "green" : "red" }}
                         />
                       </Tooltip>
@@ -827,11 +826,12 @@ class Register extends Component<IProps, IState> {
                   onChange={this._handleInput}
                   type={!this.state.show_re_password ? "password" : null}
                 />
-              </div>
+              </Col>
               {/* inviteCode */}
-              <div className="normal">
+              <Col span={24} className="normal">
                 <Input
                   id="inviteCode"
+                  size="large"
                   placeholder="Mã giới thiệu (nếu có)"
                   prefix={
                     <Icon type="qrcode" style={{ color: "rgba(0,0,0,.4)" }} />
@@ -839,9 +839,9 @@ class Register extends Component<IProps, IState> {
                   value={inviteCode}
                   onChange={this._handleInput}
                 />
-              </div>
+              </Col>
               {/* Except */}
-              <div className="normal" style={{ marginTop: 25 }}>
+              <Col span={24} className="normal" style={{ marginTop: 25 }}>
                 <p className="fogot-password">
                   <Checkbox onChange={this._handleCheckbox}>
                     Đồng ý với{" "}
@@ -854,6 +854,7 @@ class Register extends Component<IProps, IState> {
                 <p>
                   <Button
                     type="primary"
+                    size="large"
                     onClick={() => this.requestToServer()}
                     // disabled={!is_except_rule}
                     block
@@ -870,7 +871,7 @@ class Register extends Component<IProps, IState> {
                     <b> Đăng nhập</b>
                   </label>
                 </p>
-              </div>
+              </Col>
             </form>
           </Col>
           <Col
@@ -878,10 +879,13 @@ class Register extends Component<IProps, IState> {
             sm={mobile ? 0 : 12}
             md={mobile ? 0 : 12}
             lg={mobile ? 0 : 14}
-            xl={mobile ? 0 : 14}
-            xxl={mobile ? 0 : 14}
+            xl={mobile ? 0 : 16}
+            xxl={mobile ? 0 : 16}
+            style={{padding:"10px 0px", backgroundColor: "#f2f2f2"}}
           >
-            <LazyLoadImage src={imageLogin} className="image-login" alt={"Sự kiện work"} />
+            <Affix offsetTop={0}>
+             <LazyLoadImage src={imageLogin} className="image-login" alt={"Sự kiện work"} />
+            </Affix>
           </Col>
         </Row>
 

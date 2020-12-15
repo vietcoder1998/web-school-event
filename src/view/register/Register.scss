@@ -1,10 +1,15 @@
+
 .register {
   // height: 650px;
-  width: 100%;
-  margin: 20px 0 50px;
   background-color: white;
   display: block;
-  padding: 5% 5% 0px;
+  padding: 5vh 10px;
+  margin: 10px 10px 0;
+  overflow-y: scroll;
+  z-index: 100;
+  // background-color: #f2f2f2;
+  box-shadow:  4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.06);
+  border-radius: 3px;
   .title_register {
     font-weight: 600;
     font-size: 20px;
@@ -20,8 +25,8 @@
   }
   .normal {
     font-weight: 500;
-    margin: 15px 0px;
-    padding: 0px 20px;
+    margin: 5px 0px;
+    padding: 0px 10px;
     .fogot-password {
       margin-bottom: 25px;
     }
@@ -62,9 +67,8 @@
 }
 .image-login {
   width: 100%;
-  height: auto;
-  border-radius: -5px;
   position: relative;
+  object-fit: cover;
 }
 
 .ant-calendar-year-panel-last-decade-cell {

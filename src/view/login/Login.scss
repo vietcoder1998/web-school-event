@@ -2,20 +2,21 @@
   display: flex;
   width: 100%;
   text-align: center;
-  background-color: white;
+  background-color: #f2f2f2;
+  
+
   .login-form {
-    padding: 20% 15% 0px;
+    padding: 60px 20px;
+    margin: 10px 10px 0px;
+    background-color: white;
+    border-radius: 3px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 6px 20px 0 rgba(0, 0, 0, 0.06);
     .btn-login {
       background-color: '#31a3f9';
       height: 40px;
     }
   }
-  .nomal {
-    height: 60px;
-    input {
-      height: 40px;
-    }
-  }
+
   .image-login{
     width: 100%;
     height: auto;

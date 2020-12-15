@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { authUserPassword } from "../../services/api/private.api";
 import { loginHeaders } from '../../services/auth';
 import { AUTH_HOST } from "../../environment/development";
-import { Input, Tooltip, Icon, Button } from "antd";
+import { Input, Tooltip, Icon, Button, Row, Affix } from "antd";
 import { Col } from "antd";
 import { _requestToServer } from "../../services/exec";
 import { POST } from "../../const/method";
@@ -16,7 +16,7 @@ import { REDUX } from "../../const/actions";
 //@ts-ignore
 import logo from "../../assets/image/logo-01.png";
 //@ts-ignore
-import imageLogin from "../../assets/image/image-login.png";
+import imageLogin from "../../assets/image/Break750x600.jpg";
 import { goBackWhenLogined } from "../../utils/goBackWhenLogined";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { FacebookProvider, LoginButton } from 'react-facebook';
@@ -24,7 +24,7 @@ import setupLogin from "../../config/setup-login";
 // import { TYPE } from './../../const/type';
 
 interface IState {
-  
+
 }
 
 class Login extends Component {
@@ -86,7 +86,7 @@ class Login extends Component {
 
   _loginAction = (res?: any, data?: any, token?: string) => {
     console.log(data);
-    if(res) {
+    if (res) {
       setupLogin(res.data)
     }
     if (res.data.target !== "STUDENT") {
@@ -162,7 +162,7 @@ class Login extends Component {
       .then((res) => {
         if (res) {
           console.log(data)
-          this._loginAction(res,data)
+          this._loginAction(res, data)
         }
       })
       .finally(() => {
@@ -178,14 +178,14 @@ class Login extends Component {
     return (
       <Layout disableFooterData={false}>
         {/* <form> */}
-        <div className="login-content">
+        <Row className="login-content">
           <Col
             xs={mobile ? 24 : 12}
             sm={mobile ? 24 : 12}
             md={mobile ? 24 : 12}
             lg={mobile ? 24 : 10}
-            xl={mobile ? 24 : 10}
-            xxl={mobile ? 24 : 10}
+            xl={mobile ? 24 : 8}
+            xxl={mobile ? 24 : 8}
           >
 
             <div className="login-form">
@@ -197,14 +197,15 @@ class Login extends Component {
                 <p className="nomal">
                   <Input
                     placeholder="Email"
+                    size={"large"}
                     prefix={
                       <Icon type="mail" style={{ color: "rgba(0,0,0,.25)" }} />
                     }
                     suffix={
-                      <Tooltip title="Email của bạn">
+                      <Tooltip title="Vui lòng nhập email">
                         <Icon
-                          type="info-circle"
-                          style={{ color: "rgba(0,0,0,.45)" }}
+                          type={!user_name ? "exclamation" : ""}
+                          style={{ color: "red" }}
                         />
                       </Tooltip>
                     }
@@ -216,6 +217,7 @@ class Login extends Component {
                 <p className="nomal">
                   <Input.Password
                     placeholder="Password"
+                    size={"large"}
                     prefix={
                       <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
                     }
@@ -238,12 +240,13 @@ class Login extends Component {
                 <p>
                   <Button
                     className="btn-login"
+                    size={"large"}
                     type="primary"
                     onClick={this._createResponse}
                     block
-                    icon={!loading ? "key": "loading"}
+                    icon={!loading ? "key" : "loading"}
                   >
-                    {loading? "": "Đăng nhập"}
+                    {loading ? "" : "Đăng nhập"}
                   </Button>
                 </p>
                 <p>
@@ -262,7 +265,7 @@ class Login extends Component {
                       onCompleted={this.onLoginFB}
                       onError={this.handleError}
                     >
-                      <Icon type="facebook" style={{marginRight: 10}} />Đăng nhập với facebook
+                      <Icon type="facebook" style={{ marginRight: 10 }} />Đăng nhập với facebook
                     </LoginButton>
                   </FacebookProvider>
                 </p>
@@ -283,12 +286,15 @@ class Login extends Component {
             sm={mobile ? 0 : 0}
             md={mobile ? 0 : 12}
             lg={mobile ? 0 : 14}
-            xl={mobile ? 0 : 14}
-            xxl={mobile ? 0 : 14}
+            xl={mobile ? 0 : 16}
+            xxl={mobile ? 0 : 16}
+            style={{marginTop: 10}}
           >
-            <LazyLoadImage alt="Đăng nhập tìm việc" src={imageLogin} className="image-login" />
+            <Affix offsetTop={0}>
+              <LazyLoadImage alt="Đăng nhập tìm việc" src={imageLogin} className="image-login" />
+            </Affix>
           </Col>
-        </div>
+        </Row>
         {/* </form> */}
       </Layout >
     );

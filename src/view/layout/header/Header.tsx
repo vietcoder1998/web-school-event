@@ -144,7 +144,7 @@ class Header extends PureComponent<IProps, IState> {
         <div className="header" style={{ backgroundColor: "#1890ff" }}>
           <div className="logo">
             <Link to={eventStart ? `/${param}` : `/home${param}`}>
-              <LazyLoadImage width="auto" height={45} src={logo} alt="itea-scan" />{" "}
+              <LazyLoadImage width="auto" height={50} src={logo} alt="itea-scan" />{" "}
             </Link>
           </div>
           <div className="direct-page">
