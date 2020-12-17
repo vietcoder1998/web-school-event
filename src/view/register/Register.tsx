@@ -36,7 +36,7 @@ const isNumeric = (value) => {
 const validRePassword = ["Mật khẩu quá ngắn", "Mật khẩu không trùng khớp", "Mật khẩu hợp lệ"]
 interface IProps {
   marker?: any;
-
+  schools?: any;
 }
 let { Option } = Select;
 interface IState {
@@ -83,12 +83,12 @@ class Register extends Component<IProps, IState> {
         firstName: "",
         lastName: "",
         gender: "MALE",
-        phone: "",
+        phone: null,
         schoolYearStart: 0,
         schoolYearEnd: 0,
-        majorID: undefined,
-        schoolID: '',
-        inviteCode: ''
+        majorID: null,
+        schoolID: null,
+        inviteCode: null,
       },
       show_password: false,
       show_re_password: false,
@@ -144,8 +144,8 @@ class Register extends Component<IProps, IState> {
           })
         })
     }
-    let inviteCode = url.searchParams.get('inviteCode')
 
+    let inviteCode = url.searchParams.get('inviteCode')
     if (inviteCode) {
       body.inviteCode = inviteCode
       this.setState({ body })
@@ -217,6 +217,7 @@ class Register extends Component<IProps, IState> {
     body.majorID = value;
     this.setState({ body });
   };
+
   _choseSchool = (value) => {
     let { body } = this.state;
     if (value && value!=="") {
@@ -232,6 +233,7 @@ class Register extends Component<IProps, IState> {
         })
     }
   };
+
   _handleInput = (event) => {
     let {
       body,
@@ -356,6 +358,7 @@ class Register extends Component<IProps, IState> {
     checked = !checked;
     this.setState({ body, checked });
   };
+  
   getLatLngFromMap = (lat, lng, address) => {
     let { location, body } = this.state;
     body.lat = lat;
@@ -367,6 +370,14 @@ class Register extends Component<IProps, IState> {
       body,
     });
   };
+
+  onSearchSchool=async (value)=> {
+    let res_school = await _post(null, SCHOOLS, PUBLIC_HOST, noInfoHeader);
+    if(res_school && res_school.data) {
+      this.setState({list_school: res_school.data.items})
+    }
+
+  }
   requestToServer = async () => {
     this.setState({ loading: true });
     let {
@@ -386,13 +397,12 @@ class Register extends Component<IProps, IState> {
       is_exactly_lastname === false ||
       is_exactly_email === false ||
       is_exactly_pw === false ||
-      is_exactly_phone === false ||
-      is_exactly_schoolID === false
+      is_exactly_phone === false
     ) {
       swal({
         title: "Workvn thông báo",
         icon: "error",
-        text: "Vui lòng nhật đầy đủ các trường thông tin",
+        text: "Vui lòng nhập đầy đủ các trường thông tin",
       });
       this.setState({ loading: false });
     } else if (body && body.password !== repassword) {
@@ -408,11 +418,7 @@ class Register extends Component<IProps, IState> {
         icon: "error",
         text: "Bạn chưa đồng ý với điều khoản của Worksvn",
       });
-      this.setState({ loading: false });
     } else {
-      if (localStorage.getItem("login_type") === "FB") {
-
-      }
       await _requestToServer(
         POST,
         body,
@@ -423,9 +429,9 @@ class Register extends Component<IProps, IState> {
         true, null, null, this.state.typeUpdateInfor ? `Hoàn tất thông tin thành công!` : `Đăng ký thành công,
         Vui lòng kích hoạt tài khoản trong mail và tiếp tục đăng nhập!`
       ).then().catch(err => {
+        this.setState({ loading: false });
         throw exceptionShowNotiConfig(err, false, true)
       })
-      this.setState({ loading: false });
     }
   };
 
@@ -440,7 +446,6 @@ class Register extends Component<IProps, IState> {
       inviteCode
     } = this.state.body;
 
-    console.log(email);
     let {
       repassword,
       checked,
@@ -459,7 +464,9 @@ class Register extends Component<IProps, IState> {
       loading,
       list_school
     } = this.state;
+
     let { mobile } = this.props;
+
     return (
       <Layout disableFooterData={false}>
         {/* Form Register */}
@@ -477,7 +484,7 @@ class Register extends Component<IProps, IState> {
             <form className="register">
               <div className="title_register a_c">ĐĂNG KÝ</div>
               {/* FirstName And LastName */}
-              <Col span={12} className="normal">
+              <Col span={16} className="normal">
                 <Input
                   id="firstName"
                   size={"large"}
@@ -503,7 +510,7 @@ class Register extends Component<IProps, IState> {
                   type="text"
                 />
               </Col>
-              <Col span={12} className="normal">
+              <Col span={8} className="normal">
                 <Input
                   size={"large"}
                   id="lastName"
@@ -613,18 +620,10 @@ class Register extends Component<IProps, IState> {
                   style={{ width: "100%" }}
                   optionFilterProp="children"
                   onChange={(event) => this._choseSchool(event)}
-                  filterOption={(input, option) =>
-                    // @ts-ignore
-                    option.props.children
-                      .toLowerCase()
-                      .indexOf(input.toLowerCase()) >= 0
-                  }
+                  onSearch={(event) => this.onSearchSchool(event)}
                   showArrow={false}
-                  value={schoolID ? schoolID : undefined}
+                  value={schoolID ? schoolID : "Chọn trường học"}
                 >
-                  <Option value={""} key={"ALL"}>
-                    <b style={{color: "red"}}>Khác</b>
-                  </Option>
                   {list_school.map((item, index) => {
                     return (
                       <Option value={item.id} key={index}>
@@ -639,8 +638,8 @@ class Register extends Component<IProps, IState> {
                   }
                 >
                   <Icon
-                    type={is_exactly_schoolID ? "check" : "exclamation"}
-                    style={{ color: is_exactly_schoolID ? "green" : "red", position: 'absolute', marginLeft: -25, marginTop: 8 }}
+                    type={is_exactly_schoolID ? "check" : "warning"}
+                    style={{ color: is_exactly_schoolID ? "green" : "orange", position: 'absolute', marginLeft: -25, marginTop: 8 }}
                   />
                 </Tooltip>
               </Col>
@@ -650,29 +649,10 @@ class Register extends Component<IProps, IState> {
                   showSearch
                   placeholder={!schoolID ? <i>Vui lòng chọn trường!</i> : "Chọn ngành học"}
                   style={{ width: "100%" }}
-                  optionFilterProp="children"
                   onChange={(event) => this._choseMajor(event)}
                   disabled={schoolID ? false : true}
-                  // dropdownRender={menu => {
-                  //   if (is_exactly_schoolID) {
-                  //     return menu
-                  //   } else {
-                  //     return (
-                  //       <React.Fragment>
-                  //         <div style={{ color: 'red', padding: 10 }}>
-                  //           Vui lòng chọn Trường Học trước khi chọn Ngành Nghề
-                  //         </div>
-                  //       </React.Fragment>
-                  //     )
-                  //   }
-                  // }}
-                  filterOption={(input, option) =>
-                    option.props.children
-                      .toLowerCase()
-                      .indexOf(input.toLowerCase()) >= 0
-                  }
                   showArrow={false}
-                  value={this.state.body.majorID}
+                  value={this.state.body.majorID ? this.state.body.majorID: "Chọn ngành học"}
                 >
                   {list_major.map((item, index) => {
                     return (
@@ -688,8 +668,8 @@ class Register extends Component<IProps, IState> {
                   }
                 >
                   <Icon
-                    type={is_exactly_majorID ? "check" : "exclamation"}
-                    style={{ color: is_exactly_majorID ? "green" : "red", position: 'absolute', marginLeft: -25, marginTop: 8 }}
+                    type={is_exactly_majorID ? "check" : "warning"}
+                    style={{ color: is_exactly_majorID ? "green" : "orange", position: 'absolute', marginLeft: -25, marginTop: 8 }}
                   />
                 </Tooltip>
               </Col>
