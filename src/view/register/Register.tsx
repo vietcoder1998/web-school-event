@@ -620,6 +620,9 @@ class Register extends Component<IProps, IState> {
                   showArrow={false}
                   value={schoolID ? schoolID : undefined}
                 >
+                  <Option value={""} key={"ALL"}>
+                    <b style={{color: "red"}}>Khác</b>
+                  </Option>
                   {list_school.map((item, index) => {
                     return (
                       <Option value={item.id} key={index}>
@@ -841,7 +844,7 @@ class Register extends Component<IProps, IState> {
                 />
               </Col>
               {/* Except */}
-              <Col span={24} className="normal" style={{ marginTop: 25 }}>
+              <Col span={24} className="normal a_l" style={{ marginTop: 25 }}>
                 <p className="fogot-password">
                   <Checkbox onChange={this._handleCheckbox}>
                     Đồng ý với{" "}
@@ -862,9 +865,6 @@ class Register extends Component<IProps, IState> {
                     {loading ? <Icon type="loading" /> : 'Hoàn tất'}
                   </Button>
                 </p>
-                {/* <p className='or'>
-                                        hoặc
-                                    </p> */}
                 <p className="a_c">
                   Bạn đã có tài khoản ?{" "}
                   <label onClick={() => goBackWhenLogined('login')} style={{ color: "red" }} >

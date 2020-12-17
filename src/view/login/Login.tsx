@@ -65,7 +65,7 @@ class Login extends Component {
         {
           client_id: process.env.REACT_APP_CLIENT_ID,
           sercret: process.env.REACT_APP_CLIENT_SECRET,
-          fbAccessToken: data.tokenDetail.actk
+          fbAccessToken: data.tokenDetail.accessToken
         },
         "/api/oauth2/authentication/facebook",
         process.env.REACT_APP_API_HOST,
@@ -74,7 +74,7 @@ class Login extends Component {
         if (res) {
           console.log(res);
           localStorage.setItem("login_type", "FB")
-          this._loginAction(res, res.data, data.tokenDetail.actk)
+          this._loginAction(res, res.data, data.tokenDetail.accessToken)
         }
       })
     }
@@ -85,7 +85,6 @@ class Login extends Component {
   }
 
   _loginAction = (res?: any, data?: any, token?: string) => {
-    console.log(data);
     if (res) {
       setupLogin(res.data)
     }
