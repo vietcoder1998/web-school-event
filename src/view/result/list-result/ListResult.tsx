@@ -166,7 +166,7 @@ export default class ListResult extends React.Component<IListResultProps, IListR
                             <Col xs={1} sm={1} md={2} lg={2} xl={2} className='item-option '>
                                 <Tooltip title='Lưu lại'>
                                     <div className='item-save'
-                                        style={{ display: localStorage.getItem("actk") ? 'block' : 'none' }}
+                                        style={{ display: localStorage.getItem("actk_w_s") ? 'block' : 'none' }}
                                         onClick={() => {
                                             this.saveJob(item.id, item.saved, index);
                                         }}

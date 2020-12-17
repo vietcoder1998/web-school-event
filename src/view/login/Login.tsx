@@ -22,6 +22,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { FacebookProvider, LoginButton } from 'react-facebook';
 import setupLogin from "../../config/setup-login";
 import { TYPE } from "../../const/type";
+import { exceptionShowNotiConfig } from "../../config/config-exception";
 // import { TYPE } from './../../const/type';
 
 interface IState {
@@ -85,23 +86,14 @@ class Login extends Component {
 
   _loginAction = (res?: any, data?: any, type?: string) => {
     if (type === TYPE.ALL) {
-      console.log(res.data);
       setupLogin(data)
       let last_access = localStorage.getItem("last_access");
       last_access
         ? window.location.href = last_access
         : window.location.assign("/");
-
     } else
       if (res && res.data && res.data.target !== "STUDENT") {
-        swal({
-          title: "Worksvns thông báo",
-          text: "Sai tên đăng nhập hoặc mật khẩu!",
-          icon: "error",
-          dangerMode: true,
-        });
-      } else {
-        if (res && res.data && res.data.userExists) {
+        if (res.data.userExists) {
           if (res.data.userExists) {
             setupLogin(data)
             let last_access = localStorage.getItem("last_access");
@@ -140,11 +132,32 @@ class Login extends Component {
       null,
       false
     ).then((res) => {
-        if (res) {
-          console.log(data)
-          this._loginAction(res, res.data, TYPE.ALL)
-        }
-      })
+      if (res) {
+        console.log(data)
+        this._loginAction(res, res.data, TYPE.ALL)
+      }
+    }).catch(err => {
+      if (err) {
+        swal({
+          title: "Worksvns thông báo",
+          text: "Sai tên đăng nhập hoặc mật khẩu!",
+          icon: "error",
+          dangerMode: true,
+        });
+      } else {
+        swal({
+          title: "Worksvns thông báo",
+          text: "Đăng nhập thành công",
+          icon: "success",
+          dangerMode: true,
+        }).then(() => {
+          let last_access = localStorage.getItem("last_access");
+          last_access
+            ? window.location.href = last_access
+            : window.location.assign("/");
+        });
+      }
+    })
       .finally(() => {
         setTimeout(() => {
           this.setState({ loading: false });

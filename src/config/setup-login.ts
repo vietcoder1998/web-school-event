@@ -17,9 +17,9 @@ export default function setupLogin(oauth2?: IOAuth2) {
     let refreshTokenExpSecs = new Date(new Date().getTime() + oauth2.refreshTokenExpSecs)
     let cookie = new Cookies();
     console.log(oauth2);
-    localStorage.setItem("actk", oauth2.accessToken);
+    localStorage.setItem("actk_w_s", oauth2.accessToken);
     localStorage.setItem("rftk", oauth2.refreshToken);
-    cookie.set("actk", oauth2.accessToken, { expires: accessExpSecs, path: "/" });
+    cookie.set("actk_w_s", oauth2.accessToken, { expires: accessExpSecs, path: "/" });
     cookie.set("rftk", oauth2.refreshToken, { expires: refreshTokenExpSecs, path: "/" });
     localStorage.setItem("userID", oauth2.userID);
 }

@@ -110,7 +110,7 @@ function* getFullPersonInfo(action: any) {
 }
 
 function getData() {
-    if (localStorage.getItem("actk")){
+    if (localStorage.getItem("actk_w_s")){
         let data = _get(null, FULL_PROFILE, STUDENT_HOST, authHeaders);
         return data;
     }

@@ -15,7 +15,7 @@ function* getListJobSaveData(action) {
 }
 
 function getJobSaveData(action) {
-    let token = localStorage.getItem('actk');
+    let token = localStorage.getItem('actk_w_s');
 
     if (token) {
         let res = _requestToServer(

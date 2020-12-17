@@ -160,7 +160,7 @@ class JobDetail extends Component<IJobDetailProps, IJobDetailState> {
     this._loadData();
     this._loadState();
     moveScroll(0, 0);
-    if (!localStorage.getItem("cvUrl") && localStorage.getItem("actk")) {
+    if (!localStorage.getItem("cvUrl") && localStorage.getItem("actk_w_s")) {
       this.props.getFullProfile()
     }
     this.props.getSimilarJob(0, 6);
