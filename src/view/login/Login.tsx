@@ -75,7 +75,7 @@ class Login extends Component {
         if (res) {
           console.log(res);
           localStorage.setItem("login_type", "FB")
-          this._loginAction(res, res.data, data.tokenDetail.accessToken)
+          this._loginAction(res, res.data)
         }
       })
     }
@@ -85,10 +85,10 @@ class Login extends Component {
     this.setState({ error });
   }
 
-  _loginAction = (res?: any, data?: any, token?: string,type?: string) => {
+  _loginAction = (res?: any, data?: any, type?: string) => {
     if (type===TYPE.ALL) {
       setupLogin(res)
-    }
+    } else
     if (res && res.data&&res.data.target !== "STUDENT") {
       swal({
         title: "Worksvns thông báo",
