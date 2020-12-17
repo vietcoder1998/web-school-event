@@ -60,7 +60,6 @@ class Login extends Component {
 
   onLoginFB = async (data) => {
     if (data) {
-      console.log(data);
       await _requestToServer(
         POST,
         {
@@ -73,7 +72,6 @@ class Login extends Component {
         loginHeaders
       ).then((res) => {
         if (res) {
-          console.log(res);
           localStorage.setItem("login_type", "FB")
           this._loginAction(res, res.data)
         }
@@ -86,39 +84,45 @@ class Login extends Component {
   }
 
   _loginAction = (res?: any, data?: any, type?: string) => {
-    if (type===TYPE.ALL) {
-      setupLogin(res)
+    if (type === TYPE.ALL) {
+      console.log(res.data);
+      setupLogin(data)
+      let last_access = localStorage.getItem("last_access");
+      last_access
+        ? window.location.href = last_access
+        : window.location.assign("/");
+
     } else
-    if (res && res.data&&res.data.target !== "STUDENT") {
-      swal({
-        title: "Worksvns thông báo",
-        text: "Sai tên đăng nhập hoặc mật khẩu!",
-        icon: "error",
-        dangerMode: true,
-      });
-    } else {
-      if (res&&res.data&&res.data.userExists) {
-        if (res.data.userExists) {
-          setupLogin(res)
-          let last_access = localStorage.getItem("last_access");
-          last_access
-            ? window.location.href = last_access
-            : window.location.assign("/");
-          }
-      }else{
-        localStorage.setItem("user_exists", 'false');
-        localStorage.setItem("user_exists_userName", data.username);
-        localStorage.setItem("user_exists_password", data.password);
+      if (res && res.data && res.data.target !== "STUDENT") {
         swal({
-          title: "Worksvn thông báo",
-          text: "Xác thực thông tin để đăng nhập",
-          icon: "success",
+          title: "Worksvns thông báo",
+          text: "Sai tên đăng nhập hoặc mật khẩu!",
+          icon: "error",
           dangerMode: true,
-        }).then(() => {
-          window.location.assign("/register");
         });
-      } 
-    }
+      } else {
+        if (res && res.data && res.data.userExists) {
+          if (res.data.userExists) {
+            setupLogin(data)
+            let last_access = localStorage.getItem("last_access");
+            last_access
+              ? window.location.href = last_access
+              : window.location.assign("/");
+          }
+        } else {
+          localStorage.setItem("user_exists", 'false');
+          localStorage.setItem("user_exists_userName", data.username);
+          localStorage.setItem("user_exists_password", data.password);
+          swal({
+            title: "Worksvn thông báo",
+            text: "Xác thực thông tin để đăng nhập",
+            icon: "success",
+            dangerMode: true,
+          }).then(() => {
+            window.location.assign("/register");
+          });
+        }
+      }
   }
 
   getResponse = async () => {
@@ -135,11 +139,10 @@ class Login extends Component {
       loginHeaders,
       null,
       false
-    )
-      .then((res) => {
+    ).then((res) => {
         if (res) {
           console.log(data)
-          this._loginAction(res, data, TYPE.ALL)
+          this._loginAction(res, res.data, TYPE.ALL)
         }
       })
       .finally(() => {
@@ -265,7 +268,7 @@ class Login extends Component {
             lg={mobile ? 0 : 14}
             xl={mobile ? 0 : 16}
             xxl={mobile ? 0 : 16}
-            style={{marginTop: 10}}
+            style={{ marginTop: 10 }}
           >
             <Affix offsetTop={0}>
               <LazyLoadImage alt="Đăng nhập tìm việc" src={imageLogin} className="image-login" />
