@@ -85,10 +85,8 @@ class Login extends Component {
   }
 
   _loginAction = (res?: any, data?: any, token?: string) => {
-    if (res) {
-      setupLogin(res.data)
-    }
-    if (res.data.target !== "STUDENT") {
+
+    if (res && res.data&&res.data.target !== "STUDENT") {
       swal({
         title: "Worksvns thông báo",
         text: "Sai tên đăng nhập hoặc mật khẩu!",
@@ -96,7 +94,15 @@ class Login extends Component {
         dangerMode: true,
       });
     } else {
-      if (res.data.userExists === false) {
+      if (res&&res.data&&res.data.userExists) {
+        if (res.data.userExists) {
+          setupLogin(res)
+          let last_access = localStorage.getItem("last_access");
+          last_access
+            ? window.location.href = last_access
+            : window.location.assign("/");
+          }
+      }else{
         localStorage.setItem("user_exists", 'false');
         localStorage.setItem("user_exists_userName", data.username);
         localStorage.setItem("user_exists_password", data.password);
@@ -108,38 +114,7 @@ class Login extends Component {
         }).then(() => {
           window.location.assign("/register");
         });
-      } else {
-        // this.props.setAuthen();
-        let last_access = localStorage.getItem("last_access");
-        last_access
-          ? window.location.href = last_access
-          : window.location.assign("/");
-        // const parsed = queryString.parse(this.props.location.search);
-        // console.log(parsed);
-        // if (parsed.path) {
-        //     window.location.assign(parsed.path);
-        // } else if (last_access) {
-        //     window.location.assign(last_access);
-        // } else {
-        //     window.location.assign('/');
-        // }
-
-        // console.log(this.props.location.search);
-        //   const parsed = queryString.parse(this.props.location.search);
-        //   // console.log(window.atob(parsed.path));
-        //   // setTimeout(() => {
-        //   var base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
-        //   if (base64regex.test(parsed.path)) {
-        //     if (window.atob(parsed.path)) {
-        //       window.location.assign(window.atob(parsed.path));
-        //     } else {
-        //       window.location.assign("/");
-        //     }
-        //   } else {
-        //     window.location.assign("/");
-        //   }
-        // }, 3000)loading
-      }
+      } 
     }
   }
 
