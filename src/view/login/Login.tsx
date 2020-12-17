@@ -21,6 +21,7 @@ import { goBackWhenLogined } from "../../utils/goBackWhenLogined";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { FacebookProvider, LoginButton } from 'react-facebook';
 import setupLogin from "../../config/setup-login";
+import { TYPE } from "../../const/type";
 // import { TYPE } from './../../const/type';
 
 interface IState {
@@ -84,8 +85,10 @@ class Login extends Component {
     this.setState({ error });
   }
 
-  _loginAction = (res?: any, data?: any, token?: string) => {
-
+  _loginAction = (res?: any, data?: any, token?: string,type?: string) => {
+    if (type===TYPE.ALL) {
+      setupLogin(res)
+    }
     if (res && res.data&&res.data.target !== "STUDENT") {
       swal({
         title: "Worksvns thông báo",
@@ -136,7 +139,7 @@ class Login extends Component {
       .then((res) => {
         if (res) {
           console.log(data)
-          this._loginAction(res, data)
+          this._loginAction(res, data, TYPE.ALL)
         }
       })
       .finally(() => {

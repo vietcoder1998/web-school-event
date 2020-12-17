@@ -219,16 +219,18 @@ class Register extends Component<IProps, IState> {
   };
   _choseSchool = (value) => {
     let { body } = this.state;
-    this.setState({ is_exactly_schoolID: true, is_exactly_majorID: false })
-    body.schoolID = value;
-    body.majorID = undefined;
-    this.setState({ body });
-    _get(null, `/api/schools/${value}/education/majors/query`, PUBLIC_HOST, noInfoHeader)
-      .then((res_major) => {
-        this.setState({
-          list_major: res_major.data.items
+    if (value && value!=="") {
+      this.setState({ is_exactly_schoolID: true, is_exactly_majorID: false })
+      body.schoolID = value;
+      body.majorID = undefined;
+      this.setState({ body });
+      _get(null, `/api/schools/${value}/education/majors/query`, PUBLIC_HOST, noInfoHeader)
+        .then((res_major) => {
+          this.setState({
+            list_major: res_major.data.items
+          })
         })
-      })
+    }
   };
   _handleInput = (event) => {
     let {
