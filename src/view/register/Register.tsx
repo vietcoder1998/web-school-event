@@ -70,6 +70,7 @@ interface IState {
   typeUpdateInfor?: boolean
   mobile?: boolean;
   inviteCode?: string
+  email?: string
 }
 
 class Register extends Component<IProps, IState> {
@@ -385,7 +386,6 @@ class Register extends Component<IProps, IState> {
       is_exactly_phone,
       is_except_rule,
       repassword,
-      email
     } = this.state;
 
     if (
@@ -420,7 +420,7 @@ class Register extends Component<IProps, IState> {
           POST,
           {
             userID: localStorage.getItem("fb_uid"),
-            username: localStorage.getItem("fb_un"),
+            username: body.email,
             isActivated: true
           },
           `/api/students/registration/facebook`,

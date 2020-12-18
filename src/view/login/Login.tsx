@@ -104,7 +104,6 @@ class Login extends Component {
         } else {
           console.log(data);
           localStorage.setItem("user_exists", 'false');
-          localStorage.setItem("fb_un", data.email);
           localStorage.setItem("fb_uid", data.userID);
 
           swal({
