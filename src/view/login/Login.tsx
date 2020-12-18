@@ -94,7 +94,7 @@ class Login extends Component {
           : window.location.assign("/");
       }
     } else
-      if (res && res.data && res.data.targe=== "STUDENT") {
+      if (res && res.data && res.data.target=== "STUDENT") {
         if (res.data.userExists) {
             setupLogin(data)
             let last_access = localStorage.getItem("last_access");
