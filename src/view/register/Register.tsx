@@ -415,37 +415,41 @@ class Register extends Component<IProps, IState> {
         text: "Bạn chưa đồng ý với điều khoản của Worksvn",
       });
     } else {
-      if (localStorage.getItem("login_type") === "FB") {
-        let new_body = {...body}
-        new_body.fbAccessToken=localStorage.getItem("fb_actk");
+      try {
+        if (localStorage.getItem("login_type") === "FB") {
+          let new_body = {...body}
+          new_body.fbAccessToken=localStorage.getItem("fb_actk");
+          await _requestToServer(
+            POST,
+            new_body,
+            `/api/students/registration/facebook`,
+            null,
+            authHeaders,
+            {
+              schoolID: body.schoolID
+            },
+            true
+          ).then((res) => {
+            localStorage.setItem('user_exists', "true");
+            setTimeout(()=> window.location.assign('/'), 250)
+          })
+        } else
         await _requestToServer(
           POST,
-          new_body,
-          `/api/students/registration/facebook`,
+          body,
+          `/api/students/registration?schoolID=${body.schoolID}`,
           null,
-          authHeaders,
-          {
-            schoolID: body.schoolID
-          },
-          true
-        )
-      } else
-      await _requestToServer(
-        POST,
-        body,
-        `/api/students/registration?schoolID=${body.schoolID}`,
-        null,
-        noInfoHeader,
-        null,
-        true, null, null, this.state.typeUpdateInfor ? `Hoàn tất thông tin thành công!` : `Đăng ký thành công,
-        Vui lòng kích hoạt tài khoản trong mail và tiếp tục đăng nhập!`
-      ).then((res) => {
-        localStorage.setItem('user_exists', "true");
-        setTimeout(()=> window.location.assign('/'), 250)
-      }).catch(err => {
-        this.setState({ loading: false });
-        throw exceptionShowNotiConfig(err, false, true)
-      })
+          noInfoHeader,
+          null,
+          true, null, null, this.state.typeUpdateInfor ? `Hoàn tất thông tin thành công!` : `Đăng ký thành công,
+          Vui lòng kích hoạt tài khoản trong mail và tiếp tục đăng nhập!`
+        ).then((res) => {
+          localStorage.setItem('user_exists', "true");
+          setTimeout(()=> window.location.assign('/'), 250)
+        })
+      } catch(error) {
+        throw exceptionShowNotiConfig(error, false, true)
+      }
     }
   };
 

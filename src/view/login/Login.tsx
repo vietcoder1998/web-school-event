@@ -91,6 +91,8 @@ class Login extends Component {
     }
 
     if (type === TYPE.ALL) {
+        localStorage.setItem("user_exists", 'true');
+        localStorage.setItem("login_type", "BASIC")
         let last_access = localStorage.getItem("last_access");
         last_access
           ? window.location.href = last_access
