@@ -441,6 +441,7 @@ class Register extends Component<IProps, IState> {
         Vui lòng kích hoạt tài khoản trong mail và tiếp tục đăng nhập!`
       ).then((res) => {
         localStorage.setItem('user_exists', "true");
+        setTimeout(()=> window.location.assign('/'), 250)
       }).catch(err => {
         this.setState({ loading: false });
         throw exceptionShowNotiConfig(err, false, true)
