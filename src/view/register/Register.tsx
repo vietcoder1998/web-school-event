@@ -384,7 +384,6 @@ class Register extends Component<IProps, IState> {
       is_exactly_pw,
       is_exactly_phone,
       is_except_rule,
-      is_exactly_schoolID,
       repassword
     } = this.state;
 

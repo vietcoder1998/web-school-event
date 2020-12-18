@@ -187,6 +187,7 @@ class App extends React.Component<IProps, IState> {
     );
     return res
   }
+
   getInfoSchool(schoolID) {
     let res = _get(
       null,
@@ -291,14 +292,14 @@ class App extends React.Component<IProps, IState> {
               />
               <Route exact path="/count" component={EventCountDown} />
               <Route exact path="/home" component={Home} />
-              <Route exact path="/login" component={this.props.isAuthen ? Home : Login} />
+              <Route exact path="/login" component={Login} />
               <Route exact path="/reset-password" component={ResetPassword} />
               <Route
                 exact
                 path="/profile"
                 component={this.props.isAuthen === true ? Profile : Login}
               />
-              <Route exact path="/register" component={this.props.isAuthen ? Home : Register} />
+              <Route exact path="/register" component={Register} />
               <Route
                 exact
                 path="/forgot-password"
