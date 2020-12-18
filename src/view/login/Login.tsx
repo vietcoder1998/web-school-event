@@ -102,6 +102,7 @@ class Login extends Component {
               ? window.location.href = last_access
               : window.location.assign("/");
         } else {
+          console.log(data);
           localStorage.setItem("user_exists", 'false');
           localStorage.setItem("fb_un", data.email);
           localStorage.setItem("fb_uid", data.userID);

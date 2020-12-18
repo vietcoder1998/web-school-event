@@ -14,7 +14,6 @@ import QRCodeCHPlay from '../../../../assets/image/qr-code-chplay.png';
 import qs from 'query-string';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { TYPE } from '../../../../const/type';
-import { Link } from 'react-router-dom';
 
 const InputGroup = Input.Group;
 const { Option } = Select;
