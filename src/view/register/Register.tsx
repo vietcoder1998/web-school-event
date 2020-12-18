@@ -418,15 +418,13 @@ class Register extends Component<IProps, IState> {
       if (localStorage.getItem("login_type") === "FB") {
         await _requestToServer(
           POST,
-          {
-            userID: localStorage.getItem("fb_uid"),
-            username: body.email,
-            isActivated: true
-          },
-          `/api/students/registration/facebook`,
+          body,
+          `/api/users/registration/facebook`,
           null,
           authHeaders,
-          null,
+          {
+            schoolID: body.schoolID
+          },
           true
         )
       } else
