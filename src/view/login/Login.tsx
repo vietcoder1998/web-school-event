@@ -103,7 +103,9 @@ class Login extends Component {
               : window.location.assign("/");
         } else {
           localStorage.setItem("user_exists", 'false');
-          localStorage.setItem("fb_un", data.username);
+          localStorage.setItem("fb_un", data.email);
+          localStorage.setItem("fb_uid", data.userID);
+
           swal({
             title: "Worksvn thông báo",
             text: "Xác thực thông tin để đăng nhập",
