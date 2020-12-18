@@ -155,10 +155,7 @@ class Register extends Component<IProps, IState> {
       if (body.email) {
         body.email = localStorage.getItem("user_exists_userName");
       }
-      // body.password = localStorage.getItem(
-      // "body"
-      // );
-      // repassword = localStorage.getItem("body");
+      
       localStorage.setItem('user_exists', "true");
       this.setState({
         is_exists: true,
