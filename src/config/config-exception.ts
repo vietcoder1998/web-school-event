@@ -7,7 +7,6 @@ export const exceptionShowNotiConfig = async (err: any, hidden_alert_err?:boolea
         let code = res.code.toString();
         console.log(code);
         if (code.includes("401")) {
-            console.log("ok");
             tkNotInvalid();
         } else {
             if (!disabled_routing){
@@ -18,8 +17,10 @@ export const exceptionShowNotiConfig = async (err: any, hidden_alert_err?:boolea
                         localStorage.clear();
                         window.location.assign('/');
                     },
-                    text: "Có lỗi xảy ra",
+                    text: err.response.data.msg,
                     timer: 5000
+                }).then(()=> {
+
                 })
             } else
             Swal.fire({
