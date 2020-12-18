@@ -97,7 +97,6 @@ class Login extends Component {
     } else
       if (data.target=== "STUDENT") {
         if (data.userExists) {
-            console.log("exi");
             let last_access = localStorage.getItem("last_access");
             last_access
               ? window.location.href = last_access
