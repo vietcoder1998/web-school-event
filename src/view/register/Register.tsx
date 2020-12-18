@@ -16,7 +16,7 @@ import {
 import "./Register.scss";
 import { connect } from "react-redux";
 import { SCHOOLS } from "../../services/api/private.api";
-import { noInfoHeader } from "../../services/auth";
+import { authHeaders, noInfoHeader } from "../../services/auth";
 import { _requestToServer } from "../../services/exec";
 import swal from "sweetalert";
 import { POST } from "../../const/method";
@@ -153,9 +153,9 @@ class Register extends Component<IProps, IState> {
 
     if (localStorage.getItem("user_exists") === "false") {
       if (body.email) {
-        body.email = localStorage.getItem("user_exists_userName");
+        body.email = localStorage.getItem("fb_un");
       }
-      
+
       this.setState({
         is_exists: true,
         body,
@@ -216,7 +216,7 @@ class Register extends Component<IProps, IState> {
 
   _choseSchool = (value) => {
     let { body } = this.state;
-    if (value && value!=="") {
+    if (value && value !== "") {
       this.setState({ is_exactly_schoolID: true, is_exactly_majorID: false })
       body.schoolID = value;
       body.majorID = undefined;
@@ -354,7 +354,7 @@ class Register extends Component<IProps, IState> {
     checked = !checked;
     this.setState({ body, checked });
   };
-  
+
   getLatLngFromMap = (lat, lng, address) => {
     let { location, body } = this.state;
     body.lat = lat;
@@ -367,10 +367,10 @@ class Register extends Component<IProps, IState> {
     });
   };
 
-  onSearchSchool=async (value)=> {
+  onSearchSchool = async (value) => {
     let res_school = await _post(null, SCHOOLS, PUBLIC_HOST, noInfoHeader);
-    if(res_school && res_school.data) {
-      this.setState({list_school: res_school.data.items})
+    if (res_school && res_school.data) {
+      this.setState({ list_school: res_school.data.items })
     }
 
   }
@@ -384,7 +384,8 @@ class Register extends Component<IProps, IState> {
       is_exactly_pw,
       is_exactly_phone,
       is_except_rule,
-      repassword
+      repassword,
+      email
     } = this.state;
 
     if (
@@ -414,6 +415,21 @@ class Register extends Component<IProps, IState> {
         text: "Bạn chưa đồng ý với điều khoản của Worksvn",
       });
     } else {
+      if (localStorage.getItem("login_type") === "FB") {
+        await _requestToServer(
+          POST,
+          {
+            userID: localStorage.getItem("fb_uid"),
+            username: localStorage.getItem("fb_un"),
+            isActivated: true
+          },
+          `/api/students/registration/facebook`,
+          null,
+          authHeaders,
+          null,
+          true
+        )
+      } else
       await _requestToServer(
         POST,
         body,
@@ -423,7 +439,7 @@ class Register extends Component<IProps, IState> {
         null,
         true, null, null, this.state.typeUpdateInfor ? `Hoàn tất thông tin thành công!` : `Đăng ký thành công,
         Vui lòng kích hoạt tài khoản trong mail và tiếp tục đăng nhập!`
-      ).then((res)=> {
+      ).then((res) => {
         localStorage.setItem('user_exists', "true");
       }).catch(err => {
         this.setState({ loading: false });
@@ -649,7 +665,7 @@ class Register extends Component<IProps, IState> {
                   onChange={(event) => this._choseMajor(event)}
                   disabled={schoolID ? false : true}
                   showArrow={false}
-                  value={this.state.body.majorID ? this.state.body.majorID: "Chọn ngành học"}
+                  value={this.state.body.majorID ? this.state.body.majorID : "Chọn ngành học"}
                 >
                   {list_major.map((item, index) => {
                     return (
@@ -860,10 +876,10 @@ class Register extends Component<IProps, IState> {
             lg={mobile ? 0 : 14}
             xl={mobile ? 0 : 16}
             xxl={mobile ? 0 : 16}
-            style={{padding:"10px 0px", backgroundColor: "#f2f2f2"}}
+            style={{ padding: "10px 0px", backgroundColor: "#f2f2f2" }}
           >
             <Affix offsetTop={0}>
-             <LazyLoadImage src={imageLogin} className="image-login" alt={"Sự kiện work"} />
+              <LazyLoadImage src={imageLogin} className="image-login" alt={"Sự kiện work"} />
             </Affix>
           </Col>
         </Row>
