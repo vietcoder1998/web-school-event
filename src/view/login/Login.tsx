@@ -95,8 +95,9 @@ class Login extends Component {
           ? window.location.href = last_access
           : window.location.assign("/");
     } else
-      if (res.data.target=== "STUDENT") {
-        if (res.data.userExists) {
+      if (data.target=== "STUDENT") {
+        if (data.userExists) {
+            console.log("exist");
             let last_access = localStorage.getItem("last_access");
             last_access
               ? window.location.href = last_access
