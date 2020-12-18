@@ -419,7 +419,7 @@ class Register extends Component<IProps, IState> {
         await _requestToServer(
           POST,
           body,
-          `/api/users/registration/facebook`,
+          `/api/students/registration/facebook`,
           null,
           authHeaders,
           {
