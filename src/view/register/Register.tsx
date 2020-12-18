@@ -156,7 +156,6 @@ class Register extends Component<IProps, IState> {
         body.email = localStorage.getItem("user_exists_userName");
       }
       
-      localStorage.setItem('user_exists', "true");
       this.setState({
         is_exists: true,
         body,
@@ -425,7 +424,9 @@ class Register extends Component<IProps, IState> {
         null,
         true, null, null, this.state.typeUpdateInfor ? `Hoàn tất thông tin thành công!` : `Đăng ký thành công,
         Vui lòng kích hoạt tài khoản trong mail và tiếp tục đăng nhập!`
-      ).then().catch(err => {
+      ).then((res)=> {
+        localStorage.setItem('user_exists', "true");
+      }).catch(err => {
         this.setState({ loading: false });
         throw exceptionShowNotiConfig(err, false, true)
       })
