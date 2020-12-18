@@ -156,7 +156,7 @@ class App extends React.Component<IProps, IState> {
 
   async componentDidMount() {
     await this._loadLocal();
-    if (this.props.isAuthen) {
+    if (this.props.isAuthen && localStorage.getItem("user_exists")==="true") {
       this.props.getData();
     }
     this._callResize();
@@ -198,7 +198,7 @@ class App extends React.Component<IProps, IState> {
     return res
   }
   _loadLocal = async () => {
-    let token = localStorage.getItem("actk_w_s");
+    let token = localStorage.getItem("actk_w_s") && localStorage.getItem("user_exists")==="true";
 
     let queryParam = qs.parse(window.location.search, {
       //@ts-ignore
