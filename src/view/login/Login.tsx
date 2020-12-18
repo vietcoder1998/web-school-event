@@ -86,11 +86,13 @@ class Login extends Component {
 
   _loginAction = (res?: any, data?: any, type?: string) => {
     if (type === TYPE.ALL) {
-      setupLogin(data)
-      let last_access = localStorage.getItem("last_access");
-      last_access
-        ? window.location.href = last_access
-        : window.location.assign("/");
+      if (res && res.data) {
+        setupLogin(data)
+        let last_access = localStorage.getItem("last_access");
+        last_access
+          ? window.location.href = last_access
+          : window.location.assign("/");
+      }
     } else
       if (res && res.data && res.data.target !== "STUDENT") {
         if (res.data.userExists) {
