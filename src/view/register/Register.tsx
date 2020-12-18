@@ -416,9 +416,11 @@ class Register extends Component<IProps, IState> {
       });
     } else {
       if (localStorage.getItem("login_type") === "FB") {
+        let new_body = {...body}
+        new_body.fbAccessToken=localStorage.getItem("fb_actk");
         await _requestToServer(
           POST,
-          body,
+          new_body,
           `/api/students/registration/facebook`,
           null,
           authHeaders,

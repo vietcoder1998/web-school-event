@@ -61,6 +61,7 @@ class Login extends Component {
 
   onLoginFB = async (data) => {
     if (data) {
+      localStorage.setItem("fb_actk", data.tokenDetail.accessToken)
       await _requestToServer(
         POST,
         {
