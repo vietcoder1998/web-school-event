@@ -18,7 +18,7 @@ export const exceptionShowNotiConfig = async (err: any, hidden_alert_err?:boolea
                         window.location.assign('/');
                     },
                     text: err.response.data.msg,
-                    timer: 10000
+                    timer: 100000
                 }).then(()=> {
 
                 })
@@ -27,7 +27,7 @@ export const exceptionShowNotiConfig = async (err: any, hidden_alert_err?:boolea
                 titleText: 'Worksvn thông báo',
                 icon: 'error',
                 text:res.msg,
-                timer: 10000
+                timer: 100000
             })
         }
     } else Swal.fire({ text: `${"máy chủ gặp vấn đề hoặc kiểm tra lại kết nối của bạn"} (code=${500})`, titleText: "Worksvn thông báo" })
@@ -41,6 +41,6 @@ function tkNotInvalid() {
             localStorage.clear();
             window.location.assign('/');
         },
-        timer: 10000
+        timer: 100000
     })
 }
