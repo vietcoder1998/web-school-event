@@ -94,15 +94,13 @@ class Login extends Component {
           : window.location.assign("/");
       }
     } else
-      if (res && res.data && res.data.target !== "STUDENT") {
+      if (res && res.data && res.data.targe=== "STUDENT") {
         if (res.data.userExists) {
-          if (res.data.userExists) {
             setupLogin(data)
             let last_access = localStorage.getItem("last_access");
             last_access
               ? window.location.href = last_access
               : window.location.assign("/");
-          }
         } else {
           localStorage.setItem("user_exists", 'false');
           localStorage.setItem("user_exists_userName", data.username);
@@ -135,18 +133,7 @@ class Login extends Component {
       false
     ).then((res) => {
       if (res) {
-        console.log(data)
         this._loginAction(res, res.data, TYPE.ALL)
-      }
-    }).catch(err => {
-      if (err) {
-        swal({
-          title: "Worksvns thông báo",
-          text: "Sai tên đăng nhập hoặc mật khẩu!",
-          icon: "error",
-          dangerMode: true,
-        });
-      } else {
         swal({
           title: "Worksvns thông báo",
           text: "Đăng nhập thành công",
@@ -159,8 +146,16 @@ class Login extends Component {
             : window.location.assign("/");
         });
       }
-    })
-      .finally(() => {
+    }).catch(err => {
+      if (err) {
+        swal({
+          title: "Worksvns thông báo",
+          text: "Sai tên đăng nhập hoặc mật khẩu!",
+          icon: "error",
+          dangerMode: true,
+        });
+      } 
+    }).finally(() => {
         setTimeout(() => {
           this.setState({ loading: false });
         }, 1000);
