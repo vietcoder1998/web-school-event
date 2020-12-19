@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import './SideBar.scss';
 import { connect } from 'react-redux';
 import clearStorage from '../../../services/clear-storage';
-import { Icon, Drawer, Avatar } from 'antd';
+import { 
+    Icon, 
+    Drawer, 
+    // Avatar 
+} from 'antd';
 import { REDUX } from '../../../const/actions';
 // import CoverImage from '../../../assets/image/Abstract-Envelope.svg';
 import { LazyLoadImage } from 'react-lazy-load-image-component';

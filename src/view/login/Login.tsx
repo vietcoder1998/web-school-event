@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { authUserPassword } from "../../services/api/private.api";
 import { loginHeaders } from '../../services/auth';
 import { AUTH_HOST } from "../../environment/development";
-import { Input, Tooltip, Icon, Button, Row, Affix } from "antd";
+import { Input, Tooltip, Icon, Button, Row, Affix, Carousel } from "antd";
 import { Col } from "antd";
 import { _requestToServer } from "../../services/exec";
 import { POST } from "../../const/method";
@@ -17,12 +17,14 @@ import { REDUX } from "../../const/actions";
 import logo from "../../assets/image/logo-01.png";
 //@ts-ignore
 import imageLogin from "../../assets/image/Break750x600.jpg";
+//@ts-ignore
+import imageEvent from "../../assets/image/DIEMCHAMDAUTIEN750X600.jpg";
 import { goBackWhenLogined } from "../../utils/goBackWhenLogined";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { FacebookProvider, LoginButton } from 'react-facebook';
 import setupLogin from "../../config/setup-login";
 import { TYPE } from "../../const/type";
-import { exceptionShowNotiConfig } from "../../config/config-exception";
+// import { exceptionShowNotiConfig } from "../../config/config-exception";
 // import { TYPE } from './../../const/type';
 
 interface IState {
@@ -91,20 +93,20 @@ class Login extends Component {
     }
 
     if (type === TYPE.ALL) {
-        localStorage.setItem("user_exists", 'true');
-        localStorage.setItem("login_type", "BASIC")
-        let last_access = localStorage.getItem("last_access");
-        last_access
-          ? window.location.href = last_access
-          : window.location.assign("/");
+      localStorage.setItem("user_exists", 'true');
+      localStorage.setItem("login_type", "BASIC")
+      let last_access = localStorage.getItem("last_access");
+      last_access
+        ? window.location.href = last_access
+        : window.location.assign("/");
     } else
-      if (data.target=== "STUDENT") {
+      if (data.target === "STUDENT") {
         if (data.userExists) {
           localStorage.setItem("user_exists", 'true');
-            let last_access = localStorage.getItem("last_access");
-            last_access
-              ? window.location.href = last_access
-              : window.location.assign("/");
+          let last_access = localStorage.getItem("last_access");
+          last_access
+            ? window.location.href = last_access
+            : window.location.assign("/");
         } else {
           console.log(data);
           localStorage.setItem("user_exists", 'false');
@@ -152,18 +154,18 @@ class Login extends Component {
         });
       }
     }).catch(err => {
-        console.log(err.response.data.msg);
-        swal({
-          title: "Worksvns thông báo",
-          text: err.response.data.msg,
-          icon: "error",
-          dangerMode: true,
-        });
-    }).finally(() => {
-        setTimeout(() => {
-          this.setState({ loading: false });
-        }, 1000);
+      console.log(err.response.data.msg);
+      swal({
+        title: "Worksvns thông báo",
+        text: err.response.data.msg,
+        icon: "error",
+        dangerMode: true,
       });
+    }).finally(() => {
+      setTimeout(() => {
+        this.setState({ loading: false });
+      }, 1000);
+    });
   };
 
   render() {
@@ -283,9 +285,23 @@ class Login extends Component {
             xxl={mobile ? 0 : 16}
             style={{ marginTop: 10 }}
           >
-            <Affix offsetTop={0}>
-              <LazyLoadImage alt="Đăng nhập tìm việc" src={imageLogin} className="image-login" />
-            </Affix>
+            <Carousel
+              dots={true}
+              autoplay
+              autoplaySpeed={3000}
+              dotPosition={"bottom"}
+            >
+              <div style={{marginTop: -10}}>
+                <a href={"https://www.facebook.com/WORKSVN.Official"} target="_blank" rel="noopener noreferrer">
+                  <LazyLoadImage alt="Đăng nhập tìm việc" src={imageLogin} className="image-login" />
+                </a>
+              </div>
+              <div style={{marginTop: -10}}>
+                <a href={"https://www.facebook.com/WORKSVN.Official/photos/a.679864142789713/839440720165387/"} target="_blank" rel="noopener noreferrer">
+                  <LazyLoadImage alt="Sự kiện trên works.vn" src={imageEvent} className="image-login" />
+                </a>
+              </div>
+            </Carousel>
           </Col>
         </Row>
         {/* </form> */}

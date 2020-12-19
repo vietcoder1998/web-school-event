@@ -1,5 +1,7 @@
 import React from 'react';
-import { Icon, Popover, Tabs, Dropdown, Menu, Select, Button, Col, Row } from 'antd';
+import { 
+    // Icon, Popover, Tabs, Dropdown, Menu, 
+    Select, Button, Col, Row } from 'antd';
 import { TYPE } from '../../../const/type';
 
 const {Option} = Select

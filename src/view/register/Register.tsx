@@ -10,7 +10,8 @@ import {
   Col,
   // DatePicker,
   Select,
-  Affix
+  Affix,
+  Carousel
 } from "antd";
 // import moment from "moment";
 import "./Register.scss";
@@ -29,6 +30,8 @@ import imageLogin from "../../assets/image/Break750x600.jpg";
 import { goBackWhenLogined } from '../../utils/goBackWhenLogined'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { IAppState } from '../../redux/store/reducer';
+//@ts-ignore
+import imageEvent from "../../assets/image/DIEMCHAMDAUTIEN750X600.jpg";
 const isNumeric = (value) => {
   return /^-{0,1}\d+$/.test(value);
 };
@@ -417,8 +420,8 @@ class Register extends Component<IProps, IState> {
     } else {
       try {
         if (localStorage.getItem("login_type") === "FB") {
-          let new_body = {...body}
-          new_body.fbAccessToken=localStorage.getItem("fb_actk");
+          let new_body = { ...body }
+          new_body.fbAccessToken = localStorage.getItem("fb_actk");
           await _requestToServer(
             POST,
             new_body,
@@ -431,23 +434,23 @@ class Register extends Component<IProps, IState> {
             true
           ).then((res) => {
             localStorage.setItem('user_exists', "true");
-            setTimeout(()=> window.location.assign('/'), 250)
+            setTimeout(() => window.location.assign('/'), 250)
           })
         } else
-        await _requestToServer(
-          POST,
-          body,
-          `/api/students/registration?schoolID=${body.schoolID}`,
-          null,
-          noInfoHeader,
-          null,
-          true, null, null, this.state.typeUpdateInfor ? `Hoàn tất thông tin thành công!` : `Đăng ký thành công,
+          await _requestToServer(
+            POST,
+            body,
+            `/api/students/registration?schoolID=${body.schoolID}`,
+            null,
+            noInfoHeader,
+            null,
+            true, null, null, this.state.typeUpdateInfor ? `Hoàn tất thông tin thành công!` : `Đăng ký thành công,
           Vui lòng kích hoạt tài khoản trong mail và tiếp tục đăng nhập!`
-        ).then((res) => {
-          localStorage.setItem('user_exists', "true");
-          setTimeout(()=> window.location.assign('/'), 250)
-        })
-      } catch(error) {
+          ).then((res) => {
+            localStorage.setItem('user_exists', "true");
+            setTimeout(() => window.location.assign('/'), 250)
+          })
+      } catch (error) {
         throw exceptionShowNotiConfig(error, false, true)
       }
     }
@@ -883,9 +886,23 @@ class Register extends Component<IProps, IState> {
             xxl={mobile ? 0 : 16}
             style={{ padding: "10px 0px", backgroundColor: "#f2f2f2" }}
           >
-            <Affix offsetTop={0}>
-              <LazyLoadImage src={imageLogin} className="image-login" alt={"Sự kiện work"} />
-            </Affix>
+            <Carousel
+              dots={true}
+              autoplay
+              autoplaySpeed={3000}
+              dotPosition={"bottom"}
+            >
+              <div >
+                <a href={"https://www.facebook.com/WORKSVN.Official"} target="_blank" rel="noopener noreferrer">
+                  <LazyLoadImage alt="Đăng nhập tìm việc" src={imageLogin} className="image-login" />
+                </a>
+              </div>
+              <div >
+                <a href={"https://www.facebook.com/WORKSVN.Official/photos/a.679864142789713/839440720165387/"} target="_blank" rel="noopener noreferrer">
+                  <LazyLoadImage alt="Sự kiện trên works.vn" src={imageEvent} className="image-login" />
+                </a>
+              </div>
+            </Carousel>
           </Col>
         </Row>
 
