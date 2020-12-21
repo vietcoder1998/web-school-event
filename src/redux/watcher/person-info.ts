@@ -9,7 +9,52 @@ import { REDUX_SAGA, REDUX } from '../../const/actions'
 import imageDefault from "../../assets/image/base-image.jpg";
 function* getFullPersonInfo(action: any) {
     let res = yield call(getData);
+    let data = {
+        id: "",
+        firstName: "",
+        lastName: "",
+        birthday: "",
+        avatarUrl: "",
+        gender: "",
+        email: "",
+        phone: "",
+        region: "",
+        address: "",
+        lat: "",
+        lon: "",
+        profileVerified: false,
+        isLookingForJob: false,
+        completePercent: 0,
+        unlock: true,
+        saved: true,
+        schoolYearStart: 0,
+        schoolYearEnd: 0,
+        studentCode: "",
+        createdDate: "",
+        coverUrl: "",
+        description: "",
+        identityCard: "",
+        identityCardFrontImageUrl: "",
+        identityCardBackImageUrl: "",
+        cvUrl: "",
+        tools: [],
+        lookingForJob: false,
+        workingTools: [],
+        rating: 0,
+        experiences: [],
+        school: [],
+        languageSkills: [],
+        skills: [],
+        major: ""
+    }
 
+    if (res) {
+        let new_data = res.data
+        Object.keys(new_data).map(function(key, index) {
+            data[key] = new_data[key];
+          });
+    }
+    
     let personalInfo = {
         id: "",
         firstName: "",
@@ -38,16 +83,11 @@ function* getFullPersonInfo(action: any) {
         identityCardFrontImageUrl: "",
         identityCardBackImageUrl: "",
         cvUrl: "",
-        tools: []
+        tools: [],
+        languageSkills: [],
+        experiences: [],
+        
     };
-
-    let data = {...personalInfo}
-    if (res) {
-        let new_data = res.data
-        Object.keys(new_data).map(function(key, index) {
-            data[key] =new_data[key];
-          });
-    }
     personalInfo.avatarUrl = data.avatarUrl;
     personalInfo.phone = data.phone;
     personalInfo.email = data.email;
