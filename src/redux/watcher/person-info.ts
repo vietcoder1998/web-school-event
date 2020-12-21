@@ -9,7 +9,7 @@ import { REDUX_SAGA, REDUX } from '../../const/actions'
 import imageDefault from "../../assets/image/base-image.jpg";
 function* getFullPersonInfo(action: any) {
     let res = yield call(getData);
-    let data = res.data
+
     let personalInfo = {
         id: "",
         firstName: "",
@@ -40,6 +40,14 @@ function* getFullPersonInfo(action: any) {
         cvUrl: "",
         tools: []
     };
+
+    let data = {...personalInfo}
+    if (res) {
+        let new_data = res.data
+        Object.keys(new_data).map(function(key, index) {
+            data[key] =new_data[key];
+          });
+    }
     personalInfo.avatarUrl = data.avatarUrl;
     personalInfo.phone = data.phone;
     personalInfo.email = data.email;
