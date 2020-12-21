@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { authUserPassword } from "../../services/api/private.api";
 import { loginHeaders } from '../../services/auth';
 import { AUTH_HOST } from "../../environment/development";
-import { Input, Tooltip, Icon, Button, Row, Affix, Carousel } from "antd";
+import { Input, Tooltip, Icon, Button, Row, Carousel } from "antd";
 import { Col } from "antd";
 import { _requestToServer } from "../../services/exec";
 import { POST } from "../../const/method";

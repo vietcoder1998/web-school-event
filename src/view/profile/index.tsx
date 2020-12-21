@@ -93,6 +93,7 @@ class Profile extends Component<IProps, IState> {
     await this.props.getData(this.setActiveKeyCV, this.setActiveKeyCV2);
     this.setState({ loading: false });
   }
+  
   setActiveKeyCV= () =>  {
     this.setState({activeKeyCV: false, listActiveKeyCV: []})
   }

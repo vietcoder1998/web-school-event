@@ -67,7 +67,12 @@ function* getFullPersonInfo(action: any) {
     personalInfo.schoolYearEnd = data.schoolYearEnd;
     personalInfo.studentCode = data.studentCode;
     personalInfo.createdDate = data.createdDate;
-    personalInfo.cvUrl = data.cvUrl;
+
+    if (data && data.cvUrl) {
+        personalInfo.cvUrl = data.cvUrl;
+    } else {
+        data.cvUrl = null
+    }
     if(data.cvUrl && action.setActiveKeyCV) {
         action.setActiveKeyCV()
     }
@@ -113,12 +118,10 @@ function getData() {
     if (localStorage.getItem("actk_w_s") && localStorage.getItem("user_exists")==="true"){
         let data = _get(null, FULL_PROFILE, STUDENT_HOST, authHeaders);
         return data;
-    }
+    } else return 
 }
 
 // Watcher
 export function* PersonInfoWatcher() {
     yield takeEvery(REDUX_SAGA.PERSON_INFO.GET_FULL_PERSON_INFO, getFullPersonInfo);
 }   
-
-
