@@ -111,11 +111,11 @@ class LanguageSkillItem extends Component<IProps, IState> {
       let params = [id];
       await _requestToServer(
         DELETE,
-        null,
+        params,
         LANGUAGE_SKILL,
         STUDENT_HOST,
         null,
-        params,
+        null,
         true
       );
     }

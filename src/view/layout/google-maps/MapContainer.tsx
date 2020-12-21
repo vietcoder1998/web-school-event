@@ -11,18 +11,22 @@ import MenuItem from 'antd/lib/menu/MenuItem';
 
 interface IProps {
     personalInfo?: any;
-    address?: {
+    position?: {
         lat: number,
         lng: number
     };
     location?: any;
+    address?: string;
     marker?: any;
     hidden?: boolean;
     _fixData?: (params?: string) => any;
 }
 
 interface IState {
-    position?: object,
+    position?: {
+        lat?: number;
+        lng?: number;
+    },
     address?: string,
     showInfo?: boolean
 }
@@ -111,6 +115,8 @@ class GoogleMap extends React.Component<IProps, IState>{
     };
 
     render() {
+        let {address, position} = this.props;
+        console.log(position);
         return (
             <div style={{ position: "absolute", height: "80%", width: "100%", top: 0, right: 0 }}>
                 <PlacesAutocomplete
@@ -165,18 +171,12 @@ class GoogleMap extends React.Component<IProps, IState>{
                     style={{ width: "100%", height: "100%", marginTop: 10, padding: 10 }}
                     google={window.google}
                     zoom={14}
-                    center={{
-                        lat: this.props.address.lat,
-                        lng: this.props.address.lng,
-                    }}
-                    initialCenter={{
-                        lat: this.state.position.lat,
-                        lng: this.state.position.lng,
-                    }}
+                    center={position?position:this.state.position}
+                    initialCenter={position?position:this.state.position}
                 >
                     <Marker
-                        name={this.props.location}
-                        position={this.props.address}
+                        name={address?address: this.state.address}
+                        position={position?position:this.state.position}
                         draggable={false}
                         onDragend={(t, map, coord) => this.getAddress(coord)}
                     />

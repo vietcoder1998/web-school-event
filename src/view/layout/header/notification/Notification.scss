@@ -138,9 +138,8 @@
 
 .notification {
   font-size: 0.8rem;
-  width: 300px;
+  width: 50vh;
   z-index: 4;
-  padding: 5px 10px;
   .ant-popover {
     width: 200px;
   }
@@ -158,7 +157,7 @@
 
     .noti-info {
       padding: 5px 0px;
-      height: 30vh;
+      height: 50vh;
       overflow-y: auto;
       margin-bottom: 5px;
 

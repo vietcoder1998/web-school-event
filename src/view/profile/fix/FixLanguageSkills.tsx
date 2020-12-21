@@ -66,11 +66,11 @@ class FixLanguageSkills extends Component<IProps, IState> {
 
     _createRequest = () => {
         this.requestServer(this.props.method);
-        
     }
 
     async requestServer(method) {
         let { languageSkill } = this.state;
+        console.log(languageSkill);
         if (languageSkill.languageID === null || languageSkill.level === '') {
         } else if (method === POST) {
             let res = await _requestToServer(POST, languageSkill, LANGUAGE_SKILL, null, null, null, true);
@@ -78,7 +78,6 @@ class FixLanguageSkills extends Component<IProps, IState> {
                 await this.props.getData();
                 await this.props._fixData('languageSkill');
             }
-
         }
     }
 

@@ -102,6 +102,7 @@ class FixPerson extends Component<IProps, IState> {
 
     picture = files[0];
     this.setState({ [name]: picture });
+    console.log(this.state);
   };
 
 
@@ -117,7 +118,8 @@ class FixPerson extends Component<IProps, IState> {
         form,
         update_card_image,
         null,
-        sendFileHeader
+        sendFileHeader,
+        true
       );
     }
     await this.props.getData();
