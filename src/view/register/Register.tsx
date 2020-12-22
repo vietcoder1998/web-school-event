@@ -525,7 +525,7 @@ class Register extends Component<IProps, IState> {
               {/* FirstName And LastName */}
               <Col span={16} className="normal">
                 <Input
-                  id="firstName"
+                  id="lastName"
                   size={"large"}
                   placeholder="Họ (đệm)"
                   style={{ marginBottom: 5 }}
@@ -544,7 +544,7 @@ class Register extends Component<IProps, IState> {
                       />
                     </Tooltip>
                   }
-                  value={firstName}
+                  value={lastName}
                   onChange={this._handleInput}
                   type="text"
                 />
@@ -552,7 +552,7 @@ class Register extends Component<IProps, IState> {
               <Col span={8} className="normal">
                 <Input
                   size={"large"}
-                  id="lastName"
+                  id="firstName"
                   placeholder="Tên"
                   // prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                   suffix={
@@ -567,7 +567,7 @@ class Register extends Component<IProps, IState> {
                       />
                     </Tooltip>
                   }
-                  value={lastName}
+                  value={firstName}
                   onChange={this._handleInput}
                   type="text"
                 />

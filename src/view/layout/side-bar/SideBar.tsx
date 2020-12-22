@@ -65,7 +65,7 @@ class SideBar extends Component {
                         <li style={{ display: isAuthen ? 'block' : 'none' }}><Link to='/cong-viec-da-luu'><Icon type="history" /><label className='text-icon'>Công việc đã lưu</label></Link></li>
                         <li style={{ display: isAuthen ? 'block' : 'none' }} onClick={this._clearStorage}><Link style={{ pointerEvents: "none" }} to='/'><Icon type="logout" /><label className='text-icon'>Đăng xuất</label></Link></li>
                         <li style={{ display: isAuthen ? 'none' : 'block' }}><Link to='/login'><Icon type="key" /><label className='text-icon'>Đăng nhập</label></Link></li>
-                        <li style={{ display: isAuthen ? 'none' : 'block' }}><Link to='/register'><Icon type="solution" /><label className='text-icon'>Đăng kí</label></Link></li>
+                        <li style={{ display: isAuthen ? 'none' : 'block' }}><Link to='/register'><Icon type="solution" /><label className='text-icon'>Đăng ký</label></Link></li>
                     </ul>
                 </div>
             </Drawer>
