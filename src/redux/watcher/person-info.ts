@@ -9,52 +9,7 @@ import { REDUX_SAGA, REDUX } from '../../const/actions'
 import imageDefault from "../../assets/image/base-image.jpg";
 function* getFullPersonInfo(action: any) {
     let res = yield call(getData);
-    let data = {
-        id: "",
-        firstName: "",
-        lastName: "",
-        birthday: "",
-        avatarUrl: "",
-        gender: "",
-        email: "",
-        phone: "",
-        region: "",
-        address: "",
-        lat: "",
-        lon: "",
-        profileVerified: false,
-        isLookingForJob: false,
-        completePercent: 0,
-        unlock: true,
-        saved: true,
-        schoolYearStart: 0,
-        schoolYearEnd: 0,
-        studentCode: "",
-        createdDate: "",
-        coverUrl: "",
-        description: "",
-        identityCard: "",
-        identityCardFrontImageUrl: "",
-        identityCardBackImageUrl: "",
-        cvUrl: "",
-        tools: [],
-        lookingForJob: false,
-        workingTools: [],
-        rating: 0,
-        experiences: [],
-        school: [],
-        languageSkills: [],
-        skills: [],
-        major: ""
-    }
-
-    if (res) {
-        let new_data = res.data
-        Object.keys(new_data).map(function(key, index) {
-            data[key] = new_data[key];
-          });
-    }
-    
+    let data = res.data
     let personalInfo = {
         id: "",
         firstName: "",
@@ -83,10 +38,7 @@ function* getFullPersonInfo(action: any) {
         identityCardFrontImageUrl: "",
         identityCardBackImageUrl: "",
         cvUrl: "",
-        tools: [],
-        languageSkills: [],
-        experiences: [],
-        
+        tools: []
     };
     personalInfo.avatarUrl = data.avatarUrl;
     personalInfo.phone = data.phone;
@@ -115,12 +67,7 @@ function* getFullPersonInfo(action: any) {
     personalInfo.schoolYearEnd = data.schoolYearEnd;
     personalInfo.studentCode = data.studentCode;
     personalInfo.createdDate = data.createdDate;
-
-    if (data && data.cvUrl) {
-        personalInfo.cvUrl = data.cvUrl;
-    } else {
-        data.cvUrl = null
-    }
+    personalInfo.cvUrl = data.cvUrl;
     if(data.cvUrl && action.setActiveKeyCV) {
         action.setActiveKeyCV()
     }
@@ -166,10 +113,12 @@ function getData() {
     if (localStorage.getItem("actk_w_s") && localStorage.getItem("user_exists")==="true"){
         let data = _get(null, FULL_PROFILE, STUDENT_HOST, authHeaders);
         return data;
-    } else return 
+    }
 }
 
 // Watcher
 export function* PersonInfoWatcher() {
     yield takeEvery(REDUX_SAGA.PERSON_INFO.GET_FULL_PERSON_INFO, getFullPersonInfo);
 }   
+
+

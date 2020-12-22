@@ -132,6 +132,7 @@ class Register extends Component<IProps, IState> {
     let { body, repassword } = this.state;
     this.setState({ listBirthYearMin: this.listYear(1970, 2035), listBirthYearMax: this.listYear(1970, 2035) })
     let res_school = await _post(null, SCHOOLS, PUBLIC_HOST, noInfoHeader);
+    this._getLocal()
     // console.log(res_school);
     this.setState({ list_school: res_school.data.items })
     let url = new URL(window.location.href);
@@ -170,6 +171,23 @@ class Register extends Component<IProps, IState> {
         typeUpdateInfor: true
       });
     }
+  }
+
+  _getLocal(){
+    let {body}=this.state
+    if (localStorage.getItem("fb_fn")) {
+      body.firstName=localStorage.getItem("fb_fn")
+    }
+
+    if (localStorage.getItem("fb_ln")) {
+      body.lastName=localStorage.getItem("fb_ln")
+    }
+
+    if (localStorage.getItem("fb_fn")) {
+      body.email=localStorage.getItem("fb_mail")
+    }
+
+    this.setState({body})
   }
 
   listYear(min, max) {
@@ -690,11 +708,11 @@ class Register extends Component<IProps, IState> {
                 >
                   <Icon
                     type={is_exactly_majorID ? "check" : "warning"}
-                    style={{ color: is_exactly_majorID ? "green" : "orange", position: 'absolute', marginLeft: -25, marginTop: 8 }}
+                    style={{ 
+                      color: is_exactly_majorID ? "green" : "orange", position: 'absolute', marginLeft: -25, marginTop: 8 }}
                   />
                 </Tooltip>
               </Col>
-
               {/* <div className="normal" style={{ display: 'flex', flexDirection: 'row' }}>
                   <Select
                     showSearch
@@ -762,7 +780,6 @@ class Register extends Component<IProps, IState> {
                 </Tooltip>
               </div>
               */}
-              {/* Password */}
               <Col span={24} className="normal">
                 <Input
                   id="password"
@@ -786,7 +803,7 @@ class Register extends Component<IProps, IState> {
                         }
                       >
                         <Icon
-                          type={is_exactly_pw ? "check" : "exclamation"}
+                          type={is_exactly_pw ? "chFrame 2eck" : "exclamation"}
                           style={{ color: is_exactly_pw ? "green" : "red" }}
                         />
                       </Tooltip>
@@ -797,7 +814,6 @@ class Register extends Component<IProps, IState> {
                   type={!this.state.show_password ? "password" : null}
                 />
               </Col>
-
               {/* RePassword */}
               <Col span={24} className="normal">
                 <Input

@@ -85,7 +85,7 @@ class SearchFilter extends React.Component<
   }
 
   areaFilterOption = () => {
-    let { regionID, jobNameID, isEvent} = this.state
+    let { regionID, isEvent} = this.state
     let { regions } = this.props
     return (
       <Select

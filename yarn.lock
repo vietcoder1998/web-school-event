@@ -12698,6 +12698,14 @@ react-flip-move@^3.0.1:
   resolved "https://registry.yarnpkg.com/react-flip-move/-/react-flip-move-3.0.3.tgz#3065b0b9e622ae73953aba725f8feed8e4643667"
   integrity sha512-gR2jvjUgIXI7ceFWJkr8owX4vKhV0IJoXIf/Dt7gESFe5OKiSz2H6d10mKTW8fN134NDI16J4HgEgq9pKqJd5A==
 
+react-google-login@^5.1.25:
+  version "5.1.25"
+  resolved "https://registry.yarnpkg.com/react-google-login/-/react-google-login-5.1.25.tgz#6bf5b4c8ce4e9e64a4c80eb14b80c9c6bd07bf9b"
+  integrity sha512-N7SZkjTEX9NsC3hywXs68SPJWAHo6M19Bs1OIFPirG0yomGF7KnbKjSqoiIfxz1V7fKAt8bkfBAzogwnGWYTeQ==
+  dependencies:
+    "@types/react" "*"
+    prop-types "^15.6.0"
+
 react-headroom@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/react-headroom/-/react-headroom-3.0.1.tgz#fa5e1746135e9dd17e6c941a09dd72f5464b9040"

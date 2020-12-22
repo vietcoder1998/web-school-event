@@ -204,7 +204,7 @@ class Header extends PureComponent<IProps, IState> {
                     <Menu.Item key="1">
                       <Row>
                         <Col span={18}>
-                          <a href={'https://play.google.com/store/apps/details?id=com.worksvn.candidate&hl=vi'}>
+                          <a href={'https://play.google.com/store/apps/details?id=com.worksvn.student&hl=vi'}>
                             <LazyLoadImage src={CHPlay} alt='CHPlay Tìm việc' height='50px' width='auto' />
                           </a>
                         </Col>
