@@ -100,7 +100,7 @@ class ForgotPassword extends Component<IProps, IState> {
                                 <Button type='primary' loading={isLoading} onClick={this.onSubmit} block>Gửi</Button>
                             </p>
                             <p className='a_c'>
-                                Quay trở lại? <a href='/register' style={{ color: 'red' }}>Đăng kí</a>
+                                Quay trở lại? <a href='/register' style={{ color: 'red' }}>Đăng ký</a>
                             </p>
                             <p className='a_c'>
                                 <a href='/'>Trợ giúp</a>
