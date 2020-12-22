@@ -180,7 +180,7 @@ class Register extends Component<IProps, IState> {
     }
 
     if (localStorage.getItem("fb_ls")) {
-      body.lastName=localStorage.getItem("fb_ln")
+      body.lastName=localStorage.getItem("fb_ls")
     }
 
     if (localStorage.getItem("fb_mail")) {
