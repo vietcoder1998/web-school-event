@@ -488,14 +488,10 @@ class Register extends Component<IProps, IState> {
     let {
       repassword,
       checked,
-      is_exactly_firstname,
-      is_exactly_lastname,
-      is_exactly_email,
       is_exactly_phone,
       is_exactly_rpw,
       is_exactly_pw,
       list_major,
-      is_exists,
       // is_exactly_schoolYearStart,
       // exactly_schoolYearEnd,
       is_exactly_majorID,
@@ -601,6 +597,7 @@ class Register extends Component<IProps, IState> {
                   id="email"
                   size="large"
                   placeholder="Email"
+                  type="email"
                   prefix={
                     <Icon type="mail" style={{ color: "rgba(0,0,0,.4)" }} />
                   }
@@ -613,14 +610,13 @@ class Register extends Component<IProps, IState> {
                       }
                     >
                       <Icon
-                        type={is_exactly_email ? "check" : "exclamation"}
-                        style={{ color: is_exactly_email ? "green" : "red" }}
+                        type={email && email!=="" ? "check" : "exclamation"}
+                        style={{ color: email && email!=="" ? "green" : "red" }}
                       />
                     </Tooltip>
                   }
                   value={email}
                   onChange={this._handleInput}
-                  type="text"
                 />
               </Col>
               {/* Phone */}
@@ -648,7 +644,7 @@ class Register extends Component<IProps, IState> {
                   }
                   value={phone}
                   onChange={this._handleInput}
-                  type="text"
+                  type="tel"
                 />
               </Col>
               <Col span={24} className="normal">
