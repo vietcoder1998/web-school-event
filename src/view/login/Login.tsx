@@ -63,6 +63,7 @@ class Login extends Component {
 
   onLoginFB = async (data) => {
     if (data) {
+      console.log(data);
       localStorage.setItem("fb_actk", data.tokenDetail.accessToken)
       localStorage.setItem("fb_mail", data.email)
       localStorage.setItem("fb_fn", data.first_name)
