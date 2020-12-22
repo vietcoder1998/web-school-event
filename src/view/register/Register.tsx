@@ -109,7 +109,7 @@ class Register extends Component<IProps, IState> {
       is_exactly_firstname: false,
       is_exactly_lastname: false,
       is_exactly_rpw: 0,
-      is_except_rule: false,
+      is_except_rule: true,
       is_exactly_schoolYearStart: false,
       exactly_schoolYearEnd: 0,
       is_exactly_majorID: false,
