@@ -534,12 +534,12 @@ class Register extends Component<IProps, IState> {
                   }
                   suffix={
                     <Tooltip
-                      title={is_exactly_firstname ? "Họ" : "Điền họ"}
+                      title={lastName&&lastName!=="" ? "Họ" : "Điền họ"}
                     >
                       <Icon
-                        type={is_exactly_firstname ? "check" : "exclamation"}
+                        type={lastName&&lastName!=="" ? "check" : "exclamation"}
                         style={{
-                          color: is_exactly_firstname ? "green" : "red",
+                          color: lastName&&lastName!=="" ? "green" : "red",
                         }}
                       />
                     </Tooltip>
@@ -557,12 +557,12 @@ class Register extends Component<IProps, IState> {
                   // prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                   suffix={
                     <Tooltip
-                      title={is_exactly_lastname ? "Tên" : "Điền Tên"}
+                      title={firstName && firstName!=="" ? "Tên" : "Điền Tên"}
                     >
                       <Icon
-                        type={is_exactly_lastname ? "check" : "exclamation"}
+                        type={firstName && firstName!=="" ? "check" : "exclamation"}
                         style={{
-                          color: is_exactly_lastname ? "green" : "red",
+                          color: firstName && firstName!=="" ? "green" : "red",
                         }}
                       />
                     </Tooltip>
@@ -607,7 +607,7 @@ class Register extends Component<IProps, IState> {
                   suffix={
                     <Tooltip
                       title={
-                        is_exactly_email
+                        email && email!==""
                           ? "Email chính xác"
                           : "Điền Địa chỉ mail"
                       }
