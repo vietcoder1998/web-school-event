@@ -65,9 +65,9 @@ class Login extends Component {
     if (data) {
       console.log(data);
       localStorage.setItem("fb_actk", data.tokenDetail.accessToken)
-      localStorage.setItem("fb_mail", data.email)
-      localStorage.setItem("fb_fn", data.first_name)
-      localStorage.setItem("fb_ls", data.last_name)
+      localStorage.setItem("fb_mail", data.profile.email)
+      localStorage.setItem("fb_fn", data.profile.first_name)
+      localStorage.setItem("fb_ls", data.profile.last_name)
 
       await _requestToServer(
         POST,
