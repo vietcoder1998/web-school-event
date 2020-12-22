@@ -605,6 +605,7 @@ class SearchBox extends Component<IProps, IState>{
                                         style={{ width: '20%' }}
                                         size="large"
                                         onChange={event => this._setArea(event)}
+                                        onSearch={(event)=>this.props.getRegions(event)}
                                         suffixIcon={<Icon type="environment" />}
                                         autoFocus={false}
                                     >
