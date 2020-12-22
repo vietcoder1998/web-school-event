@@ -53,12 +53,9 @@ class SideBar extends Component {
                     <ul>
                         <li><Link to={'/'}><Icon type="home" />Trang chủ</Link></li>
                         <li><Link to='/event' style={{ display: eventStart === false ? 'none' : window.location.pathname === '/' ? "none" : '' }}><Icon type="tags" />Sự kiện</Link></li>
-
                         <li style={{ display: isAuthen ? 'block' : 'none' }}><Link to='/gross-to-net'><Icon type="dollar" /><label className='text-icon'>Công cụ tính lương</label></Link></li>
-
                         <li style={{ color: 'gray', cursor: 'not-allowed', opacity: 0.5, pointerEvents: 'none' }}><Link to='/'><Icon type="user-add" />Tạo CV</Link></li>
                         <li style={{ display: isAuthen ? 'block' : 'none' }}><Link to='/result'><Icon type="search" /><label className='text-icon'>Tìm việc</label></Link></li>
-
                         <li style={{ display: isAuthen ? 'block' : 'none' }}><Link to='/thong-bao'><Icon type="notification" /><label className='text-icon'>Thông báo</label></Link></li>
                         <li style={{ display: isAuthen ? 'block' : 'none' }}><Link to='/profile'><Icon type="user" /><label className='text-icon'>Hồ sơ</label></Link></li>
                         <li style={{ display: isAuthen ? 'block' : 'none' }}><Link to='lich-su-ung-tuyen'><Icon type="solution" /><label className='text-icon'>Lịch sử ứng tuyển</label></Link></li>
