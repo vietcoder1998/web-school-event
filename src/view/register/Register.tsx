@@ -74,6 +74,7 @@ interface IState {
   mobile?: boolean;
   inviteCode?: string
   email?: string
+  is_exactly_rule?: boolean
 }
 
 class Register extends Component<IProps, IState> {
@@ -493,7 +494,8 @@ class Register extends Component<IProps, IState> {
       is_exactly_majorID,
       is_exactly_schoolID,
       loading,
-      list_school
+      list_school,
+      is_except_rule
     } = this.state;
 
     let { mobile } = this.props;
@@ -857,7 +859,7 @@ class Register extends Component<IProps, IState> {
               {/* Except */}
               <Col span={24} className="normal a_l" style={{ marginTop: 25 }}>
                 <p className="fogot-password">
-                  <Checkbox onChange={this._handleCheckbox}>
+                  <Checkbox onChange={this._handleCheckbox} defaultChecked={is_except_rule}>
                     Đồng ý với{" "}
                     <a href="/" target="_blank" style={{ color: "#4a9ae1" }}>
                       điều khoản
