@@ -157,10 +157,6 @@ class Register extends Component<IProps, IState> {
     }
 
     if (localStorage.getItem("user_exists") === "false") {
-      if (body.email) {
-        body.email = localStorage.getItem("fb_un");
-      }
-
       this.setState({
         is_exists: true,
         body,
