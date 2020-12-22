@@ -332,6 +332,7 @@ class SearchBox extends Component<IProps, IState>{
                 showSearch={true}
                 defaultValue={area ? area.name : 'Chọn tỉnh thành bạn muốn'} style={{ width: '80%' }}
                 size="default"
+                onSearch={(event)=>this.props.getRegions(event)}
                 onChange={this._setArea}
             >
                 {regions && regions.length > 0 ? regions.map(item => <Option
@@ -792,7 +793,7 @@ const mapDispatchToProps = (dispatch) => ({
     getJobResult: (body) => dispatch({ type: REDUX_SAGA.JOB_RESULT.GET_JOB_RESULT, body }),
     getJobNames: (name?: string) => dispatch({ type: REDUX_SAGA.JOB_NAMES.GET_JOB_NAMES, name }),
     getMajors: (name?: string) => dispatch({ type: REDUX_SAGA.MAJOR.GET_MAJOR, name }),
-    getRegions: () => dispatch({ type: REDUX_SAGA.REGIONS.GET_REGIONS }),
+    getRegions: (name?: string) => dispatch({ type: REDUX_SAGA.REGIONS.GET_REGIONS,name }),
     setFilterJobType: (jobType, show_days) => dispatch({ type: REDUX.JOB_RESULT.SET_FILTER_JOB_TYPE, jobType, show_days }),
     setFilterListShift: (list_shift) => dispatch({ type: REDUX.JOB_RESULT.SET_FILTER_LIST_SHIFT, list_shift }),
     setFilterListDay: (list_day) => dispatch({ type: REDUX.JOB_RESULT.SET_FILTER_LIST_DAY, list_day }),
